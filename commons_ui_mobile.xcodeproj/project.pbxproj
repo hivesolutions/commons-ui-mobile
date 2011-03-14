@@ -10,6 +10,7 @@
 		C29A2E2E132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E2A132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h */; };
 		C29A2E2F132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */; };
 		C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */; };
+		C29A2E36132EA3EE005EAB37 /* MBRemoteTableViewProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E35132EA3EE005EAB37 /* MBRemoteTableViewProvider.h */; };
 		C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C2FA0A132E95530038B41E /* UIKit.framework */; };
 		C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EEE097132E8E9B0038FFA6 /* Foundation.framework */; };
 		C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */; };
@@ -19,6 +20,7 @@
 		C29A2E2A132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBRemoteTableViewDataSource.h; path = classes/MBRemoteTableViewDataSource.h; sourceTree = "<group>"; };
 		C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBRemoteTableViewDataSource.m; path = classes/MBRemoteTableViewDataSource.m; sourceTree = "<group>"; };
 		C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commons_ui_mobile.h; path = headers/commons_ui_mobile.h; sourceTree = "<group>"; };
+		C29A2E35132EA3EE005EAB37 /* MBRemoteTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBRemoteTableViewProvider.h; sourceTree = "<group>"; };
 		C2C2FA0A132E95530038B41E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2EEE094132E8E9B0038FFA6 /* libcommons_ui_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcommons_ui_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EEE097132E8E9B0038FFA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,6 +99,7 @@
 			children = (
 				C29A2E2A132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h */,
 				C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */,
+				C29A2E35132EA3EE005EAB37 /* MBRemoteTableViewProvider.h */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -118,6 +121,7 @@
 				C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */,
 				C29A2E2E132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h in Headers */,
 				C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */,
+				C29A2E36132EA3EE005EAB37 /* MBRemoteTableViewProvider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

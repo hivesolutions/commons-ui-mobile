@@ -33,6 +33,10 @@
     return self;
 }
 
++ (void)_keepAtLinkTime {
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

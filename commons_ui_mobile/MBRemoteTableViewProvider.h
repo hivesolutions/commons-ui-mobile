@@ -25,12 +25,31 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MBRemoteTableViewDataSource : NSObject<UITableViewDataSource> {
-    @private NSString *remoteUrl;
-}
+enum MBRemoteTableViewSerialized {
+    MBRemoteTableViewJsonSerialized,
+    MBRemoteTableViewXmlSerialized,
+};
 
-@property (retain) IBOutlet NSString *remoteUrl;
+@protocol MBRemoteTableViewProvider <NSObject>    
 
-+(void)_keepAtLinkTime;
+/**
+ * Retrieves the remote url to be used during the
+ * provider series.
+ *
+ * @return The remote url to be used during the
+ * provider series.
+ */
+- (NSString *)getRemoteUrl;
+
+/**
+ * Retrieves the type of serializer to be used to decode
+ * the remote request.
+ *
+ * @return The type of serializer to be used to decode
+ * the remote request
+ */
+- (NSString *)getRemoteType;
 
 @end
+
+
