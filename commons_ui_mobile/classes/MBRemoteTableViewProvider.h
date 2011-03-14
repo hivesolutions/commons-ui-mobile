@@ -25,10 +25,14 @@
 
 #import <Foundation/Foundation.h>
 
-enum MBRemoteTableViewSerialized {
-    MBRemoteTableViewJsonSerialized,
+/**
+ * Enumeration defining the various remote
+ * serializer engines.
+ */
+typedef enum {
+    MBRemoteTableViewJsonSerialized = 1,
     MBRemoteTableViewXmlSerialized,
-};
+} MBRemoteTableViewSerialized;
 
 @protocol MBRemoteTableViewProvider <NSObject>    
 
@@ -48,7 +52,7 @@ enum MBRemoteTableViewSerialized {
  * @return The type of serializer to be used to decode
  * the remote request
  */
-- (NSString *)getRemoteType;
+- (MBRemoteTableViewSerialized)getRemoteType;
 
 @end
 
