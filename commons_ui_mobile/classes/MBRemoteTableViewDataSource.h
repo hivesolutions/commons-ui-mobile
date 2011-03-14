@@ -23,8 +23,12 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "MBCustomView.h"
+#import <Foundation/Foundation.h>
 
-@implementation MBCustomView
+@interface MBRemoteTableViewDataSource : NSObject<UITableViewDataSource> {
+    @private NSString *remoteUrl;
+}
+
+@property (retain) NSString *remoteUrl;
 
 @end

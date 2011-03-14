@@ -7,16 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C2C2FA07132E94F90038B41E /* MBCustomView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C2FA05132E94F90038B41E /* MBCustomView.h */; };
-		C2C2FA08132E94F90038B41E /* MBCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C2FA06132E94F90038B41E /* MBCustomView.m */; };
+		C29A2E2E132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E2A132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h */; };
+		C29A2E2F132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */; };
+		C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */; };
 		C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C2FA0A132E95530038B41E /* UIKit.framework */; };
 		C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EEE097132E8E9B0038FFA6 /* Foundation.framework */; };
 		C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		C2C2FA05132E94F90038B41E /* MBCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBCustomView.h; sourceTree = "<group>"; };
-		C2C2FA06132E94F90038B41E /* MBCustomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBCustomView.m; sourceTree = "<group>"; };
+		C29A2E2A132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBRemoteTableViewDataSource.h; path = classes/MBRemoteTableViewDataSource.h; sourceTree = "<group>"; };
+		C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBRemoteTableViewDataSource.m; path = classes/MBRemoteTableViewDataSource.m; sourceTree = "<group>"; };
+		C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commons_ui_mobile.h; path = headers/commons_ui_mobile.h; sourceTree = "<group>"; };
 		C2C2FA0A132E95530038B41E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2EEE094132E8E9B0038FFA6 /* libcommons_ui_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcommons_ui_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EEE097132E8E9B0038FFA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -36,6 +38,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C29A2E30132E9D08005EAB37 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
 		C2EEE089132E8E9B0038FFA6 = {
 			isa = PBXGroup;
 			children = (
@@ -65,6 +75,7 @@
 		C2EEE099132E8E9B0038FFA6 /* Commons Ui Mobile */ = {
 			isa = PBXGroup;
 			children = (
+				C29A2E30132E9D08005EAB37 /* Headers */,
 				C2EEE0A5132E8EF80038FFA6 /* Nibs */,
 				C2EEE0A4132E8EF20038FFA6 /* Classes */,
 				C2EEE0A1132E8ECD0038FFA6 /* Support */,
@@ -84,6 +95,8 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C29A2E2A132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h */,
+				C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -91,8 +104,6 @@
 		C2EEE0A5132E8EF80038FFA6 /* Nibs */ = {
 			isa = PBXGroup;
 			children = (
-				C2C2FA05132E94F90038B41E /* MBCustomView.h */,
-				C2C2FA06132E94F90038B41E /* MBCustomView.m */,
 			);
 			name = Nibs;
 			sourceTree = "<group>";
@@ -105,7 +116,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */,
-				C2C2FA07132E94F90038B41E /* MBCustomView.h in Headers */,
+				C29A2E2E132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h in Headers */,
+				C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2C2FA08132E94F90038B41E /* MBCustomView.m in Sources */,
+				C29A2E2F132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
