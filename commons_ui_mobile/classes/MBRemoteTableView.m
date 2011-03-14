@@ -23,19 +23,29 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import <Foundation/Foundation.h>
+#import "MBRemoteTableView.h"
 
-#import "MBRemoteTableViewProvider.h"
+@implementation MBRemoteTableView
 
-@interface MBRemoteTableViewDataSource : NSObject<UITableViewDataSource> {
-    @private NSObject<MBRemoteTableViewProvider> *_remoteTableViewProvider;
+@synthesize remoteTableViewProvider = _remoteTableViewProvider;
+
+- (id)init {
+    // calls the super
+    self = [super init];
+
+    // returns self
+    return self;
 }
 
-@property (retain) IBOutlet NSObject<MBRemoteTableViewProvider> *remoteTableViewProvider;
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    // calls the super
+    self = [super initWithCoder:aDecoder];
+    
+    // returns self
+    return self;
+}
 
-/**
- * Keeps the class valid for export at link time.
- */
-+ (void)_keepAtLinkTime;
++ (void)_keepAtLinkTime {
+}
 
 @end

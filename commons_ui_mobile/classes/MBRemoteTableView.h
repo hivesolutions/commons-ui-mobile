@@ -27,7 +27,7 @@
 
 #import "MBRemoteTableViewProvider.h"
 
-@interface MBRemoteTableViewDataSource : NSObject<UITableViewDataSource> {
+@interface MBRemoteTableView : UITableView {
     @private NSObject<MBRemoteTableViewProvider> *_remoteTableViewProvider;
 }
 

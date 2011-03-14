@@ -11,6 +11,8 @@
 		C29A2E2F132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */; };
 		C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */; };
 		C29A2E38132EA52B005EAB37 /* MBRemoteTableViewProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E37132EA52B005EAB37 /* MBRemoteTableViewProvider.h */; };
+		C29A2E3F132EA6A2005EAB37 /* MBRemoteTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E3D132EA6A2005EAB37 /* MBRemoteTableView.h */; };
+		C29A2E40132EA6A2005EAB37 /* MBRemoteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E3E132EA6A2005EAB37 /* MBRemoteTableView.m */; };
 		C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C2FA0A132E95530038B41E /* UIKit.framework */; };
 		C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EEE097132E8E9B0038FFA6 /* Foundation.framework */; };
 		C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */; };
@@ -21,6 +23,8 @@
 		C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBRemoteTableViewDataSource.m; path = classes/MBRemoteTableViewDataSource.m; sourceTree = "<group>"; };
 		C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commons_ui_mobile.h; path = headers/commons_ui_mobile.h; sourceTree = "<group>"; };
 		C29A2E37132EA52B005EAB37 /* MBRemoteTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBRemoteTableViewProvider.h; path = classes/MBRemoteTableViewProvider.h; sourceTree = "<group>"; };
+		C29A2E3D132EA6A2005EAB37 /* MBRemoteTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MBRemoteTableView.h; path = classes/MBRemoteTableView.h; sourceTree = "<group>"; };
+		C29A2E3E132EA6A2005EAB37 /* MBRemoteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MBRemoteTableView.m; path = classes/MBRemoteTableView.m; sourceTree = "<group>"; };
 		C2C2FA0A132E95530038B41E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2EEE094132E8E9B0038FFA6 /* libcommons_ui_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcommons_ui_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EEE097132E8E9B0038FFA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -97,6 +101,8 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C29A2E3D132EA6A2005EAB37 /* MBRemoteTableView.h */,
+				C29A2E3E132EA6A2005EAB37 /* MBRemoteTableView.m */,
 				C29A2E37132EA52B005EAB37 /* MBRemoteTableViewProvider.h */,
 				C29A2E2A132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h */,
 				C29A2E2B132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m */,
@@ -122,6 +128,7 @@
 				C29A2E2E132E9CF6005EAB37 /* MBRemoteTableViewDataSource.h in Headers */,
 				C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */,
 				C29A2E38132EA52B005EAB37 /* MBRemoteTableViewProvider.h in Headers */,
+				C29A2E3F132EA6A2005EAB37 /* MBRemoteTableView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C29A2E2F132E9CF6005EAB37 /* MBRemoteTableViewDataSource.m in Sources */,
+				C29A2E40132EA6A2005EAB37 /* MBRemoteTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

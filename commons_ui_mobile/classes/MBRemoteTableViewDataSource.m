@@ -27,14 +27,13 @@
 
 @implementation MBRemoteTableViewDataSource
 
-@synthesize remoteUrl = _remoteUrl;
+@synthesize remoteTableViewProvider = _remoteTableViewProvider;
 
 - (id)init {
     return self;
 }
 
 + (void)_keepAtLinkTime {
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -42,7 +41,7 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return nil;
+    return [[NSArray alloc] init];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
