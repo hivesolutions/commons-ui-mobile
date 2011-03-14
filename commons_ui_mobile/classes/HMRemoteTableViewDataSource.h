@@ -25,13 +25,13 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MBRemoteTableViewProvider.h"
+#import "HMRemoteTableViewProvider.h"
 
-@interface MBRemoteTableView : UITableView {
-    @private NSObject<MBRemoteTableViewProvider> *_remoteTableViewProvider;
+@interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource> {
+    @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
 }
 
-@property (retain) IBOutlet NSObject<MBRemoteTableViewProvider> *remoteTableViewProvider;
+@property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
 
 /**
  * Keeps the class valid for export at link time.

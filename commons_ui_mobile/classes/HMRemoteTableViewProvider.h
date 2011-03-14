@@ -23,38 +23,37 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "MBRemoteTableView.h"
+#import <Foundation/Foundation.h>
 
-@implementation MBRemoteTableView
+/**
+ * Enumeration defining the various remote
+ * serializer engines.
+ */
+typedef enum {
+    HMRemoteTableViewJsonSerialized = 1,
+    HMRemoteTableViewXmlSerialized,
+} HMRemoteTableViewSerialized;
 
-- (id)init {
-    // calls the super
-    self = [super init];
+@protocol HMRemoteTableViewProvider <NSObject>    
 
-    // returns self
-    return self;
-}
+/**
+ * Retrieves the remote url to be used during the
+ * provider series.
+ *
+ * @return The remote url to be used during the
+ * provider series.
+ */
+- (NSString *)getRemoteUrl;
 
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    // calls the super
-    self = [super initWithCoder:aDecoder];
-    
-    // returns self
-    return self;
-}
-
-+ (void)_keepAtLinkTime {
-}
-
-- (NSObject<MBRemoteTableViewProvider> *)remoteTableViewProvider {
-    return _remoteTableViewProvider;
-}
-
-- (void)setRemoteTableViewProvider:(NSObject<MBRemoteTableViewProvider> *)remoteTableViewProvider {
-    _remoteTableViewProvider = remoteTableViewProvider;
-    
-    //[remoteTableViewProvider retain];
-}
-
+/**
+ * Retrieves the type of serializer to be used to decode
+ * the remote request.
+ *
+ * @return The type of serializer to be used to decode
+ * the remote request
+ */
+- (HMRemoteTableViewSerialized)getRemoteType;
 
 @end
+
+

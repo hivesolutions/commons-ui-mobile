@@ -25,35 +25,17 @@
 
 #import <Foundation/Foundation.h>
 
-/**
- * Enumeration defining the various remote
- * serializer engines.
- */
-typedef enum {
-    MBRemoteTableViewJsonSerialized = 1,
-    MBRemoteTableViewXmlSerialized,
-} MBRemoteTableViewSerialized;
+#import "HMRemoteTableViewProvider.h"
 
-@protocol MBRemoteTableViewProvider <NSObject>    
+@interface HMRemoteTableView : UITableView {
+    @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
+}
+
+@property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
 
 /**
- * Retrieves the remote url to be used during the
- * provider series.
- *
- * @return The remote url to be used during the
- * provider series.
+ * Keeps the class valid for export at link time.
  */
-- (NSString *)getRemoteUrl;
-
-/**
- * Retrieves the type of serializer to be used to decode
- * the remote request.
- *
- * @return The type of serializer to be used to decode
- * the remote request
- */
-- (MBRemoteTableViewSerialized)getRemoteType;
++ (void)_keepAtLinkTime;
 
 @end
-
-
