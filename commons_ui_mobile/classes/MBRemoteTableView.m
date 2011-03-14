@@ -27,8 +27,6 @@
 
 @implementation MBRemoteTableView
 
-@synthesize remoteTableViewProvider = _remoteTableViewProvider;
-
 - (id)init {
     // calls the super
     self = [super init];
@@ -47,5 +45,16 @@
 
 + (void)_keepAtLinkTime {
 }
+
+- (NSObject<MBRemoteTableViewProvider> *)remoteTableViewProvider {
+    return _remoteTableViewProvider;
+}
+
+- (void)setRemoteTableViewProvider:(NSObject<MBRemoteTableViewProvider> *)remoteTableViewProvider {
+    _remoteTableViewProvider = remoteTableViewProvider;
+    
+    //[remoteTableViewProvider retain];
+}
+
 
 @end
