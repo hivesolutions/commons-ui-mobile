@@ -41,7 +41,7 @@
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [[NSArray alloc] init];
+    return [[[NSArray alloc] init] autorelease];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
