@@ -28,12 +28,21 @@
 @protocol HMItemTableViewDelegate <NSObject>
 
 /**
- * Called when a row is selected for a data in
+ * Called when a row is selected for an item in
  * the virtual data set.
  *
- * @param data The data in the virtual set for the
+ * @param item The item in the virtual set for the
  * selected row.
  */
-- (void)didSelectItemRowWidthData:(NSDictionary *)data;
+- (void)didSelectItemRowWidthItem:(HMItem *)item;
+
+/**
+ * Called when a row is deselected for an item in
+ * the virtual data set.
+ *
+ * @param item The item in the virtual set for the
+ * deselected row.
+ */
+- (void)didDeselectItemRowWidthItem:(HMItem *)item;
 
 @end

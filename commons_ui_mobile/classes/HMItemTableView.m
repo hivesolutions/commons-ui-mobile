@@ -65,17 +65,39 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // retrieves the item data
-    /*NSMutableArray *itemData = self.itemDataSource.remoteData;
+    // rettrieves the item specification
+    HMItemGroup *itemSpecification = self.itemDataSource.itemSpecification;
 
-    // retrieves the index path row
-    NSInteger row = indexPath.row;
+    // retrieves the button item
+    HMButtonItem *buttonItem = (HMButtonItem *) [itemSpecification getItem:indexPath];
 
-    // retrieves the remote data item from the remote data at the row
-    NSMutableDictionary *remoteDataItem = [remoteData objectAtIndex:row];
+    // retrieves the selected cell
+    UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
 
-    // calls the did select remote row with data method
-    [self.remoteDelegate didSelectRemoteRowWidthData:remoteDataItem];*/
+    // changes the cell's icon
+    UIImage *iconImage = [UIImage imageNamed:buttonItem.selectedIcon];
+    cell.imageView.image = iconImage;
+
+    // calls the did select item row with item method
+    [self.itemDelegate didSelectItemRowWidthItem:buttonItem];
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // rettrieves the item specification
+    HMItemGroup *itemSpecification = self.itemDataSource.itemSpecification;
+
+    // retrieves the button item
+    HMButtonItem *buttonItem = (HMButtonItem *) [itemSpecification getItem:indexPath];
+
+    // retrieves the deselected cell
+    UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
+
+    // changes the cell's icon
+    UIImage *iconImage = [UIImage imageNamed:buttonItem.icon];
+    cell.imageView.image = iconImage;
+
+    // calls the did deselect item row with item method
+    [self.itemDelegate didDeselectItemRowWidthItem:buttonItem];
 }
 
 + (void)_keepAtLinkTime {

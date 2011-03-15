@@ -68,19 +68,7 @@
     }
 
     // retrieves the item specification from the item table view provider
-    NSArray *itemSpecification = [self.itemTableViewProvider getItemSpecification];
-
-    // creates the request
-    /*NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-
-    // creates the connection with the intance as delegate
-    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
-    // creates the received data
-    self.receivedData = [[NSMutableData alloc] init];
-
-    // creates a "new" remote data and initializes it
-    self.remoteData = [[NSArray alloc] init];*/
+    self.itemSpecification = [self.itemTableViewProvider getItemSpecification];
 
     // unsets the item dirty flag
     itemDirty = NO;
@@ -93,8 +81,11 @@
     // updates the item (if necessary)
     [self updateItem];
 
-    // returns the number of sections
-    return 1;
+    // retrieves the menu item group items size
+    NSInteger menuItemGroupItemsSize = [self.itemSpecification.items count];
+
+    // returns the menu item group items size
+    return menuItemGroupItemsSize;
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
@@ -111,29 +102,39 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // creates the cell identifier
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *cellIdentifier = @"Cell";
+
+    // retrieves the button item
+    HMButtonItem *buttonItem = (HMButtonItem *) [self.itemSpecification getItem:indexPath];
 
     // tries to retrives the cell from cache (reusable)
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonItem.name] autorelease];
     }
 
-    // retrieves the index path row
-    NSInteger pathRow = indexPath.row;
-/*
-    // retrieves the user
-    NSMutableDictionary *user = [self.remoteData objectAtIndex:pathRow];
+    // sets the button item's attributes in the cell
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.textLabel.text = buttonItem.name;
 
-    // retrieves the username for the first user
-    NSMutableString *username = [user objectForKey:@"username"];
+    cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 
-    // sets the text label text
-    cell.textLabel.text = username;*/
+    // sets the icon in case it is defined
+    if(buttonItem.icon) {
+        cell.imageView.image = [UIImage imageNamed:buttonItem.icon];
+    }
+
+    // sets the notifications switch
+    if(indexPath.section == 1) {
+        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
+        cell.accessoryView = notificationsSwitch;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [notificationsSwitch release];
+    }
 
     // returns the cell
     return cell;
@@ -146,8 +147,20 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    //return [self.remoteData count];
-    return 0;
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the section item group
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.itemSpecification getItem:indexPath];
+
+    // retrieves the section item group items count
+    NSInteger sectionItemGroupItemsCount = [sectionItemGroup.items count];
+
+    // releases the index path
+    [indexPath release];
+
+    // returns the section item group items count
+    return sectionItemGroupItemsCount;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
@@ -155,7 +168,17 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return nil;
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the section item group
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.itemSpecification getItem:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // returns the section's description
+    return sectionItemGroup.description;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
