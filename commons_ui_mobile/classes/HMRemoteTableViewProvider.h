@@ -55,5 +55,3 @@ typedef enum {
 - (HMRemoteTableViewSerialized)getRemoteType;
 
 @end
-
-
