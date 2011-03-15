@@ -31,14 +31,14 @@
 - (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
-    
+
     // creates a new background view
     HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
     [backgroundView setCellPosition:HMTableCellBackgroundViewPositionNormal];
-    
+
     // sets the new cell background view
     self.selectedBackgroundView = backgroundView;
-    
+
     // returns the instance
     return self;
 }
@@ -46,7 +46,7 @@
 - (void)setCellPosition:(HMTableCellBackgroundViewPosition)position {
     // retrieves the background view
     HMTableCellBackgroundView *backgroundView = (HMTableCellBackgroundView *) self.selectedBackgroundView;
-    
+
     // sets the background view's position
     [backgroundView setPosition:position];
 }

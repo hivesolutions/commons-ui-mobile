@@ -25,8 +25,8 @@
 
 #import "HMTableCellBackgroundView.h"
 
-@interface HMTableViewCell : UITableViewCell { 
-} 
+@interface HMTableViewCell : UITableViewCell {
+}
 
 /**
  * Sets the cell's position.
@@ -35,4 +35,4 @@
  */
 - (void)setCellPosition:(HMTableCellBackgroundViewPosition)position;
 
-@end 
+@end

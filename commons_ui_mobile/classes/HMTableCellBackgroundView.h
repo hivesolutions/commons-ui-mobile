@@ -29,7 +29,7 @@
  */
 typedef enum  {
     HMTableCellBackgroundViewPositionGroupedSingle = 1,
-    HMTableCellBackgroundViewPositionGroupedTop, 
+    HMTableCellBackgroundViewPositionGroupedTop,
     HMTableCellBackgroundViewPositionGroupedBottom,
     HMTableCellBackgroundViewPositionGroupedMiddle,
     HMTableCellBackgroundViewPositionNormal
@@ -39,7 +39,7 @@ typedef enum  {
     @private HMTableCellBackgroundViewPosition _position;
     @private CGFloat *_gradientColors;
 }
- 
+
 @property HMTableCellBackgroundViewPosition position;
 @property CGFloat *gradientColors;
 

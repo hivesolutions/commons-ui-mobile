@@ -33,22 +33,22 @@
 
 @synthesize position = _position;
 @synthesize gradientColors = _gradientColors;
- 
+
 - (BOOL) isOpaque {
     return NO;
 }
 
 -(void)drawRect:(CGRect)rectangle {
     // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();	
-    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
     // configures the context
     const CGColorRef grayColor = [[UIColor grayColor] CGColor];
     CGContextSetStrokeColorWithColor(context, grayColor);
     CGContextSetLineWidth(context, 1);
     CGContextSetAllowsAntialiasing(context, YES);
     CGContextSetShouldAntialias(context, YES);
-     
+
     // invokes the appropriate draw function
     // depending on the cell's position
     switch(self.position) {
@@ -72,18 +72,18 @@
 
 - (void)drawRectGroupedTop {
     // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();	
-    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];	
-    
+    CGRect rectangle = [self bounds];
+
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
     CGFloat middleX = CGRectGetMidX(rectangle);
     CGFloat maximumX = CGRectGetMaxX(rectangle);
     CGFloat minimumY = CGRectGetMinY(rectangle);
     CGFloat maximumY = CGRectGetMaxY(rectangle);
-    
+
     // creates the cell's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, maximumX);
@@ -92,12 +92,12 @@
     CGPathAddLineToPoint(path, NULL, maximumX, maximumY);
     CGPathAddLineToPoint(path, NULL, minimumX, maximumY);
     CGPathCloseSubpath(path);
-    
+
     // defines the gradient drawing bounds
     CGContextSaveGState(context);
     CGContextAddPath(context, path);
     CGContextClip(context);
-    
+
     // draws the gradient
     CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
     CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
@@ -106,11 +106,11 @@
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
     CGPoint maximumPoint = CGPointMake(minimumX, maximumY);
     CGContextDrawLinearGradient(context, gradient, minimumPoint, maximumPoint, 0);
-    
+
     // releases the colorspace and the gradient
     CGColorSpaceRelease(colorspace);
     CGGradientRelease(gradient);
-    
+
     // draws the cell's border
     CGContextAddPath(context, path);
     CGPathRelease(path);
@@ -120,21 +120,21 @@
 
 - (void)drawRectGroupedBottom {
     // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();	
-   
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];	
-    
+    CGRect rectangle = [self bounds];
+
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
     CGFloat middleX = CGRectGetMidX(rectangle);
     CGFloat maximumX = CGRectGetMaxX(rectangle);
     CGFloat minimumY = CGRectGetMinY(rectangle);
     CGFloat maximumY = CGRectGetMaxY(rectangle);
-    
+
     // decreases the minimum y
     minimumY -= 1;
-    
+
     // creates the cell's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, minimumY);
@@ -157,11 +157,11 @@
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
     CGPoint maximumPoint = CGPointMake(minimumX, maximumY);
     CGContextDrawLinearGradient(context, gradient, minimumPoint, maximumPoint, 0);
-    
+
     // releases the colorspace and the gradient
     CGColorSpaceRelease(colorspace);
     CGGradientRelease(gradient);
-    
+
     // draws the cell's border
     CGContextAddPath(context, path);
     CGPathRelease(path);
@@ -171,20 +171,20 @@
 
 - (void)drawRectGroupedMiddle {
     // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();	
+    CGContextRef context = UIGraphicsGetCurrentContext();
 
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];	
-    
+    CGRect rectangle = [self bounds];
+
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
     CGFloat maximumX = CGRectGetMaxX(rectangle);
     CGFloat minimumY = CGRectGetMinY(rectangle);
     CGFloat maximumY = CGRectGetMaxY(rectangle);
-    
+
     // decreases the minimum y
     minimumY -= 1;
-    
+
     // creates the cell's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, minimumY);
@@ -193,12 +193,12 @@
     CGPathAddLineToPoint(path, NULL, minimumX, maximumY);
     CGPathAddLineToPoint(path, NULL, minimumX, minimumY);
     CGPathCloseSubpath(path);
-    
+
     // defines the gradient drawing bounds
     CGContextSaveGState(context);
     CGContextAddPath(context, path);
     CGContextClip(context);
-    
+
     // draws the gradient
     CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
     CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
@@ -207,7 +207,7 @@
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
     CGPoint maximumPoint = CGPointMake(minimumX, maximumY);
     CGContextDrawLinearGradient(context, gradient, minimumPoint, maximumPoint, 0);
-    
+
     // releases the colorspace and the gradient
     CGColorSpaceRelease(colorspace);
     CGGradientRelease(gradient);
@@ -221,11 +221,11 @@
 
 - (void)drawRectGroupedSingle {
     // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();	
-    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];	
-    
+    CGRect rectangle = [self bounds];
+
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
     CGFloat middleX = CGRectGetMidX(rectangle);
@@ -233,7 +233,7 @@
     CGFloat minimumY = CGRectGetMinY(rectangle);
     CGFloat middleY = CGRectGetMidY(rectangle);
     CGFloat maximumY = CGRectGetMaxY(rectangle);
-    
+
     // creates the cell's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, middleY);
@@ -242,12 +242,12 @@
     CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, DEFAULT_MARGIN);
     CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, DEFAULT_MARGIN);
     CGPathCloseSubpath(path);
-    
+
     // defines the gradient drawing bounds
     CGContextSaveGState(context);
     CGContextAddPath(context, path);
     CGContextClip(context);
-    
+
     // draws the gradient
     CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
     CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
@@ -256,11 +256,11 @@
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
     CGPoint maximumPoint = CGPointMake(minimumX, maximumY);
     CGContextDrawLinearGradient(context, gradient, minimumPoint, maximumPoint, 0);
-    
+
     // releases the colorspace and the gradient
     CGColorSpaceRelease(colorspace);
     CGGradientRelease(gradient);
-    
+
     // draws the cell's border
     CGContextAddPath(context, path);
     CGPathRelease(path);
@@ -270,16 +270,16 @@
 
 - (void)drawRectNormal {
     // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();	
-    
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];	
-    
+    CGRect rectangle = [self bounds];
+
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
     CGFloat minimumY = CGRectGetMinY(rectangle);
     CGFloat maximumY = CGRectGetMaxY(rectangle);
-    
+
     // draws the gradient
     CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
     CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
@@ -288,7 +288,7 @@
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
     CGPoint maximumPoint = CGPointMake(minimumX, maximumY);
     CGContextDrawLinearGradient(context, gradient, minimumPoint, maximumPoint, 0);
-    
+
     // releases the colorspace and the gradient
     CGColorSpaceRelease(colorspace);
     CGGradientRelease(gradient);
@@ -298,11 +298,11 @@
     // returns in case the position hasn't changed
     if (self.position == position) {
         return;
-    }    
-    
+    }
+
     // stores the new position
     self.position = position;
-    
+
     // sets the cell to be re-rendered
     [self setNeedsDisplay];
 }

@@ -40,7 +40,7 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     // calls the super
     self = [super initWithCoder:aDecoder];
-    
+
     // returns self
     return self;
 }
@@ -51,7 +51,7 @@
 
 - (void)setRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
     _remoteTableViewProvider = remoteTableViewProvider;
-    
+
     // creates and sets the remote table view data source
     // from the remote table view provider
     self.dataSource = [[HMRemoteTableViewDataSource alloc] initWithRemoteTableViewProvider:remoteTableViewProvider];

@@ -34,7 +34,7 @@ typedef enum {
     HMRemoteTableViewXmlSerialized,
 } HMRemoteTableViewSerialized;
 
-@protocol HMRemoteTableViewProvider <NSObject>    
+@protocol HMRemoteTableViewProvider <NSObject>
 
 /**
  * Retrieves the remote url to be used during the

@@ -36,10 +36,10 @@
 - (id)init {
     // calls the super
     self = [super init];
-    
+
     // sets the remote dirty
     remoteDirty = YES;
-    
+
     // returns self
     return self;
 }
@@ -58,7 +58,7 @@
 - (void)dealloc {
     // calls the supper
     [super dealloc];
-    
+
     // releases the attributes
     [remoteData release];
 }
@@ -86,7 +86,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // sets the table view
     self.tableView = tableView;
-    
+
     // in case the remote is "dirty"
     if(remoteDirty == YES) {
         // updates the remote
@@ -112,29 +112,29 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // creates the cell identifier
     static NSString *CellIdentifier = @"Cell";
-    
+
     // tries to retrives the cell from cache (reusable)
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
+
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
         cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
-    
+
     // retrieves the index path row
     NSInteger pathRow = indexPath.row;
-    
+
     // retrieves the user
     NSMutableDictionary *user = [remoteData objectAtIndex:pathRow];
-    
+
     // retrieves the username for the first user
     NSMutableString *username = [user objectForKey:@"username"];
-    
+
     // sets the text label text
     cell.textLabel.text = username;
-    
+
     // returns the cell
     return cell;
 }
@@ -178,8 +178,8 @@
     [remoteData retain];
 
     // reloads the data
-    [self.tableView reloadData];    
-    
+    [self.tableView reloadData];
+
     // releases the json parser
     [jsonParser release];
 }
