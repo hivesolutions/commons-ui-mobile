@@ -34,6 +34,14 @@
 @property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
 
 /**
+ * Constructor of the class.
+ *
+ * @param remoteTableViewProvider The remote table view
+ * provider.
+ */
+- (HMRemoteTableViewDataSource *)initWithRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;

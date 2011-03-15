@@ -30,10 +30,19 @@
 @synthesize remoteTableViewProvider = _remoteTableViewProvider;
 
 - (id)init {
+    // returns self
     return self;
 }
 
-+ (void)_keepAtLinkTime {
+- (HMRemoteTableViewDataSource *)initWithRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
+    // calls the default contructor
+    self = [self init];
+     
+    // sets the attributes
+    self.remoteTableViewProvider = remoteTableViewProvider;
+    
+    // returns self
+    return self;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -57,9 +66,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    printf("commitEditingStyle\n");
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+    printf("moveRowAtIndexPath\n");
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -76,6 +87,9 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return @"adeus";
+}
+
++ (void)_keepAtLinkTime {
 }
 
 @end

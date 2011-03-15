@@ -25,6 +25,8 @@
 
 #import "HMRemoteTableView.h"
 
+#import "HMRemoteTableViewDataSource.h"
+
 @implementation HMRemoteTableView
 
 - (id)init {
@@ -43,9 +45,6 @@
     return self;
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 - (NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
     return _remoteTableViewProvider;
 }
@@ -53,8 +52,12 @@
 - (void)setRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
     _remoteTableViewProvider = remoteTableViewProvider;
     
-    //[remoteTableViewProvider retain];
+    // creates and sets the remote table view data source
+    // from the remote table view provider
+    self.dataSource = [[HMRemoteTableViewDataSource alloc] initWithRemoteTableViewProvider:remoteTableViewProvider];
 }
 
++ (void)_keepAtLinkTime {
+}
 
 @end
