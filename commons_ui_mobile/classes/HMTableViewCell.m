@@ -32,23 +32,42 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
-    // creates a new background view
+    // replaces the selected background view
     HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
-    [backgroundView setCellPosition:HMTableCellBackgroundViewPositionNormal];
-
-    // sets the new cell background view
     self.selectedBackgroundView = backgroundView;
 
     // returns the instance
     return self;
 }
 
-- (void)setCellPosition:(HMTableCellBackgroundViewPosition)position {
+- (void)drawRect:(CGRect)rect {
+    // retrieves the parent table view
+    UITableView *tableView = (UITableView *) self.superview;
+
+    // retrieves the cell's position attributes
+    NSIndexPath *indexPath = [tableView indexPathForCell:self];
+    NSUInteger section = [indexPath section];
+    NSUInteger numberRows = [tableView numberOfRowsInSection:section];
+    NSUInteger row = [indexPath row];
+
     // retrieves the background view
     HMTableCellBackgroundView *backgroundView = (HMTableCellBackgroundView *) self.selectedBackgroundView;
 
     // sets the background view's position
-    [backgroundView setPosition:position];
+    if(tableView.style == UITableViewStylePlain) {
+        [backgroundView setPosition:HMTableCellBackgroundViewPositionPlain];
+    } else if(row == 0 && numberRows == 1) {
+        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedSingle];
+    } else if(row == 0) {
+        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedTop];
+    } else if(row == numberRows - 1) {
+        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedBottom];
+    } else {
+        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedMiddle];
+    }
+
+    // invokes the parent
+    [super drawRect:rect];
 }
 
 @end

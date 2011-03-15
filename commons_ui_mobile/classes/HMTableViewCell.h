@@ -23,16 +23,7 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMTableCellBackgroundView.h"
-
 @interface HMTableViewCell : UITableViewCell {
 }
-
-/**
- * Sets the cell's position.
- *
- * @param position The cell's position.
- */
-- (void)setCellPosition:(HMTableCellBackgroundViewPosition)position;
 
 @end

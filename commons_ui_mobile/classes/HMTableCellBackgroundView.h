@@ -32,7 +32,7 @@ typedef enum  {
     HMTableCellBackgroundViewPositionGroupedTop,
     HMTableCellBackgroundViewPositionGroupedBottom,
     HMTableCellBackgroundViewPositionGroupedMiddle,
-    HMTableCellBackgroundViewPositionNormal
+    HMTableCellBackgroundViewPositionPlain
 } HMTableCellBackgroundViewPosition;
 
 @interface HMTableCellBackgroundView : UIView {
@@ -56,12 +56,6 @@ typedef enum  {
 - (void)drawRectGroupedBottom;
 
 /**
- * Draws a middle cell for a
- * grouped table.
- */
-- (void)drawRectGroupedMiddle;
-
-/**
  * Draws a cell that stands
  * alone in a grouped table.
  */
@@ -69,9 +63,14 @@ typedef enum  {
 
 /**
  * Draws a cell for a
- * normal table.
+ * plain table.
  */
-- (void)drawRectNormal;
+- (void)drawRectPlain;
+
+/**
+ * Draws the gradient.
+ */
+- (void)drawGradient;
 
 /**
  * Sets the cell's position.
