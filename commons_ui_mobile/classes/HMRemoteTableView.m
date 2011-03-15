@@ -29,6 +29,8 @@
 
 @implementation HMRemoteTableView
 
+@synthesize activity = _activity;
+@synthesize activityIndicator = _activityIndicator;
 @synthesize remoteDataSource = _remoteDataSource;
 @synthesize remoteDelegate = _remoteDelegate;
 
@@ -36,6 +38,9 @@
     // calls the super
     self = [super init];
 
+    // sets the first reload flag
+    firstReload = YES;
+    
     // returns self
     return self;
 }
@@ -44,8 +49,55 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
+    // sets the first reload flag
+    firstReload = YES;
+    
     // returns self
     return self;
+}
+
+- (void)createActivityIndicator {
+    // creates the activity
+    self.activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.superview.bounds.size.width, self.superview.bounds.size.height)];
+    self.activity.backgroundColor = [UIColor blackColor];
+    self.activity.alpha = 0.75;
+    
+    // creates the activity indicator
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(self.superview.bounds.size.width / 2 - 12, self.superview.bounds.size.height / 2 - 12, 24, 24)];
+    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    self.activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+    
+    // creates the activity structure
+    [self.activity addSubview:self.activityIndicator];
+    [self.superview addSubview:self.activity];
+}
+
+- (void)showActivityIndicator {
+    // in case the activity indicator is not set
+    if(self.activityIndicator == nil) {
+        // creates the activity indicator
+        [self createActivityIndicator];
+    }
+    
+    // shows the activity
+    self.activity.hidden = NO;
+    
+    // starts animating the activity indicator
+    [self.activityIndicator startAnimating];
+}
+
+- (void)hideActivityIndicator {
+    // in case the activity indicator is not set
+    if(self.activityIndicator == nil) {
+        // creates the activity indicator
+        [self createActivityIndicator];
+    }
+    
+    // hides the activity
+    self.activity.hidden = YES;
+    
+    // stops animating the activity indicator
+    [self.activityIndicator stopAnimating];
 }
 
 - (NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
@@ -62,6 +114,27 @@
 
     // sets the current instance as the delegate to the table view
     self.delegate = self;
+}
+
+- (void)reloadData {
+    // calls the super
+    [super reloadData];
+    
+    // in case it's the first reload (initial
+    // load must wait for remote loading)
+    if(firstReload) {
+        // shows the activity indicator
+        [self showActivityIndicator];
+    } 
+    // not the first loading the remote loading
+    // must be completed
+    else {
+        // hides the activity indicator
+        [self hideActivityIndicator];
+    }
+    
+    // unsets the first reload flag
+    firstReload = NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

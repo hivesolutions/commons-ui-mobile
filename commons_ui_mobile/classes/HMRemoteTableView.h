@@ -30,14 +30,35 @@
 #import "HMRemoteTableViewDataSource.h"
 
 @interface HMRemoteTableView : UITableView<UITableViewDelegate> {
+    @private UIView *_activity;
+    @private UIActivityIndicatorView *_activityIndicator;
     @private HMRemoteTableViewDataSource *_remoteDataSource;
     @private NSObject<HMRemoteTableViewDelegate> *_remoteTableViewDelegate;
     @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
+    @private BOOL firstReload;
 }
 
+@property (retain) UIView *activity;
+@property (retain) UIActivityIndicatorView *activityIndicator;
 @property (retain) HMRemoteTableViewDataSource *remoteDataSource;
 @property (retain) IBOutlet NSObject<HMRemoteTableViewDelegate> *remoteDelegate;
 @property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
+
+/**
+ * Creates the activity indicator to be used
+ * in the current remote table context.
+ */
+- (void)createActivityIndicator;
+
+/**
+ * Shows the current activity indicator.
+ */
+- (void)showActivityIndicator;
+
+/**
+ * Hides the current activity indicator.
+ */
+- (void)hideActivityIndicator;
 
 /**
  * Keeps the class valid for export at link time.
