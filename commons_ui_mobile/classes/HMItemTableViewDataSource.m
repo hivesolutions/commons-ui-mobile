@@ -24,33 +24,29 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #import "HMTableViewCell.h"
-#import "HMRemoteTableViewDataSource.h"
+#import "HMItemTableViewDataSource.h"
 
-@implementation HMRemoteTableViewDataSource
+@implementation HMItemTableViewDataSource
 
-@synthesize remoteTableViewProvider = _remoteTableViewProvider;
-@synthesize tableView = _tableView;
-@synthesize connection = _connection;
-@synthesize receivedData = _receivedData;
-@synthesize remoteData = _remoteData;
+@synthesize itemTableViewProvider = _itemTableViewProvider;
 
 - (id)init {
     // calls the super
     self = [super init];
 
     // sets the remote dirty
-    remoteDirty = YES;
+    //remoteDirty = YES;
 
     // returns self
     return self;
 }
 
-- (id)initWithRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
+- (id)initWithItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
     // calls the default contructor
     self = [self init];
 
     // sets the attributes
-    self.remoteTableViewProvider = remoteTableViewProvider;
+    self.itemTableViewProvider = itemTableViewProvider;
 
     // returns self
     return self;
@@ -61,8 +57,8 @@
     [super dealloc];
 }
 
-- (void)updateRemote {
-    // retrieves the remote url from the remote table view provider
+- (void)updateItem {
+   /* // retrieves the remote url from the remote table view provider
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
 
     // creates the request
@@ -78,18 +74,18 @@
     self.remoteData = [[NSArray alloc] init];
 
     // unsets the remote dirty flag
-    remoteDirty = NO;
+    remoteDirty = NO; */
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // sets the table view
-    self.tableView = tableView;
+//    self.tableView = tableView;
 
     // in case the remote is "dirty"
-    if(remoteDirty == YES) {
+    /*if(remoteDirty == YES) {
         // updates the remote
         [self updateRemote];
-    }
+    }*/
 
     // returns the number of sections
     return 1;
@@ -123,7 +119,7 @@
 
     // retrieves the index path row
     NSInteger pathRow = indexPath.row;
-
+/*
     // retrieves the user
     NSMutableDictionary *user = [self.remoteData objectAtIndex:pathRow];
 
@@ -131,7 +127,7 @@
     NSMutableString *username = [user objectForKey:@"username"];
 
     // sets the text label text
-    cell.textLabel.text = username;
+    cell.textLabel.text = username;*/
 
     // returns the cell
     return cell;
@@ -144,7 +140,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.remoteData count];
+    //return [self.remoteData count];
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
@@ -157,27 +154,6 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return nil;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    [self.receivedData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // creates a new json parser
-    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
-
-    // parses the received (remote) data and sets it into the intance
-    self.remoteData = [jsonParser objectWithData:self.receivedData];
-
-    // retains the remote data
-    [self.remoteData retain];
-
-    // reloads the data
-    [self.tableView reloadData];
-
-    // releases the json parser
-    [jsonParser release];
 }
 
 + (void)_keepAtLinkTime {
