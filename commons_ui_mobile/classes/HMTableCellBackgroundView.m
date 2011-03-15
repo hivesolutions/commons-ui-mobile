@@ -24,6 +24,8 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #define DEFAULT_MARGIN 10
+#define DEFAULT_GRADIENT_LOCATIONS {0.0, 1.0}
+#define DEFAULT_GRADIENT_COLORS {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1}
 
 #import "HMTableCellBackgroundView.h"
 
@@ -97,8 +99,8 @@
     CGContextClip(context);
     
     // draws the gradient
-    CGFloat locations[2] = {0.0, 1.0};
-    CGFloat components[8] = {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1};
+    CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
+    CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
@@ -148,8 +150,8 @@
     CGContextClip(context);
 
     // draws the gradient
-    CGFloat locations[2] = {0.0, 1.0};
-    CGFloat components[8] = {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1};
+    CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
+    CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
@@ -198,8 +200,8 @@
     CGContextClip(context);
     
     // draws the gradient
-    CGFloat locations[2] = {0.0, 1.0};
-    CGFloat components[8] = {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1};
+    CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
+    CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
@@ -247,8 +249,8 @@
     CGContextClip(context);
     
     // draws the gradient
-    CGFloat locations[2] = {0.0, 1.0};
-    CGFloat components[8] = {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1};
+    CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
+    CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
@@ -279,8 +281,8 @@
     CGFloat maximumY = CGRectGetMaxY(rectangle);
     
     // draws the gradient
-    CGFloat locations[2] = {0.0, 1.0};
-    CGFloat components[8] = {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1};
+    CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
+    CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
     CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
