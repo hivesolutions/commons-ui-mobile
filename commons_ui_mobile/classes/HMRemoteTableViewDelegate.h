@@ -25,23 +25,15 @@
 
 #import <Foundation/Foundation.h>
 
-#import "HMRemoteTableViewDelegate.h"
-#import "HMRemoteTableViewProvider.h"
-#import "HMRemoteTableViewDataSource.h"
-
-@interface HMRemoteTableView : UITableView<UITableViewDelegate> {
-    @private HMRemoteTableViewDataSource *_remoteDataSource;
-    @private NSObject<HMRemoteTableViewDelegate> *_remoteTableViewDelegate;
-    @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
-}
-
-@property (retain) HMRemoteTableViewDataSource *remoteDataSource;
-@property (retain) IBOutlet NSObject<HMRemoteTableViewDelegate> *remoteDelegate;
-@property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
+@protocol HMRemoteTableViewDelegate <NSObject>
 
 /**
- * Keeps the class valid for export at link time.
+ * Called when a row is selected for a data in
+ * the virtual data set.
+ *
+ * @param data The data in the virtual set for the
+ * selected row.
  */
-+ (void)_keepAtLinkTime;
+- (void)didSelectRemoteRowWidthData:(NSDictionary *)data;
 
 @end

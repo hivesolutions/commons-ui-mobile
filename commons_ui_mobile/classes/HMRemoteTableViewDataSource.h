@@ -32,7 +32,7 @@
     @private UITableView *_tableView;
     @private NSURLConnection *_connection;
     @private NSMutableData *_receivedData;
-    @private NSMutableArray *remoteData;
+    @private NSMutableArray *_remoteData;
     @private BOOL remoteDirty;
 }
 
@@ -40,6 +40,7 @@
 @property (retain) UITableView *tableView;
 @property (retain) NSURLConnection *connection;
 @property (retain) NSMutableData *receivedData;
+@property (retain) NSMutableArray *remoteData;
 
 /**
  * Constructor of the class.

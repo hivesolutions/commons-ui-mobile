@@ -32,6 +32,7 @@
 @synthesize tableView = _tableView;
 @synthesize connection = _connection;
 @synthesize receivedData = _receivedData;
+@synthesize remoteData = _remoteData;
 
 - (id)init {
     // calls the super
@@ -58,9 +59,6 @@
 - (void)dealloc {
     // calls the supper
     [super dealloc];
-
-    // releases the attributes
-    [remoteData release];
 }
 
 - (void)updateRemote {
@@ -77,7 +75,7 @@
     self.receivedData = [[NSMutableData alloc] init];
 
     // creates a "new" remote data and initializes it
-    remoteData = [[NSArray alloc] init];
+    self.remoteData = [[NSArray alloc] init];
 
     // unsets the remote dirty flag
     remoteDirty = NO;
@@ -127,7 +125,7 @@
     NSInteger pathRow = indexPath.row;
 
     // retrieves the user
-    NSMutableDictionary *user = [remoteData objectAtIndex:pathRow];
+    NSMutableDictionary *user = [self.remoteData objectAtIndex:pathRow];
 
     // retrieves the username for the first user
     NSMutableString *username = [user objectForKey:@"username"];
@@ -148,7 +146,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [remoteData count];
+    return [self.remoteData count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
@@ -172,10 +170,10 @@
     SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
     // parses the received (remote) data and sets it into the intance
-    remoteData = [jsonParser objectWithData:self.receivedData];
+    self.remoteData = [jsonParser objectWithData:self.receivedData];
 
     // retains the remote data
-    [remoteData retain];
+    [self.remoteData retain];
 
     // reloads the data
     [self.tableView reloadData];

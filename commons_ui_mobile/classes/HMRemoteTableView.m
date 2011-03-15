@@ -29,6 +29,9 @@
 
 @implementation HMRemoteTableView
 
+@synthesize remoteDataSource = _remoteDataSource;
+@synthesize remoteDelegate = _remoteDelegate;
+
 - (id)init {
     // calls the super
     self = [super init];
@@ -54,7 +57,25 @@
 
     // creates and sets the remote table view data source
     // from the remote table view provider
-    self.dataSource = [[HMRemoteTableViewDataSource alloc] initWithRemoteTableViewProvider:remoteTableViewProvider];
+    self.remoteDataSource = [[HMRemoteTableViewDataSource alloc] initWithRemoteTableViewProvider:remoteTableViewProvider];
+    self.dataSource = self.remoteDataSource;
+
+    // sets the current instance as the delegate to the table view
+    self.delegate = self;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // retrieves the remote data
+    NSMutableArray *remoteData = self.remoteDataSource.remoteData;
+
+    // retrieves the index path row
+    NSInteger row = indexPath.row;
+
+    // retrieves the remote data item from the remote data at the row
+    NSMutableDictionary *remoteDataItem = [remoteData objectAtIndex:row];
+
+    // calls the did select remote row with data method
+    [self.remoteDelegate didSelectRemoteRowWidthData:remoteDataItem];
 }
 
 + (void)_keepAtLinkTime {
