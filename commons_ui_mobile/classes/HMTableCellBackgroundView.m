@@ -34,11 +34,22 @@
 @synthesize position = _position;
 @synthesize gradientColors = _gradientColors;
 
-- (BOOL) isOpaque {
+- (id)init {
+    // invokes the parent constructor
+    self = [super init];
+
+    // sets the default attributes
+    self.position = HMTableCellBackgroundViewPositionPlain;
+
+    // returns the instance
+    return self;
+}
+
+- (BOOL)isOpaque {
     return NO;
 }
 
--(void)drawRect:(CGRect)rectangle {
+- (void)drawRect:(CGRect)rectangle {
     // retrieves the current graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();
 
