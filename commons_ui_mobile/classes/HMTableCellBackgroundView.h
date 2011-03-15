@@ -23,53 +23,61 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
-
 /**
  * Enumeration defining the various
  * cell positions.
  */
 typedef enum  {
-    HMCellBackgroundViewPositionSingle = 1,
-    HMCellBackgroundViewPositionTop, 
-    HMCellBackgroundViewPositionBottom,
-    HMCellBackgroundViewPositionMiddle
-} HMCellBackgroundViewPosition;
+    HMTableCellBackgroundViewPositionGroupedSingle = 1,
+    HMTableCellBackgroundViewPositionGroupedTop, 
+    HMTableCellBackgroundViewPositionGroupedBottom,
+    HMTableCellBackgroundViewPositionGroupedMiddle,
+    HMTableCellBackgroundViewPositionNormal
+} HMTableCellBackgroundViewPosition;
 
-@interface HMCellBackgroundView : UIView {
-    @private HMCellBackgroundViewPosition _position;
+@interface HMTableCellBackgroundView : UIView {
+    @private HMTableCellBackgroundViewPosition _position;
     @private CGFloat *_gradientColors;
 }
  
-@property HMCellBackgroundViewPosition position;
+@property HMTableCellBackgroundViewPosition position;
 @property CGFloat *gradientColors;
 
 /**
- * Draws a top cell.
+ * Draws a top cell for a
+ * grouped table.
  */
-- (void)drawRectTop;
+- (void)drawRectGroupedTop;
 
 /**
- * Draws a bottom cell.
+ * Draws a bottom cell for a
+ * grouped table.
  */
-- (void)drawRectBottom;
+- (void)drawRectGroupedBottom;
 
 /**
- * Draws a middle cell.
+ * Draws a middle cell for a
+ * grouped table.
  */
-- (void)drawRectMiddle;
+- (void)drawRectGroupedMiddle;
 
 /**
- * Draws a single cell.
+ * Draws a cell that stands
+ * alone in a grouped table.
  */
-- (void)drawRectSingle;
+- (void)drawRectGroupedSingle;
+
+/**
+ * Draws a cell for a
+ * normal table.
+ */
+- (void)drawRectNormal;
 
 /**
  * Sets the cell's position.
  *
  * @param position The cell's position.
  */
-- (void)setCellPosition:(HMCellBackgroundViewPosition)position;
+- (void)setCellPosition:(HMTableCellBackgroundViewPosition)position;
 
 @end

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A53B0577132F97C40064BCA5 /* HMTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A53B0573132F97C40064BCA5 /* HMTableViewCell.h */; };
+		A53B0578132F97C40064BCA5 /* HMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0574132F97C40064BCA5 /* HMTableViewCell.m */; };
+		A53B0579132F97C40064BCA5 /* HMTableCellBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */; };
+		A53B057A132F97C40064BCA5 /* HMTableCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */; };
 		C29A2E2E132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E2A132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h */; };
 		C29A2E2F132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E2B132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m */; };
 		C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A53B0573132F97C40064BCA5 /* HMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewCell.h; path = classes/HMTableViewCell.h; sourceTree = "<group>"; };
+		A53B0574132F97C40064BCA5 /* HMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCell.m; path = classes/HMTableViewCell.m; sourceTree = "<group>"; };
+		A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableCellBackgroundView.h; path = classes/HMTableCellBackgroundView.h; sourceTree = "<group>"; };
+		A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableCellBackgroundView.m; path = classes/HMTableCellBackgroundView.m; sourceTree = "<group>"; };
 		C29A2E2A132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableViewDataSource.h; path = classes/HMRemoteTableViewDataSource.h; sourceTree = "<group>"; };
 		C29A2E2B132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableViewDataSource.m; path = classes/HMRemoteTableViewDataSource.m; sourceTree = "<group>"; };
 		C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commons_ui_mobile.h; path = headers/commons_ui_mobile.h; sourceTree = "<group>"; };
@@ -101,6 +109,10 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A53B0573132F97C40064BCA5 /* HMTableViewCell.h */,
+				A53B0574132F97C40064BCA5 /* HMTableViewCell.m */,
+				A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */,
+				A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */,
 				C29A2E3D132EA6A2005EAB37 /* HMRemoteTableView.h */,
 				C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */,
 				C29A2E37132EA52B005EAB37 /* HMRemoteTableViewProvider.h */,
@@ -129,6 +141,8 @@
 				C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */,
 				C29A2E38132EA52B005EAB37 /* HMRemoteTableViewProvider.h in Headers */,
 				C29A2E3F132EA6A2005EAB37 /* HMRemoteTableView.h in Headers */,
+				A53B0577132F97C40064BCA5 /* HMTableViewCell.h in Headers */,
+				A53B0579132F97C40064BCA5 /* HMTableCellBackgroundView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,6 +195,8 @@
 			files = (
 				C29A2E2F132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m in Sources */,
 				C29A2E40132EA6A2005EAB37 /* HMRemoteTableView.m in Sources */,
+				A53B0578132F97C40064BCA5 /* HMTableViewCell.m in Sources */,
+				A53B057A132F97C40064BCA5 /* HMTableCellBackgroundView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,18 +25,13 @@
 
 #define DEFAULT_MARGIN 10
 
-#import "HMCellBackgroundView.h"
+#import "HMTableCellBackgroundView.h"
 
-@implementation HMCellBackgroundView
+@implementation HMTableCellBackgroundView
 
 @synthesize position = _position;
 @synthesize gradientColors = _gradientColors;
  
-- (void)dealloc {
-    // invokes the parent destructor
-    [super dealloc];
-}
-
 - (BOOL) isOpaque {
     return NO;
 }
@@ -55,22 +50,25 @@
     // invokes the appropriate draw function
     // depending on the cell's position
     switch(self.position) {
-        case HMCellBackgroundViewPositionTop:
-            [self drawRectTop];
+        case HMTableCellBackgroundViewPositionGroupedTop:
+            [self drawRectGroupedTop];
             break;
-        case HMCellBackgroundViewPositionBottom:
-            [self drawRectBottom];
+        case HMTableCellBackgroundViewPositionGroupedBottom:
+            [self drawRectGroupedBottom];
             break;
-        case HMCellBackgroundViewPositionMiddle:
-            [self drawRectMiddle];
+        case HMTableCellBackgroundViewPositionGroupedMiddle:
+            [self drawRectGroupedMiddle];
             break;
-        case HMCellBackgroundViewPositionSingle:
-            [self drawRectSingle];
+        case HMTableCellBackgroundViewPositionGroupedSingle:
+            [self drawRectGroupedSingle];
+            break;
+        case HMTableCellBackgroundViewPositionNormal:
+            [self drawRectNormal];
             break;
     }
 }
 
-- (void)drawRectTop {
+- (void)drawRectGroupedTop {
     // retrieves the current graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();	
     
@@ -118,7 +116,7 @@
     CGContextRestoreGState(context);
 }
 
-- (void)drawRectBottom {
+- (void)drawRectGroupedBottom {
     // retrieves the current graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();	
    
@@ -169,7 +167,7 @@
     CGContextRestoreGState(context);
 }
 
-- (void)drawRectMiddle {
+- (void)drawRectGroupedMiddle {
     // retrieves the current graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();	
 
@@ -219,7 +217,7 @@
     CGContextRestoreGState(context);
 }
 
-- (void)drawRectSingle {
+- (void)drawRectGroupedSingle {
     // retrieves the current graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();	
     
@@ -268,7 +266,33 @@
     CGContextRestoreGState(context);
 }
 
-- (void)setCellPosition:(HMCellBackgroundViewPosition)position {
+- (void)drawRectNormal {
+    // retrieves the current graphics context
+    CGContextRef context = UIGraphicsGetCurrentContext();	
+    
+    // retrieves the view's bounds
+    CGRect rectangle = [self bounds];	
+    
+    // retrieves the rectangles coordinates
+    CGFloat minimumX = CGRectGetMinX(rectangle);
+    CGFloat minimumY = CGRectGetMinY(rectangle);
+    CGFloat maximumY = CGRectGetMaxY(rectangle);
+    
+    // draws the gradient
+    CGFloat locations[2] = {0.0, 1.0};
+    CGFloat components[8] = {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1};
+    CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
+    CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
+    CGPoint maximumPoint = CGPointMake(minimumX, maximumY);
+    CGContextDrawLinearGradient(context, gradient, minimumPoint, maximumPoint, 0);
+    
+    // releases the colorspace and the gradient
+    CGColorSpaceRelease(colorspace);
+    CGGradientRelease(gradient);
+}
+
+- (void)setCellPosition:(HMTableCellBackgroundViewPosition)position {
     // returns in case the position hasn't changed
     if (self.position == position) {
         return;

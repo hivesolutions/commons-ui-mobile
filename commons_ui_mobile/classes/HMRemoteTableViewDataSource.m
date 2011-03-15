@@ -23,6 +23,7 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
+#import "HMTableViewCell.h"
 #import "HMRemoteTableViewDataSource.h"
 
 @implementation HMRemoteTableViewDataSource
@@ -119,7 +120,7 @@
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     }
     
     // retrieves the index path row
