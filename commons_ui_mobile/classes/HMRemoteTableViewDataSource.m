@@ -65,19 +65,19 @@
 - (void)updateRemote {
     // retrieves the remote url from the remote table view provider
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
-    
+
     // creates the request
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-    
+
     // creates the connection with the intance as delegate
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     // creates the received data
     self.receivedData = [[NSMutableData alloc] init];
-    
+
     // creates a "new" remote data and initializes it
     remoteData = [[NSArray alloc] init];
-    
+
     // unsets the remote dirty flag
     remoteDirty = NO;
 }
