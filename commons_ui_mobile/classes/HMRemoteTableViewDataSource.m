@@ -62,6 +62,13 @@
 }
 
 - (void)updateRemote {
+    // in case the remote dirty flag is
+    // not set
+    if(remoteDirty == NO) {
+        // returns immeditely
+        return;
+    }
+
     // retrieves the remote url from the remote table view provider
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
 
@@ -85,11 +92,8 @@
     // sets the table view
     self.tableView = tableView;
 
-    // in case the remote is "dirty"
-    if(remoteDirty == YES) {
-        // updates the remote
-        [self updateRemote];
-    }
+    // updates the remote (if necessary)
+    [self updateRemote];
 
     // returns the number of sections
     return 1;

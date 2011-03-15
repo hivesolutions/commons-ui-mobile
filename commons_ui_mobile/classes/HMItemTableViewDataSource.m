@@ -29,13 +29,15 @@
 @implementation HMItemTableViewDataSource
 
 @synthesize itemTableViewProvider = _itemTableViewProvider;
+@synthesize tableView = _tableView;
+@synthesize itemSpecification = _itemSpecification;
 
 - (id)init {
     // calls the super
     self = [super init];
 
-    // sets the remote dirty
-    //remoteDirty = YES;
+    // sets the item dirty
+    itemDirty = YES;
 
     // returns self
     return self;
@@ -58,11 +60,18 @@
 }
 
 - (void)updateItem {
-   /* // retrieves the remote url from the remote table view provider
-    NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
+    // in case the item dirty flag is
+    // not set
+    if(itemDirty == NO) {
+        // returns immeditely
+        return;
+    }
+
+    // retrieves the item specification from the item table view provider
+    NSArray *itemSpecification = [self.itemTableViewProvider getItemSpecification];
 
     // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    /*NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 
     // creates the connection with the intance as delegate
     self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -71,21 +80,18 @@
     self.receivedData = [[NSMutableData alloc] init];
 
     // creates a "new" remote data and initializes it
-    self.remoteData = [[NSArray alloc] init];
+    self.remoteData = [[NSArray alloc] init];*/
 
-    // unsets the remote dirty flag
-    remoteDirty = NO; */
+    // unsets the item dirty flag
+    itemDirty = NO;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // sets the table view
-//    self.tableView = tableView;
+    self.tableView = tableView;
 
-    // in case the remote is "dirty"
-    /*if(remoteDirty == YES) {
-        // updates the remote
-        [self updateRemote];
-    }*/
+    // updates the item (if necessary)
+    [self updateItem];
 
     // returns the number of sections
     return 1;

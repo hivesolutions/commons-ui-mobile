@@ -29,9 +29,14 @@
 
 @interface HMItemTableViewDataSource : NSObject<UITableViewDataSource> {
     @private NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
+    @private UITableView *_tableView;
+    @private HMItemGroup *_itemSpecification;
+    @private BOOL itemDirty;
 }
 
 @property (retain) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
+@property (retain) UITableView *tableView;
+@property (retain) HMItemGroup *itemSpecification;
 
 /**
  * Constructor of the class.

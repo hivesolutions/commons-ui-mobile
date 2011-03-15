@@ -23,9 +23,13 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "../classes/HMRemoteTableViewDelegate.h"
-#import "../classes/HMTableViewCell.h"
-#import "../classes/HMTableCellBackgroundView.h"
+#import "../classes/HMItemTableView.h"
+#import "../classes/HMItemTableViewDelegate.h"
+#import "../classes/HMItemTableViewProvider.h"
+#import "../classes/HMItemTableViewDataSource.h"
 #import "../classes/HMRemoteTableView.h"
+#import "../classes/HMRemoteTableViewDelegate.h"
 #import "../classes/HMRemoteTableViewProvider.h"
 #import "../classes/HMRemoteTableViewDataSource.h"
+#import "../classes/HMTableCellBackgroundView.h"
+#import "../classes/HMTableViewCell.h"

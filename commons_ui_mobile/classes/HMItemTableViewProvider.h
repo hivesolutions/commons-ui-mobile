@@ -30,8 +30,8 @@
 /**
  * Retrieves the table item specification.
  *
- * @return The list with the item specification.
+ * @return The item group with the item specification.
  */
-- (NSArray *)getItemSpecification;
+- (HMItemGroup *)getItemSpecification;
 
 @end
