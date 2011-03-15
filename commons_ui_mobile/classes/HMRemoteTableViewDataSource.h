@@ -29,9 +29,17 @@
 
 @interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource> {
     @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
+    @private UITableView *_tableView;
+    @private NSURLConnection *_connection;
+    @private NSMutableData *_receivedData;
+    @private NSMutableArray *remoteData;
+    @private BOOL remoteDirty;
 }
 
 @property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
+@property (retain) UITableView *tableView;
+@property (retain) NSURLConnection *connection;
+@property (retain) NSMutableData *receivedData;
 
 /**
  * Constructor of the class.
@@ -39,7 +47,13 @@
  * @param remoteTableViewProvider The remote table view
  * provider.
  */
-- (HMRemoteTableViewDataSource *)initWithRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider;
+- (id)initWithRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider;
+
+/**
+ * Updates the remote data, by performing a remote
+ * call to the provider.
+ */
+- (void)updateRemote;
 
 /**
  * Keeps the class valid for export at link time.

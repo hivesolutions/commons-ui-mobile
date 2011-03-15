@@ -24,5 +24,5 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #import "../classes/HMRemoteTableView.h"
-#import "../classes/HMRemoteTableViewDataSource.h"
 #import "../classes/HMRemoteTableViewProvider.h"
+#import "../classes/HMRemoteTableViewDataSource.h"

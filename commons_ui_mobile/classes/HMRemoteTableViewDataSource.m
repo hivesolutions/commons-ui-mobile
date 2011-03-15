@@ -28,24 +28,71 @@
 @implementation HMRemoteTableViewDataSource
 
 @synthesize remoteTableViewProvider = _remoteTableViewProvider;
+@synthesize tableView = _tableView;
+@synthesize connection = _connection;
+@synthesize receivedData = _receivedData;
 
 - (id)init {
-    // returns self
-    return self;
-}
-
-- (HMRemoteTableViewDataSource *)initWithRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
-    // calls the default contructor
-    self = [self init];
-     
-    // sets the attributes
-    self.remoteTableViewProvider = remoteTableViewProvider;
+    // calls the super
+    self = [super init];
+    
+    // sets the remote dirty
+    remoteDirty = YES;
     
     // returns self
     return self;
 }
 
+- (id)initWithRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
+    // calls the default contructor
+    self = [self init];
+
+    // sets the attributes
+    self.remoteTableViewProvider = remoteTableViewProvider;
+
+    // returns self
+    return self;
+}
+
+- (void)dealloc {
+    // calls the supper
+    [super dealloc];
+    
+    // releases the attributes
+    [remoteData release];
+}
+
+- (void)updateRemote {
+    // retrieves the remote url from the remote table view provider
+    NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
+    
+    // creates the request
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    
+    // creates the connection with the intance as delegate
+    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+
+    // creates the received data
+    self.receivedData = [[NSMutableData alloc] init];
+    
+    // creates a "new" remote data and initializes it
+    remoteData = [[NSArray alloc] init];
+    
+    // unsets the remote dirty flag
+    remoteDirty = NO;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // sets the table view
+    self.tableView = tableView;
+    
+    // in case the remote is "dirty"
+    if(remoteDirty == YES) {
+        // updates the remote
+        [self updateRemote];
+    }
+
+    // returns the number of sections
     return 1;
 }
 
@@ -62,7 +109,33 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return nil;
+    // creates the cell identifier
+    static NSString *CellIdentifier = @"Cell";
+    
+    // tries to retrives the cell from cache (reusable)
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    // in case the cell is not defined in the cuurrent cache
+    // need to create a new cell
+    if (cell == nil) {
+        // creates the new cell with the given reuse identifier
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    }
+    
+    // retrieves the index path row
+    NSInteger pathRow = indexPath.row;
+    
+    // retrieves the user
+    NSMutableDictionary *user = [remoteData objectAtIndex:pathRow];
+    
+    // retrieves the username for the first user
+    NSMutableString *username = [user objectForKey:@"username"];
+    
+    // sets the text label text
+    cell.textLabel.text = username;
+    
+    // returns the cell
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -74,19 +147,40 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [remoteData count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return 1;
+    return 0;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return @"ola";
+    return nil;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"adeus";
+    return nil;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    [self.receivedData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // creates a new json parser
+    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
+
+    // parses the received (remote) data and sets it into the intance
+    remoteData = [jsonParser objectWithData:self.receivedData];
+
+    // retains the remote data
+    [remoteData retain];
+
+    // reloads the data
+    [self.tableView reloadData];    
+    
+    // releases the json parser
+    [jsonParser release];
 }
 
 + (void)_keepAtLinkTime {
