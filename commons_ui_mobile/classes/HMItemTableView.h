@@ -25,13 +25,23 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HMItemTableViewProvider <NSObject>
+#import "HMItemTableViewDelegate.h"
+#import "HMItemTableViewProvider.h"
+#import "HMItemTableViewDataSource.h"
+
+@interface HMItemTableView : UITableView<UITableViewDelegate> {
+    @private HMItemTableViewDataSource *_ItemDataSource;
+    @private NSObject<HMItemTableViewDelegate> *_itemTableViewDelegate;
+    @private NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
+}
+
+@property (retain) HMItemTableViewDataSource *itemDataSource;
+@property (retain) IBOutlet NSObject<HMItemTableViewDelegate> *itemDelegate;
+@property (retain) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
 
 /**
- * Retrieves the table item specification.
- *
- * @return The list with the item specification.
+ * Keeps the class valid for export at link time.
  */
-- (NSArray *)getItemSpecification;
++ (void)_keepAtLinkTime;
 
 @end

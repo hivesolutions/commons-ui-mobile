@@ -25,13 +25,15 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HMItemTableViewProvider <NSObject>
+@protocol HMItemTableViewDelegate <NSObject>
 
 /**
- * Retrieves the table item specification.
+ * Called when a row is selected for a data in
+ * the virtual data set.
  *
- * @return The list with the item specification.
+ * @param data The data in the virtual set for the
+ * selected row.
  */
-- (NSArray *)getItemSpecification;
+- (void)didSelectItemRowWidthData:(NSDictionary *)data;
 
 @end
