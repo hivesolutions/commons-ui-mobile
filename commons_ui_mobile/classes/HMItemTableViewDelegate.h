@@ -34,7 +34,7 @@
  * @param item The item in the virtual set for the
  * selected row.
  */
-- (void)didSelectItemRowWidthItem:(HMItem *)item;
+- (void)didSelectItemRowWithItem:(HMItem *)item;
 
 /**
  * Called when a row is deselected for an item in
@@ -43,6 +43,6 @@
  * @param item The item in the virtual set for the
  * deselected row.
  */
-- (void)didDeselectItemRowWidthItem:(HMItem *)item;
+- (void)didDeselectItemRowWithItem:(HMItem *)item;
 
 @end

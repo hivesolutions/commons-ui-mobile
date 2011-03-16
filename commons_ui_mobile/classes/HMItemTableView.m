@@ -79,7 +79,7 @@
     cell.imageView.image = iconImage;
 
     // calls the did select item row with item method
-    [self.itemDelegate didSelectItemRowWidthItem:buttonItem];
+    [self.itemDelegate didSelectItemRowWithItem:buttonItem];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,7 +97,7 @@
     cell.imageView.image = iconImage;
 
     // calls the did deselect item row with item method
-    [self.itemDelegate didDeselectItemRowWidthItem:buttonItem];
+    [self.itemDelegate didDeselectItemRowWithItem:buttonItem];
 }
 
 + (void)_keepAtLinkTime {

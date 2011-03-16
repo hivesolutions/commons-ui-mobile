@@ -148,7 +148,7 @@
     NSMutableDictionary *remoteDataItem = [remoteData objectAtIndex:row];
 
     // calls the did select remote row with data method
-    [self.remoteDelegate didSelectRemoteRowWidthData:remoteDataItem];
+    [self.remoteDelegate didSelectRemoteRowWithData:remoteDataItem];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -162,7 +162,7 @@
     NSMutableDictionary *remoteDataItem = [remoteData objectAtIndex:row];
 
     // calls the did deselect remote row with data method
-    [self.remoteDelegate didDeselectRemoteRowWidthData:remoteDataItem];
+    [self.remoteDelegate didDeselectRemoteRowWithData:remoteDataItem];
 }
 
 + (void)_keepAtLinkTime {
