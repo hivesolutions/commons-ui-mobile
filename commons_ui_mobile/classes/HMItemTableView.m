@@ -48,6 +48,9 @@
 }
 
 - (void)dealloc {
+    // releases the item data source
+    [_itemDataSource release];
+
     // calls the super
     [super dealloc];
 }
@@ -62,11 +65,17 @@
 
     // creates and sets the item table view data source
     // from the item table view provider
-    self.itemDataSource = [[HMItemTableViewDataSource alloc] initWithItemTableViewProvider:itemTableViewProvider];
-    self.dataSource = self.itemDataSource;
+    HMItemTableViewDataSource *itemDataSource = [[HMItemTableViewDataSource alloc] initWithItemTableViewProvider:itemTableViewProvider];
+
+    // sets the attributes
+    self.itemDataSource = itemDataSource;
+    self.dataSource = itemDataSource;
 
     // sets the current instance as the delegate to the table view
     self.delegate = self;
+
+    // releases the objects
+    [itemDataSource release];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

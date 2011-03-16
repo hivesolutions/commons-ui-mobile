@@ -55,6 +55,9 @@
 }
 
 - (void)dealloc {
+    // releases the item specification
+    [_itemSpecification release];
+
     // calls the supper
     [super dealloc];
 }

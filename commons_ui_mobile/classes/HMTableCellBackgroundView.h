@@ -40,8 +40,8 @@ typedef enum  {
     @private CGFloat *_gradientColors;
 }
 
-@property HMTableCellBackgroundViewPosition position;
-@property CGFloat *gradientColors;
+@property (assign) HMTableCellBackgroundViewPosition position;
+@property (assign) CGFloat *gradientColors;
 
 /**
  * Draws a top cell for a
