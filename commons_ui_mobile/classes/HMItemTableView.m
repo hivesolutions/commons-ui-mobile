@@ -71,7 +71,7 @@
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     label.text = @"Accenture";
     label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Helvetica" size:19];
+    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
     label.shadowColor = [UIColor whiteColor];
     label.shadowOffset = CGSizeMake(0, 1);
 
