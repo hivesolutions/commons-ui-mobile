@@ -114,11 +114,21 @@
         [self createActivityIndicator];
     }
 
-    // hides the activity
-    self.activity.hidden = YES;
+    // creates the fade out animation
+    [UIView beginAnimations:@"fadeOut" context: nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(hideActivityIndicatorComplete)];
+    [UIView setAnimationDuration:0.5];
+    [self.activity setAlpha:0.0];
+    [UIView commitAnimations];
 
     // stops animating the activity indicator
     [self.activityIndicator stopAnimating];
+}
+
+- (void)hideActivityIndicatorComplete {
+    // hides the activity
+    self.activity.hidden = YES;
 }
 
 - (NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {

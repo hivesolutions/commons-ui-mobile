@@ -61,6 +61,12 @@
 - (void)hideActivityIndicator;
 
 /**
+ * Called uppon the end of the hiding of the
+ * activity indicator.
+ */
+- (void)hideActivityIndicatorComplete;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;
