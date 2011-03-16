@@ -105,7 +105,7 @@
     static NSString *cellIdentifier = @"Cell";
 
     // retrieves the button item
-    HMButtonItem *buttonItem = (HMButtonItem *) [self.itemSpecification getItem:indexPath];
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.itemSpecification getItem:indexPath];
 
     // tries to retrives the cell from cache (reusable)
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -114,20 +114,11 @@
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonItem.name name:buttonItem.name icon:buttonItem.icon highlightedIcon:buttonItem.highlightedIcon] autorelease];
+        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier name:tableCellItem.name icon:tableCellItem.icon highlightedIcon:tableCellItem.highlightedIcon selectable:tableCellItem.selectable accessoryType:tableCellItem.accessoryType] autorelease];
     }
 
     // sets the button item's attributes in the cell
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
-
-    // sets the notifications switch
-    if(indexPath.section == 1) {
-        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
-        cell.accessoryView = notificationsSwitch;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        [notificationsSwitch release];
-    }
 
     // returns the cell
     return cell;

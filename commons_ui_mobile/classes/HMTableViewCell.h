@@ -37,8 +37,12 @@
  * resource.
  * @param highlightedIcon The identifier of the
  * highlighted icon resource.
+ * @param accessoryType Specifies if the cell
+ * is selectable.
+ * @param accessoryType The type of accessory
+ * view to use.
  * @return The table view cell instance.
  */
-- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon;
+- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon selectable:(BOOL)selectable accessoryType:(NSString *)accessoryType;
 
 @end

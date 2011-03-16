@@ -40,7 +40,7 @@
     return self;
 }
 
-- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon {
+- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon selectable:(BOOL)selectable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
@@ -50,6 +50,11 @@
 
     // sets the cell's text label
     self.textLabel.text = name;
+
+    // sets the cell as not selectable
+    if(selectable == NO) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
 
     // creates the icon image and sets it in the image view
     if(icon) {
@@ -61,6 +66,15 @@
     if(highlightedIcon) {
         UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
         [self.imageView setHighlightedImage:highlightedIconImage];
+    }
+
+    // creates the specified accessory type
+    if(accessoryType == @"disclosure_indicator") {
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if(accessoryType == @"switch") {
+        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
+        self.accessoryView = notificationsSwitch;
+        [notificationsSwitch release];
     }
 
     // returns the instance
