@@ -11,6 +11,8 @@
 		A53B0578132F97C40064BCA5 /* HMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0574132F97C40064BCA5 /* HMTableViewCell.m */; };
 		A53B0579132F97C40064BCA5 /* HMTableCellBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */; };
 		A53B057A132F97C40064BCA5 /* HMTableCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */; };
+		A5E648D913313BC800FE725A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E648D813313BC700FE725A /* CoreGraphics.framework */; };
+		A5E648DB13313BD000FE725A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E648DA13313BD000FE725A /* QuartzCore.framework */; };
 		C202928D132FD974009D7B69 /* HMRemoteTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C202928C132FD974009D7B69 /* HMRemoteTableViewDelegate.h */; };
 		C2029290132FE23C009D7B69 /* HMItemTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C202928E132FE23B009D7B69 /* HMItemTableViewDataSource.h */; };
 		C2029291132FE23C009D7B69 /* HMItemTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C202928F132FE23B009D7B69 /* HMItemTableViewDataSource.m */; };
@@ -34,6 +36,8 @@
 		A53B0574132F97C40064BCA5 /* HMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCell.m; path = classes/HMTableViewCell.m; sourceTree = "<group>"; };
 		A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableCellBackgroundView.h; path = classes/HMTableCellBackgroundView.h; sourceTree = "<group>"; };
 		A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableCellBackgroundView.m; path = classes/HMTableCellBackgroundView.m; sourceTree = "<group>"; };
+		A5E648D813313BC700FE725A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A5E648DA13313BD000FE725A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C202928C132FD974009D7B69 /* HMRemoteTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableViewDelegate.h; path = classes/HMRemoteTableViewDelegate.h; sourceTree = "<group>"; };
 		C202928E132FE23B009D7B69 /* HMItemTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMItemTableViewDataSource.h; path = classes/HMItemTableViewDataSource.h; sourceTree = "<group>"; };
 		C202928F132FE23B009D7B69 /* HMItemTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMItemTableViewDataSource.m; path = classes/HMItemTableViewDataSource.m; sourceTree = "<group>"; };
@@ -58,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5E648D913313BC800FE725A /* CoreGraphics.framework in Frameworks */,
+				A5E648DB13313BD000FE725A /* QuartzCore.framework in Frameworks */,
 				C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */,
 				C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */,
 			);
@@ -94,6 +100,8 @@
 		C2EEE096132E8E9B0038FFA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5E648D813313BC700FE725A /* CoreGraphics.framework */,
+				A5E648DA13313BD000FE725A /* QuartzCore.framework */,
 				C2C2FA0A132E95530038B41E /* UIKit.framework */,
 				C2EEE097132E8E9B0038FFA6 /* Foundation.framework */,
 			);
