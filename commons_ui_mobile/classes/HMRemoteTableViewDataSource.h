@@ -27,7 +27,9 @@
 
 #import "HMRemoteTableViewProvider.h"
 
-@interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource> {
+#define CONNECTION_TIMEOUT 30.0
+
+@interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource, UIActionSheetDelegate> {
     @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
     @private UITableView *_tableView;
     @private NSURLConnection *_connection;

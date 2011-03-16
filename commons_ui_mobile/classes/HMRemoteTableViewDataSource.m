@@ -82,7 +82,7 @@
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
 
     // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:CONNECTION_TIMEOUT];
 
     // creates the connection with the intance as delegate
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
@@ -198,6 +198,39 @@
 
     // releases the json parser
     [jsonParser release];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // retrieves the (localized) base error message
+    NSString *baseErrorMessage = NSLocalizedString(@"ConnectionError", @"ConnectionError");
+
+    // retrieves the localized error description
+    NSString *localizedErrorDescription = [error localizedDescription];
+
+    // creates the error message from the base error message and the
+    // localized error description
+    NSString *errorMessage = [NSString stringWithFormat:@"%@\n%@", baseErrorMessage, localizedErrorDescription];
+
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:NSLocalizedString(@"Retry", @"Retry") otherButtonTitles:nil];
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+    [actionSheet showInView:self.tableView];
+    [actionSheet release];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // in case the button click was retry
+    if(buttonIndex == 0) {
+        // sets the remote dirty flag
+        remoteDirty = YES;
+
+        // updates the remote
+        [self updateRemote];
+    }
+    // in case the button click was cancel
+    else {
+        // reloads the data
+        [self.tableView reloadData];
+    }
 }
 
 + (void)_keepAtLinkTime {
