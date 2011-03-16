@@ -31,4 +31,7 @@
 
 @property (retain) UIView *editView;
 
+- (void)showEditing;
+- (void)hideEditing;
+
 @end
