@@ -193,9 +193,6 @@
     // parses the received (remote) data and sets it into the intance
     self.remoteData = [jsonParser objectWithData:self.receivedData];
 
-    // retains the remote data
-    [self.remoteData retain];
-
     // reloads the data
     [self.tableView reloadData];
 
