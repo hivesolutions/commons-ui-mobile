@@ -24,7 +24,6 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #import "HMRemoteTableView.h"
-
 #import "HMRemoteTableViewDataSource.h"
 
 @implementation HMRemoteTableView
@@ -57,24 +56,41 @@
 }
 
 - (void)dealloc {
+    // releases the activity
+    [_activity release];
+
+    // releases the activity indicator
+    [_activityIndicator release];
+
+    // releases the remote data source
+    [_remoteDataSource release];
+
     // calls the supper
     [super dealloc];
 }
 
 - (void)createActivityIndicator {
     // creates the activity
-    self.activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.superview.bounds.size.width, self.superview.bounds.size.height)];
-    self.activity.backgroundColor = [UIColor blackColor];
-    self.activity.alpha = 0.75;
+    UIView *activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.superview.bounds.size.width, self.superview.bounds.size.height)];
+    activity.backgroundColor = [UIColor blackColor];
+    activity.alpha = 0.75;
 
     // creates the activity indicator
-    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(self.superview.bounds.size.width / 2 - 12, self.superview.bounds.size.height / 2 - 12, 24, 24)];
-    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    self.activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(self.superview.bounds.size.width / 2 - 12, self.superview.bounds.size.height / 2 - 12, 24, 24)];
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
+    activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
 
     // creates the activity structure
-    [self.activity addSubview:self.activityIndicator];
-    [self.superview addSubview:self.activity];
+    [activity addSubview:activityIndicator];
+    [self.superview addSubview:activity];
+
+    // sets the attributes
+    self.activity = activity;
+    self.activityIndicator = activityIndicator;
+
+    // releases the objects
+    [activity release];
+    [activityIndicator release];
 }
 
 - (void)showActivityIndicator {
@@ -115,11 +131,17 @@
 
     // creates and sets the remote table view data source
     // from the remote table view provider
-    self.remoteDataSource = [[HMRemoteTableViewDataSource alloc] initWithRemoteTableViewProvider:remoteTableViewProvider];
-    self.dataSource = self.remoteDataSource;
+    HMRemoteTableViewDataSource *remoteDataSource = [[HMRemoteTableViewDataSource alloc] initWithRemoteTableViewProvider:remoteTableViewProvider];
+
+    // sets the attributes
+    self.remoteDataSource = remoteDataSource;
+    self.dataSource = remoteDataSource;
 
     // sets the current instance as the delegate to the table view
     self.delegate = self;
+
+    // releases the objects
+    [remoteDataSource release];
 }
 
 - (void)reloadData {
@@ -145,7 +167,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // retrieves the remote data
-    NSMutableArray *remoteData = self.remoteDataSource.remoteData;
+    NSArray *remoteData = self.remoteDataSource.remoteData;
 
     // retrieves the index path row
     NSInteger row = indexPath.row;
@@ -159,7 +181,7 @@
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     // retrieves the remote data
-    NSMutableArray *remoteData = self.remoteDataSource.remoteData;
+    NSArray *remoteData = self.remoteDataSource.remoteData;
 
     // retrieves the index path row
     NSInteger row = indexPath.row;

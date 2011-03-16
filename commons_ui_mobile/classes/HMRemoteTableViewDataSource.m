@@ -57,6 +57,15 @@
 }
 
 - (void)dealloc {
+    // releases the connection
+    [_connection release];
+
+    // releases the received data
+    [_receivedData release];
+
+    // releases the remote data
+    [_remoteData release];
+
     // calls the supper
     [super dealloc];
 }
@@ -76,16 +85,26 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 
     // creates the connection with the intance as delegate
-    self.connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     // creates the received data
-    self.receivedData = [[NSMutableData alloc] init];
+    NSMutableData *receivedData = [[NSMutableData alloc] init];
 
     // creates a "new" remote data and initializes it
-    self.remoteData = [[NSArray alloc] init];
+    NSArray *remoteData = [[NSArray alloc] init];
+
+    // sets the attributes
+    self.connection = connection;
+    self.receivedData = receivedData;
+    self.remoteData = remoteData;
 
     // unsets the remote dirty flag
     remoteDirty = NO;
+
+    // releases the objects
+    [connection release];
+    [receivedData release];
+    [remoteData release];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {

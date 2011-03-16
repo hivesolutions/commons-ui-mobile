@@ -24,7 +24,6 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #import "HMItemTableView.h"
-
 #import "HMItemTableViewDataSource.h"
 
 @implementation HMItemTableView
@@ -57,10 +56,10 @@
     return _itemTableViewProvider;
 }
 
-- (void)setItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider {    
+- (void)setItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
     // sets the object
     _itemTableViewProvider = itemTableViewProvider;
-    
+
     // creates and sets the item table view data source
     // from the item table view provider
     self.itemDataSource = [[HMItemTableViewDataSource alloc] initWithItemTableViewProvider:itemTableViewProvider];
