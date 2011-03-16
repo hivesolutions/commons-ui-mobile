@@ -30,8 +30,8 @@
 #import "HMItemTableViewDataSource.h"
 
 @interface HMItemTableView : UITableView<UITableViewDelegate> {
-    @private HMItemTableViewDataSource *_ItemDataSource;
-    @private NSObject<HMItemTableViewDelegate> *_itemTableViewDelegate;
+    @private HMItemTableViewDataSource *_itemDataSource;
+    @private NSObject<HMItemTableViewDelegate> *_itemDelegate;
     @private NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
 }
 

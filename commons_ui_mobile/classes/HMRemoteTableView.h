@@ -33,7 +33,7 @@
     @private UIView *_activity;
     @private UIActivityIndicatorView *_activityIndicator;
     @private HMRemoteTableViewDataSource *_remoteDataSource;
-    @private NSObject<HMRemoteTableViewDelegate> *_remoteTableViewDelegate;
+    @private NSObject<HMRemoteTableViewDelegate> *_remoteDelegate;
     @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
     @private BOOL firstReload;
 }
