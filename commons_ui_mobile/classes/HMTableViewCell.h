@@ -24,7 +24,10 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 @interface HMTableViewCell : UITableViewCell {
+    @private UIView *_editView;
 }
+
+@property (retain) UIView *editView;
 
 /**
  * Initializes the table view cell.
@@ -43,6 +46,6 @@
  * view to use.
  * @return The table view cell instance.
  */
-- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
+- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
 
 @end

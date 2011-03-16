@@ -43,6 +43,47 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
+    // creats the header view
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 72)];
+    header.contentMode = UIViewContentModeScaleToFill;
+    header.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+    
+    // creates the image frame
+    CGRect imageFrame = CGRectMake(20, 15, 64, 64);
+    
+    // creates the image view
+    UIImageView *image = [[UIImageView alloc] initWithFrame:imageFrame];
+    image.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+    image.image = [UIImage imageNamed:@"user.png"];
+    image.backgroundColor = [UIColor clearColor];
+    
+    // creates the label frame
+    CGRect labelFrame = CGRectMake(103, 34, 197, 24);
+    
+    // creates the label view
+    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    label.text = @"Accenture";
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont fontWithName:@"Helvetica" size:19];
+    label.shadowColor = [UIColor whiteColor];
+    label.shadowOffset = CGSizeMake(0, 1);
+    
+    header.backgroundColor = [UIColor clearColor];
+    header.opaque = NO;
+    
+    // adds the sub views
+    [header addSubview:image];
+    [header addSubview:label];
+    
+    // sets the table header
+    self.tableHeaderView = header;
+    
+    // releases the objects
+    [image release];
+    [label release];
+    [header release];
+
     // returns self
     return self;
 }

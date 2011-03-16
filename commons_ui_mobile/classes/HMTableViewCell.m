@@ -28,7 +28,9 @@
 
 @implementation HMTableViewCell
 
-- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
+@synthesize editView = _editView;
+
+- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
@@ -40,17 +42,20 @@
     return self;
 }
 
-- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
+- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
+    return self;
+    
     // replaces the selected background view
     HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
     self.selectedBackgroundView = backgroundView;
 
     // sets the cell's text label
     self.textLabel.text = name;
-
+    self.detailTextLabel.text = name;
+    
     // sets the cell as not highlightable
     if(!highlightable) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -67,7 +72,7 @@
         UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
         [self.imageView setHighlightedImage:highlightedIconImage];
     }
-
+    
     // creates the specified accessory type
     if(accessoryType == @"disclosure_indicator") {
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
@@ -76,9 +81,17 @@
         self.accessoryView = notificationsSwitch;
         [notificationsSwitch release];
     }
-
+    
     // returns the instance
     return self;
+}
+
+- (void)dealloc {
+    // releases the edit view
+    [_editView release];
+    
+    // calls the super
+    [super dealloc];
 }
 
 - (void)drawRect:(CGRect)rect {
