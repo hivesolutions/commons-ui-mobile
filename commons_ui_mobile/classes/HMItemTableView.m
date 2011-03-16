@@ -43,17 +43,21 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
-    // creats the header view
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 72)];
+    // creates the header
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 82)];
     header.contentMode = UIViewContentModeScaleToFill;
-    header.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
+    header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    header.backgroundColor = [UIColor clearColor];
+
+    // creates the header container
+    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 300, 82)];
+    headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 
     // creates the image frame
-    CGRect imageFrame = CGRectMake(20, 15, 64, 64);
+    CGRect imageFrame = CGRectMake(0, 15, 64, 64);
 
     // creates the image view
     UIImageView *image = [[UIImageView alloc] initWithFrame:imageFrame];
-    image.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin;
     image.image = [UIImage imageNamed:@"user.png"];
     image.backgroundColor = [UIColor clearColor];
 
@@ -64,23 +68,21 @@
     image.layer.borderWidth = 1.0;
 
     // creates the label frame
-    CGRect labelFrame = CGRectMake(103, 34, 197, 24);
+    CGRect labelFrame = CGRectMake(83, 34, 197, 24);
 
     // creates the label view
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.text = @"Accenture";
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
     label.shadowColor = [UIColor whiteColor];
     label.shadowOffset = CGSizeMake(0, 1);
 
-    header.backgroundColor = [UIColor clearColor];
-    header.opaque = NO;
-
     // adds the sub views
-    [header addSubview:image];
-    [header addSubview:label];
+    [headerContainer addSubview:image];
+    [headerContainer addSubview:label];
+    [header addSubview:headerContainer];
 
     // sets the table header
     self.tableHeaderView = header;

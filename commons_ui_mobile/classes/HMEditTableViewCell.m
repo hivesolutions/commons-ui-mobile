@@ -33,17 +33,22 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
 
+    // VALUE FOR ROUGHT TABLES
+    //float delta = 100;
+    // VALUE FOR ROUNDED TABLES
+    float delta = 76;
+
     // creates the edit view
-    CGRect editViewFrame = CGRectMake(35, 5, self.frame.size.width - 92, self.contentView.frame.size.height - 10);
+    CGRect editViewFrame = CGRectMake(delta, 5, self.frame.size.width - delta, self.contentView.frame.size.height - 10);
     UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
-    editView.backgroundColor = [UIColor greenColor];
-    editView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    editView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
     // adds the text view to the edit view
     CGRect textViewFrame = CGRectMake(0, 0, editViewFrame.size.width, editViewFrame.size.height);
     UITextView *textView = [[UITextView alloc] initWithFrame:textViewFrame];
-    textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin;
+    textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textView.text = @"TEST";
+    textView.backgroundColor = [UIColor colorWithRed:0.56 green:0.46 blue:0.46 alpha:0.5];
     [editView addSubview:textView];
 
     // adds the edit view
