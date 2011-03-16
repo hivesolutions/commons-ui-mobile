@@ -36,8 +36,8 @@
 }
 
 @property (retain) HMItemTableViewDataSource *itemDataSource;
-@property (retain) IBOutlet NSObject<HMItemTableViewDelegate> *itemDelegate;
-@property (retain) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
+@property (assign) IBOutlet NSObject<HMItemTableViewDelegate> *itemDelegate;
+@property (assign) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
 
 /**
  * Keeps the class valid for export at link time.

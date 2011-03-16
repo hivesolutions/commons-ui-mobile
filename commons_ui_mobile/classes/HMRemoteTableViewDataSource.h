@@ -36,8 +36,8 @@
     @private BOOL remoteDirty;
 }
 
-@property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
-@property (retain) UITableView *tableView;
+@property (assign) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
+@property (assign) UITableView *tableView;
 @property (retain) NSURLConnection *connection;
 @property (retain) NSMutableData *receivedData;
 @property (retain) NSMutableArray *remoteData;
