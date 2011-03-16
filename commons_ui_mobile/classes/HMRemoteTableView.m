@@ -23,8 +23,8 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMRemoteTableView.h"
 #import "HMRemoteTableViewDataSource.h"
+#import "HMRemoteTableView.h"
 
 @implementation HMRemoteTableView
 
