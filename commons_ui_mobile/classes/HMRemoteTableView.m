@@ -40,7 +40,7 @@
 
     // sets the first reload flag
     firstReload = YES;
-    
+
     // returns self
     return self;
 }
@@ -51,7 +51,7 @@
 
     // sets the first reload flag
     firstReload = YES;
-    
+
     // returns self
     return self;
 }
@@ -61,12 +61,12 @@
     self.activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.superview.bounds.size.width, self.superview.bounds.size.height)];
     self.activity.backgroundColor = [UIColor blackColor];
     self.activity.alpha = 0.75;
-    
+
     // creates the activity indicator
     self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(self.superview.bounds.size.width / 2 - 12, self.superview.bounds.size.height / 2 - 12, 24, 24)];
     self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     self.activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-    
+
     // creates the activity structure
     [self.activity addSubview:self.activityIndicator];
     [self.superview addSubview:self.activity];
@@ -78,10 +78,10 @@
         // creates the activity indicator
         [self createActivityIndicator];
     }
-    
+
     // shows the activity
     self.activity.hidden = NO;
-    
+
     // starts animating the activity indicator
     [self.activityIndicator startAnimating];
 }
@@ -92,10 +92,10 @@
         // creates the activity indicator
         [self createActivityIndicator];
     }
-    
+
     // hides the activity
     self.activity.hidden = YES;
-    
+
     // stops animating the activity indicator
     [self.activityIndicator stopAnimating];
 }
@@ -119,20 +119,20 @@
 - (void)reloadData {
     // calls the super
     [super reloadData];
-    
+
     // in case it's the first reload (initial
     // load must wait for remote loading)
     if(firstReload) {
         // shows the activity indicator
         [self showActivityIndicator];
-    } 
+    }
     // not the first loading the remote loading
     // must be completed
     else {
         // hides the activity indicator
         [self hideActivityIndicator];
     }
-    
+
     // unsets the first reload flag
     firstReload = NO;
 }
@@ -154,13 +154,13 @@
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     // retrieves the remote data
     NSMutableArray *remoteData = self.remoteDataSource.remoteData;
-    
+
     // retrieves the index path row
     NSInteger row = indexPath.row;
-    
+
     // retrieves the remote data item from the remote data at the row
     NSMutableDictionary *remoteDataItem = [remoteData objectAtIndex:row];
-    
+
     // calls the did deselect remote row with data method
     [self.remoteDelegate didDeselectRemoteRowWidthData:remoteDataItem];
 }
