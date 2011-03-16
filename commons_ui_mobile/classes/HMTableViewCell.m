@@ -40,7 +40,7 @@
     return self;
 }
 
-- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon selectable:(BOOL)selectable accessoryType:(NSString *)accessoryType {
+- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
@@ -51,8 +51,8 @@
     // sets the cell's text label
     self.textLabel.text = name;
 
-    // sets the cell as not selectable
-    if(selectable == NO) {
+    // sets the cell as not highlightable
+    if(!highlightable) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
 
