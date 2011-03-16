@@ -23,8 +23,8 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMTableViewCell.h"
 #import "HMTableCellBackgroundView.h"
+#import "HMTableViewCell.h"
 
 @implementation HMTableViewCell
 
@@ -35,6 +35,47 @@
     // replaces the selected background view
     HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
     self.selectedBackgroundView = backgroundView;
+
+    // returns the instance
+    return self;
+}
+
+- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon selectable:(BOOL)selectable accessoryType:(NSString *)accessoryType {
+    // invokes the parent constructor
+    self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
+
+    // replaces the selected background view
+    HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
+    self.selectedBackgroundView = backgroundView;
+
+    // sets the cell's text label
+    self.textLabel.text = name;
+
+    // sets the cell as not selectable
+    if(selectable == NO) {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+
+    // creates the icon image and sets it in the image view
+    if(icon) {
+        UIImage *iconImage = [UIImage imageNamed:icon];
+        [self.imageView setImage:iconImage];
+    }
+
+    // creates the highlighted icon image
+    if(highlightedIcon) {
+        UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
+        [self.imageView setHighlightedImage:highlightedIconImage];
+    }
+
+    // creates the specified accessory type
+    if(accessoryType == @"disclosure_indicator") {
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if(accessoryType == @"switch") {
+        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
+        self.accessoryView = notificationsSwitch;
+        [notificationsSwitch release];
+    }
 
     // returns the instance
     return self;

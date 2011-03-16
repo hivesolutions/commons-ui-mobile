@@ -26,4 +26,23 @@
 @interface HMTableViewCell : UITableViewCell {
 }
 
+/**
+ * Initializes the table view cell.
+ *
+ * @param cellStyle The cell's style.
+ * @param reuseIdentifier The cell's identifier.
+ * @param name The cell's name that will be set
+ * as its label.
+ * @param icon The identifier of the normal icon
+ * resource.
+ * @param highlightedIcon The identifier of the
+ * highlighted icon resource.
+ * @param accessoryType Specifies if the cell
+ * is selectable.
+ * @param accessoryType The type of accessory
+ * view to use.
+ * @return The table view cell instance.
+ */
+- (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon selectable:(BOOL)selectable accessoryType:(NSString *)accessoryType;
+
 @end
