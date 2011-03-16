@@ -117,7 +117,7 @@
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier name:tableCellItem.name icon:tableCellItem.icon highlightedIcon:tableCellItem.highlightedIcon selectable:tableCellItem.selectable accessoryType:tableCellItem.accessoryType] autorelease];
+        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier name:tableCellItem.name icon:tableCellItem.icon highlightedIcon:tableCellItem.highlightedIcon highlightable:tableCellItem.highlightable accessoryType:tableCellItem.accessoryType] autorelease];
     }
 
     // sets the button item's attributes in the cell
