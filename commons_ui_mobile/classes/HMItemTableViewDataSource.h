@@ -34,8 +34,8 @@
     @private BOOL itemDirty;
 }
 
-@property (retain) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
-@property (retain) UITableView *tableView;
+@property (assign) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
+@property (assign) UITableView *tableView;
 @property (retain) HMItemGroup *itemSpecification;
 
 /**

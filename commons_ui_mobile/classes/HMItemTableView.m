@@ -48,13 +48,19 @@
     return self;
 }
 
+- (void)dealloc {
+    // calls the super
+    [super dealloc];
+}
+
 - (NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
     return _itemTableViewProvider;
 }
 
-- (void)setItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
+- (void)setItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider {    
+    // sets the object
     _itemTableViewProvider = itemTableViewProvider;
-
+    
     // creates and sets the item table view data source
     // from the item table view provider
     self.itemDataSource = [[HMItemTableViewDataSource alloc] initWithItemTableViewProvider:itemTableViewProvider];

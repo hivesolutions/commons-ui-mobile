@@ -56,6 +56,11 @@
     return self;
 }
 
+- (void)dealloc {
+    // calls the supper
+    [super dealloc];
+}
+
 - (void)createActivityIndicator {
     // creates the activity
     self.activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.superview.bounds.size.width, self.superview.bounds.size.height)];
@@ -105,6 +110,7 @@
 }
 
 - (void)setRemoteTableViewProvider:(NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
+    // sets the object
     _remoteTableViewProvider = remoteTableViewProvider;
 
     // creates and sets the remote table view data source

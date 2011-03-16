@@ -41,8 +41,8 @@
 @property (retain) UIView *activity;
 @property (retain) UIActivityIndicatorView *activityIndicator;
 @property (retain) HMRemoteTableViewDataSource *remoteDataSource;
-@property (retain) IBOutlet NSObject<HMRemoteTableViewDelegate> *remoteDelegate;
-@property (retain) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
+@property (assign) IBOutlet NSObject<HMRemoteTableViewDelegate> *remoteDelegate;
+@property (assign) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
 
 /**
  * Creates the activity indicator to be used
