@@ -71,13 +71,6 @@
     // retrieves the button item
     HMButtonItem *buttonItem = (HMButtonItem *) [itemSpecification getItem:indexPath];
 
-    // retrieves the selected cell
-    UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-
-    // changes the cell's icon
-    UIImage *iconImage = [UIImage imageNamed:buttonItem.highlightedIcon];
-    cell.imageView.image = iconImage;
-
     // calls the did select item row with item method
     [self.itemDelegate didSelectItemRowWithItem:buttonItem];
 }
@@ -88,13 +81,6 @@
 
     // retrieves the button item
     HMButtonItem *buttonItem = (HMButtonItem *) [itemSpecification getItem:indexPath];
-
-    // retrieves the deselected cell
-    UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
-
-    // changes the cell's icon
-    UIImage *iconImage = [UIImage imageNamed:buttonItem.icon];
-    cell.imageView.image = iconImage;
 
     // calls the did deselect item row with item method
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];

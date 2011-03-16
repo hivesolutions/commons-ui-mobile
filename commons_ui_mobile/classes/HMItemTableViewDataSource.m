@@ -114,19 +114,12 @@
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonItem.name] autorelease];
+        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:buttonItem.name name:buttonItem.name icon:buttonItem.icon highlightedIcon:buttonItem.highlightedIcon] autorelease];
     }
 
     // sets the button item's attributes in the cell
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    cell.textLabel.text = buttonItem.name;
-
     cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
-
-    // sets the icon in case it is defined
-    if(buttonItem.icon) {
-        cell.imageView.image = [UIImage imageNamed:buttonItem.icon];
-    }
 
     // sets the notifications switch
     if(indexPath.section == 1) {
