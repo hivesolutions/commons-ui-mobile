@@ -23,11 +23,13 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-@interface HMTableViewCell : UITableViewCell {
+#import "HMEditTableViewCell.h"
+
+@interface HMStringTableViewCell : HMEditTableViewCell {
 }
 
 /**
- * Initializes the table view cell.
+ * Initializes the string table view cell.
  *
  * @param cellStyle The cell's style.
  * @param reuseIdentifier The cell's identifier.
@@ -41,8 +43,8 @@
  * view cell is highlightable.
  * @param accessoryType The type of accessory
  * view to use.
- * @return The table view cell instance.
+ * @return The string table view cell instance.
  */
-- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
+- (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
 
 @end

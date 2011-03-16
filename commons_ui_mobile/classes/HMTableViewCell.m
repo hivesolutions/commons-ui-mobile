@@ -28,8 +28,6 @@
 
 @implementation HMTableViewCell
 
-@synthesize editView = _editView;
-
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
@@ -85,9 +83,6 @@
 }
 
 - (void)dealloc {
-    // releases the edit view
-    [_editView release];
-
     // calls the super
     [super dealloc];
 }
