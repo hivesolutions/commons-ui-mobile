@@ -151,6 +151,20 @@
     [self.remoteDelegate didSelectRemoteRowWidthData:remoteDataItem];
 }
 
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // retrieves the remote data
+    NSMutableArray *remoteData = self.remoteDataSource.remoteData;
+    
+    // retrieves the index path row
+    NSInteger row = indexPath.row;
+    
+    // retrieves the remote data item from the remote data at the row
+    NSMutableDictionary *remoteDataItem = [remoteData objectAtIndex:row];
+    
+    // calls the did deselect remote row with data method
+    [self.remoteDelegate didDeselectRemoteRowWidthData:remoteDataItem];
+}
+
 + (void)_keepAtLinkTime {
 }
 

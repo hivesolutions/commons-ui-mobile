@@ -36,4 +36,14 @@
  */
 - (void)didSelectRemoteRowWidthData:(NSDictionary *)data;
 
+/**
+ * Called when a row is deselected for a data in
+ * the virtual data set.
+ *
+ * @param data The data in the virtual set for the
+ * deselected row.
+ */
+- (void)didDeselectRemoteRowWidthData:(NSDictionary *)data;
+
+
 @end
