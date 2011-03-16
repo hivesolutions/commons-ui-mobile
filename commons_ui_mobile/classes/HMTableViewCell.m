@@ -28,9 +28,6 @@
 
 @implementation HMTableViewCell
 
-@synthesize iconImage = _iconImage;
-@synthesize highlightedIconImage = _highlightedIconImage;
-
 - (UITableViewCell *)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
@@ -54,19 +51,16 @@
     // sets the cell's text label
     self.textLabel.text = name;
 
-    // initializes the icon images
-    self.iconImage = nil;
-    self.highlightedIconImage = nil;
-
     // creates the icon image and sets it in the image view
     if(icon) {
-        self.iconImage = [UIImage imageNamed:icon];
-        self.imageView.image = self.iconImage;
+        UIImage *iconImage = [UIImage imageNamed:icon];
+        [self.imageView setImage:iconImage];
     }
 
     // creates the highlighted icon image
     if(highlightedIcon) {
-        self.highlightedIconImage = [UIImage imageNamed:highlightedIcon];
+        UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
+        [self.imageView setHighlightedImage:highlightedIconImage];
     }
 
     // returns the instance
@@ -101,18 +95,6 @@
 
     // invokes the parent
     [super drawRect:rect];
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    // invokes the parent function
-    [super setSelected:selected animated:animated];
-
-    // updates the cell's icon
-    if(selected && self.highlightedIconImage) {
-        self.imageView.image = self.highlightedIconImage;
-    } else if(self.iconImage) {
-        self.imageView.image = self.iconImage;
-    }
 }
 
 @end

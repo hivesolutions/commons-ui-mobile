@@ -24,12 +24,7 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 @interface HMTableViewCell : UITableViewCell {
-    @private UIImage *_iconImage;
-    @private UIImage *_highlightedIconImage;
 }
-
-@property (retain) UIImage *iconImage;
-@property (retain) UIImage *highlightedIconImage;
 
 /**
  * Initializes the table view cell.
