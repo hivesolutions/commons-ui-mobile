@@ -81,7 +81,7 @@
     UITableViewCell *cell = [self cellForRowAtIndexPath:indexPath];
 
     // changes the cell's icon
-    UIImage *iconImage = [UIImage imageNamed:buttonItem.selectedIcon];
+    UIImage *iconImage = [UIImage imageNamed:buttonItem.highlightedIcon];
     cell.imageView.image = iconImage;
 
     // calls the did select item row with item method
