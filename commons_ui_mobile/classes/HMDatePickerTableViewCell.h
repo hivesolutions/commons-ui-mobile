@@ -53,6 +53,11 @@
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
 
 /**
+ * Updates the date.
+ */
+- (void)dateChanged;
+
+/**
  * Shrinks the table to give
  * space for the date picker.
  */

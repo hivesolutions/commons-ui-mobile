@@ -60,6 +60,19 @@
 - (void)dateChanged {
     // stores the date picker's date
     self.dateValue = self.datePicker.date;
+
+    // creates the date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+
+    // converts the date to a string
+    NSString *dateString = [dateFormatter stringFromDate:self.dateValue];
+
+    // sets the date string in the detail text label
+    self.detailTextLabel.text = dateString;
+
+    // releases the date formatter
+    [dateFormatter release];
 }
 
 - (void)createEditing {
@@ -124,6 +137,8 @@
     if(!self.editing || !selected) {
         return;
     }
+
+    // SACAR A DATA INICIAL
 
     // shows the date picker
     self.datePicker.hidden = NO;
