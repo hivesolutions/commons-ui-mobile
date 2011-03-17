@@ -42,12 +42,14 @@
     CGRect editViewFrame = CGRectMake(delta, 5, self.frame.size.width - delta, self.contentView.frame.size.height - 10);
     UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
     editView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    editView.hidden = YES;
 
     // adds the text view to the edit view
     CGRect textViewFrame = CGRectMake(8, 8, editViewFrame.size.width, editViewFrame.size.height);
     UITextField *textField = [[UITextField alloc] initWithFrame:textViewFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.text = @"Default";
+    textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
     textField.backgroundColor = [UIColor clearColor];
     [editView addSubview:textField];
@@ -56,13 +58,12 @@
     [self.contentView addSubview:editView];
 
     // sets the attributes
+    self.editingAccessoryType = UITableViewCellAccessoryNone;
     self.editView = editView;
 
     // releases the objects
     [textField release];
     [editView release];
-
-    [self showEditing];
 
     // returns the instance
     return self;
@@ -111,6 +112,7 @@
         [self hideEditing];
     }
 }
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     // calls the super
     [super setEditing:editing animated:animated];
