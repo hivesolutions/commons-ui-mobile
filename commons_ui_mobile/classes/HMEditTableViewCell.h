@@ -28,6 +28,7 @@
 @interface HMEditTableViewCell : HMTableViewCell {
     @private UIView *_editView;
     @private float baseWidth;
+    @private BOOL editingDirty;
 }
 
 @property (retain) UIView *editView;

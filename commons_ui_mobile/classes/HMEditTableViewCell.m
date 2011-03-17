@@ -33,6 +33,9 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
 
+    // sets the editing dirty
+    editingDirty = YES;
+
     // returns the instance
     return self;
 }
@@ -143,8 +146,14 @@
     // calls the super
     [super didMoveToSuperview];
 
-    // creates the editing (view)
-    [self createEditing];
+    // in case the editing is dirty
+    if(editingDirty) {
+        // creates the editing (view)
+        [self createEditing];
+
+        // unsets the editing dirty flag
+        editingDirty = NO;
+    }
 }
 
 @end
