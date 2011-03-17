@@ -51,7 +51,7 @@
 
     // creates the text field and adds it to the edit view
     CGRect editViewFrame = self.editView.frame;
-    CGRect textFieldFrame = CGRectMake(HM_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_STRING_TABLE_VIEW_CELL_HEIGHT);
+    CGRect textFieldFrame = CGRectMake(HM_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_STRING_TABLE_VIEW_CELL_X_MARGIN * 2, HM_STRING_TABLE_VIEW_CELL_HEIGHT);
     UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
