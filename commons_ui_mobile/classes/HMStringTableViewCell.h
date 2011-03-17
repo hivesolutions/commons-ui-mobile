@@ -26,7 +26,10 @@
 #import "HMEditTableViewCell.h"
 
 @interface HMStringTableViewCell : HMEditTableViewCell {
+    @private UITextField *_textField;
 }
+
+@property (retain) UITextField *textField;
 
 /**
  * Initializes the string table view cell.
