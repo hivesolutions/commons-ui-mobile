@@ -83,12 +83,11 @@
     // positions the date picker at the bottom of the screen
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     CGSize pickerSize = [datePicker sizeThatFits:CGSizeZero];
-    datePicker.frame =  CGRectMake(0.0, screenRect.size.height, pickerSize.width, pickerSize.height);
+    datePicker.frame = CGRectMake(0.0, screenRect.size.height, pickerSize.width, pickerSize.height);
     datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 
-    // adds the date picker to the table view's parent
-    UITableView *tableView = (UITableView *) self.superview;
-    [tableView.superview addSubview:datePicker];
+    // adds the date picker to the window
+    [self.window addSubview:datePicker];
 
     // sets the attributes
     self.datePicker = datePicker;
@@ -147,15 +146,15 @@
     // retrieves the screen rect and the date picker frame
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     CGRect datePickerFrame = self.datePicker.frame;
+    datePickerFrame.origin.y = screenRect.size.height - datePickerFrame.size.height + 20;
 
     // creates the slide up animation
     [UIView beginAnimations:@"slideUp" context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(shrinkTable)];
-    [UIView setAnimationDuration:0.75];
+    [UIView setAnimationDuration:0.25];
 
     // updates the date picker's position
-    datePickerFrame.origin.y = screenRect.size.height - datePickerFrame.size.height - 44;
     self.datePicker.frame = datePickerFrame;
 
     // commits the animation
