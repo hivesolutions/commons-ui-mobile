@@ -50,7 +50,7 @@
 
     // sets the cell's text label
     self.textLabel.text = name;
-    self.detailTextLabel.text = name;
+    self.detailTextLabel.text = @"v-fcastro@hive.pt";
 
     // sets the cell as not highlightable
     if(!highlightable) {

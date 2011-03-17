@@ -72,14 +72,12 @@
 
             // breaks the switch
             break;
-
     }
 
     // creates the edit view
     CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
     UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
     editView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    editView.hidden = YES;
 
     // adds the edit view
     [self.contentView addSubview:editView];
@@ -106,8 +104,8 @@
     self.editView.hidden = YES;
 
     // hides the contents
-    self.detailTextLabel.hidden = NO;
     self.accessoryView.hidden = NO;
+    self.detailTextLabel.hidden = NO;
 }
 
 - (void)setEditing:(BOOL)editing {
@@ -150,6 +148,9 @@
     if(editingDirty) {
         // creates the editing (view)
         [self createEditing];
+
+        // hides the editing
+        [self hideEditing];
 
         // unsets the editing dirty flag
         editingDirty = NO;

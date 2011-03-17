@@ -42,9 +42,11 @@
 
 @interface HMStringTableViewCell : HMEditTableViewCell {
     @private UITextField *_textField;
+    @private NSString *_stringValue;
 }
 
 @property (retain) UITextField *textField;
+@property (retain) NSString *stringValue;
 
 /**
  * Initializes the string table view cell.

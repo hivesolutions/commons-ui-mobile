@@ -28,6 +28,7 @@
 @implementation HMStringTableViewCell
 
 @synthesize textField = _textField;
+@synthesize stringValue = _stringValue;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
@@ -40,6 +41,9 @@
 - (void)dealloc {
     // releases the text field
     [_textField release];
+
+    // releases the string value
+    [_stringValue release];
 
     // calls the super
     [super dealloc];
@@ -67,6 +71,36 @@
 
     // releases the objects
     [textField release];
+}
+
+- (void)showEditing {
+    // calls the super
+    [super showEditing];
+
+    // updates the string value
+    self.stringValue = self.detailTextLabel.text;
+
+    // sets the text field text
+    self.textField.text = self.stringValue;
+
+    // hides the text field
+    self.textField.hidden = NO;
+}
+
+- (void)hideEditing {
+    // updates the string value
+    self.stringValue = self.textField.text;
+
+    // sets the detail text label text
+    self.detailTextLabel.text = self.stringValue;
+
+    [self.detailTextLabel setNeedsDisplay];
+
+    // hides the text field
+    self.textField.hidden = YES;
+
+    // calls the super
+    [super hideEditing];
 }
 
 @end
