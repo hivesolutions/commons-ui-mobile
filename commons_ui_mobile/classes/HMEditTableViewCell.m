@@ -108,6 +108,12 @@
     self.detailTextLabel.hidden = NO;
 }
 
+- (void)focusEditing {
+}
+
+- (void)blurEditing {
+}
+
 - (void)setEditing:(BOOL)editing {
     // calls the super
     [super setEditing:editing];

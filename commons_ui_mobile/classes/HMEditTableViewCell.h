@@ -48,4 +48,14 @@
  */
 - (void)hideEditing;
 
+/**
+ * Focus in the editing view contents.
+ */
+- (void)focusEditing;
+
+/**
+ * Bliurs from the editing view contents.
+ */
+- (void)blurEditing;
+
 @end
