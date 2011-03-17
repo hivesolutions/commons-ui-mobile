@@ -82,7 +82,7 @@
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
 
     // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:CONNECTION_TIMEOUT];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_TABLE_VIEW_CONNECTION_TIMEOUT];
 
     // creates the connection with the intance as delegate
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
