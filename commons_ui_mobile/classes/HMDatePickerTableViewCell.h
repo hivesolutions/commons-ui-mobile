@@ -27,9 +27,11 @@
 
 @interface HMDatePickerTableViewCell : HMEditTableViewCell {
     @private UIDatePicker *_datePicker;
+    @private NSDate *_dateValue;
 }
 
 @property (retain) UIDatePicker *datePicker;
+@property (retain) NSDate *dateValue;
 
 /**
  * Initializes the string table view cell.
@@ -49,5 +51,16 @@
  * @return The string table view cell instance.
  */
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
+
+/**
+ * Shrinks the table to give
+ * space for the date picker.
+ */
+- (void)shrinkTable;
+
+/**
+ * Hides the date picker.
+ */
+- (void)hideDatePicker;
 
 @end

@@ -28,6 +28,7 @@
 @implementation HMDatePickerTableViewCell
 
 @synthesize datePicker = _datePicker;
+@synthesize dateValue = _dateValue;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
@@ -45,16 +46,31 @@
     [super dealloc];
 }
 
+- (void)shrinkTable {
+    // resizes the table to use the space left by the date picker
+    UITableView *tableView = (UITableView *) self.superview;
+    tableView.frame = CGRectMake(0, 0, tableView.frame.size.width, tableView.superview.frame.size.height - self.datePicker.frame.size.height);
+}
+
+- (void)hideDatePicker {
+    // hides the date picker
+    self.datePicker.hidden = YES;
+}
+
+- (void)dateChanged {
+    // stores the date picker's date
+    self.dateValue = self.datePicker.date;
+}
+
 - (void)createEditing {
     // creates the date picker
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.hidden = YES;
+    [datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
 
     // positions the date picker at the bottom of the screen
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     CGSize pickerSize = [datePicker sizeThatFits:CGSizeZero];
-    CGRect pickerRect = CGRectMake(0.0, screenRect.size.height - pickerSize.height - 44, pickerSize.width, pickerSize.height);
-    datePicker.frame = pickerRect;
+    datePicker.frame =  CGRectMake(0.0, screenRect.size.height, pickerSize.width, pickerSize.height);
     datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 
     // adds the date picker to the table view's parent
@@ -68,19 +84,67 @@
     [datePicker release];
 }
 
+- (void)hideEditing {
+    // returns in case the date
+    // picker is already hidden
+    if(self.datePicker.hidden) {
+        return;
+    }
+
+    // resizes the table back to its original size
+    UITableView *tableView = (UITableView *) self.superview;
+    tableView.frame = CGRectMake(0, 0, tableView.superview.frame.size.width, tableView.superview.frame.size.height);
+
+    // retrieves the screen rect and the date picker frame
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGRect datePickerFrame = self.datePicker.frame;
+
+    // creates the slide down animation
+    [UIView beginAnimations:@"slideDown" context:nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(hideDatePicker)];
+    [UIView setAnimationDuration:0.25];
+
+    // updates the date picker's position
+    datePickerFrame.origin.y = screenRect.size.height;
+    self.datePicker.frame = datePickerFrame;
+
+    // commits the animation
+    [UIView commitAnimations];
+
+    // calls the super
+    [super hideEditing];
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     // calls the super
     [super setSelected:selected animated:animated];
 
-    // shows the date picker in case the cell was selected
-    if(selected) {
-        // resizes the table to give space for the date picker
-        UITableView *tableView = (UITableView *) self.superview;
-        tableView.frame = CGRectMake(0,0, tableView.frame.size.width, tableView.superview.frame.size.height - self.datePicker.frame.size.height);
-
-        // shows the date picker
-        self.datePicker.hidden = NO;
+    // returns in case the cell is not
+    // selected or isn't in editing mode
+    if(!self.editing || !selected) {
+        return;
     }
+
+    // shows the date picker
+    self.datePicker.hidden = NO;
+
+    // retrieves the screen rect and the date picker frame
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGRect datePickerFrame = self.datePicker.frame;
+
+    // creates the slide up animation
+    [UIView beginAnimations:@"slideUp" context:nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(shrinkTable)];
+    [UIView setAnimationDuration:0.75];
+
+    // updates the date picker's position
+    datePickerFrame.origin.y = screenRect.size.height - datePickerFrame.size.height - 44;
+    self.datePicker.frame = datePickerFrame;
+
+    // commits the animation
+    [UIView commitAnimations];
 }
 
 @end
