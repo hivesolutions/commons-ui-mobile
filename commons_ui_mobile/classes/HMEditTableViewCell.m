@@ -50,7 +50,7 @@
 
 - (void)createEditing {
     // retrieves the associated table view (superview)
-    UITableView *table = (UITableView *) [self superview];
+    UITableView *table = (UITableView *) self.superview;
 
     // starts the delta value
     float delta = 0;
