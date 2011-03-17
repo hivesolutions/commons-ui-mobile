@@ -218,6 +218,7 @@
 
     // creates the action sheet
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:NSLocalizedString(@"Retry", @"Retry") otherButtonTitles:nil];
+    actionSheet.alpha = 0.75;
 
     // sets the action sheet style
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
