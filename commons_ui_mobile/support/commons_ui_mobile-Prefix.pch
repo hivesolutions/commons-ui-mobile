@@ -30,4 +30,6 @@
     
     #import "../../../json_mobile/json_mobile/headers/json_mobile.h"
     #import "../../../commons_mobile/commons_mobile/headers/commons_mobile.h"
+
+    #import "../headers/commons_ui_mobile.h"
 #endif
