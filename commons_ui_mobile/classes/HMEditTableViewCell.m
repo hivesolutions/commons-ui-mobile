@@ -44,12 +44,13 @@
     editView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 
     // adds the text view to the edit view
-    CGRect textViewFrame = CGRectMake(0, 0, editViewFrame.size.width, editViewFrame.size.height);
-    UITextView *textView = [[UITextView alloc] initWithFrame:textViewFrame];
-    textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    textView.text = @"TEST";
-    textView.backgroundColor = [UIColor colorWithRed:0.56 green:0.46 blue:0.46 alpha:0.5];
-    [editView addSubview:textView];
+    CGRect textViewFrame = CGRectMake(8, 8, editViewFrame.size.width, editViewFrame.size.height);
+    UITextField *textField = [[UITextField alloc] initWithFrame:textViewFrame];
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    textField.text = @"Default";
+    textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    textField.backgroundColor = [UIColor clearColor];
+    [editView addSubview:textField];
 
     // adds the edit view
     [self.contentView addSubview:editView];
@@ -58,7 +59,7 @@
     self.editView = editView;
 
     // releases the objects
-    [textView release];
+    [textField release];
     [editView release];
 
     [self showEditing];
