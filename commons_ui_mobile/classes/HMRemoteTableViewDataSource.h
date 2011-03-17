@@ -59,6 +59,11 @@
 - (void)updateRemote;
 
 /**
+ * Cancels the current remote call.
+ */
+- (void)cancelRemote;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;

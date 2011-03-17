@@ -107,6 +107,11 @@
     [remoteData release];
 }
 
+- (void)cancelRemote {
+    // cancels the connection
+    [self.connection cancel];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // sets the table view
     self.tableView = tableView;
@@ -211,9 +216,16 @@
     // localized error description
     NSString *errorMessage = [NSString stringWithFormat:@"%@\n%@", baseErrorMessage, localizedErrorDescription];
 
+    // creates the action sheet
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:NSLocalizedString(@"Retry", @"Retry") otherButtonTitles:nil];
+
+    // sets the action sheet style
     actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+
+    // shows the action sheet in the table view
     [actionSheet showInView:self.tableView];
+
+    // releases the action sheet
     [actionSheet release];
 }
 

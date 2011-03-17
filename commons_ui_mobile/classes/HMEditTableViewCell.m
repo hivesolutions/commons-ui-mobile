@@ -58,6 +58,7 @@
     self.editView = editView;
 
     // releases the objects
+    [textView release];
     [editView release];
 
     [self showEditing];

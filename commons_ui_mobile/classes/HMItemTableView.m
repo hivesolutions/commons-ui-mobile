@@ -88,8 +88,9 @@
     self.tableHeaderView = header;
 
     // releases the objects
-    [image release];
     [label release];
+    [image release];
+    [headerContainer release];
     [header release];
 
     // returns self

@@ -56,6 +56,10 @@
 }
 
 - (void)dealloc {
+    // cancels any pending remote connections in the
+    // remote data source
+    [self.remoteDataSource cancelRemote];
+
     // releases the activity
     [_activity release];
 
