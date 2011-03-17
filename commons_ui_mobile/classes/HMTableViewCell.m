@@ -71,10 +71,17 @@
 
     // creates the specified accessory type
     if(accessoryType == @"disclosure_indicator") {
+        // sets the acessory type as the table view cell acessory disclosure
+        // indicator
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if(accessoryType == @"switch") {
+        // creates the notifications switch
         UISwitch *notificationsSwitch = [[UISwitch alloc] init];
+
+        // sets the notifications switch in the accessory view
         self.accessoryView = notificationsSwitch;
+
+        // releases the notifications switch
         [notificationsSwitch release];
     }
 
