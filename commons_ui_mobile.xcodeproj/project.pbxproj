@@ -11,6 +11,8 @@
 		A53B0578132F97C40064BCA5 /* HMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0574132F97C40064BCA5 /* HMTableViewCell.m */; };
 		A53B0579132F97C40064BCA5 /* HMTableCellBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */; };
 		A53B057A132F97C40064BCA5 /* HMTableCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */; };
+		A5DF506A1332392F0038D5B4 /* HMDatePickerTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A5DF50681332392E0038D5B4 /* HMDatePickerTableViewCell.h */; };
+		A5DF506B1332392F0038D5B4 /* HMDatePickerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A5DF50691332392E0038D5B4 /* HMDatePickerTableViewCell.m */; };
 		A5E648D913313BC800FE725A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E648D813313BC700FE725A /* CoreGraphics.framework */; };
 		A5E648DB13313BD000FE725A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E648DA13313BD000FE725A /* QuartzCore.framework */; };
 		A5E648E513313F1B00FE725A /* HMStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E648E313313F1600FE725A /* HMStringTableViewCell.h */; };
@@ -40,6 +42,8 @@
 		A53B0574132F97C40064BCA5 /* HMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCell.m; path = classes/HMTableViewCell.m; sourceTree = "<group>"; };
 		A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableCellBackgroundView.h; path = classes/HMTableCellBackgroundView.h; sourceTree = "<group>"; };
 		A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableCellBackgroundView.m; path = classes/HMTableCellBackgroundView.m; sourceTree = "<group>"; };
+		A5DF50681332392E0038D5B4 /* HMDatePickerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMDatePickerTableViewCell.h; path = classes/HMDatePickerTableViewCell.h; sourceTree = "<group>"; };
+		A5DF50691332392E0038D5B4 /* HMDatePickerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMDatePickerTableViewCell.m; path = classes/HMDatePickerTableViewCell.m; sourceTree = "<group>"; };
 		A5E648D813313BC700FE725A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A5E648DA13313BD000FE725A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A5E648E313313F1600FE725A /* HMStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMStringTableViewCell.h; path = classes/HMStringTableViewCell.h; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 		C220E36313318DD60076803A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A5DF50681332392E0038D5B4 /* HMDatePickerTableViewCell.h */,
+				A5DF50691332392E0038D5B4 /* HMDatePickerTableViewCell.m */,
 				A53B0573132F97C40064BCA5 /* HMTableViewCell.h */,
 				A53B0574132F97C40064BCA5 /* HMTableViewCell.m */,
 				A5E648E713313F6C00FE725A /* HMEditTableViewCell.h */,
@@ -255,6 +261,7 @@
 				C2029299132FE748009D7B69 /* HMItemTableViewDelegate.h in Headers */,
 				A5E648E513313F1B00FE725A /* HMStringTableViewCell.h in Headers */,
 				A5E648E913313F7100FE725A /* HMEditTableViewCell.h in Headers */,
+				A5DF506A1332392F0038D5B4 /* HMDatePickerTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,6 +320,7 @@
 				C2029297132FE594009D7B69 /* HMItemTableView.m in Sources */,
 				A5E648E613313F1B00FE725A /* HMStringTableViewCell.m in Sources */,
 				A5E648EA13313F7100FE725A /* HMEditTableViewCell.m in Sources */,
+				A5DF506B1332392F0038D5B4 /* HMDatePickerTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
