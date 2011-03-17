@@ -57,6 +57,7 @@
 
     // switches over the table style
     switch(table.style) {
+        // in case it's an ui table view style grouped
         case UITableViewStyleGrouped:
             // sets the delta to grouped
             delta = 76;
@@ -64,6 +65,7 @@
             // breaks the switch
             break;
 
+        // in case it's an ui table view style plain
         case UITableViewStylePlain:
             // sets the delta to grouped
             delta = 100;
