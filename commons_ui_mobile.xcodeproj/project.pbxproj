@@ -83,19 +83,13 @@
 		C220E35C13318CC40076803A /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
-				A53B0573132F97C40064BCA5 /* HMTableViewCell.h */,
-				A53B0574132F97C40064BCA5 /* HMTableViewCell.m */,
-				A5E648E713313F6C00FE725A /* HMEditTableViewCell.h */,
-				A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */,
-				A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */,
-				A5E648E813313F6D00FE725A /* HMEditTableViewCell.m */,
-				A5E648E313313F1600FE725A /* HMStringTableViewCell.h */,
-				A5E648E413313F1800FE725A /* HMStringTableViewCell.m */,
+				C220E36413318DEA0076803A /* Background Views */,
+				C220E36313318DD60076803A /* Views */,
 			);
 			name = "Table View Cells";
 			sourceTree = "<group>";
 		};
-		C220E35E13318CD00076803A /* Table Views */ = {
+		C220E35E13318CD00076803A /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				C2029294132FE592009D7B69 /* HMItemTableView.h */,
@@ -103,28 +97,28 @@
 				C29A2E3D132EA6A2005EAB37 /* HMRemoteTableView.h */,
 				C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */,
 			);
-			name = "Table Views";
+			name = Views;
 			sourceTree = "<group>";
 		};
-		C220E35F13318CE30076803A /* Table View Providers */ = {
+		C220E35F13318CE30076803A /* Providers */ = {
 			isa = PBXGroup;
 			children = (
 				C2029292132FE42F009D7B69 /* HMItemTableViewProvider.h */,
 				C29A2E37132EA52B005EAB37 /* HMRemoteTableViewProvider.h */,
 			);
-			name = "Table View Providers";
+			name = Providers;
 			sourceTree = "<group>";
 		};
-		C220E36013318D0D0076803A /* Table View Delegates */ = {
+		C220E36013318D0D0076803A /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
 				C2029298132FE748009D7B69 /* HMItemTableViewDelegate.h */,
 				C202928C132FD974009D7B69 /* HMRemoteTableViewDelegate.h */,
 			);
-			name = "Table View Delegates";
+			name = Delegates;
 			sourceTree = "<group>";
 		};
-		C220E36113318D1B0076803A /* Table View Data Sources */ = {
+		C220E36113318D1B0076803A /* Data Sources */ = {
 			isa = PBXGroup;
 			children = (
 				C202928E132FE23B009D7B69 /* HMItemTableViewDataSource.h */,
@@ -132,7 +126,40 @@
 				C29A2E2A132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h */,
 				C29A2E2B132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m */,
 			);
-			name = "Table View Data Sources";
+			name = "Data Sources";
+			sourceTree = "<group>";
+		};
+		C220E36213318DAE0076803A /* Table View */ = {
+			isa = PBXGroup;
+			children = (
+				C220E36113318D1B0076803A /* Data Sources */,
+				C220E36013318D0D0076803A /* Delegates */,
+				C220E35F13318CE30076803A /* Providers */,
+				C220E35E13318CD00076803A /* Views */,
+			);
+			name = "Table View";
+			sourceTree = "<group>";
+		};
+		C220E36313318DD60076803A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A53B0573132F97C40064BCA5 /* HMTableViewCell.h */,
+				A53B0574132F97C40064BCA5 /* HMTableViewCell.m */,
+				A5E648E713313F6C00FE725A /* HMEditTableViewCell.h */,
+				A5E648E813313F6D00FE725A /* HMEditTableViewCell.m */,
+				A5E648E313313F1600FE725A /* HMStringTableViewCell.h */,
+				A5E648E413313F1800FE725A /* HMStringTableViewCell.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		C220E36413318DEA0076803A /* Background Views */ = {
+			isa = PBXGroup;
+			children = (
+				A53B0575132F97C40064BCA5 /* HMTableCellBackgroundView.h */,
+				A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */,
+			);
+			name = "Background Views";
 			sourceTree = "<group>";
 		};
 		C29A2E30132E9D08005EAB37 /* Headers */ = {
@@ -194,10 +221,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				C220E36113318D1B0076803A /* Table View Data Sources */,
-				C220E36013318D0D0076803A /* Table View Delegates */,
-				C220E35F13318CE30076803A /* Table View Providers */,
-				C220E35E13318CD00076803A /* Table Views */,
+				C220E36213318DAE0076803A /* Table View */,
 				C220E35C13318CC40076803A /* Table View Cells */,
 			);
 			name = Classes;
