@@ -27,11 +27,24 @@
 
 @interface HMEditTableViewCell : HMTableViewCell {
     @private UIView *_editView;
+    @private float baseWidth;
 }
 
 @property (retain) UIView *editView;
 
+/**
+ * Creates the editing view.
+ */
+- (void)createEditing;
+
+/**
+ * Shows the editing view.
+ */
 - (void)showEditing;
+
+/**
+ * Hides the editing view.
+ */
 - (void)hideEditing;
 
 @end

@@ -33,17 +33,47 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
 
-    // VALUE FOR ROUGHT TABLES
-    //float delta = 100;
-    // VALUE FOR ROUNDED TABLES
-    float delta = 76;
+    // returns the instance
+    return self;
+}
 
-    // SE TIVER PISCO TENHO DE RETIRAR O DELTA OA PISCO
+- (void)dealloc {
+    // releases the edit view
+    [_editView release];
+
+    // calls the super
+    [super dealloc];
+}
+
+- (void)createEditing {
+    // retrieves the associated table view (superview)
+    UITableView *table = (UITableView *) [self superview];
+
+    // starts the delta value
+    float delta = 0;
+
+    // switches over the table style
+    switch(table.style) {
+        case UITableViewStyleGrouped:
+            // sets the delta to grouped
+            delta = 76;
+
+            // breaks the switch
+            break;
+
+        case UITableViewStylePlain:
+            // sets the delta to grouped
+            delta = 100;
+
+            // breaks the switch
+            break;
+
+    }
 
     // creates the edit view
-    CGRect editViewFrame = CGRectMake(delta, 5, self.frame.size.width - 90, self.contentView.frame.size.height - 10);
+    CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
     UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
-    editView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    editView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     editView.hidden = YES;
 
     // adds the edit view
@@ -55,17 +85,6 @@
 
     // releases the objects
     [editView release];
-
-    // returns the instance
-    return self;
-}
-
-- (void)dealloc {
-    // releases the edit view
-    [_editView release];
-
-    // calls the super
-    [super dealloc];
 }
 
 - (void)showEditing {
@@ -118,6 +137,14 @@
         // hides the editing mode
         [self hideEditing];
     }
+}
+
+- (void)didMoveToSuperview {
+    // calls the super
+    [super didMoveToSuperview];
+
+    // creates the editing (view)
+    [self createEditing];
 }
 
 @end

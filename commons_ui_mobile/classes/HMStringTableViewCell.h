@@ -25,6 +25,21 @@
 
 #import "HMEditTableViewCell.h"
 
+/**
+ * The string table view cell x margin.
+ */
+#define HM_STRING_TABLE_VIEW_CELL_X_MARGIN 10
+
+/**
+ * The string table view cell y margin.
+ */
+#define HM_STRING_TABLE_VIEW_CELL_Y_MARGIN 13
+
+/**
+ * The string table view cell height.
+ */
+#define HM_STRING_TABLE_VIEW_CELL_HEIGHT 19
+
 @interface HMStringTableViewCell : HMEditTableViewCell {
     @private UITextField *_textField;
 }

@@ -33,22 +33,6 @@
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
 
-    // creates the text field and adds it to the edit view
-    CGRect editViewFrame = self.editView.frame;
-    CGRect textFieldFrame = CGRectMake(8, 8, editViewFrame.size.width - 16, editViewFrame.size.height - 14);
-    UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
-    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-    textField.placeholder = @"default value";
-    textField.clearButtonMode = UITextFieldViewModeAlways;
-    [self.editView addSubview:textField];
-
-    // sets the attributes
-    self.textField = textField;
-
-    // releases the objects
-    [textField release];
-
     // returns self
     return self;
 }
@@ -60,4 +44,29 @@
     // calls the super
     [super dealloc];
 }
+
+- (void)createEditing {
+    // calls the super
+    [super createEditing];
+
+    // creates the text field and adds it to the edit view
+    CGRect editViewFrame = self.editView.frame;
+    CGRect textFieldFrame = CGRectMake(HM_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_STRING_TABLE_VIEW_CELL_HEIGHT);
+    UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    textField.placeholder = @"default value";
+    textField.clearButtonMode = UITextFieldViewModeAlways;
+    textField.autocorrectionType = UITextAutocorrectionTypeNo;
+
+    // adds the textfield as subview
+    [self.editView addSubview:textField];
+
+    // sets the attributes
+    self.textField = textField;
+
+    // releases the objects
+    [textField release];
+}
+
 @end
