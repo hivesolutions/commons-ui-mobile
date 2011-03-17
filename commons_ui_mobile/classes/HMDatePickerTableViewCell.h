@@ -25,13 +25,30 @@
 
 #include "HMEditTableViewCell.h"
 
+/**
+ * The date picker table view cell x margin.
+ */
+#define HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN 6
+
+/**
+ * The date picker table view cell y margin.
+ */
+#define HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN 13
+
+/**
+ * The date picker table view cell height.
+ */
+#define HM_DATE_PICKER_TABLE_VIEW_CELL_HEIGHT 19
+
 @interface HMDatePickerTableViewCell : HMEditTableViewCell {
     @private UIDatePicker *_datePicker;
     @private NSDate *_dateValue;
+    @private UILabel *_label;
 }
 
 @property (retain) UIDatePicker *datePicker;
 @property (retain) NSDate *dateValue;
+@property (retain) UILabel *label;
 
 /**
  * Initializes the string table view cell.
@@ -53,9 +70,14 @@
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
 
 /**
- * Updates the date.
+ * Slides up the date picker.
  */
-- (void)dateChanged;
+- (void)slideUpDatePicker;
+
+/**
+ * Slides down the date picker.
+ */
+- (void)slideDownDatePicker;
 
 /**
  * Shrinks the table to give
@@ -67,5 +89,19 @@
  * Hides the date picker.
  */
 - (void)hideDatePicker;
+
+/**
+ * Updates the date.
+ */
+- (void)dateChanged;
+
+/**
+ * Converts the date to a string
+ * representation in the current locale.
+ * @param date The date to format.
+ * @return The string with the formatted
+ * date.
+ */
+- (NSString *)formatDate:(NSDate *)date;
 
 @end

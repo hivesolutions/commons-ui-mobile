@@ -29,10 +29,11 @@
 
 @synthesize datePicker = _datePicker;
 @synthesize dateValue = _dateValue;
+@synthesize label = _label;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
-    self = [super initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
+    self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
 
     // returns self
     return self;
@@ -41,6 +42,9 @@
 - (void)dealloc {
     // releases the date picker
     [_datePicker release];
+
+    // releases the date label
+    [_label release];
 
     // calls the super
     [super dealloc];
@@ -52,57 +56,29 @@
     tableView.frame = CGRectMake(0, 0, tableView.frame.size.width, tableView.superview.frame.size.height - self.datePicker.frame.size.height);
 }
 
-- (void)hideDatePicker {
-    // hides the date picker
-    self.datePicker.hidden = YES;
-}
+- (void)slideUpDatePicker {
+    // shows the date picker
+    self.datePicker.hidden = NO;
 
-- (void)dateChanged {
-    // stores the date picker's date
-    self.dateValue = self.datePicker.date;
-
-    // creates the date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
-
-    // converts the date to a string
-    NSString *dateString = [dateFormatter stringFromDate:self.dateValue];
-
-    // sets the date string in the detail text label
-    self.detailTextLabel.text = dateString;
-
-    // releases the date formatter
-    [dateFormatter release];
-}
-
-- (void)createEditing {
-    // creates the date picker
-    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    [datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
-
-    // positions the date picker at the bottom of the screen
+    // retrieves the screen rect and the date picker frame
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-    CGSize pickerSize = [datePicker sizeThatFits:CGSizeZero];
-    datePicker.frame = CGRectMake(0.0, screenRect.size.height, pickerSize.width, pickerSize.height);
-    datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    CGRect datePickerFrame = self.datePicker.frame;
+    datePickerFrame.origin.y = screenRect.size.height - datePickerFrame.size.height + 20;
 
-    // adds the date picker to the window
-    [self.window addSubview:datePicker];
+    // creates the slide up animation
+    [UIView beginAnimations:@"slideUp" context:nil];
+    [UIView setAnimationDelegate:self];
+    [UIView setAnimationDidStopSelector:@selector(shrinkTable)];
+    [UIView setAnimationDuration:0.25];
 
-    // sets the attributes
-    self.datePicker = datePicker;
+    // updates the date picker's position
+    self.datePicker.frame = datePickerFrame;
 
-    // releases the objects
-    [datePicker release];
+    // commits the animation
+    [UIView commitAnimations];
 }
 
-- (void)hideEditing {
-    // returns in case the date
-    // picker is already hidden
-    if(self.datePicker.hidden) {
-        return;
-    }
-
+- (void)slideDownDatePicker {
     // resizes the table back to its original size
     UITableView *tableView = (UITableView *) self.superview;
     tableView.frame = CGRectMake(0, 0, tableView.superview.frame.size.width, tableView.superview.frame.size.height);
@@ -123,9 +99,114 @@
 
     // commits the animation
     [UIView commitAnimations];
+}
+
+- (void)hideDatePicker {
+    // hides the date picker
+    self.datePicker.hidden = YES;
+}
+
+- (void)dateChanged {
+    // stores the date picker's date
+    self.dateValue = self.datePicker.date;
+
+    // converts the date to a string
+    NSString *dateString = [self formatDate:self.dateValue];
+
+    // sets the date string in the detail text label
+    self.label.text = dateString;
+}
+
+- (NSString *)formatDate:(NSDate *)date {
+    // creates the date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+
+    // sets the current locale in the date formatter
+    NSLocale *currentLocale = [NSLocale currentLocale];
+    [dateFormatter setLocale:currentLocale];
+
+    // converts the date to a string
+    NSString *dateString = [dateFormatter stringFromDate:date];
+
+    // releases the date formatter
+    [dateFormatter release];
+
+    // returns the date string
+    return dateString;
+}
+
+- (void)createEditing {
+    // invokes the super
+    [super createEditing];
+
+    // creates the date picker
+    UIDatePicker *datePicker = [[UIDatePicker alloc] init];
+    [datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
+
+    // positions the date picker at the bottom of the screen
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGSize pickerSize = [datePicker sizeThatFits:CGSizeZero];
+    datePicker.frame = CGRectMake(0.0, screenRect.size.height, pickerSize.width, pickerSize.height);
+    datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+
+    // creates the label and adds it to the edit view
+    CGRect editViewFrame = self.editView.frame;
+    CGRect labelFrame = CGRectMake(HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN, HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN * 2, HM_DATE_PICKER_TABLE_VIEW_CELL_HEIGHT);
+    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    label.backgroundColor = [UIColor clearColor];
+
+    // adds the date picker to the window
+    [self.window addSubview:datePicker];
+
+    // adds the label as subview
+    [self.editView addSubview:label];
+
+    // sets the attributes
+    self.datePicker = datePicker;
+    self.label = label;
+
+    // releases the objects
+    [datePicker release];
+    [label release];
+}
+
+- (void)hideEditing {
+    // returns in case the date
+    // picker is already hidden
+    if(self.datePicker.hidden) {
+        return;
+    }
+
+    // converts the date to a string
+    NSString *dateString = [self formatDate:self.dateValue];
+
+    // sets the detail text label text
+    self.detailTextLabel.text = dateString;
+
+    // slides down the date picker
+    [self slideDownDatePicker];
 
     // calls the super
     [super hideEditing];
+}
+
+- (void)focusEditing {
+    // slides up the date picker
+    [self slideUpDatePicker];
+
+    // calls the super
+    [super focusEditing];
+}
+
+- (void)blurEditing {
+    // calls the super
+    [super blurEditing];
+
+    // slides down the date picker
+    [self slideDownDatePicker];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -138,27 +219,8 @@
         return;
     }
 
-    // SACAR A DATA INICIAL
-
-    // shows the date picker
-    self.datePicker.hidden = NO;
-
-    // retrieves the screen rect and the date picker frame
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
-    CGRect datePickerFrame = self.datePicker.frame;
-    datePickerFrame.origin.y = screenRect.size.height - datePickerFrame.size.height + 20;
-
-    // creates the slide up animation
-    [UIView beginAnimations:@"slideUp" context:nil];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(shrinkTable)];
-    [UIView setAnimationDuration:0.25];
-
-    // updates the date picker's position
-    self.datePicker.frame = datePickerFrame;
-
-    // commits the animation
-    [UIView commitAnimations];
+    // slides up the date picker
+    [self slideUpDatePicker];
 }
 
 @end
