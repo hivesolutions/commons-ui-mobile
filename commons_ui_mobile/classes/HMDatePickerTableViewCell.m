@@ -48,7 +48,7 @@
 - (void)createEditing {
     // creates the date picker
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
-    datePicker.hidden = NO;
+    datePicker.hidden = YES;
 
     // positions the date picker at the bottom of the screen
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
@@ -57,11 +57,8 @@
     datePicker.frame = pickerRect;
     datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 
-    // resizes the table to give space for the date picker
-    UITableView *tableView = (UITableView *) self.superview;
-    tableView.frame = CGRectMake(0,0, tableView.frame.size.width, tableView.superview.frame.size.height - pickerSize.height);
-
     // adds the date picker to the table view's parent
+    UITableView *tableView = (UITableView *) self.superview;
     [tableView.superview addSubview:datePicker];
 
     // sets the attributes
@@ -75,12 +72,14 @@
     // calls the super
     [super setSelected:selected animated:animated];
 
-    return;
-    // toggles the date picker's visibility
+    // shows the date picker in case the cell was selected
     if(selected) {
+        // resizes the table to give space for the date picker
+        UITableView *tableView = (UITableView *) self.superview;
+        tableView.frame = CGRectMake(0,0, tableView.frame.size.width, tableView.superview.frame.size.height - self.datePicker.frame.size.height);
+
+        // shows the date picker
         self.datePicker.hidden = NO;
-    } else {
-        self.datePicker.hidden = YES;
     }
 }
 

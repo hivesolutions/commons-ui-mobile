@@ -102,8 +102,6 @@
 }
 
 - (void)hideEditing {
-    return;
-
     // shows the edit view
     self.editView.hidden = YES;
 

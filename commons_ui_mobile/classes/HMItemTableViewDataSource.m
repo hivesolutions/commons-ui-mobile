@@ -23,7 +23,7 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMDatePickerTableViewCell.h"
+#import "HMStringTableViewCell.h"
 #import "HMItemTableViewDataSource.h"
 
 @implementation HMItemTableViewDataSource
@@ -117,7 +117,7 @@
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[HMDatePickerTableViewCell alloc] initWithReuseIdentifier:cellIdentifier name:tableCellItem.name icon:tableCellItem.icon highlightedIcon:tableCellItem.highlightedIcon highlightable:tableCellItem.highlightable accessoryType:tableCellItem.accessoryType] autorelease];
+        cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier name:tableCellItem.name icon:tableCellItem.icon highlightedIcon:tableCellItem.highlightedIcon highlightable:tableCellItem.highlightable accessoryType:tableCellItem.accessoryType] autorelease];
     }
 
     // sets the button item's attributes in the cell
