@@ -40,6 +40,14 @@
 @property (assign) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
 
 /**
+ * Blurs all the edit table view cells in the table
+ * except the one given.
+ *
+ * @param tableCellView The table cell view not to be hidden.
+ */
+- (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;

@@ -23,7 +23,6 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMItemTableViewDataSource.h"
 #import "HMItemTableView.h"
 
 @implementation HMItemTableView
@@ -103,6 +102,23 @@
 
     // calls the super
     [super dealloc];
+}
+
+- (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView {
+    // retrieves the visible cells
+    NSArray *visibleCells = [self visibleCells];
+
+    // iterates over all the visible cells
+    for(int index = 0; index < [visibleCells count]; index++) {
+        // retrieves the (visible) cell
+        HMEditTableViewCell *cell = [visibleCells objectAtIndex:index];
+
+        // in case the cell is the table cell view
+        if(cell != tableCellView) {
+            // blurs the editing
+            [cell blurEditing];
+        }
+    }
 }
 
 - (NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
