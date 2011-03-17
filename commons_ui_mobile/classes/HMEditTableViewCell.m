@@ -41,29 +41,20 @@
     // SE TIVER PISCO TENHO DE RETIRAR O DELTA OA PISCO
 
     // creates the edit view
-    CGRect editViewFrame = CGRectMake(delta, 5, self.frame.size.width, self.contentView.frame.size.height - 10);
+    CGRect editViewFrame = CGRectMake(delta, 5, self.frame.size.width - 90, self.contentView.frame.size.height - 10);
     UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
     editView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-
-    // adds the text view to the edit view
-    CGRect textViewFrame = CGRectMake(8, 8, editViewFrame.size.width - 16, editViewFrame.size.height - 8);
-    UITextField *textField = [[UITextField alloc] initWithFrame:textViewFrame];
-    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    textField.text = @"Default";
-    textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
-    [editView addSubview:textField];
+    editView.hidden = YES;
 
     // adds the edit view
     [self.contentView addSubview:editView];
 
     // sets the attributes
+    self.editingAccessoryType = UITableViewCellAccessoryNone;
     self.editView = editView;
 
     // releases the objects
-    [textField release];
     [editView release];
-
-    [self showEditing];
 
     // returns the instance
     return self;
@@ -112,6 +103,7 @@
         [self hideEditing];
     }
 }
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     // calls the super
     [super setEditing:editing animated:animated];

@@ -128,6 +128,10 @@
     [itemDataSource release];
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleNone;
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // rettrieves the item specification
     HMItemGroup *itemSpecification = self.itemDataSource.itemSpecification;

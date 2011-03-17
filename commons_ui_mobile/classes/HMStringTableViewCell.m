@@ -27,12 +27,37 @@
 
 @implementation HMStringTableViewCell
 
+@synthesize textField = _textField;
+
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
+
+    // creates the text field and adds it to the edit view
+    CGRect editViewFrame = self.editView.frame;
+    CGRect textFieldFrame = CGRectMake(8, 8, editViewFrame.size.width - 16, editViewFrame.size.height - 14);
+    UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
+    textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    textField.placeholder = @"default value";
+    textField.clearButtonMode = UITextFieldViewModeAlways;
+    [self.editView addSubview:textField];
+
+    // sets the attributes
+    self.textField = textField;
+
+    // releases the objects
+    [textField release];
 
     // returns self
     return self;
 }
 
+- (void)dealloc {
+    // releases the text field
+    [_textField release];
+
+    // calls the super
+    [super dealloc];
+}
 @end
