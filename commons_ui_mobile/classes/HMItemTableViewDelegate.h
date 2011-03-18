@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HMItemTableViewDelegate <NSObject>
+@protocol HMItemTableViewDelegate<NSObject>
 
 /**
  * Called when a row is selected for an item in

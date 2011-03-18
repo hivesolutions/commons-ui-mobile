@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HMRemoteTableViewDelegate <NSObject>
+@protocol HMRemoteTableViewDelegate<NSObject>
 
 /**
  * Called when a row is selected for a data in

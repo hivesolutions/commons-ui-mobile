@@ -25,7 +25,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol HMItemTableViewProvider <NSObject>
+@protocol HMItemTableViewProvider<NSObject>
 
 /**
  * Retrieves the table item specification.
