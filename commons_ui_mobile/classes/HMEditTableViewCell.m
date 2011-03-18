@@ -28,6 +28,7 @@
 @implementation HMEditTableViewCell
 
 @synthesize editView = _editView;
+@synthesize itemTableView = _itemTableView;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
@@ -50,13 +51,13 @@
 
 - (void)createEditing {
     // retrieves the associated table view (superview)
-    UITableView *table = (UITableView *) self.superview;
+    self.itemTableView = (HMItemTableView *) self.superview;
 
     // starts the delta value
     float delta = 0;
 
     // switches over the table style
-    switch(table.style) {
+    switch(self.itemTableView.style) {
         // in case it's an ui table view style grouped
         case UITableViewStyleGrouped:
             // sets the delta to grouped
