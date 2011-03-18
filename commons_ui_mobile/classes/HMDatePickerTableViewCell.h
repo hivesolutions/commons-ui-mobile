@@ -94,10 +94,23 @@
 /**
  * Converts the date to a string
  * representation in the current locale.
+ *
  * @param date The date to format.
  * @return The string with the formatted
  * date.
  */
 - (NSString *)formatDate:(NSDate *)date;
 
+/**
+ * Returns the rect for the device's
+ * screen, but with the dimensions
+ * adjusted so that the width is always
+ * the horizontal portion of the device
+ * and the height the vertical one.
+ *
+ * @return The rect for the device's
+ * screen with dimensions adjusted taking
+ * into account the device's orientation.
+ */
+- (CGRect)getAdjustedDimensionsScreenRect;
 @end
