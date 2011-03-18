@@ -50,11 +50,6 @@
     [super dealloc];
 }
 
-- (void)shrinkTable {
-    // resizes the table to use the space left by the date picker
-    self.itemTableView.frame = CGRectMake(0, 0, self.itemTableView.frame.size.width, self.itemTableView.frame.size.height - self.datePicker.frame.size.height);
-}
-
 - (void)slideUpDatePicker {
     // shows the date picker
     self.datePicker.hidden = NO;
@@ -66,8 +61,6 @@
 
     // creates the slide up animation
     [UIView beginAnimations:@"slideUp" context:nil];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(shrinkTable)];
     [UIView setAnimationDuration:0.25];
 
     // updates the date picker's position
@@ -118,7 +111,8 @@
 - (NSString *)formatDate:(NSDate *)date {
     // creates the date formatter
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterMediumStyle];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
 
     // sets the current locale in the date formatter
     NSLocale *currentLocale = [NSLocale currentLocale];
@@ -217,8 +211,11 @@
         return;
     }
 
-    // focus the editing
+    // focuses the editing
     [self focusEditing];
+
+    // disables the highlighting
+    [super setSelected:false animated:NO];
 }
 
 @end

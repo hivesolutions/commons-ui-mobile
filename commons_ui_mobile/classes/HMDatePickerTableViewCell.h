@@ -82,12 +82,6 @@
 - (void)slideDownDatePicker;
 
 /**
- * Shrinks the table to give
- * space for the date picker.
- */
-- (void)shrinkTable;
-
-/**
  * Hides the date picker.
  */
 - (void)hideDatePicker;
