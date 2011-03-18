@@ -32,8 +32,8 @@
 /**
  * Retrieves the table item specification.
  *
- * @return The item group with the item specification.
+ * @return The named item group with the item specification.
  */
-- (HMItemGroup *)getItemSpecification;
+- (HMNamedItemGroup *)getItemSpecification;
 
 @end

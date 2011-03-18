@@ -76,6 +76,22 @@
     itemDirty = NO;
 }
 
+- (HMNamedItemGroup *)headerNamedItemGroup {
+    // retrieves the header named item group from the item specification
+    HMNamedItemGroup *headerItemGroup = (HMNamedItemGroup *) [self.itemSpecification getItem:@"header"];
+
+    // returns the header item group
+    return headerItemGroup;
+}
+
+- (HMItemGroup *)listItemGroup {
+    // retrieves the list item group from the item specification
+    HMItemGroup *listItemGroup = (HMItemGroup *) [self.itemSpecification getItem:@"list"];
+
+    // returns the list item group
+    return listItemGroup;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // sets the table view
     self.tableView = tableView;
@@ -84,7 +100,7 @@
     [self updateItem];
 
     // retrieves the menu item group items size
-    NSInteger menuItemGroupItemsSize = [self.itemSpecification.items count];
+    NSInteger menuItemGroupItemsSize = [self.listItemGroup.items count];
 
     // returns the menu item group items size
     return menuItemGroupItemsSize;
@@ -107,7 +123,7 @@
     static NSString *cellIdentifier = @"Cell";
 
     // retrieves the button item
-    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.itemSpecification getItem:indexPath];
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItem:indexPath];
 
     // tries to retrives the cell from cache (reusable)
     HMStringTableViewCell *cell = (HMStringTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -161,7 +177,7 @@
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
     // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.itemSpecification getItem:indexPath];
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItem:indexPath];
 
     // retrieves the section item group items count
     NSInteger sectionItemGroupItemsCount = [sectionItemGroup.items count];
@@ -182,7 +198,7 @@
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
     // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.itemSpecification getItem:indexPath];
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItem:indexPath];
 
     // releases the index path
     [indexPath release];

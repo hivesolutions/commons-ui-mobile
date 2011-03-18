@@ -31,13 +31,15 @@
 @interface HMItemTableViewDataSource : NSObject<UITableViewDataSource> {
     @private NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
     @private UITableView *_tableView;
-    @private HMItemGroup *_itemSpecification;
+    @private HMNamedItemGroup *_itemSpecification;
     @private BOOL itemDirty;
 }
 
 @property (assign) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
 @property (assign) UITableView *tableView;
-@property (retain) HMItemGroup *itemSpecification;
+@property (retain) HMNamedItemGroup *itemSpecification;
+@property (readonly) HMNamedItemGroup *headerNamedItemGroup;
+@property (readonly) HMItemGroup *listItemGroup;
 
 /**
  * Constructor of the class.
@@ -46,6 +48,11 @@
  * provider.
  */
 - (id)initWithItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider;
+
+/**
+ * Updates the current item structure.
+ */
+- (void)updateItem;
 
 /**
  * Keeps the class valid for export at link time.

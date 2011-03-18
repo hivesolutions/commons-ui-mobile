@@ -66,8 +66,12 @@
         // retrieves the (visible) cell
         HMEditTableViewCell *cell = [visibleCells objectAtIndex:index];
 
-        // in case the cell is the table cell view
-        if(cell != tableCellView) {
+        // checks if the cell responds to the blur selector
+        BOOL cellRespondsBlur = [cell respondsToSelector:@selector(blurEditing)];
+
+        // in case the cell is the table cell view and responds
+        // to the cell blur method
+        if(cell != tableCellView && cellRespondsBlur) {
             // blurs the editing
             [cell blurEditing];
         }
@@ -85,6 +89,9 @@
     // creates and sets the item table view data source
     // from the item table view provider
     HMItemTableViewDataSource *itemDataSource = [[HMItemTableViewDataSource alloc] initWithItemTableViewProvider:itemTableViewProvider];
+
+    // updates the item
+    [itemDataSource updateItem];
 
     // sets the attributes
     self.itemDataSource = itemDataSource;
@@ -118,15 +125,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    // rettrieves the item specification
-    HMItemGroup *itemSpecification = self.itemDataSource.itemSpecification;
+    // rettrieves the list item group
+    HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
 
     // retrieves the button item
-    HMButtonItem *buttonItem = (HMButtonItem *) [itemSpecification getItem:indexPath];
+    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItem:indexPath];
 
     // calls the did deselect item row with item method
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];
 }
+
+
 
 + (void)_keepAtLinkTime {
 }
