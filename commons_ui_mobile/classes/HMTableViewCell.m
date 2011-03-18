@@ -31,6 +31,10 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
+    // sets the text label to adjust the
+    // font size to the available width
+    self.textLabel.adjustsFontSizeToFitWidth = YES;
+
     // replaces the selected background view
     HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
     self.selectedBackgroundView = backgroundView;
