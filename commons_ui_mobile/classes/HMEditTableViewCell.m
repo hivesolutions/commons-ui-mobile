@@ -33,7 +33,7 @@
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
-    
+
     // sets the editing dirty
     editingDirty = YES;
 

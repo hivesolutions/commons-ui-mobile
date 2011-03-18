@@ -42,16 +42,16 @@
 - (void)dealloc {
     // releases the name
     [_name release];
-    
+
     // releases the icon
     [_icon release];
-    
+
     // releases the highlighted icon
     [_highlightedIcon release];
-    
+
     // releases the accessory type string
     [_accessoryTypeString release];
-    
+
     // calls the super
     [super dealloc];
 }
@@ -96,13 +96,13 @@
         // returns immediately
         return;
     }
-    
+
     // releases the object
     [_name release];
-    
+
     // sets and retains the object
     _name = [name retain];
-    
+
     // sets the cell's text label
     self.textLabel.text = name;
     self.detailTextLabel.text = @"v-fcastro@hive.pt";
@@ -118,16 +118,16 @@
         // returns immediately
         return;
     }
-    
+
     // releases the object
     [_icon release];
-    
+
     // sets and retains the object
     _icon = [icon retain];
-    
+
     // retrieves the icon image
     UIImage *iconImage = [UIImage imageNamed:icon];
-    
+
     // sets the image in the image view
     [self.imageView setImage:iconImage];
 }
@@ -142,13 +142,13 @@
         // returns immediately
         return;
     }
-    
+
     // releases the object
     [_highlightedIcon release];
-    
+
     // sets and retains the object
     _highlightedIcon = [highlightedIcon retain];
-    
+
     // retrieves the highlighted icon image
     UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
 
@@ -163,7 +163,7 @@
 - (void)setHighlightable:(BOOL)highlightable {
     // sets the object
     _highlightable = highlightable;
-    
+
     // in case it's highlightable
     if(highlightable == YES) {
         // changes the selection style to blue
@@ -186,13 +186,13 @@
         // returns immediately
         return;
     }
-    
+
     // releases the object
     [accessoryTypeString release];
-    
+
     // sets and retains the object
     _accessoryTypeString = [accessoryTypeString retain];
-    
+
     // creates the specified accessory type
     if(accessoryTypeString == @"disclosure_indicator") {
         // sets the acessory type as the table view
@@ -201,10 +201,10 @@
     } else if(accessoryTypeString == @"switch") {
         // creates the notifications switch
         UISwitch *notificationsSwitch = [[UISwitch alloc] init];
-        
+
         // sets the notifications switch in the accessory view
         self.accessoryView = notificationsSwitch;
-        
+
         // releases the notifications switch
         [notificationsSwitch release];
     }

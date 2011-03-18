@@ -117,7 +117,7 @@
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
         cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-        
+
         // sets the cell attributes
         cell.name = tableCellItem.name;
         cell.icon = tableCellItem.icon;
