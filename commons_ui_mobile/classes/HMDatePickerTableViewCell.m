@@ -50,11 +50,6 @@
     [super dealloc];
 }
 
-- (void)shrinkTable {
-    // resizes the table to use the space left by the date picker
-    self.itemTableView.frame = CGRectMake(0, 0, self.itemTableView.frame.size.width, self.itemTableView.frame.size.height - self.datePicker.frame.size.height);
-}
-
 - (void)slideUpDatePicker {
     // shows the date picker
     self.datePicker.hidden = NO;
@@ -66,8 +61,6 @@
 
     // creates the slide up animation
     [UIView beginAnimations:@"slideUp" context:nil];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(shrinkTable)];
     [UIView setAnimationDuration:0.25];
 
     // updates the date picker's position
@@ -193,19 +186,19 @@
 }
 
 - (void)focusEditing {
-    // slides up the date picker
-    [self slideUpDatePicker];
-
     // calls the super
     [super focusEditing];
+
+    // slides up the date picker
+    [self slideUpDatePicker];
 }
 
 - (void)blurEditing {
-    // calls the super
-    [super blurEditing];
-
     // slides down the date picker
     [self slideDownDatePicker];
+
+    // calls the super
+    [super blurEditing];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -218,9 +211,9 @@
         return;
     }
 
-    // slides up the date picker
-    [self slideUpDatePicker];
-    
+    // focuses the editing
+    [self focusEditing];
+
     // disables the highlighting
     [super setSelected:false animated:NO];
 }
