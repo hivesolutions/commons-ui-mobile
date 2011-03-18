@@ -51,7 +51,7 @@
 @property (retain) NSString *stringValue;
 
 /**
- * Initializes the string table view cell.
+ * Constructor of the class.
  *
  * @param reuseIdentifier The cell's identifier.
  * @return The string table view cell instance.
