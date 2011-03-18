@@ -32,6 +32,8 @@
 		C29A2E38132EA52B005EAB37 /* HMRemoteTableViewProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E37132EA52B005EAB37 /* HMRemoteTableViewProvider.h */; };
 		C29A2E3F132EA6A2005EAB37 /* HMRemoteTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E3D132EA6A2005EAB37 /* HMRemoteTableView.h */; };
 		C29A2E40132EA6A2005EAB37 /* HMRemoteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */; };
+		C29E100F1333A24C00E9F77A /* HMHeaderItemTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */; };
+		C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */; };
 		C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C2FA0A132E95530038B41E /* UIKit.framework */; };
 		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
 		C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EEE097132E8E9B0038FFA6 /* Foundation.framework */; };
@@ -64,6 +66,8 @@
 		C29A2E37132EA52B005EAB37 /* HMRemoteTableViewProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableViewProvider.h; path = classes/HMRemoteTableViewProvider.h; sourceTree = "<group>"; };
 		C29A2E3D132EA6A2005EAB37 /* HMRemoteTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableView.h; path = classes/HMRemoteTableView.h; sourceTree = "<group>"; };
 		C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableView.m; path = classes/HMRemoteTableView.m; sourceTree = "<group>"; };
+		C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMHeaderItemTableView.h; path = classes/HMHeaderItemTableView.h; sourceTree = "<group>"; };
+		C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMHeaderItemTableView.m; path = classes/HMHeaderItemTableView.m; sourceTree = "<group>"; };
 		C2C2FA0A132E95530038B41E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
 		C2EEE094132E8E9B0038FFA6 /* libcommons_ui_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcommons_ui_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +102,8 @@
 		C220E35E13318CD00076803A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */,
+				C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */,
 				C2029294132FE592009D7B69 /* HMItemTableView.h */,
 				C2029295132FE593009D7B69 /* HMItemTableView.m */,
 				C29A2E3D132EA6A2005EAB37 /* HMRemoteTableView.h */,
@@ -274,6 +280,7 @@
 				A5E648E913313F7100FE725A /* HMEditTableViewCell.h in Headers */,
 				A5DF506A1332392F0038D5B4 /* HMDatePickerTableViewCell.h in Headers */,
 				C2C96E481333742900D6910B /* Dependencies.h in Headers */,
+				C29E100F1333A24C00E9F77A /* HMHeaderItemTableView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +340,7 @@
 				A5E648E613313F1B00FE725A /* HMStringTableViewCell.m in Sources */,
 				A5E648EA13313F7100FE725A /* HMEditTableViewCell.m in Sources */,
 				A5DF506B1332392F0038D5B4 /* HMDatePickerTableViewCell.m in Sources */,
+				C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

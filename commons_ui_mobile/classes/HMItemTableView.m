@@ -42,56 +42,6 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
-    // creates the header
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 82)];
-    header.contentMode = UIViewContentModeScaleToFill;
-    header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    header.backgroundColor = [UIColor clearColor];
-
-    // creates the header container
-    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 300, 82)];
-    headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-
-    // creates the image frame
-    CGRect imageFrame = CGRectMake(0, 15, 64, 64);
-
-    // creates the image view
-    UIImageView *image = [[UIImageView alloc] initWithFrame:imageFrame];
-    image.image = [UIImage imageNamed:@"user.png"];
-    image.backgroundColor = [UIColor clearColor];
-
-    // sets the header image rounded corners
-    image.layer.cornerRadius = 4.0;
-    image.layer.masksToBounds = YES;
-    image.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    image.layer.borderWidth = 1.0;
-
-    // creates the label frame
-    CGRect labelFrame = CGRectMake(83, 34, 197, 24);
-
-    // creates the label view
-    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.text = @"Accenture";
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
-    label.shadowColor = [UIColor whiteColor];
-    label.shadowOffset = CGSizeMake(0, 1);
-
-    // adds the sub views
-    [headerContainer addSubview:image];
-    [headerContainer addSubview:label];
-    [header addSubview:headerContainer];
-
-    // sets the table header
-    self.tableHeaderView = header;
-
-    // releases the objects
-    [label release];
-    [image release];
-    [headerContainer release];
-    [header release];
-
     // returns self
     return self;
 }
