@@ -25,7 +25,7 @@
 
 #import "Dependencies.h"
 
-#include "HMEditTableViewCell.h"
+#import "HMEditTableViewCell.h"
 
 /**
  * The date picker table view cell x margin.

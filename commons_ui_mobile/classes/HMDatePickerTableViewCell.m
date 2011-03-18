@@ -23,7 +23,7 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#include "HMDatePickerTableViewCell.h"
+#import "HMDatePickerTableViewCell.h"
 
 @implementation HMDatePickerTableViewCell
 
@@ -156,7 +156,7 @@
     label.backgroundColor = [UIColor clearColor];
 
     // adds the date picker to the window
-    [self.window addSubview:datePicker];
+    [[self.window.subviews objectAtIndex:0] addSubview:datePicker];
 
     // adds the label as subview
     [self.editView addSubview:label];
