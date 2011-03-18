@@ -171,7 +171,7 @@
     CGRect labelFrame = CGRectMake(HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN, HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN * 2, HM_DATE_PICKER_TABLE_VIEW_CELL_HEIGHT);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     label.backgroundColor = [UIColor clearColor];
 
     // adds the date picker to the window
@@ -190,12 +190,6 @@
 }
 
 - (void)hideEditing {
-    // returns in case the date
-    // picker is already hidden
-    if(self.datePicker.hidden) {
-        return;
-    }
-
     // converts the date to a string
     NSString *dateString = [self formatDate:self.dateValue];
 
@@ -203,7 +197,9 @@
     self.detailTextLabel.text = dateString;
 
     // slides down the date picker
-    [self slideDownDatePicker];
+    if(!self.datePicker.hidden) {
+        [self slideDownDatePicker];
+    }
 
     // calls the super
     [super hideEditing];
