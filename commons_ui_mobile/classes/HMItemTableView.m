@@ -66,8 +66,11 @@
         // retrieves the (visible) cell
         HMEditTableViewCell *cell = [visibleCells objectAtIndex:index];
 
+        // checks if the cell responds to the blur selector
+        BOOL cellRespondsBlur = [cell respondsToSelector:@selector(blurEditing)];
+
         // in case the cell is the table cell view
-        if(cell != tableCellView) {
+        if(cell != tableCellView && cellRespondsBlur) {
             // blurs the editing
             [cell blurEditing];
         }
