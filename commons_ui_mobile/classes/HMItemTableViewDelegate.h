@@ -27,6 +27,8 @@
 
 @protocol HMItemTableViewDelegate<NSObject>
 
+@required
+
 /**
  * Called when a row is selected for an item in
  * the virtual data set.
