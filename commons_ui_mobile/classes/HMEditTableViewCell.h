@@ -23,17 +23,23 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 
 #import "HMTableViewCell.h"
 
+// avoids circular dependency
+@class HMItemTableView;
+
 @interface HMEditTableViewCell : HMTableViewCell {
     @private UIView *_editView;
+    @private HMItemTableView *_itemTableView;
     @private float baseWidth;
     @private BOOL editingDirty;
 }
 
 @property (retain) UIView *editView;
+@property (assign) HMItemTableView *itemTableView;
 
 /**
  * Creates the editing view.

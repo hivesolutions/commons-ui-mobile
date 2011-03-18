@@ -52,8 +52,7 @@
 
 - (void)shrinkTable {
     // resizes the table to use the space left by the date picker
-    UITableView *tableView = (UITableView *) self.superview;
-    tableView.frame = CGRectMake(0, 0, tableView.frame.size.width, tableView.superview.frame.size.height - self.datePicker.frame.size.height);
+    self.itemTableView.frame = CGRectMake(0, 0, self.itemTableView.frame.size.width, self.itemTableView.frame.size.height - self.datePicker.frame.size.height);
 }
 
 - (void)slideUpDatePicker {
@@ -80,8 +79,7 @@
 
 - (void)slideDownDatePicker {
     // resizes the table back to its original size
-    UITableView *tableView = (UITableView *) self.superview;
-    tableView.frame = CGRectMake(0, 0, tableView.superview.frame.size.width, tableView.superview.frame.size.height);
+    self.itemTableView.frame = CGRectMake(0, 0, self.itemTableView.frame.size.width, self.itemTableView.frame.size.height);
 
     // retrieves the screen rect and the date picker frame
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
