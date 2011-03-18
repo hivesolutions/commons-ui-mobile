@@ -62,6 +62,7 @@
     textField.placeholder = @"default value";
     textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.delegate = self;
 
     // adds the textfield as subview
     [self.editView addSubview:textField];
@@ -91,6 +92,9 @@
 }
 
 - (void)hideEditing {
+    // hides the keyboard
+    [self.textField resignFirstResponder];
+
     // enables cell highlighting
     self.selectionStyle = UITableViewCellSelectionStyleBlue;
 
@@ -105,6 +109,19 @@
 
     // calls the super
     [super hideEditing];
+}
+
+- (void)blurEditing {
+    // hides the keyboard
+    [self.textField resignFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    // hides the keyboard
+    [self.textField resignFirstResponder];
+
+    // returns yes
+    return YES;
 }
 
 @end
