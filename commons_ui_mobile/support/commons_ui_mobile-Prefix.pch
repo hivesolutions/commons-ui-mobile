@@ -24,9 +24,7 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-    #import <QuartzCore/QuartzCore.h>
-    #import <Foundation/Foundation.h>
+    #import "../classes/Dependencies.h"
 
     #import "../headers/commons_ui_mobile.h"
 #endif

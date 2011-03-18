@@ -16,53 +16,18 @@
 // You should have received a copy of the GNU General Public License
 // along with Hive Mobile. If not, see <http://www.gnu.org/licenses/>.
 
-// __author__    = Tiago Silva <tsilva@hive.pt>
+// __author__    = João Magalhães <joamag@hive.pt>
 // __version__   = 1.0.0
 // __revision__  = $LastChangedRevision: 2390 $
 // __date__      = $LastChangedDate: 2009-04-02 08:36:50 +0100 (qui, 02 Abr 2009) $
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "Dependencies.h"
+// framework dependency includes
+#import <UIKit/UIKit.h>
+#import <QuartzCore/QuartzCore.h>
+#import <Foundation/Foundation.h>
 
-#import "HMTableViewCell.h"
-
-// avoids circular dependency
-@class HMItemTableView;
-
-@interface HMEditTableViewCell : HMTableViewCell {
-    @private UIView *_editView;
-    @private HMItemTableView *_itemTableView;
-    @private float baseWidth;
-    @private BOOL editingDirty;
-}
-
-@property (retain) UIView *editView;
-@property (assign) HMItemTableView *itemTableView;
-
-/**
- * Creates the editing view.
- */
-- (void)createEditing;
-
-/**
- * Shows the editing view.
- */
-- (void)showEditing;
-
-/**
- * Hides the editing view.
- */
-- (void)hideEditing;
-
-/**
- * Focus in the editing view contents.
- */
-- (void)focusEditing;
-
-/**
- * Bliurs from the editing view contents.
- */
-- (void)blurEditing;
-
-@end
+// library dependency includes
+#import "../../../json_mobile/json_mobile/headers/json_mobile.h"
+#import "../../../commons_mobile/commons_mobile/headers/commons_mobile.h"
