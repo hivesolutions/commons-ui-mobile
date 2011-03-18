@@ -24,7 +24,5 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #ifdef __OBJC__
-    #import "../classes/Dependencies.h"
-
     #import "../headers/commons_ui_mobile.h"
 #endif
