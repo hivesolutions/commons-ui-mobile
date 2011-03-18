@@ -30,12 +30,12 @@
 /**
  * The date picker table view cell x margin.
  */
-#define HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN 6
+#define HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN 7
 
 /**
  * The date picker table view cell y margin.
  */
-#define HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN 13
+#define HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN 12
 
 /**
  * The date picker table view cell height.
@@ -94,10 +94,23 @@
 /**
  * Converts the date to a string
  * representation in the current locale.
+ *
  * @param date The date to format.
  * @return The string with the formatted
  * date.
  */
 - (NSString *)formatDate:(NSDate *)date;
 
+/**
+ * Returns the rect for the device's
+ * screen, but with the dimensions
+ * adjusted so that the width is always
+ * the horizontal portion of the device
+ * and the height the vertical one.
+ *
+ * @return The rect for the device's
+ * screen with dimensions adjusted taking
+ * into account the device's orientation.
+ */
+- (CGRect)getAdjustedDimensionsScreenRect;
 @end

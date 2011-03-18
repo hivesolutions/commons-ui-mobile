@@ -52,7 +52,7 @@
 
 - (void)slideUpDatePicker {
     // creates a date picker frame with the updated position
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGRect screenRect = [self getAdjustedDimensionsScreenRect];
     CGRect datePickerFrame = self.datePicker.frame;
     datePickerFrame.origin.y = screenRect.size.height - datePickerFrame.size.height + 20;
 
@@ -76,7 +76,7 @@
 
 - (void)slideDownDatePicker {
     // creates a date picker frame with the updated position
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGRect screenRect = [self getAdjustedDimensionsScreenRect];
     CGRect datePickerFrame = self.datePicker.frame;
     datePickerFrame.origin.y = screenRect.size.height;
 
@@ -133,6 +133,25 @@
     return dateString;
 }
 
+- (CGRect)getAdjustedDimensionsScreenRect {
+    // retrieves the device
+    UIDevice *device = [UIDevice currentDevice];
+
+    // retrieves the screen rect
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+
+    // swaps the device's dimensions in case
+    // the device is in landscape mode
+    if(device.orientation == UIDeviceOrientationLandscapeLeft || device.orientation == UIDeviceOrientationLandscapeRight) {
+        CGFloat width = screenRect.size.width;
+        screenRect.size.width = screenRect.size.height;
+        screenRect.size.height = width;
+    }
+
+    // returns the screen rect
+    return screenRect;
+}
+
 - (void)createEditing {
     // invokes the super
     [super createEditing];
@@ -142,7 +161,7 @@
     [datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
 
     // positions the date picker at the bottom of the screen
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGRect screenRect = [self getAdjustedDimensionsScreenRect];
     CGSize pickerSize = [datePicker sizeThatFits:CGSizeZero];
     datePicker.frame = CGRectMake(0.0, screenRect.size.height, pickerSize.width, pickerSize.height);
     datePicker.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
@@ -152,7 +171,7 @@
     CGRect labelFrame = CGRectMake(HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN, HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN * 2, HM_DATE_PICKER_TABLE_VIEW_CELL_HEIGHT);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
+    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     label.backgroundColor = [UIColor clearColor];
 
     // adds the date picker to the window
@@ -171,12 +190,6 @@
 }
 
 - (void)hideEditing {
-    // returns in case the date
-    // picker is already hidden
-    if(self.datePicker.hidden) {
-        return;
-    }
-
     // converts the date to a string
     NSString *dateString = [self formatDate:self.dateValue];
 
@@ -184,7 +197,9 @@
     self.detailTextLabel.text = dateString;
 
     // slides down the date picker
-    [self slideDownDatePicker];
+    if(!self.datePicker.hidden) {
+        [self slideDownDatePicker];
+    }
 
     // calls the super
     [super hideEditing];
