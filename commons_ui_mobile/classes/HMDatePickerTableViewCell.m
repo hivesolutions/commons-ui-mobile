@@ -135,7 +135,7 @@
     // creates the date picker
     UIDatePicker *datePicker = [[UIDatePicker alloc] init];
     [datePicker addTarget:self action:@selector(dateChanged) forControlEvents:UIControlEventValueChanged];
-    
+
     // positions the date picker at the bottom of the screen
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     CGSize pickerSize = [datePicker sizeThatFits:CGSizeZero];
