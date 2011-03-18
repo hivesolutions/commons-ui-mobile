@@ -27,6 +27,8 @@
 
 @protocol HMRemoteTableViewDelegate<NSObject>
 
+@required
+
 /**
  * Called when a row is selected for a data in
  * the virtual data set.

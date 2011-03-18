@@ -152,6 +152,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    printf("selecionou");
+
+    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    /*
+
+
     // rettrieves the item specification
     HMItemGroup *itemSpecification = self.itemDataSource.itemSpecification;
 
@@ -159,7 +165,7 @@
     HMButtonItem *buttonItem = (HMButtonItem *) [itemSpecification getItem:indexPath];
 
     // calls the did select item row with item method
-    [self.itemDelegate didSelectItemRowWithItem:buttonItem];
+    [self.itemDelegate didSelectItemRowWithItem:buttonItem]*/
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {

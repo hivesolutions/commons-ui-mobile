@@ -36,6 +36,8 @@ typedef enum {
 
 @protocol HMRemoteTableViewProvider<NSObject>
 
+@required
+
 /**
  * Retrieves the remote url to be used during the
  * provider series.

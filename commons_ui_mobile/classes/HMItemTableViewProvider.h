@@ -27,6 +27,8 @@
 
 @protocol HMItemTableViewProvider<NSObject>
 
+@required
+
 /**
  * Retrieves the table item specification.
  *
