@@ -114,6 +114,19 @@
 - (void)blurEditing {
     // hides the keyboard
     [self.textField resignFirstResponder];
+
+    // calls the super
+    [super blurEditing];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    // focuses the editing
+    [self focusEditing];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    // blurs the editing
+    [self blurEditing];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
