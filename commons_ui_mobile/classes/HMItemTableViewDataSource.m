@@ -115,15 +115,32 @@
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if (cell == nil) {
-        // creates the new cell with the given reuse identifier
-        cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+        // retrieves the object class name
+        const char *objectClassName = object_getClassName(tableCellItem);
 
-        // sets the cell attributes
-        cell.name = tableCellItem.name;
-        cell.icon = tableCellItem.icon;
-        cell.highlightedIcon = tableCellItem.highlightedIcon;
-        cell.highlightable = tableCellItem.highlightable;
-        cell.accessoryTypeString = tableCellItem.accessoryType;
+        NSString *objectClassNameString = [NSString stringWithCString:objectClassName encoding:NSASCIIStringEncoding];
+
+        if([objectClassNameString isEqualToString:@"HMTableCellItem"]) {
+            // creates the new cell with the given reuse identifier
+            cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier] autorelease];
+
+            // sets the cell attributes
+            cell.name = tableCellItem.name;
+            cell.icon = tableCellItem.icon;
+            cell.highlightedIcon = tableCellItem.highlightedIcon;
+            cell.highlightable = tableCellItem.highlightable;
+            cell.accessoryTypeString = tableCellItem.accessoryType;
+        } else if([objectClassNameString isEqualToString:@"HMStringTableCellItem"]) {
+            // creates the new cell with the given reuse identifier
+            cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+
+            // sets the cell attributes
+            cell.name = tableCellItem.name;
+            cell.icon = tableCellItem.icon;
+            cell.highlightedIcon = tableCellItem.highlightedIcon;
+            cell.highlightable = tableCellItem.highlightable;
+            cell.accessoryTypeString = tableCellItem.accessoryType;
+        }
     }
 
     // sets the button item's attributes in the cell
