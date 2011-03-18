@@ -33,6 +33,7 @@
 		C29A2E3F132EA6A2005EAB37 /* HMRemoteTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E3D132EA6A2005EAB37 /* HMRemoteTableView.h */; };
 		C29A2E40132EA6A2005EAB37 /* HMRemoteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */; };
 		C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C2FA0A132E95530038B41E /* UIKit.framework */; };
+		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
 		C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EEE097132E8E9B0038FFA6 /* Foundation.framework */; };
 		C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */; };
 /* End PBXBuildFile section */
@@ -64,6 +65,7 @@
 		C29A2E3D132EA6A2005EAB37 /* HMRemoteTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableView.h; path = classes/HMRemoteTableView.h; sourceTree = "<group>"; };
 		C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableView.m; path = classes/HMRemoteTableView.m; sourceTree = "<group>"; };
 		C2C2FA0A132E95530038B41E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
 		C2EEE094132E8E9B0038FFA6 /* libcommons_ui_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcommons_ui_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EEE097132E8E9B0038FFA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "commons_ui_mobile-Prefix.pch"; path = "support/commons_ui_mobile-Prefix.pch"; sourceTree = "<group>"; };
@@ -176,6 +178,14 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
+		C2C96E45133373F700D6910B /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				C2C96E471333742900D6910B /* Dependencies.h */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
 		C2EEE089132E8E9B0038FFA6 = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +237,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C2C96E45133373F700D6910B /* Dependencies */,
 				C220E36213318DAE0076803A /* Table View */,
 				C220E35C13318CC40076803A /* Table View Cells */,
 			);
@@ -262,6 +273,7 @@
 				A5E648E513313F1B00FE725A /* HMStringTableViewCell.h in Headers */,
 				A5E648E913313F7100FE725A /* HMEditTableViewCell.h in Headers */,
 				A5DF506A1332392F0038D5B4 /* HMDatePickerTableViewCell.h in Headers */,
+				C2C96E481333742900D6910B /* Dependencies.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

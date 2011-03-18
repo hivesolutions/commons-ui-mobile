@@ -110,6 +110,8 @@
 }
 
 - (void)focusEditing {
+    // blurs all the other cells except mine
+    [self.itemTableView blurAllExceptCell:self];
 }
 
 - (void)blurEditing {

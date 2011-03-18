@@ -23,9 +23,8 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-// dependency includes
-#import "../../../json_mobile/json_mobile/headers/json_mobile.h"
-#import "../../../commons_mobile/commons_mobile/headers/commons_mobile.h"
+// dependencies includes
+#import "../classes/Dependencies.h"
 
 // class includes
 #import "../classes/HMDatePickerTableViewCell.h"
