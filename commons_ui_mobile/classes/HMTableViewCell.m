@@ -39,56 +39,19 @@
     return self;
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
-    // invokes the parent constructor
-    self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
-
-    // replaces the selected background view
-    HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
-    self.selectedBackgroundView = backgroundView;
-
-    // sets the cell's text label
-    self.textLabel.text = name;
-    self.detailTextLabel.text = @"v-fcastro@hive.pt";
-
-    // sets the cell as not highlightable
-    if(!highlightable) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-
-    // creates the icon image and sets it in the image view
-    if(icon) {
-        UIImage *iconImage = [UIImage imageNamed:icon];
-        [self.imageView setImage:iconImage];
-    }
-
-    // creates the highlighted icon image
-    if(highlightedIcon) {
-        UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
-        [self.imageView setHighlightedImage:highlightedIconImage];
-    }
-
-    // creates the specified accessory type
-    if(accessoryType == @"disclosure_indicator") {
-        // sets the acessory type as the table view
-        // cell acessory disclosure indicator
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else if(accessoryType == @"switch") {
-        // creates the notifications switch
-        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
-
-        // sets the notifications switch in the accessory view
-        self.accessoryView = notificationsSwitch;
-
-        // releases the notifications switch
-        [notificationsSwitch release];
-    }
-
-    // returns the instance
-    return self;
-}
-
 - (void)dealloc {
+    // releases the name
+    [_name release];
+    
+    // releases the icon
+    [_icon release];
+    
+    // releases the highlighted icon
+    [_highlightedIcon release];
+    
+    // releases the accessory type string
+    [_accessoryTypeString release];
+    
     // calls the super
     [super dealloc];
 }
@@ -121,6 +84,130 @@
 
     // invokes the parent
     [super drawRect:rect];
+}
+
+- (NSString *)name {
+    return _name;
+}
+
+- (void)setName:(NSString *)name {
+    // in case the object is the same
+    if(name == _name) {
+        // returns immediately
+        return;
+    }
+    
+    // releases the object
+    [_name release];
+    
+    // sets and retains the object
+    _name = [name retain];
+    
+    // sets the cell's text label
+    self.textLabel.text = name;
+    self.detailTextLabel.text = @"v-fcastro@hive.pt";
+}
+
+- (NSString *)icon {
+    return _icon;
+}
+
+- (void)setIcon:(NSString *)icon {
+    // in case the object is the same
+    if(icon == _icon) {
+        // returns immediately
+        return;
+    }
+    
+    // releases the object
+    [_icon release];
+    
+    // sets and retains the object
+    _icon = [icon retain];
+    
+    // retrieves the icon image
+    UIImage *iconImage = [UIImage imageNamed:icon];
+    
+    // sets the image in the image view
+    [self.imageView setImage:iconImage];
+}
+
+- (NSString *)highlightedIcon {
+    return _highlightedIcon;
+}
+
+- (void)setHighlightedIcon:(NSString *)highlightedIcon {
+    // in case the object is the same
+    if(highlightedIcon == _highlightedIcon) {
+        // returns immediately
+        return;
+    }
+    
+    // releases the object
+    [_highlightedIcon release];
+    
+    // sets and retains the object
+    _highlightedIcon = [highlightedIcon retain];
+    
+    // retrieves the highlighted icon image
+    UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
+
+    // sets the image in the image view
+    [self.imageView setHighlightedImage:highlightedIconImage];
+}
+
+- (BOOL)highlightable {
+    return _highlightable;
+}
+
+- (void)setHighlightable:(BOOL)highlightable {
+    // sets the object
+    _highlightable = highlightable;
+    
+    // in case it's highlightable
+    if(highlightable == YES) {
+        // changes the selection style to blue
+        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+    }
+    // otherwise it's not highlightable
+    else {
+        // changes the selection style to none
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+}
+
+- (NSString *)accessoryTypeString {
+    return _accessoryTypeString;
+}
+
+- (void)setAccessoryTypeString:(NSString *)accessoryTypeString {
+    // in case the object is the same
+    if(accessoryTypeString == _accessoryTypeString) {
+        // returns immediately
+        return;
+    }
+    
+    // releases the object
+    [accessoryTypeString release];
+    
+    // sets and retains the object
+    _accessoryTypeString = [accessoryTypeString retain];
+    
+    // creates the specified accessory type
+    if(accessoryTypeString == @"disclosure_indicator") {
+        // sets the acessory type as the table view
+        // cell acessory disclosure indicator
+        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if(accessoryTypeString == @"switch") {
+        // creates the notifications switch
+        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
+        
+        // sets the notifications switch in the accessory view
+        self.accessoryView = notificationsSwitch;
+        
+        // releases the notifications switch
+        [notificationsSwitch release];
+    }
 }
 
 @end

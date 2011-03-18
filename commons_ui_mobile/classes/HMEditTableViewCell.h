@@ -33,7 +33,6 @@
 @interface HMEditTableViewCell : HMTableViewCell {
     @private UIView *_editView;
     @private HMItemTableView *_itemTableView;
-    @private float baseWidth;
     @private BOOL editingDirty;
 }
 

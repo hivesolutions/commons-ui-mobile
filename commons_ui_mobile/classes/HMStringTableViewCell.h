@@ -53,20 +53,9 @@
 /**
  * Initializes the string table view cell.
  *
- * @param cellStyle The cell's style.
  * @param reuseIdentifier The cell's identifier.
- * @param name The cell's name that will be set
- * as its label.
- * @param icon The identifier of the normal icon
- * resource.
- * @param highlightedIcon The identifier of the
- * highlighted icon resource.
- * @param highlightable Indicates if the table
- * view cell is highlightable.
- * @param accessoryType The type of accessory
- * view to use.
  * @return The string table view cell instance.
  */
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
+- (id)initWithReuseIdentifier:(NSString *)cellIdentifier;
 
 @end

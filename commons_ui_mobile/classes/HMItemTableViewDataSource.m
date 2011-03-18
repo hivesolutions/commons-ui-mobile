@@ -110,13 +110,20 @@
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.itemSpecification getItem:indexPath];
 
     // tries to retrives the cell from cache (reusable)
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    HMStringTableViewCell *cell = (HMStringTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if (cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[HMDatePickerTableViewCell alloc] initWithReuseIdentifier:cellIdentifier name:tableCellItem.name icon:tableCellItem.icon highlightedIcon:tableCellItem.highlightedIcon highlightable:tableCellItem.highlightable accessoryType:tableCellItem.accessoryType] autorelease];
+        cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+        
+        // sets the cell attributes
+        cell.name = tableCellItem.name;
+        cell.icon = tableCellItem.icon;
+        cell.highlightedIcon = tableCellItem.highlightedIcon;
+        cell.highlightable = tableCellItem.highlightable;
+        cell.accessoryTypeString = tableCellItem.accessoryType;
     }
 
     // sets the button item's attributes in the cell
