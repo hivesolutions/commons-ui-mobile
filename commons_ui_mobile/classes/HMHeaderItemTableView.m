@@ -192,4 +192,24 @@
     [super setEditing:editing];
 }
 
+
+- (void)setItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
+    // calls the super
+    [super setItemTableViewProvider:itemTableViewProvider];
+
+    // retrieves the header named item group
+    HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
+
+    // retrieves the values from the header named item group
+    HMItem *title = [headerNamedItemGroup getItem:@"title"];
+    HMItem *subTitle = [headerNamedItemGroup getItem:@"subTitle"];
+    HMItem *image = [headerNamedItemGroup getItem:@"image"];
+
+    // sets the attributes
+    self.title = title.identifier;
+    self.subTitle = subTitle.identifier;
+    self.image = image.identifier;
+}
+
+
 @end
