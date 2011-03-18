@@ -30,9 +30,9 @@
 @synthesize textField = _textField;
 @synthesize stringValue = _stringValue;
 
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
+- (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
-    self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
+    self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
 
     // returns self
     return self;

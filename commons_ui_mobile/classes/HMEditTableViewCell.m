@@ -30,9 +30,9 @@
 @synthesize editView = _editView;
 @synthesize itemTableView = _itemTableView;
 
-- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
+- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
-    self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier name:name icon:icon highlightedIcon:highlightedIcon highlightable:highlightable accessoryType:accessoryType];
+    self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
     // sets the editing dirty
     editingDirty = YES;

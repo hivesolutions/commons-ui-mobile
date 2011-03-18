@@ -26,25 +26,37 @@
 #import "Dependencies.h"
 
 @interface HMTableViewCell : UITableViewCell {
+    @private NSString *_name;
+    @private NSString *_icon;
+    @private NSString *_highlightedIcon;
+    @private BOOL _highlightable;
+    @private NSString *_accessoryTypeString;
 }
 
 /**
- * Initializes the table view cell.
- *
- * @param cellStyle The cell's style.
- * @param reuseIdentifier The cell's identifier.
- * @param name The cell's name that will be set
+ * The cell's name that will be set
  * as its label.
- * @param icon The identifier of the normal icon
- * resource.
- * @param highlightedIcon The identifier of the
- * highlighted icon resource.
- * @param highlightable Indicates if the table
- * view cell is highlightable.
- * @param accessoryType The type of accessory
- * view to use.
- * @return The table view cell instance.
  */
-- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType;
+@property (retain) NSString *name;
+
+/**
+ * The identifier of the icon resource.
+ */
+@property (retain) NSString *icon;
+
+/**
+ * The identifier of the highlighted icon resource.
+ */
+@property (retain) NSString *highlightedIcon;
+
+/**
+ * Indicates if the table view cell is highlightable.
+ */
+@property (assign) BOOL highlightable;
+
+/**
+ * The type of accessory (string mode).
+ */
+@property (retain) NSString *accessoryTypeString;
 
 @end

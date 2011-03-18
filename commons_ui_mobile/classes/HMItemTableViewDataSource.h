@@ -26,6 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMItemTableViewProvider.h"
+#import "HMStringTableViewCell.h"
 
 @interface HMItemTableViewDataSource : NSObject<UITableViewDataSource> {
     @private NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
