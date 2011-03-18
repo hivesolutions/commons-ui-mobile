@@ -31,6 +31,9 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
+    // enables font resizing to fit width in the text label
+    self.textLabel.adjustsFontSizeToFitWidth = YES;
+
     // replaces the selected background view
     HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
     self.selectedBackgroundView = backgroundView;
@@ -42,6 +45,9 @@
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier name:(NSString *)name icon:(NSString *)icon highlightedIcon:(NSString *)highlightedIcon highlightable:(BOOL)highlightable accessoryType:(NSString *)accessoryType {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
+
+    // enables font resizing to fit width in the text label
+    self.textLabel.adjustsFontSizeToFitWidth = YES;
 
     // replaces the selected background view
     HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
