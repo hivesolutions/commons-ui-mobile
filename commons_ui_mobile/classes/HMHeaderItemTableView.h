@@ -23,21 +23,30 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-// dependencies includes
-#import "../classes/Dependencies.h"
+#import "Dependencies.h"
 
-// class includes
-#import "../classes/HMDateTableViewCell.h"
-#import "../classes/HMEditTableViewCell.h"
-#import "../classes/HMHeaderItemTableView.h"
-#import "../classes/HMItemTableView.h"
-#import "../classes/HMItemTableViewDelegate.h"
-#import "../classes/HMItemTableViewProvider.h"
-#import "../classes/HMItemTableViewDataSource.h"
-#import "../classes/HMRemoteTableView.h"
-#import "../classes/HMRemoteTableViewDelegate.h"
-#import "../classes/HMRemoteTableViewProvider.h"
-#import "../classes/HMRemoteTableViewDataSource.h"
-#import "../classes/HMStringTableViewCell.h"
-#import "../classes/HMTableCellBackgroundView.h"
-#import "../classes/HMTableViewCell.h"
+#import "HMItemTableView.h"
+
+@interface HMHeaderItemTableView : HMItemTableView {
+    @private NSString *_title;
+    @private NSString *_subTitle;
+    @private NSString *_image;
+    @private UILabel *_titleLabel;
+    @private UILabel *_subTitleLabel;
+    @private UIImageView *_imageImage;
+}
+
+@property (retain) NSString *title;
+@property (retain) NSString *subTitle;
+@property (retain) NSString *image;
+@property (assign) UILabel *titleLabel;
+@property (assign) UILabel *subTitleLabel;
+@property (assign) UIImageView *imageImage;
+
+/**
+ * Constructs the view components and adds them
+ * to the view.
+ */
+- (void)constructView;
+
+@end
