@@ -108,8 +108,11 @@
     // retrieves the visible cells
     NSArray *visibleCells = [self visibleCells];
 
-    // iterates over all the visible cells
-    for(int index = 0; index < [visibleCells count]; index++) {
+    // retrieves the visible cells size
+    int visibleCellsSize = [visibleCells count];
+
+    // iterates over all the visible cells (to blur them)
+    for(int index = 0; index < visibleCellsSize; index++) {
         // retrieves the (visible) cell
         HMEditTableViewCell *cell = [visibleCells objectAtIndex:index];
 
