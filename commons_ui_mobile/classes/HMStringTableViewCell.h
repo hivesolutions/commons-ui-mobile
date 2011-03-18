@@ -35,7 +35,7 @@
 /**
  * The string table view cell y margin.
  */
-#define HM_STRING_TABLE_VIEW_CELL_Y_MARGIN 13
+#define HM_STRING_TABLE_VIEW_CELL_Y_MARGIN 12
 
 /**
  * The string table view cell height.
