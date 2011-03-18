@@ -94,8 +94,6 @@
     // sets the detail text label text
     self.detailTextLabel.text = self.stringValue;
 
-    [self.detailTextLabel setNeedsDisplay];
-
     // hides the text field
     self.textField.hidden = YES;
 
