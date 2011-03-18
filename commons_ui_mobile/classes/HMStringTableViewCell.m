@@ -77,6 +77,9 @@
     // calls the super
     [super showEditing];
 
+    // disables cell highlighting
+    self.selectionStyle = UITableViewCellEditingStyleNone;
+
     // updates the string value
     self.stringValue = self.detailTextLabel.text;
 
@@ -88,6 +91,9 @@
 }
 
 - (void)hideEditing {
+    // enables cell highlighting
+    self.selectionStyle = UITableViewCellSelectionStyleBlue;
+
     // updates the string value
     self.stringValue = self.textField.text;
 

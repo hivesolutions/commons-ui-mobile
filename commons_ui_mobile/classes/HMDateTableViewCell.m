@@ -23,9 +23,9 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMDatePickerTableViewCell.h"
+#import "HMDateTableViewCell.h"
 
-@implementation HMDatePickerTableViewCell
+@implementation HMDateTableViewCell
 
 @synthesize datePicker = _datePicker;
 @synthesize dateValue = _dateValue;
@@ -168,7 +168,7 @@
 
     // creates the label and adds it to the edit view
     CGRect editViewFrame = self.editView.frame;
-    CGRect labelFrame = CGRectMake(HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN, HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN * 2, HM_DATE_PICKER_TABLE_VIEW_CELL_HEIGHT);
+    CGRect labelFrame = CGRectMake(HM_DATE_TABLE_VIEW_CELL_X_MARGIN, HM_DATE_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_DATE_TABLE_VIEW_CELL_X_MARGIN * 2, HM_DATE_TABLE_VIEW_CELL_HEIGHT);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];

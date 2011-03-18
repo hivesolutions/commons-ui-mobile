@@ -27,7 +27,7 @@
 #import "../classes/Dependencies.h"
 
 // class includes
-#import "../classes/HMDatePickerTableViewCell.h"
+#import "../classes/HMDateTableViewCell.h"
 #import "../classes/HMEditTableViewCell.h"
 #import "../classes/HMHeaderItemTableView.h"
 #import "../classes/HMItemTableView.h"

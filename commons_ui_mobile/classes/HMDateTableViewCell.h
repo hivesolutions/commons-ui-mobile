@@ -28,21 +28,21 @@
 #import "HMEditTableViewCell.h"
 
 /**
- * The date picker table view cell x margin.
+ * The date table view cell x margin.
  */
-#define HM_DATE_PICKER_TABLE_VIEW_CELL_X_MARGIN 7
+#define HM_DATE_TABLE_VIEW_CELL_X_MARGIN 7
 
 /**
- * The date picker table view cell y margin.
+ * The date table view cell y margin.
  */
-#define HM_DATE_PICKER_TABLE_VIEW_CELL_Y_MARGIN 12
+#define HM_DATE_TABLE_VIEW_CELL_Y_MARGIN 12
 
 /**
- * The date picker table view cell height.
+ * The date table view cell height.
  */
-#define HM_DATE_PICKER_TABLE_VIEW_CELL_HEIGHT 19
+#define HM_DATE_TABLE_VIEW_CELL_HEIGHT 19
 
-@interface HMDatePickerTableViewCell : HMEditTableViewCell {
+@interface HMDateTableViewCell : HMEditTableViewCell {
     @private UIDatePicker *_datePicker;
     @private NSDate *_dateValue;
     @private UILabel *_label;
@@ -102,4 +102,5 @@
  * into account the device's orientation.
  */
 - (CGRect)getAdjustedDimensionsScreenRect;
+
 @end
