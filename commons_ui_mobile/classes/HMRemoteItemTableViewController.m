@@ -146,7 +146,6 @@
     // creates the menu named item group
     HMNamedItemGroup *menuNamedItemGroup = [[HMNamedItemGroup alloc] initWithIdentifier:@"menu"];
 
-
     // populates the menu header
     [menuHeaderGroup addItem:@"title" item:title];
     [menuHeaderGroup addItem:@"subTitle" item:subTitle];
@@ -165,13 +164,6 @@
     [image release];
     [subTitle release];
     [title release];
-
-
-
-
-
-
-
 
     // reloads the data
     [self.tableView reloadData];
