@@ -123,12 +123,6 @@
 - (void)dateChanged {
     // stores the date picker's date
     self.dateValue = self.datePicker.date;
-
-    // converts the date to a string
-    NSString *dateString = [self.dateFormatter stringFromDate:self.dateValue];
-
-    // sets the date string in the detail text label
-    self.label.text = dateString;
 }
 
 - (CGRect)getAdjustedDimensionsScreenRect {
@@ -205,12 +199,6 @@
 }
 
 - (void)hideEditing {
-    // converts the date to a string
-    NSString *dateString = [self.dateFormatter stringFromDate:self.dateValue];
-
-    // sets the detail text label text
-    self.detailTextLabel.text = dateString;
-
     // slides down the date picker
     if(!self.datePicker.hidden) {
         [self slideDownDatePicker];
@@ -251,6 +239,33 @@
 
     // disables the highlighting
     [super setSelected:false animated:NO];
+}
+
+- (NSDate *)dateValue {
+    return _dateValue;
+}
+
+- (void)setDateValue:(NSDate *)dateValue {
+    // in case the object is the same
+    if(dateValue == _dateValue) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_dateValue release];
+
+    // sets and retains the object
+    _dateValue = [dateValue retain];
+
+    // converts the date to a string
+    NSString *dateString = [self.dateFormatter stringFromDate:dateValue];
+
+    // updates the detail text label text
+    self.detailTextLabel.text = dateString;
+
+    // sets the date string in the detail text label
+    self.label.text = dateString;
 }
 
 @end
