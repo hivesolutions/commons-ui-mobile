@@ -28,7 +28,6 @@
 @implementation HMStringTableViewCell
 
 @synthesize textField = _textField;
-@synthesize stringValue = _stringValue;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -84,9 +83,6 @@
     // updates the string value
     self.stringValue = self.detailTextLabel.text;
 
-    // sets the text field text
-    self.textField.text = self.stringValue;
-
     // hides the text field
     self.textField.hidden = NO;
 }
@@ -101,9 +97,6 @@
     // updates the string value
     self.stringValue = self.textField.text;
 
-    // sets the detail text label text
-    self.detailTextLabel.text = self.stringValue;
-
     // hides the text field
     self.textField.hidden = YES;
 
@@ -117,6 +110,30 @@
 
     // calls the super
     [super blurEditing];
+}
+
+- (NSString *)stringValue {
+    return _stringValue;
+}
+
+- (void)setStringValue:(NSString *)stringValue {
+    // in case the object is the same
+    if(stringValue == _stringValue) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_stringValue release];
+
+    // sets and retains the object
+    _stringValue = [stringValue retain];
+
+    // updates the detail text label text
+    self.detailTextLabel.text = _stringValue;
+
+    // updates the text field text
+    self.textField.text = _stringValue;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

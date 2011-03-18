@@ -31,22 +31,52 @@
     @private NSString *_title;
     @private NSString *_subTitle;
     @private NSString *_image;
+    @private UIView *_normalHeaderView;
+    @private UIView *_editHeaderView;
     @private UILabel *_titleLabel;
     @private UILabel *_subTitleLabel;
     @private UIImageView *_imageImage;
+    @private UITextField *_titleTextField;
+    @private UITextField *_subTitleTextField;
+    @private UIImageView *_imageAddImage;
 }
 
 @property (retain) NSString *title;
 @property (retain) NSString *subTitle;
 @property (retain) NSString *image;
+@property (retain) UIView *normalHeaderView;
+@property (retain) UIView *editHeaderView;
 @property (assign) UILabel *titleLabel;
 @property (assign) UILabel *subTitleLabel;
 @property (assign) UIImageView *imageImage;
+@property (assign) UITextField *titleTextField;
+@property (assign) UITextField *subTitleTextField;
+@property (assign) UIImageView *imageAddImage;
 
 /**
  * Constructs the view components and adds them
  * to the view.
  */
 - (void)constructView;
+
+/**
+ * Constructs the normal view components.
+ */
+- (void)constructNormalView;
+
+/**
+ * Constructs the edit view components.
+ */
+- (void)constructEditView;
+
+/**
+ * Called when editing mode shows.
+ */
+- (void)showEditing;
+
+/**
+ * Called when editing mode hides.
+ */
+- (void)hideEditing;
 
 @end
