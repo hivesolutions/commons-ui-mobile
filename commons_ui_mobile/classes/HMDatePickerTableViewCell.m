@@ -51,13 +51,17 @@
 }
 
 - (void)slideUpDatePicker {
-    // shows the date picker
-    self.datePicker.hidden = NO;
-
-    // retrieves the screen rect and the date picker frame
+    // creates a date picker frame with the updated position
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     CGRect datePickerFrame = self.datePicker.frame;
     datePickerFrame.origin.y = screenRect.size.height - datePickerFrame.size.height + 20;
+
+    // shows the date picker
+    self.datePicker.hidden = NO;
+
+    // updates the item table view's scrolling area
+    self.itemTableView.contentInset = UIEdgeInsetsMake(0, 0, datePickerFrame.size.height, 0);
+    self.itemTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, datePickerFrame.size.height, 0);
 
     // creates the slide up animation
     [UIView beginAnimations:@"slideUp" context:nil];
@@ -71,12 +75,14 @@
 }
 
 - (void)slideDownDatePicker {
-    // resizes the table back to its original size
-    self.itemTableView.frame = CGRectMake(0, 0, self.itemTableView.frame.size.width, self.itemTableView.frame.size.height);
-
-    // retrieves the screen rect and the date picker frame
+    // creates a date picker frame with the updated position
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
     CGRect datePickerFrame = self.datePicker.frame;
+    datePickerFrame.origin.y = screenRect.size.height;
+
+    // updates the item table view's scrolling area
+    self.itemTableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    self.itemTableView.scrollIndicatorInsets = UIEdgeInsetsMake(0, 0, 0, 0);
 
     // creates the slide down animation
     [UIView beginAnimations:@"slideDown" context:nil];
@@ -85,7 +91,6 @@
     [UIView setAnimationDuration:0.25];
 
     // updates the date picker's position
-    datePickerFrame.origin.y = screenRect.size.height;
     self.datePicker.frame = datePickerFrame;
 
     // commits the animation
