@@ -192,19 +192,19 @@
 }
 
 - (void)focusEditing {
-    // slides up the date picker
-    [self slideUpDatePicker];
-
     // calls the super
     [super focusEditing];
+
+    // slides up the date picker
+    [self slideUpDatePicker];
 }
 
 - (void)blurEditing {
-    // calls the super
-    [super blurEditing];
-
     // slides down the date picker
     [self slideDownDatePicker];
+
+    // calls the super
+    [super blurEditing];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -217,8 +217,8 @@
         return;
     }
 
-    // slides up the date picker
-    [self slideUpDatePicker];
+    // focus the editing
+    [self focusEditing];
 }
 
 @end
