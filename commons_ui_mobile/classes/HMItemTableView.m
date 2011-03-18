@@ -69,7 +69,8 @@
         // checks if the cell responds to the blur selector
         BOOL cellRespondsBlur = [cell respondsToSelector:@selector(blurEditing)];
 
-        // in case the cell is the table cell view
+        // in case the cell is the table cell view and responds
+        // to the cell blur method
         if(cell != tableCellView && cellRespondsBlur) {
             // blurs the editing
             [cell blurEditing];
