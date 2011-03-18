@@ -23,22 +23,45 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-// dependencies includes
-#import "../classes/Dependencies.h"
+#import "Dependencies.h"
 
-// class includes
-#import "../classes/HMDateTableViewCell.h"
-#import "../classes/HMEditTableViewCell.h"
-#import "../classes/HMHeaderItemTableView.h"
-#import "../classes/HMItemTableView.h"
-#import "../classes/HMItemTableViewDelegate.h"
-#import "../classes/HMItemTableViewProvider.h"
-#import "../classes/HMItemTableViewDataSource.h"
-#import "../classes/HMRemoteTableView.h"
-#import "../classes/HMRemoteTableViewDelegate.h"
-#import "../classes/HMRemoteTableViewProvider.h"
-#import "../classes/HMRemoteTableViewDataSource.h"
-#import "../classes/HMStringTableViewCell.h"
-#import "../classes/HMTableCellBackgroundView.h"
-#import "../classes/HMTableViewCell.h"
-#import "../classes/HMRemoteItemTableViewController.h"
+#import "HMItemTableView.h"
+#import "HMItemTableViewDelegate.h"
+#import "HMItemTableViewProvider.h"
+
+@interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {
+    @private NSMutableData *_receivedData;
+    @private HMNamedItemGroup *_remoteGroup;
+}
+
+/**
+ * The buffer for received data.
+ */
+@property (retain) NSMutableData *receivedData;
+
+/**
+ * The generated remote group.
+ */
+@property (retain) HMNamedItemGroup *remoteGroup;
+
+/**
+ * Retrieves the remote url.
+ */
+- (NSString *)getRemoteUrl;
+
+/**
+ * Updates the remote reference.
+ */
+- (void) updateRemote;
+
+/**
+ * Constructs the internal data structures.
+ */
+- (void)constructStructures;
+
+/**
+ * Keeps the class valid for export at link time.
+ */
++ (void)_keepAtLinkTime;
+
+@end

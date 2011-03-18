@@ -76,6 +76,14 @@
     itemDirty = NO;
 }
 
+- (void)updateItemForce {
+    // retrieves the item specification from the item table view provider
+    self.itemSpecification = [self.itemTableViewProvider getItemSpecification];
+
+    // unsets the item dirty flag
+    itemDirty = NO;
+}
+
 - (HMNamedItemGroup *)headerNamedItemGroup {
     // retrieves the header named item group from the item specification
     HMNamedItemGroup *headerItemGroup = (HMNamedItemGroup *) [self.itemSpecification getItem:@"header"];

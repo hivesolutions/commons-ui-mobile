@@ -26,6 +26,8 @@
 		C2029299132FE748009D7B69 /* HMItemTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2029298132FE748009D7B69 /* HMItemTableViewDelegate.h */; };
 		C23B5E561333BC0100CFC9AF /* HMDateTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C23B5E541333BC0100CFC9AF /* HMDateTableViewCell.h */; };
 		C23B5E571333BC0100CFC9AF /* HMDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23B5E551333BC0100CFC9AF /* HMDateTableViewCell.m */; };
+		C23B5E721333D5BB00CFC9AF /* HMRemoteItemTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C23B5E701333D5BB00CFC9AF /* HMRemoteItemTableViewController.h */; };
+		C23B5E731333D5BB00CFC9AF /* HMRemoteItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */; };
 		C29A2E2E132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E2A132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h */; };
 		C29A2E2F132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E2B132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m */; };
 		C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */; };
@@ -60,6 +62,8 @@
 		C2029298132FE748009D7B69 /* HMItemTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMItemTableViewDelegate.h; path = classes/HMItemTableViewDelegate.h; sourceTree = "<group>"; };
 		C23B5E541333BC0100CFC9AF /* HMDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMDateTableViewCell.h; path = classes/HMDateTableViewCell.h; sourceTree = "<group>"; };
 		C23B5E551333BC0100CFC9AF /* HMDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMDateTableViewCell.m; path = classes/HMDateTableViewCell.m; sourceTree = "<group>"; };
+		C23B5E701333D5BB00CFC9AF /* HMRemoteItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteItemTableViewController.h; path = classes/HMRemoteItemTableViewController.h; sourceTree = "<group>"; };
+		C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteItemTableViewController.m; path = classes/HMRemoteItemTableViewController.m; sourceTree = "<group>"; };
 		C29A2E2A132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableViewDataSource.h; path = classes/HMRemoteTableViewDataSource.h; sourceTree = "<group>"; };
 		C29A2E2B132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableViewDataSource.m; path = classes/HMRemoteTableViewDataSource.m; sourceTree = "<group>"; };
 		C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commons_ui_mobile.h; path = headers/commons_ui_mobile.h; sourceTree = "<group>"; };
@@ -144,6 +148,7 @@
 		C220E36213318DAE0076803A /* Table View */ = {
 			isa = PBXGroup;
 			children = (
+				C23B5E6E1333D52100CFC9AF /* View Controllers */,
 				C220E36113318D1B0076803A /* Data Sources */,
 				C220E36013318D0D0076803A /* Delegates */,
 				C220E35F13318CE30076803A /* Providers */,
@@ -174,6 +179,15 @@
 				A53B0576132F97C40064BCA5 /* HMTableCellBackgroundView.m */,
 			);
 			name = "Background Views";
+			sourceTree = "<group>";
+		};
+		C23B5E6E1333D52100CFC9AF /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C23B5E701333D5BB00CFC9AF /* HMRemoteItemTableViewController.h */,
+				C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */,
+			);
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		C29A2E30132E9D08005EAB37 /* Headers */ = {
@@ -281,6 +295,7 @@
 				C2C96E481333742900D6910B /* Dependencies.h in Headers */,
 				C29E100F1333A24C00E9F77A /* HMHeaderItemTableView.h in Headers */,
 				C23B5E561333BC0100CFC9AF /* HMDateTableViewCell.h in Headers */,
+				C23B5E721333D5BB00CFC9AF /* HMRemoteItemTableViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +356,7 @@
 				A5E648EA13313F7100FE725A /* HMEditTableViewCell.m in Sources */,
 				C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */,
 				C23B5E571333BC0100CFC9AF /* HMDateTableViewCell.m in Sources */,
+				C23B5E731333D5BB00CFC9AF /* HMRemoteItemTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

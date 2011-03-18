@@ -55,6 +55,11 @@
 - (void)updateItem;
 
 /**
+ * Updates the current item structure (forced).
+ */
+- (void)updateItemForce;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;

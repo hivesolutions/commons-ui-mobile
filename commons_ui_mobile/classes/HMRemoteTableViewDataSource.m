@@ -187,6 +187,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    // adds the data to the received data
     [self.receivedData appendData:data];
 }
 

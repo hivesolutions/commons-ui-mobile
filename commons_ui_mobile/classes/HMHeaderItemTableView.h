@@ -79,4 +79,9 @@
  */
 - (void)hideEditing;
 
+/**
+ * Redraws the header part.
+ */
+- (void)redrawHeader;
+
 @end

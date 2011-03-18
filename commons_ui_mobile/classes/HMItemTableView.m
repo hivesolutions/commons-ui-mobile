@@ -104,24 +104,27 @@
     [itemDataSource release];
 }
 
+- (void)reloadData {
+    // updates the item in forced mode
+    [self.itemDataSource updateItemForce];
+
+    // calls the super
+    [super reloadData];
+}
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleDelete;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
-    /*
-
-
-    // rettrieves the item specification
-    HMItemGroup *itemSpecification = self.itemDataSource.itemSpecification;
+    // rettrieves the list item group
+    HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
 
     // retrieves the button item
-    HMButtonItem *buttonItem = (HMButtonItem *) [itemSpecification getItem:indexPath];
+    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItem:indexPath];
 
     // calls the did select item row with item method
-    [self.itemDelegate didSelectItemRowWithItem:buttonItem]*/
+    [self.itemDelegate didSelectItemRowWithItem:buttonItem];
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -134,8 +137,6 @@
     // calls the did deselect item row with item method
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];
 }
-
-
 
 + (void)_keepAtLinkTime {
 }

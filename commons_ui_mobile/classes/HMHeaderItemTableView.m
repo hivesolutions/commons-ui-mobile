@@ -308,10 +308,7 @@
     self.tableHeaderView = self.normalHeaderView;
 }
 
-- (void)setItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
-    // calls the super
-    [super setItemTableViewProvider:itemTableViewProvider];
-
+- (void)redrawHeader {
     // retrieves the header named item group
     HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
 
@@ -324,6 +321,14 @@
     self.title = title.identifier;
     self.subTitle = subTitle.identifier;
     self.image = image.identifier;
+}
+
+- (void)reloadData {
+    // calls the super
+    [super reloadData];
+
+    // redraws the header
+    [self redrawHeader];
 }
 
 @end
