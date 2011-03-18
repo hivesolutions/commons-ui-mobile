@@ -30,10 +30,25 @@
 @synthesize datePicker = _datePicker;
 @synthesize dateValue = _dateValue;
 @synthesize label = _label;
+@synthesize dateFormatter = _dateFormatter;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
+
+    // creates the date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    [dateFormatter setLocale:[NSLocale currentLocale]];
+
+    // sets the attributes
+    self.dateFormatter = dateFormatter;
+
+    // releases the objects
+    [dateFormatter release];
+
+    self.detailTextLabel.text = @"3/14/11 5:32 PM";
 
     // returns self
     return self;
@@ -45,6 +60,9 @@
 
     // releases the date label
     [_label release];
+
+    // releases the date formatter
+    [_dateFormatter release];
 
     // calls the super
     [super dealloc];
@@ -65,7 +83,7 @@
 
     // creates the slide up animation
     [UIView beginAnimations:@"slideUp" context:nil];
-    [UIView setAnimationDuration:0.25];
+    [UIView setAnimationDuration:0.3];
 
     // updates the date picker's position
     self.datePicker.frame = datePickerFrame;
@@ -88,7 +106,7 @@
     [UIView beginAnimations:@"slideDown" context:nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(hideDatePicker)];
-    [UIView setAnimationDuration:0.25];
+    [UIView setAnimationDuration:0.3];
 
     // updates the date picker's position
     self.datePicker.frame = datePickerFrame;
@@ -107,30 +125,10 @@
     self.dateValue = self.datePicker.date;
 
     // converts the date to a string
-    NSString *dateString = [self formatDate:self.dateValue];
+    NSString *dateString = [self.dateFormatter stringFromDate:self.dateValue];
 
     // sets the date string in the detail text label
     self.label.text = dateString;
-}
-
-- (NSString *)formatDate:(NSDate *)date {
-    // creates the date formatter
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-
-    // sets the current locale in the date formatter
-    NSLocale *currentLocale = [NSLocale currentLocale];
-    [dateFormatter setLocale:currentLocale];
-
-    // converts the date to a string
-    NSString *dateString = [dateFormatter stringFromDate:date];
-
-    // releases the date formatter
-    [dateFormatter release];
-
-    // returns the date string
-    return dateString;
 }
 
 - (CGRect)getAdjustedDimensionsScreenRect {
@@ -174,6 +172,23 @@
     label.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     label.backgroundColor = [UIColor clearColor];
 
+    // retrieves the date currently in the cell
+    NSString *dateString = self.detailTextLabel.text;
+
+    // sets the date in the date picker
+    // in case a date is defined
+    if(dateString.length > 0) {
+        // sets the date string in the label
+        label.text = dateString;
+
+        // converts the date string to a
+        // date and stores it in the date value
+        self.dateValue = [self.dateFormatter dateFromString:dateString];
+
+        // sets the date value in the date picker
+        datePicker.date = self.dateValue;
+    }
+
     // adds the date picker to the window
     [[self.window.subviews objectAtIndex:0] addSubview:datePicker];
 
@@ -191,7 +206,7 @@
 
 - (void)hideEditing {
     // converts the date to a string
-    NSString *dateString = [self formatDate:self.dateValue];
+    NSString *dateString = [self.dateFormatter stringFromDate:self.dateValue];
 
     // sets the detail text label text
     self.detailTextLabel.text = dateString;

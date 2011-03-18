@@ -109,7 +109,6 @@
 
     // sets the cell's text label
     self.textLabel.text = name;
-    self.detailTextLabel.text = @"v-fcastro@hive.pt";
 }
 
 - (NSString *)icon {

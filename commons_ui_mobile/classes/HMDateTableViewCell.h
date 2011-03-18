@@ -46,11 +46,13 @@
     @private UIDatePicker *_datePicker;
     @private NSDate *_dateValue;
     @private UILabel *_label;
+    @private NSDateFormatter *_dateFormatter;
 }
 
 @property (retain) UIDatePicker *datePicker;
 @property (retain) NSDate *dateValue;
 @property (retain) UILabel *label;
+@property (retain) NSDateFormatter *dateFormatter;
 
 /**
  * Constructor of the class.
@@ -79,16 +81,6 @@
  * Updates the date.
  */
 - (void)dateChanged;
-
-/**
- * Converts the date to a string
- * representation in the current locale.
- *
- * @param date The date to format.
- * @return The string with the formatted
- * date.
- */
-- (NSString *)formatDate:(NSDate *)date;
 
 /**
  * Returns the rect for the device's
