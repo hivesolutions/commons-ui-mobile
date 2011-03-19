@@ -157,7 +157,6 @@
     // adds the menu items to the menu item group
     [menuNamedItemGroup addItem:@"header" item:menuHeaderGroup];
 
-
     // stores the menu item group
     self.remoteGroup = menuNamedItemGroup;
 
