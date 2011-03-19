@@ -67,6 +67,9 @@
     // releases the received data
     [self.receivedData release];
 
+    // releases the remote group
+    [self.remoteGroup release];
+
     // calls the super
     [super dealloc];
 }
