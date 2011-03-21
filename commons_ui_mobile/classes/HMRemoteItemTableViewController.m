@@ -108,6 +108,10 @@
 - (void)processRemoteData:(NSDictionary *)remoteData {
 }
 
+
+- (void)convertRemoteGroup:(HMNamedItemGroup *)remoteGroup {
+}
+
 - (void)editButtonClick:(id)sender extra:(id)extra {
     // in case the table view is in editing mode
     if(self.tableView.editing) {
@@ -116,6 +120,9 @@
 
         // flushes the item specification
         [itemTableView flushItemSpecification];
+
+        // converts the remote group
+        [self convertRemoteGroup:self.remoteGroup];
 
         // sets the table view as not editing
         [self.tableView setEditing:NO animated:YES];

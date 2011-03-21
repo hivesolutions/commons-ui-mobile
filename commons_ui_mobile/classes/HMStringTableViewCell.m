@@ -134,6 +134,9 @@
 
     // updates the text field text
     self.textField.text = _stringValue;
+
+    // updates the description
+    self.description = _stringValue;
 }
 
 - (NSString *)defaultValue {

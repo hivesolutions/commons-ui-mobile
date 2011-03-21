@@ -74,8 +74,9 @@
 }
 
 - (void)flushItemSpecification {
-    // retrieves the list item group items
-    NSArray *listItemGroupItems = self.listItemGroup.items;
+    HMItemGroup *listItemGroup = [self.listItemGroup getItem:0];
+
+    NSArray *listItemGroupItems = listItemGroup.items;
 
     // retrieves the list item group items count
     int listItemGroupItemsCount = [listItemGroupItems count];
@@ -88,8 +89,11 @@
         // retrieves the cell for the list item identifier
         HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
 
+        // retrieves the description
+        NSString *description = cell.description;
+
         // sets the adapted values
-        listItem.description = cell.description;
+        listItem.description = description;
     }
 }
 
@@ -163,7 +167,7 @@
     static NSString *cellIdentifier = @"Cell";
 
     // retrieves the button item
-    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItem:indexPath];
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // tries to retrives the cell from cache (reusable)
     HMStringTableViewCell *cell = (HMStringTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -224,7 +228,7 @@
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
     // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItem:indexPath];
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // retrieves the section item group items count
     NSInteger sectionItemGroupItemsCount = [sectionItemGroup.items count];
@@ -245,7 +249,7 @@
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
     // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItem:indexPath];
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // releases the index path
     [indexPath release];

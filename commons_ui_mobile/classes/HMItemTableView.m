@@ -128,7 +128,7 @@
     HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
 
     // retrieves the button item
-    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItem:indexPath];
+    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
     // calls the did select item row with item method
     [self.itemDelegate didSelectItemRowWithItem:buttonItem];
@@ -139,7 +139,7 @@
     HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
 
     // retrieves the button item
-    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItem:indexPath];
+    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
     // calls the did deselect item row with item method
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];
