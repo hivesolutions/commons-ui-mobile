@@ -193,6 +193,13 @@
             [stringBuffer addObject:@"&"];
         }
 
+        // in case the value is not defined or it's
+        // an empty string
+        if(!value || [value length] < 1) {
+            // continues the loop
+            continue;
+        }
+
         // creates the line value
         NSString *lineValue = [NSString stringWithFormat:@"%@=%@", key, value];
 

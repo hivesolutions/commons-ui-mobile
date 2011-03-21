@@ -100,12 +100,6 @@
     // creates the image view
     UIImageView *image = [[UIImageView alloc] initWithFrame:imageFrame];
 
-    // sets the header image rounded corners
-    image.layer.cornerRadius = 4.0;
-    image.layer.masksToBounds = YES;
-    image.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    image.layer.borderWidth = 1.0;
-
     // creates the title label frame
     CGRect titleLabelFrame = CGRectMake(83, 34, 197, 24);
 
@@ -166,12 +160,6 @@
     // sets the button frame
     addButton.frame = imageFrame;
 
-    // sets the header button rounded corners
-    addButton.layer.cornerRadius = 4.0;
-    addButton.layer.masksToBounds = YES;
-    addButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    addButton.layer.borderWidth = 1.0;
-
     // sets the button properties
     [addButton setTitle:NSLocalizedString(@"add photo", @"add photo") forState:UIControlStateNormal];
 
@@ -182,8 +170,8 @@
     addButton.titleLabel.textAlignment = UITextAlignmentCenter;
 
     // creates the images for the button backgrounds
-    UIImage *buttonBackground = [UIImage imageNamed:@"whiteButton.png"];
-    UIImage *buttonBackgroundPressed = [UIImage imageNamed:@"whiteButtonPressed.png"];
+    UIImage *buttonBackground = [UIImage imageNamed:@"white_button.png"];
+    UIImage *buttonBackgroundPressed = [UIImage imageNamed:@"white_button_pressed.png"];
 
     // creates the button background image for the normal state
     UIImage *newImage = [buttonBackground stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0];
@@ -415,6 +403,24 @@
 
     // redraws the header
     [self redrawHeader];
+}
+
+- (void)flushItemSpecification {
+    // calls the super
+    [super flushItemSpecification];
+
+    // retrieves the header named item group
+    HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
+
+    // retrieves the items
+    HMItem *titleItem = [headerNamedItemGroup getItem:@"title"];
+    HMItem *subTitleItem = [headerNamedItemGroup getItem:@"subTitle"];
+    HMItem *imageItem = [headerNamedItemGroup getItem:@"image"];
+
+    // sets the attributes
+    titleItem.identifier = self.title;
+    subTitleItem.identifier = self.subTitle;
+    imageItem.identifier = self.image;
 }
 
 @end
