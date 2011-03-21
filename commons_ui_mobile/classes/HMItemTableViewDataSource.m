@@ -60,6 +60,9 @@
     // releases the item specification
     [_itemSpecification release];
 
+    // releases the cell identifier map
+    [_cellIdentifierMap release];
+
     // calls the supper
     [super dealloc];
 }

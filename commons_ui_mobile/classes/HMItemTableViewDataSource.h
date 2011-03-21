@@ -37,8 +37,8 @@
     NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
     UITableView *_tableView;
     HMNamedItemGroup *_itemSpecification;
-    BOOL _itemDirty;
     NSMutableDictionary *_cellIdentifierMap;
+    BOOL _itemDirty;
 }
 
 /**
