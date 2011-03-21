@@ -52,6 +52,11 @@
 @property (assign) BOOL editable;
 
 /**
+ * Initializes the structures.
+ */
+- (void)initStructures;
+
+/**
  * Retrieves the remote url.
  */
 - (NSString *)getRemoteUrl;
