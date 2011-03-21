@@ -111,6 +111,12 @@
 - (void)editButtonClick:(id)sender extra:(id)extra {
     // in case the table view is in editing mode
     if(self.tableView.editing) {
+        // casts the table view as item table view
+        HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+        // flushes the item specification
+        [itemTableView flushItemSpecification];
+
         // sets the table view as not editing
         [self.tableView setEditing:NO animated:YES];
     }

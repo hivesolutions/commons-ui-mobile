@@ -69,13 +69,28 @@
     _itemDirty = YES;
 
     // creates the item cell map to hold the relations
-    // between the cells and the names
-    _cellNameMap = [[NSMutableDictionary alloc] init];
+    // between the cells and the identifiers
+    _cellIdentifierMap = [[NSMutableDictionary alloc] init];
 }
 
 - (void)flushItemSpecification {
-    // retrieves the button item
-    //HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItem:indexPath];
+    // retrieves the list item group items
+    NSArray *listItemGroupItems = self.listItemGroup.items;
+
+    // retrieves the list item group items count
+    int listItemGroupItemsCount = [listItemGroupItems count];
+
+    // iterates over all the list items in the list item group items
+    for(int index = 0; index < listItemGroupItemsCount; index++) {
+        // retrieves the list item at the index
+        HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
+
+        // retrieves the cell for the list item identifier
+        HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
+
+        // sets the adapted values
+        listItem.description = cell.description;
+    }
 }
 
 - (void)updateItemSpecification {
@@ -188,8 +203,8 @@
         }
     }
 
-    // inserts the item cell name association into the map
-    [_cellNameMap setObject:cell forKey:tableCellItem.name];
+    // inserts the item cell identifier association into the map
+    [_cellIdentifierMap setObject:cell forKey:tableCellItem.identifier];
 
     // sets the button item's attributes in the cell
     cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];

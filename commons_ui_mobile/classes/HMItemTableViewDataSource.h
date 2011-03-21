@@ -38,7 +38,7 @@
     UITableView *_tableView;
     HMNamedItemGroup *_itemSpecification;
     BOOL _itemDirty;
-    NSMutableDictionary *_cellNameMap;
+    NSMutableDictionary *_cellIdentifierMap;
 }
 
 /**
