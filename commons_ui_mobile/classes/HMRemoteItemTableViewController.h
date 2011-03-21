@@ -52,6 +52,11 @@
 @property (assign) BOOL editable;
 
 /**
+ * Initializes the structures.
+ */
+- (void)initStructures;
+
+/**
  * Retrieves the remote url.
  */
 - (NSString *)getRemoteUrl;
@@ -76,14 +81,14 @@
 - (void)processRemoteData:(NSDictionary *)remoteData;
 
 /**
- * Converts the given remote group to the must up to date
+ * Converts the remote group to the must up to date
  * information.
  * This method is called before persistence of the data
  * to obtain the must updated values.
  *
- * @param remoteData The remote data to be processed.
+ * @return The converted remote group as remote data.
  */
-- (void)convertRemoteGroup:(HMNamedItemGroup *)remoteGroup;
+- (NSMutableDictionary *)convertRemoteGroup;
 
 /**
  * Callback handler called when the edit button is

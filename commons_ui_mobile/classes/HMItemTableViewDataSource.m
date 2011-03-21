@@ -74,8 +74,10 @@
 }
 
 - (void)flushItemSpecification {
-    HMItemGroup *listItemGroup = [self.listItemGroup getItem:0];
+    // retrieves the list item group
+    HMItemGroup *listItemGroup = (HMItemGroup *) [self.listItemGroup getItem:0];
 
+    // retrieves the list item group items
     NSArray *listItemGroupItems = listItemGroup.items;
 
     // retrieves the list item group items count

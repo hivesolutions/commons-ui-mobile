@@ -35,8 +35,8 @@
     // calls the super
     self = [super init];
 
-    // sets the table view as editable
-    self.editable = YES;
+    // initializes the structures
+    [self initStructures];
 
     // constructs the structures
     [self constructStructures];
@@ -49,8 +49,8 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
-    // sets the table view as editable
-    self.editable = YES;
+    // initializes the structures
+    [self initStructures];
 
     // constructs the structures
     [self constructStructures];
@@ -63,8 +63,8 @@
     // calls the super
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
 
-    // sets the table view as editable
-    self.editable = YES;
+    // initializes the structures
+    [self initStructures];
 
     // constructs the structures
     [self constructStructures];
@@ -82,6 +82,11 @@
 
     // calls the super
     [super dealloc];
+}
+
+- (void)initStructures {
+    // sets the table view as editable
+    self.editable = YES;
 }
 
 - (NSString *)getRemoteUrl {
@@ -108,30 +113,104 @@
 - (void)processRemoteData:(NSDictionary *)remoteData {
 }
 
+- (NSMutableDictionary *)convertRemoteGroup {
+    // allocates the remote data
+    NSMutableDictionary *remoteData = [[NSMutableDictionary alloc] init];
 
-- (void)convertRemoteGroup:(HMNamedItemGroup *)remoteGroup {
+    // returns the remote data in auto release
+    return [remoteData autorelease];
 }
 
 - (void)editButtonClick:(id)sender extra:(id)extra {
     // in case the table view is in editing mode
     if(self.tableView.editing) {
+        // sets the table view as not editing
+        [self.tableView setEditing:NO animated:YES];
+
         // casts the table view as item table view
         HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
         // flushes the item specification
         [itemTableView flushItemSpecification];
 
-        // converts the remote group
-        [self convertRemoteGroup:self.remoteGroup];
+        // converts the remote group, retrieving the remote
+        // data
+        NSDictionary *remoteData = [self convertRemoteGroup];
 
-        // sets the table view as not editing
-        [self.tableView setEditing:NO animated:YES];
+        // creates the http data from the remote data
+        NSData *httpData = [self createHttpData:remoteData];
+
+        // retrieves the object id
+        NSString *objectId = [remoteData objectForKey:@"object_id"];
+
+        // creates the update url
+        NSString *updateUrl = [NSString stringWithFormat:@"http://tsilva.hive:8080/colony_mod_python/rest/mvc/omni/users/%@/update", objectId];
+
+        // creates the request
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+
+        // sets the http request properties
+        [request setHTTPMethod: @"POST"];
+        [request setHTTPBody: httpData];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+
+        // creates the connection with the intance as delegate
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
     }
     // otherwise it must not be editing
     else {
         // sets the table view as editing
         [self.tableView setEditing:YES animated:YES];
     }
+}
+
+- (NSData *)createHttpData:(NSDictionary *)remoteData {
+    // retrives the remote data enumerator
+    NSEnumerator *remoteDataEnumerator = [remoteData keyEnumerator];
+
+    // allocates the key value
+    id key;
+
+    // creats the buffer to hold the string
+    NSMutableArray *stringBuffer = [[NSMutableArray alloc] init];
+
+    // sets the is first flag
+    BOOL isFirst = YES;
+
+    // iterates over the remote data
+    while ((key = [remoteDataEnumerator nextObject])) {
+        // retrieves the current value
+        NSString *value = (NSString *) [remoteData objectForKey:key];
+
+        // in case it's the first iteration
+        if(isFirst) {
+            // unsets the is first flag
+            isFirst = NO;
+        }
+        // otherwise it must be a different iteration
+        else {
+            // adds the "and" value
+            [stringBuffer addObject:@"&"];
+        }
+
+        // creates the line value
+        NSString *lineValue = [NSString stringWithFormat:@"%@=%@", key, value];
+
+        // adds the line value to the string buffer
+        [stringBuffer addObject:lineValue];
+    }
+
+    // joins the http string buffer retrieving the string
+    NSString *httpString = [stringBuffer componentsJoinedByString:@""];
+
+    // escapes the http string
+    NSString *escapedHttpString = [httpString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+
+    // creates the http data from the http string
+    NSData *httpData = [escapedHttpString dataUsingEncoding:NSUTF8StringEncoding];
+
+    // returns the http data
+    return httpData;
 }
 
 - (void) updateRemote {
