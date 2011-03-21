@@ -43,12 +43,15 @@
 #define HM_STRING_TABLE_VIEW_CELL_HEIGHT 19
 
 @interface HMStringTableViewCell : HMEditTableViewCell<UITextFieldDelegate> {
-    @private UITextField *_textField;
-    @private NSString *_stringValue;
+    @private
+    UITextField *_textField;
+    NSString *_stringValue;
+    NSString *_defaultValue;
 }
 
 @property (retain) UITextField *textField;
 @property (retain) NSString *stringValue;
+@property (retain) NSString *defaultValue;
 
 /**
  * Constructor of the class.

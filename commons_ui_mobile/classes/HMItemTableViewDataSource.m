@@ -150,6 +150,7 @@
 
             // sets the cell attributes
             cell.name = tableCellItem.name;
+            cell.description = tableCellItem.description;
             cell.icon = tableCellItem.icon;
             cell.highlightedIcon = tableCellItem.highlightedIcon;
             cell.highlightable = tableCellItem.highlightable;
@@ -160,6 +161,8 @@
 
             // sets the cell attributes
             cell.name = tableCellItem.name;
+            cell.description = tableCellItem.description;
+            cell.defaultValue = tableCellItem.defaultValue;
             cell.icon = tableCellItem.icon;
             cell.highlightedIcon = tableCellItem.highlightedIcon;
             cell.highlightable = tableCellItem.highlightable;

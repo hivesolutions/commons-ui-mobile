@@ -47,6 +47,9 @@
     // releases the name
     [_name release];
 
+    // releases the description
+    [_description release];
+
     // releases the icon
     [_icon release];
 
@@ -109,6 +112,27 @@
 
     // sets the cell's text label
     self.textLabel.text = name;
+}
+
+- (NSString *)description {
+    return _description;
+}
+
+- (void)setDescription:(NSString *)description {
+    // in case the object is the same
+    if(description == _description) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_description release];
+
+    // sets and retains the object
+    _description = [description retain];
+
+    // sets the cell's text label
+    self.detailTextLabel.text = description;
 }
 
 - (NSString *)icon {

@@ -58,7 +58,6 @@
     UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-    textField.placeholder = @"default value";
     textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.delegate = self;
@@ -134,6 +133,27 @@
 
     // updates the text field text
     self.textField.text = _stringValue;
+}
+
+- (NSString *)defaultValue {
+    return _defaultValue;
+}
+
+- (void)setDefaultValue:(NSString *)defaultValue {
+    // in case the object is the same
+    if(defaultValue == _defaultValue) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_defaultValue release];
+
+    // sets and retains the object
+    _defaultValue = [defaultValue retain];
+
+    // updates the text field's placeholder
+    self.textField.placeholder = _defaultValue;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
