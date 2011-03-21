@@ -91,11 +91,35 @@
         // retrieves the cell for the list item identifier
         HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
 
-        // retrieves the description
-        NSString *description = cell.description;
+        // retrieves the cell description
+        NSString *cellStringValue = cell.stringValue;
 
         // sets the adapted values
-        listItem.description = description;
+        listItem.description = cellStringValue;
+    }
+
+    // retrieves the list item group
+    listItemGroup = (HMItemGroup *) [self.listItemGroup getItem:1];
+
+    // retrieves the list item group items
+    listItemGroupItems = listItemGroup.items;
+
+    // retrieves the list item group items count
+    listItemGroupItemsCount = [listItemGroupItems count];
+
+    // iterates over all the list items in the list item group items
+    for(int index = 0; index < listItemGroupItemsCount; index++) {
+        // retrieves the list item at the index
+        HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
+
+        // retrieves the cell for the list item identifier
+        HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
+
+        // retrieves the cell description
+        NSString *cellStringValue = cell.stringValue;
+
+        // sets the adapted values
+        listItem.description = cellStringValue;
     }
 }
 
