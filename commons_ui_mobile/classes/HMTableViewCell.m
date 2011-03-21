@@ -247,7 +247,7 @@
     // moves the detail text label origin
     // five pixels to the right
     CGRect frame = self.detailTextLabel.frame;
-    frame.origin.x += 5;
+    frame.origin.x += 4;
 
     // updates the detail text label's position
     self.detailTextLabel.frame = frame;

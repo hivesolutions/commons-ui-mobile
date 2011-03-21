@@ -198,14 +198,19 @@
             // creates the new cell with the given reuse identifier
             cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
 
+            // casts the table cell item to a
+            // string table cell item
+            HMStringTableCellItem *stringTableCellItem = (HMStringTableCellItem *) tableCellItem;
+
             // sets the cell attributes
-            cell.name = tableCellItem.name;
-            cell.description = tableCellItem.description;
-            cell.defaultValue = tableCellItem.defaultValue;
-            cell.icon = tableCellItem.icon;
-            cell.highlightedIcon = tableCellItem.highlightedIcon;
-            cell.highlightable = tableCellItem.highlightable;
-            cell.accessoryTypeString = tableCellItem.accessoryType;
+            cell.name = stringTableCellItem.name;
+            cell.description = stringTableCellItem.description;
+            cell.defaultValue = stringTableCellItem.defaultValue;
+            cell.secure = stringTableCellItem.secure;
+            cell.icon = stringTableCellItem.icon;
+            cell.highlightedIcon = stringTableCellItem.highlightedIcon;
+            cell.highlightable = stringTableCellItem.highlightable;
+            cell.accessoryTypeString = stringTableCellItem.accessoryType;
         }
     }
 

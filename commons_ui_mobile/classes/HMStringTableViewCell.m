@@ -61,6 +61,8 @@
     textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.placeholder = self.defaultValue;
+    textField.clearsOnBeginEditing = self.secure;
+    textField.secureTextEntry = self.secure;
     textField.delegate = self;
 
     // adds the textfield as subview
@@ -132,14 +134,34 @@
     // sets and retains the object
     _stringValue = [stringValue retain];
 
-    // updates the detail text label text
-    self.detailTextLabel.text = _stringValue;
-
     // updates the text field text
     self.textField.text = _stringValue;
 
-    // updates the description
-    self.description = _stringValue;
+    // sets the a mask as the description
+    // in case the cell is secure
+    if(self.secure == YES && _stringValue.length > 0) {
+        self.description = @"••••••••";
+    } else {
+        self.description = _stringValue;
+    }
+}
+
+- (BOOL)secure {
+    return _secure;
+}
+
+- (void)setSecure:(BOOL)secure {
+    // in case the object is the same
+    if(secure == _secure) {
+        // returns immediately
+        return;
+    }
+
+    // sets the object
+    _secure = secure;
+
+    // updates the secure text entry attribute
+    self.textField.secureTextEntry = _secure;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
