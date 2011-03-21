@@ -150,9 +150,9 @@
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 
         // sets the http request properties, for a post request
-        [request setHTTPMethod: @"POST"];
+        [request setHTTPMethod: HTTP_POST_METHOD];
         [request setHTTPBody: httpData];
-        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+        [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
 
         // creates the connection with the intance as delegate
         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
