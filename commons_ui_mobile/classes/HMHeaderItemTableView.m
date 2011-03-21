@@ -34,7 +34,7 @@
 @synthesize imageImage = _imageImage;
 @synthesize titleTextField = _titleTextField;
 @synthesize subTitleTextField = _subTitleTextField;
-@synthesize imageAddImage = _imageAddImage;
+@synthesize imageAddButton = _imageAddButton;
 
 - (id)init {
     // calls the super
@@ -78,6 +78,9 @@
 
     // constructs the "edit" view
     [self constructEditView];
+
+    // constructs the toolbar
+    [self constructToolbar];
 }
 
 - (void)constructNormalView {
@@ -137,6 +140,10 @@
     [header release];
 }
 
+- (void)addPhotoButtonClicked:(id)sender extra:(id)extra {
+    printf("ola");
+}
+
 - (void)constructEditView {
     // creates the header
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 82)];
@@ -151,14 +158,42 @@
     // creates the image frame
     CGRect imageFrame = CGRectMake(0, 15, 64, 64);
 
-    // creates the add image view
-    UIImageView *addImage = [[UIImageView alloc] initWithFrame:imageFrame];
+    // creates the add image button view
+    UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 
-    // sets the header image rounded corners
-    addImage.layer.cornerRadius = 4.0;
-    addImage.layer.masksToBounds = YES;
-    addImage.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    addImage.layer.borderWidth = 1.0;
+    [addButton addTarget:self action:@selector(addPhotoButtonClicked:extra:) forControlEvents:UIControlEventTouchUpInside];
+
+    // sets the button frame
+    addButton.frame = imageFrame;
+
+    // sets the header button rounded corners
+    addButton.layer.cornerRadius = 4.0;
+    addButton.layer.masksToBounds = YES;
+    addButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+    addButton.layer.borderWidth = 1.0;
+
+    // sets the button properties
+    [addButton setTitle:NSLocalizedString(@"add photo", @"add photo") forState:UIControlStateNormal];
+
+    // sets the button title label properties
+    addButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
+    addButton.titleLabel.numberOfLines = 2;
+    addButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
+    addButton.titleLabel.textAlignment = UITextAlignmentCenter;
+
+    // creates the images for the button backgrounds
+    UIImage *buttonBackground = [UIImage imageNamed:@"whiteButton.png"];
+    UIImage *buttonBackgroundPressed = [UIImage imageNamed:@"whiteButtonPressed.png"];
+
+    // creates the button background image for the normal state
+    UIImage *newImage = [buttonBackground stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0];
+
+    // creates the button background image for the pressed state
+    UIImage *newPressedImage = [buttonBackgroundPressed stretchableImageWithLeftCapWidth:12.0 topCapHeight:0.0];
+
+    // sets the background images to the button
+    [addButton setBackgroundImage:newImage forState:UIControlStateNormal];
+    [addButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
 
     // creates the title text field frame
     CGRect titleTextFieldFrame = CGRectMake(83, 35, 197, 24);
@@ -170,7 +205,7 @@
     titleTextField.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
 
     // adds the sub views
-    [headerContainer addSubview:addImage];
+    [headerContainer addSubview:addButton];
     [headerContainer addSubview:titleTextField];
     [header addSubview:headerContainer];
 
@@ -180,13 +215,68 @@
     // sets the attributes
     self.titleTextField = titleTextField;
     self.subTitleTextField = titleTextField;
-    self.imageAddImage = addImage;
+    self.imageAddButton = addButton;
 
     // releases the objects
     [titleTextField release];
-    [addImage release];
     [headerContainer release];
     [header release];
+}
+
+- (void)constructToolbar {
+    // create the toolbar
+    UIToolbar *toolbar = [UIToolbar new];
+
+    // sets the toolbar style
+    toolbar.barStyle = UIBarStyleDefault;
+
+    // size up the toolbar and set its frame
+    [toolbar sizeToFit];
+
+    // retrieves the toolbar height
+    CGFloat toolbarHeight = [toolbar frame].size.height;
+
+    // retrieves the main view bounds
+    CGRect mainViewBounds = self.bounds;
+
+    // sets the toolbar frame to place it in the right spot
+    [toolbar setFrame:CGRectMake(CGRectGetMinX(mainViewBounds), CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - (toolbarHeight * 2.0) + 2.0, CGRectGetWidth(mainViewBounds), toolbarHeight)];
+
+    // match each of the toolbar item's style match the selection in the "UIBarButtonItemStyle" segmented control
+    UIBarButtonItemStyle style = UIBarButtonItemStylePlain;
+
+    // create the system-defined "OK or Done" button
+    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:nil];
+
+    // sets the system item style
+    trashItem.style = style;
+
+    // flex item used to separate the left groups items and right grouped items
+    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    // create the system-defined "OK or Done" button
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
+
+    // sets the system item style
+    refreshItem.style = style;
+
+    // creates the toolbar items list
+    NSArray *items = [NSArray arrayWithObjects: trashItem, flexItem, refreshItem, nil];
+
+    // sets the toolbar items in the toolbar
+    [toolbar setItems:items animated:NO];
+
+    // adds the toolbar to the view
+    [self addSubview:toolbar];
+
+    // releases the system item
+    [trashItem release];
+
+    // releases the refresh item
+    [refreshItem release];
+
+    // releases the toolbar
+    [toolbar release];
 }
 
 - (NSString *)title {

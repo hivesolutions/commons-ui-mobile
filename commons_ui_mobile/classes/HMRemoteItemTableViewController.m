@@ -149,7 +149,7 @@
         // creates the request
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 
-        // sets the http request properties
+        // sets the http request properties, for a post request
         [request setHTTPMethod: @"POST"];
         [request setHTTPBody: httpData];
         [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];

@@ -43,7 +43,7 @@
     UIImageView *_imageImage;
     UITextField *_titleTextField;
     UITextField *_subTitleTextField;
-    UIImageView *_imageAddImage;
+    UIButton *_imageAddButton;
 }
 
 /**
@@ -97,9 +97,9 @@
 @property (assign) UITextField *subTitleTextField;
 
 /**
- * The image to the add image.
+ * The button to the add image.
  */
-@property (assign) UIImageView *imageAddImage;
+@property (assign) UIButton *imageAddButton;
 
 /**
  * Constructs the view components and adds them
@@ -116,6 +116,11 @@
  * Constructs the edit view components.
  */
 - (void)constructEditView;
+
+/**
+ * Constructs the bottom toolbar component.
+ */
+- (void)constructToolbar;
 
 /**
  * Called when editing mode shows.
