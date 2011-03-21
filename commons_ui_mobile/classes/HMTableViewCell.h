@@ -28,6 +28,7 @@
 @interface HMTableViewCell : UITableViewCell {
     @private
     NSString *_name;
+    NSString *_description;
     NSString *_icon;
     NSString *_highlightedIcon;
     BOOL _highlightable;
@@ -39,6 +40,12 @@
  * as its label.
  */
 @property (retain) NSString *name;
+
+/**
+ * The cell's description that will be set
+ * as its detail text label.
+ */
+@property (retain) NSString *description;
 
 /**
  * The identifier of the icon resource.

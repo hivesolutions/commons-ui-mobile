@@ -29,6 +29,7 @@
 // class includes
 #import "../classes/HMDateTableViewCell.h"
 #import "../classes/HMEditTableViewCell.h"
+#import "../classes/HMEditTableViewCellEditView.h"
 #import "../classes/HMHeaderItemTableView.h"
 #import "../classes/HMItemTableView.h"
 #import "../classes/HMItemTableViewDelegate.h"
@@ -39,6 +40,6 @@
 #import "../classes/HMRemoteTableViewProvider.h"
 #import "../classes/HMRemoteTableViewDataSource.h"
 #import "../classes/HMStringTableViewCell.h"
-#import "../classes/HMTableCellBackgroundView.h"
 #import "../classes/HMTableViewCell.h"
+#import "../classes/HMTableViewCellBackgroundView.h"
 #import "../classes/HMRemoteItemTableViewController.h"

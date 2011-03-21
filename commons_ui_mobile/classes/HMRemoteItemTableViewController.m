@@ -29,10 +29,14 @@
 
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
+@synthesize editable = _editable;
 
 - (id)init {
     // calls the super
     self = [super init];
+
+    // initializes the structures
+    [self initStructures];
 
     // constructs the structures
     [self constructStructures];
@@ -45,6 +49,9 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
+    // initializes the structures
+    [self initStructures];
+
     // constructs the structures
     [self constructStructures];
 
@@ -55,6 +62,9 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     // calls the super
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
+    // initializes the structures
+    [self initStructures];
 
     // constructs the structures
     [self constructStructures];
@@ -74,14 +84,140 @@
     [super dealloc];
 }
 
+- (void)initStructures {
+    // sets the table view as editable
+    self.editable = YES;
+}
+
 - (NSString *)getRemoteUrl {
     return nil;
 }
 
 - (void)constructStructures {
+    // creates the item table view and sets the item table
+    // view provider and the item delegate
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
     itemTableView.itemTableViewProvider = self;
     itemTableView.itemDelegate = self;
+
+    // in case the current table view is editable
+    if(self.editable) {
+        // creates the edit ui bar button
+        UIBarButtonItem *editUiBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:   @selector(editButtonClick:extra:)];
+
+        // sets the edit ui bar button
+        self.navigationItem.rightBarButtonItem = editUiBarButton;
+    }
+}
+
+- (void)processRemoteData:(NSDictionary *)remoteData {
+}
+
+- (NSMutableDictionary *)convertRemoteGroup {
+    // allocates the remote data
+    NSMutableDictionary *remoteData = [[NSMutableDictionary alloc] init];
+
+    // returns the remote data in auto release
+    return [remoteData autorelease];
+}
+
+- (void)editButtonClick:(id)sender extra:(id)extra {
+    // in case the table view is in editing mode
+    if(self.tableView.editing) {
+        // sets the table view as not editing
+        [self.tableView setEditing:NO animated:YES];
+
+        // casts the table view as item table view
+        HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+        // flushes the item specification
+        [itemTableView flushItemSpecification];
+
+        // converts the remote group, retrieving the remote
+        // data
+        NSDictionary *remoteData = [self convertRemoteGroup];
+
+        // creates the http data from the remote data
+        NSData *httpData = [self createHttpData:remoteData];
+
+        // retrieves the object id
+        NSString *objectId = [remoteData objectForKey:@"object_id"];
+
+        // creates the update url
+        NSString *updateUrl = [NSString stringWithFormat:@"http://172.16.0.24:8080/colony_mod_python/rest/mvc/omni/users/%@/update", objectId];
+
+        // creates the request
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+
+        // sets the http request properties, for a post request
+        [request setHTTPMethod: @"POST"];
+        [request setHTTPBody: httpData];
+        [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"content-type"];
+
+        // creates the connection with the intance as delegate
+        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+    }
+    // otherwise it must not be editing
+    else {
+        // sets the table view as editing
+        [self.tableView setEditing:YES animated:YES];
+    }
+}
+
+- (NSData *)createHttpData:(NSDictionary *)remoteData {
+    // retrives the remote data enumerator
+    NSEnumerator *remoteDataEnumerator = [remoteData keyEnumerator];
+
+    // allocates the key value
+    id key;
+
+    // creats the buffer to hold the string
+    NSMutableArray *stringBuffer = [[NSMutableArray alloc] init];
+
+    // sets the is first flag
+    BOOL isFirst = YES;
+
+    // iterates over the remote data
+    while ((key = [remoteDataEnumerator nextObject])) {
+        // retrieves the current value
+        NSString *value = (NSString *) [remoteData objectForKey:key];
+
+        // in case it's the first iteration
+        if(isFirst) {
+            // unsets the is first flag
+            isFirst = NO;
+        }
+        // otherwise it must be a different iteration
+        else {
+            // adds the "and" value
+            [stringBuffer addObject:@"&"];
+        }
+
+        // in case the value is not defined or it's
+        // an empty string
+        if(!value || [value length] < 1) {
+            // continues the loop
+            continue;
+        }
+
+        // creates the line value
+        NSString *lineValue = [NSString stringWithFormat:@"%@=%@", key, value];
+
+        // adds the line value to the string buffer
+        [stringBuffer addObject:lineValue];
+    }
+
+    // joins the http string buffer retrieving the string
+    NSString *httpString = [stringBuffer componentsJoinedByString:@""];
+
+    // escapes the http string
+    NSString *escapedHttpString = [httpString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
+
+    // creates the http data from the http string
+    NSData *httpData = [escapedHttpString dataUsingEncoding:NSUTF8StringEncoding];
+
+    // returns the http data
+    return httpData;
 }
 
 - (void) updateRemote {
@@ -136,36 +272,8 @@
     // parses the received (remote) data and sets it into the intance
     NSDictionary *remoteData = [jsonParser objectWithData:self.receivedData];
 
-    NSString *username = [remoteData objectForKey:@"username"];
-
-    // creates the menu header items
-    HMItem *title = [[HMItem alloc] initWithIdentifier:username];
-    HMItem *subTitle = [[HMItem alloc] initWithIdentifier:username];
-    HMItem *image = [[HMItem alloc] initWithIdentifier:@"user.png"];
-
-    // creates the menu header group
-    HMNamedItemGroup *menuHeaderGroup = [[HMNamedItemGroup alloc] initWithIdentifier:@"menu_header"];
-
-    // creates the menu named item group
-    HMNamedItemGroup *menuNamedItemGroup = [[HMNamedItemGroup alloc] initWithIdentifier:@"menu"];
-
-    // populates the menu header
-    [menuHeaderGroup addItem:@"title" item:title];
-    [menuHeaderGroup addItem:@"subTitle" item:subTitle];
-    [menuHeaderGroup addItem:@"image" item:image];
-
-    // adds the menu items to the menu item group
-    [menuNamedItemGroup addItem:@"header" item:menuHeaderGroup];
-
-    // stores the menu item group
-    self.remoteGroup = menuNamedItemGroup;
-
-    // releases the objects
-    [menuNamedItemGroup release];
-    [menuHeaderGroup release];
-    [image release];
-    [subTitle release];
-    [title release];
+    // processes the remote data, setting the remote group
+    [self processRemoteData:remoteData];
 
     // reloads the data
     [self.tableView reloadData];

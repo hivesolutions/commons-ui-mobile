@@ -23,42 +23,32 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "Dependencies.h"
+@implementation HMEditTableViewCellEditView
 
-#import "HMEditTableViewCell.h"
+- (void)drawRect:(CGRect)rect {
+    // calls the super
+    [super drawRect:rect];
 
-/**
- * The string table view cell x margin.
- */
-#define HM_STRING_TABLE_VIEW_CELL_X_MARGIN 6
+    // retrieves the current graphics context
+    CGContextRef context = UIGraphicsGetCurrentContext();
 
-/**
- * The string table view cell y margin.
- */
-#define HM_STRING_TABLE_VIEW_CELL_Y_MARGIN 12
+    // configures the context
+    const CGColorRef grayColor = [[UIColor grayColor] CGColor];
+    CGContextSetStrokeColorWithColor(context, grayColor);
+    CGContextSetLineWidth(context, 1);
+    CGContextSetAllowsAntialiasing(context, YES);
+    CGContextSetShouldAntialias(context, YES);
 
-/**
- * The string table view cell height.
- */
-#define HM_STRING_TABLE_VIEW_CELL_HEIGHT 19
+    // creates the cell's border
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, 0, 0);
+    CGPathAddLineToPoint(path, NULL, 0, self.frame.size.height);
+    CGPathCloseSubpath(path);
 
-@interface HMStringTableViewCell : HMEditTableViewCell<UITextFieldDelegate> {
-    @private
-    UITextField *_textField;
-    NSString *_stringValue;
-    BOOL _secure;
+    // draws the cell's border
+    CGContextAddPath(context, path);
+    CGPathRelease(path);
+    CGContextStrokePath(context);
 }
-
-@property (retain) UITextField *textField;
-@property (retain) NSString *stringValue;
-@property (assign) BOOL secure;
-
-/**
- * Constructor of the class.
- *
- * @param reuseIdentifier The cell's identifier.
- * @return The string table view cell instance.
- */
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifier;
 
 @end

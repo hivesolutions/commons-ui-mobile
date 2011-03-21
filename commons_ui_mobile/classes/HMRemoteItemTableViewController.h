@@ -33,6 +33,7 @@
     @private
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
+    BOOL _editable;
 }
 
 /**
@@ -44,6 +45,16 @@
  * The generated remote group.
  */
 @property (retain) HMNamedItemGroup *remoteGroup;
+
+/**
+ * The property the table view as editable (edit button).
+ */
+@property (assign) BOOL editable;
+
+/**
+ * Initializes the structures.
+ */
+- (void)initStructures;
 
 /**
  * Retrieves the remote url.
@@ -59,6 +70,34 @@
  * Constructs the internal data structures.
  */
 - (void)constructStructures;
+
+/**
+ * Processes the remote data hanlding it and constructing
+ * the final adapted object item.
+ * The object item is set in the remote group.
+ *
+ * @param remoteData The remote data to be processed.
+ */
+- (void)processRemoteData:(NSDictionary *)remoteData;
+
+/**
+ * Converts the remote group to the must up to date
+ * information.
+ * This method is called before persistence of the data
+ * to obtain the must updated values.
+ *
+ * @return The converted remote group as remote data.
+ */
+- (NSMutableDictionary *)convertRemoteGroup;
+
+/**
+ * Callback handler called when the edit button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)editButtonClick:(id)sender extra:(id)extra;
 
 /**
  * Keeps the class valid for export at link time.

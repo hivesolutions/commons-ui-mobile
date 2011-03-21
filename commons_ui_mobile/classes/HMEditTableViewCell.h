@@ -32,11 +32,13 @@
 
 @interface HMEditTableViewCell : HMTableViewCell {
     @private
+    NSString *_defaultValue;
     UIView *_editView;
     HMItemTableView *_itemTableView;
     BOOL _editingDirty;
 }
 
+@property (assign) NSString *defaultValue;
 @property (retain) UIView *editView;
 @property (assign) HMItemTableView *itemTableView;
 

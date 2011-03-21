@@ -54,6 +54,13 @@
     [super dealloc];
 }
 
+- (void)flushItemSpecification {
+    // flushes the item specification in the item
+    // data source (changing) the item specification
+    // values with the current ui component ones
+    [self.itemDataSource flushItemSpecification];
+}
+
 - (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView {
     // retrieves the visible cells
     NSArray *visibleCells = [self visibleCells];
@@ -90,8 +97,8 @@
     // from the item table view provider
     HMItemTableViewDataSource *itemDataSource = [[HMItemTableViewDataSource alloc] initWithItemTableViewProvider:itemTableViewProvider];
 
-    // updates the item
-    [itemDataSource updateItem];
+    // updates the item specification
+    [itemDataSource updateItemSpecification];
 
     // sets the attributes
     self.itemDataSource = itemDataSource;
@@ -105,8 +112,8 @@
 }
 
 - (void)reloadData {
-    // updates the item in forced mode
-    [self.itemDataSource updateItemForce];
+    // updates the item specification in forced mode
+    [self.itemDataSource updateItemSpecificationForce];
 
     // calls the super
     [super reloadData];
@@ -121,7 +128,7 @@
     HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
 
     // retrieves the button item
-    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItem:indexPath];
+    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
     // calls the did select item row with item method
     [self.itemDelegate didSelectItemRowWithItem:buttonItem];
@@ -132,7 +139,7 @@
     HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
 
     // retrieves the button item
-    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItem:indexPath];
+    HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
     // calls the did deselect item row with item method
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];

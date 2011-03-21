@@ -166,22 +166,9 @@
     label.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     label.backgroundColor = [UIColor clearColor];
 
-    // retrieves the date currently in the cell
-    NSString *dateString = self.detailTextLabel.text;
-
-    // sets the date in the date picker
-    // in case a date is defined
-    if(dateString.length > 0) {
-        // sets the date string in the label
-        label.text = dateString;
-
-        // converts the date string to a
-        // date and stores it in the date value
-        self.dateValue = [self.dateFormatter dateFromString:dateString];
-
-        // sets the date value in the date picker
-        datePicker.date = self.dateValue;
-    }
+    // converts the date string to a
+    // date and stores it in the date value
+    self.dateValue = [self.dateFormatter dateFromString:self.detailTextLabel.text];
 
     // adds the date picker to the window
     [[self.window.subviews objectAtIndex:0] addSubview:datePicker];

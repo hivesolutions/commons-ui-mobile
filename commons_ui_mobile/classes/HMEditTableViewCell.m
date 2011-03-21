@@ -27,6 +27,7 @@
 
 @implementation HMEditTableViewCell
 
+@synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
 @synthesize itemTableView = _itemTableView;
 
@@ -49,6 +50,10 @@
     [super dealloc];
 }
 
+- (void)didSelectLabel {
+    NSLog(@"LABEL SELECTED");
+}
+
 - (void)createEditing {
     // retrieves the associated table view (superview)
     self.itemTableView = (HMItemTableView *) self.superview;
@@ -61,7 +66,7 @@
         // in case it's an ui table view style grouped
         case UITableViewStyleGrouped:
             // sets the delta to grouped
-            delta = 76;
+            delta = 81;
 
             // breaks the switch
             break;
@@ -69,18 +74,31 @@
         // in case it's an ui table view style plain
         case UITableViewStylePlain:
             // sets the delta to grouped
-            delta = 100;
+            delta = 105;
 
             // breaks the switch
             break;
     }
 
+    // creates a label click view
+    CGRect labelClickViewFrame = CGRectMake(0, 0, delta, self.contentView.frame.size.height);
+    UIView *labelClickView = [[UIView alloc] initWithFrame:labelClickViewFrame];
+    labelClickView.backgroundColor = [UIColor clearColor];
+
+    // creates a tap gesture recognizer
+    // for the label click view
+    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectLabel)];
+    [labelClickView addGestureRecognizer:tapGestureRecognizer];
+
     // creates the edit view
     CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
-    UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
+    UIView *editView = [[HMEditTableViewCellEditView alloc] initWithFrame:editViewFrame];
     editView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    editView.backgroundColor = [UIColor clearColor];
 
-    // adds the edit view
+    // adds the label click view and the
+    // edit view to the content view
+    [self.contentView addSubview:labelClickView];
     [self.contentView addSubview:editView];
 
     // sets the attributes
@@ -88,6 +106,8 @@
     self.editView = editView;
 
     // releases the objects
+    [labelClickView release];
+    [tapGestureRecognizer release];
     [editView release];
 }
 

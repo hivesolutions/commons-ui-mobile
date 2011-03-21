@@ -30,21 +30,19 @@
  * cell positions.
  */
 typedef enum  {
-    HMTableCellBackgroundViewPositionGroupedSingle = 1,
-    HMTableCellBackgroundViewPositionGroupedTop,
-    HMTableCellBackgroundViewPositionGroupedBottom,
-    HMTableCellBackgroundViewPositionGroupedMiddle,
-    HMTableCellBackgroundViewPositionPlain
-} HMTableCellBackgroundViewPosition;
+    HMTableViewCellBackgroundViewPositionGroupedSingle = 1,
+    HMTableViewCellBackgroundViewPositionGroupedTop,
+    HMTableViewCellBackgroundViewPositionGroupedBottom,
+    HMTableViewCellBackgroundViewPositionGroupedMiddle,
+    HMTableViewCellBackgroundViewPositionPlain
+} HMTableViewCellBackgroundViewPosition;
 
-@interface HMTableCellBackgroundView : UIView {
+@interface HMTableViewCellBackgroundView : UIView {
     @private
-    HMTableCellBackgroundViewPosition _position;
-    CGFloat *_gradientColors;
+    HMTableViewCellBackgroundViewPosition _position;
 }
 
-@property (assign) HMTableCellBackgroundViewPosition position;
-@property (assign) CGFloat *gradientColors;
+@property (assign) HMTableViewCellBackgroundViewPosition position;
 
 /**
  * Draws a top cell for a
@@ -80,6 +78,6 @@ typedef enum  {
  *
  * @param position The cell's position.
  */
-- (void)setCellPosition:(HMTableCellBackgroundViewPosition)position;
+- (void)setCellPosition:(HMTableViewCellBackgroundViewPosition)position;
 
 @end

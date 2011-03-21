@@ -35,8 +35,8 @@
     // calls the super
     self = [super init];
 
-    // sets the item dirty
-    _itemDirty = YES;
+    // initializes the structures
+    [self initStructures];
 
     // returns self
     return self;
@@ -48,6 +48,9 @@
 
     // sets the attributes
     self.itemTableViewProvider = itemTableViewProvider;
+
+    // initializes the structures
+    [self initStructures];
 
     // returns self
     return self;
@@ -61,7 +64,66 @@
     [super dealloc];
 }
 
-- (void)updateItem {
+- (void)initStructures {
+    // sets the item dirty
+    _itemDirty = YES;
+
+    // creates the item cell map to hold the relations
+    // between the cells and the identifiers
+    _cellIdentifierMap = [[NSMutableDictionary alloc] init];
+}
+
+- (void)flushItemSpecification {
+    // retrieves the list item group
+    HMItemGroup *listItemGroup = (HMItemGroup *) [self.listItemGroup getItem:0];
+
+    // retrieves the list item group items
+    NSArray *listItemGroupItems = listItemGroup.items;
+
+    // retrieves the list item group items count
+    int listItemGroupItemsCount = [listItemGroupItems count];
+
+    // iterates over all the list items in the list item group items
+    for(int index = 0; index < listItemGroupItemsCount; index++) {
+        // retrieves the list item at the index
+        HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
+
+        // retrieves the cell for the list item identifier
+        HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
+
+        // retrieves the cell description
+        NSString *cellStringValue = cell.stringValue;
+
+        // sets the adapted values
+        listItem.description = cellStringValue;
+    }
+
+    // retrieves the list item group
+    listItemGroup = (HMItemGroup *) [self.listItemGroup getItem:1];
+
+    // retrieves the list item group items
+    listItemGroupItems = listItemGroup.items;
+
+    // retrieves the list item group items count
+    listItemGroupItemsCount = [listItemGroupItems count];
+
+    // iterates over all the list items in the list item group items
+    for(int index = 0; index < listItemGroupItemsCount; index++) {
+        // retrieves the list item at the index
+        HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
+
+        // retrieves the cell for the list item identifier
+        HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
+
+        // retrieves the cell description
+        NSString *cellStringValue = cell.stringValue;
+
+        // sets the adapted values
+        listItem.description = cellStringValue;
+    }
+}
+
+- (void)updateItemSpecification {
     // in case the item dirty flag is
     // not set
     if(_itemDirty == NO) {
@@ -76,7 +138,7 @@
     _itemDirty = NO;
 }
 
-- (void)updateItemForce {
+- (void)updateItemSpecificationForce {
     // retrieves the item specification from the item table view provider
     self.itemSpecification = [self.itemTableViewProvider getItemSpecification];
 
@@ -105,7 +167,7 @@
     self.tableView = tableView;
 
     // updates the item (if necessary)
-    [self updateItem];
+    [self updateItemSpecification];
 
     // retrieves the menu item group items size
     NSInteger menuItemGroupItemsSize = [self.listItemGroup.items count];
@@ -131,7 +193,7 @@
     static NSString *cellIdentifier = @"Cell";
 
     // retrieves the button item
-    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItem:indexPath];
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // tries to retrives the cell from cache (reusable)
     HMStringTableViewCell *cell = (HMStringTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -142,6 +204,7 @@
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
 
+        // retrieves the object class name string
         NSString *objectClassNameString = [NSString stringWithCString:objectClassName encoding:NSASCIIStringEncoding];
 
         if([objectClassNameString isEqualToString:@"HMTableCellItem"]) {
@@ -150,6 +213,7 @@
 
             // sets the cell attributes
             cell.name = tableCellItem.name;
+            cell.description = tableCellItem.description;
             cell.icon = tableCellItem.icon;
             cell.highlightedIcon = tableCellItem.highlightedIcon;
             cell.highlightable = tableCellItem.highlightable;
@@ -158,14 +222,24 @@
             // creates the new cell with the given reuse identifier
             cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
 
+            // casts the table cell item to a
+            // string table cell item
+            HMStringTableCellItem *stringTableCellItem = (HMStringTableCellItem *) tableCellItem;
+
             // sets the cell attributes
-            cell.name = tableCellItem.name;
-            cell.icon = tableCellItem.icon;
-            cell.highlightedIcon = tableCellItem.highlightedIcon;
-            cell.highlightable = tableCellItem.highlightable;
-            cell.accessoryTypeString = tableCellItem.accessoryType;
+            cell.name = stringTableCellItem.name;
+            cell.description = stringTableCellItem.description;
+            cell.defaultValue = stringTableCellItem.defaultValue;
+            cell.secure = stringTableCellItem.secure;
+            cell.icon = stringTableCellItem.icon;
+            cell.highlightedIcon = stringTableCellItem.highlightedIcon;
+            cell.highlightable = stringTableCellItem.highlightable;
+            cell.accessoryTypeString = stringTableCellItem.accessoryType;
         }
     }
+
+    // inserts the item cell identifier association into the map
+    [_cellIdentifierMap setObject:cell forKey:tableCellItem.identifier];
 
     // sets the button item's attributes in the cell
     cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
@@ -185,7 +259,7 @@
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
     // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItem:indexPath];
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // retrieves the section item group items count
     NSInteger sectionItemGroupItemsCount = [sectionItemGroup.items count];
@@ -206,7 +280,7 @@
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
     // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItem:indexPath];
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // releases the index path
     [indexPath release];

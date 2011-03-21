@@ -38,6 +38,7 @@
     UITableView *_tableView;
     HMNamedItemGroup *_itemSpecification;
     BOOL _itemDirty;
+    NSMutableDictionary *_cellIdentifierMap;
 }
 
 /**
@@ -75,14 +76,25 @@
 - (id)initWithItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider;
 
 /**
- * Updates the current item structure.
+ * Initializes the instance structures.
  */
-- (void)updateItem;
+- (void)initStructures;
 
 /**
- * Updates the current item structure (forced).
+ * Flushes the item specification, converting the current ui component
+ * values with new object items.
  */
-- (void)updateItemForce;
+- (void)flushItemSpecification;
+
+/**
+ * Updates the current item specification.
+ */
+- (void)updateItemSpecification;
+
+/**
+ * Updates the current item specification (forced).
+ */
+- (void)updateItemSpecificationForce;
 
 /**
  * Keeps the class valid for export at link time.
