@@ -108,6 +108,9 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
+    // updates the string value
+    self.stringValue = self.textField.text;
+
     // calls the super
     [super blurEditing];
 }
