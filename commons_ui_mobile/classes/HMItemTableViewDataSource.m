@@ -261,12 +261,22 @@
     // releases the index path
     [indexPath release];
 
-    // returns the section's description
-    return sectionItemGroup.description;
+    // returns the section's footer
+    return sectionItemGroup.footer;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the section item group
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // returns the section's header
+    return sectionItemGroup.header;
 }
 
 + (void)_keepAtLinkTime {
