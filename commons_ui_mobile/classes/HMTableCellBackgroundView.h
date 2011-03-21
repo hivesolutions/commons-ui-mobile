@@ -38,8 +38,9 @@ typedef enum  {
 } HMTableCellBackgroundViewPosition;
 
 @interface HMTableCellBackgroundView : UIView {
-    @private HMTableCellBackgroundViewPosition _position;
-    @private CGFloat *_gradientColors;
+    @private
+    HMTableCellBackgroundViewPosition _position;
+    CGFloat *_gradientColors;
 }
 
 @property (assign) HMTableCellBackgroundViewPosition position;

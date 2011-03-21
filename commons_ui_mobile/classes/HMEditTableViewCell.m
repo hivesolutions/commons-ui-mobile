@@ -35,7 +35,7 @@
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
     // sets the editing dirty
-    editingDirty = YES;
+    _editingDirty = YES;
 
     // returns the instance
     return self;
@@ -154,7 +154,7 @@
     [super didMoveToSuperview];
 
     // in case the editing is dirty
-    if(editingDirty) {
+    if(_editingDirty) {
         // creates the editing (view)
         [self createEditing];
 
@@ -162,7 +162,7 @@
         [self hideEditing];
 
         // unsets the editing dirty flag
-        editingDirty = NO;
+        _editingDirty = NO;
     }
 }
 

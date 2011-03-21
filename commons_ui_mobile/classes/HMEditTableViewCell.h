@@ -31,9 +31,10 @@
 @class HMItemTableView;
 
 @interface HMEditTableViewCell : HMTableViewCell {
-    @private UIView *_editView;
-    @private HMItemTableView *_itemTableView;
-    @private BOOL editingDirty;
+    @private
+    UIView *_editView;
+    HMItemTableView *_itemTableView;
+    BOOL _editingDirty;
 }
 
 @property (retain) UIView *editView;

@@ -38,7 +38,7 @@
     self = [super init];
 
     // sets the remote dirty
-    remoteDirty = YES;
+    _remoteDirty = YES;
 
     // returns self
     return self;
@@ -72,7 +72,7 @@
 - (void)updateRemote {
     // in case the remote dirty flag is
     // not set
-    if(remoteDirty == NO) {
+    if(_remoteDirty == NO) {
         // returns immeditely
         return;
     }
@@ -98,7 +98,7 @@
     self.remoteData = remoteData;
 
     // unsets the remote dirty flag
-    remoteDirty = NO;
+    _remoteDirty = NO;
 
     // releases the objects
     [connection release];
@@ -234,7 +234,7 @@
     // in case the button click was retry
     if(buttonIndex == 0) {
         // sets the remote dirty flag
-        remoteDirty = YES;
+        _remoteDirty = YES;
 
         // updates the remote
         [self updateRemote];

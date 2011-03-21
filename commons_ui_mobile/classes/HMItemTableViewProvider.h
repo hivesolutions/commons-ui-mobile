@@ -25,6 +25,10 @@
 
 #import "Dependencies.h"
 
+/**
+ * The provider class to be used in the item
+ * table view.
+ */
 @protocol HMItemTableViewProvider<NSObject>
 
 @required

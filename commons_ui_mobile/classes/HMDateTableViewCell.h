@@ -43,10 +43,11 @@
 #define HM_DATE_TABLE_VIEW_CELL_HEIGHT 19
 
 @interface HMDateTableViewCell : HMEditTableViewCell {
-    @private UIDatePicker *_datePicker;
-    @private NSDate *_dateValue;
-    @private UILabel *_label;
-    @private NSDateFormatter *_dateFormatter;
+    @private
+    UIDatePicker *_datePicker;
+    NSDate *_dateValue;
+    UILabel *_label;
+    NSDateFormatter *_dateFormatter;
 }
 
 @property (retain) UIDatePicker *datePicker;

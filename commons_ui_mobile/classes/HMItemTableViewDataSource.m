@@ -36,7 +36,7 @@
     self = [super init];
 
     // sets the item dirty
-    itemDirty = YES;
+    _itemDirty = YES;
 
     // returns self
     return self;
@@ -64,7 +64,7 @@
 - (void)updateItem {
     // in case the item dirty flag is
     // not set
-    if(itemDirty == NO) {
+    if(_itemDirty == NO) {
         // returns immeditely
         return;
     }
@@ -73,7 +73,7 @@
     self.itemSpecification = [self.itemTableViewProvider getItemSpecification];
 
     // unsets the item dirty flag
-    itemDirty = NO;
+    _itemDirty = NO;
 }
 
 - (void)updateItemForce {
@@ -81,7 +81,7 @@
     self.itemSpecification = [self.itemTableViewProvider getItemSpecification];
 
     // unsets the item dirty flag
-    itemDirty = NO;
+    _itemDirty = NO;
 }
 
 - (HMNamedItemGroup *)headerNamedItemGroup {

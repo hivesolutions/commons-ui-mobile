@@ -29,10 +29,14 @@
 #import "HMItemTableViewProvider.h"
 #import "HMItemTableViewDataSource.h"
 
+/**
+ * The item table view to be used to display object items.
+ */
 @interface HMItemTableView : UITableView<UITableViewDelegate> {
-    @private HMItemTableViewDataSource *_itemDataSource;
-    @private NSObject<HMItemTableViewDelegate> *_itemDelegate;
-    @private NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
+    @private
+    HMItemTableViewDataSource *_itemDataSource;
+    NSObject<HMItemTableViewDelegate> *_itemDelegate;
+    NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
 }
 
 @property (retain) HMItemTableViewDataSource *itemDataSource;

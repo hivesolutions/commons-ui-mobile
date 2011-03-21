@@ -30,8 +30,10 @@
 #import "HMItemTableViewProvider.h"
 
 @interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {
-    @private NSMutableData *_receivedData;
-    @private HMNamedItemGroup *_remoteGroup;
+    @private
+    NSMutableData *_receivedData;
+    HMNamedItemGroup *_remoteGroup;
+    BOOL _editable;
 }
 
 /**
@@ -43,6 +45,12 @@
  * The generated remote group.
  */
 @property (retain) HMNamedItemGroup *remoteGroup;
+
+/**
+ * The property the table view as editable (edit button).
+ */
+@property (assign) BOOL editable;
+
 
 /**
  * Retrieves the remote url.
@@ -58,6 +66,15 @@
  * Constructs the internal data structures.
  */
 - (void)constructStructures;
+
+/**
+ * Callback handler called when the edit button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)editButtonClick:(id)sender extra:(id)extra;
 
 /**
  * Keeps the class valid for export at link time.

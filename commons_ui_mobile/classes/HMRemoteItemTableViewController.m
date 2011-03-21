@@ -29,10 +29,14 @@
 
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
+@synthesize editable = _editable;
 
 - (id)init {
     // calls the super
     self = [super init];
+
+    // sets the table view as editable
+    self.editable = YES;
 
     // constructs the structures
     [self constructStructures];
@@ -45,6 +49,9 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
+    // sets the table view as editable
+    self.editable = YES;
+
     // constructs the structures
     [self constructStructures];
 
@@ -55,6 +62,9 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     // calls the super
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
+    // sets the table view as editable
+    self.editable = YES;
 
     // constructs the structures
     [self constructStructures];
@@ -79,9 +89,33 @@
 }
 
 - (void)constructStructures {
+    // creates the item table view and sets the item table
+    // view provider and the item delegate
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
     itemTableView.itemTableViewProvider = self;
     itemTableView.itemDelegate = self;
+
+    // in case the current table view is editable
+    if(self.editable) {
+        // creates the edit ui bar button
+        UIBarButtonItem *editUiBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:   @selector(editButtonClick:extra:)];
+
+        // sets the edit ui bar button
+        self.navigationItem.rightBarButtonItem = editUiBarButton;
+    }
+}
+
+- (void)editButtonClick:(id)sender extra:(id)extra {
+    // in case the table view is in editing mode
+    if(self.tableView.editing) {
+        // sets the table view as not editing
+        self.tableView.editing = NO;
+    }
+    // otherwise it must not be editing
+    else {
+        // sets the table view as editing
+        self.tableView.editing = YES;
+    }
 }
 
 - (void) updateRemote {
