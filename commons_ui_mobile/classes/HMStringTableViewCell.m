@@ -60,6 +60,7 @@
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.placeholder = self.defaultValue;
     textField.delegate = self;
 
     // adds the textfield as subview
