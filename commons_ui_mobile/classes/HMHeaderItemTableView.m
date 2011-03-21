@@ -269,13 +269,9 @@
     // adds the toolbar to the view
     [self addSubview:toolbar];
 
-    // releases the system item
+    // releases the objects
     [trashItem release];
-
-    // releases the refresh item
     [refreshItem release];
-
-    // releases the toolbar
     [toolbar release];
 }
 
