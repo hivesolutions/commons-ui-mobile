@@ -242,26 +242,26 @@
     // sets the toolbar frame to place it in the right spot
     [toolbar setFrame:CGRectMake(CGRectGetMinX(mainViewBounds), CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - (toolbarHeight * 2.0) + 2.0, CGRectGetWidth(mainViewBounds), toolbarHeight)];
 
-    // match each of the toolbar item's style match the selection in the "UIBarButtonItemStyle" segmented control
+    // creates the style to be used in all the items
     UIBarButtonItemStyle style = UIBarButtonItemStylePlain;
 
-    // create the system-defined "OK or Done" button
+    // creates the trash item
     UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:nil];
 
     // sets the system item style
     trashItem.style = style;
 
-    // flex item used to separate the left groups items and right grouped items
-    UIBarButtonItem *flexItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    // creates the flexible space item
+    UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
-    // create the system-defined "OK or Done" button
+    // creates the refresh item
     UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
 
     // sets the system item style
     refreshItem.style = style;
 
     // creates the toolbar items list
-    NSArray *items = [NSArray arrayWithObjects: trashItem, flexItem, refreshItem, nil];
+    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
 
     // sets the toolbar items in the toolbar
     [toolbar setItems:items animated:NO];
