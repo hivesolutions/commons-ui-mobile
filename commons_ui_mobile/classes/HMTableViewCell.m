@@ -36,8 +36,11 @@
     self.textLabel.adjustsFontSizeToFitWidth = YES;
 
     // replaces the selected background view
-    HMTableCellBackgroundView *backgroundView = [[HMTableCellBackgroundView alloc] init];
+    HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
     self.selectedBackgroundView = backgroundView;
+
+    // releases the objects
+    [backgroundView release];
 
     // returns the instance
     return self;
@@ -74,19 +77,19 @@
     NSUInteger row = [indexPath row];
 
     // retrieves the background view
-    HMTableCellBackgroundView *backgroundView = (HMTableCellBackgroundView *) self.selectedBackgroundView;
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
 
     // sets the background view's position
     if(tableView.style == UITableViewStylePlain) {
-        [backgroundView setPosition:HMTableCellBackgroundViewPositionPlain];
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionPlain];
     } else if(row == 0 && numberRows == 1) {
-        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedSingle];
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedSingle];
     } else if(row == 0) {
-        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedTop];
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedTop];
     } else if(row == numberRows - 1) {
-        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedBottom];
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedBottom];
     } else {
-        [backgroundView setPosition:HMTableCellBackgroundViewPositionGroupedMiddle];
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedMiddle];
     }
 
     // invokes the parent
@@ -235,6 +238,19 @@
         // releases the notifications switch
         [notificationsSwitch release];
     }
+}
+
+- (void)layoutSubviews {
+    // calls the super
+    [super layoutSubviews];
+
+    // moves the detail text label origin
+    // five pixels to the right
+    CGRect frame = self.detailTextLabel.frame;
+    frame.origin.x += 5;
+
+    // updates the detail text label's position
+    self.detailTextLabel.frame = frame;
 }
 
 @end

@@ -27,19 +27,18 @@
 #define DEFAULT_GRADIENT_LOCATIONS {0.0, 1.0}
 #define DEFAULT_GRADIENT_COLORS {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1}
 
-#import "HMTableCellBackgroundView.h"
+#import "HMTableViewCellBackgroundView.h"
 
-@implementation HMTableCellBackgroundView
+@implementation HMTableViewCellBackgroundView
 
 @synthesize position = _position;
-@synthesize gradientColors = _gradientColors;
 
 - (id)init {
     // invokes the parent constructor
     self = [super init];
 
     // sets the default attributes
-    self.position = HMTableCellBackgroundViewPositionPlain;
+    self.position = HMTableViewCellBackgroundViewPositionPlain;
 
     // returns the instance
     return self;
@@ -63,19 +62,19 @@
     // invokes the appropriate draw function
     // depending on the cell's position
     switch(self.position) {
-        case HMTableCellBackgroundViewPositionGroupedTop:
+        case HMTableViewCellBackgroundViewPositionGroupedTop:
             [self drawRectGroupedTop];
             break;
-        case HMTableCellBackgroundViewPositionGroupedBottom:
+        case HMTableViewCellBackgroundViewPositionGroupedBottom:
             [self drawRectGroupedBottom];
             break;
-        case HMTableCellBackgroundViewPositionGroupedMiddle:
+        case HMTableViewCellBackgroundViewPositionGroupedMiddle:
             [self drawRectPlain];
             break;
-        case HMTableCellBackgroundViewPositionGroupedSingle:
+        case HMTableViewCellBackgroundViewPositionGroupedSingle:
             [self drawRectGroupedSingle];
             break;
-        case HMTableCellBackgroundViewPositionPlain:
+        case HMTableViewCellBackgroundViewPositionPlain:
             [self drawRectPlain];
             break;
     }
@@ -265,7 +264,7 @@
     CGGradientRelease(gradient);
 }
 
-- (void)setCellPosition:(HMTableCellBackgroundViewPosition)position {
+- (void)setCellPosition:(HMTableViewCellBackgroundViewPosition)position {
     // returns in case the position hasn't changed
     if (self.position == position) {
         return;
