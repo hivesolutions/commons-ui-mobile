@@ -51,7 +51,6 @@
  */
 @property (assign) BOOL editable;
 
-
 /**
  * Retrieves the remote url.
  */
@@ -66,6 +65,25 @@
  * Constructs the internal data structures.
  */
 - (void)constructStructures;
+
+/**
+ * Processes the remote data hanlding it and constructing
+ * the final adapted object item.
+ * The object item is set in the remote group.
+ *
+ * @param remoteData The remote data to be processed.
+ */
+- (void)processRemoteData:(NSDictionary *)remoteData;
+
+/**
+ * Converts the given remote group to the must up to date
+ * information.
+ * This method is called before persistence of the data
+ * to obtain the must updated values.
+ *
+ * @param remoteData The remote data to be processed.
+ */
+- (void)convertRemoteGroup:(HMNamedItemGroup *)remoteGroup;
 
 /**
  * Callback handler called when the edit button is

@@ -108,6 +108,9 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
+    // updates the string value
+    self.stringValue = self.textField.text;
+
     // calls the super
     [super blurEditing];
 }
@@ -134,6 +137,9 @@
 
     // updates the text field text
     self.textField.text = _stringValue;
+
+    // updates the description
+    self.description = _stringValue;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
