@@ -108,13 +108,20 @@
 - (void)processRemoteData:(NSDictionary *)remoteData {
 }
 
+- (NSMutableDictionary *)convertRemoteGroup {
+    // allocates the remote data
+    NSMutableDictionary *remoteData = [[NSMutableDictionary alloc] init];
 
-- (void)convertRemoteGroup:(HMNamedItemGroup *)remoteGroup {
+    // returns the remote data in auto release
+    return [remoteData autorelease];
 }
 
 - (void)editButtonClick:(id)sender extra:(id)extra {
     // in case the table view is in editing mode
     if(self.tableView.editing) {
+        // sets the table view as not editing
+        [self.tableView setEditing:NO animated:YES];
+
         // casts the table view as item table view
         HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
@@ -122,10 +129,7 @@
         [itemTableView flushItemSpecification];
 
         // converts the remote group
-        [self convertRemoteGroup:self.remoteGroup];
-
-        // sets the table view as not editing
-        [self.tableView setEditing:NO animated:YES];
+        [self convertRemoteGroup];
     }
     // otherwise it must not be editing
     else {
