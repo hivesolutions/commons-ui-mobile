@@ -35,8 +35,8 @@
     // calls the super
     self = [super init];
 
-    // sets the item dirty
-    _itemDirty = YES;
+    // initializes the structures
+    [self initStructures];
 
     // returns self
     return self;
@@ -48,6 +48,9 @@
 
     // sets the attributes
     self.itemTableViewProvider = itemTableViewProvider;
+
+    // initializes the structures
+    [self initStructures];
 
     // returns self
     return self;
@@ -61,7 +64,21 @@
     [super dealloc];
 }
 
-- (void)updateItem {
+- (void)initStructures {
+    // sets the item dirty
+    _itemDirty = YES;
+
+    // creates the item cell map to hold the relations
+    // between the cells and the names
+    _cellNameMap = [[NSMutableDictionary alloc] init];
+}
+
+- (void)flushItemSpecification {
+    // retrieves the button item
+    //HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItem:indexPath];
+}
+
+- (void)updateItemSpecification {
     // in case the item dirty flag is
     // not set
     if(_itemDirty == NO) {
@@ -76,7 +93,7 @@
     _itemDirty = NO;
 }
 
-- (void)updateItemForce {
+- (void)updateItemSpecificationForce {
     // retrieves the item specification from the item table view provider
     self.itemSpecification = [self.itemTableViewProvider getItemSpecification];
 
@@ -105,7 +122,7 @@
     self.tableView = tableView;
 
     // updates the item (if necessary)
-    [self updateItem];
+    [self updateItemSpecification];
 
     // retrieves the menu item group items size
     NSInteger menuItemGroupItemsSize = [self.listItemGroup.items count];
@@ -142,6 +159,7 @@
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
 
+        // retrieves the object class name string
         NSString *objectClassNameString = [NSString stringWithCString:objectClassName encoding:NSASCIIStringEncoding];
 
         if([objectClassNameString isEqualToString:@"HMTableCellItem"]) {
@@ -169,6 +187,9 @@
             cell.accessoryTypeString = tableCellItem.accessoryType;
         }
     }
+
+    // inserts the item cell name association into the map
+    [_cellNameMap setObject:cell forKey:tableCellItem.name];
 
     // sets the button item's attributes in the cell
     cell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];

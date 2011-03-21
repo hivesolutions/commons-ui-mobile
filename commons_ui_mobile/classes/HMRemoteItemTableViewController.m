@@ -105,16 +105,19 @@
     }
 }
 
+- (void)processRemoteData:(NSDictionary *)remoteData {
+}
+
 - (void)editButtonClick:(id)sender extra:(id)extra {
     // in case the table view is in editing mode
     if(self.tableView.editing) {
         // sets the table view as not editing
-        self.tableView.editing = NO;
+        [self.tableView setEditing:NO animated:YES];
     }
     // otherwise it must not be editing
     else {
         // sets the table view as editing
-        self.tableView.editing = YES;
+        [self.tableView setEditing:YES animated:YES];
     }
 }
 
@@ -170,36 +173,8 @@
     // parses the received (remote) data and sets it into the intance
     NSDictionary *remoteData = [jsonParser objectWithData:self.receivedData];
 
-    NSString *username = [remoteData objectForKey:@"username"];
-
-    // creates the menu header items
-    HMItem *title = [[HMItem alloc] initWithIdentifier:username];
-    HMItem *subTitle = [[HMItem alloc] initWithIdentifier:username];
-    HMItem *image = [[HMItem alloc] initWithIdentifier:@"user.png"];
-
-    // creates the menu header group
-    HMNamedItemGroup *menuHeaderGroup = [[HMNamedItemGroup alloc] initWithIdentifier:@"menu_header"];
-
-    // creates the menu named item group
-    HMNamedItemGroup *menuNamedItemGroup = [[HMNamedItemGroup alloc] initWithIdentifier:@"menu"];
-
-    // populates the menu header
-    [menuHeaderGroup addItem:@"title" item:title];
-    [menuHeaderGroup addItem:@"subTitle" item:subTitle];
-    [menuHeaderGroup addItem:@"image" item:image];
-
-    // adds the menu items to the menu item group
-    [menuNamedItemGroup addItem:@"header" item:menuHeaderGroup];
-
-    // stores the menu item group
-    self.remoteGroup = menuNamedItemGroup;
-
-    // releases the objects
-    [menuNamedItemGroup release];
-    [menuHeaderGroup release];
-    [image release];
-    [subTitle release];
-    [title release];
+    // processes the remote data, setting the remote group
+    [self processRemoteData:remoteData];
 
     // reloads the data
     [self.tableView reloadData];
