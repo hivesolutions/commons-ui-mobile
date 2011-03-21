@@ -43,7 +43,7 @@
     NSURLConnection *_connection;
     NSMutableData *_receivedData;
     NSArray *_remoteData;
-    BOOL remoteDirty;
+    BOOL _remoteDirty;
 }
 
 /**

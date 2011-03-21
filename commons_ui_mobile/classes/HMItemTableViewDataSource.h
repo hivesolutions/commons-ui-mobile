@@ -37,7 +37,7 @@
     NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
     UITableView *_tableView;
     HMNamedItemGroup *_itemSpecification;
-    BOOL itemDirty;
+    BOOL _itemDirty;
 }
 
 /**

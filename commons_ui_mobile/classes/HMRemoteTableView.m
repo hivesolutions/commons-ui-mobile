@@ -37,7 +37,7 @@
     self = [super init];
 
     // sets the first reload flag
-    firstReload = YES;
+    _firstReload = YES;
 
     // returns self
     return self;
@@ -48,7 +48,7 @@
     self = [super initWithCoder:aDecoder];
 
     // sets the first reload flag
-    firstReload = YES;
+    _firstReload = YES;
 
     // returns self
     return self;
@@ -163,7 +163,7 @@
 
     // in case it's the first reload (initial
     // load must wait for remote loading)
-    if(firstReload) {
+    if(_firstReload) {
         // shows the activity indicator
         [self showActivityIndicator];
     }
@@ -175,7 +175,7 @@
     }
 
     // unsets the first reload flag
-    firstReload = NO;
+    _firstReload = NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

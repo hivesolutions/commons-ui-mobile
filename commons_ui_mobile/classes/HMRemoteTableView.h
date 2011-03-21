@@ -36,7 +36,7 @@
     HMRemoteTableViewDataSource *_remoteDataSource;
     NSObject<HMRemoteTableViewDelegate> *_remoteDelegate;
     NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
-    BOOL firstReload;
+    BOOL _firstReload;
 }
 
 @property (retain) UIView *activity;

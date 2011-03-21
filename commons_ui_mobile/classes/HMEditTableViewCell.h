@@ -34,7 +34,7 @@
     @private
     UIView *_editView;
     HMItemTableView *_itemTableView;
-    BOOL editingDirty;
+    BOOL _editingDirty;
 }
 
 @property (retain) UIView *editView;
