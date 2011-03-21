@@ -27,6 +27,7 @@
 
 @implementation HMEditTableViewCell
 
+@synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
 @synthesize itemTableView = _itemTableView;
 

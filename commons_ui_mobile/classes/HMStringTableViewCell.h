@@ -46,12 +46,10 @@
     @private
     UITextField *_textField;
     NSString *_stringValue;
-    NSString *_defaultValue;
 }
 
 @property (retain) UITextField *textField;
 @property (retain) NSString *stringValue;
-@property (retain) NSString *defaultValue;
 
 /**
  * Constructor of the class.
