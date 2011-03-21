@@ -93,6 +93,9 @@
     return nil;
 }
 
+- (void)buttonClicked:(NSString *)buttonName {
+}
+
 - (void)constructStructures {
     // creates the item table view and sets the item table
     // view provider and the item delegate
@@ -138,7 +141,7 @@
         NSDictionary *remoteData = [self convertRemoteGroup];
 
         // creates the http data from the remote data
-        NSData *httpData = [self createHttpData:remoteData];
+        NSData *httpData = [HMHttpUtil createHttpData:remoteData];
 
         // retrieves the object id
         NSString *objectId = [remoteData objectForKey:@"object_id"];
@@ -155,69 +158,16 @@
         [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
 
         // creates the connection with the intance as delegate
-        NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+        NSConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+
+        // releases the connection
+        [connection release];
     }
     // otherwise it must not be editing
     else {
         // sets the table view as editing
         [self.tableView setEditing:YES animated:YES];
     }
-}
-
-- (NSData *)createHttpData:(NSDictionary *)remoteData {
-    // retrives the remote data enumerator
-    NSEnumerator *remoteDataEnumerator = [remoteData keyEnumerator];
-
-    // allocates the key value
-    id key;
-
-    // creats the buffer to hold the string
-    NSMutableArray *stringBuffer = [[NSMutableArray alloc] init];
-
-    // sets the is first flag
-    BOOL isFirst = YES;
-
-    // iterates over the remote data
-    while ((key = [remoteDataEnumerator nextObject])) {
-        // retrieves the current value
-        NSString *value = (NSString *) [remoteData objectForKey:key];
-
-        // in case it's the first iteration
-        if(isFirst) {
-            // unsets the is first flag
-            isFirst = NO;
-        }
-        // otherwise it must be a different iteration
-        else {
-            // adds the "and" value
-            [stringBuffer addObject:@"&"];
-        }
-
-        // in case the value is not defined or it's
-        // an empty string
-        if(!value || [value length] < 1) {
-            // continues the loop
-            continue;
-        }
-
-        // creates the line value
-        NSString *lineValue = [NSString stringWithFormat:@"%@=%@", key, value];
-
-        // adds the line value to the string buffer
-        [stringBuffer addObject:lineValue];
-    }
-
-    // joins the http string buffer retrieving the string
-    NSString *httpString = [stringBuffer componentsJoinedByString:@""];
-
-    // escapes the http string
-    NSString *escapedHttpString = [httpString stringByAddingPercentEscapesUsingEncoding:NSASCIIStringEncoding];
-
-    // creates the http data from the http string
-    NSData *httpData = [escapedHttpString dataUsingEncoding:NSUTF8StringEncoding];
-
-    // returns the http data
-    return httpData;
 }
 
 - (void) updateRemote {

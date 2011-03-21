@@ -31,6 +31,16 @@
  */
 @protocol HMItemTableViewDelegate<NSObject>
 
+@optional
+
+/**
+ * Called when a button is clicked.
+ *
+ * @param buttonName The name of the button
+ * that has been clicked.
+ */
+- (void)buttonClicked:(NSString *)buttonName;
+
 @required
 
 /**

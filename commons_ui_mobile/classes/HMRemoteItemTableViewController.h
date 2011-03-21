@@ -29,7 +29,14 @@
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
 
+/**
+ * The http post method name.
+ */
 #define HTTP_POST_METHOD @"POST"
+
+/**
+ * The http application url encoded mime type.
+ */
 #define HTTP_APPLICATION_URL_ENCODED @"application/x-www-form-urlencoded"
 
 @interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {

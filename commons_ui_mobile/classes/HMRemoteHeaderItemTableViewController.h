@@ -23,24 +23,23 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-// dependencies includes
-#import "../classes/Dependencies.h"
+#import "Dependencies.h"
 
-// class includes
-#import "../classes/HMDateTableViewCell.h"
-#import "../classes/HMEditTableViewCell.h"
-#import "../classes/HMEditTableViewCellEditView.h"
-#import "../classes/HMHeaderItemTableView.h"
-#import "../classes/HMItemTableView.h"
-#import "../classes/HMItemTableViewDelegate.h"
-#import "../classes/HMItemTableViewProvider.h"
-#import "../classes/HMItemTableViewDataSource.h"
-#import "../classes/HMRemoteTableView.h"
-#import "../classes/HMRemoteTableViewDelegate.h"
-#import "../classes/HMRemoteTableViewProvider.h"
-#import "../classes/HMRemoteTableViewDataSource.h"
-#import "../classes/HMStringTableViewCell.h"
-#import "../classes/HMTableViewCell.h"
-#import "../classes/HMTableViewCellBackgroundView.h"
-#import "../classes/HMRemoteItemTableViewController.h"
-#import "../classes/HMRemoteHeaderItemTableViewController.h"
+#import "HMRemoteItemTableViewController.h"
+
+@interface HMRemoteHeaderItemTableViewController : HMRemoteItemTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+}
+
+/**
+ * Called when a new picture was taken.
+ *
+ * @param picture The new picture.
+ */
+- (void)didTakePicture:(UIImage *)picture;
+
+/**
+ * Keeps the class valid for export at link time.
+ */
++ (void)_keepAtLinkTime;
+
+@end

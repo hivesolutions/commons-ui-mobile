@@ -135,7 +135,10 @@
 }
 
 - (void)addPhotoButtonClicked:(id)sender extra:(id)extra {
-    printf("ola");
+    if([self.itemDelegate respondsToSelector:@selector(buttonClicked:)]) {
+        // calls the add photo button clicked handler
+        [self.itemDelegate buttonClicked:@"addPhoto"];
+    }
 }
 
 - (void)constructEditView {
@@ -259,6 +262,7 @@
 
     // releases the objects
     [trashItem release];
+    [flexibleSpaceItem release];
     [refreshItem release];
     [toolbar release];
 }
