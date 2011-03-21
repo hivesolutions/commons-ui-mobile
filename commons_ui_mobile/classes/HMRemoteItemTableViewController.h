@@ -31,7 +31,6 @@
 
 @interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {
     @private
-
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
 }

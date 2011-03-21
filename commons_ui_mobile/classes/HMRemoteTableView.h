@@ -30,12 +30,13 @@
 #import "HMRemoteTableViewDataSource.h"
 
 @interface HMRemoteTableView : UITableView<UITableViewDelegate> {
-    @private UIView *_activity;
-    @private UIActivityIndicatorView *_activityIndicator;
-    @private HMRemoteTableViewDataSource *_remoteDataSource;
-    @private NSObject<HMRemoteTableViewDelegate> *_remoteDelegate;
-    @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
-    @private BOOL firstReload;
+    @private
+    UIView *_activity;
+    UIActivityIndicatorView *_activityIndicator;
+    HMRemoteTableViewDataSource *_remoteDataSource;
+    NSObject<HMRemoteTableViewDelegate> *_remoteDelegate;
+    NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
+    BOOL firstReload;
 }
 
 @property (retain) UIView *activity;

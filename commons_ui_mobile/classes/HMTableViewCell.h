@@ -26,11 +26,12 @@
 #import "Dependencies.h"
 
 @interface HMTableViewCell : UITableViewCell {
-    @private NSString *_name;
-    @private NSString *_icon;
-    @private NSString *_highlightedIcon;
-    @private BOOL _highlightable;
-    @private NSString *_accessoryTypeString;
+    @private
+    NSString *_name;
+    NSString *_icon;
+    NSString *_highlightedIcon;
+    BOOL _highlightable;
+    NSString *_accessoryTypeString;
 }
 
 /**

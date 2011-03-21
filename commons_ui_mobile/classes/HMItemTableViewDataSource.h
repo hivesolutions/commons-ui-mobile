@@ -34,7 +34,6 @@
  */
 @interface HMItemTableViewDataSource : NSObject<UITableViewDataSource> {
     @private
-
     NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
     UITableView *_tableView;
     HMNamedItemGroup *_itemSpecification;

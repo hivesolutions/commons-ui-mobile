@@ -27,30 +27,78 @@
 
 #import "HMItemTableView.h"
 
+/**
+ * The header item table view used to incorporate
+ * an header in the item table view.
+ */
 @interface HMHeaderItemTableView : HMItemTableView {
-    @private NSString *_title;
-    @private NSString *_subTitle;
-    @private NSString *_image;
-    @private UIView *_normalHeaderView;
-    @private UIView *_editHeaderView;
-    @private UILabel *_titleLabel;
-    @private UILabel *_subTitleLabel;
-    @private UIImageView *_imageImage;
-    @private UITextField *_titleTextField;
-    @private UITextField *_subTitleTextField;
-    @private UIImageView *_imageAddImage;
+    @private
+    NSString *_title;
+    NSString *_subTitle;
+    NSString *_image;
+    UIView *_normalHeaderView;
+    UIView *_editHeaderView;
+    UILabel *_titleLabel;
+    UILabel *_subTitleLabel;
+    UIImageView *_imageImage;
+    UITextField *_titleTextField;
+    UITextField *_subTitleTextField;
+    UIImageView *_imageAddImage;
 }
 
+/**
+ * The title of the header.
+ */
 @property (retain) NSString *title;
+
+/**
+ * The sub-title of the header.
+ */
 @property (retain) NSString *subTitle;
+
+/**
+ * The image of the header.
+ */
 @property (retain) NSString *image;
+
+/**
+ * The header view to be used in "normal" mode.
+ */
 @property (retain) UIView *normalHeaderView;
+
+/**
+ * The header view to be used in "edit" mode.
+ */
 @property (retain) UIView *editHeaderView;
+
+/**
+ * The label for the title.
+ */
 @property (assign) UILabel *titleLabel;
+
+/**
+ * The label for the sub-title.
+ */
 @property (assign) UILabel *subTitleLabel;
+
+/**
+ * The image view to be used in the image.
+ */
 @property (assign) UIImageView *imageImage;
+
+/**
+ * The text field for the title.
+ */
 @property (assign) UITextField *titleTextField;
+
+/**
+ * The text field for the sub-title.
+ */
 @property (assign) UITextField *subTitleTextField;
+
+/**
+ * The image to the add image.
+ */
 @property (assign) UIImageView *imageAddImage;
 
 /**
