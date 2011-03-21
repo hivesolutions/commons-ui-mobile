@@ -161,7 +161,7 @@
     addImage.layer.borderWidth = 1.0;
 
     // creates the title text field frame
-    CGRect titleTextFieldFrame = CGRectMake(83, 34, 197, 24);
+    CGRect titleTextFieldFrame = CGRectMake(83, 35, 197, 24);
 
     // creates the title text field view
     UITextField *titleTextField = [[UITextField alloc] initWithFrame:titleTextFieldFrame];
