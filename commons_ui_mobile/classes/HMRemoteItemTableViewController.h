@@ -30,8 +30,10 @@
 #import "HMItemTableViewProvider.h"
 
 @interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {
-    @private NSMutableData *_receivedData;
-    @private HMNamedItemGroup *_remoteGroup;
+    @private
+
+    NSMutableData *_receivedData;
+    HMNamedItemGroup *_remoteGroup;
 }
 
 /**

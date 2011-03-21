@@ -28,17 +28,43 @@
 #import "HMItemTableViewProvider.h"
 #import "HMStringTableViewCell.h"
 
+/**
+ * Table view data soruce used to represent for reprenstation
+ * of item objects.
+ */
 @interface HMItemTableViewDataSource : NSObject<UITableViewDataSource> {
-    @private NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
-    @private UITableView *_tableView;
-    @private HMNamedItemGroup *_itemSpecification;
-    @private BOOL itemDirty;
+    @private
+
+    NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
+    UITableView *_tableView;
+    HMNamedItemGroup *_itemSpecification;
+    BOOL itemDirty;
 }
 
+/**
+ * The item table view provider used to obtain the item objects.
+ */
 @property (assign) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
+
+/**
+ * The table view that is associated with this
+ * data source.
+ */
 @property (assign) UITableView *tableView;
+
+/**
+ * The current item specification (top level item node).
+ */
 @property (retain) HMNamedItemGroup *itemSpecification;
+
+/**
+ * The reference to the header named item group.
+ */
 @property (readonly) HMNamedItemGroup *headerNamedItemGroup;
+
+/**
+ * The reference to the list item group.
+ */
 @property (readonly) HMItemGroup *listItemGroup;
 
 /**

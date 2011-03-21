@@ -25,6 +25,10 @@
 
 #import "Dependencies.h"
 
+/**
+ * The delegate class to be used in the remote
+ * table view.
+ */
 @protocol HMRemoteTableViewDelegate<NSObject>
 
 @required

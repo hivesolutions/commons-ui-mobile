@@ -32,19 +32,46 @@
  */
 #define HM_REMOTE_TABLE_VIEW_CONNECTION_TIMEOUT 30.0
 
+/**
+ * Class used to represent a table view data source
+ * for remote connections with serialization.
+ */
 @interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource, UIActionSheetDelegate> {
-    @private NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
-    @private UITableView *_tableView;
-    @private NSURLConnection *_connection;
-    @private NSMutableData *_receivedData;
-    @private NSArray *_remoteData;
-    @private BOOL remoteDirty;
+    @private
+    NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
+    UITableView *_tableView;
+    NSURLConnection *_connection;
+    NSMutableData *_receivedData;
+    NSArray *_remoteData;
+    BOOL remoteDirty;
 }
 
+/**
+ * The remote table view provider.
+ * This table view provider is used to obtain information
+ * about the remote node.
+ */
 @property (assign) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
+
+/**
+ * The table view that is associated with this
+ * data source.
+ */
 @property (assign) UITableView *tableView;
+
+/**
+ * The currently established connection.
+ */
 @property (retain) NSURLConnection *connection;
+
+/**
+ * The received data at the moment.
+ */
 @property (retain) NSMutableData *receivedData;
+
+/**
+ * The parsed (deserialized) of remote data.
+ */
 @property (retain) NSArray *remoteData;
 
 /**

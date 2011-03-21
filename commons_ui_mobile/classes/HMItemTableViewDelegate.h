@@ -25,6 +25,10 @@
 
 #import "Dependencies.h"
 
+/**
+ * The delegate class to be used in the item
+ * table view.
+ */
 @protocol HMItemTableViewDelegate<NSObject>
 
 @required

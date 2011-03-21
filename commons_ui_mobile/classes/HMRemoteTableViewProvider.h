@@ -34,6 +34,11 @@ typedef enum {
     HMRemoteTableViewXmlSerialized,
 } HMRemoteTableViewSerialized;
 
+
+/**
+ * The provider class to be used in the remote
+ * table view.
+ */
 @protocol HMRemoteTableViewProvider<NSObject>
 
 @required
