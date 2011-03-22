@@ -118,11 +118,6 @@
 - (void)constructEditView;
 
 /**
- * Constructs the bottom toolbar component.
- */
-- (void)constructToolbar;
-
-/**
  * Called when editing mode shows.
  */
 - (void)showEditing;
