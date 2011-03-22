@@ -31,6 +31,9 @@
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 
+    // defines the text label's font
+    self.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+
     // returns self
     return self;
 }
@@ -40,7 +43,7 @@
     [super createEditing];
 
     // initializes the delta
-    float delta = 10;
+    float delta = 0;
 
     // adjusts the delta in case the item table view is plain
     if(self.itemTableView.style == UITableViewStylePlain) {
@@ -48,7 +51,7 @@
     }
 
     // creates the edit view
-    CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta - 10, self.contentView.frame.size.height);
+    CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
     UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
     editView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     editView.backgroundColor = [UIColor clearColor];
@@ -61,6 +64,39 @@
 
     // releases the objects
     [editView release];
+}
+
+- (void)showEditing {
+    // hides the text label
+    self.textLabel.hidden = YES;
+
+    // calls the super
+    [super showEditing];
+}
+
+- (void)hideEditing {
+    // calls the super
+    [super hideEditing];
+
+    // shows the text label
+    self.textLabel.hidden = NO;
+}
+
+- (void)setDescription:(NSString *)description {
+    // in case the object is the same
+    if(description == _description) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_description release];
+
+    // sets and retains the object
+    _description = [description retain];
+
+    // sets the cell's text label
+    self.textLabel.text = description;
 }
 
 @end

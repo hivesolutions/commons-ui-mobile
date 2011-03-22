@@ -57,7 +57,6 @@
 
 - (void)showEditing {
     // hides the contents
-    self.detailTextLabel.hidden = YES;
     self.accessoryView.hidden = YES;
 
     // shows the edit view
@@ -70,7 +69,6 @@
 
     // hides the contents
     self.accessoryView.hidden = NO;
-    self.detailTextLabel.hidden = NO;
 }
 
 - (void)focusEditing {

@@ -30,7 +30,7 @@
 /**
  * The plain string table view cell x margin.
  */
-#define HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN 6
+#define HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN 10
 
 /**
  * The plain string table view cell y margin.

@@ -85,6 +85,22 @@
     [editView release];
 }
 
+- (void)showEditing {
+    // hides the detail text label
+    self.detailTextLabel.hidden = YES;
+
+    // calls the super
+    [super showEditing];
+}
+
+- (void)hideEditing {
+    // calls the super
+    [super hideEditing];
+
+    // shows the detail text label
+    self.detailTextLabel.hidden = NO;
+}
+
 - (void)layoutSubviews {
     // calls the super
     [super layoutSubviews];

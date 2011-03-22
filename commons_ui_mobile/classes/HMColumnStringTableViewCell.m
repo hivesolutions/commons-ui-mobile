@@ -52,6 +52,8 @@
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.backgroundColor = [UIColor clearColor];
+    textField.text = self.stringValue;
     textField.placeholder = self.defaultValue;
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
@@ -74,10 +76,7 @@
     // disables cell highlighting
     self.selectionStyle = UITableViewCellEditingStyleNone;
 
-    // updates the string value
-    self.stringValue = self.detailTextLabel.text;
-
-    // hides the text field
+    // shows the text field
     self.textField.hidden = NO;
 }
 
@@ -88,8 +87,8 @@
     // enables cell highlighting
     self.selectionStyle = UITableViewCellSelectionStyleBlue;
 
-    // updates the string value
-    self.stringValue = self.textField.text;
+    // updates the description
+    self.description = self.textField.text;
 
     // hides the text field
     self.textField.hidden = YES;
@@ -102,8 +101,8 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
-    // updates the string value
-    self.stringValue = self.textField.text;
+    // updates the description
+    self.description = self.textField.text;
 
     // calls the super
     [super blurEditing];
@@ -128,14 +127,6 @@
 
     // updates the text field text
     self.textField.text = _stringValue;
-
-    // sets the a mask as the description
-    // in case the cell is secure
-    if(self.secure == YES && _stringValue.length > 0) {
-        self.description = @"••••••••";
-    } else {
-        self.description = _stringValue;
-    }
 }
 
 - (BOOL)secure {
@@ -154,6 +145,9 @@
 
     // updates the secure text entry attribute
     self.textField.secureTextEntry = _secure;
+
+    // sets the description
+    self.description = self.textField.text;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -172,6 +166,19 @@
 
     // returns yes
     return YES;
+}
+
+- (void)setDescription:(NSString *)description {
+    // sets the string value
+    self.stringValue = description;
+
+    // masks the description if necessary
+    if(self.secure == YES && description.length > 0) {
+        description = @"••••••••";
+    }
+
+    // calls the super
+    [super setDescription:description];
 }
 
 @end
