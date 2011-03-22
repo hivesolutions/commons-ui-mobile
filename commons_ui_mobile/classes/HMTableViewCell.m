@@ -31,10 +31,6 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
-    // sets the text label to adjust the
-    // font size to the available width
-    self.textLabel.adjustsFontSizeToFitWidth = YES;
-
     // replaces the selected background view
     HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
     self.selectedBackgroundView = backgroundView;
@@ -238,19 +234,6 @@
         // releases the notifications switch
         [notificationsSwitch release];
     }
-}
-
-- (void)layoutSubviews {
-    // calls the super
-    [super layoutSubviews];
-
-    // moves the detail text label origin
-    // five pixels to the right
-    CGRect frame = self.detailTextLabel.frame;
-    frame.origin.x += 4;
-
-    // updates the detail text label's position
-    self.detailTextLabel.frame = frame;
 }
 
 @end

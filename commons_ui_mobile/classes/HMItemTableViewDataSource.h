@@ -26,7 +26,8 @@
 #import "Dependencies.h"
 
 #import "HMItemTableViewProvider.h"
-#import "HMStringTableViewCell.h"
+#import "HMPlainStringTableViewCell.h"
+#import "HMColumnStringTableViewCell.h"
 
 /**
  * Table view data soruce used to represent for reprenstation

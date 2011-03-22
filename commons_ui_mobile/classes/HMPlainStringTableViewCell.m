@@ -19,23 +19,15 @@
 // __author__    = Tiago Silva <tsilva@hive.pt>
 // __version__   = 1.0.0
 // __revision__  = $LastChangedRevision: 2390 $
-// __date__      = $LastChangedDate: 2009-04-02 08:36:50 +0100 (qui, 02 Abr 2009) $
+// __date__      = $LastChangedDate: 2009-04-02 08:36:50 +0100 (qui, 02 2009) $
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMStringTableViewCell.h"
+#import "HMPlainStringTableViewCell.h"
 
-@implementation HMStringTableViewCell
+@implementation HMPlainStringTableViewCell
 
 @synthesize textField = _textField;
-
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
-    // invokes the parent constructor
-    self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
-
-    // returns self
-    return self;
-}
 
 - (void)dealloc {
     // releases the text field
@@ -54,12 +46,14 @@
 
     // creates the text field and adds it to the edit view
     CGRect editViewFrame = self.editView.frame;
-    CGRect textFieldFrame = CGRectMake(HM_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_STRING_TABLE_VIEW_CELL_X_MARGIN * 2, HM_STRING_TABLE_VIEW_CELL_HEIGHT);
+    CGRect textFieldFrame = CGRectMake(HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_PLAIN_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN * 2 + 4, HM_PLAIN_STRING_TABLE_VIEW_CELL_HEIGHT);
     UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
+    textField.backgroundColor = [UIColor clearColor];
+    textField.text = self.stringValue;
     textField.placeholder = self.defaultValue;
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
@@ -82,10 +76,7 @@
     // disables cell highlighting
     self.selectionStyle = UITableViewCellEditingStyleNone;
 
-    // updates the string value
-    self.stringValue = self.detailTextLabel.text;
-
-    // hides the text field
+    // shows the text field
     self.textField.hidden = NO;
 }
 
@@ -96,8 +87,8 @@
     // enables cell highlighting
     self.selectionStyle = UITableViewCellSelectionStyleBlue;
 
-    // updates the string value
-    self.stringValue = self.textField.text;
+    // updates the description
+    self.description = self.textField.text;
 
     // hides the text field
     self.textField.hidden = YES;
@@ -110,8 +101,8 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
-    // updates the string value
-    self.stringValue = self.textField.text;
+    // updates the description
+    self.description = self.textField.text;
 
     // calls the super
     [super blurEditing];
@@ -136,14 +127,6 @@
 
     // updates the text field text
     self.textField.text = _stringValue;
-
-    // sets the a mask as the description
-    // in case the cell is secure
-    if(self.secure == YES && _stringValue.length > 0) {
-        self.description = @"••••••••";
-    } else {
-        self.description = _stringValue;
-    }
 }
 
 - (BOOL)secure {
@@ -162,6 +145,9 @@
 
     // updates the secure text entry attribute
     self.textField.secureTextEntry = _secure;
+
+    // sets the description
+    self.description = self.textField.text;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -180,6 +166,19 @@
 
     // returns yes
     return YES;
+}
+
+- (void)setDescription:(NSString *)description {
+    // sets the string value
+    self.stringValue = description;
+
+    // masks the description if necessary
+    if(self.secure == YES && description.length > 0) {
+        description = @"••••••••";
+    }
+
+    // calls the super
+    [super setDescription:description];
 }
 
 @end

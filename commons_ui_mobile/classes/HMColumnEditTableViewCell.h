@@ -27,38 +27,16 @@
 
 #import "HMEditTableViewCell.h"
 
-/**
- * The string table view cell x margin.
- */
-#define HM_STRING_TABLE_VIEW_CELL_X_MARGIN 6
+// avoids circular dependency
+@class HMEditItemTableView;
 
-/**
- * The string table view cell y margin.
- */
-#define HM_STRING_TABLE_VIEW_CELL_Y_MARGIN 12
-
-/**
- * The string table view cell height.
- */
-#define HM_STRING_TABLE_VIEW_CELL_HEIGHT 19
-
-@interface HMStringTableViewCell : HMEditTableViewCell<UITextFieldDelegate> {
-    @private
-    UITextField *_textField;
-    NSString *_stringValue;
-    BOOL _secure;
+@interface HMColumnEditTableViewCell : HMEditTableViewCell {
 }
 
-@property (retain) UITextField *textField;
-@property (retain) NSString *stringValue;
-@property (assign) BOOL secure;
-
 /**
- * Constructor of the class.
- *
- * @param reuseIdentifier The cell's identifier.
- * @return The string table view cell instance.
+ * Indicates that the label
+ * was selected.
  */
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifier;
+- (void)didSelectLabel;
 
 @end
