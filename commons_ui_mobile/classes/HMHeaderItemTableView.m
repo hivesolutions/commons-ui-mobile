@@ -131,13 +131,6 @@
     [header release];
 }
 
-- (void)addPhotoButtonClicked:(id)sender extra:(id)extra {
-    if([self.itemDelegate respondsToSelector:@selector(buttonClicked:)]) {
-        // calls the add photo button clicked handler
-        [self.itemDelegate buttonClicked:@"addPhoto"];
-    }
-}
-
 - (void)constructEditView {
     // creates the header
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 82)];
@@ -209,6 +202,13 @@
     [titleTextField release];
     [headerContainer release];
     [header release];
+}
+
+- (void)addPhotoButtonClicked:(id)sender extra:(id)extra {
+    if([self.itemDelegate respondsToSelector:@selector(buttonClicked:)]) {
+        // calls the add photo button clicked handler
+        [self.itemDelegate buttonClicked:@"addPhoto"];
+    }
 }
 
 - (NSString *)title {
