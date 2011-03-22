@@ -25,48 +25,32 @@
 
 #import "Dependencies.h"
 
-@interface HMTableViewCell : UITableViewCell {
-    @protected
-    NSString *_description;
+#import "HMColumnEditTableViewCell.h"
 
+/**
+ * The column string table view cell x margin.
+ */
+#define HM_COLUMN_STRING_TABLE_VIEW_CELL_X_MARGIN 6
+
+/**
+ * The column string table view cell y margin.
+ */
+#define HM_COLUMN_STRING_TABLE_VIEW_CELL_Y_MARGIN 12
+
+/**
+ * The column string table view cell height.
+ */
+#define HM_COLUMN_STRING_TABLE_VIEW_CELL_HEIGHT 19
+
+@interface HMColumnStringTableViewCell : HMColumnEditTableViewCell<UITextFieldDelegate> {
     @private
-    NSString *_name;
-    NSString *_icon;
-    NSString *_highlightedIcon;
-    BOOL _highlightable;
-    NSString *_accessoryTypeString;
+    UITextField *_textField;
+    NSString *_stringValue;
+    BOOL _secure;
 }
 
-/**
- * The cell's name that will be set
- * as its label.
- */
-@property (retain) NSString *name;
-
-/**
- * The cell's description that will be set
- * as its detail text label.
- */
-@property (retain) NSString *description;
-
-/**
- * The identifier of the icon resource.
- */
-@property (retain) NSString *icon;
-
-/**
- * The identifier of the highlighted icon resource.
- */
-@property (retain) NSString *highlightedIcon;
-
-/**
- * Indicates if the table view cell is highlightable.
- */
-@property (assign) BOOL highlightable;
-
-/**
- * The type of accessory (string mode).
- */
-@property (retain) NSString *accessoryTypeString;
+@property (retain) UITextField *textField;
+@property (retain) NSString *stringValue;
+@property (assign) BOOL secure;
 
 @end

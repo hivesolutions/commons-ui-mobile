@@ -25,48 +25,18 @@
 
 #import "Dependencies.h"
 
-@interface HMTableViewCell : UITableViewCell {
-    @protected
-    NSString *_description;
+#import "HMEditTableViewCell.h"
 
-    @private
-    NSString *_name;
-    NSString *_icon;
-    NSString *_highlightedIcon;
-    BOOL _highlightable;
-    NSString *_accessoryTypeString;
+// avoids circular dependency
+@class HMEditItemTableView;
+
+@interface HMColumnEditTableViewCell : HMEditTableViewCell {
 }
 
 /**
- * The cell's name that will be set
- * as its label.
+ * Indicates that the label
+ * was selected.
  */
-@property (retain) NSString *name;
-
-/**
- * The cell's description that will be set
- * as its detail text label.
- */
-@property (retain) NSString *description;
-
-/**
- * The identifier of the icon resource.
- */
-@property (retain) NSString *icon;
-
-/**
- * The identifier of the highlighted icon resource.
- */
-@property (retain) NSString *highlightedIcon;
-
-/**
- * Indicates if the table view cell is highlightable.
- */
-@property (assign) BOOL highlightable;
-
-/**
- * The type of accessory (string mode).
- */
-@property (retain) NSString *accessoryTypeString;
+- (void)didSelectLabel;
 
 @end

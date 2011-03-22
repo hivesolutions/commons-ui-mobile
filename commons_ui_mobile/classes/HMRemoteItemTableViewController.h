@@ -39,11 +39,21 @@
  */
 #define HTTP_APPLICATION_URL_ENCODED @"application/x-www-form-urlencoded"
 
+/**
+ * Enumeration defining the various item
+ * operations available.
+ */
+typedef enum {
+    HMItemOperationCreate = 1,
+    HMItemOperationRead,
+    HMItemOperationUpdate
+} HMItemOperationType;
+
 @interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {
     @private
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
-    BOOL _editable;
+    HMItemOperationType _operationType;
 }
 
 /**
@@ -57,9 +67,21 @@
 @property (retain) HMNamedItemGroup *remoteGroup;
 
 /**
- * The property the table view as editable (edit button).
+ * The property that defined the king of table
+ * view to be presented.
+ * The ui of the table view is presented according to
+ * the type of operation in defined.
  */
-@property (assign) BOOL editable;
+@property (assign) HMItemOperationType operationType;
+
+/**
+ * Constructor of the class.
+ *
+ * @param nibNameOrNil The name of the nib to be used.
+ * @param nibBundleOrNil The nib bundle to be used.
+ * @param operationType The type of operation.
+ */
+- (id)initWithNibNameAndType:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil operationType:(HMItemOperationType)operationType;
 
 /**
  * Initializes the structures.
@@ -80,6 +102,16 @@
  * Constructs the internal data structures.
  */
 - (void)constructStructures;
+
+/**
+ * Constructs the create operation stuctures.
+ */
+- (void)constructCreateStructures;
+
+/**
+ * Constructs the update operation stuctures.
+ */
+- (void)constructUpdateStructures;
 
 /**
  * Processes the remote data hanlding it and constructing
@@ -108,6 +140,21 @@
  @ @param extra The extra parameters values.
  */
 - (void)editButtonClick:(id)sender extra:(id)extra;
+
+/**
+ * Shows the bottom toolbar.
+ */
+- (void)showToolbar;
+
+/**
+ * Hides the bottom toolbar.
+ */
+- (void)hideToolbar;
+
+/**
+ * Deletes the item.
+ */
+- (void)deleteButtonClicked:(id)sender;
 
 /**
  * Keeps the class valid for export at link time.

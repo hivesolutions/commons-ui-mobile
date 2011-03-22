@@ -29,7 +29,7 @@
 
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
-@synthesize editable = _editable;
+@synthesize operationType = _operationType;
 
 - (id)init {
     // calls the super
@@ -73,6 +73,23 @@
     return self;
 }
 
+- (id)initWithNibNameAndType:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil operationType:(HMItemOperationType)operationType {
+    // calls the super
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
+    // initializes the structures
+    [self initStructures];
+
+    // sets the operation type
+    self.operationType = operationType;
+
+    // constructs the structures
+    [self constructStructures];
+
+    // returns self
+    return self;
+}
+
 - (void)dealloc {
     // releases the received data
     [self.receivedData release];
@@ -84,9 +101,19 @@
     [super dealloc];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // shows the toolbar
+    [self showToolbar];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // hides the toolbar
+    [self hideToolbar];
+}
+
 - (void)initStructures {
     // sets the table view as editable
-    self.editable = YES;
+    self.operationType = HMItemOperationUpdate;
 }
 
 - (NSString *)getRemoteUrl {
@@ -103,14 +130,56 @@
     itemTableView.itemTableViewProvider = self;
     itemTableView.itemDelegate = self;
 
-    // in case the current table view is editable
-    if(self.editable) {
-        // creates the edit ui bar button
-        UIBarButtonItem *editUiBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:   @selector(editButtonClick:extra:)];
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
+        // in case it's a create operation
+        case HMItemOperationCreate:
+            // constructs the create structures
+            [self constructCreateStructures];
 
-        // sets the edit ui bar button
-        self.navigationItem.rightBarButtonItem = editUiBarButton;
+            // breaks the swtich
+            break;
+
+        // in case it's an update operation
+        case HMItemOperationUpdate:
+            // constructs the update structures
+            [self constructUpdateStructures];
+
+            // breaks the switch
+            break;
+
+        default:
+            break;
     }
+}
+
+- (void)constructCreateStructures {
+    // creates the cancel bar button
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClick:extra:)];
+
+    // creates the done button
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClick:extra:)];
+
+    // sets the bar buttons
+    self.navigationItem.leftBarButtonItem = cancelBarButton;
+    self.navigationItem.rightBarButtonItem = doneBarButton;
+
+    // releases the objects
+    [cancelBarButton release];
+    [doneBarButton release];
+}
+
+- (void)constructUpdateStructures {
+    // creates the edit bar button
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClick:extra:)];
+
+    // sets the bar buttons
+    self.navigationItem.rightBarButtonItem = editBarButton;
+
+    // releases the objects
+    [editBarButton release];
 }
 
 - (void)processRemoteData:(NSDictionary *)remoteData {
@@ -154,7 +223,7 @@
 
         // sets the http request properties, for a post request
         [request setHTTPMethod: HTTP_POST_METHOD];
-        [request setHTTPBody: httpData];
+        [request setHTTPBody:httpData];
         [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
 
         // creates the connection with the intance as delegate
@@ -168,6 +237,11 @@
         // sets the table view as editing
         [self.tableView setEditing:YES animated:YES];
     }
+}
+
+- (void)cancelButtonClick:(id)sender extra:(id)extra {
+    // dismisses the modal view controller in animated mode
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void) updateRemote {
@@ -233,6 +307,48 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+}
+
+- (void)showToolbar {
+    // shows the navigation controller toolbar
+    [self.navigationController setToolbarHidden:NO animated:YES];
+
+    // sets the navigation toolbar tint color
+    self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+
+    // creates the trash item
+    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:)];
+
+    // sets the trash item style
+    trashItem.style = UIBarButtonItemStylePlain;
+
+    // flexible item used to separate the left groups items and right grouped items
+    UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    // create the system-defined refresh button
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
+
+    // sets the system item style
+    refreshItem.style = UIBarButtonItemStylePlain;
+
+    // creates the toolbar items list
+    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
+
+    // sets the toolbar items in the toolbar
+    [self.navigationController.toolbar setItems:items animated:NO];
+}
+
+- (void)hideToolbar {
+    // hides the navigation controller toolbar
+    [self.navigationController setToolbarHidden:YES animated:YES];
+}
+
+- (void)deleteButtonClicked:(id)sender {
+    CATransition *animation = [CATransition animation];
+    animation.type = @"suckEffect";
+    animation.duration = 2.0f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
 }
 
 + (void)_keepAtLinkTime {

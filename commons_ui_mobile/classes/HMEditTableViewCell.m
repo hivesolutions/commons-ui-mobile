@@ -50,70 +50,13 @@
     [super dealloc];
 }
 
-- (void)didSelectLabel {
-    NSLog(@"LABEL SELECTED");
-}
-
 - (void)createEditing {
     // retrieves the associated table view (superview)
     self.itemTableView = (HMItemTableView *) self.superview;
-
-    // starts the delta value
-    float delta = 0;
-
-    // switches over the table style
-    switch(self.itemTableView.style) {
-        // in case it's an ui table view style grouped
-        case UITableViewStyleGrouped:
-            // sets the delta to grouped
-            delta = 81;
-
-            // breaks the switch
-            break;
-
-        // in case it's an ui table view style plain
-        case UITableViewStylePlain:
-            // sets the delta to grouped
-            delta = 105;
-
-            // breaks the switch
-            break;
-    }
-
-    // creates a label click view
-    CGRect labelClickViewFrame = CGRectMake(0, 0, delta, self.contentView.frame.size.height);
-    UIView *labelClickView = [[UIView alloc] initWithFrame:labelClickViewFrame];
-    labelClickView.backgroundColor = [UIColor clearColor];
-
-    // creates a tap gesture recognizer
-    // for the label click view
-    UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectLabel)];
-    [labelClickView addGestureRecognizer:tapGestureRecognizer];
-
-    // creates the edit view
-    CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
-    UIView *editView = [[HMEditTableViewCellEditView alloc] initWithFrame:editViewFrame];
-    editView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    editView.backgroundColor = [UIColor clearColor];
-
-    // adds the label click view and the
-    // edit view to the content view
-    [self.contentView addSubview:labelClickView];
-    [self.contentView addSubview:editView];
-
-    // sets the attributes
-    self.editingAccessoryType = UITableViewCellAccessoryNone;
-    self.editView = editView;
-
-    // releases the objects
-    [labelClickView release];
-    [tapGestureRecognizer release];
-    [editView release];
 }
 
 - (void)showEditing {
     // hides the contents
-    self.detailTextLabel.hidden = YES;
     self.accessoryView.hidden = YES;
 
     // shows the edit view
@@ -126,12 +69,14 @@
 
     // hides the contents
     self.accessoryView.hidden = NO;
-    self.detailTextLabel.hidden = NO;
 }
 
 - (void)focusEditing {
     // blurs all the other cells except mine
     [self.itemTableView blurAllExceptCell:self];
+
+    // sets the editing accessory type
+    self.editingAccessoryType = UITableViewCellAccessoryNone;
 }
 
 - (void)blurEditing {

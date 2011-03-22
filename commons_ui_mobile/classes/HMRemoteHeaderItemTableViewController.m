@@ -53,6 +53,7 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    // dismisses the modal view controller in animated mode
     [self dismissModalViewControllerAnimated:YES];
 
     // retrieves the selected image
