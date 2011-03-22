@@ -290,28 +290,28 @@
     // creates an index path
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
-    // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // releases the index path
     [indexPath release];
 
-    // returns the section's footer
-    return sectionItemGroup.footer;
+    // returns the table section item group's footer
+    return tableSectionItemGroup.footer;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     // creates an index path
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
-    // retrieves the section item group
-    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // releases the index path
     [indexPath release];
 
-    // returns the section's header
-    return sectionItemGroup.header;
+    // returns the table section item group's header
+    return tableSectionItemGroup.header;
 }
 
 + (void)_keepAtLinkTime {
