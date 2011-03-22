@@ -118,6 +118,14 @@
 - (void)constructEditView;
 
 /**
+ * Called when the photo button is clicked.
+ *
+ * @param sender The sender component.
+ * @param extra The extra parameters argument.
+ */
+- (void)addPhotoButtonClicked:(id)sender extra:(id)extra;
+
+/**
  * Called when editing mode shows.
  */
 - (void)showEditing;

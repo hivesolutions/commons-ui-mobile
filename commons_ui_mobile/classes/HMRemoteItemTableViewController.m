@@ -29,7 +29,7 @@
 
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
-@synthesize editable = _editable;
+@synthesize operationType = _operationType;
 
 - (id)init {
     // calls the super
@@ -73,6 +73,23 @@
     return self;
 }
 
+- (id)initWithNibNameAndType:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil operationType:(HMItemOperationType)operationType {
+    // calls the super
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
+    // initializes the structures
+    [self initStructures];
+
+    // sets the operation type
+    self.operationType = operationType;
+
+    // constructs the structures
+    [self constructStructures];
+
+    // returns self
+    return self;
+}
+
 - (void)dealloc {
     // releases the received data
     [self.receivedData release];
@@ -96,7 +113,7 @@
 
 - (void)initStructures {
     // sets the table view as editable
-    self.editable = YES;
+    self.operationType = HMItemOperationUpdate;
 }
 
 - (NSString *)getRemoteUrl {
@@ -113,14 +130,56 @@
     itemTableView.itemTableViewProvider = self;
     itemTableView.itemDelegate = self;
 
-    // in case the current table view is editable
-    if(self.editable) {
-        // creates the edit ui bar button
-        UIBarButtonItem *editUiBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action:   @selector(editButtonClick:extra:)];
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
+        // in case it's a create operation
+        case HMItemOperationCreate:
+            // constructs the create structures
+            [self constructCreateStructures];
 
-        // sets the edit ui bar button
-        self.navigationItem.rightBarButtonItem = editUiBarButton;
+            // breaks the swtich
+            break;
+
+        // in case it's an update operation
+        case HMItemOperationUpdate:
+            // constructs the update structures
+            [self constructUpdateStructures];
+
+            // breaks the switch
+            break;
+
+        default:
+            break;
     }
+}
+
+- (void)constructCreateStructures {
+    // creates the cancel bar button
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClick:extra:)];
+
+    // creates the done button
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(editButtonClick:extra:)];
+
+    // sets the bar buttons
+    self.navigationItem.leftBarButtonItem = cancelBarButton;
+    self.navigationItem.rightBarButtonItem = doneBarButton;
+
+    // releases the objects
+    [cancelBarButton release];
+    [doneBarButton release];
+}
+
+- (void)constructUpdateStructures {
+    // creates the edit bar button
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClick:extra:)];
+
+    // sets the bar buttons
+    self.navigationItem.rightBarButtonItem = editBarButton;
+
+    // releases the objects
+    [editBarButton release];
 }
 
 - (void)processRemoteData:(NSDictionary *)remoteData {
