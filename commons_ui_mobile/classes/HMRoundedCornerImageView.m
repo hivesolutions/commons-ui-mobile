@@ -24,24 +24,30 @@
 // __license__   = GNU General Public License (GPL), Version 3
 
 #define DEFAULT_CORNER_RADIUS 10.0
-#define IMAGE_BITS_PER_COMPONENT 8
-#define IMAGE_BYTES_PER_ROW 4
+#define DEFAULT_IMAGE_WIDTH 64
+#define DEFAULT_IMAGE_HEIGHT 64
 
 #import "HMRoundedCornerImageView.h"
 
 @implementation HMRoundedCornerImageView
 
 - (void)setImage:(UIImage *)image {
-    // retrieves the image's dimensions
+    // retrieves the image's attributes
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
     CGRect imageRect = CGRectMake(0, 0, imageWidth, imageHeight);
+    CGImageRef imageRef = image.CGImage;
+    int imageBitsPerComponent = CGImageGetBitsPerComponent(imageRef);
+    CGColorSpaceRef imageColorSpaceRef = CGImageGetColorSpace(imageRef);
 
-    // creates a bitmap context
-    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
-    CGContextRef context = CGBitmapContextCreate(NULL, imageWidth, imageHeight, IMAGE_BITS_PER_COMPONENT, IMAGE_BYTES_PER_ROW * imageWidth, colorSpace, kCGImageAlphaPremultipliedFirst);
+    // resizes the image
+    CGContextRef context = CGBitmapContextCreate(NULL, imageWidth, imageHeight, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
+    CGContextDrawImage(context, imageRect, image.CGImage);
+    CGImageRef imageResized = CGBitmapContextCreateImage(context);
+    image = [UIImage imageWithCGImage:imageResized];
 
     // configures the context
+    context = CGBitmapContextCreate(NULL, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     const CGColorRef grayColor = [[UIColor grayColor] CGColor];
     CGContextSetStrokeColorWithColor(context, grayColor);
     CGContextSetLineWidth(context, 1);
@@ -49,12 +55,13 @@
     CGContextSetShouldAntialias(context, YES);
 
     // retrieves the rectangles coordinates
-    CGFloat minimumX = CGRectGetMinX(imageRect);
-    CGFloat middleX = CGRectGetMidX(imageRect);
-    CGFloat maximumX = CGRectGetMaxX(imageRect);
-    CGFloat minimumY = CGRectGetMinY(imageRect);
-    CGFloat middleY = CGRectGetMidY(imageRect);
-    CGFloat maximumY = CGRectGetMaxY(imageRect);
+    CGRect resizedImageRect = CGRectMake(0, 0, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
+    CGFloat minimumX = CGRectGetMinX(resizedImageRect);
+    CGFloat middleX = CGRectGetMidX(resizedImageRect);
+    CGFloat maximumX = CGRectGetMaxX(resizedImageRect);
+    CGFloat minimumY = CGRectGetMinY(resizedImageRect);
+    CGFloat middleY = CGRectGetMidY(resizedImageRect);
+    CGFloat maximumY = CGRectGetMaxY(resizedImageRect);
 
     // creates the image's border
     CGMutablePathRef path = CGPathCreateMutable();
@@ -71,7 +78,7 @@
     CGContextClip(context);
 
     // draws the image
-    CGContextDrawImage(context, imageRect, image.CGImage);
+    CGContextDrawImage(context, resizedImageRect, image.CGImage);
 
     // draws the image's border
     CGContextAddPath(context, path);
@@ -85,7 +92,6 @@
 
     // releases the objects
     CGContextRelease(context);
-    CGColorSpaceRelease(colorSpace);
     CGImageRelease(imageMasked);
 
     // calls the super
