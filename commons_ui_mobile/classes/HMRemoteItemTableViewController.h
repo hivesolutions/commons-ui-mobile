@@ -110,6 +110,16 @@
 - (void)editButtonClick:(id)sender extra:(id)extra;
 
 /**
+ * Shows the bottom toolbar.
+ */
+- (void)showToolbar;
+
+/**
+ * Hides the bottom toolbar.
+ */
+- (void)hideToolbar;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;

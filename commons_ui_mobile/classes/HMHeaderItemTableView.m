@@ -78,9 +78,6 @@
 
     // constructs the "edit" view
     [self constructEditView];
-
-    // constructs the toolbar
-    [self constructToolbar];
 }
 
 - (void)constructNormalView {
@@ -212,59 +209,6 @@
     [titleTextField release];
     [headerContainer release];
     [header release];
-}
-
-- (void)constructToolbar {
-    // create the toolbar
-    UIToolbar *toolbar = [UIToolbar new];
-
-    // sets the toolbar style
-    toolbar.barStyle = UIBarStyleDefault;
-
-    // size up the toolbar and set its frame
-    [toolbar sizeToFit];
-
-    // retrieves the toolbar height
-    CGFloat toolbarHeight = [toolbar frame].size.height;
-
-    // retrieves the main view bounds
-    CGRect mainViewBounds = self.bounds;
-
-    // sets the toolbar frame to place it in the right spot
-    [toolbar setFrame:CGRectMake(CGRectGetMinX(mainViewBounds), CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - (toolbarHeight * 2.0) + 2.0, CGRectGetWidth(mainViewBounds), toolbarHeight)];
-
-    // creates the style to be used in all the items
-    UIBarButtonItemStyle style = UIBarButtonItemStylePlain;
-
-    // creates the trash item
-    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:nil];
-
-    // sets the system item style
-    trashItem.style = style;
-
-    // creates the flexible space item
-    UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-
-    // creates the refresh item
-    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
-
-    // sets the system item style
-    refreshItem.style = style;
-
-    // creates the toolbar items list
-    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
-
-    // sets the toolbar items in the toolbar
-    [toolbar setItems:items animated:NO];
-
-    // adds the toolbar to the view
-    [self addSubview:toolbar];
-
-    // releases the objects
-    [trashItem release];
-    [flexibleSpaceItem release];
-    [refreshItem release];
-    [toolbar release];
 }
 
 - (NSString *)title {

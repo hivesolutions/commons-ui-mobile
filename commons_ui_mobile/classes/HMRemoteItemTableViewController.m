@@ -84,6 +84,16 @@
     [super dealloc];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    // shows the toolbar
+    [self showToolbar];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // hides the toolbar
+    [self hideToolbar];
+}
+
 - (void)initStructures {
     // sets the table view as editable
     self.editable = YES;
@@ -235,64 +245,38 @@
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-        // create the toolbar
-        UIToolbar *toolbar = [[UIToolbar alloc] init];
+- (void)showToolbar {
+    // shows the navigation controller toolbar
+    [self.navigationController setToolbarHidden:NO animated:YES];
 
-        // sets the toolbar style
-        toolbar.barStyle = UIBarStyleDefault;
-        toolbar.alpha = 0.5;
+    // sets the navigation toolbar tint color
+    self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 
-        // sizes the toolbar
-        [toolbar sizeToFit];
+    // creates the trash item
+    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:nil];
 
-        // retrieves the toolbar height
-        CGFloat toolbarHeight = [toolbar frame].size.height;
+    // sets the trash item style
+    trashItem.style = UIBarButtonItemStylePlain;
 
-        // retrieves the view's bounds
-        CGRect mainViewBounds = self.navigationController.view.bounds;
+    // flexible item used to separate the left groups items and right grouped items
+    UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
-        // sets the toolbar's frame
-        [toolbar setFrame:CGRectMake(CGRectGetMinX(mainViewBounds), CGRectGetMinY(mainViewBounds) + CGRectGetHeight(mainViewBounds) - toolbarHeight, CGRectGetWidth(mainViewBounds), toolbarHeight)];
+    // create the system-defined refresh button
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
 
-        // sets the toolbar's autoresizing mask
-        toolbar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
+    // sets the system item style
+    refreshItem.style = UIBarButtonItemStylePlain;
 
-        // match each of the toolbar item's style match the selection in the "UIBarButtonItemStyle" segmented control
-        UIBarButtonItemStyle style = UIBarButtonItemStylePlain;
+    // creates the toolbar items list
+    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
 
-        // create the trash item
-        UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:nil];
+    // sets the toolbar items in the toolbar
+    [self.navigationController.toolbar setItems:items animated:NO];
+}
 
-        // sets the system item style
-        trashItem.style = style;
-
-        // flex item used to separate the left groups items and right grouped items
-        UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-
-        // create the system-defined refresh button
-        UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
-
-        // sets the system item style
-        refreshItem.style = style;
-
-        // creates the toolbar items list
-        NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
-
-        // sets the toolbar items in the toolbar
-        [toolbar setItems:items animated:NO];
-
-        //Add the toolbar as a subview to the navigation controller.
-        [self.navigationController.view addSubview:toolbar];
-
-        // releases the system item
-        [trashItem release];
-
-        // releases the refresh item
-        [refreshItem release];
-
-        // releases the toolbar
-        [toolbar release];
+- (void)hideToolbar {
+    // hides the navigation controller toolbar
+    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 + (void)_keepAtLinkTime {
