@@ -247,7 +247,7 @@
 
 - (void)showToolbar {
     // shows the navigation controller toolbar
-    [self.navigationController setToolbarHidden:NO];
+    [self.navigationController setToolbarHidden:NO animated:YES];
 
     // sets the navigation toolbar tint color
     self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
@@ -276,7 +276,7 @@
 
 - (void)hideToolbar {
     // hides the navigation controller toolbar
-    [self.navigationController setToolbarHidden:YES];
+    [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
 + (void)_keepAtLinkTime {
