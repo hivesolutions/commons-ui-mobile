@@ -122,6 +122,12 @@
 }
 
 - (void)setDescription:(NSString *)description {
+    // in case the description is invalid
+    if(description == nil) {
+        // returns immediately
+        return;
+    }
+    
     // in case the object is the same
     if(description == _description) {
         // returns immediately
