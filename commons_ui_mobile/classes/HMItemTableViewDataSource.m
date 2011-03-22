@@ -30,6 +30,7 @@
 @synthesize itemTableViewProvider = _itemTableViewProvider;
 @synthesize tableView = _tableView;
 @synthesize itemSpecification = _itemSpecification;
+@synthesize cellIdentifierMap = _cellIdentifierMap;
 
 - (id)init {
     // calls the super
@@ -73,7 +74,13 @@
 
     // creates the item cell map to hold the relations
     // between the cells and the identifiers
-    _cellIdentifierMap = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *cellIdentifierMap = [[NSMutableDictionary alloc] init];
+
+    // sets the attributes
+    self.cellIdentifierMap = cellIdentifierMap;
+
+    // releases the objects
+    [cellIdentifierMap release];
 }
 
 - (void)flushItemSpecification {

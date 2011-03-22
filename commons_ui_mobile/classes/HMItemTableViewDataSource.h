@@ -58,6 +58,11 @@
 @property (retain) HMNamedItemGroup *itemSpecification;
 
 /**
+ * The map containing the cell identifiers.
+ */
+@property (retain) NSMutableDictionary *cellIdentifierMap;
+
+/**
  * The reference to the header named item group.
  */
 @property (readonly) HMNamedItemGroup *headerNamedItemGroup;
