@@ -37,8 +37,8 @@
     NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
     UITableView *_tableView;
     HMNamedItemGroup *_itemSpecification;
-    BOOL _itemDirty;
     NSMutableDictionary *_cellIdentifierMap;
+    BOOL _itemDirty;
 }
 
 /**
@@ -56,6 +56,11 @@
  * The current item specification (top level item node).
  */
 @property (retain) HMNamedItemGroup *itemSpecification;
+
+/**
+ * The map containing the cell identifiers.
+ */
+@property (retain) NSMutableDictionary *cellIdentifierMap;
 
 /**
  * The reference to the header named item group.

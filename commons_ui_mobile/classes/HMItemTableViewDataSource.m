@@ -30,6 +30,7 @@
 @synthesize itemTableViewProvider = _itemTableViewProvider;
 @synthesize tableView = _tableView;
 @synthesize itemSpecification = _itemSpecification;
+@synthesize cellIdentifierMap = _cellIdentifierMap;
 
 - (id)init {
     // calls the super
@@ -60,6 +61,9 @@
     // releases the item specification
     [_itemSpecification release];
 
+    // releases the cell identifier map
+    [_cellIdentifierMap release];
+
     // calls the supper
     [super dealloc];
 }
@@ -70,7 +74,13 @@
 
     // creates the item cell map to hold the relations
     // between the cells and the identifiers
-    _cellIdentifierMap = [[NSMutableDictionary alloc] init];
+    NSMutableDictionary *cellIdentifierMap = [[NSMutableDictionary alloc] init];
+
+    // sets the attributes
+    self.cellIdentifierMap = cellIdentifierMap;
+
+    // releases the objects
+    [cellIdentifierMap release];
 }
 
 - (void)flushItemSpecification {
@@ -285,12 +295,22 @@
     // releases the index path
     [indexPath release];
 
-    // returns the section's description
-    return sectionItemGroup.description;
+    // returns the section's footer
+    return sectionItemGroup.footer;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the section item group
+    HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // returns the section's header
+    return sectionItemGroup.header;
 }
 
 + (void)_keepAtLinkTime {
