@@ -120,6 +120,11 @@
 - (void)hideToolbar;
 
 /**
+ * Deletes the item.
+ */
+- (void)deleteButtonClicked:(id)sender;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;
