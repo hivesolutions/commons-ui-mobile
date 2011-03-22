@@ -84,7 +84,7 @@
     [super dealloc];
 }
 
-- (void)viewDidAppear:(BOOL)animated {   
+- (void)viewDidAppear:(BOOL)animated {
     // shows the toolbar
     [self showToolbar];
 }

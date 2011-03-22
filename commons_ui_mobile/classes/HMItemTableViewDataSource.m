@@ -99,13 +99,10 @@
         HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
 
         // retrieves the cell for the list item identifier
-        HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
-
-        // retrieves the cell description
-        NSString *cellStringValue = cell.stringValue;
+        HMTableViewCell *cell = (HMTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
 
         // sets the adapted values
-        listItem.description = cellStringValue;
+        listItem.description = cell.description;
     }
 
     // retrieves the list item group
@@ -123,13 +120,10 @@
         HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
 
         // retrieves the cell for the list item identifier
-        HMStringTableViewCell *cell = (HMStringTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
-
-        // retrieves the cell description
-        NSString *cellStringValue = cell.stringValue;
+        HMTableViewCell *cell = (HMTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
 
         // sets the adapted values
-        listItem.description = cellStringValue;
+        listItem.description = cell.description;
     }
 }
 
@@ -206,7 +200,7 @@
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // tries to retrives the cell from cache (reusable)
-    HMStringTableViewCell *cell = (HMStringTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    HMTableViewCell *cell = (HMTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
@@ -229,18 +223,25 @@
             cell.highlightable = tableCellItem.highlightable;
             cell.accessoryTypeString = tableCellItem.accessoryType;
         } else if([objectClassNameString isEqualToString:@"HMStringTableCellItem"]) {
-            // creates the new cell with the given reuse identifier
-            cell = [[[HMStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-
-            // casts the table cell item to a
-            // string table cell item
+            // casts the table cell item to a string table cell item
             HMStringTableCellItem *stringTableCellItem = (HMStringTableCellItem *) tableCellItem;
 
-            // sets the cell attributes
+            // creates the appropriate string table view cell
+            if(stringTableCellItem.name) {
+                HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                columnStringTableViewCell.secure = stringTableCellItem.secure;
+                cell = columnStringTableViewCell;
+            } else {
+                HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                plainStringTableViewCell.secure = stringTableCellItem.secure;
+                cell = plainStringTableViewCell;
+            }
+
+            // sets the cell's attributes
             cell.name = stringTableCellItem.name;
             cell.description = stringTableCellItem.description;
-            cell.defaultValue = stringTableCellItem.defaultValue;
-            cell.secure = stringTableCellItem.secure;
             cell.icon = stringTableCellItem.icon;
             cell.highlightedIcon = stringTableCellItem.highlightedIcon;
             cell.highlightable = stringTableCellItem.highlightable;

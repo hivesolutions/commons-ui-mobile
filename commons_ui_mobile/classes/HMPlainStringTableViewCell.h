@@ -25,24 +25,24 @@
 
 #import "Dependencies.h"
 
-#import "HMEditTableViewCell.h"
+#import "HMPlainEditTableViewCell.h"
 
 /**
- * The string table view cell x margin.
+ * The plain string table view cell x margin.
  */
-#define HM_STRING_TABLE_VIEW_CELL_X_MARGIN 6
+#define HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN 6
 
 /**
- * The string table view cell y margin.
+ * The plain string table view cell y margin.
  */
-#define HM_STRING_TABLE_VIEW_CELL_Y_MARGIN 12
+#define HM_PLAIN_STRING_TABLE_VIEW_CELL_Y_MARGIN 12
 
 /**
- * The string table view cell height.
+ * The plain string table view cell height.
  */
-#define HM_STRING_TABLE_VIEW_CELL_HEIGHT 19
+#define HM_PLAIN_STRING_TABLE_VIEW_CELL_HEIGHT 19
 
-@interface HMStringTableViewCell : HMEditTableViewCell<UITextFieldDelegate> {
+@interface HMPlainStringTableViewCell : HMPlainEditTableViewCell<UITextFieldDelegate> {
     @private
     UITextField *_textField;
     NSString *_stringValue;
@@ -52,13 +52,5 @@
 @property (retain) UITextField *textField;
 @property (retain) NSString *stringValue;
 @property (assign) BOOL secure;
-
-/**
- * Constructor of the class.
- *
- * @param reuseIdentifier The cell's identifier.
- * @return The string table view cell instance.
- */
-- (id)initWithReuseIdentifier:(NSString *)cellIdentifier;
 
 @end
