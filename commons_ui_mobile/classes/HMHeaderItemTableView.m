@@ -95,7 +95,7 @@
     CGRect imageFrame = CGRectMake(0, 15, 64, 64);
 
     // creates the image view
-    UIImageView *image = [[UIImageView alloc] initWithFrame:imageFrame];
+    UIImageView *image = [[HMRoundedCornerImageView alloc] initWithFrame:imageFrame];
 
     // creates the title label frame
     CGRect titleLabelFrame = CGRectMake(83, 34, 197, 24);
