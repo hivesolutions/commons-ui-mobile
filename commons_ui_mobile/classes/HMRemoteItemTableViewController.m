@@ -84,7 +84,7 @@
     [super dealloc];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
+- (void)viewDidAppear:(BOOL)animated {   
     // shows the toolbar
     [self showToolbar];
 }
@@ -253,7 +253,7 @@
     self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 
     // creates the trash item
-    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:nil];
+    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:)];
 
     // sets the trash item style
     trashItem.style = UIBarButtonItemStylePlain;
@@ -277,6 +277,14 @@
 - (void)hideToolbar {
     // hides the navigation controller toolbar
     [self.navigationController setToolbarHidden:YES];
+}
+
+- (void)deleteButtonClicked:(id)sender {
+    CATransition *animation = [CATransition animation];
+    animation.type = @"suckEffect";
+    animation.duration = 2.0f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
 }
 
 + (void)_keepAtLinkTime {
