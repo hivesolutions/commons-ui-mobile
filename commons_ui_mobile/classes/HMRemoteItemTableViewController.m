@@ -157,10 +157,10 @@
 
 - (void)constructCreateStructures {
     // creates the cancel bar button
-    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClick:extra:)];
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClick:extra:)];
 
     // creates the done button
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(editButtonClick:extra:)];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClick:extra:)];
 
     // sets the bar buttons
     self.navigationItem.leftBarButtonItem = cancelBarButton;
@@ -223,7 +223,7 @@
 
         // sets the http request properties, for a post request
         [request setHTTPMethod: HTTP_POST_METHOD];
-        [request setHTTPBody: httpData];
+        [request setHTTPBody:httpData];
         [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
 
         // creates the connection with the intance as delegate
@@ -237,6 +237,11 @@
         // sets the table view as editing
         [self.tableView setEditing:YES animated:YES];
     }
+}
+
+- (void)cancelButtonClick:(id)sender extra:(id)extra {
+    // dismisses the modal view controller in animated mode
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void) updateRemote {
