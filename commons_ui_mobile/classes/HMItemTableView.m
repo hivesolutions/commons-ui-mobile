@@ -248,10 +248,10 @@
 
     // retrieves the header label item
     HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
-    
+
     // initializes the section view
     UIView *sectionView = nil;
-    
+
     // creates the section view
     if(headerLabelItem) {
         sectionView = [self tableView:tableView sectionViewForLabelItem:headerLabelItem];
@@ -276,15 +276,15 @@
 
     // initializes the section view
     UIView *sectionView = nil;
-    
+
     // creates the section view
     if(footerLabelItem) {
         sectionView = [self tableView:tableView sectionViewForLabelItem:footerLabelItem];
     }
-    
+
     // releases the objects
     [indexPath release];
-    
+
     // returns the section view
     return sectionView;
 }
