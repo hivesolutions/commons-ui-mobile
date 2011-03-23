@@ -64,4 +64,6 @@
  */
 + (void)_keepAtLinkTime;
 
+- (UIView *)tableView:(UITableView *)tableView sectionViewForLabelItem:(HMLabelItem *)labelItem;
+
 @end
