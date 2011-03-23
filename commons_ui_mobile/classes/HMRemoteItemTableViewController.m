@@ -110,18 +110,39 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    // shows the toolbar
-    [self showToolbar];
+    // calls the super
+    [super viewDidAppear:animated];
+
+    // sets the view appear flag
+    _viewAppear = YES;
+
+    // calls the construct structures delayed
+    [self constructStructuresDelayed];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     // hides the toolbar
     [self hideToolbar];
+
+    // unsets the remote data is set
+    _remoteDataIsSet = NO;
+
+    // sets the view appear flag
+    _viewAppear = NO;
+
+    // calls the destroy structures delayed
+    [self destroyStructuresDelayed];
 }
 
 - (void)initStructures {
     // sets the table view as editable
     self.operationType = HMItemOperationUpdate;
+
+    // sets the remote data as not set
+    _remoteDataIsSet = NO;
+
+    // sets the view appear as not set
+    _viewAppear = NO;
 }
 
 - (void)constructStructures {
@@ -142,11 +163,67 @@
 
             // breaks the swtich
             break;
+    }
+}
 
+- (void)destroyStructures {
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
+        // in case it's a create operation
+        case HMItemOperationCreate:
+            // destroys the create structures
+            [self destroyCreateStructures];
+
+            // breaks the swtich
+            break;
+    }
+}
+
+- (void)constructStructuresDelayed {
+    // in case the remote data is not set
+    // or the view is hidden
+    if(!_remoteDataIsSet || !_viewAppear) {
+        // returns immediately (can't
+        // construct without remote data)
+        return;
+    }
+
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
         // in case it's an update operation
         case HMItemOperationUpdate:
             // constructs the update structures
             [self constructUpdateStructures];
+
+            // breaks the switch
+            break;
+
+        default:
+            break;
+    }
+}
+
+- (void)destroyStructuresDelayed {
+    // in case the remote data is set
+    // or the view is hidden
+    if(_remoteDataIsSet || !_viewAppear) {
+        // returns immediately (can't
+        // destroy with remote data)
+        return;
+    }
+
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
+        // in case it's an update operation
+        case HMItemOperationUpdate:
+            // destroys the update structures
+            [self destroyUpdateStructures];
 
             // breaks the switch
             break;
@@ -172,6 +249,12 @@
     [doneBarButton release];
 }
 
+- (void)destroyCreateStructures {
+    // unsets the bar buttons
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
 - (void)constructUpdateStructures {
     // creates the edit bar button
     UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
@@ -179,8 +262,19 @@
     // sets the bar buttons
     self.navigationItem.rightBarButtonItem = editBarButton;
 
+    // shows the toolbar
+    [self showToolbar];
+
     // releases the objects
     [editBarButton release];
+}
+
+- (void)destroyUpdateStructures {
+    // sets the bar buttons
+    self.navigationItem.rightBarButtonItem = nil;
+
+    // hides the toolbar
+    [self hideToolbar];
 }
 
 - (void)processRemoteData:(NSDictionary *)remoteData {
@@ -194,7 +288,7 @@
     return [remoteData autorelease];
 }
 
-- (void) updateRemote {
+- (void)updateRemote {
     // retrieves the remote url
     NSString *remoteUrl = [self getRemoteUrl];
 
@@ -226,7 +320,7 @@
     self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 
     // creates the trash item
-    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:)];
+    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:extra:)];
 
     // sets the trash item style
     trashItem.style = UIBarButtonItemStylePlain;
@@ -235,7 +329,7 @@
     UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
     // create the system-defined refresh button
-    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonClicked:extra:)];
 
     // sets the system item style
     refreshItem.style = UIBarButtonItemStylePlain;
@@ -361,12 +455,17 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void)deleteButtonClicked:(id)sender {
+- (void)deleteButtonClicked:(id)sender extra:(id)extra {
     CATransition *animation = [CATransition animation];
     animation.type = @"suckEffect";
     animation.duration = 2.0f;
     animation.timingFunction = UIViewAnimationCurveEaseInOut;
     [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
+}
+
+- (void)refreshButtonClicked:(id)sender extra:(id)extra {
+    // updates the remote provider
+    [self updateRemote];
 }
 
 - (void)buttonClicked:(NSString *)buttonName {
@@ -392,14 +491,26 @@
     // processes the remote data, setting the remote group
     [self processRemoteData:remoteData];
 
+    // sets the remote data as set
+    _remoteDataIsSet = YES;
+
     // reloads the data
     [self.tableView reloadData];
+
+    // constructs the delayed structures
+    [self constructStructuresDelayed];
 
     // releases the json parser
     [jsonParser release];
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error {
+    // sets the remote data as not set
+    _remoteDataIsSet = NO;
+
+    // destroys the delayed structures
+    [self destroyStructuresDelayed];
+
     // reloads the data
     [self.tableView reloadData];
 }

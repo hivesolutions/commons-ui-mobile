@@ -57,6 +57,8 @@ typedef enum {
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
+    BOOL _viewAppear;
+    BOOL _remoteDataIsSet;
 }
 
 /**
@@ -109,14 +111,41 @@ typedef enum {
 - (void)constructStructures;
 
 /**
+ * Destroys the internal data structures.
+ */
+- (void)destroyStructures;
+
+/**
+ * Constructs the internal data structures (delayed).
+ * This delayed constructing allows the display to be
+ * constructed only after the initial successful parsing.
+ */
+- (void)constructStructuresDelayed;
+
+/**
+ * Destroy the internal data structures (delayed).
+ */
+- (void)destroyStructuresDelayed;
+
+/**
  * Constructs the create operation stuctures.
  */
 - (void)constructCreateStructures;
 
 /**
+ * Destroys the create operation stuctures.
+ */
+- (void)destroyCreateStructures;
+
+/**
  * Constructs the update operation stuctures.
  */
 - (void)constructUpdateStructures;
+
+/**
+ * Destroy the update operation stuctures.
+ */
+- (void)destroyUpdateStructures;
 
 /**
  * Processes the remote data hanlding it and constructing
@@ -177,9 +206,22 @@ typedef enum {
 - (void)cancelButtonClicked:(id)sender extra:(id)extra;
 
 /**
- * Deletes the item.
+ * Callback handler called when the delete button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
  */
-- (void)deleteButtonClicked:(id)sender;
+- (void)deleteButtonClicked:(id)sender extra:(id)extra;
+
+/**
+ * Callback handler called when the refresh button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)refreshButtonClicked:(id)sender extra:(id)extra;
 
 /**
  * Keeps the class valid for export at link time.
