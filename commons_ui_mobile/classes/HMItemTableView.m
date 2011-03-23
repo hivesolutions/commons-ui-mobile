@@ -157,19 +157,37 @@
     // releases the index path
     [indexPath release];
 
-    // retrieves the header table cell item
-    HMTableCellItem *headerTableCellItem = tableSectionItemGroup.header;
+    // retrieves the header label item
+    HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
 
     // returns in case no header exists
-    if(!headerTableCellItem) {
+    if(!headerLabelItem) {
         return nil;
     }
 
-    // retrieves the header table view cell
-    HMTableViewCell *headerTableViewCell = [self.itemDataSource tableView:tableView cellForTableCellItem:headerTableCellItem];
+    // creates a label
+    UILabel *label = [[UILabel alloc] init];
+    label.text = headerLabelItem.description;
+    label.font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowOffset = CGSizeMake(-1, 0);
 
-    // returns the header table view cell
-    return headerTableViewCell;
+    // retrieves the label colors
+    HMColor *textColor = headerLabelItem.textColor;
+    HMColor *shadowColor = headerLabelItem.shadowColor;
+
+    // sets the label text color
+    if(textColor) {
+        label.textColor = [UIColor colorWithRed:textColor.red green:textColor.green blue:textColor.blue alpha:textColor.alpha];
+    }
+
+    // sets the label shadow color
+    if(shadowColor) {
+        label.shadowColor = [UIColor colorWithRed:shadowColor.red green:shadowColor.green blue:shadowColor.blue alpha:shadowColor.alpha];
+    }
+
+    // returns the label
+    return label;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -182,19 +200,37 @@
     // releases the index path
     [indexPath release];
 
-    // retrieves the footer table cell item
-    HMTableCellItem *footerTableCellItem = tableSectionItemGroup.footer;
+    // retrieves the footer label item
+    HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
 
-    // returns in case no footer exists
-    if(!footerTableCellItem) {
+    // returns in case no header exists
+    if(!footerLabelItem) {
         return nil;
     }
 
-    // retrieves the footer table view cell
-    HMTableViewCell *footerTableViewCell = [self.itemDataSource tableView:tableView cellForTableCellItem:footerTableCellItem];
+    // creates a label
+    UILabel *label = [[UILabel alloc] init];
+    label.text = footerLabelItem.description;
+    label.font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowOffset = CGSizeMake(-1, 0);
 
-    // returns the footer table view cell
-    return footerTableViewCell;
+    // retrieves the label colors
+    HMColor *textColor = footerLabelItem.textColor;
+    HMColor *shadowColor = footerLabelItem.shadowColor;
+
+    // sets the label text color
+    if(textColor) {
+        label.textColor = [UIColor colorWithRed:textColor.red green:textColor.green blue:textColor.blue alpha:textColor.alpha];
+    }
+
+    // sets the label shadow color
+    if(shadowColor) {
+        label.shadowColor = [UIColor colorWithRed:shadowColor.red green:shadowColor.green blue:shadowColor.blue alpha:shadowColor.alpha];
+    }
+
+    // returns the label
+    return label;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
