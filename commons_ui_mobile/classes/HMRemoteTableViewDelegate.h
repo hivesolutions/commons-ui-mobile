@@ -51,5 +51,4 @@
  */
 - (void)didDeselectRemoteRowWithData:(NSDictionary *)data;
 
-
 @end

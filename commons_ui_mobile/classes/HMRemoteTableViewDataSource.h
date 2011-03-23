@@ -26,6 +26,8 @@
 #import "Dependencies.h"
 
 #import "HMRemoteTableViewProvider.h"
+#import "HMRemoteDelegate.h"
+#import "HMRemoteAbstraction.h"
 
 /**
  * The connection timeout for the remote table view.
@@ -36,12 +38,11 @@
  * Class used to represent a table view data source
  * for remote connections with serialization.
  */
-@interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource, UIActionSheetDelegate> {
+@interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource, HMRemoteDelegate> {
     @private
     NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
     UITableView *_tableView;
-    NSURLConnection *_connection;
-    NSMutableData *_receivedData;
+    HMRemoteAbstraction *_remoteAbstraction;
     NSArray *_remoteData;
     BOOL _remoteDirty;
 }
@@ -60,14 +61,10 @@
 @property (assign) UITableView *tableView;
 
 /**
- * The currently established connection.
+ * The remote abstraction to be used for controlling
+ * the remote calls.
  */
-@property (retain) NSURLConnection *connection;
-
-/**
- * The received data at the moment.
- */
-@property (retain) NSMutableData *receivedData;
+@property (retain) HMRemoteAbstraction *remoteAbstraction;
 
 /**
  * The parsed (deserialized) of remote data.

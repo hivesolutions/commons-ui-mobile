@@ -27,17 +27,12 @@
 
 @implementation HMRemoteTableView
 
-@synthesize activity = _activity;
-@synthesize activityIndicator = _activityIndicator;
 @synthesize remoteDataSource = _remoteDataSource;
 @synthesize remoteDelegate = _remoteDelegate;
 
 - (id)init {
     // calls the super
     self = [super init];
-
-    // sets the first reload flag
-    _firstReload = YES;
 
     // returns self
     return self;
@@ -46,9 +41,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     // calls the super
     self = [super initWithCoder:aDecoder];
-
-    // sets the first reload flag
-    _firstReload = YES;
 
     // returns self
     return self;
@@ -59,79 +51,11 @@
     // remote data source
     [self.remoteDataSource cancelRemote];
 
-    // releases the activity
-    [_activity release];
-
-    // releases the activity indicator
-    [_activityIndicator release];
-
     // releases the remote data source
     [_remoteDataSource release];
 
     // calls the supper
     [super dealloc];
-}
-
-- (void)createActivityIndicator {
-    // creates the activity
-    UIView *activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.superview.bounds.size.width, self.superview.bounds.size.height)];
-    activity.backgroundColor = [UIColor blackColor];
-    activity.alpha = 0.75;
-
-    // creates the activity indicator
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(self.superview.bounds.size.width / 2 - 12, self.superview.bounds.size.height / 2 - 12, 24, 24)];
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
-
-    // creates the activity structure
-    [activity addSubview:activityIndicator];
-    [self.superview addSubview:activity];
-
-    // sets the attributes
-    self.activity = activity;
-    self.activityIndicator = activityIndicator;
-
-    // releases the objects
-    [activity release];
-    [activityIndicator release];
-}
-
-- (void)showActivityIndicator {
-    // in case the activity indicator is not set
-    if(self.activityIndicator == nil) {
-        // creates the activity indicator
-        [self createActivityIndicator];
-    }
-
-    // shows the activity
-    self.activity.hidden = NO;
-
-    // starts animating the activity indicator
-    [self.activityIndicator startAnimating];
-}
-
-- (void)hideActivityIndicator {
-    // in case the activity indicator is not set
-    if(self.activityIndicator == nil) {
-        // creates the activity indicator
-        [self createActivityIndicator];
-    }
-
-    // creates the fade out animation
-    [UIView beginAnimations:@"fadeOut" context: nil];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(hideActivityIndicatorComplete)];
-    [UIView setAnimationDuration:0.5];
-    [self.activity setAlpha:0.0];
-    [UIView commitAnimations];
-
-    // stops animating the activity indicator
-    [self.activityIndicator stopAnimating];
-}
-
-- (void)hideActivityIndicatorComplete {
-    // hides the activity
-    self.activity.hidden = YES;
 }
 
 - (NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {
@@ -160,22 +84,6 @@
 - (void)reloadData {
     // calls the super
     [super reloadData];
-
-    // in case it's the first reload (initial
-    // load must wait for remote loading)
-    if(_firstReload) {
-        // shows the activity indicator
-        [self showActivityIndicator];
-    }
-    // not the first loading the remote loading
-    // must be completed
-    else {
-        // hides the activity indicator
-        [self hideActivityIndicator];
-    }
-
-    // unsets the first reload flag
-    _firstReload = NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
