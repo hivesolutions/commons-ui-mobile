@@ -80,6 +80,7 @@ typedef enum {
  * @param nibNameOrNil The name of the nib to be used.
  * @param nibBundleOrNil The nib bundle to be used.
  * @param operationType The type of operation.
+ * @return The created instance.
  */
 - (id)initWithNibNameAndType:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil operationType:(HMItemOperationType)operationType;
 
