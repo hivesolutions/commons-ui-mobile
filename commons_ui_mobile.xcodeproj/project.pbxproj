@@ -50,6 +50,8 @@
 		C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */; };
 		C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C2FA0A132E95530038B41E /* UIKit.framework */; };
 		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
+		C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */; };
+		C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */; };
 		C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EEE097132E8E9B0038FFA6 /* Foundation.framework */; };
 		C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */; };
 /* End PBXBuildFile section */
@@ -98,6 +100,8 @@
 		C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMHeaderItemTableView.m; path = classes/HMHeaderItemTableView.m; sourceTree = "<group>"; };
 		C2C2FA0A132E95530038B41E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
+		C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteAbstraction.h; path = classes/HMRemoteAbstraction.h; sourceTree = "<group>"; };
+		C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteAbstraction.m; path = classes/HMRemoteAbstraction.m; sourceTree = "<group>"; };
 		C2EEE094132E8E9B0038FFA6 /* libcommons_ui_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcommons_ui_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EEE097132E8E9B0038FFA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "commons_ui_mobile-Prefix.pch"; path = "support/commons_ui_mobile-Prefix.pch"; sourceTree = "<group>"; };
@@ -242,6 +246,15 @@
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
+		C2DFF26C133A032100E6E1D2 /* Abstractions */ = {
+			isa = PBXGroup;
+			children = (
+				C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */,
+				C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */,
+			);
+			name = Abstractions;
+			sourceTree = "<group>";
+		};
 		C2EEE089132E8E9B0038FFA6 = {
 			isa = PBXGroup;
 			children = (
@@ -293,6 +306,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C2DFF26C133A032100E6E1D2 /* Abstractions */,
 				C2C96E45133373F700D6910B /* Dependencies */,
 				C220E36213318DAE0076803A /* Table View */,
 				C220E35C13318CC40076803A /* Table View Cells */,
@@ -338,6 +352,7 @@
 				A5FA27471338D1F600DD428A /* HMPlainEditTableViewCell.h in Headers */,
 				A5FA274B1338D52C00DD428A /* HMColumnStringTableViewCell.h in Headers */,
 				A5FA274F1338D53900DD428A /* HMPlainStringTableViewCell.h in Headers */,
+				C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -405,6 +420,7 @@
 				A5FA27481338D1F600DD428A /* HMPlainEditTableViewCell.m in Sources */,
 				A5FA274C1338D52C00DD428A /* HMColumnStringTableViewCell.m in Sources */,
 				A5FA27501338D53900DD428A /* HMPlainStringTableViewCell.m in Sources */,
+				C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
