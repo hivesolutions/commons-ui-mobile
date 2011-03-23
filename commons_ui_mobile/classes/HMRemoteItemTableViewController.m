@@ -27,6 +27,7 @@
 
 @implementation HMRemoteItemTableViewController
 
+@synthesize remoteAbstraction = _remoteAbstraction;
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
@@ -91,14 +92,21 @@
 }
 
 - (void)dealloc {
+    // releases the remote abstraction
+    [_remoteAbstraction release];
+
     // releases the received data
-    [self.receivedData release];
+    [_receivedData release];
 
     // releases the remote group
-    [self.remoteGroup release];
+    [_remoteGroup release];
 
     // calls the super
     [super dealloc];
+}
+
+- (NSString *)getRemoteUrl {
+    return nil;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -114,13 +122,6 @@
 - (void)initStructures {
     // sets the table view as editable
     self.operationType = HMItemOperationUpdate;
-}
-
-- (NSString *)getRemoteUrl {
-    return nil;
-}
-
-- (void)buttonClicked:(NSString *)buttonName {
 }
 
 - (void)constructStructures {
@@ -193,6 +194,69 @@
     return [remoteData autorelease];
 }
 
+- (void) updateRemote {
+    // retrieves the remote url
+    NSString *remoteUrl = [self getRemoteUrl];
+
+    // creates the remote abstraction using the remote url
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithUrl:remoteUrl];
+    remoteAbstraction.remoteDelegate = self;
+    remoteAbstraction.view = self.tableView;
+
+    // sets the attributes
+    self.remoteAbstraction = remoteAbstraction;
+
+    // oprens the remote abstraction
+    [self.remoteAbstraction updateRemote];
+
+    // releases the objects
+    [remoteAbstraction release];
+}
+
+- (void)cancelRemote {
+    // cancels the remote abstraction
+    [self.remoteAbstraction cancelRemote];
+}
+
+- (void)showToolbar {
+    // shows the navigation controller toolbar
+    [self.navigationController setToolbarHidden:NO animated:YES];
+
+    // sets the navigation toolbar tint color
+    self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
+
+    // creates the trash item
+    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:)];
+
+    // sets the trash item style
+    trashItem.style = UIBarButtonItemStylePlain;
+
+    // flexible item used to separate the left groups items and right grouped items
+    UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+
+    // create the system-defined refresh button
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
+
+    // sets the system item style
+    refreshItem.style = UIBarButtonItemStylePlain;
+
+    // creates the toolbar items list
+    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
+
+    // sets the toolbar items in the toolbar
+    [self.navigationController.toolbar setItems:items animated:NO];
+
+    // releases the objects
+    [refreshItem release];
+    [flexibleSpaceItem release];
+    [trashItem release];
+}
+
+- (void)hideToolbar {
+    // hides the navigation controller toolbar
+    [self.navigationController setToolbarHidden:YES animated:YES];
+}
+
 - (void)editButtonClick:(id)sender extra:(id)extra {
     // in case the table view is in editing mode
     if(self.tableView.editing) {
@@ -244,34 +308,15 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
-- (void) updateRemote {
-    // retrieves the remote url
-    NSString *remoteUrl = [self getRemoteUrl];
+- (void)deleteButtonClicked:(id)sender {
+    CATransition *animation = [CATransition animation];
+    animation.type = @"suckEffect";
+    animation.duration = 2.0f;
+    animation.timingFunction = UIViewAnimationCurveEaseInOut;
+    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
+}
 
-    // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-
-    // creates the connection with the intance as delegate
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
-    // creates the received data
-    NSMutableData *receivedData = [[NSMutableData alloc] init];
-
-    // creates a "new" remote data and initializes it
-    NSArray *remoteData = [[NSArray alloc] init];
-
-    // sets the attributes
-    //self.connection = connection;
-    self.receivedData = receivedData;
-    //self.remoteData = remoteData;
-
-    // unsets the remote dirty flag
-    //remoteDirty = NO;
-
-    // releases the objects
-    [connection release];
-    [receivedData release];
-    [remoteData release];
+- (void)buttonClicked:(NSString *)buttonName {
 }
 
 - (HMNamedItemGroup *)getItemSpecification {
@@ -284,17 +329,12 @@
 - (void)didDeselectItemRowWithItem:(HMItem *)item {
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // adds the data to the received data
-    [self.receivedData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
     // creates a new json parser
     SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
     // parses the received (remote) data and sets it into the intance
-    NSDictionary *remoteData = [jsonParser objectWithData:self.receivedData];
+    NSDictionary *remoteData = [jsonParser objectWithData:data];
 
     // processes the remote data, setting the remote group
     [self processRemoteData:remoteData];
@@ -306,54 +346,9 @@
     [jsonParser release];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-}
-
-- (void)showToolbar {
-    // shows the navigation controller toolbar
-    [self.navigationController setToolbarHidden:NO animated:YES];
-
-    // sets the navigation toolbar tint color
-    self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
-
-    // creates the trash item
-    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:)];
-
-    // sets the trash item style
-    trashItem.style = UIBarButtonItemStylePlain;
-
-    // flexible item used to separate the left groups items and right grouped items
-    UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-
-    // create the system-defined refresh button
-    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
-
-    // sets the system item style
-    refreshItem.style = UIBarButtonItemStylePlain;
-
-    // creates the toolbar items list
-    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
-
-    // sets the toolbar items in the toolbar
-    [self.navigationController.toolbar setItems:items animated:NO];
-
-    // releases the objects
-    [refreshItem release];
-    [flexibleSpaceItem release];
-    [trashItem release];
-}
-
-- (void)hideToolbar {
-    // hides the navigation controller toolbar
-    [self.navigationController setToolbarHidden:YES animated:YES];
-}
-
-- (void)deleteButtonClicked:(id)sender {
-    CATransition *animation = [CATransition animation];
-    animation.type = @"suckEffect";
-    animation.duration = 2.0f;
-    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error {
+    // reloads the data
+    [self.tableView reloadData];
 }
 
 + (void)_keepAtLinkTime {

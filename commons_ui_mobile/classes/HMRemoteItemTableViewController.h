@@ -28,6 +28,8 @@
 #import "HMItemTableView.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
+#import "HMRemoteDelegate.h"
+#import "HMRemoteAbstraction.h"
 
 /**
  * The http post method name.
@@ -49,12 +51,19 @@ typedef enum {
     HMItemOperationUpdate
 } HMItemOperationType;
 
-@interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {
+@interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
     @private
+    HMRemoteAbstraction *_remoteAbstraction;
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
 }
+
+/**
+ * The remote abstraction to be used for controlling
+ * the remote calls.
+ */
+@property (retain) HMRemoteAbstraction *remoteAbstraction;
 
 /**
  * The buffer for received data.
@@ -95,11 +104,6 @@ typedef enum {
 - (NSString *)getRemoteUrl;
 
 /**
- * Updates the remote reference.
- */
-- (void) updateRemote;
-
-/**
  * Constructs the internal data structures.
  */
 - (void)constructStructures;
@@ -134,13 +138,15 @@ typedef enum {
 - (NSMutableDictionary *)convertRemoteGroup;
 
 /**
- * Callback handler called when the edit button is
- * clicked.
- *
- * @param sender The sender object.
- @ @param extra The extra parameters values.
+ * Updates the remote data, by performing a remote
+ * call to the provider.
  */
-- (void)editButtonClick:(id)sender extra:(id)extra;
+- (void)updateRemote;
+
+/**
+ * Cancels the current remote call.
+ */
+- (void)cancelRemote;
 
 /**
  * Shows the bottom toolbar.
@@ -151,6 +157,24 @@ typedef enum {
  * Hides the bottom toolbar.
  */
 - (void)hideToolbar;
+
+/**
+ * Callback handler called when the edit button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)editButtonClick:(id)sender extra:(id)extra;
+
+/**
+ * Callback handler called when the cancel button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)cancelButtonClick:(id)sender extra:(id)extra;
 
 /**
  * Deletes the item.
