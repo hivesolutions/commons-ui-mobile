@@ -165,7 +165,7 @@ typedef enum {
  * @param sender The sender object.
  @ @param extra The extra parameters values.
  */
-- (void)editButtonClick:(id)sender extra:(id)extra;
+- (void)editButtonClicked:(id)sender extra:(id)extra;
 
 /**
  * Callback handler called when the cancel button is
@@ -174,7 +174,7 @@ typedef enum {
  * @param sender The sender object.
  @ @param extra The extra parameters values.
  */
-- (void)cancelButtonClick:(id)sender extra:(id)extra;
+- (void)cancelButtonClicked:(id)sender extra:(id)extra;
 
 /**
  * Deletes the item.

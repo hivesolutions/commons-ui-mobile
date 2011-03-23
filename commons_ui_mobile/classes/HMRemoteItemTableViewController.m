@@ -158,10 +158,10 @@
 
 - (void)constructCreateStructures {
     // creates the cancel bar button
-    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClick:extra:)];
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClicked:extra:)];
 
     // creates the done button
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClick:extra:)];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClicked:extra:)];
 
     // sets the bar buttons
     self.navigationItem.leftBarButtonItem = cancelBarButton;
@@ -174,7 +174,7 @@
 
 - (void)constructUpdateStructures {
     // creates the edit bar button
-    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClick:extra:)];
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
 
     // sets the bar buttons
     self.navigationItem.rightBarButtonItem = editBarButton;
@@ -310,7 +310,7 @@
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
-- (void)editButtonClick:(id)sender extra:(id)extra {
+- (void)editButtonClicked:(id)sender extra:(id)extra {
     // in case the table view is in editing mode
     if(self.tableView.editing) {
         // sets the table view as not editing
@@ -356,7 +356,7 @@
     }
 }
 
-- (void)cancelButtonClick:(id)sender extra:(id)extra {
+- (void)cancelButtonClicked:(id)sender extra:(id)extra {
     // dismisses the modal view controller in animated mode
     [self dismissModalViewControllerAnimated:YES];
 }

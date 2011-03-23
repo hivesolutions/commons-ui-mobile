@@ -119,7 +119,7 @@
 
 - (void)setDescription:(NSString *)description {
     // in case the description is invalid
-    if(description == nil) {
+    if(description == nil || (NSNull *) description == [NSNull null]) {
         // returns immediately
         return;
     }
