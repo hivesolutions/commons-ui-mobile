@@ -73,9 +73,6 @@
     // calls the super
     [super showEditing];
 
-    // disables cell highlighting
-    self.selectionStyle = UITableViewCellEditingStyleNone;
-
     // shows the text field
     self.textField.hidden = NO;
 }
@@ -83,9 +80,6 @@
 - (void)hideEditing {
     // hides the keyboard
     [self.textField resignFirstResponder];
-
-    // enables cell highlighting
-    self.selectionStyle = UITableViewCellSelectionStyleBlue;
 
     // updates the description
     self.description = self.textField.text;

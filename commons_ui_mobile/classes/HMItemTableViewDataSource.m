@@ -214,14 +214,6 @@
         if([objectClassNameString isEqualToString:@"HMTableCellItem"]) {
             // creates the new cell with the given reuse identifier
             cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier] autorelease];
-
-            // sets the cell attributes
-            cell.name = tableCellItem.name;
-            cell.description = tableCellItem.description;
-            cell.icon = tableCellItem.icon;
-            cell.highlightedIcon = tableCellItem.highlightedIcon;
-            cell.highlightable = tableCellItem.highlightable;
-            cell.accessoryTypeString = tableCellItem.accessoryType;
         } else if([objectClassNameString isEqualToString:@"HMStringTableCellItem"]) {
             // casts the table cell item to a string table cell item
             HMStringTableCellItem *stringTableCellItem = (HMStringTableCellItem *) tableCellItem;
@@ -238,15 +230,15 @@
                 plainStringTableViewCell.secure = stringTableCellItem.secure;
                 cell = plainStringTableViewCell;
             }
-
-            // sets the cell's attributes
-            cell.name = stringTableCellItem.name;
-            cell.description = stringTableCellItem.description;
-            cell.icon = stringTableCellItem.icon;
-            cell.highlightedIcon = stringTableCellItem.highlightedIcon;
-            cell.highlightable = stringTableCellItem.highlightable;
-            cell.accessoryTypeString = stringTableCellItem.accessoryType;
         }
+
+        // sets the cell's attributes
+        cell.name = tableCellItem.name;
+        cell.description = tableCellItem.description;
+        cell.icon = tableCellItem.icon;
+        cell.highlightedIcon = tableCellItem.highlightedIcon;
+        cell.highlightable = NO;//tableCellItem.highlightable;
+        cell.accessoryTypeString = tableCellItem.accessoryType;
     }
 
     // inserts the item cell identifier association into the map
