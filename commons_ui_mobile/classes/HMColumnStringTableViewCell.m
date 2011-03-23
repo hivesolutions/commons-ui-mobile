@@ -147,6 +147,12 @@
     // calls the super
     [super setDescription:description];
 
+    // in case the description is invalid
+    if(description == nil || (NSNull *) description == [NSNull null]) {
+        // returns immediately
+        return;
+    }
+
     // in case the text field is defined
     if(self.textField) {
         // updates the text field text

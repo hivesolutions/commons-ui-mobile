@@ -501,11 +501,26 @@
 }
 
 - (void)deleteButtonClicked:(id)sender extra:(id)extra {
-    CATransition *animation = [CATransition animation];
+    /*CATransition *animation = [CATransition animation];
     animation.type = @"suckEffect";
     animation.duration = 2.0f;
     animation.timingFunction = UIViewAnimationCurveEaseInOut;
-    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
+    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];*/
+
+    // creates the delete url
+    NSString *deleteUrl = [self getRemoteUrlForOperation:HMItemOperationDelete];
+
+    // creates the request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:deleteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+
+    // sets the http request properties, for a post request
+    [request setHTTPMethod: HTTP_POST_METHOD];
+
+    // creates the connection with the intance as delegate
+    NSConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+
+    // releases the connection
+    [connection release];
 }
 
 - (void)refreshButtonClicked:(id)sender extra:(id)extra {

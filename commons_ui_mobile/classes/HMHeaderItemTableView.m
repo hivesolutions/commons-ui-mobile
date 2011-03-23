@@ -366,8 +366,8 @@
     HMItem *imageItem = [headerNamedItemGroup getItem:@"image"];
 
     // sets the attributes
-    titleItem.identifier = self.title;
-    subTitleItem.identifier = self.subTitle;
+    titleItem.identifier = self.titleTextField.text;
+    subTitleItem.identifier = self.subTitleTextField.text;
     imageItem.identifier = self.image;
 }
 
