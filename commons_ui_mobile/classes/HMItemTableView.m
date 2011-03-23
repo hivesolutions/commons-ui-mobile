@@ -119,7 +119,6 @@
     [super reloadData];
 }
 
-
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
     // retrieves the list item group
     HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
@@ -146,6 +145,56 @@
     } else {
         return UITableViewCellEditingStyleNone;
     }
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // retrieves the header table cell item
+    HMTableCellItem *headerTableCellItem = tableSectionItemGroup.header;
+
+    // returns in case no header exists
+    if(!headerTableCellItem) {
+        return nil;
+    }
+
+    // retrieves the header table view cell
+    HMTableViewCell *headerTableViewCell = [self.itemDataSource tableView:tableView cellForTableCellItem:headerTableCellItem];
+
+    // returns the header table view cell
+    return headerTableViewCell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // retrieves the footer table cell item
+    HMTableCellItem *footerTableCellItem = tableSectionItemGroup.footer;
+
+    // returns in case no footer exists
+    if(!footerTableCellItem) {
+        return nil;
+    }
+
+    // retrieves the footer table view cell
+    HMTableViewCell *footerTableViewCell = [self.itemDataSource tableView:tableView cellForTableCellItem:footerTableCellItem];
+
+    // returns the footer table view cell
+    return footerTableViewCell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
