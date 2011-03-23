@@ -27,6 +27,7 @@
 
 @implementation HMRemoteAbstraction
 
+@synthesize remoteAbstractionId = _remoteAbstractionId;
 @synthesize view = _view;
 @synthesize remoteDelegate = _remoteDelegate;
 @synthesize activity = _activity;
@@ -43,11 +44,23 @@
     return self;
 }
 
-- (id)initWithUrl:(NSString *)url {
+- (id)initWithId:(int)remoteAbstractionId {
     // calls the super
     self = [super init];
 
     // sets the attributes
+    self.remoteAbstractionId = remoteAbstractionId;
+
+    // returns self
+    return self;
+}
+
+- (id)initWithIdAndUrl:(int)remoteAbstractionId url:(NSString *)url {
+    // calls the super
+    self = [super init];
+
+    // sets the attributes
+    self.remoteAbstractionId = remoteAbstractionId;
     self.url = url;
 
     // returns self

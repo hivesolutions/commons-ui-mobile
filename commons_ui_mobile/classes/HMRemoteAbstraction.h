@@ -35,6 +35,7 @@
 
 @interface HMRemoteAbstraction : NSObject<UIActionSheetDelegate> {
     @private
+    int _remoteAbstractionId;
     UIView *_view;
     NSObject<HMRemoteDelegate> *_remoteDelegate;
     UIView *_activity;
@@ -43,6 +44,11 @@
     NSURLConnection *_connection;
     NSMutableData *_receivedData;
 }
+
+/**
+ * The associated remote abstraction id.
+ */
+@property (assign) int remoteAbstractionId;
 
 /**
  * The associated view.
@@ -84,10 +90,19 @@
 /**
  * Constructor fo the class.
  *
+ * @param remoteAbstractionId The id describing the remote abstraction.
+ * @return The created instance.
+ */
+- (id)initWithId:(int)remoteAbstractionId;
+
+/**
+ * Constructor fo the class.
+ *
+ * @param remoteAbstractionId The id describing the remote abstraction.
  * @param url The url to be used by the remote abstraction.
  * @return The created instance.
  */
-- (id)initWithUrl:(NSString *)url;
+- (id)initWithIdAndUrl:(int)remoteAbstractionId url:(NSString *)url;
 
 /**
  * Updates the remote data, by performing a remote

@@ -309,7 +309,7 @@
     NSString *remoteUrl = [self getRemoteUrl];
 
     // creates the remote abstraction using the remote url
-    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithUrl:remoteUrl];
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationRead url:remoteUrl];
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView;
 
@@ -542,7 +542,7 @@
 - (void)didDeselectItemRowWithItem:(HMItem *)item {
 }
 
-- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
+- (void)processOperationRead:(NSData *)data  {
     // creates a new json parser
     SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
@@ -563,6 +563,31 @@
 
     // releases the json parser
     [jsonParser release];
+}
+
+- (void)processOperationDelete:(NSData *)data  {
+    // pops the view controller
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
+
+    // switches over the remote abstraction id
+    switch(remoteAbstraction.remoteAbstractionId) {
+        case HMItemOperationRead:
+            // processes the read operation
+            [self processOperationRead:data];
+
+            // breaks the switch
+            break;
+        case HMItemOperationDelete:
+            // processes the delete operation
+            [self processOperationDelete:data];
+
+            // breaks the switch
+            break;
+    }
+
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
@@ -589,7 +614,9 @@
         [request setHTTPMethod: HTTP_POST_METHOD];
 
         // creates the remote abstraction
-        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] init];
+        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationDelete];
+        remoteAbstraction.remoteDelegate = self;
+        remoteAbstraction.view = self.tableView;
 
         // updates the remote with the given request
         [remoteAbstraction updateRemoteWithRequest:request];
