@@ -464,6 +464,15 @@
 }
 
 - (void)doneButtonClicked:(id)sender extra:(id)extra {
+    // in case the table view is not in editing mode (ignore)
+    if(!self.tableView.editing) {
+        // returns immediately
+        return;
+    }
+
+    // sets the table view as not editing
+    [self.tableView setEditing:NO animated:YES];
+
     // casts the table view as item table view
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
