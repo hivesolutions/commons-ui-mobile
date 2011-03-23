@@ -331,13 +331,66 @@
     // sets the system item style
     refreshItem.style = UIBarButtonItemStylePlain;
 
+    // creates the standard text color for toolbar labels
+    UIColor *toolbarLabelTextColor = [UIColor whiteColor];
+
+    // creates the standard background color for toolbar labels
+    UIColor *toolbarLabelBackgroundColor = [UIColor clearColor];
+
+    // creates the text value for the labels
+    NSString *leftLabelText = @"Updated";
+    NSString *centerLabelText = @"15/03/11";
+    NSString *rightLabelText = @"13:25";
+
+    // creates the left toolbar label
+    UILabel *leftLabel = [[UILabel alloc] init];
+    [leftLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
+    [leftLabel setTextColor:toolbarLabelTextColor];
+    [leftLabel setBackgroundColor:toolbarLabelBackgroundColor];
+    [leftLabel setText:leftLabelText];
+    [leftLabel setTextAlignment:UITextAlignmentCenter];
+    [leftLabel sizeToFit];
+
+    // creates the center toolbar label
+    UILabel *centerLabel = [[UILabel alloc] init];
+    [centerLabel setFont:[UIFont fontWithName:@"Helvetica" size:13]];
+    [centerLabel setTextColor:toolbarLabelTextColor];
+    [centerLabel setBackgroundColor:toolbarLabelBackgroundColor];
+    [centerLabel setText:centerLabelText];
+    [centerLabel setTextAlignment:UITextAlignmentCenter];
+    [centerLabel sizeToFit];
+
+    // creates the right toolbar label
+    UILabel *rightLabel = [[UILabel alloc] init];
+    [rightLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
+    [rightLabel setTextColor:toolbarLabelTextColor];
+    [rightLabel setBackgroundColor:toolbarLabelBackgroundColor];
+    [rightLabel setText:rightLabelText];
+    [rightLabel setTextAlignment:UITextAlignmentCenter];
+    [rightLabel sizeToFit];
+
+    // creates the bar button item to host the left label
+    UIBarButtonItem *leftLabelItem = [[UIBarButtonItem alloc] initWithCustomView:leftLabel];
+
+    // creates the bar button item to host the center label
+    UIBarButtonItem *centerLabelItem = [[UIBarButtonItem alloc] initWithCustomView:centerLabel];
+
+    // creates the bar button item to host the right label
+    UIBarButtonItem *rightLabelItem = [[UIBarButtonItem alloc] initWithCustomView:rightLabel];
+
     // creates the toolbar items list
-    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, refreshItem, nil];
+    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, leftLabelItem, centerLabelItem, rightLabelItem, flexibleSpaceItem, refreshItem, nil];
 
     // sets the toolbar items in the toolbar
     [self.navigationController.toolbar setItems:items animated:NO];
 
     // releases the objects
+    [leftLabelItem release];
+    [centerLabelItem release];
+    [rightLabelItem release];
+    [leftLabel release];
+    [centerLabel release];
+    [rightLabel release];
     [refreshItem release];
     [flexibleSpaceItem release];
     [trashItem release];
