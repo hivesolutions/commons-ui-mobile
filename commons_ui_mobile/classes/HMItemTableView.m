@@ -119,8 +119,33 @@
     [super reloadData];
 }
 
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath {
+    // retrieves the list item group
+    HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
+
+    // retrieves the table cell item
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [listItemGroup getItemAtIndexPath:indexPath];
+
+    // returns the table cell item's
+    // indentable attribute
+    return tableCellItem.indentable;
+}
+
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return UITableViewCellEditingStyleDelete;
+    // retrieves the list item group
+    HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
+
+    // retrieves the table cell item
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [listItemGroup getItemAtIndexPath:indexPath];
+
+    // returns the editing style for
+    // the table cell item
+    if(tableCellItem.indentable) {
+        return UITableViewCellEditingStyleDelete;
+    } else {
+        return UITableViewCellEditingStyleNone;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

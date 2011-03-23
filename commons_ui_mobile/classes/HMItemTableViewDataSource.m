@@ -237,7 +237,7 @@
         cell.description = tableCellItem.description;
         cell.icon = tableCellItem.icon;
         cell.highlightedIcon = tableCellItem.highlightedIcon;
-        cell.highlightable = NO;//tableCellItem.highlightable;
+        cell.highlightable = tableCellItem.highlightable;
         cell.accessoryTypeString = tableCellItem.accessoryType;
     }
 
