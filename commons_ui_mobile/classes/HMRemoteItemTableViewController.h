@@ -148,6 +148,12 @@ typedef enum {
 - (void)destroyUpdateStructures;
 
 /**
+ * Processes the empty data hanlding it and constructing
+ * the final adapted object item.
+ */
+- (void)processEmpty;
+
+/**
  * Processes the remote data hanlding it and constructing
  * the final adapted object item.
  * The object item is set in the remote group.

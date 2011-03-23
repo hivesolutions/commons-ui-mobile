@@ -244,6 +244,15 @@
     self.navigationItem.leftBarButtonItem = cancelBarButton;
     self.navigationItem.rightBarButtonItem = doneBarButton;
 
+    // sets the table view as editing
+    self.tableView.editing = YES;
+
+    // processes the empty (data), setting the remote group
+    [self processEmpty];
+
+    // reloads the data
+    [self.tableView reloadData];
+
     // releases the objects
     [cancelBarButton release];
     [doneBarButton release];
@@ -275,6 +284,9 @@
 
     // hides the toolbar
     [self hideToolbar];
+}
+
+- (void)processEmpty {
 }
 
 - (void)processRemoteData:(NSDictionary *)remoteData {
