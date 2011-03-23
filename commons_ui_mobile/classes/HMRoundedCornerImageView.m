@@ -46,6 +46,10 @@
     CGImageRef imageResized = CGBitmapContextCreateImage(context);
     image = [UIImage imageWithCGImage:imageResized];
 
+    // releases the objects
+    CGContextRelease(context);
+    CGImageRelease(imageResized);
+
     // configures the context
     context = CGBitmapContextCreate(NULL, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     const CGColorRef grayColor = [[UIColor grayColor] CGColor];

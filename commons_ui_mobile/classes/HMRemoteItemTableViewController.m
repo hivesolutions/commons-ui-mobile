@@ -336,6 +336,11 @@
 
     // sets the toolbar items in the toolbar
     [self.navigationController.toolbar setItems:items animated:NO];
+
+    // releases the objects
+    [refreshItem release];
+    [flexibleSpaceItem release];
+    [trashItem release];
 }
 
 - (void)hideToolbar {
