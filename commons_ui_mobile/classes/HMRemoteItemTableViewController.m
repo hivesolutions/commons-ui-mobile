@@ -109,6 +109,10 @@
     return nil;
 }
 
+- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType {
+    return nil;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     // calls the super
     [super viewDidAppear:animated];
@@ -135,8 +139,8 @@
 }
 
 - (void)initStructures {
-    // sets the table view as editable
-    self.operationType = HMItemOperationUpdate;
+    // sets the table view as read
+    self.operationType = HMItemOperationRead;
 
     // sets the remote data as not set
     _remoteDataIsSet = NO;
@@ -194,10 +198,10 @@
     // in order to create the apropriate
     // components
     switch (self.operationType) {
-        // in case it's an update operation
-        case HMItemOperationUpdate:
-            // constructs the update structures
-            [self constructUpdateStructures];
+        // in case it's a read operation
+        case HMItemOperationRead:
+            // constructs the read structures
+            [self constructReadStructures];
 
             // breaks the switch
             break;
@@ -220,10 +224,10 @@
     // in order to create the apropriate
     // components
     switch (self.operationType) {
-        // in case it's an update operation
-        case HMItemOperationUpdate:
-            // destroys the update structures
-            [self destroyUpdateStructures];
+        // in case it's an read operation
+        case HMItemOperationRead:
+            // destroys the read structures
+            [self destroyReadStructures];
 
             // breaks the switch
             break;
@@ -264,7 +268,7 @@
     self.navigationItem.rightBarButtonItem = nil;
 }
 
-- (void)constructUpdateStructures {
+- (void)constructReadStructures {
     // creates the edit bar button
     UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
 
@@ -278,7 +282,7 @@
     [editBarButton release];
 }
 
-- (void)destroyUpdateStructures {
+- (void)destroyReadStructures {
     // sets the bar buttons
     self.navigationItem.rightBarButtonItem = nil;
 
@@ -435,11 +439,8 @@
         // creates the http data from the remote data
         NSData *httpData = [HMHttpUtil createHttpData:remoteData];
 
-        // retrieves the object id
-        NSString *objectId = [remoteData objectForKey:@"object_id"];
-
         // creates the update url
-        NSString *updateUrl = [NSString stringWithFormat:@"http://172.16.0.24:8080/colony_mod_python/rest/mvc/omni/users/%@/update", objectId];
+        NSString *updateUrl = [self getRemoteUrlForOperation:HMItemOperationUpdate];
 
         // creates the request
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
@@ -460,6 +461,38 @@
         // sets the table view as editing
         [self.tableView setEditing:YES animated:YES];
     }
+}
+
+- (void)doneButtonClicked:(id)sender extra:(id)extra {
+    // casts the table view as item table view
+    HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // flushes the item specification
+    [itemTableView flushItemSpecification];
+
+    // converts the remote group, retrieving the remote
+    // data
+    NSDictionary *remoteData = [self convertRemoteGroup];
+
+    // creates the http data from the remote data
+    NSData *httpData = [HMHttpUtil createHttpData:remoteData];
+
+    // creates the create url
+    NSString *createUrl = [self getRemoteUrlForOperation:HMItemOperationCreate];
+
+    // creates the request
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:createUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+
+    // sets the http request properties, for a post request
+    [request setHTTPMethod: HTTP_POST_METHOD];
+    [request setHTTPBody:httpData];
+    [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
+
+    // creates the connection with the intance as delegate
+    NSConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+
+    // releases the connection
+    [connection release];
 }
 
 - (void)cancelButtonClicked:(id)sender extra:(id)extra {

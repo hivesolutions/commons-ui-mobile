@@ -48,7 +48,8 @@
 typedef enum {
     HMItemOperationCreate = 1,
     HMItemOperationRead,
-    HMItemOperationUpdate
+    HMItemOperationUpdate,
+    HMItemOperationDelete
 } HMItemOperationType;
 
 @interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
@@ -102,8 +103,19 @@ typedef enum {
 
 /**
  * Retrieves the remote url.
+ *
+ * @return The remote url.
  */
 - (NSString *)getRemoteUrl;
+
+/**
+ * Retrieves the remote url for the given
+ * operation type.
+ *
+ * @param operationType The opration type to retrieve the remote url.
+ * @return The remote url for the given operation type.
+ */
+- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType;
 
 /**
  * Constructs the internal data structures.
@@ -138,14 +150,14 @@ typedef enum {
 - (void)destroyCreateStructures;
 
 /**
- * Constructs the update operation stuctures.
+ * Constructs the read operation stuctures.
  */
-- (void)constructUpdateStructures;
+- (void)constructReadStructures;
 
 /**
- * Destroy the update operation stuctures.
+ * Destroy the read operation stuctures.
  */
-- (void)destroyUpdateStructures;
+- (void)destroyReadStructures;
 
 /**
  * Processes the empty data hanlding it and constructing
@@ -166,7 +178,7 @@ typedef enum {
  * Converts the remote group to the must up to date
  * information.
  * This method is called before persistence of the data
- * to obtain the must updated values.
+ * to obtain the most updated values.
  *
  * @return The converted remote group as remote data.
  */

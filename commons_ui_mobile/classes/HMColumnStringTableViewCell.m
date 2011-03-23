@@ -33,9 +33,6 @@
     // releases the text field
     [_textField release];
 
-    // releases the string value
-    [_stringValue release];
-
     // calls the super
     [super dealloc];
 }
@@ -52,7 +49,7 @@
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.backgroundColor = [UIColor clearColor];
-    textField.text = self.stringValue;
+    textField.text = self.description;
     textField.placeholder = self.defaultValue;
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
@@ -107,27 +104,6 @@
     [super blurEditing];
 }
 
-- (NSString *)stringValue {
-    return _stringValue;
-}
-
-- (void)setStringValue:(NSString *)stringValue {
-    // in case the object is the same
-    if(stringValue == _stringValue) {
-        // returns immediately
-        return;
-    }
-
-    // releases the object
-    [_stringValue release];
-
-    // sets and retains the object
-    _stringValue = [stringValue retain];
-
-    // updates the text field text
-    self.textField.text = _stringValue;
-}
-
 - (BOOL)secure {
     return _secure;
 }
@@ -168,16 +144,29 @@
 }
 
 - (void)setDescription:(NSString *)description {
-    // sets the string value
-    self.stringValue = description;
+    // calls the super
+    [super setDescription:description];
+
+    // in case the text field is defined
+    if(self.textField) {
+        // updates the text field text
+        self.textField.text = description;
+    }
 
     // masks the description if necessary
     if(self.secure == YES && description.length > 0) {
-        description = @"••••••••";
-    }
+        // creates the secret value
+        NSMutableString *secretValue = [[NSMutableString alloc] init];
 
-    // calls the super
-    [super setDescription:description];
+        // iterates over the length of the description
+        for(int index = 0; index < description.length; index++) {
+            // adds the secret token to the secret value
+            [secretValue appendString:@"•"];
+        }
+
+        // sets the detail text label text with the secret value
+        self.detailTextLabel.text = secretValue;
+    }
 }
 
 @end

@@ -40,7 +40,6 @@
 }
 
 - (void)didSelectLabel {
-    NSLog(@"LABEL SELECTED");
 }
 
 - (void)createEditing {
