@@ -52,7 +52,7 @@ typedef enum {
     HMItemOperationDelete
 } HMItemOperationType;
 
-@interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
+@interface HMRemoteItemTableViewController : UITableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
     @private
     HMRemoteAbstraction *_remoteAbstraction;
     NSMutableData *_receivedData;

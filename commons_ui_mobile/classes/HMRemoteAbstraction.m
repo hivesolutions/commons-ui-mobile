@@ -75,17 +75,22 @@
 }
 
 - (void)updateRemote {
-    // shows the activity indicator
-    [self showActivityIndicator];
-
     // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_TABLE_VIEW_CONNECTION_TIMEOUT];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
 
+    // updates the remote with the request
+    [self updateRemoteWithRequest:request];
+}
+
+- (void)updateRemoteWithRequest:(NSURLRequest *)request {
     // creates the connection with the intance as delegate
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     // creates the received data
     NSMutableData *receivedData = [[NSMutableData alloc] init];
+
+    // shows the activity indicator
+    [self showActivityIndicator];
 
     // sets the attributes
     self.connection = connection;

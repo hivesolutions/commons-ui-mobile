@@ -55,6 +55,8 @@
     textField.secureTextEntry = self.secure;
     textField.delegate = self;
 
+    textField.returnKeyType = UIReturnKeyDone;
+
     // enables the clear button
     // in case the cell is clearable
     if(self.clearable) {
@@ -138,6 +140,9 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     // hides the keyboard
     [self.textField resignFirstResponder];
+
+    // sets the item table view as exiting editing
+    self.itemTableView.editing = NO;
 
     // returns yes
     return YES;

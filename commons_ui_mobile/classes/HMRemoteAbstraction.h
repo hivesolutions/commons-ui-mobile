@@ -27,6 +27,12 @@
 
 #import "HMRemoteDelegate.h"
 
+/**
+ * The connection timeout for the remote abstraction
+ * connection.
+ */
+#define HM_REMOTE_ABSTRACTION_TIMEOUT 30.0
+
 @interface HMRemoteAbstraction : NSObject<UIActionSheetDelegate> {
     @private
     UIView *_view;
@@ -88,6 +94,15 @@
  * call to the provider.
  */
 - (void)updateRemote;
+
+/**
+ * Updates the remote data, using the given
+ * request.
+ *
+ * @param request The request to be in the
+ * update of the data.
+ */
+- (void)updateRemoteWithRequest:(NSURLRequest *)request;
 
 /**
  * Cancels the current remote call.

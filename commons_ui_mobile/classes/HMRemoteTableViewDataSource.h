@@ -30,11 +30,6 @@
 #import "HMRemoteAbstraction.h"
 
 /**
- * The connection timeout for the remote table view.
- */
-#define HM_REMOTE_TABLE_VIEW_CONNECTION_TIMEOUT 30.0
-
-/**
  * Class used to represent a table view data source
  * for remote connections with serialization.
  */

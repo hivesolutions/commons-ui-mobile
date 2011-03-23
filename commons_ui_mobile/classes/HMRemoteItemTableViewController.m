@@ -239,10 +239,10 @@
 
 - (void)constructCreateStructures {
     // creates the cancel bar button
-    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClicked:extra:)];
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClicked:extra:)];
 
     // creates the done button
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClicked:extra:)];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done") style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClicked:extra:)];
 
     // sets the bar buttons
     self.navigationItem.leftBarButtonItem = cancelBarButton;
@@ -270,7 +270,7 @@
 
 - (void)constructReadStructures {
     // creates the edit bar button
-    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
 
     // sets the bar buttons
     self.navigationItem.rightBarButtonItem = editBarButton;
@@ -510,26 +510,18 @@
 }
 
 - (void)deleteButtonClicked:(id)sender extra:(id)extra {
-    /*CATransition *animation = [CATransition animation];
-    animation.type = @"suckEffect";
-    animation.duration = 2.0f;
-    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];*/
+    // creates the action sheet
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ConfirmDeleteError", @"ConfirmDeleteError") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:NSLocalizedString(@"Delete", @"Delete") otherButtonTitles:nil];
+    actionSheet.alpha = 0.75;
 
-    // creates the delete url
-    NSString *deleteUrl = [self getRemoteUrlForOperation:HMItemOperationDelete];
+    // sets the action sheet style
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
 
-    // creates the request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:deleteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    // shows the action sheet in the table view
+    [actionSheet showFromToolbar:self.navigationController.toolbar];
 
-    // sets the http request properties, for a post request
-    [request setHTTPMethod: HTTP_POST_METHOD];
-
-    // creates the connection with the intance as delegate
-    NSConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
-
-    // releases the connection
-    [connection release];
+    // releases the action sheet
+    [actionSheet release];
 }
 
 - (void)refreshButtonClicked:(id)sender extra:(id)extra {
@@ -582,6 +574,32 @@
 
     // reloads the data
     [self.tableView reloadData];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // in case the button click was retry
+    if(buttonIndex == 0) {
+        // creates the delete url
+        NSString *deleteUrl = [self getRemoteUrlForOperation:HMItemOperationDelete];
+
+        // creates the request to be used in the remote abstraction
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:deleteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+
+        // sets the http request properties, for a post request
+        [request setHTTPMethod: HTTP_POST_METHOD];
+
+        // creates the remote abstraction
+        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] init];
+
+        // updates the remote with the given request
+        [remoteAbstraction updateRemoteWithRequest:request];
+
+        // releases the remote abstraction
+        [remoteAbstraction release];
+    }
+    // in case the button click was cancel
+    else {
+    }
 }
 
 + (void)_keepAtLinkTime {
