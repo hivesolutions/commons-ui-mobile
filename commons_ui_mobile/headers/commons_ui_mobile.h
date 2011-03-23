@@ -48,3 +48,5 @@
 #import "../classes/HMRoundedCornerImageView.h"
 #import "../classes/HMTableViewCell.h"
 #import "../classes/HMTableViewCellBackgroundView.h"
+#import "../classes/HMRemoteAbstraction.h"
+#import "../classes/HMRemoteDelegate.h"

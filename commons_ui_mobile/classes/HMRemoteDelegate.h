@@ -25,38 +25,28 @@
 
 #import "Dependencies.h"
 
-#import "HMRemoteTableViewDelegate.h"
-#import "HMRemoteTableViewProvider.h"
-#import "HMRemoteTableViewDataSource.h"
+@class HMRemoteAbstraction;
 
-@interface HMRemoteTableView : UITableView<UITableViewDelegate> {
-    @private
-    HMRemoteTableViewDataSource *_remoteDataSource;
-    NSObject<HMRemoteTableViewDelegate> *_remoteDelegate;
-    NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
-}
+@protocol HMRemoteDelegate<NSObject>
+
+@required
 
 /**
- * The remote data source provider to be used
- * to retrieve remote object information.
+ * Called when a remote call succeeds.
+ *
+ * @param remoteAbstraction The associated remote abstraction.
+ * @param data The data associated with the remote call.
+ * @param connection The connection associated with the remote call.
  */
-@property (retain) HMRemoteTableViewDataSource *remoteDataSource;
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection;
 
 /**
- * The remote delegate to be used to handle the changes in
- * the remote table.
+ * Called when a remote call fails.
+ * The failure may come from different possibilities.
+ *
+ * @param remoteAbstraction The associated remote abstraction.
+ * @param error The error associated with the failure.
  */
-@property (assign) IBOutlet NSObject<HMRemoteTableViewDelegate> *remoteDelegate;
-
-/**
- * The remote table view provider used to retrieve
- * configuration on the remote object.
- */
-@property (assign) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
-
-/**
- * Keeps the class valid for export at link time.
- */
-+ (void)_keepAtLinkTime;
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error;
 
 @end

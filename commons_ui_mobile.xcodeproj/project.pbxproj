@@ -52,6 +52,7 @@
 		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
 		C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */; };
 		C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */; };
+		C2DFF276133A228600E6E1D2 /* HMRemoteDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2DFF274133A228600E6E1D2 /* HMRemoteDelegate.h */; };
 		C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2EEE097132E8E9B0038FFA6 /* Foundation.framework */; };
 		C2EEE0A3132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */; };
 /* End PBXBuildFile section */
@@ -102,6 +103,7 @@
 		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
 		C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteAbstraction.h; path = classes/HMRemoteAbstraction.h; sourceTree = "<group>"; };
 		C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteAbstraction.m; path = classes/HMRemoteAbstraction.m; sourceTree = "<group>"; };
+		C2DFF274133A228600E6E1D2 /* HMRemoteDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteDelegate.h; path = classes/HMRemoteDelegate.h; sourceTree = "<group>"; };
 		C2EEE094132E8E9B0038FFA6 /* libcommons_ui_mobile.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libcommons_ui_mobile.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2EEE097132E8E9B0038FFA6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2EEE0A2132E8EDD0038FFA6 /* commons_ui_mobile-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "commons_ui_mobile-Prefix.pch"; path = "support/commons_ui_mobile-Prefix.pch"; sourceTree = "<group>"; };
@@ -249,10 +251,27 @@
 		C2DFF26C133A032100E6E1D2 /* Abstractions */ = {
 			isa = PBXGroup;
 			children = (
+				C2DFF273133A227800E6E1D2 /* Delegates */,
+				C2DFF272133A227200E6E1D2 /* Remote */,
+			);
+			name = Abstractions;
+			sourceTree = "<group>";
+		};
+		C2DFF272133A227200E6E1D2 /* Remote */ = {
+			isa = PBXGroup;
+			children = (
 				C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */,
 				C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */,
 			);
-			name = Abstractions;
+			name = Remote;
+			sourceTree = "<group>";
+		};
+		C2DFF273133A227800E6E1D2 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C2DFF274133A228600E6E1D2 /* HMRemoteDelegate.h */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		C2EEE089132E8E9B0038FFA6 = {
@@ -353,6 +372,7 @@
 				A5FA274B1338D52C00DD428A /* HMColumnStringTableViewCell.h in Headers */,
 				A5FA274F1338D53900DD428A /* HMPlainStringTableViewCell.h in Headers */,
 				C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */,
+				C2DFF276133A228600E6E1D2 /* HMRemoteDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -29,8 +29,7 @@
 
 @synthesize remoteTableViewProvider = _remoteTableViewProvider;
 @synthesize tableView = _tableView;
-@synthesize connection = _connection;
-@synthesize receivedData = _receivedData;
+@synthesize remoteAbstraction = _remoteAbstraction;
 @synthesize remoteData = _remoteData;
 
 - (id)init {
@@ -56,11 +55,8 @@
 }
 
 - (void)dealloc {
-    // releases the connection
-    [_connection release];
-
-    // releases the received data
-    [_receivedData release];
+    // releases the remote abstraction
+    [_remoteAbstraction release];
 
     // releases the remote data
     [_remoteData release];
@@ -80,35 +76,27 @@
     // retrieves the remote url from the remote table view provider
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
 
-    // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_TABLE_VIEW_CONNECTION_TIMEOUT];
-
-    // creates the connection with the intance as delegate
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
-    // creates the received data
-    NSMutableData *receivedData = [[NSMutableData alloc] init];
-
-    // creates a "new" remote data and initializes it
-    NSArray *remoteData = [[NSArray alloc] init];
+    // creates the remote abstraction using the remote url
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithUrl:remoteUrl];
+    remoteAbstraction.remoteDelegate = self;
+    remoteAbstraction.view = self.tableView;
 
     // sets the attributes
-    self.connection = connection;
-    self.receivedData = receivedData;
-    self.remoteData = remoteData;
+    self.remoteAbstraction = remoteAbstraction;
+
+    // oprens the remote abstraction
+    [self.remoteAbstraction updateRemote];
 
     // unsets the remote dirty flag
     _remoteDirty = NO;
 
     // releases the objects
-    [connection release];
-    [receivedData release];
-    [remoteData release];
+    [remoteAbstraction release];
 }
 
 - (void)cancelRemote {
-    // cancels the connection
-    [self.connection cancel];
+    // cancels the remote abstraction
+    [self.remoteAbstraction cancelRemote];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -186,17 +174,12 @@
     return nil;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // adds the data to the received data
-    [self.receivedData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
     // creates a new json parser
     SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
     // parses the received (remote) data and sets it into the intance
-    self.remoteData = [jsonParser objectWithData:self.receivedData];
+    self.remoteData = [jsonParser objectWithData:data];
 
     // reloads the data
     [self.tableView reloadData];
@@ -205,45 +188,9 @@
     [jsonParser release];
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // retrieves the (localized) base error message
-    NSString *baseErrorMessage = NSLocalizedString(@"ConnectionError", @"ConnectionError");
-
-    // retrieves the localized error description
-    NSString *localizedErrorDescription = [error localizedDescription];
-
-    // creates the error message from the base error message and the
-    // localized error description
-    NSString *errorMessage = [NSString stringWithFormat:@"%@\n%@", baseErrorMessage, localizedErrorDescription];
-
-    // creates the action sheet
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:NSLocalizedString(@"Retry", @"Retry") otherButtonTitles:nil];
-    actionSheet.alpha = 0.75;
-
-    // sets the action sheet style
-    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-
-    // shows the action sheet in the table view
-    [actionSheet showInView:self.tableView];
-
-    // releases the action sheet
-    [actionSheet release];
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
-    // in case the button click was retry
-    if(buttonIndex == 0) {
-        // sets the remote dirty flag
-        _remoteDirty = YES;
-
-        // updates the remote
-        [self updateRemote];
-    }
-    // in case the button click was cancel
-    else {
-        // reloads the data
-        [self.tableView reloadData];
-    }
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error {
+    // reloads the data
+    [self.tableView reloadData];
 }
 
 + (void)_keepAtLinkTime {
