@@ -25,7 +25,95 @@
 
 #import "Dependencies.h"
 
-@interface HMRemoteAbstraction : NSObject {
+#import "HMRemoteDelegate.h"
+
+@interface HMRemoteAbstraction : NSObject<UIActionSheetDelegate> {
+    @private
+    UIView *_view;
+    NSObject<HMRemoteDelegate> *_remoteDelegate;
+    UIView *_activity;
+    UIActivityIndicatorView *_activityIndicator;
+    NSString *_url;
+    NSURLConnection *_connection;
+    NSMutableData *_receivedData;
 }
+
+/**
+ * The associated view.
+ */
+@property (assign) UIView *view;
+
+/**
+ * The associated remote delegate.
+ */
+@property (assign) NSObject<HMRemoteDelegate> *remoteDelegate;
+
+/**
+ * The view to be used as loading mask during
+ * the remote call process.
+ */
+@property (retain) UIView *activity;
+
+/**
+ * The activity indicator used for the loading
+ * mask information.
+ */
+@property (retain) UIActivityIndicatorView *activityIndicator;
+
+/**
+ * The associated url.
+ */
+@property (retain) NSString *url;
+
+/**
+ * The currently established connection.
+ */
+@property (retain) NSURLConnection *connection;
+
+/**
+ * The received data at the moment.
+ */
+@property (retain) NSMutableData *receivedData;
+
+/**
+ * Constructor fo the class.
+ *
+ * @param url The url to be used by the remote abstraction.
+ * @return The created instance.
+ */
+- (id)initWithUrl:(NSString *)url;
+
+/**
+ * Updates the remote data, by performing a remote
+ * call to the provider.
+ */
+- (void)updateRemote;
+
+/**
+ * Cancels the current remote call.
+ */
+- (void)cancelRemote;
+
+/**
+ * Creates the activity indicator to be used
+ * in the current remote table context.
+ */
+- (void)createActivityIndicator;
+
+/**
+ * Shows the current activity indicator.
+ */
+- (void)showActivityIndicator;
+
+/**
+ * Hides the current activity indicator.
+ */
+- (void)hideActivityIndicator;
+
+/**
+ * Called uppon the end of the hiding of the
+ * activity indicator.
+ */
+- (void)hideActivityIndicatorComplete;
 
 @end

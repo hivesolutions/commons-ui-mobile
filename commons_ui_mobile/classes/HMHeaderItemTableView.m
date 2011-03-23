@@ -60,13 +60,13 @@
 
 - (void)dealloc {
     // releases the title
-    [self.title release];
+    [_title release];
 
     // releases the sub title
-    [self.subTitle release];
+    [_subTitle release];
 
     // releases the image
-    [self.image release];
+    [_image release];
 
     // calls the super
     [super dealloc];
