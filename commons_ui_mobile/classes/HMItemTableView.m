@@ -85,6 +85,52 @@
     }
 }
 
+- (UIView *)tableView:(UITableView *)tableView sectionViewForLabelItem:(HMLabelItem *)labelItem {
+    // retrieves the size occupied by the font
+    UIFont *font = [UIFont fontWithName:labelItem.fontName size:labelItem.fontSize];
+    CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
+    CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
+
+    // creates a label
+    CGRect labelFrame = CGRectMake(10, 10, tableView.frame.size.width - 20, size.height);
+    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+    label.text = labelItem.description;
+    label.textAlignment = UITextAlignmentCenter;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
+    label.font = font;
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowOffset = CGSizeMake(1, 1);
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+    // retrieves the label colors
+    HMColor *textColor = labelItem.textColor;
+    HMColor *shadowColor = labelItem.shadowColor;
+
+    // sets the label text color
+    if(textColor) {
+        label.textColor = [UIColor colorWithRed:textColor.red green:textColor.green blue:textColor.blue alpha:textColor.alpha];
+    }
+
+    // sets the label shadow color
+    if(shadowColor) {
+        label.shadowColor = [UIColor colorWithRed:shadowColor.red green:shadowColor.green blue:shadowColor.blue alpha:shadowColor.alpha];
+    }
+
+    // creates a wrapper view
+    CGRect wrapperViewFrame = CGRectMake(0, 0, tableView.frame.size.width, size.height);
+    UIView *wrapperView = [[[UIView alloc] initWithFrame:wrapperViewFrame] autorelease];
+    wrapperView.backgroundColor = [UIColor clearColor];
+    wrapperView.autoresizesSubviews = YES;
+    [wrapperView addSubview:label];
+
+    // releases the objects
+    [label release];
+
+    // returns the wrapper view
+    return wrapperView;
+}
+
 - (NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
     return _itemTableViewProvider;
 }
@@ -164,7 +210,7 @@
     UIFont *font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat height = size.height;
+    CGFloat height = size.height + 10;
 
     // returns the height
     return height;
@@ -187,7 +233,7 @@
     UIFont *font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat height = size.height;
+    CGFloat height = size.height + 10;
 
     // returns the height
     return height;
@@ -200,42 +246,22 @@
     // retrieves the table section item group
     HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
 
-    // releases the index path
-    [indexPath release];
-
     // retrieves the header label item
     HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
 
-    // returns in case no header exists
-    if(!headerLabelItem) {
-        return nil;
+    // initializes the section view
+    UIView *sectionView = nil;
+
+    // creates the section view
+    if(headerLabelItem) {
+        sectionView = [self tableView:tableView sectionViewForLabelItem:headerLabelItem];
     }
 
-    // creates a label
-    UILabel *label = [[UILabel alloc] init];
-    label.text = headerLabelItem.description;
-    label.lineBreakMode = UILineBreakModeWordWrap;
-    label.numberOfLines = 0;
-    label.font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
-    label.backgroundColor = [UIColor clearColor];
-    label.shadowOffset = CGSizeMake(1, 1);
+    // releases the objects
+    [indexPath release];
 
-    // retrieves the label colors
-    HMColor *textColor = headerLabelItem.textColor;
-    HMColor *shadowColor = headerLabelItem.shadowColor;
-
-    // sets the label text color
-    if(textColor) {
-        label.textColor = [UIColor colorWithRed:textColor.red green:textColor.green blue:textColor.blue alpha:textColor.alpha];
-    }
-
-    // sets the label shadow color
-    if(shadowColor) {
-        label.shadowColor = [UIColor colorWithRed:shadowColor.red green:shadowColor.green blue:shadowColor.blue alpha:shadowColor.alpha];
-    }
-
-    // returns the label
-    return label;
+    // returns the section view
+    return sectionView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -245,42 +271,22 @@
     // retrieves the table section item group
     HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
 
-    // releases the index path
-    [indexPath release];
-
     // retrieves the footer label item
     HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
 
-    // returns in case no header exists
-    if(!footerLabelItem) {
-        return nil;
+    // initializes the section view
+    UIView *sectionView = nil;
+
+    // creates the section view
+    if(footerLabelItem) {
+        sectionView = [self tableView:tableView sectionViewForLabelItem:footerLabelItem];
     }
 
-    // creates a label
-    UILabel *label = [[UILabel alloc] init];
-    label.text = footerLabelItem.description;
-    label.lineBreakMode = UILineBreakModeWordWrap;
-    label.numberOfLines = 0;
-    label.font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
-    label.backgroundColor = [UIColor clearColor];
-    label.shadowOffset = CGSizeMake(1, 1);
+    // releases the objects
+    [indexPath release];
 
-    // retrieves the label colors
-    HMColor *textColor = footerLabelItem.textColor;
-    HMColor *shadowColor = footerLabelItem.shadowColor;
-
-    // sets the label text color
-    if(textColor) {
-        label.textColor = [UIColor colorWithRed:textColor.red green:textColor.green blue:textColor.blue alpha:textColor.alpha];
-    }
-
-    // sets the label shadow color
-    if(shadowColor) {
-        label.shadowColor = [UIColor colorWithRed:shadowColor.red green:shadowColor.green blue:shadowColor.blue alpha:shadowColor.alpha];
-    }
-
-    // returns the label
-    return label;
+    // returns the section view
+    return sectionView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
