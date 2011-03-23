@@ -30,6 +30,7 @@
 @synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
 @synthesize itemTableView = _itemTableView;
+@synthesize clearable = _clearable;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor

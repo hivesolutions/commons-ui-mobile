@@ -50,7 +50,6 @@
     UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-    textField.clearButtonMode = UITextFieldViewModeAlways;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.backgroundColor = [UIColor clearColor];
     textField.text = self.stringValue;
@@ -58,6 +57,12 @@
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
     textField.delegate = self;
+
+    // enables the clear button
+    // in case the cell is clearable
+    if(self.clearable) {
+        textField.clearButtonMode = UITextFieldViewModeAlways;
+    }
 
     // adds the textfield as subview
     [self.editView addSubview:textField];

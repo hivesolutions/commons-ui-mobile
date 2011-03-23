@@ -36,11 +36,13 @@
     UIView *_editView;
     HMItemTableView *_itemTableView;
     BOOL _editingDirty;
+    BOOL _clearable;
 }
 
 @property (assign) NSString *defaultValue;
 @property (retain) UIView *editView;
 @property (assign) HMItemTableView *itemTableView;
+@property (assign) BOOL clearable;
 
 /**
  * Creates the editing view.

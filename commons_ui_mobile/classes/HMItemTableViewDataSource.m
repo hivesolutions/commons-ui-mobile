@@ -223,11 +223,13 @@
                 HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
                 columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                 columnStringTableViewCell.secure = stringTableCellItem.secure;
+                columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                 cell = columnStringTableViewCell;
             } else {
                 HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
                 plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                 plainStringTableViewCell.secure = stringTableCellItem.secure;
+                plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                 cell = plainStringTableViewCell;
             }
         }
