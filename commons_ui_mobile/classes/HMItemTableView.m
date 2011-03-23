@@ -147,6 +147,52 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // retrieves the header label item
+    HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
+
+    // retrieves the height occupied by the font
+    UIFont *font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
+    CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
+    CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
+    CGFloat height = size.height;
+
+    // returns the height
+    return height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // retrieves the footer label item
+    HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
+
+    // retrieves the height occupied by the font
+    UIFont *font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
+    CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
+    CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
+    CGFloat height = size.height;
+
+    // returns the height
+    return height;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     // creates an index path
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
@@ -168,9 +214,11 @@
     // creates a label
     UILabel *label = [[UILabel alloc] init];
     label.text = headerLabelItem.description;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
     label.font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
     label.backgroundColor = [UIColor clearColor];
-    label.shadowOffset = CGSizeMake(-1, 0);
+    label.shadowOffset = CGSizeMake(1, 1);
 
     // retrieves the label colors
     HMColor *textColor = headerLabelItem.textColor;
@@ -211,9 +259,11 @@
     // creates a label
     UILabel *label = [[UILabel alloc] init];
     label.text = footerLabelItem.description;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
     label.font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
     label.backgroundColor = [UIColor clearColor];
-    label.shadowOffset = CGSizeMake(-1, 0);
+    label.shadowOffset = CGSizeMake(1, 1);
 
     // retrieves the label colors
     HMColor *textColor = footerLabelItem.textColor;
