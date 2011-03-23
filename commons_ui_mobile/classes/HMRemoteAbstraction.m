@@ -218,7 +218,7 @@
     // in case the button click was cancel
     else {
         // calls the remote did fail method in the remote delegate
-        [self.remoteDelegate remoteDidFail:self error:nil];
+        [self.remoteDelegate remoteDidFail:self data:self.receivedData error:nil];
 
         // hides the activity indicator
         [self hideActivityIndicator];

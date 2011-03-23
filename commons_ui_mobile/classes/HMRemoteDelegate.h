@@ -45,8 +45,9 @@
  * The failure may come from different possibilities.
  *
  * @param remoteAbstraction The associated remote abstraction.
+ * @param data The data associated with the remote call.
  * @param error The error associated with the failure.
  */
-- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error;
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error;
 
 @end

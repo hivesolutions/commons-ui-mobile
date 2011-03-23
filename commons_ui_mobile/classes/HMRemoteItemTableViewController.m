@@ -565,7 +565,7 @@
     [jsonParser release];
 }
 
-- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error {
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
     // sets the remote data as not set
     _remoteDataIsSet = NO;
 

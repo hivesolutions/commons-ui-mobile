@@ -188,7 +188,7 @@
     [jsonParser release];
 }
 
-- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error {
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
     // reloads the data
     [self.tableView reloadData];
 }
