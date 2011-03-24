@@ -144,6 +144,11 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
+    // disables editing in case the return type is done
+    if([self.returnType isEqualToString:@"done"]) {
+        self.itemTableView.editing = NO;
+    }
+
     // returns yes
     return YES;
 }

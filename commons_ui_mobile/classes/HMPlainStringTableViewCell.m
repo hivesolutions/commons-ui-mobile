@@ -144,8 +144,10 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
-    // sets the item table view as exiting editing
-    self.itemTableView.editing = NO;
+    // disables editing in case the return type is done
+    if([self.returnType isEqualToString:@"done"]) {
+        self.itemTableView.editing = NO;
+    }
 
     // returns yes
     return YES;
