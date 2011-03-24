@@ -103,20 +103,6 @@
 - (void)updateItemSpecificationForce;
 
 /**
- * Creates and returns a table view cell
- * for the specified table cell item.
- *
- * @param tableView The table view for which
- * the cell will be created.
- * @param tableCellItem The table cell item
- * for which one wants the corresponding
- * table view cell.
- * @return The table view cell that represents
- * the specified table cell item.
- */
-- (HMTableViewCell *)tableView:(UITableView *)tableView cellForTableCellItem:(HMTableCellItem *)tableCellItem;
-
-/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;

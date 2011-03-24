@@ -149,10 +149,54 @@
     // unsets the item dirty flag
     _itemDirty = NO;
 }
+- (HMNamedItemGroup *)headerNamedItemGroup {
+    // retrieves the header named item group from the item specification
+    HMNamedItemGroup *headerItemGroup = (HMNamedItemGroup *) [self.itemSpecification getItem:@"header"];
 
-- (HMTableViewCell *)tableView:(UITableView *)tableView cellForTableCellItem:(HMTableCellItem *)tableCellItem {
+    // returns the header item group
+    return headerItemGroup;
+}
+
+- (HMItemGroup *)listItemGroup {
+    // retrieves the list item group from the item specification
+    HMItemGroup *listItemGroup = (HMItemGroup *) [self.itemSpecification getItem:@"list"];
+
+    // returns the list item group
+    return listItemGroup;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // sets the table view
+    self.tableView = tableView;
+
+    // updates the item (if necessary)
+    [self updateItemSpecification];
+
+    // retrieves the menu item group items size
+    NSInteger menuItemGroupItemsSize = [self.listItemGroup.items count];
+
+    // returns the menu item group items size
+    return menuItemGroupItemsSize;
+}
+
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    return [[[NSArray alloc] init] autorelease];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return NO;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // creates the cell identifier
     static NSString *cellIdentifier = @"Cell";
+
+    // retrieves the table cell item
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // tries to retrives the cell from cache (reusable)
     HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
@@ -205,59 +249,6 @@
 
     // sets the button item's attributes in the cell
     tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
-
-    // returns the cell
-    return tableViewCell;
-}
-
-- (HMNamedItemGroup *)headerNamedItemGroup {
-    // retrieves the header named item group from the item specification
-    HMNamedItemGroup *headerItemGroup = (HMNamedItemGroup *) [self.itemSpecification getItem:@"header"];
-
-    // returns the header item group
-    return headerItemGroup;
-}
-
-- (HMItemGroup *)listItemGroup {
-    // retrieves the list item group from the item specification
-    HMItemGroup *listItemGroup = (HMItemGroup *) [self.itemSpecification getItem:@"list"];
-
-    // returns the list item group
-    return listItemGroup;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // sets the table view
-    self.tableView = tableView;
-
-    // updates the item (if necessary)
-    [self updateItemSpecification];
-
-    // retrieves the menu item group items size
-    NSInteger menuItemGroupItemsSize = [self.listItemGroup.items count];
-
-    // returns the menu item group items size
-    return menuItemGroupItemsSize;
-}
-
-- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
-    return [[[NSArray alloc] init] autorelease];
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    return NO;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    // retrieves the table cell item
-    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
-
-    // retrieves the table view cell
-    HMTableViewCell *tableViewCell = [self tableView:tableView cellForTableCellItem:tableCellItem];
 
     // returns the cell
     return tableViewCell;

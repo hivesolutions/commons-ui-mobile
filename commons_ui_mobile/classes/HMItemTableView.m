@@ -92,7 +92,7 @@
     CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
 
     // creates a label
-    CGRect labelFrame = CGRectMake(10, 10, tableView.frame.size.width - 20, size.height);
+    CGRect labelFrame = CGRectMake(10, 0, tableView.frame.size.width - 20, size.height);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.text = labelItem.description;
     label.textAlignment = UITextAlignmentCenter;
@@ -121,6 +121,7 @@
     CGRect wrapperViewFrame = CGRectMake(0, 0, tableView.frame.size.width, size.height);
     UIView *wrapperView = [[[UIView alloc] initWithFrame:wrapperViewFrame] autorelease];
     wrapperView.backgroundColor = [UIColor clearColor];
+    wrapperView.clipsToBounds = YES;
     wrapperView.autoresizesSubviews = YES;
     [wrapperView addSubview:label];
 
@@ -210,7 +211,7 @@
     UIFont *font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat height = size.height + 10;
+    CGFloat height = size.height + 30;
 
     // returns the height
     return height;
@@ -233,7 +234,7 @@
     UIFont *font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat height = size.height + 10;
+    CGFloat height = size.height + 30;
 
     // returns the height
     return height;
