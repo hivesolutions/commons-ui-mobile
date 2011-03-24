@@ -50,9 +50,26 @@
     NSDateFormatter *_dateFormatter;
 }
 
+/**
+ * The date picker used to select the date.
+ */
 @property (retain) UIDatePicker *datePicker;
+
+/**
+ * The value represented in the cell.
+ */
 @property (retain) NSDate *dateValue;
+
+/**
+ * The label used to display the
+ * string representation of the date.
+ */
 @property (retain) UILabel *label;
+
+/**
+ * The formatter used to convert date objects
+ * to strings and strings to date objects.
+ */
 @property (retain) NSDateFormatter *dateFormatter;
 
 /**

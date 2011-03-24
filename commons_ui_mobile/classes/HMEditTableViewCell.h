@@ -40,10 +40,33 @@
     NSString *_returnType;
 }
 
+/**
+ * The value that should be used by default.
+ */
 @property (assign) NSString *defaultValue;
+
+/**
+ * The view that is shown when the cell
+ * is in edit mode.
+ */
 @property (retain) UIView *editView;
+
+/**
+ * The item table view this cell belongs to.
+ */
 @property (assign) HMItemTableView *itemTableView;
+
+/**
+ * Indicates if the inserted value is
+ * clearable with a clear action.
+ */
 @property (assign) BOOL clearable;
+
+/**
+ * Indicates the action that is
+ * represented by returning from
+ * the cell's value edition.
+ */
 @property (retain) NSString *returnType;
 
 /**

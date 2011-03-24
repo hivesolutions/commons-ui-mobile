@@ -28,6 +28,7 @@
 @implementation HMPlainStringTableViewCell
 
 @synthesize textField = _textField;
+@synthesize returnDisablesEdit = _returnDisablesEdit;
 
 - (void)dealloc {
     // releases the text field
@@ -144,8 +145,9 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
-    // disables editing in case the return type is done
-    if([self.returnType isEqualToString:@"done"]) {
+    // disables editing in case
+    // returning should do so
+    if(self.returnDisablesEdit) {
         self.itemTableView.editing = NO;
     }
 
