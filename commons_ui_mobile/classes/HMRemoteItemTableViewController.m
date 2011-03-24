@@ -404,7 +404,7 @@
 - (void)deleteButtonClicked:(id)sender {
     CATransition *animation = [CATransition animation];
     animation.type = @"suckEffect";
-    animation.duration = 2.0f;
+    animation.duration = 0.35f;
     animation.timingFunction = UIViewAnimationCurveEaseInOut;
     [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
 }
