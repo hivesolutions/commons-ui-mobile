@@ -122,6 +122,9 @@
 
     // calls the construct structures delayed
     [self constructStructuresDelayed];
+
+    // updates the view in the remote abstraction
+    [self.remoteAbstraction updateView:self.tableView.superview];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -311,7 +314,7 @@
     // creates the remote abstraction using the remote url
     HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationRead url:remoteUrl];
     remoteAbstraction.remoteDelegate = self;
-    remoteAbstraction.view = self.tableView;
+    remoteAbstraction.view = self.tableView.superview;
 
     // sets the attributes
     self.remoteAbstraction = remoteAbstraction;
@@ -581,7 +584,6 @@
 }
 
 - (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
-
     // initializes the data string with the contents of the data
     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
