@@ -55,6 +55,11 @@
     textField.secureTextEntry = self.secure;
     textField.delegate = self;
 
+    // sets the text field's return key type
+    if([self.returnType isEqualToString:@"done"]) {
+        textField.returnKeyType = UIReturnKeyDone;
+    }
+
     // enables the clear button
     // in case the cell is clearable
     if(self.clearable) {
