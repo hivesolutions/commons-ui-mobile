@@ -606,15 +606,6 @@
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
-    // creates the error alert window
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Occurred" message:@"AThe message." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
-
-    // shows the alert
-    [alert show];
-
-    // releases the alert
-    [alert release];
-
     // sets the remote data as not set
     _remoteDataIsSet = NO;
 
