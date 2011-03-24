@@ -179,12 +179,14 @@
                 columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                 columnStringTableViewCell.secure = stringTableCellItem.secure;
                 columnStringTableViewCell.clearable = stringTableCellItem.clearable;
+                columnStringTableViewCell.returnType = stringTableCellItem.returnType;
                 tableViewCell = columnStringTableViewCell;
             } else {
                 HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
                 plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                 plainStringTableViewCell.secure = stringTableCellItem.secure;
                 plainStringTableViewCell.clearable = stringTableCellItem.clearable;
+                plainStringTableViewCell.returnType = stringTableCellItem.returnType;
                 tableViewCell = plainStringTableViewCell;
             }
         }
