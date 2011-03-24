@@ -28,6 +28,7 @@
 @implementation HMColumnStringTableViewCell
 
 @synthesize textField = _textField;
+@synthesize returnDisablesEdit = _returnDisablesEdit;
 
 - (void)dealloc {
     // releases the text field
@@ -143,6 +144,12 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     // hides the keyboard
     [self.textField resignFirstResponder];
+
+    // disables editing in case
+    // returning should do so
+    if(self.returnDisablesEdit) {
+        self.itemTableView.editing = NO;
+    }
 
     // returns yes
     return YES;

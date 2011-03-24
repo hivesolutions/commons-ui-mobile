@@ -46,9 +46,23 @@
     @private
     UITextField *_textField;
     BOOL _secure;
+    BOOL _returnDisablesEdit;
 }
 
+/**
+ * The textfield used to represent the cell value.
+ */
 @property (retain) UITextField *textField;
+
+/**
+ * Indicates if the value should be masked.
+ */
 @property (assign) BOOL secure;
+
+/**
+ * Indicates if the return action should
+ * disable the edit mode.
+ */
+@property (assign) BOOL returnDisablesEdit;
 
 @end
