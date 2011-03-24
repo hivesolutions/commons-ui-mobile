@@ -42,6 +42,11 @@
 #define HTTP_APPLICATION_URL_ENCODED @"application/x-www-form-urlencoded"
 
 /**
+ * The http content type value.
+ */
+#define HTTP_CONTENT_TYPE_VALUE @"content-type"
+
+/**
  * Enumeration defining the various item
  * operations available.
  */

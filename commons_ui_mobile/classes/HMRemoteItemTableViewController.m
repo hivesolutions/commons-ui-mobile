@@ -442,19 +442,24 @@
         // creates the update url
         NSString *updateUrl = [self getRemoteUrlForOperation:HMItemOperationUpdate];
 
-        // creates the request
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+        // creates the request to be used in the remote abstraction
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
 
         // sets the http request properties, for a post request
         [request setHTTPMethod: HTTP_POST_METHOD];
         [request setHTTPBody:httpData];
-        [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
+        [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
 
-        // creates the connection with the intance as delegate
-        NSConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+        // creates the remote abstraction
+        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationUpdate];
+        remoteAbstraction.remoteDelegate = self;
+        remoteAbstraction.view = self.tableView;
 
-        // releases the connection
-        [connection release];
+        // updates the remote with the given request
+        [remoteAbstraction updateRemoteWithRequest:request];
+
+        // releases the remote abstraction
+        [remoteAbstraction release];
     }
     // otherwise it must not be editing
     else {
@@ -489,19 +494,24 @@
     // creates the create url
     NSString *createUrl = [self getRemoteUrlForOperation:HMItemOperationCreate];
 
-    // creates the request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:createUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    // creates the request to be used in the remote abstraction
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:createUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
 
     // sets the http request properties, for a post request
     [request setHTTPMethod: HTTP_POST_METHOD];
     [request setHTTPBody:httpData];
-    [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
+    [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
 
-    // creates the connection with the intance as delegate
-    NSConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
+    // creates the remote abstraction
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationCreate];
+    remoteAbstraction.remoteDelegate = self;
+    remoteAbstraction.view = self.tableView;
 
-    // releases the connection
-    [connection release];
+    // updates the remote with the given request
+    [remoteAbstraction updateRemoteWithRequest:request];
+
+    // releases the remote abstraction
+    [remoteAbstraction release];
 }
 
 - (void)cancelButtonClicked:(id)sender extra:(id)extra {
@@ -572,6 +582,12 @@
 
 - (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
 
+    // initializes the data string with the contents of the data
+    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    // logs the received data
+    NSLog(dataString);
+
     // switches over the remote abstraction id
     switch(remoteAbstraction.remoteAbstractionId) {
         case HMItemOperationRead:
@@ -590,6 +606,15 @@
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
+    // creates the error alert window
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error Occurred" message:@"AThe message." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil];
+
+    // shows the alert
+    [alert show];
+
+    // releases the alert
+    [alert release];
+
     // sets the remote data as not set
     _remoteDataIsSet = NO;
 
