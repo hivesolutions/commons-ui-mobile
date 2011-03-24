@@ -48,6 +48,9 @@
 		C29A2E40132EA6A2005EAB37 /* HMRemoteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */; };
 		C29E100F1333A24C00E9F77A /* HMHeaderItemTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */; };
 		C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */; };
+		C2C272C5133C05DA00D203C2 /* HMEntityAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C272C3133C05DA00D203C2 /* HMEntityAbstraction.h */; };
+		C2C272C6133C05DA00D203C2 /* HMEntityAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C272C4133C05DA00D203C2 /* HMEntityAbstraction.m */; };
+		C2C272C8133C06FB00D203C2 /* HMEntityDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C272C7133C06FB00D203C2 /* HMEntityDelegate.h */; };
 		C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2C2FA0A132E95530038B41E /* UIKit.framework */; };
 		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
 		C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */; };
@@ -99,6 +102,9 @@
 		C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableView.m; path = classes/HMRemoteTableView.m; sourceTree = "<group>"; };
 		C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMHeaderItemTableView.h; path = classes/HMHeaderItemTableView.h; sourceTree = "<group>"; };
 		C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMHeaderItemTableView.m; path = classes/HMHeaderItemTableView.m; sourceTree = "<group>"; };
+		C2C272C3133C05DA00D203C2 /* HMEntityAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityAbstraction.h; path = classes/HMEntityAbstraction.h; sourceTree = "<group>"; };
+		C2C272C4133C05DA00D203C2 /* HMEntityAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMEntityAbstraction.m; path = classes/HMEntityAbstraction.m; sourceTree = "<group>"; };
+		C2C272C7133C06FB00D203C2 /* HMEntityDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityDelegate.h; path = classes/HMEntityDelegate.h; sourceTree = "<group>"; };
 		C2C2FA0A132E95530038B41E /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
 		C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteAbstraction.h; path = classes/HMRemoteAbstraction.h; sourceTree = "<group>"; };
@@ -240,6 +246,15 @@
 			name = Headers;
 			sourceTree = "<group>";
 		};
+		C2C272C1133C05C900D203C2 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C2C272C3133C05DA00D203C2 /* HMEntityAbstraction.h */,
+				C2C272C4133C05DA00D203C2 /* HMEntityAbstraction.m */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		C2C96E45133373F700D6910B /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +266,7 @@
 		C2DFF26C133A032100E6E1D2 /* Abstractions */ = {
 			isa = PBXGroup;
 			children = (
+				C2C272C1133C05C900D203C2 /* Entity */,
 				C2DFF273133A227800E6E1D2 /* Delegates */,
 				C2DFF272133A227200E6E1D2 /* Remote */,
 			);
@@ -269,6 +285,7 @@
 		C2DFF273133A227800E6E1D2 /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				C2C272C7133C06FB00D203C2 /* HMEntityDelegate.h */,
 				C2DFF274133A228600E6E1D2 /* HMRemoteDelegate.h */,
 			);
 			name = Delegates;
@@ -373,6 +390,8 @@
 				A5FA274F1338D53900DD428A /* HMPlainStringTableViewCell.h in Headers */,
 				C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */,
 				C2DFF276133A228600E6E1D2 /* HMRemoteDelegate.h in Headers */,
+				C2C272C5133C05DA00D203C2 /* HMEntityAbstraction.h in Headers */,
+				C2C272C8133C06FB00D203C2 /* HMEntityDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -441,6 +460,7 @@
 				A5FA274C1338D52C00DD428A /* HMColumnStringTableViewCell.m in Sources */,
 				A5FA27501338D53900DD428A /* HMPlainStringTableViewCell.m in Sources */,
 				C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */,
+				C2C272C6133C05DA00D203C2 /* HMEntityAbstraction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

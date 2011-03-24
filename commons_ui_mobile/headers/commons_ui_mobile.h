@@ -50,3 +50,5 @@
 #import "../classes/HMTableViewCellBackgroundView.h"
 #import "../classes/HMRemoteAbstraction.h"
 #import "../classes/HMRemoteDelegate.h"
+#import "../classes/HMEntityAbstraction.h"
+#import "../classes/HMEntityDelegate.h"
