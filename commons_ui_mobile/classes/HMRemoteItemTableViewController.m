@@ -586,7 +586,7 @@
     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 
     // logs the received data
-    NSLog(dataString);
+    NSLog(@"%@", dataString);
 
     // switches over the remote abstraction id
     switch(remoteAbstraction.remoteAbstractionId) {
