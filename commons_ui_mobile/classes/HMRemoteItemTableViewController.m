@@ -587,7 +587,6 @@
             // breaks the switch
             break;
     }
-
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
