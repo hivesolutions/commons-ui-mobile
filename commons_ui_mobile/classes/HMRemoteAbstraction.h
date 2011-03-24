@@ -27,8 +27,28 @@
 
 #import "HMRemoteDelegate.h"
 
+/**
+ * The connection timeout for the remote abstraction
+ * connection.
+ */
+#define HM_REMOTE_ABSTRACTION_TIMEOUT 30.0
+
+/**
+ * Enumeration defining the various status
+ * for the remote abstraction.
+ */
+typedef enum {
+    HMRemoteAbstractionStatusOpen = 1,
+    HMRemoteAbstractionStatusPending,
+    HMRemoteAbstractionStatusClosed,
+    HMRemoteAbstractionStatusError
+} HMRemoteAbstractionStatus;
+
 @interface HMRemoteAbstraction : NSObject<UIActionSheetDelegate> {
     @private
+    int _remoteAbstractionId;
+    HMRemoteAbstractionStatus _remoteAbstractionStatus;
+    NSError *_error;
     UIView *_view;
     NSObject<HMRemoteDelegate> *_remoteDelegate;
     UIView *_activity;
@@ -37,6 +57,21 @@
     NSURLConnection *_connection;
     NSMutableData *_receivedData;
 }
+
+/**
+ * The associated remote abstraction id.
+ */
+@property (assign) int remoteAbstractionId;
+
+/**
+ * The associated remote abstraction status.
+ */
+@property (assign) HMRemoteAbstractionStatus remoteAbstractionStatus;
+
+/**
+ * The error associated with the last call.
+ */
+@property (retain) NSError *error;
 
 /**
  * The associated view.
@@ -78,16 +113,43 @@
 /**
  * Constructor fo the class.
  *
+ * @param remoteAbstractionId The id describing the remote abstraction.
+ * @return The created instance.
+ */
+- (id)initWithId:(int)remoteAbstractionId;
+
+/**
+ * Constructor fo the class.
+ *
+ * @param remoteAbstractionId The id describing the remote abstraction.
  * @param url The url to be used by the remote abstraction.
  * @return The created instance.
  */
-- (id)initWithUrl:(NSString *)url;
+- (id)initWithIdAndUrl:(int)remoteAbstractionId url:(NSString *)url;
 
 /**
  * Updates the remote data, by performing a remote
  * call to the provider.
  */
 - (void)updateRemote;
+
+/**
+ * Updates the remote data, using the given
+ * request.
+ *
+ * @param request The request to be in the
+ * update of the data.
+ */
+- (void)updateRemoteWithRequest:(NSURLRequest *)request;
+
+/**
+ * Updates the view associated with the remote
+ * abstraction this update triggers the activity indicator
+ * or the activity sheet in case it's necessary.
+ *
+ * @param view The view to be used in the update.
+ */
+- (void)updateView:(UIView *)view;
 
 /**
  * Cancels the current remote call.
@@ -115,5 +177,10 @@
  * activity indicator.
  */
 - (void)hideActivityIndicatorComplete;
+
+/**
+ * Shows the action sheet modal box for retry.
+ */
+- (void)showActionSheet;
 
 @end

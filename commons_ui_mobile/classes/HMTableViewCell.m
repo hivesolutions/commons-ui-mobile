@@ -119,7 +119,7 @@
 
 - (void)setDescription:(NSString *)description {
     // in case the description is invalid
-    if(description == nil) {
+    if(description == nil || (NSNull *) description == [NSNull null]) {
         // returns immediately
         return;
     }
@@ -226,11 +226,11 @@
     _accessoryTypeString = [accessoryTypeString retain];
 
     // creates the specified accessory type
-    if(accessoryTypeString == @"disclosure_indicator") {
+    if([accessoryTypeString isEqualToString:@"disclosure_indicator"]) {
         // sets the acessory type as the table view
         // cell acessory disclosure indicator
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else if(accessoryTypeString == @"switch") {
+    } else if([accessoryTypeString isEqualToString:@"switch"]) {
         // creates the notifications switch
         UISwitch *notificationsSwitch = [[UISwitch alloc] init];
 

@@ -85,6 +85,53 @@
     }
 }
 
+- (UIView *)tableView:(UITableView *)tableView sectionViewForLabelItem:(HMLabelItem *)labelItem {
+    // retrieves the size occupied by the font
+    UIFont *font = [UIFont fontWithName:labelItem.fontName size:labelItem.fontSize];
+    CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
+    CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
+
+    // creates a label
+    CGRect labelFrame = CGRectMake(10, 0, tableView.frame.size.width - 20, size.height);
+    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+    label.text = labelItem.description;
+    label.textAlignment = UITextAlignmentCenter;
+    label.lineBreakMode = UILineBreakModeWordWrap;
+    label.numberOfLines = 0;
+    label.font = font;
+    label.backgroundColor = [UIColor clearColor];
+    label.shadowOffset = CGSizeMake(1, 1);
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+    // retrieves the label colors
+    HMColor *textColor = labelItem.textColor;
+    HMColor *shadowColor = labelItem.shadowColor;
+
+    // sets the label text color
+    if(textColor) {
+        label.textColor = [UIColor colorWithRed:textColor.red green:textColor.green blue:textColor.blue alpha:textColor.alpha];
+    }
+
+    // sets the label shadow color
+    if(shadowColor) {
+        label.shadowColor = [UIColor colorWithRed:shadowColor.red green:shadowColor.green blue:shadowColor.blue alpha:shadowColor.alpha];
+    }
+
+    // creates a wrapper view
+    CGRect wrapperViewFrame = CGRectMake(0, 0, tableView.frame.size.width, size.height);
+    UIView *wrapperView = [[[UIView alloc] initWithFrame:wrapperViewFrame] autorelease];
+    wrapperView.backgroundColor = [UIColor clearColor];
+    wrapperView.clipsToBounds = YES;
+    wrapperView.autoresizesSubviews = YES;
+    [wrapperView addSubview:label];
+
+    // releases the objects
+    [label release];
+
+    // returns the wrapper view
+    return wrapperView;
+}
+
 - (NSObject<HMItemTableViewProvider> *)itemTableViewProvider {
     return _itemTableViewProvider;
 }
@@ -147,7 +194,7 @@
     }
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     // creates an index path
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
 
@@ -157,19 +204,65 @@
     // releases the index path
     [indexPath release];
 
-    // retrieves the header table cell item
-    HMTableCellItem *headerTableCellItem = tableSectionItemGroup.header;
+    // retrieves the header label item
+    HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
 
-    // returns in case no header exists
-    if(!headerTableCellItem) {
-        return nil;
+    // retrieves the height occupied by the font
+    UIFont *font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
+    CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
+    CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
+    CGFloat height = size.height + 30;
+
+    // returns the height
+    return height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+
+    // releases the index path
+    [indexPath release];
+
+    // retrieves the footer label item
+    HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
+
+    // retrieves the height occupied by the font
+    UIFont *font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
+    CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
+    CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
+    CGFloat height = size.height + 30;
+
+    // returns the height
+    return height;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    // creates an index path
+    NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];
+
+    // retrieves the table section item group
+    HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+
+    // retrieves the header label item
+    HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
+
+    // initializes the section view
+    UIView *sectionView = nil;
+
+    // creates the section view
+    if(headerLabelItem) {
+        sectionView = [self tableView:tableView sectionViewForLabelItem:headerLabelItem];
     }
 
-    // retrieves the header table view cell
-    HMTableViewCell *headerTableViewCell = [self.itemDataSource tableView:tableView cellForTableCellItem:headerTableCellItem];
+    // releases the objects
+    [indexPath release];
 
-    // returns the header table view cell
-    return headerTableViewCell;
+    // returns the section view
+    return sectionView;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -179,22 +272,22 @@
     // retrieves the table section item group
     HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
 
-    // releases the index path
-    [indexPath release];
+    // retrieves the footer label item
+    HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
 
-    // retrieves the footer table cell item
-    HMTableCellItem *footerTableCellItem = tableSectionItemGroup.footer;
+    // initializes the section view
+    UIView *sectionView = nil;
 
-    // returns in case no footer exists
-    if(!footerTableCellItem) {
-        return nil;
+    // creates the section view
+    if(footerLabelItem) {
+        sectionView = [self tableView:tableView sectionViewForLabelItem:footerLabelItem];
     }
 
-    // retrieves the footer table view cell
-    HMTableViewCell *footerTableViewCell = [self.itemDataSource tableView:tableView cellForTableCellItem:footerTableCellItem];
+    // releases the objects
+    [indexPath release];
 
-    // returns the footer table view cell
-    return footerTableViewCell;
+    // returns the section view
+    return sectionView;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

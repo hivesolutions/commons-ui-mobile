@@ -27,6 +27,7 @@
 
 @implementation HMRemoteItemTableViewController
 
+@synthesize remoteAbstraction = _remoteAbstraction;
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
@@ -91,36 +92,64 @@
 }
 
 - (void)dealloc {
+    // releases the remote abstraction
+    [_remoteAbstraction release];
+
     // releases the received data
-    [self.receivedData release];
+    [_receivedData release];
 
     // releases the remote group
-    [self.remoteGroup release];
+    [_remoteGroup release];
 
     // calls the super
     [super dealloc];
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    // shows the toolbar
-    [self showToolbar];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    // hides the toolbar
-    [self hideToolbar];
-}
-
-- (void)initStructures {
-    // sets the table view as editable
-    self.operationType = HMItemOperationUpdate;
 }
 
 - (NSString *)getRemoteUrl {
     return nil;
 }
 
-- (void)buttonClicked:(NSString *)buttonName {
+- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType {
+    return nil;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    // calls the super
+    [super viewDidAppear:animated];
+
+    // sets the view appear flag
+    _viewAppear = YES;
+
+    // calls the construct structures delayed
+    [self constructStructuresDelayed];
+
+    // updates the view in the remote abstraction
+    [self.remoteAbstraction updateView:self.tableView.superview];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    // hides the toolbar
+    [self hideToolbar];
+
+    // unsets the remote data is set
+    _remoteDataIsSet = NO;
+
+    // sets the view appear flag
+    _viewAppear = NO;
+
+    // calls the destroy structures delayed
+    [self destroyStructuresDelayed];
+}
+
+- (void)initStructures {
+    // sets the table view as read
+    self.operationType = HMItemOperationRead;
+
+    // sets the remote data as not set
+    _remoteDataIsSet = NO;
+
+    // sets the view appear as not set
+    _viewAppear = NO;
 }
 
 - (void)constructStructures {
@@ -141,11 +170,67 @@
 
             // breaks the swtich
             break;
+    }
+}
 
-        // in case it's an update operation
-        case HMItemOperationUpdate:
-            // constructs the update structures
-            [self constructUpdateStructures];
+- (void)destroyStructures {
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
+        // in case it's a create operation
+        case HMItemOperationCreate:
+            // destroys the create structures
+            [self destroyCreateStructures];
+
+            // breaks the swtich
+            break;
+    }
+}
+
+- (void)constructStructuresDelayed {
+    // in case the remote data is not set
+    // or the view is hidden
+    if(!_remoteDataIsSet || !_viewAppear) {
+        // returns immediately (can't
+        // construct without remote data)
+        return;
+    }
+
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
+        // in case it's a read operation
+        case HMItemOperationRead:
+            // constructs the read structures
+            [self constructReadStructures];
+
+            // breaks the switch
+            break;
+
+        default:
+            break;
+    }
+}
+
+- (void)destroyStructuresDelayed {
+    // in case the remote data is set
+    // or the view is hidden
+    if(_remoteDataIsSet || !_viewAppear) {
+        // returns immediately (can't
+        // destroy with remote data)
+        return;
+    }
+
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch (self.operationType) {
+        // in case it's an read operation
+        case HMItemOperationRead:
+            // destroys the read structures
+            [self destroyReadStructures];
 
             // breaks the switch
             break;
@@ -157,29 +242,58 @@
 
 - (void)constructCreateStructures {
     // creates the cancel bar button
-    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClick:extra:)];
+    UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action: @selector(cancelButtonClicked:extra:)];
 
     // creates the done button
-    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClick:extra:)];
+    UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done") style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClicked:extra:)];
 
     // sets the bar buttons
     self.navigationItem.leftBarButtonItem = cancelBarButton;
     self.navigationItem.rightBarButtonItem = doneBarButton;
+
+    // sets the table view as editing
+    self.tableView.editing = YES;
+
+    // processes the empty (data), setting the remote group
+    [self processEmpty];
+
+    // reloads the data
+    [self.tableView reloadData];
 
     // releases the objects
     [cancelBarButton release];
     [doneBarButton release];
 }
 
-- (void)constructUpdateStructures {
+- (void)destroyCreateStructures {
+    // unsets the bar buttons
+    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.rightBarButtonItem = nil;
+}
+
+- (void)constructReadStructures {
     // creates the edit bar button
-    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClick:extra:)];
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
 
     // sets the bar buttons
     self.navigationItem.rightBarButtonItem = editBarButton;
 
+    // shows the toolbar
+    [self showToolbar];
+
     // releases the objects
     [editBarButton release];
+}
+
+- (void)destroyReadStructures {
+    // sets the bar buttons
+    self.navigationItem.rightBarButtonItem = nil;
+
+    // hides the toolbar
+    [self hideToolbar];
+}
+
+- (void)processEmpty {
 }
 
 - (void)processRemoteData:(NSDictionary *)remoteData {
@@ -193,120 +307,28 @@
     return [remoteData autorelease];
 }
 
-- (void)editButtonClick:(id)sender extra:(id)extra {
-    // in case the table view is in editing mode
-    if(self.tableView.editing) {
-        // sets the table view as not editing
-        [self.tableView setEditing:NO animated:YES];
-
-        // casts the table view as item table view
-        HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
-
-        // flushes the item specification
-        [itemTableView flushItemSpecification];
-
-        // converts the remote group, retrieving the remote
-        // data
-        NSDictionary *remoteData = [self convertRemoteGroup];
-
-        // creates the http data from the remote data
-        NSData *httpData = [HMHttpUtil createHttpData:remoteData];
-
-        // retrieves the object id
-        NSString *objectId = [remoteData objectForKey:@"object_id"];
-
-        // creates the update url
-        NSString *updateUrl = [NSString stringWithFormat:@"http://172.16.0.24:8080/colony_mod_python/rest/mvc/omni/users/%@/update", objectId];
-
-        // creates the request
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-
-        // sets the http request properties, for a post request
-        [request setHTTPMethod: HTTP_POST_METHOD];
-        [request setHTTPBody:httpData];
-        [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:@"content-type"];
-
-        // creates the connection with the intance as delegate
-        NSConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:nil];
-
-        // releases the connection
-        [connection release];
-    }
-    // otherwise it must not be editing
-    else {
-        // sets the table view as editing
-        [self.tableView setEditing:YES animated:YES];
-    }
-}
-
-- (void)cancelButtonClick:(id)sender extra:(id)extra {
-    // dismisses the modal view controller in animated mode
-    [self dismissModalViewControllerAnimated:YES];
-}
-
-- (void) updateRemote {
+- (void)updateRemote {
     // retrieves the remote url
     NSString *remoteUrl = [self getRemoteUrl];
 
-    // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:remoteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-
-    // creates the connection with the intance as delegate
-    NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-
-    // creates the received data
-    NSMutableData *receivedData = [[NSMutableData alloc] init];
-
-    // creates a "new" remote data and initializes it
-    NSArray *remoteData = [[NSArray alloc] init];
+    // creates the remote abstraction using the remote url
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationRead url:remoteUrl];
+    remoteAbstraction.remoteDelegate = self;
+    remoteAbstraction.view = self.tableView.superview;
 
     // sets the attributes
-    //self.connection = connection;
-    self.receivedData = receivedData;
-    //self.remoteData = remoteData;
+    self.remoteAbstraction = remoteAbstraction;
 
-    // unsets the remote dirty flag
-    //remoteDirty = NO;
+    // oprens the remote abstraction
+    [self.remoteAbstraction updateRemote];
 
     // releases the objects
-    [connection release];
-    [receivedData release];
-    [remoteData release];
+    [remoteAbstraction release];
 }
 
-- (HMNamedItemGroup *)getItemSpecification {
-    return self.remoteGroup;
-}
-
-- (void)didSelectItemRowWithItem:(HMItem *)item {
-}
-
-- (void)didDeselectItemRowWithItem:(HMItem *)item {
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // adds the data to the received data
-    [self.receivedData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // creates a new json parser
-    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
-
-    // parses the received (remote) data and sets it into the intance
-    NSDictionary *remoteData = [jsonParser objectWithData:self.receivedData];
-
-    // processes the remote data, setting the remote group
-    [self processRemoteData:remoteData];
-
-    // reloads the data
-    [self.tableView reloadData];
-
-    // releases the json parser
-    [jsonParser release];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+- (void)cancelRemote {
+    // cancels the remote abstraction
+    [self.remoteAbstraction cancelRemote];
 }
 
 - (void)showToolbar {
@@ -317,7 +339,7 @@
     self.navigationController.toolbar.tintColor = self.navigationController.navigationBar.tintColor;
 
     // creates the trash item
-    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:)];
+    UIBarButtonItem *trashItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deleteButtonClicked:extra:)];
 
     // sets the trash item style
     trashItem.style = UIBarButtonItemStylePlain;
@@ -326,7 +348,7 @@
     UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
     // create the system-defined refresh button
-    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:nil];
+    UIBarButtonItem *refreshItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshButtonClicked:extra:)];
 
     // sets the system item style
     refreshItem.style = UIBarButtonItemStylePlain;
@@ -401,12 +423,227 @@
     [self.navigationController setToolbarHidden:YES animated:YES];
 }
 
-- (void)deleteButtonClicked:(id)sender {
-    CATransition *animation = [CATransition animation];
-    animation.type = @"suckEffect";
-    animation.duration = 0.35f;
-    animation.timingFunction = UIViewAnimationCurveEaseInOut;
-    [self.view.layer addAnimation:animation forKey:@"transitionViewAnimation"];
+- (void)editButtonClicked:(id)sender extra:(id)extra {
+    // in case the table view is in editing mode
+    if(self.tableView.editing) {
+        // sets the table view as not editing
+        [self.tableView setEditing:NO animated:YES];
+
+        // casts the table view as item table view
+        HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+        // flushes the item specification
+        [itemTableView flushItemSpecification];
+
+        // converts the remote group, retrieving the remote
+        // data
+        NSDictionary *remoteData = [self convertRemoteGroup];
+
+        // creates the http data from the remote data
+        NSData *httpData = [HMHttpUtil createHttpData:remoteData];
+
+        // creates the update url
+        NSString *updateUrl = [self getRemoteUrlForOperation:HMItemOperationUpdate];
+
+        // creates the request to be used in the remote abstraction
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+
+        // sets the http request properties, for a post request
+        [request setHTTPMethod: HTTP_POST_METHOD];
+        [request setHTTPBody:httpData];
+        [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
+
+        // creates the remote abstraction
+        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationUpdate];
+        remoteAbstraction.remoteDelegate = self;
+        remoteAbstraction.view = self.tableView;
+
+        // updates the remote with the given request
+        [remoteAbstraction updateRemoteWithRequest:request];
+
+        // releases the remote abstraction
+        [remoteAbstraction release];
+    }
+    // otherwise it must not be editing
+    else {
+        // sets the table view as editing
+        [self.tableView setEditing:YES animated:YES];
+    }
+}
+
+- (void)doneButtonClicked:(id)sender extra:(id)extra {
+    // in case the table view is not in editing mode (ignore)
+    if(!self.tableView.editing) {
+        // returns immediately
+        return;
+    }
+
+    // sets the table view as not editing
+    [self.tableView setEditing:NO animated:YES];
+
+    // casts the table view as item table view
+    HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // flushes the item specification
+    [itemTableView flushItemSpecification];
+
+    // converts the remote group, retrieving the remote
+    // data
+    NSDictionary *remoteData = [self convertRemoteGroup];
+
+    // creates the http data from the remote data
+    NSData *httpData = [HMHttpUtil createHttpData:remoteData];
+
+    // creates the create url
+    NSString *createUrl = [self getRemoteUrlForOperation:HMItemOperationCreate];
+
+    // creates the request to be used in the remote abstraction
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:createUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+
+    // sets the http request properties, for a post request
+    [request setHTTPMethod: HTTP_POST_METHOD];
+    [request setHTTPBody:httpData];
+    [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
+
+    // creates the remote abstraction
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationCreate];
+    remoteAbstraction.remoteDelegate = self;
+    remoteAbstraction.view = self.tableView;
+
+    // updates the remote with the given request
+    [remoteAbstraction updateRemoteWithRequest:request];
+
+    // releases the remote abstraction
+    [remoteAbstraction release];
+}
+
+- (void)cancelButtonClicked:(id)sender extra:(id)extra {
+    // dismisses the modal view controller in animated mode
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)deleteButtonClicked:(id)sender extra:(id)extra {
+    // creates the action sheet
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:NSLocalizedString(@"ConfirmDeleteError", @"ConfirmDeleteError") delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:NSLocalizedString(@"Delete", @"Delete") otherButtonTitles:nil];
+    actionSheet.alpha = 0.75;
+
+    // sets the action sheet style
+    actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+
+    // shows the action sheet in the table view
+    [actionSheet showFromToolbar:self.navigationController.toolbar];
+
+    // releases the action sheet
+    [actionSheet release];
+}
+
+- (void)refreshButtonClicked:(id)sender extra:(id)extra {
+    // updates the remote provider
+    [self updateRemote];
+}
+
+- (void)buttonClicked:(NSString *)buttonName {
+}
+
+- (HMNamedItemGroup *)getItemSpecification {
+    return self.remoteGroup;
+}
+
+- (void)didSelectItemRowWithItem:(HMItem *)item {
+}
+
+- (void)didDeselectItemRowWithItem:(HMItem *)item {
+}
+
+- (void)processOperationRead:(NSData *)data  {
+    // creates a new json parser
+    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
+
+    // parses the received (remote) data and sets it into the intance
+    NSDictionary *remoteData = [jsonParser objectWithData:data];
+
+    // processes the remote data, setting the remote group
+    [self processRemoteData:remoteData];
+
+    // sets the remote data as set
+    _remoteDataIsSet = YES;
+
+    // reloads the data
+    [self.tableView reloadData];
+
+    // constructs the delayed structures
+    [self constructStructuresDelayed];
+
+    // releases the json parser
+    [jsonParser release];
+}
+
+- (void)processOperationDelete:(NSData *)data  {
+    // pops the view controller
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
+    // initializes the data string with the contents of the data
+    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+
+    // logs the received data
+    NSLog(@"%@", dataString);
+
+    // switches over the remote abstraction id
+    switch(remoteAbstraction.remoteAbstractionId) {
+        case HMItemOperationRead:
+            // processes the read operation
+            [self processOperationRead:data];
+
+            // breaks the switch
+            break;
+        case HMItemOperationDelete:
+            // processes the delete operation
+            [self processOperationDelete:data];
+
+            // breaks the switch
+            break;
+    }
+}
+
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
+    // sets the remote data as not set
+    _remoteDataIsSet = NO;
+
+    // destroys the delayed structures
+    [self destroyStructuresDelayed];
+
+    // reloads the data
+    [self.tableView reloadData];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    // in case the button click was retry
+    if(buttonIndex == 0) {
+        // creates the delete url
+        NSString *deleteUrl = [self getRemoteUrlForOperation:HMItemOperationDelete];
+
+        // creates the request to be used in the remote abstraction
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:deleteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+
+        // sets the http request properties, for a post request
+        [request setHTTPMethod: HTTP_POST_METHOD];
+
+        // creates the remote abstraction
+        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationDelete];
+        remoteAbstraction.remoteDelegate = self;
+        remoteAbstraction.view = self.tableView;
+
+        // updates the remote with the given request
+        [remoteAbstraction updateRemoteWithRequest:request];
+
+        // releases the remote abstraction
+        [remoteAbstraction release];
+    }
+    // in case the button click was cancel
+    else {
+    }
 }
 
 + (void)_keepAtLinkTime {

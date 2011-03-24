@@ -77,7 +77,7 @@
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
 
     // creates the remote abstraction using the remote url
-    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithUrl:remoteUrl];
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:-1 url:remoteUrl];
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView;
 
@@ -188,7 +188,7 @@
     [jsonParser release];
 }
 
-- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction error:(NSError *)error {
+- (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
     // reloads the data
     [self.tableView reloadData];
 }

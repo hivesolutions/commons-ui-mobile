@@ -27,6 +27,9 @@
 
 @implementation HMRemoteAbstraction
 
+@synthesize remoteAbstractionId = _remoteAbstractionId;
+@synthesize remoteAbstractionStatus = _remoteAbstractionStatus;
+@synthesize error = _error;
 @synthesize view = _view;
 @synthesize remoteDelegate = _remoteDelegate;
 @synthesize activity = _activity;
@@ -39,15 +42,32 @@
     // calls the super
     self = [super init];
 
+    // sets the attributes
+    self.remoteAbstractionStatus = HMRemoteAbstractionStatusOpen;
+
     // returns self
     return self;
 }
 
-- (id)initWithUrl:(NSString *)url {
+- (id)initWithId:(int)remoteAbstractionId {
     // calls the super
     self = [super init];
 
     // sets the attributes
+    self.remoteAbstractionId = remoteAbstractionId;
+    self.remoteAbstractionStatus = HMRemoteAbstractionStatusOpen;
+
+    // returns self
+    return self;
+}
+
+- (id)initWithIdAndUrl:(int)remoteAbstractionId url:(NSString *)url {
+    // calls the super
+    self = [super init];
+
+    // sets the attributes
+    self.remoteAbstractionId = remoteAbstractionId;
+    self.remoteAbstractionStatus = HMRemoteAbstractionStatusOpen;
     self.url = url;
 
     // returns self
@@ -75,17 +95,25 @@
 }
 
 - (void)updateRemote {
-    // shows the activity indicator
-    [self showActivityIndicator];
-
     // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_TABLE_VIEW_CONNECTION_TIMEOUT];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+
+    // updates the remote with the request
+    [self updateRemoteWithRequest:request];
+}
+
+- (void)updateRemoteWithRequest:(NSURLRequest *)request {
+    // sets the remote abstraction status to pending
+    self.remoteAbstractionStatus = HMRemoteAbstractionStatusPending;
 
     // creates the connection with the intance as delegate
     NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
 
     // creates the received data
     NSMutableData *receivedData = [[NSMutableData alloc] init];
+
+    // shows the activity indicator
+    [self showActivityIndicator];
 
     // sets the attributes
     self.connection = connection;
@@ -105,6 +133,12 @@
 }
 
 - (void)createActivityIndicator {
+    // in case the view is not set
+    if(self.view == nil) {
+        // returns immediately
+        return;
+    }
+
     // creates the activity
     UIView *activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     activity.backgroundColor = [UIColor blackColor];
@@ -133,6 +167,12 @@
     if(self.activityIndicator == nil) {
         // creates the activity indicator
         [self createActivityIndicator];
+    }
+
+    // in case the activity indicator was not created
+    if(self.activityIndicator == nil) {
+        // returns immediately
+        return;
     }
 
     // shows the activity
@@ -166,25 +206,18 @@
     self.activity.hidden = YES;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // adds the data to the received data
-    [self.receivedData appendData:data];
-}
+- (void)showActionSheet {
+    // in case the view is not set
+    if(self.view == nil) {
+        // returns immediately
+        return;
+    }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // calls the remote did succeed method in the remote delegate
-    [self.remoteDelegate remoteDidSucceed:self data:self.receivedData connection:self.connection];
-
-    // hides the activity indicator
-    [self hideActivityIndicator];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // retrieves the (localized) base error message
     NSString *baseErrorMessage = NSLocalizedString(@"ConnectionError", @"ConnectionError");
 
     // retrieves the localized error description
-    NSString *localizedErrorDescription = [error localizedDescription];
+    NSString *localizedErrorDescription = [self.error localizedDescription];
 
     // creates the error message from the base error message and the
     // localized error description
@@ -204,6 +237,63 @@
     [actionSheet release];
 }
 
+- (void)updateView:(UIView *)view {
+    // sets the new view
+    self.view = view;
+
+    // switches over the remote abstraction
+    // status value
+    switch (self.remoteAbstractionStatus) {
+        // in case the remote abstraction status
+        // is pending
+        case HMRemoteAbstractionStatusPending:
+            // shows the activity indicator
+            [self showActivityIndicator];
+
+            // breaks the switch
+            break;
+
+        // in case the remote abstraction status
+        // is error
+        case HMRemoteAbstractionStatusError:
+            // shows the action sheet
+            [self showActionSheet];
+
+            // breaks the switch
+            break;
+
+        default:
+            break;
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+    // adds the data to the received data
+    [self.receivedData appendData:data];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
+    // sets the remote abstraction status to closed
+    self.remoteAbstractionStatus = HMRemoteAbstractionStatusClosed;
+
+    // calls the remote did succeed method in the remote delegate
+    [self.remoteDelegate remoteDidSucceed:self data:self.receivedData connection:self.connection];
+
+    // hides the activity indicator
+    [self hideActivityIndicator];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
+    // sets the remote abstraction status to error
+    self.remoteAbstractionStatus = HMRemoteAbstractionStatusError;
+
+    // sets the error
+    self.error = error;
+
+    // shows the action sheet
+    [self showActionSheet];
+}
+
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
     // in case the button click was retry
     if(buttonIndex == 0) {
@@ -213,7 +303,7 @@
     // in case the button click was cancel
     else {
         // calls the remote did fail method in the remote delegate
-        [self.remoteDelegate remoteDidFail:self error:nil];
+        [self.remoteDelegate remoteDidFail:self data:self.receivedData error:nil];
 
         // hides the activity indicator
         [self hideActivityIndicator];

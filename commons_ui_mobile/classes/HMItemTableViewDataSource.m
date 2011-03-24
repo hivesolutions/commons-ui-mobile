@@ -149,65 +149,6 @@
     // unsets the item dirty flag
     _itemDirty = NO;
 }
-
-- (HMTableViewCell *)tableView:(UITableView *)tableView cellForTableCellItem:(HMTableCellItem *)tableCellItem {
-    // creates the cell identifier
-    static NSString *cellIdentifier = @"Cell";
-
-    // tries to retrives the cell from cache (reusable)
-    HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-
-    // in case the cell is not defined in the cuurrent cache
-    // need to create a new cell
-    if (tableViewCell == nil) {
-        // retrieves the object class name
-        const char *objectClassName = object_getClassName(tableCellItem);
-
-        // retrieves the object class name string
-        NSString *objectClassNameString = [NSString stringWithCString:objectClassName encoding:NSASCIIStringEncoding];
-
-        if([objectClassNameString isEqualToString:@"HMTableCellItem"]) {
-            // creates the new cell with the given reuse identifier
-            tableViewCell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier] autorelease];
-        } else if([objectClassNameString isEqualToString:@"HMStringTableCellItem"]) {
-            // casts the table cell item to a string table cell item
-            HMStringTableCellItem *stringTableCellItem = (HMStringTableCellItem *) tableCellItem;
-
-            // creates the appropriate string table view cell
-            if(stringTableCellItem.name) {
-                HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-                columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
-                columnStringTableViewCell.secure = stringTableCellItem.secure;
-                columnStringTableViewCell.clearable = stringTableCellItem.clearable;
-                tableViewCell = columnStringTableViewCell;
-            } else {
-                HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-                plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
-                plainStringTableViewCell.secure = stringTableCellItem.secure;
-                plainStringTableViewCell.clearable = stringTableCellItem.clearable;
-                tableViewCell = plainStringTableViewCell;
-            }
-        }
-
-        // sets the cell's attributes
-        tableViewCell.name = tableCellItem.name;
-        tableViewCell.description = tableCellItem.description;
-        tableViewCell.icon = tableCellItem.icon;
-        tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
-        tableViewCell.highlightable = tableCellItem.highlightable;
-        tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
-    }
-
-    // inserts the item cell identifier association into the map
-    [_cellIdentifierMap setObject:tableViewCell forKey:tableCellItem.identifier];
-
-    // sets the button item's attributes in the cell
-    tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
-
-    // returns the cell
-    return tableViewCell;
-}
-
 - (HMNamedItemGroup *)headerNamedItemGroup {
     // retrieves the header named item group from the item specification
     HMNamedItemGroup *headerItemGroup = (HMNamedItemGroup *) [self.itemSpecification getItem:@"header"];
@@ -251,11 +192,63 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // creates the cell identifier
+    static NSString *cellIdentifier = @"Cell";
+
     // retrieves the table cell item
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
-    // retrieves the table view cell
-    HMTableViewCell *tableViewCell = [self tableView:tableView cellForTableCellItem:tableCellItem];
+    // tries to retrives the cell from cache (reusable)
+    HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+    // in case the cell is not defined in the cuurrent cache
+    // need to create a new cell
+    if (tableViewCell == nil) {
+        // retrieves the object class name
+        const char *objectClassName = object_getClassName(tableCellItem);
+
+        // retrieves the object class name string
+        NSString *objectClassNameString = [NSString stringWithCString:objectClassName encoding:NSASCIIStringEncoding];
+
+        if([objectClassNameString isEqualToString:@"HMTableCellItem"]) {
+            // creates the new cell with the given reuse identifier
+            tableViewCell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier] autorelease];
+        } else if([objectClassNameString isEqualToString:@"HMStringTableCellItem"]) {
+            // casts the table cell item to a string table cell item
+            HMStringTableCellItem *stringTableCellItem = (HMStringTableCellItem *) tableCellItem;
+
+            // creates the appropriate string table view cell
+            if(stringTableCellItem.name) {
+                HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                columnStringTableViewCell.secure = stringTableCellItem.secure;
+                columnStringTableViewCell.clearable = stringTableCellItem.clearable;
+                columnStringTableViewCell.returnType = stringTableCellItem.returnType;
+                tableViewCell = columnStringTableViewCell;
+            } else {
+                HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                plainStringTableViewCell.secure = stringTableCellItem.secure;
+                plainStringTableViewCell.clearable = stringTableCellItem.clearable;
+                plainStringTableViewCell.returnType = stringTableCellItem.returnType;
+                tableViewCell = plainStringTableViewCell;
+            }
+        }
+
+        // sets the cell's attributes
+        tableViewCell.name = tableCellItem.name;
+        tableViewCell.description = tableCellItem.description;
+        tableViewCell.icon = tableCellItem.icon;
+        tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
+        tableViewCell.highlightable = tableCellItem.highlightable;
+        tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
+    }
+
+    // inserts the item cell identifier association into the map
+    [_cellIdentifierMap setObject:tableViewCell forKey:tableCellItem.identifier];
+
+    // sets the button item's attributes in the cell
+    tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 
     // returns the cell
     return tableViewCell;

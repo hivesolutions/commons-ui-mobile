@@ -31,6 +31,7 @@
 @synthesize editView = _editView;
 @synthesize itemTableView = _itemTableView;
 @synthesize clearable = _clearable;
+@synthesize returnType = _returnType;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -46,6 +47,9 @@
 - (void)dealloc {
     // releases the edit view
     [_editView release];
+
+    // releases the return type
+    [_returnType release];
 
     // calls the super
     [super dealloc];

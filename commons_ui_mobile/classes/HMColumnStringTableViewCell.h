@@ -45,12 +45,10 @@
 @interface HMColumnStringTableViewCell : HMColumnEditTableViewCell<UITextFieldDelegate> {
     @private
     UITextField *_textField;
-    NSString *_stringValue;
     BOOL _secure;
 }
 
 @property (retain) UITextField *textField;
-@property (retain) NSString *stringValue;
 @property (assign) BOOL secure;
 
 @end

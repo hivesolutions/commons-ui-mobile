@@ -28,6 +28,8 @@
 #import "HMItemTableView.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
+#import "HMRemoteDelegate.h"
+#import "HMRemoteAbstraction.h"
 
 /**
  * The http post method name.
@@ -40,21 +42,36 @@
 #define HTTP_APPLICATION_URL_ENCODED @"application/x-www-form-urlencoded"
 
 /**
+ * The http content type value.
+ */
+#define HTTP_CONTENT_TYPE_VALUE @"content-type"
+
+/**
  * Enumeration defining the various item
  * operations available.
  */
 typedef enum {
     HMItemOperationCreate = 1,
     HMItemOperationRead,
-    HMItemOperationUpdate
+    HMItemOperationUpdate,
+    HMItemOperationDelete
 } HMItemOperationType;
 
-@interface HMRemoteItemTableViewController : UITableViewController<HMItemTableViewProvider, HMItemTableViewDelegate> {
+@interface HMRemoteItemTableViewController : UITableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
     @private
+    HMRemoteAbstraction *_remoteAbstraction;
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
+    BOOL _viewAppear;
+    BOOL _remoteDataIsSet;
 }
+
+/**
+ * The remote abstraction to be used for controlling
+ * the remote calls.
+ */
+@property (retain) HMRemoteAbstraction *remoteAbstraction;
 
 /**
  * The buffer for received data.
@@ -91,13 +108,19 @@ typedef enum {
 
 /**
  * Retrieves the remote url.
+ *
+ * @return The remote url.
  */
 - (NSString *)getRemoteUrl;
 
 /**
- * Updates the remote reference.
+ * Retrieves the remote url for the given
+ * operation type.
+ *
+ * @param operationType The opration type to retrieve the remote url.
+ * @return The remote url for the given operation type.
  */
-- (void) updateRemote;
+- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType;
 
 /**
  * Constructs the internal data structures.
@@ -105,14 +128,47 @@ typedef enum {
 - (void)constructStructures;
 
 /**
+ * Destroys the internal data structures.
+ */
+- (void)destroyStructures;
+
+/**
+ * Constructs the internal data structures (delayed).
+ * This delayed constructing allows the display to be
+ * constructed only after the initial successful parsing.
+ */
+- (void)constructStructuresDelayed;
+
+/**
+ * Destroy the internal data structures (delayed).
+ */
+- (void)destroyStructuresDelayed;
+
+/**
  * Constructs the create operation stuctures.
  */
 - (void)constructCreateStructures;
 
 /**
- * Constructs the update operation stuctures.
+ * Destroys the create operation stuctures.
  */
-- (void)constructUpdateStructures;
+- (void)destroyCreateStructures;
+
+/**
+ * Constructs the read operation stuctures.
+ */
+- (void)constructReadStructures;
+
+/**
+ * Destroy the read operation stuctures.
+ */
+- (void)destroyReadStructures;
+
+/**
+ * Processes the empty data hanlding it and constructing
+ * the final adapted object item.
+ */
+- (void)processEmpty;
 
 /**
  * Processes the remote data hanlding it and constructing
@@ -127,20 +183,22 @@ typedef enum {
  * Converts the remote group to the must up to date
  * information.
  * This method is called before persistence of the data
- * to obtain the must updated values.
+ * to obtain the most updated values.
  *
  * @return The converted remote group as remote data.
  */
 - (NSMutableDictionary *)convertRemoteGroup;
 
 /**
- * Callback handler called when the edit button is
- * clicked.
- *
- * @param sender The sender object.
- @ @param extra The extra parameters values.
+ * Updates the remote data, by performing a remote
+ * call to the provider.
  */
-- (void)editButtonClick:(id)sender extra:(id)extra;
+- (void)updateRemote;
+
+/**
+ * Cancels the current remote call.
+ */
+- (void)cancelRemote;
 
 /**
  * Shows the bottom toolbar.
@@ -153,9 +211,40 @@ typedef enum {
 - (void)hideToolbar;
 
 /**
- * Deletes the item.
+ * Callback handler called when the edit button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
  */
-- (void)deleteButtonClicked:(id)sender;
+- (void)editButtonClicked:(id)sender extra:(id)extra;
+
+/**
+ * Callback handler called when the cancel button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)cancelButtonClicked:(id)sender extra:(id)extra;
+
+/**
+ * Callback handler called when the delete button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)deleteButtonClicked:(id)sender extra:(id)extra;
+
+/**
+ * Callback handler called when the refresh button is
+ * clicked.
+ *
+ * @param sender The sender object.
+ @ @param extra The extra parameters values.
+ */
+- (void)refreshButtonClicked:(id)sender extra:(id)extra;
 
 /**
  * Keeps the class valid for export at link time.
