@@ -32,6 +32,12 @@
 #define BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN 5
 
 /**
+ * The horizontal margin between the badge
+ * label and the cell.
+ */
+#define BADGE_LABEL_ACCESSORY_X_MARGIN 11
+
+/**
  * The vertical margin between the badge
  * label and the cell.
  */

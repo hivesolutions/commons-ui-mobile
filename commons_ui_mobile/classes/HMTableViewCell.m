@@ -300,7 +300,8 @@
         CGSize textSize = [badgeLabel.text sizeWithFont:badgeLabel.font];
 
         // updates the accessory view's frame
-        CGRect frame = self.accessoryView.frame;
+        CGRect frame = CGRectZero;
+        frame.origin.x = self.backgroundView.frame.origin.x + self.backgroundView.frame.size.width - textSize.width - BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN * 2 - BADGE_LABEL_ACCESSORY_X_MARGIN;
         frame.origin.y = BADGE_LABEL_ACCESSORY_Y_MARGIN;
         frame.size.width = textSize.width + BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN * 2;
         frame.size.height = textSize.height;
