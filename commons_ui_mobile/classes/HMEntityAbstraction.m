@@ -95,7 +95,7 @@
     return url;
 }
 
-- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType serializerName:(NSString *)serializerName {
+- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType entityName:(NSString *)entityName serializerName:(NSString *)serializerName {
     // allocates the url
     NSString *url;
 
@@ -104,28 +104,28 @@
     switch (operationType) {
             // in case it's a create operation
         case HMItemOperationCreate:
-            url = [self constructClassUrl:@"inventory_lines" serializerName:@"json"];
+            url = [self constructClassUrl:entityName serializerName:serializerName];
 
             // breaks the swtich
             break;
 
             // in case it's a read operation
         case HMItemOperationRead:
-            url = [self constructObjectUrl:@"inventory_lines" serializerName:@"json"];
+            url = [self constructObjectUrl:entityName serializerName:serializerName];
 
             // breaks the swtich
             break;
 
             // in case it's an update operation
         case HMItemOperationUpdate:
-            url = [self constructObjectCompositeUrl:@"inventory_lines" operationName:@"update" serializerName:@"json"];
+            url = [self constructObjectCompositeUrl:entityName operationName:@"update" serializerName:serializerName];
 
             // breaks the swtich
             break;
 
             // in case it's a delete operation
         case HMItemOperationDelete:
-            url = [self constructObjectCompositeUrl:@"inventory_lines" operationName:@"delete" serializerName:@"json"];
+            url = [self constructObjectCompositeUrl:entityName operationName:@"delete" serializerName:serializerName];
 
             // breaks the swtich
             break;

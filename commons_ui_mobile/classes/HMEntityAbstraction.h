@@ -51,7 +51,7 @@
 
 - (NSString *)constructObjectCompositeUrl:(NSString *)entityName operationName:(NSString *)operationName serializerName:(NSString *)serializerName;
 
-- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType serializerName:(NSString *)serializerName;
+- (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType entityName:(NSString *)entityName serializerName:(NSString *)serializerName;
 
 /**
  * Retrieves the url considered to be the base
