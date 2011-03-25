@@ -170,6 +170,11 @@
 
             // breaks the swtich
             break;
+
+        // in case it's default
+        default:
+            // breaks the switch
+            break;
     }
 }
 
@@ -184,6 +189,11 @@
             [self destroyCreateStructures];
 
             // breaks the swtich
+            break;
+
+        // in case it's default
+        default:
+            // breaks the switch
             break;
     }
 }
@@ -209,6 +219,7 @@
             // breaks the switch
             break;
 
+        // in case it's default
         default:
             break;
     }
@@ -235,6 +246,7 @@
             // breaks the switch
             break;
 
+        // in case it's default
         default:
             break;
     }
@@ -605,6 +617,9 @@
             // breaks the switch
             break;
     }
+
+    // releases the objects
+    [dataString release];
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {

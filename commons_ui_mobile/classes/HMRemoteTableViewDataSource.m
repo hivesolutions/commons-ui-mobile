@@ -143,7 +143,7 @@
     NSMutableDictionary *user = [self.remoteData objectAtIndex:pathRow];
 
     // retrieves the username for the first user
-    NSMutableString *username = [user objectForKey:@"username"];
+    NSMutableString *username = [user objectForKey:@"company_product_code"];
 
     // sets the text label text
     cell.textLabel.text = username;
