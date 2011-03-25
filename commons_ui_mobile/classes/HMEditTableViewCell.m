@@ -29,7 +29,6 @@
 
 @synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
-@synthesize itemTableView = _itemTableView;
 @synthesize clearable = _clearable;
 @synthesize returnType = _returnType;
 
@@ -56,8 +55,6 @@
 }
 
 - (void)createEditing {
-    // retrieves the associated table view (superview)
-    self.itemTableView = (HMItemTableView *) self.superview;
 }
 
 - (void)showEditing {

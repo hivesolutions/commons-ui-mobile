@@ -23,11 +23,11 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
+#import "HMTableViewCellBackgroundView.h"
+
 #define DEFAULT_MARGIN 10
 #define DEFAULT_GRADIENT_LOCATIONS {0.0, 1.0}
 #define DEFAULT_GRADIENT_COLORS {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1}
-
-#import "HMTableViewCellBackgroundView.h"
 
 @implementation HMTableViewCellBackgroundView
 
@@ -85,7 +85,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];
+    CGRect rectangle = self.bounds;
 
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
@@ -123,7 +123,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];
+    CGRect rectangle = self.bounds;
 
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
@@ -164,7 +164,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];
+    CGRect rectangle = self.bounds;
 
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
@@ -203,7 +203,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];
+    CGRect rectangle = self.bounds;
 
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);
@@ -243,7 +243,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     // retrieves the view's bounds
-    CGRect rectangle = [self bounds];
+    CGRect rectangle = self.bounds;
 
     // retrieves the rectangles coordinates
     CGFloat minimumX = CGRectGetMinX(rectangle);

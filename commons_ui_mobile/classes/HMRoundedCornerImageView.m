@@ -23,11 +23,11 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
+#import "HMRoundedCornerImageView.h"
+
 #define DEFAULT_CORNER_RADIUS 10.0
 #define DEFAULT_IMAGE_WIDTH 64
 #define DEFAULT_IMAGE_HEIGHT 64
-
-#import "HMRoundedCornerImageView.h"
 
 @implementation HMRoundedCornerImageView
 

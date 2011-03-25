@@ -25,6 +25,21 @@
 
 #import "Dependencies.h"
 
+/**
+ * The horizontal margin between the badge
+ * label's text and the badge.
+ */
+#define BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN 5
+
+/**
+ * The vertical margin between the badge
+ * label and the cell.
+ */
+#define BADGE_LABEL_ACCESSORY_Y_MARGIN 13
+
+// avoids circular dependency
+@class HMItemTableView;
+
 @interface HMTableViewCell : UITableViewCell {
     @protected
     NSString *_description;
@@ -35,6 +50,8 @@
     NSString *_highlightedIcon;
     BOOL _highlightable;
     NSString *_accessoryTypeString;
+    NSString *_accessoryValue;
+    HMItemTableView *_itemTableView;
 }
 
 /**
@@ -68,5 +85,15 @@
  * The type of accessory (string mode).
  */
 @property (retain) NSString *accessoryTypeString;
+
+/**
+ * The accessory value.
+ */
+@property (retain) NSString *accessoryValue;
+
+/**
+ * The item table view this cell belongs to.
+ */
+@property (assign) HMItemTableView *itemTableView;
 
 @end

@@ -244,6 +244,7 @@
         tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
         tableViewCell.highlightable = tableCellItem.highlightable;
         tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
+        tableViewCell.accessoryValue = tableCellItem.accessoryValue;
     }
 
     // inserts the item cell identifier association into the map

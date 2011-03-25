@@ -25,64 +25,15 @@
 
 #import "Dependencies.h"
 
-#import "HMTableViewCell.h"
-
-@interface HMEditTableViewCell : HMTableViewCell {
+@interface HMBadgeLabel : UILabel {
     @private
-    NSString *_defaultValue;
-    UIView *_editView;
-    BOOL _editingDirty;
-    BOOL _clearable;
-    NSString *_returnType;
+    UIColor *_badgeColor;
 }
 
 /**
- * The value that should be used by default.
+ * The badge view's badge color.
  */
-@property (assign) NSString *defaultValue;
+@property (retain) UIColor *badgeColor;
 
-/**
- * The view that is shown when the cell
- * is in edit mode.
- */
-@property (retain) UIView *editView;
-
-/**
- * Indicates if the inserted value is
- * clearable with a clear action.
- */
-@property (assign) BOOL clearable;
-
-/**
- * Indicates the action that is
- * represented by returning from
- * the cell's value edition.
- */
-@property (retain) NSString *returnType;
-
-/**
- * Creates the editing view.
- */
-- (void)createEditing;
-
-/**
- * Shows the editing view.
- */
-- (void)showEditing;
-
-/**
- * Hides the editing view.
- */
-- (void)hideEditing;
-
-/**
- * Focus in the editing view contents.
- */
-- (void)focusEditing;
-
-/**
- * Bliurs from the editing view contents.
- */
-- (void)blurEditing;
 
 @end

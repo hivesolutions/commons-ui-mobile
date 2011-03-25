@@ -27,6 +27,9 @@
 
 @implementation HMTableViewCell
 
+@synthesize accessoryValue = _accessoryValue;
+@synthesize itemTableView = _itemTableView;
+
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
@@ -239,7 +242,81 @@
 
         // releases the notifications switch
         [notificationsSwitch release];
+    } else if([accessoryTypeString isEqualToString:@"badge_label"]) {
+        // creates the badge label and sets it as the accessory view
+        HMBadgeLabel *badgeLabel = [[HMBadgeLabel alloc] init];
+        badgeLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+        badgeLabel.text = self.accessoryValue;
+        badgeLabel.backgroundColor = [UIColor clearColor];
+        badgeLabel.textColor = [UIColor whiteColor];
+        badgeLabel.textAlignment = UITextAlignmentCenter;
+        badgeLabel.badgeColor = [UIColor colorWithRed:0.54 green:0.56 blue:0.62 alpha:1.0];
+
+        // sets the badge label as the accessory view
+        self.accessoryView = badgeLabel;
+
+        // releases the badge label
+        [badgeLabel release];
     }
+}
+
+- (NSString *)accessoryValue {
+    return _accessoryValue;
+}
+
+- (void)setAccessoryValue:(NSString *)accessoryValue {
+    // in case the object is the same
+    if(accessoryValue == _accessoryValue) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [accessoryValue release];
+
+    // sets and retains the object
+    _accessoryValue = [accessoryValue retain];
+
+    // updates the badge label's value
+    if([self.accessoryTypeString isEqualToString:@"badge_label"] && self.accessoryView) {
+        // retrieves the badge label
+        HMBadgeLabel *badgeLabel = (HMBadgeLabel *) self.accessoryView;
+
+        // sets the accessory in the badge
+        badgeLabel.text = accessoryValue;
+    }
+}
+
+- (void)layoutSubviews {
+    // calls the super
+    [super layoutSubviews];
+
+    // adjusts the badge label's position
+    if([self.accessoryTypeString isEqualToString:@"badge_label"] && self.accessoryView) {
+        // retrieves the badge label
+        HMBadgeLabel *badgeLabel = (HMBadgeLabel *) self.accessoryView;
+
+        // calculates the text size
+        CGSize textSize = [badgeLabel.text sizeWithFont:badgeLabel.font];
+
+        // updates the accessory view's frame
+        CGRect frame = self.accessoryView.frame;
+        frame.origin.y = BADGE_LABEL_ACCESSORY_Y_MARGIN;
+        frame.size.width = textSize.width + BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN * 2;
+        frame.size.height = textSize.height;
+
+        // updates the accessory view's dimensions
+        self.accessoryView.frame = frame;
+        self.accessoryView.bounds = frame;
+    }
+}
+
+- (void)didMoveToSuperview {
+    // calls the super
+    [super didMoveToSuperview];
+
+    // retrieves the associated table view (superview)
+    self.itemTableView = (HMItemTableView *) self.superview;
 }
 
 @end
