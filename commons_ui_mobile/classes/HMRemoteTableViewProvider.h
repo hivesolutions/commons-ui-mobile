@@ -61,4 +61,13 @@ typedef enum {
  */
 - (HMRemoteTableViewSerialized)getRemoteType;
 
+/**
+ * Retrieves the item title name to be used
+ * to retrieve the item title.
+ *
+ * @return The item title name to be used
+ * to retrieve the item title.
+ */
+- (NSString *)getItemTitleName;
+
 @end

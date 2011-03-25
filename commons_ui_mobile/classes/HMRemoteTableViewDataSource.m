@@ -139,14 +139,17 @@
     // retrieves the index path row
     NSInteger pathRow = indexPath.row;
 
-    // retrieves the user
-    NSMutableDictionary *user = [self.remoteData objectAtIndex:pathRow];
+    // retrieves the (current) item
+    NSMutableDictionary *item = [self.remoteData objectAtIndex:pathRow];
 
-    // retrieves the username for the first user
-    NSMutableString *username = [user objectForKey:@"company_product_code"];
+    // retrieves the item title name from the remote table view provider
+    NSString *itemTitleName = [self.remoteTableViewProvider getItemTitleName];
+
+    // retrieves the title for the item
+    NSMutableString *title = [item objectForKey:itemTitleName];
 
     // sets the text label text
-    cell.textLabel.text = username;
+    cell.textLabel.text = title;
 
     // returns the cell
     return cell;
