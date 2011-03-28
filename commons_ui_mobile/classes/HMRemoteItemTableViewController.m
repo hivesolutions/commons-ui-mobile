@@ -148,6 +148,9 @@
     // hides the toolbar
     [self hideToolbar];
 
+    // sets the remote data as not set
+    _remoteDataIsSet = NO;
+
     // sets the view appear flag
     _viewAppear = NO;
 
@@ -466,6 +469,7 @@
     [leftLabel release];
     [centerLabel release];
     [rightLabel release];
+    [dateFormatter release];
     [refreshItem release];
     [flexibleSpaceItem release];
     [trashItem release];
