@@ -94,6 +94,7 @@
     // creates and sets the remote table view data source
     // from the remote table view provider
     HMRemoteTableViewDataSource *remoteDataSource = [[HMRemoteTableViewDataSource alloc] initWithRemoteTableViewProvider:remoteTableViewProvider];
+    remoteDataSource.tableView = self;
 
     // sets the attributes
     self.remoteDataSource = remoteDataSource;

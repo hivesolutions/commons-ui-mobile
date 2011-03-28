@@ -154,9 +154,6 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // sets the table view
-    self.tableView = tableView;
-
     // returns the number of sections
     return 1;
 }

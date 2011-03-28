@@ -42,6 +42,11 @@
  */
 #define HM_COLUMN_STRING_TABLE_VIEW_CELL_HEIGHT 19
 
+/**
+ * The column string table view cell password length.
+ */
+#define HM_COLUMN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
+
 @interface HMColumnStringTableViewCell : HMColumnEditTableViewCell<UITextFieldDelegate> {
     @private
     UITextField *_textField;

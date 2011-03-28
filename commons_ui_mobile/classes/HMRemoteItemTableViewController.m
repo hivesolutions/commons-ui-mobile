@@ -136,9 +136,6 @@
     // hides the toolbar
     [self hideToolbar];
 
-    // unsets the remote data is set
-    _remoteDataIsSet = NO;
-
     // sets the view appear flag
     _viewAppear = NO;
 
