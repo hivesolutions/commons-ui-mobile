@@ -31,6 +31,9 @@
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
+@synthesize leftLabel = _leftLabel;
+@synthesize centerLabel = _centerLabel;
+@synthesize rightLabel = _rightLabel;
 
 - (id)init {
     // calls the super
@@ -100,6 +103,15 @@
 
     // releases the remote group
     [_remoteGroup release];
+
+    // releases the left label
+    [_leftLabel release];
+
+    // releases the center label
+    [_centerLabel release];
+
+    // releases the right label
+    [_rightLabel release];
 
     // calls the super
     [super dealloc];
@@ -373,36 +385,58 @@
     // creates the standard background color for toolbar labels
     UIColor *toolbarLabelBackgroundColor = [UIColor clearColor];
 
-    // creates the text value for the labels
-    NSString *leftLabelText = @"Updated";
-    NSString *centerLabelText = @"15/03/11";
-    NSString *rightLabelText = @"13:25";
+    // retrieves the updated string
+    NSString *updatedString = NSLocalizedString(@"Updated", @"Updated");
+
+    // retrieves the current date
+    NSDate *date = [NSDate date];
+
+    // creates the date formatter
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+
+    // sets the date formatter for date format
+    [dateFormatter setDateFormat:@"dd-MM-yy"];
+
+    // retrieves the date string
+    NSString *dateString = [dateFormatter stringFromDate:date];
+
+    // sets the date formatter for hour format
+    [dateFormatter setDateFormat:@"HH:mm"];
+
+    // retrieves the hour string
+    NSString *hourString = [dateFormatter stringFromDate:date];
 
     // creates the left toolbar label
     UILabel *leftLabel = [[UILabel alloc] init];
-    [leftLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
-    [leftLabel setTextColor:toolbarLabelTextColor];
-    [leftLabel setBackgroundColor:toolbarLabelBackgroundColor];
-    [leftLabel setText:leftLabelText];
-    [leftLabel setTextAlignment:UITextAlignmentCenter];
+    leftLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
+    leftLabel.textColor = toolbarLabelTextColor;
+    leftLabel.backgroundColor = toolbarLabelBackgroundColor;
+    leftLabel.textAlignment = UITextAlignmentCenter;
+    leftLabel.text = updatedString;
+
+    // sets size to fit
     [leftLabel sizeToFit];
 
     // creates the center toolbar label
     UILabel *centerLabel = [[UILabel alloc] init];
-    [centerLabel setFont:[UIFont fontWithName:@"Helvetica" size:13]];
-    [centerLabel setTextColor:toolbarLabelTextColor];
-    [centerLabel setBackgroundColor:toolbarLabelBackgroundColor];
-    [centerLabel setText:centerLabelText];
-    [centerLabel setTextAlignment:UITextAlignmentCenter];
+    centerLabel.font = [UIFont fontWithName:@"Helvetica" size:13];
+    centerLabel.textColor = toolbarLabelTextColor;
+    centerLabel.backgroundColor = toolbarLabelBackgroundColor;
+    centerLabel.textAlignment = UITextAlignmentCenter;
+    centerLabel.text = dateString;
+
+    // sets size to fit
     [centerLabel sizeToFit];
 
     // creates the right toolbar label
     UILabel *rightLabel = [[UILabel alloc] init];
-    [rightLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:13]];
-    [rightLabel setTextColor:toolbarLabelTextColor];
-    [rightLabel setBackgroundColor:toolbarLabelBackgroundColor];
-    [rightLabel setText:rightLabelText];
-    [rightLabel setTextAlignment:UITextAlignmentCenter];
+    rightLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
+    rightLabel.textColor = toolbarLabelTextColor;
+    rightLabel.backgroundColor = toolbarLabelBackgroundColor;
+    rightLabel.textAlignment = UITextAlignmentCenter;
+    rightLabel.text = hourString;
+
+    // sets the size to fit
     [rightLabel sizeToFit];
 
     // creates the bar button item to host the left label
@@ -419,6 +453,11 @@
 
     // sets the toolbar items in the toolbar
     [self.navigationController.toolbar setItems:items animated:NO];
+
+    // sets the attributes
+    self.leftLabel = leftLabel;
+    self.centerLabel = centerLabel;
+    self.rightLabel = rightLabel;
 
     // releases the objects
     [leftLabelItem release];
