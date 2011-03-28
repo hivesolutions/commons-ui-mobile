@@ -31,9 +31,6 @@
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
-@synthesize leftLabel = _leftLabel;
-@synthesize centerLabel = _centerLabel;
-@synthesize rightLabel = _rightLabel;
 
 - (id)init {
     // calls the super
@@ -103,15 +100,6 @@
 
     // releases the remote group
     [_remoteGroup release];
-
-    // releases the left label
-    [_leftLabel release];
-
-    // releases the center label
-    [_centerLabel release];
-
-    // releases the right label
-    [_rightLabel release];
 
     // calls the super
     [super dealloc];
@@ -456,11 +444,6 @@
 
     // sets the toolbar items in the toolbar
     [self.navigationController.toolbar setItems:items animated:NO];
-
-    // sets the attributes
-    self.leftLabel = leftLabel;
-    self.centerLabel = centerLabel;
-    self.rightLabel = rightLabel;
 
     // releases the objects
     [leftLabelItem release];

@@ -69,9 +69,6 @@ typedef enum {
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
-    UILabel *_leftLabel;
-    UILabel *_centerLabel;
-    UILabel *_rightLabel;
     BOOL _viewAppear;
     BOOL _remoteDataIsSet;
 }
@@ -99,24 +96,6 @@ typedef enum {
  * the type of operation in defined.
  */
 @property (assign) HMItemOperationType operationType;
-
-/**
- * The label to be positioned in the left part
- * of the bottom bar.
- */
-@property (assign) UILabel *leftLabel;
-
-/**
- * The label to be positioned in the center part
- * of the bottom bar.
- */
-@property (assign) UILabel *centerLabel;
-
-/**
- * The label to be positioned in the right part
- * of the bottom bar.
- */
-@property (assign) UILabel *rightLabel;
 
 /**
  * Constructor of the class.
