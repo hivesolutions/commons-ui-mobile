@@ -28,19 +28,27 @@
 @implementation HMTableViewController
 
 - (void)viewWillAppear:(BOOL)animated {
+    // calls the super
     [super viewWillAppear:animated];
+
+    // casts the table view (safe)
+    HMTableView *tableView = (HMTableView *) self.tableView;
 
     // calls the will appear handler in
     // the table view
-    [self.tableView willAppear];
+    [tableView willAppear];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    // calls the super
     [super viewWillDisappear:animated];
+
+    // casts the table view (safe)
+    HMTableView *tableView = (HMTableView *) self.tableView;
 
     // calls the will disappear handler in
     // the table view
-    [self.tableView willDisappear];
+    [tableView willDisappear];
 }
 
 @end

@@ -25,6 +25,8 @@
 
 #import "Dependencies.h"
 
+#import "HMTableView.h"
+
 @interface HMTableViewController : UITableViewController {
 }
 
