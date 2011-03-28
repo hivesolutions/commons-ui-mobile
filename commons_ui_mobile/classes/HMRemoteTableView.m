@@ -34,6 +34,9 @@
     // calls the super
     self = [super init];
 
+    // constructs the view
+    [self constructView];
+
     // returns self
     return self;
 }
@@ -41,6 +44,9 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     // calls the super
     self = [super initWithCoder:aDecoder];
+
+    // constructs the view
+    [self constructView];
 
     // returns self
     return self;
@@ -56,6 +62,19 @@
 
     // calls the supper
     [super dealloc];
+}
+
+- (void)constructView {
+    // creates the search bar
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    searchBar.placeholder = NSLocalizedString(@"Search", @"Search");
+    searchBar.tintColor = [UIColor lightGrayColor];
+
+    // adds the search bar as subview
+    [self addSubview:searchBar];
+
+    // releases the objects
+    [searchBar release];
 }
 
 - (NSObject<HMRemoteTableViewProvider> *)remoteTableViewProvider {

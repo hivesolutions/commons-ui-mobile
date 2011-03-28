@@ -55,6 +55,12 @@
 @property (assign) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
 
 /**
+ * Constructs the view components and adds them
+ * to the view.
+ */
+- (void)constructView;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;
