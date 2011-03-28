@@ -25,6 +25,7 @@
 
 #import "Dependencies.h"
 
+#import "HMTableView.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
 #import "HMItemTableViewDataSource.h"
@@ -32,7 +33,7 @@
 /**
  * The item table view to be used to display object items.
  */
-@interface HMItemTableView : UITableView<UITableViewDelegate> {
+@interface HMItemTableView : HMTableView<UITableViewDelegate> {
     @private
     HMItemTableViewDataSource *_itemDataSource;
     NSObject<HMItemTableViewDelegate> *_itemDelegate;

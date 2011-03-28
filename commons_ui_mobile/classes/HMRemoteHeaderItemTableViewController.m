@@ -63,7 +63,4 @@
     [self didTakePicture:image];
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

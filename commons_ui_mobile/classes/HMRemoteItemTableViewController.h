@@ -25,11 +25,17 @@
 
 #import "Dependencies.h"
 
+#import "HMTableViewController.h"
 #import "HMItemTableView.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
 #import "HMRemoteDelegate.h"
 #import "HMRemoteAbstraction.h"
+
+/**
+ * The http get method name.
+ */
+#define HTTP_GET_METHOD @"GET"
 
 /**
  * The http post method name.
@@ -57,7 +63,7 @@ typedef enum {
     HMItemOperationDelete
 } HMItemOperationType;
 
-@interface HMRemoteItemTableViewController : UITableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
+@interface HMRemoteItemTableViewController : HMTableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
     @private
     HMRemoteAbstraction *_remoteAbstraction;
     NSMutableData *_receivedData;
@@ -245,10 +251,5 @@ typedef enum {
  @ @param extra The extra parameters values.
  */
 - (void)refreshButtonClicked:(id)sender extra:(id)extra;
-
-/**
- * Keeps the class valid for export at link time.
- */
-+ (void)_keepAtLinkTime;
 
 @end

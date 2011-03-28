@@ -25,16 +25,17 @@
 
 #import "Dependencies.h"
 
-#import "HMRemoteItemTableViewController.h"
-
-@interface HMRemoteHeaderItemTableViewController : HMRemoteItemTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+@interface HMTableView : UITableView {
 }
 
 /**
- * Called when a new picture was taken.
- *
- * @param picture The new picture.
+ * Called when the view will appear.
  */
-- (void)didTakePicture:(UIImage *)picture;
+- (void)willAppear;
+
+/**
+ * Called when the view will disappear.
+ */
+- (void)willDisappear;
 
 @end

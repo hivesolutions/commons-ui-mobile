@@ -29,7 +29,7 @@
 #import "HMRemoteTableViewProvider.h"
 #import "HMRemoteTableViewDataSource.h"
 
-@interface HMRemoteTableView : UITableView<UITableViewDelegate> {
+@interface HMRemoteTableView : HMTableView<UITableViewDelegate, UISearchBarDelegate> {
     @private
     HMRemoteTableViewDataSource *_remoteDataSource;
     NSObject<HMRemoteTableViewDelegate> *_remoteDelegate;

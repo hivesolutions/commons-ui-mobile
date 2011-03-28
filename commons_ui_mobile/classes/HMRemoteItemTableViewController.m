@@ -661,7 +661,4 @@
     }
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

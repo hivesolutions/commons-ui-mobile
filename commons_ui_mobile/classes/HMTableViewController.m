@@ -23,18 +23,24 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "Dependencies.h"
+#import "HMTableViewController.h"
 
-#import "HMRemoteItemTableViewController.h"
+@implementation HMTableViewController
 
-@interface HMRemoteHeaderItemTableViewController : HMRemoteItemTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+    // calls the will appear handler in
+    // the table view
+    [self.tableView willAppear];
 }
 
-/**
- * Called when a new picture was taken.
- *
- * @param picture The new picture.
- */
-- (void)didTakePicture:(UIImage *)picture;
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+
+    // calls the will disappear handler in
+    // the table view
+    [self.tableView willDisappear];
+}
 
 @end

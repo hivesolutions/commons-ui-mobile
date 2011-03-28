@@ -53,3 +53,5 @@
 #import "../classes/HMRemoteDelegate.h"
 #import "../classes/HMEntityAbstraction.h"
 #import "../classes/HMEntityDelegate.h"
+#import "../classes/HMTableView.h"
+#import "../classes/HMTableViewController.h"

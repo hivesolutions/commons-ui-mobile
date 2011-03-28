@@ -31,6 +31,9 @@
 @synthesize tableView = _tableView;
 @synthesize remoteAbstraction = _remoteAbstraction;
 @synthesize remoteData = _remoteData;
+@synthesize filterType = _filterType;
+@synthesize filterName = _filterName;
+@synthesize filterValue = _filterValue;
 
 - (id)init {
     // calls the super
@@ -38,6 +41,9 @@
 
     // sets the remote dirty
     _remoteDirty = YES;
+
+    // sets the default filter type
+    self.filterType = @"like";
 
     // returns self
     return self;
@@ -50,6 +56,9 @@
     // sets the attributes
     self.remoteTableViewProvider = remoteTableViewProvider;
 
+    // sets the default filter type
+    self.filterType = @"like";
+
     // returns self
     return self;
 }
@@ -60,6 +69,15 @@
 
     // releases the remote data
     [_remoteData release];
+
+    // releases the filter type
+    [_filterType release];
+
+    // releases the filter name
+    [_filterName release];
+
+    // releases the filter value
+    [_filterValue release];
 
     // calls the supper
     [super dealloc];
@@ -76,22 +94,58 @@
     // retrieves the remote url from the remote table view provider
     NSString *remoteUrl = [self.remoteTableViewProvider getRemoteUrl];
 
+    // the filter dictionary to be used in the url
+    NSMutableDictionary *urlData = [[NSMutableDictionary alloc] init];
+
+    // starts the extra url
+    NSString *extraUrl;
+
+    // in case the filter value is defined and
+    // not empty
+    if(self.filterValue && [self.filterValue length] > 0) {
+        [urlData setObject:self.filterType forKey:@"filter[filters][][filter_type]"];
+        [urlData setObject:self.filterName forKey:@"filter[filters][][filter_fields][][field_name]"];
+        [urlData setObject:self.filterValue forKey:@"filter[filters][][filter_fields][][field_value]"];
+    }
+
+    // sets the number of records to be retrieved
+    [urlData setObject:@"0" forKey:@"filter[start_record]"];
+    [urlData setObject:@"30" forKey:@"filter[number_records]"];
+
+    // creates the extra url from the url data
+    extraUrl = [HMHttpUtil createHttpDataString:urlData];
+
+    // appends the extra url to the remote url
+    NSString *completeUrl = [NSString stringWithFormat:@"%@?%@", remoteUrl, extraUrl];
+
+    // creates the request to be used in the remote abstraction
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:completeUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+
     // creates the remote abstraction using the remote url
-    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:-1 url:remoteUrl];
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] init];
     remoteAbstraction.remoteDelegate = self;
-    remoteAbstraction.view = self.tableView;
+    remoteAbstraction.view = self.tableView.superview;
 
     // sets the attributes
     self.remoteAbstraction = remoteAbstraction;
 
     // oprens the remote abstraction
-    [self.remoteAbstraction updateRemote];
+    [self.remoteAbstraction updateRemoteWithRequest:request];
 
     // unsets the remote dirty flag
     _remoteDirty = NO;
 
     // releases the objects
+    [urlData release];
     [remoteAbstraction release];
+}
+
+- (void)updateRemoteForced {
+    // sets the remote dirty flag
+    _remoteDirty = YES;
+
+    // updates the remote
+    [self updateRemote];
 }
 
 - (void)cancelRemote {
@@ -102,9 +156,6 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // sets the table view
     self.tableView = tableView;
-
-    // updates the remote (if necessary)
-    [self updateRemote];
 
     // returns the number of sections
     return 1;

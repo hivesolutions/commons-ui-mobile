@@ -39,6 +39,9 @@
     UITableView *_tableView;
     HMRemoteAbstraction *_remoteAbstraction;
     NSArray *_remoteData;
+    NSString *_filterType;
+    NSString *_filterName;
+    NSString *_filterValue;
     BOOL _remoteDirty;
 }
 
@@ -67,6 +70,21 @@
 @property (retain) NSArray *remoteData;
 
 /**
+ * The type to be used to filter the values.
+ */
+@property (retain) NSString *filterType;
+
+/**
+ * The name to be used to filter the values.
+ */
+@property (retain) NSString *filterName;
+
+/**
+ * The value to be used to filter the values.
+ */
+@property (retain) NSString *filterValue;
+
+/**
  * Constructor of the class.
  *
  * @param remoteTableViewProvider The remote table view
@@ -79,6 +97,14 @@
  * call to the provider.
  */
 - (void)updateRemote;
+
+/**
+ * Updates the remote data, by performing a remote
+ * call to the provider.
+ * This method forces the update remote behaviour (ignoring
+ * the current flag value).
+ */
+- (void)updateRemoteForced;
 
 /**
  * Cancels the current remote call.

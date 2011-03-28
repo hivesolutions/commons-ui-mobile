@@ -70,8 +70,14 @@
     searchBar.placeholder = NSLocalizedString(@"Search", @"Search");
     searchBar.tintColor = [UIColor lightGrayColor];
 
-    // adds the search bar as subview
-    [self addSubview:searchBar];
+    // sets the auto resizing mask in the search bar
+    searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+
+    // sets the search abr delegate as self
+    searchBar.delegate = self;
+
+    // adds the search bar as the table header view
+    self.tableHeaderView = searchBar;
 
     // releases the objects
     [searchBar release];
@@ -96,8 +102,19 @@
     // sets the current instance as the delegate to the table view
     self.delegate = self;
 
+    // retrieves the item title name
+    NSString *itemTitleName = [self.remoteTableViewProvider getItemTitleName];
+
+    // sets the item title name as the filter name
+    self.remoteDataSource.filterName = itemTitleName;
+
     // releases the objects
     [remoteDataSource release];
+}
+
+- (void)willAppear {
+    // calls the update remote
+    [self.remoteDataSource updateRemote];
 }
 
 - (void)reloadData {
@@ -131,6 +148,14 @@
 
     // calls the did deselect remote row with data method
     [self.remoteDelegate didDeselectRemoteRowWithData:remoteDataItem];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    // sets the filter value from the search bar text
+    self.remoteDataSource.filterValue = searchBar.text;
+
+    // updates the remote in forced mode
+    [self.remoteDataSource updateRemoteForced];
 }
 
 + (void)_keepAtLinkTime {
