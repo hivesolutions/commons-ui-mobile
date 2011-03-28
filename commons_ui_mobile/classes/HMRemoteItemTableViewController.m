@@ -113,6 +113,14 @@
     return nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    // calls the super
+    [super viewWillAppear:animated];
+
+    // updates the view in the remote abstraction
+    [self.remoteAbstraction updateView:self.tableView.superview];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     // calls the super
     [super viewDidAppear:animated];
@@ -122,9 +130,6 @@
 
     // calls the construct structures delayed
     [self constructStructuresDelayed];
-
-    // updates the view in the remote abstraction
-    [self.remoteAbstraction updateView:self.tableView.superview];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
