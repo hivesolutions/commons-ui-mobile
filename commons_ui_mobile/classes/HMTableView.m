@@ -27,6 +27,12 @@
 
 @implementation HMTableView
 
+- (void)didAppear {
+}
+
+- (void)didDisappear {
+}
+
 - (void)willAppear {
 }
 

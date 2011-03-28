@@ -29,6 +29,16 @@
 }
 
 /**
+ * Called when the view did appear.
+ */
+- (void)didAppear;
+
+/**
+ * Called when the view did disappear.
+ */
+- (void)didDisappear;
+
+/**
  * Called when the view will appear.
  */
 - (void)willAppear;
