@@ -25,10 +25,6 @@
 
 #import "HMRoundedCornerImageView.h"
 
-#define DEFAULT_CORNER_RADIUS 10.0
-#define DEFAULT_IMAGE_WIDTH 64
-#define DEFAULT_IMAGE_HEIGHT 64
-
 @implementation HMRoundedCornerImageView
 
 - (void)setImage:(UIImage *)image {
@@ -51,7 +47,7 @@
     CGImageRelease(imageResized);
 
     // configures the context
-    context = CGBitmapContextCreate(NULL, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
+    context = CGBitmapContextCreate(NULL, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     const CGColorRef grayColor = [[UIColor grayColor] CGColor];
     CGContextSetStrokeColorWithColor(context, grayColor);
     CGContextSetLineWidth(context, 1);
@@ -59,7 +55,7 @@
     CGContextSetShouldAntialias(context, YES);
 
     // retrieves the rectangles coordinates
-    CGRect resizedImageRect = CGRectMake(0, 0, DEFAULT_IMAGE_WIDTH, DEFAULT_IMAGE_HEIGHT);
+    CGRect resizedImageRect = CGRectMake(0, 0, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT);
     CGFloat minimumX = CGRectGetMinX(resizedImageRect);
     CGFloat middleX = CGRectGetMidX(resizedImageRect);
     CGFloat maximumX = CGRectGetMaxX(resizedImageRect);
@@ -70,10 +66,10 @@
     // creates the image's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, middleY);
-    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
     CGPathCloseSubpath(path);
 
     // defines the gradient drawing bounds

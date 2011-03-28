@@ -146,10 +146,6 @@
 		C220E35E13318CD00076803A /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				A5B56CBA133BAF890071763F /* HMBadgeLabel.h */,
-				A5B56CBB133BAF890071763F /* HMBadgeLabel.m */,
-				A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */,
-				A50E13EF1338ADD3006BDB18 /* HMRoundedCornerImageView.m */,
 				C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */,
 				C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */,
 				C2029294132FE592009D7B69 /* HMItemTableView.h */,
@@ -348,6 +344,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C2FEBD6D1340AF5600CBB51E /* View */,
 				C2DFF26C133A032100E6E1D2 /* Abstractions */,
 				C2C96E45133373F700D6910B /* Dependencies */,
 				C220E36213318DAE0076803A /* Table View */,
@@ -361,6 +358,25 @@
 			children = (
 			);
 			name = Nibs;
+			sourceTree = "<group>";
+		};
+		C2FEBD6D1340AF5600CBB51E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C2FEBD6F1340AF6D00CBB51E /* Views */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		C2FEBD6F1340AF6D00CBB51E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A5B56CBA133BAF890071763F /* HMBadgeLabel.h */,
+				A5B56CBB133BAF890071763F /* HMBadgeLabel.m */,
+				A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */,
+				A50E13EF1338ADD3006BDB18 /* HMRoundedCornerImageView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
