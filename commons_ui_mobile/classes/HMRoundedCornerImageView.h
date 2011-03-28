@@ -25,6 +25,24 @@
 
 #import "Dependencies.h"
 
+/**
+ * The default corner radius to be used in the rounded
+ * corner image view.
+ */
+#define HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS 4.0
+
+/**
+ * The default width to be used in the rounded
+ * corner image view.
+ */
+#define HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH 64
+
+/**
+ * The default height to be used in the rounded
+ * corner image view.
+ */
+#define HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT 64
+
 @interface HMRoundedCornerImageView : UIImageView {
 }
 

@@ -25,7 +25,11 @@
 
 #import "HMBadgeLabel.h"
 
-#define DEFAULT_CORNER_RADIUS 5.0
+/**
+ * The default corner radius to be used in the
+ * badge label.
+ */
+#define HM_BADGE_LABEL_DEFAULT_CORNER_RADIUS 5.0
 
 @implementation HMBadgeLabel
 
@@ -54,10 +58,10 @@
     // creates the badge border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, middleY);
-    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, HM_BADGE_LABEL_DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, HM_BADGE_LABEL_DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, HM_BADGE_LABEL_DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, HM_BADGE_LABEL_DEFAULT_CORNER_RADIUS);
     CGPathCloseSubpath(path);
 
     // draws the badge
