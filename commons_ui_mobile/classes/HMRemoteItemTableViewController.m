@@ -383,7 +383,7 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 
     // sets the date formatter for date format
-    [dateFormatter setDateFormat:@"dd-MM-yy"];
+    [dateFormatter setDateFormat:@"dd/MM/yy"];
 
     // retrieves the date string
     NSString *dateString = [dateFormatter stringFromDate:date];
