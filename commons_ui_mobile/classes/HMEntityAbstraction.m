@@ -49,9 +49,6 @@
 }
 
 - (void)dealloc {
-    // releases the entity delegate
-    [_entityDelegate release];
-
     // calls the super
     [super dealloc];
 }
