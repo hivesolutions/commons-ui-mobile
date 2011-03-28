@@ -227,7 +227,6 @@
                 columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                 columnStringTableViewCell.returnType = stringTableCellItem.returnType;
                 columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
-                columnStringTableViewCell.multipleLines = stringTableCellItem.multipleLines;
                 tableViewCell = columnStringTableViewCell;
             } else {
                 HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
@@ -237,7 +236,6 @@
                 plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                 plainStringTableViewCell.returnType = stringTableCellItem.returnType;
                 plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
-                plainStringTableViewCell.multipleLines = stringTableCellItem.multipleLines;
                 tableViewCell = plainStringTableViewCell;
             }
         }
