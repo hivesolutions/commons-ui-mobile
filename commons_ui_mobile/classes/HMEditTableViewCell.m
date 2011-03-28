@@ -86,14 +86,14 @@
 }
 
 - (void)setEditing:(BOOL)editing {
-    // calls the super
-    [super setEditing:editing];
-
     // returns in case the cell
     // is not editable
     if(!self.editable) {
         return;
     }
+
+    // calls the super
+    [super setEditing:editing];
 
     // in case it's editing
     if(editing) {
@@ -108,14 +108,14 @@
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    // calls the super
-    [super setEditing:editing animated:animated];
-
     // returns in case the cell
     // is not editable
     if(!self.editable) {
         return;
     }
+
+    // calls the super
+    [super setEditing:editing animated:animated];
 
     // in case it's editing
     if(editing) {
