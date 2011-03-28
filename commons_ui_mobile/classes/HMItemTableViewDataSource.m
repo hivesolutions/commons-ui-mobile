@@ -149,6 +149,7 @@
     // unsets the item dirty flag
     _itemDirty = NO;
 }
+
 - (HMNamedItemGroup *)headerNamedItemGroup {
     // retrieves the header named item group from the item specification
     HMNamedItemGroup *headerItemGroup = (HMNamedItemGroup *) [self.itemSpecification getItem:@"header"];
@@ -222,17 +223,21 @@
                 HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
                 columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                 columnStringTableViewCell.secure = stringTableCellItem.secure;
+                columnStringTableViewCell.editable = stringTableCellItem.editable;
                 columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                 columnStringTableViewCell.returnType = stringTableCellItem.returnType;
                 columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                columnStringTableViewCell.multipleLines = stringTableCellItem.multipleLines;
                 tableViewCell = columnStringTableViewCell;
             } else {
                 HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
                 plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                 plainStringTableViewCell.secure = stringTableCellItem.secure;
+                plainStringTableViewCell.editable = stringTableCellItem.editable;
                 plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                 plainStringTableViewCell.returnType = stringTableCellItem.returnType;
                 plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                plainStringTableViewCell.multipleLines = stringTableCellItem.multipleLines;
                 tableViewCell = plainStringTableViewCell;
             }
         }

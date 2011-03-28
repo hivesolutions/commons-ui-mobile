@@ -47,6 +47,7 @@
     UITextField *_textField;
     BOOL _secure;
     BOOL _returnDisablesEdit;
+    BOOL _multipleLines;
 }
 
 /**
@@ -64,5 +65,11 @@
  * disable the edit mode.
  */
 @property (assign) BOOL returnDisablesEdit;
+
+/**
+ * Indicates if the cell can hold
+ * more than one line.
+ */
+@property (assign) BOOL multipleLines;
 
 @end

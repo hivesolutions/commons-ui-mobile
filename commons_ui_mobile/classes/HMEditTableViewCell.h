@@ -29,11 +29,12 @@
 
 @interface HMEditTableViewCell : HMTableViewCell {
     @private
-    NSString *_defaultValue;
-    UIView *_editView;
     BOOL _editingDirty;
-    BOOL _clearable;
+    UIView *_editView;
+    NSString *_defaultValue;
     NSString *_returnType;
+    BOOL _editable;
+    BOOL _clearable;
 }
 
 /**
@@ -48,17 +49,22 @@
 @property (retain) UIView *editView;
 
 /**
- * Indicates if the inserted value is
- * clearable with a clear action.
- */
-@property (assign) BOOL clearable;
-
-/**
  * Indicates the action that is
  * represented by returning from
  * the cell's value edition.
  */
 @property (retain) NSString *returnType;
+
+/**
+ * Indicates if the cell is editable.
+ */
+@property (assign) BOOL editable;
+
+/**
+ * Indicates if the inserted value is
+ * clearable with a clear action.
+ */
+@property (assign) BOOL clearable;
 
 /**
  * Creates the editing view.

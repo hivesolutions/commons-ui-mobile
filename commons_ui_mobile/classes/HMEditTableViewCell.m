@@ -29,8 +29,9 @@
 
 @synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
-@synthesize clearable = _clearable;
 @synthesize returnType = _returnType;
+@synthesize editable = _editable;
+@synthesize clearable = _clearable;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -88,6 +89,12 @@
     // calls the super
     [super setEditing:editing];
 
+    // returns in case the cell
+    // is not editable
+    if(!self.editable) {
+        return;
+    }
+
     // in case it's editing
     if(editing) {
         // shows the editing mode
@@ -103,6 +110,12 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     // calls the super
     [super setEditing:editing animated:animated];
+
+    // returns in case the cell
+    // is not editable
+    if(!self.editable) {
+        return;
+    }
 
     // in case it's editing
     if(editing) {

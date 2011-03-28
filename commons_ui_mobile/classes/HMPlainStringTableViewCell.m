@@ -29,6 +29,7 @@
 
 @synthesize textField = _textField;
 @synthesize returnDisablesEdit = _returnDisablesEdit;
+@synthesize multipleLines = _multipleLines;
 
 - (void)dealloc {
     // releases the text field
