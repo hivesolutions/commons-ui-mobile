@@ -161,7 +161,7 @@
     [super setDescription:description];
 
     // in case the description is invalid
-    if(description == nil || (NSNull *) description == [NSNull null]) {
+    if(description == nil) {
         // returns immediately
         return;
     }
