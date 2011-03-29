@@ -243,7 +243,7 @@
 
     // switches over the remote abstraction
     // status value
-    switch (self.remoteAbstractionStatus) {
+    switch(self.remoteAbstractionStatus) {
         // in case the remote abstraction status
         // is pending
         case HMRemoteAbstractionStatusPending:

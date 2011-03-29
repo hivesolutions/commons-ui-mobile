@@ -94,11 +94,11 @@
 
 - (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType entityName:(NSString *)entityName serializerName:(NSString *)serializerName {
     // allocates the url
-    NSString *url;
+    NSString *url = nil;
 
     // switches over the operation type
     // in order to retrieve the apropriate url
-    switch (operationType) {
+    switch(operationType) {
             // in case it's a create operation
         case HMItemOperationCreate:
             url = [self constructClassUrl:entityName serializerName:serializerName];

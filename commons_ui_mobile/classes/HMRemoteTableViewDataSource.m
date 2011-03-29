@@ -179,7 +179,7 @@
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
-    if (cell == nil) {
+    if(cell == nil) {
         // creates the new cell with the given reuse identifier
         cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
     }

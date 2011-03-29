@@ -164,7 +164,7 @@
     // switches over the operation type
     // in order to create the apropriate
     // components
-    switch (self.operationType) {
+    switch(self.operationType) {
         // in case it's a create operation
         case HMItemOperationCreate:
             // constructs the create structures
@@ -184,7 +184,7 @@
     // switches over the operation type
     // in order to create the apropriate
     // components
-    switch (self.operationType) {
+    switch(self.operationType) {
         // in case it's a create operation
         case HMItemOperationCreate:
             // destroys the create structures
@@ -212,7 +212,7 @@
     // switches over the operation type
     // in order to create the apropriate
     // components
-    switch (self.operationType) {
+    switch(self.operationType) {
         // in case it's a read operation
         case HMItemOperationRead:
             // constructs the read structures
@@ -239,7 +239,7 @@
     // switches over the operation type
     // in order to create the apropriate
     // components
-    switch (self.operationType) {
+    switch(self.operationType) {
         // in case it's an read operation
         case HMItemOperationRead:
             // destroys the read structures

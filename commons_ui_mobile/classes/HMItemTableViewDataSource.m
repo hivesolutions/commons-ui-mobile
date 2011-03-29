@@ -204,7 +204,7 @@
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
-    if (tableViewCell == nil) {
+    if(tableViewCell == nil) {
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
 

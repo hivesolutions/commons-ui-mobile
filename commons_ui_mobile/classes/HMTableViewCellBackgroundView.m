@@ -266,7 +266,7 @@
 
 - (void)setCellPosition:(HMTableViewCellBackgroundViewPosition)position {
     // returns in case the position hasn't changed
-    if (self.position == position) {
+    if(self.position == position) {
         return;
     }
 
