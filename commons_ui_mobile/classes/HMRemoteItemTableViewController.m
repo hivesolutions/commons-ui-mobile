@@ -313,12 +313,68 @@
 - (void)processRemoteData:(NSDictionary *)remoteData {
 }
 
-- (NSMutableDictionary *)convertRemoteGroup {
+- (NSMutableDictionary *)convertRemoteGroup:(HMItemOperationType)operationType; {
+    // retrieves the target operation type based on the given parameter
+    // checking for nulls
+    HMItemOperationType operationTypeTarget = operationType == HMItemOperationUnset ? self.operationType : operationType;
+
     // allocates the remote data
     NSMutableDictionary *remoteData = [[NSMutableDictionary alloc] init];
 
+    // switches over the operation type target
+    switch(operationTypeTarget) {
+        // in case the operation is create
+        case HMItemOperationCreate:
+            // converts the remote group for read
+            [self convertRemoteGroupCreate:remoteData];
+
+            // breaks the switch
+            break;
+
+        // in case the operation is read
+        case HMItemOperationRead:
+            // converts the remote group for read
+            [self convertRemoteGroupRead:remoteData];
+
+            // breaks the switch
+            break;
+
+        // in case the operation is update
+        case HMItemOperationUpdate:
+            // converts the remote group for update
+            [self convertRemoteGroupUpdate:remoteData];
+
+            // breaks the switch
+            break;
+
+        // in case the operation is delete
+        case HMItemOperationDelete:
+            // converts the remote group for delete
+            [self convertRemoteGroupDelete:remoteData];
+
+            // breaks the switch
+            break;
+
+        // in case it's default
+        default:
+            // breaks the switch
+            break;
+    }
+
     // returns the remote data in auto release
     return [remoteData autorelease];
+}
+
+- (void)convertRemoteGroupCreate:(NSMutableDictionary *)remoteData {
+}
+
+- (void)convertRemoteGroupRead:(NSMutableDictionary *)remoteData {
+}
+
+- (void)convertRemoteGroupUpdate:(NSMutableDictionary *)remoteData {
+}
+
+- (void)convertRemoteGroupDelete:(NSMutableDictionary *)remoteData {
 }
 
 - (void)updateRemote {
@@ -474,7 +530,7 @@
 
         // converts the remote group, retrieving the remote
         // data
-        NSDictionary *remoteData = [self convertRemoteGroup];
+        NSDictionary *remoteData = [self convertRemoteGroup:HMItemOperationUpdate];
 
         // creates the http data from the remote data
         NSData *httpData = [HMHttpUtil createHttpData:remoteData];
@@ -526,7 +582,7 @@
 
     // converts the remote group, retrieving the remote
     // data
-    NSDictionary *remoteData = [self convertRemoteGroup];
+    NSDictionary *remoteData = [self convertRemoteGroup:HMItemOperationCreate];
 
     // creates the http data from the remote data
     NSData *httpData = [HMHttpUtil createHttpData:remoteData];

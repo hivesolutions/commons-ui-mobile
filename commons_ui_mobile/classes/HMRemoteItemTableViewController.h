@@ -57,7 +57,8 @@
  * operations available.
  */
 typedef enum {
-    HMItemOperationCreate = 1,
+    HMItemOperationUnset = 1,
+    HMItemOperationCreate,
     HMItemOperationRead,
     HMItemOperationUpdate,
     HMItemOperationDelete
@@ -191,9 +192,52 @@ typedef enum {
  * This method is called before persistence of the data
  * to obtain the most updated values.
  *
+ * @param operationType The type of operation type to be
+ * used in the convertion, in case it's not defined the current
+ * intance operation type is used.
  * @return The converted remote group as remote data.
  */
-- (NSMutableDictionary *)convertRemoteGroup;
+- (NSMutableDictionary *)convertRemoteGroup:(HMItemOperationType)operationType;
+
+/**
+ * Converts the remote group for the create operation.
+ * This operation puts the result into the given
+ * remote data dictionary.
+ *
+ * @param The remote data dictionary to receive the
+ * converted results.
+ */
+- (void)convertRemoteGroupCreate:(NSMutableDictionary *)remoteData;
+
+/**
+ * Converts the remote group for the read operation.
+ * This operation puts the result into the given
+ * remote data dictionary.
+ *
+ * @param The remote data dictionary to receive the
+ * converted results.
+ */
+- (void)convertRemoteGroupRead:(NSMutableDictionary *)remoteData;
+
+/**
+ * Converts the remote group for the update operation.
+ * This operation puts the result into the given
+ * remote data dictionary.
+ *
+ * @param The remote data dictionary to receive the
+ * converted results.
+ */
+- (void)convertRemoteGroupUpdate:(NSMutableDictionary *)remoteData;
+
+/**
+ * Converts the remote group for the delete operation.
+ * This operation puts the result into the given
+ * remote data dictionary.
+ *
+ * @param The remote data dictionary to receive the
+ * converted results.
+ */
+- (void)convertRemoteGroupDelete:(NSMutableDictionary *)remoteData;
 
 /**
  * Updates the remote data, by performing a remote
