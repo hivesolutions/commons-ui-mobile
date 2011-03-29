@@ -45,12 +45,45 @@
  */
 - (id)initWithEntityDelegate:(NSObject<HMEntityDelegate> *)entityDelegate;
 
+/**
+ * Constructs a class level url from the entity name
+ * and the serializer name.
+ *
+ * @param entityName The name of the entity.
+ * @param serializerName The name of the serializer.
+ * @return The constructed class level url.
+ */
 - (NSString *)constructClassUrl:(NSString *)entityName serializerName:(NSString *)serializerName;
 
+/**
+ * Constructs a object level url from the entity name
+ * and the serializer name.
+ *
+ * @param entityName The name of the entity.
+ * @param serializerName The name of the serializer.
+ * @return The constructed object level url.
+ */
 - (NSString *)constructObjectUrl:(NSString *)entityName serializerName:(NSString *)serializerName;
 
+/**
+ * Constructs a object composite level url from the entity name
+ * the operation name and the serializer name.
+ *
+ * @param entityName The name of the entity.
+ * @param operationName The name of the operation.
+ * @param serializerName The name of the serializer.
+ * @return The constructed object composite level url.
+ */
 - (NSString *)constructObjectCompositeUrl:(NSString *)entityName operationName:(NSString *)operationName serializerName:(NSString *)serializerName;
 
+/**
+ * Retrieves the remote url for the given operation type.
+ *
+ * @param operationType The type of the operation.
+ * @param entityName The name of the entity.
+ * @param serializerName The name of the serializer.
+ * @return The remote url for the given operation type.
+ */
 - (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType entityName:(NSString *)entityName serializerName:(NSString *)serializerName;
 
 /**
