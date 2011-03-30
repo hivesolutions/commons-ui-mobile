@@ -220,7 +220,7 @@
     UIFont *font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat height = size.height + 30;
+    CGFloat height = size.height + HM_ITEM_TABLE_VIEW_HEADER_OFFSET;
 
     // returns the height
     return height;
@@ -243,7 +243,7 @@
     UIFont *font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
-    CGFloat height = size.height + 30;
+    CGFloat height = size.height + HM_ITEM_TABLE_VIEW_FOOTER_OFFSET;
 
     // returns the height
     return height;

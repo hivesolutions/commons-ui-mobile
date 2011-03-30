@@ -31,6 +31,16 @@
 #import "HMItemTableViewDataSource.h"
 
 /**
+ * The item table view header offset.
+ */
+#define HM_ITEM_TABLE_VIEW_HEADER_OFFSET 30
+
+/**
+ * The item table view footer offset.
+ */
+#define HM_ITEM_TABLE_VIEW_FOOTER_OFFSET 30
+
+/**
  * The item table view to be used to display object items.
  */
 @interface HMItemTableView : HMTableView<UITableViewDelegate> {
