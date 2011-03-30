@@ -32,9 +32,10 @@
 @synthesize titleLabel = _titleLabel;
 @synthesize subTitleLabel = _subTitleLabel;
 @synthesize imageImage = _imageImage;
-@synthesize titleTextField = _titleTextField;
-@synthesize subTitleTextField = _subTitleTextField;
 @synthesize imageAddButton = _imageAddButton;
+@synthesize titleTableViewCell = _titleTableViewCell;
+@synthesize subTitleTableViewCell = _subTitleTableViewCell;
+@synthesize headerTableView = _headerTableView;
 
 - (id)init {
     // calls the super
@@ -108,9 +109,21 @@
     titleLabel.shadowColor = [UIColor whiteColor];
     titleLabel.shadowOffset = CGSizeMake(0, 1);
 
+    // creates the subtitle label frame
+    CGRect subTitleLabelFrame = CGRectMake(83, 45, 197, 24);
+
+    // creates the subtitle label view
+    UILabel *subTitleLabel = [[UILabel alloc] initWithFrame:subTitleLabelFrame];
+    subTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    subTitleLabel.backgroundColor = [UIColor clearColor];
+    subTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
+    subTitleLabel.shadowColor = [UIColor whiteColor];
+    subTitleLabel.shadowOffset = CGSizeMake(0, 1);
+
     // adds the sub views
     [headerContainer addSubview:image];
     [headerContainer addSubview:titleLabel];
+    [headerContainer addSubview:subTitleLabel];
     [header addSubview:headerContainer];
 
     // sets the table header
@@ -121,11 +134,12 @@
 
     // sets the attributes
     self.titleLabel = titleLabel;
-    self.subTitleLabel = titleLabel;
+    self.subTitleLabel = subTitleLabel;
     self.imageImage = image;
 
     // releases the objects
     [titleLabel release];
+    [subTitleLabel release];
     [image release];
     [headerContainer release];
     [header release];
@@ -133,14 +147,16 @@
 
 - (void)constructEditView {
     // creates the header
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 82)];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 110)];
     header.contentMode = UIViewContentModeScaleToFill;
     header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     header.backgroundColor = [UIColor clearColor];
+    header.layer.opacity = 0.0;
 
     // creates the header container
-    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 300, 82)];
+    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 300, 110)];
     headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    headerContainer.backgroundColor = [UIColor clearColor];
 
     // creates the image frame
     CGRect imageFrame = CGRectMake(0, 15, 64, 64);
@@ -176,30 +192,28 @@
     [addButton setBackgroundImage:newImage forState:UIControlStateNormal];
     [addButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
 
-    // creates the title text field frame
-    CGRect titleTextFieldFrame = CGRectMake(83, 35, 197, 24);
-
-    // creates the title text field view
-    UITextField *titleTextField = [[UITextField alloc] initWithFrame:titleTextFieldFrame];
-    titleTextField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    titleTextField.backgroundColor = [UIColor whiteColor];
-    titleTextField.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
+    // creates the table view
+    HMItemTableView *headerTableView = [[HMItemTableView alloc] initWithFrame:CGRectMake(80, 5, 220, 180) style:UITableViewStyleGrouped];
+    headerTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    headerTableView.backgroundColor = [UIColor clearColor];
+    headerTableView.dataSource = self;
+    headerTableView.editing = YES;
+    headerTableView.rowHeight = 50;
 
     // adds the sub views
     [headerContainer addSubview:addButton];
-    [headerContainer addSubview:titleTextField];
+    [headerContainer addSubview:headerTableView];
     [header addSubview:headerContainer];
 
     // sets the edit header view
     self.editHeaderView = header;
 
     // sets the attributes
-    self.titleTextField = titleTextField;
-    self.subTitleTextField = titleTextField;
+    self.headerTableView = headerTableView;
     self.imageAddButton = addButton;
 
     // releases the objects
-    [titleTextField release];
+    [headerTableView release];
     [headerContainer release];
     [header release];
 }
@@ -231,8 +245,8 @@
     // updates the title label text
     self.titleLabel.text = _title;
 
-    // updates the title text field
-    self.titleTextField.text = _title;
+    // sets the title in the table view cell
+    self.titleTableViewCell.description = _title;
 }
 
 - (NSString *)subTitle {
@@ -254,6 +268,16 @@
 
     // updates the sub title label text
     self.subTitleLabel.text = _subTitle;
+
+    // sets the subtitle in the table view cell
+    self.subTitleTableViewCell.description = _subTitle;
+
+    // positions the title label to give space to the subtitle
+    if(_subTitle && [_subTitle length] > 0) {
+        self.titleLabel.frame = CGRectMake(83, 24, 197, 24);
+    } else {
+        self.titleLabel.frame = CGRectMake(83, 34, 197, 24);
+    }
 }
 
 - (NSString *)image {
@@ -316,6 +340,10 @@
     // calls the super
     [super setEditing:editing animated:animate commit:commit];
 
+    // changes the cells' editing mode
+    [self.titleTableViewCell changeEditing:editing commit:commit];
+    [self.subTitleTableViewCell changeEditing:editing commit:commit];
+
     // in case it's editing
     if(editing) {
         // shows the editing
@@ -329,21 +357,37 @@
 }
 
 - (void)showEditing {
-    // updates the title value
+    // updates the title values
     self.title = self.titleLabel.text;
+    self.subTitle = self.subTitleLabel.text;
 
-    // sets the edit header view as the table
-    // header view
+    // changes the cells to edit mode
+    [self.titleTableViewCell showEditing];
+    [self.subTitleTableViewCell showEditing];
+
+    [UIView beginAnimations:@"FadeIn" context:nil];
+    [UIView setAnimationDuration:0.25];
+   //[UIView setAnimationBeginsFromCurrentState:YES];
+    self.editHeaderView.layer.opacity = 1.0;
     self.tableHeaderView = self.editHeaderView;
+    [UIView commitAnimations];
 }
 
 - (void)hideEditing {
-    // updates the title value
-    self.title = self.titleTextField.text;
+    // updates the title values
+    self.title = self.titleTableViewCell.description;
+    self.subTitle = self.subTitleTableViewCell.description;
 
-    // sets the normal header view as the table
-    // header view
+    // changes the cells to display mode
+    [self.titleTableViewCell hideEditing];
+    [self.subTitleTableViewCell hideEditing];
+
+    [UIView beginAnimations:@"FadeOut" context:nil];
+    [UIView setAnimationDuration:0.25];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    self.editHeaderView.layer.opacity = 0.0;
     self.tableHeaderView = self.normalHeaderView;
+    [UIView commitAnimations];
 }
 
 - (void)redrawHeader {
@@ -382,9 +426,50 @@
     HMItem *imageItem = [headerNamedItemGroup getItem:@"image"];
 
     // sets the attributes
-    titleItem.identifier = self.titleTextField.text;
-    subTitleItem.identifier = self.subTitleTextField.text;
+    titleItem.identifier = self.titleTableViewCell.description;
+    subTitleItem.identifier = self.subTitleTableViewCell.description;
     imageItem.identifier = self.image;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // creates the cell identifier
+    static NSString *cellIdentifier = @"Cell";
+
+    // tries to retrives the cell from cache (reusable)
+    HMPlainStringTableViewCell *tableViewCell = (HMPlainStringTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+
+    // in case the cell is not defined in the cuurrent cache
+    // need to create a new cell
+    if(tableViewCell == nil) {
+        tableViewCell = [[HMPlainStringTableViewCell alloc] init];
+    }
+
+    // configures the table view cell
+    tableViewCell.highlightable = NO;
+    tableViewCell.clearable = YES;
+    tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
+
+    // sets each table view cell's value and stores it
+    if(indexPath.row == 0) {
+        tableViewCell.description = self.title;
+        tableViewCell.defaultValue = NSLocalizedString(@"Title", @"Title");
+        self.titleTableViewCell = tableViewCell;
+    } else {
+        tableViewCell.description = self.subTitle;
+        tableViewCell.defaultValue = NSLocalizedString(@"Subtitle", @"Subtitle");
+        self.subTitleTableViewCell = tableViewCell;
+    }
+
+    // returns the cell
+    return tableViewCell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
 }
 
 @end

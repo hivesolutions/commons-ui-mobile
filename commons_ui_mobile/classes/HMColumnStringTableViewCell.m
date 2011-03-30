@@ -80,7 +80,7 @@
     // enables the clear button
     // in case the cell is clearable
     if(self.clearable) {
-        textField.clearButtonMode = UITextFieldViewModeAlways;
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }
 
     // adds the textfield as subview

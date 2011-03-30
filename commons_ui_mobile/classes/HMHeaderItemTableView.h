@@ -26,12 +26,13 @@
 #import "Dependencies.h"
 
 #import "HMItemTableView.h"
+#import "HMPlainStringTableViewCell.h"
 
 /**
  * The header item table view used to incorporate
  * an header in the item table view.
  */
-@interface HMHeaderItemTableView : HMItemTableView {
+@interface HMHeaderItemTableView : HMItemTableView<UITableViewDataSource> {
     @private
     NSString *_title;
     NSString *_subTitle;
@@ -41,9 +42,10 @@
     UILabel *_titleLabel;
     UILabel *_subTitleLabel;
     UIImageView *_imageImage;
-    UITextField *_titleTextField;
-    UITextField *_subTitleTextField;
     UIButton *_imageAddButton;
+    HMPlainStringTableViewCell *_titleTableViewCell;
+    HMPlainStringTableViewCell *_subTitleTableViewCell;
+    HMItemTableView *_headerTableView;
 }
 
 /**
@@ -89,17 +91,22 @@
 /**
  * The text field for the title.
  */
-@property (assign) UITextField *titleTextField;
+@property (assign) HMPlainStringTableViewCell *titleTableViewCell;
 
 /**
  * The text field for the sub-title.
  */
-@property (assign) UITextField *subTitleTextField;
+@property (assign) HMPlainStringTableViewCell *subTitleTableViewCell;
 
 /**
  * The button to the add image.
  */
 @property (assign) UIButton *imageAddButton;
+
+/**
+ * The table view.
+ */
+@property (retain) HMItemTableView *headerTableView;
 
 /**
  * Constructs the view components and adds them
