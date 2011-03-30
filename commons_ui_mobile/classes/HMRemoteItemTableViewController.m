@@ -553,7 +553,7 @@
         // creates the remote abstraction
         HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationUpdate];
         remoteAbstraction.remoteDelegate = self;
-        remoteAbstraction.view = self.tableView;
+        remoteAbstraction.view = self.tableView.superview;
 
         // unsets the left bar button item
         [self.navigationItem setLeftBarButtonItem:nil animated:YES];
@@ -653,7 +653,7 @@
     // creates the remote abstraction
     HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationCreate];
     remoteAbstraction.remoteDelegate = self;
-    remoteAbstraction.view = self.tableView;
+    remoteAbstraction.view = self.tableView.superview;
 
     // updates the remote with the given request
     [remoteAbstraction updateRemoteWithRequest:request];
