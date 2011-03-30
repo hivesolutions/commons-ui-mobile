@@ -262,8 +262,8 @@
     UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done") style:UIBarButtonItemStyleDone target:self action: @selector(doneButtonClicked:extra:)];
 
     // sets the bar buttons
-    self.navigationItem.leftBarButtonItem = cancelBarButton;
-    self.navigationItem.rightBarButtonItem = doneBarButton;
+    [self.navigationItem setLeftBarButtonItem:cancelBarButton animated:YES];
+    [self.navigationItem setRightBarButtonItem:doneBarButton animated:YES];
 
     // sets the table view as editing
     self.tableView.editing = YES;
@@ -290,7 +290,7 @@
     UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
 
     // sets the bar buttons
-    self.navigationItem.rightBarButtonItem = editBarButton;
+    [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
 
     // shows the toolbar
     [self showToolbar];
@@ -301,6 +301,7 @@
 
 - (void)destroyReadStructures {
     // sets the bar buttons
+    self.navigationItem.leftBarButtonItem = nil;
     self.navigationItem.rightBarButtonItem = nil;
 
     // hides the toolbar
@@ -555,17 +556,22 @@
         remoteAbstraction.view = self.tableView;
 
         // unsets the left bar button item
-        self.navigationItem.leftBarButtonItem = nil;
+        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
 
-        // sets the bar edit button style
-        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Edit", @"Edit");
-        self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
+        // creates the edit bar button
+        UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
+
+        // sets the edit bar button item
+        [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
 
         // updates the remote with the given request
         [remoteAbstraction updateRemoteWithRequest:request];
 
         // releases the remote abstraction
         [remoteAbstraction release];
+
+        // releases the objects
+        [editBarButton release];
     }
     // otherwise it must not be editing
     else {
@@ -575,12 +581,18 @@
         // creates the cancel button
         UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action: @selector(editCancelButtonClicked:extra:)];
 
-        // sets the bar cancel button
-        self.navigationItem.leftBarButtonItem = cancelBarButton;
+        // sets the cancel bar button
+        [self.navigationItem setLeftBarButtonItem:cancelBarButton animated:YES];
 
-        // sets the bar done button style
-        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Done", @"Done");
-        self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleDone;
+        // creates the done bar button
+        UIBarButtonItem *doneBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Done", @"Done") style:UIBarButtonItemStyleDone target:self action: @selector(editButtonClicked:extra:)];
+
+        // sets the done bar buttom
+        [self.navigationItem setRightBarButtonItem:doneBarButton animated:YES];
+
+        // releases the objects
+        [doneBarButton release];
+        [cancelBarButton release];
     }
 }
 
@@ -591,12 +603,17 @@
     // sets the item table view as not editing
     [itemTableView setEditing:NO animated:YES commit:NO];
 
-    // unsets the left bar button item
-    self.navigationItem.leftBarButtonItem = nil;
+    // unsets the left bar button
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
 
-    // sets the bar edit button style
-    self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Edit", @"Edit");
-    self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
+    // creates the edit bar button
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
+
+    // sets the edit bar button item
+    [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
+
+    // releases the objects
+    [editBarButton release];
 }
 
 - (void)doneButtonClicked:(id)sender extra:(id)extra {
