@@ -523,7 +523,7 @@
     // in case the table view is in editing mode
     if(self.tableView.editing) {
         // sets the item table view as not editing
-        [itemTableView setEditing:NO animated:YES commit:NO];
+        [itemTableView setEditing:NO animated:YES commit:YES];
 
         // casts the table view as item table view
         HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
