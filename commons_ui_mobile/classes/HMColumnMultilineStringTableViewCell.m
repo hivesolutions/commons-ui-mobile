@@ -43,6 +43,10 @@
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
     // returns in case its in edit mode
     if(editing == YES) {
+        // resets the text view text (this setting)
+        // forces the text view to resize
+        self.textView.text = self.textView.text;
+
         return;
     }
 
