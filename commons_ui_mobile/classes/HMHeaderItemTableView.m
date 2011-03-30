@@ -312,6 +312,22 @@
     }
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
+    // calls the super
+    [super setEditing:editing animated:animate commit:commit];
+
+    // in case it's editing
+    if(editing) {
+        // shows the editing
+        [self showEditing];
+    }
+    // othewise it's normal
+    else {
+        // hides the editing
+        [self hideEditing];
+    }
+}
+
 - (void)showEditing {
     // updates the title value
     self.title = self.titleLabel.text;
