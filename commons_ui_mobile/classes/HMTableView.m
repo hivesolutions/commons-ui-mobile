@@ -81,7 +81,7 @@
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
     // calls the super for set editing
-    [self setEditing:editing animated:animate];
+    [super setEditing:editing animated:animate];
 
     // creates the block to change the editing
     void (^block)(id) = ^(id value) {
