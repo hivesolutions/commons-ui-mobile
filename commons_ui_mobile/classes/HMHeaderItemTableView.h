@@ -29,6 +29,21 @@
 #import "HMPlainStringTableViewCell.h"
 
 /**
+ * The number of sections in the header.
+ */
+#define HM_HEADER_ITEM_TABLE_VIEW_HEADER_SECTIONS 1
+
+/**
+ * The number of rows in the header.
+ */
+#define HM_HEADER_ITEM_TABLE_VIEW_HEADER_ROWS 2
+
+/**
+ * The height of each row in the header.
+ */
+#define HM_HEADER_ITEM_TABLE_VIEW_HEADER_ROW_HEIGHT 50
+
+/**
  * The header item table view used to incorporate
  * an header in the item table view.
  */

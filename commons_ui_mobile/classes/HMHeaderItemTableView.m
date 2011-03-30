@@ -198,7 +198,7 @@
     headerTableView.backgroundColor = [UIColor clearColor];
     headerTableView.dataSource = self;
     headerTableView.editing = YES;
-    headerTableView.rowHeight = 50;
+    headerTableView.rowHeight = HM_HEADER_ITEM_TABLE_VIEW_HEADER_ROW_HEIGHT;
 
     // adds the sub views
     [headerContainer addSubview:addButton];
@@ -365,9 +365,9 @@
     [self.titleTableViewCell showEditing];
     [self.subTitleTableViewCell showEditing];
 
+    // fades in the edit header
     [UIView beginAnimations:@"FadeIn" context:nil];
     [UIView setAnimationDuration:0.25];
-   //[UIView setAnimationBeginsFromCurrentState:YES];
     self.editHeaderView.layer.opacity = 1.0;
     self.tableHeaderView = self.editHeaderView;
     [UIView commitAnimations];
@@ -382,6 +382,7 @@
     [self.titleTableViewCell hideEditing];
     [self.subTitleTableViewCell hideEditing];
 
+    // fades out the edit header
     [UIView beginAnimations:@"FadeOut" context:nil];
     [UIView setAnimationDuration:0.25];
     [UIView setAnimationBeginsFromCurrentState:YES];
@@ -431,10 +432,6 @@
     imageItem.identifier = self.image;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     // creates the cell identifier
     static NSString *cellIdentifier = @"Cell";
@@ -468,8 +465,14 @@
     return tableViewCell;
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    // returns the number of sections in the header
+    return HM_HEADER_ITEM_TABLE_VIEW_HEADER_SECTIONS;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    // returns the number of rows in the header
+    return HM_HEADER_ITEM_TABLE_VIEW_HEADER_ROWS;
 }
 
 @end
