@@ -70,7 +70,6 @@
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
-    NSLog(@"%d", commit);
 }
 
 - (void)drawRect:(CGRect)rect {

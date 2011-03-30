@@ -517,10 +517,13 @@
 }
 
 - (void)editButtonClicked:(id)sender extra:(id)extra {
+    // casts the table view to item table view
+    HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
     // in case the table view is in editing mode
     if(self.tableView.editing) {
-        // sets the table view as not editing
-        [self.tableView setEditing:NO animated:YES];
+        // sets the item table view as not editing
+        [itemTableView setEditing:NO animated:YES commit:NO];
 
         // casts the table view as item table view
         HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
@@ -551,6 +554,9 @@
         remoteAbstraction.remoteDelegate = self;
         remoteAbstraction.view = self.tableView;
 
+        // unsets the left bar button item
+        self.navigationItem.leftBarButtonItem = nil;
+
         // sets the bar edit button style
         self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Edit", @"Edit");
         self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
@@ -563,8 +569,8 @@
     }
     // otherwise it must not be editing
     else {
-        // sets the table view as editing
-        [self.tableView setEditing:YES animated:YES];
+        // sets the item table view as editing
+        [itemTableView setEditing:YES animated:YES];
 
         // creates the cancel button
         UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action: @selector(editCancelButtonClicked:extra:)];
@@ -582,15 +588,15 @@
     // casts the table view to item table view
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
-    // sets the table view as not editing
+    // sets the item table view as not editing
     [itemTableView setEditing:NO animated:YES commit:NO];
+
+    // unsets the left bar button item
+    self.navigationItem.leftBarButtonItem = nil;
 
     // sets the bar edit button style
     self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Edit", @"Edit");
     self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
-
-    // unsets the left bar button item
-    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)doneButtonClicked:(id)sender extra:(id)extra {
@@ -600,11 +606,11 @@
         return;
     }
 
-    // sets the table view as not editing
-    [self.tableView setEditing:NO animated:YES];
-
-    // casts the table view as item table view
+    // casts the table view to item table view
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // sets the item table view as not editing
+    [itemTableView setEditing:NO animated:YES commit:YES];
 
     // flushes the item specification
     [itemTableView flushItemSpecification];
