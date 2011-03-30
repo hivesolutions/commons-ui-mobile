@@ -13,6 +13,10 @@
 		A50772B91337B8E300859BD2 /* HMTableViewCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50772B51337B8E300859BD2 /* HMTableViewCellBackgroundView.m */; };
 		A50E13F01338ADD3006BDB18 /* HMRoundedCornerImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */; };
 		A50E13F11338ADD3006BDB18 /* HMRoundedCornerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50E13EF1338ADD3006BDB18 /* HMRoundedCornerImageView.m */; };
+		A537556913432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A537556513432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h */; };
+		A537556A13432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A537556613432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m */; };
+		A537556B13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A537556713432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h */; };
+		A537556C13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A537556813432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m */; };
 		A53B0577132F97C40064BCA5 /* HMTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A53B0573132F97C40064BCA5 /* HMTableViewCell.h */; };
 		A53B0578132F97C40064BCA5 /* HMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0574132F97C40064BCA5 /* HMTableViewCell.m */; };
 		A5B56CBC133BAF890071763F /* HMBadgeLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B56CBA133BAF890071763F /* HMBadgeLabel.h */; };
@@ -73,6 +77,10 @@
 		A50772B51337B8E300859BD2 /* HMTableViewCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCellBackgroundView.m; path = classes/HMTableViewCellBackgroundView.m; sourceTree = "<group>"; };
 		A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRoundedCornerImageView.h; path = classes/HMRoundedCornerImageView.h; sourceTree = "<group>"; };
 		A50E13EF1338ADD3006BDB18 /* HMRoundedCornerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRoundedCornerImageView.m; path = classes/HMRoundedCornerImageView.m; sourceTree = "<group>"; };
+		A537556513432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMColumnMultilineStringTableViewCell.h; path = classes/HMColumnMultilineStringTableViewCell.h; sourceTree = "<group>"; };
+		A537556613432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMColumnMultilineStringTableViewCell.m; path = classes/HMColumnMultilineStringTableViewCell.m; sourceTree = "<group>"; };
+		A537556713432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMPlainMultilineStringTableViewCell.h; path = classes/HMPlainMultilineStringTableViewCell.h; sourceTree = "<group>"; };
+		A537556813432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMPlainMultilineStringTableViewCell.m; path = classes/HMPlainMultilineStringTableViewCell.m; sourceTree = "<group>"; };
 		A53B0573132F97C40064BCA5 /* HMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewCell.h; path = classes/HMTableViewCell.h; sourceTree = "<group>"; };
 		A53B0574132F97C40064BCA5 /* HMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCell.m; path = classes/HMTableViewCell.m; sourceTree = "<group>"; };
 		A5B56CBA133BAF890071763F /* HMBadgeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMBadgeLabel.h; path = classes/HMBadgeLabel.h; sourceTree = "<group>"; };
@@ -210,6 +218,10 @@
 		C220E36313318DD60076803A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				A537556513432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h */,
+				A537556613432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m */,
+				A537556713432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h */,
+				A537556813432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m */,
 				A5FA274D1338D53600DD428A /* HMPlainStringTableViewCell.h */,
 				A5FA274E1338D53700DD428A /* HMPlainStringTableViewCell.m */,
 				A5FA27491338D52A00DD428A /* HMColumnStringTableViewCell.h */,
@@ -429,6 +441,8 @@
 				C2C272C8133C06FB00D203C2 /* HMEntityDelegate.h in Headers */,
 				C2C498251341053200541D4C /* HMTableView.h in Headers */,
 				C2C4982A1341088D00541D4C /* HMTableViewController.h in Headers */,
+				A537556913432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h in Headers */,
+				A537556B13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -501,6 +515,8 @@
 				C2C272C6133C05DA00D203C2 /* HMEntityAbstraction.m in Sources */,
 				C2C498261341053200541D4C /* HMTableView.m in Sources */,
 				C2C4982B1341088D00541D4C /* HMTableViewController.m in Sources */,
+				A537556A13432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m in Sources */,
+				A537556C13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

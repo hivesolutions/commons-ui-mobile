@@ -28,28 +28,18 @@
 #import "HMColumnEditTableViewCell.h"
 
 /**
- * The column string table view cell x margin.
+ * The column multiline string table view cell y margin.
  */
-#define HM_COLUMN_STRING_TABLE_VIEW_CELL_X_MARGIN 6
+#define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN 12
 
 /**
- * The column string table view cell y margin.
+ * The column multiline string table view cell password length.
  */
-#define HM_COLUMN_STRING_TABLE_VIEW_CELL_Y_MARGIN 15
+#define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
 
-/**
- * The column string table view cell height.
- */
-#define HM_COLUMN_STRING_TABLE_VIEW_CELL_HEIGHT 19
-
-/**
- * The column string table view cell password length.
- */
-#define HM_COLUMN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
-
-@interface HMColumnStringTableViewCell : HMColumnEditTableViewCell<UITextFieldDelegate> {
+@interface HMColumnMultilineStringTableViewCell : HMColumnEditTableViewCell<UITextViewDelegate> {
     @private
-    UITextField *_textField;
+    UITextView *_textView;
     BOOL _secure;
     BOOL _returnDisablesEdit;
 }
@@ -57,7 +47,7 @@
 /**
  * The textfield used to represent the cell value.
  */
-@property (retain) UITextField *textField;
+@property (retain) UITextView *textView;
 
 /**
  * Indicates if the value should be masked.

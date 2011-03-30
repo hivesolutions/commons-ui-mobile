@@ -26,6 +26,11 @@
 #import "Dependencies.h"
 
 /**
+ * The table view cell height.
+ */
+#define HM_TABLE_VIEW_CELL_HEIGHT 50
+
+/**
  * The horizontal margin between the badge
  * label's text and the badge.
  */
@@ -57,6 +62,7 @@
     BOOL _highlightable;
     NSString *_accessoryTypeString;
     NSString *_accessoryValue;
+    float _height;
     HMItemTableView *_itemTableView;
 }
 
@@ -96,6 +102,11 @@
  * The accessory value.
  */
 @property (retain) NSString *accessoryValue;
+
+/**
+ * The table view cell's height.
+ */
+@property (assign) float height;
 
 /**
  * The item table view this cell belongs to.

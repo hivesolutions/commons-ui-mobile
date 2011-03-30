@@ -219,24 +219,46 @@
             HMStringTableCellItem *stringTableCellItem = (HMStringTableCellItem *) tableCellItem;
 
             // creates the appropriate string table view cell
-            if(stringTableCellItem.name) {
-                HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-                columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
-                columnStringTableViewCell.secure = stringTableCellItem.secure;
-                columnStringTableViewCell.editable = stringTableCellItem.editable;
-                columnStringTableViewCell.clearable = stringTableCellItem.clearable;
-                columnStringTableViewCell.returnType = stringTableCellItem.returnType;
-                columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
-                tableViewCell = columnStringTableViewCell;
+            if(stringTableCellItem.multipleLines == NO) {
+                if(stringTableCellItem.name) {
+                    HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                    columnStringTableViewCell.secure = stringTableCellItem.secure;
+                    columnStringTableViewCell.editable = stringTableCellItem.editable;
+                    columnStringTableViewCell.clearable = stringTableCellItem.clearable;
+                    columnStringTableViewCell.returnType = stringTableCellItem.returnType;
+                    columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    tableViewCell = columnStringTableViewCell;
+                } else {
+                    HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                    plainStringTableViewCell.secure = stringTableCellItem.secure;
+                    plainStringTableViewCell.editable = stringTableCellItem.editable;
+                    plainStringTableViewCell.clearable = stringTableCellItem.clearable;
+                    plainStringTableViewCell.returnType = stringTableCellItem.returnType;
+                    plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    tableViewCell = plainStringTableViewCell;
+                }
             } else {
-                HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-                plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
-                plainStringTableViewCell.secure = stringTableCellItem.secure;
-                plainStringTableViewCell.editable = stringTableCellItem.editable;
-                plainStringTableViewCell.clearable = stringTableCellItem.clearable;
-                plainStringTableViewCell.returnType = stringTableCellItem.returnType;
-                plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
-                tableViewCell = plainStringTableViewCell;
+                if(stringTableCellItem.name) {
+                    HMColumnMultilineStringTableViewCell *columnMultilineStringTableViewCell = [[[HMColumnMultilineStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    columnMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                    columnMultilineStringTableViewCell.secure = stringTableCellItem.secure;
+                    columnMultilineStringTableViewCell.editable = stringTableCellItem.editable;
+                    columnMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
+                    columnMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
+                    columnMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    tableViewCell = columnMultilineStringTableViewCell;
+                } else {
+                    HMPlainMultilineStringTableViewCell *plainMultilineStringTableViewCell = [[[HMPlainMultilineStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    plainMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                    plainMultilineStringTableViewCell.secure = stringTableCellItem.secure;
+                    plainMultilineStringTableViewCell.editable = stringTableCellItem.editable;
+                    plainMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
+                    plainMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
+                    plainMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    tableViewCell = plainMultilineStringTableViewCell;
+                }
             }
         }
 
@@ -248,6 +270,7 @@
         tableViewCell.highlightable = tableCellItem.highlightable;
         tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
         tableViewCell.accessoryValue = tableCellItem.accessoryValue;
+        tableViewCell.height = tableCellItem.height;
     }
 
     // inserts the item cell identifier association into the map

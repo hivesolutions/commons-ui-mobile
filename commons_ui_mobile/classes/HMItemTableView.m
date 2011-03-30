@@ -194,6 +194,14 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    // retrieves the table cell item
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+
+    // returns the table cell item's height
+    return tableCellItem.height;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     // creates an index path
     NSIndexPath *indexPath = [[NSIndexPath alloc] initWithIndex:section];

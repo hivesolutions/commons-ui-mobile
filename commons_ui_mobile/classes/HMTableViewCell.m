@@ -28,11 +28,15 @@
 @implementation HMTableViewCell
 
 @synthesize accessoryValue = _accessoryValue;
+@synthesize height = _height;
 @synthesize itemTableView = _itemTableView;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
+
+    // sets the default attributes
+    self.height = HM_TABLE_VIEW_CELL_HEIGHT;
 
     // replaces the selected background view
     HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
