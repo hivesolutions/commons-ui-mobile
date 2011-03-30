@@ -102,4 +102,14 @@
  */
 @property (assign) HMItemTableView *itemTableView;
 
+/**
+ * Called when the edinting mode is going to be changed.
+ * The commit argument defined if the edit operation should
+ * be persisted (commited).
+ *
+ * @param editing If the editing mode is going to enter.
+ * @param commit If the edit should be persisted.
+ */
+- (void)changeEditing:(BOOL)editing commit:(BOOL)commit;
+
 @end

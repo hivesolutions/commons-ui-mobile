@@ -551,6 +551,10 @@
         remoteAbstraction.remoteDelegate = self;
         remoteAbstraction.view = self.tableView;
 
+        // sets the bar edit button style
+        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Edit", @"Edit");
+        self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
+
         // updates the remote with the given request
         [remoteAbstraction updateRemoteWithRequest:request];
 
@@ -561,7 +565,32 @@
     else {
         // sets the table view as editing
         [self.tableView setEditing:YES animated:YES];
+
+        // creates the cancel button
+        UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action: @selector(editCancelButtonClicked:extra:)];
+
+        // sets the bar cancel button
+        self.navigationItem.leftBarButtonItem = cancelBarButton;
+
+        // sets the bar done button style
+        self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Done", @"Done");
+        self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStyleDone;
     }
+}
+
+- (void)editCancelButtonClicked:(id)sender extra:(id)extra {
+    // casts the table view to item table view
+    HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // sets the table view as not editing
+    [itemTableView setEditing:NO animated:YES commit:NO];
+
+    // sets the bar edit button style
+    self.navigationItem.rightBarButtonItem.title = NSLocalizedString(@"Edit", @"Edit");
+    self.navigationItem.rightBarButtonItem.style = UIBarButtonItemStylePlain;
+
+    // unsets the left bar button item
+    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)doneButtonClicked:(id)sender extra:(id)extra {

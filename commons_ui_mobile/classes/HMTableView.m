@@ -39,4 +39,64 @@
 - (void)willDisappear {
 }
 
+- (void)setEditing:(BOOL)editing {
+    // calls the super
+    [super setEditing:editing];
+
+    // creates the block to change the editing
+    void (^block)(id) = ^(id value) {
+        // casts the value as cell
+        HMTableViewCell *cell = value;
+
+        // calls the change editing with argument
+        [cell changeEditing:editing commit:YES];
+    };
+
+    // retrieves the visible cells
+    NSArray *visibleCells = [self visibleCells];
+
+    // calls the block for the cells
+    [HMEnumerableUtil map:visibleCells block:block];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate {
+    // calls the super
+    [super setEditing:editing animated:animate];
+
+    // creates the block to change the editing
+    void (^block)(id) = ^(id value) {
+        // casts the value as cell
+        HMTableViewCell *cell = value;
+
+        // calls the change editing with argument
+        [cell changeEditing:editing commit:YES];
+    };
+
+    // retrieves the visible cells
+    NSArray *visibleCells = [self visibleCells];
+
+    // calls the block for the cells
+    [HMEnumerableUtil map:visibleCells block:block];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
+    // calls the super for set editing
+    [super setEditing:editing animated:animate];
+
+    // creates the block to change the editing
+    void (^block)(id) = ^(id value) {
+        // casts the value as cell
+        HMTableViewCell *cell = value;
+
+        // calls the change editing with argument
+        [cell changeEditing:editing commit:commit];
+    };
+
+    // retrieves the visible cells
+    NSArray *visibleCells = [self visibleCells];
+
+    // calls the block for the cells
+    [HMEnumerableUtil map:visibleCells block:block];
+}
+
 @end

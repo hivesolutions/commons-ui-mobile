@@ -48,4 +48,15 @@
  */
 - (void)willDisappear;
 
+/**
+ * Method used to set editing value, providing a
+ * commit flag that is used to control the persistence
+ * of the value.
+ *
+ * @param editing The value of the editing.
+ * @param animate If the editing should be animated.
+ * @param commit The value for the commit.
+ */
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit;
+
 @end
