@@ -39,6 +39,22 @@
     [super dealloc];
 }
 
+- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    // returns in case its in edit mode
+    if(editing == YES) {
+        return;
+    }
+
+    // commits the cell's value in
+    // or restores it depending on
+    // the commit flag
+    if(commit == YES) {
+        self.description = self.textField.text;
+    } else {
+        self.textField.text = self.description;
+    }
+}
+
 - (void)createEditing {
     // calls the super
     [super createEditing];
@@ -90,9 +106,6 @@
     // hides the keyboard
     [self.textField resignFirstResponder];
 
-    // updates the description
-    self.description = self.textField.text;
-
     // hides the text field
     self.textField.hidden = YES;
 
@@ -103,9 +116,6 @@
 - (void)blurEditing {
     // hides the keyboard
     [self.textField resignFirstResponder];
-
-    // updates the description
-    self.description = self.textField.text;
 
     // calls the super
     [super blurEditing];
@@ -127,9 +137,6 @@
 
     // updates the secure text entry attribute
     self.textField.secureTextEntry = _secure;
-
-    // sets the description
-    self.description = self.textField.text;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {

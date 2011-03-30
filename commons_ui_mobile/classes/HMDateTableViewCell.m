@@ -144,6 +144,24 @@
     return screenRect;
 }
 
+- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    // returns in case its in edit mode
+    if(editing == YES) {
+        return;
+    }
+
+    // commits the cell's value in or restores
+    // it depending on
+    // the commit flag
+    if(commit == YES) {
+        // converts the date to a string and stores it in the detail text label
+        self.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dateValue];
+    } else {
+        // converts the date string to a date and stores it in the date value
+        self.dateValue = [self.dateFormatter dateFromString:self.detailTextLabel.text];
+    }
+}
+
 - (void)createEditing {
     // invokes the super
     [super createEditing];
@@ -217,7 +235,7 @@
 
     // returns in case the cell is not
     // selected or isn't in editing mode
-    if(!self.editing || !selected) {
+    if(self.editing == NO || selected == NO) {
         return;
     }
 
@@ -247,9 +265,6 @@
 
     // converts the date to a string
     NSString *dateString = [self.dateFormatter stringFromDate:dateValue];
-
-    // updates the detail text label text
-    self.detailTextLabel.text = dateString;
 
     // sets the date string in the detail text label
     self.label.text = dateString;

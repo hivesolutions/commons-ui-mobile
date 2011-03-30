@@ -38,6 +38,22 @@
     [super dealloc];
 }
 
+- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    // returns in case its in edit mode
+    if(editing == YES) {
+        return;
+    }
+
+    // commits the cell's value in
+    // or restores it depending on
+    // the commit flag
+    if(commit == YES) {
+        self.description = self.textView.text;
+    } else {
+        self.textView.text = self.description;
+    }
+}
+
 - (void)createEditing {
     // calls the super
     [super createEditing];
@@ -82,9 +98,6 @@
     // hides the keyboard
     [self.textView resignFirstResponder];
 
-    // updates the description
-    self.description = self.textView.text;
-
     // makes the text view not editable
     self.textView.editable = NO;
 }
@@ -92,9 +105,6 @@
 - (void)blurEditing {
     // hides the keyboard
     [self.textView resignFirstResponder];
-
-    // updates the description
-    self.description = self.textView.text;
 
     // calls the super
     [super blurEditing];
@@ -116,9 +126,6 @@
 
     // updates the secure text entry attribute
     self.textView.secureTextEntry = _secure;
-
-    // sets the description
-    self.description = self.textView.text;
 }
 
 - (void)textViewDidBeginEditing:(UITextView *)textView {
