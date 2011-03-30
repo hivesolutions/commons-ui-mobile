@@ -75,6 +75,16 @@
  */
 + (void)_keepAtLinkTime;
 
+/**
+ * Creates a view representing a label item
+ * that is meant to be inserted in a table section.
+ *
+ * @param tableView The table view where the section
+ * view will be inserted.
+ * @param labelItem The label item that will be
+ * represented in the section view.
+ * @return The section view.
+ */
 - (UIView *)tableView:(UITableView *)tableView sectionViewForLabelItem:(HMLabelItem *)labelItem;
 
 @end
