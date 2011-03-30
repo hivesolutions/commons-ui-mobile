@@ -1,33 +1,30 @@
+// Hive Mobile
+// Copyright (C) 2008 Hive Solutions Lda.
 //
-//  HPTextView.m
+// This file is part of Hive Mobile.
 //
-//  Created by Hans Pinckaers on 29-06-10.
+// Hive Mobile is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//    MIT License
+// Hive Mobile is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
 //
-//    Copyright (c) 2011 Hans Pinckaers
-//
-//    Permission is hereby granted, free of charge, to any person obtaining a copy
-//    of this software and associated documentation files (the "Software"), to deal
-//    in the Software without restriction, including without limitation the rights
-//    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//    copies of the Software, and to permit persons to whom the Software is
-//    furnished to do so, subject to the following conditions:
-//
-//    The above copyright notice and this permission notice shall be included in
-//    all copies or substantial portions of the Software.
-//
-//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//    THE SOFTWARE.
+// You should have received a copy of the GNU General Public License
+// along with Hive Mobile. If not, see <http://www.gnu.org/licenses/>.
+
+// __author__    = João Magalhães <joamag@hive.pt>
+// __version__   = 1.0.0
+// __revision__  = $LastChangedRevision: 2390 $
+// __date__      = $LastChangedDate: 2009-04-02 08:36:50 +0100 (qui, 02 Abr 2009) $
+// __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
+// __license__   = GNU General Public License (GPL), Version 3
 
 #import "HPGrowingTextView.h"
 #import "HPTextViewInternal.h"
-
 
 @implementation HPGrowingTextView
 @synthesize internalTextView;
@@ -49,40 +46,45 @@
     if ((self = [super initWithFrame:frame])) {
         // Initialization code
         CGRect r = frame;
-        r.origin.y = 0;
+        r.origin.y = -10;
         r.origin.x = 0;
 
+        // creates the internal text view
         internalTextView = [[HPTextViewInternal alloc] initWithFrame:r];
         internalTextView.delegate = self;
         internalTextView.scrollEnabled = NO;
         internalTextView.font = [UIFont fontWithName:@"Helvetica" size:15];
         internalTextView.contentInset = UIEdgeInsetsZero;
+        internalTextView.textAlignment = UITextAlignmentLeft;
         internalTextView.showsHorizontalScrollIndicator = NO;
-        internalTextView.text = @"-";
         internalTextView.backgroundColor = [UIColor clearColor];
         internalTextView.autocorrectionType = UITextAutocorrectionTypeNo;
+
+        // adds the internal text view as sub view
         [self addSubview:internalTextView];
 
-        UIView *internal = (UIView*)[[internalTextView subviews] objectAtIndex:0];
-        minHeight = internal.frame.size.height;
+        UIView *internal = (UIView *)[[internalTextView subviews] objectAtIndex:0];
+        minimumHeight = internal.frame.size.height;
         minNumberOfLines = 1;
 
+        // sets the animate height change
         animateHeightChange = YES;
 
-        internalTextView.text = @"";
-
+        // sets the maximum number of lines
         [self setMaxNumberOfLines:3];
     }
+
+    // returns self
     return self;
 }
 
--(void)sizeToFit {
+- (void)sizeToFit {
     CGRect r = self.frame;
-    r.size.height = minHeight;
+    r.size.height = minimumHeight;
     self.frame = r;
 }
 
--(void)setFrame:(CGRect)aframe {
+- (void)setFrame:(CGRect)aframe {
     CGRect r = aframe;
     r.origin.y = 0;
     r.origin.x = 0;
@@ -108,10 +110,9 @@
 
     test.text = newLines;
 
-
     [self addSubview:test];
 
-    maxHeight = test.contentSize.height;
+    maximumHeight = test.contentSize.height;
     maxNumberOfLines = n;
 
     [test removeFromSuperview];
@@ -137,7 +138,7 @@
 
     [self addSubview:test];
 
-    minHeight = test.contentSize.height;
+    minimumHeight = test.contentSize.height;
 
     [self sizeToFit];
     minNumberOfLines = m;
@@ -149,80 +150,84 @@
 
 - (void)textViewDidChange:(UITextView *)textView {
     // size of content, so we can set the frame of self
-    NSInteger newSizeH = internalTextView.contentSize.height;
+    NSInteger newSizeHeight = internalTextView.contentSize.height;
 
-    if(newSizeH < minHeight || !internalTextView.hasText) {
+    if(newSizeHeight < minimumHeight || !internalTextView.hasText) {
         // not smaller than minHeight
-        newSizeH = minHeight;
+        newSizeHeight = minimumHeight;
     }
 
-    if(internalTextView.frame.size.height != newSizeH) {
-        if(newSizeH <= maxHeight) {
+    if(internalTextView.frame.size.height != newSizeHeight) {
+      //  if(newSizeHeight <= maximumHeight) {
             if(animateHeightChange){
-                [UIView beginAnimations:@"" context:nil];
+                [UIView beginAnimations:@"slideDown" context:nil];
                 [UIView setAnimationDelegate:self];
                 [UIView setAnimationDidStopSelector:@selector(growDidStop)];
                 [UIView setAnimationBeginsFromCurrentState:YES];
             }
 
-            if ([delegate respondsToSelector:@selector(growingTextView:willChangeHeight:)]) {
-                [delegate growingTextView:self willChangeHeight:newSizeH];
+            if([delegate respondsToSelector:@selector(growingTextView:willChangeHeight:)]) {
+                [delegate growingTextView:self willChangeHeight:newSizeHeight];
             }
 
             // internalTextView
             CGRect internalTextViewFrame = self.frame;
-            internalTextViewFrame.size.height = newSizeH; // + padding
+            internalTextViewFrame.size.height = newSizeHeight;
             self.frame = internalTextViewFrame;
 
             internalTextViewFrame.origin.y = 0;
             internalTextViewFrame.origin.x = 0;
             internalTextView.frame = internalTextViewFrame;
 
-            if(animateHeightChange){
+            // in case the height animations are set
+            if(animateHeightChange) {
+                // commits the animations
                 [UIView commitAnimations];
             }
-        }
+    //    }
 
-
-        // if our new height is greater than the maxHeight
-        // sets not set the height or move things
-        // around and enable scrolling
-        if (newSizeH >= maxHeight)
-        {
-            if(!internalTextView.scrollEnabled){
+        // in case the new size height is greater or equal
+        // to the maximum height
+        if(newSizeHeight >= maximumHeight) {
+            // in case the scroll is not enabled
+            if(!internalTextView.scrollEnabled) {
+                // sets the internal text view scroll
+                // and flashes the scroll indicators (for visibility)
                 internalTextView.scrollEnabled = YES;
                 [internalTextView flashScrollIndicators];
             }
-
-        } else {
+        }
+        // otherwise the new size is shrinking bellow
+        // the maximum height
+        else {
+            // disbles the scroll enabled
             internalTextView.scrollEnabled = NO;
         }
-
     }
 
-
-    if ([delegate respondsToSelector:@selector(growingTextViewDidChange:)]) {
+    // in case the delegate response to the selector
+    if([delegate respondsToSelector:@selector(growingTextViewDidChange:)]) {
+        // calls the growing textt view did change
         [delegate growingTextViewDidChange:self];
     }
-
 }
 
--(void)growDidStop
-{
-    if ([delegate respondsToSelector:@selector(growingTextView:didChangeHeight:)]) {
+-(void)growDidStop {
+    if([delegate respondsToSelector:@selector(growingTextView:didChangeHeight:)]) {
         [delegate growingTextView:self didChangeHeight:self.frame.size.height];
     }
-
 }
 
--(BOOL)resignFirstResponder
-{
+- (BOOL)resignFirstResponder {
     [super resignFirstResponder];
     return [internalTextView resignFirstResponder];
 }
 
 - (void)dealloc {
+    // releases the internal text view
     [internalTextView release];
+
+    // calls the super
     [super dealloc];
 }
 
@@ -231,28 +236,26 @@
 #pragma mark UITextView properties
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
--(void)setText:(NSString *)atext
-{
-    internalTextView.text= atext;
+- (void)setText:(NSString *)atext {
+    internalTextView.text = atext;
+
+    [self textViewDidChange:self.internalTextView];
 }
-//
--(NSString*)text
-{
+
+- (NSString*)text {
     return internalTextView.text;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
--(void)setFont:(UIFont *)afont
-{
-    internalTextView.font= afont;
+- (void)setFont:(UIFont *)afont {
+    internalTextView.font = afont;
 
     [self setMaxNumberOfLines:maxNumberOfLines];
     [self setMinNumberOfLines:minNumberOfLines];
 }
 
--(UIFont *)font
-{
+- (UIFont *)font {
     return internalTextView.font;
 }
 

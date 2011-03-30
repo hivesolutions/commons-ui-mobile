@@ -28,8 +28,10 @@
 #import "HMTableViewCell.h"
 
 @interface HMEditTableViewCell : HMTableViewCell {
-    @private
+    @protected
     BOOL _editingDirty;
+
+    @private
     UIView *_editView;
     NSString *_defaultValue;
     NSString *_returnType;

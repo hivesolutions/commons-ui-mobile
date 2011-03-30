@@ -54,6 +54,7 @@
 		C29A2E40132EA6A2005EAB37 /* HMRemoteTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */; };
 		C29E100F1333A24C00E9F77A /* HMHeaderItemTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */; };
 		C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */; };
+		C2B808BC1343E4EF00CAEC67 /* HMView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2B808BA1343E4EF00CAEC67 /* HMView.h */; };
 		C2C272C5133C05DA00D203C2 /* HMEntityAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C272C3133C05DA00D203C2 /* HMEntityAbstraction.h */; };
 		C2C272C6133C05DA00D203C2 /* HMEntityAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C272C4133C05DA00D203C2 /* HMEntityAbstraction.m */; };
 		C2C272C8133C06FB00D203C2 /* HMEntityDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C272C7133C06FB00D203C2 /* HMEntityDelegate.h */; };
@@ -122,6 +123,7 @@
 		C29A2E3E132EA6A2005EAB37 /* HMRemoteTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableView.m; path = classes/HMRemoteTableView.m; sourceTree = "<group>"; };
 		C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMHeaderItemTableView.h; path = classes/HMHeaderItemTableView.h; sourceTree = "<group>"; };
 		C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMHeaderItemTableView.m; path = classes/HMHeaderItemTableView.m; sourceTree = "<group>"; };
+		C2B808BA1343E4EF00CAEC67 /* HMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMView.h; path = classes/HMView.h; sourceTree = "<group>"; };
 		C2C272C3133C05DA00D203C2 /* HMEntityAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityAbstraction.h; path = classes/HMEntityAbstraction.h; sourceTree = "<group>"; };
 		C2C272C4133C05DA00D203C2 /* HMEntityAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMEntityAbstraction.m; path = classes/HMEntityAbstraction.m; sourceTree = "<group>"; };
 		C2C272C7133C06FB00D203C2 /* HMEntityDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityDelegate.h; path = classes/HMEntityDelegate.h; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 		C2FEBD6F1340AF6D00CBB51E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C2B808BA1343E4EF00CAEC67 /* HMView.h */,
 				A5B56CBA133BAF890071763F /* HMBadgeLabel.h */,
 				A5B56CBB133BAF890071763F /* HMBadgeLabel.m */,
 				A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */,
@@ -457,6 +460,7 @@
 				A537556B13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h in Headers */,
 				C2C520241343AB2D00F80A55 /* HPGrowingTextView.h in Headers */,
 				C2C520261343AB2D00F80A55 /* HPTextViewInternal.h in Headers */,
+				C2B808BC1343E4EF00CAEC67 /* HMView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

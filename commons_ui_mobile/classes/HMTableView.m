@@ -56,7 +56,7 @@
     NSArray *visibleCells = [self visibleCells];
 
     // calls the block for the cells
-    [HMEnumerableUtil map:visibleCells block:block];
+    [HMEnumerableUtil map:visibleCells block:block copyEnumerable:YES];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate {
@@ -76,7 +76,7 @@
     NSArray *visibleCells = [self visibleCells];
 
     // calls the block for the cells
-    [HMEnumerableUtil map:visibleCells block:block];
+    [HMEnumerableUtil map:visibleCells block:block copyEnumerable:YES];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
@@ -96,7 +96,7 @@
     NSArray *visibleCells = [self visibleCells];
 
     // calls the block for the cells
-    [HMEnumerableUtil map:visibleCells block:block];
+    [HMEnumerableUtil map:visibleCells block:block copyEnumerable:YES];
 }
 
 @end

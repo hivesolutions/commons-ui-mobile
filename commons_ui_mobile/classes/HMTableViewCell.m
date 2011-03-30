@@ -27,6 +27,7 @@
 
 @implementation HMTableViewCell
 
+@synthesize item = _item;
 @synthesize accessoryValue = _accessoryValue;
 @synthesize height = _height;
 @synthesize itemTableView = _itemTableView;
@@ -50,6 +51,9 @@
 }
 
 - (void)dealloc {
+    // releases the item
+    [_item release];
+
     // releases the name
     [_name release];
 

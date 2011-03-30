@@ -27,6 +27,7 @@
 #import "../classes/Dependencies.h"
 
 // class includes
+#import "../classes/HMView.h"
 #import "../classes/HMBadgeLabel.h"
 #import "../classes/HMDateTableViewCell.h"
 #import "../classes/HMColumnEditTableViewCell.h"

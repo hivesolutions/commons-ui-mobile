@@ -1,65 +1,64 @@
+// Hive Mobile
+// Copyright (C) 2008 Hive Solutions Lda.
 //
-//  HPTextViewInternal.m
+// This file is part of Hive Mobile.
 //
-//  Created by Hans Pinckaers on 29-06-10.
+// Hive Mobile is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//    MIT License
+// Hive Mobile is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+// GNU General Public License for more details.
 //
-//    Copyright (c) 2011 Hans Pinckaers
-//
-//    Permission is hereby granted, free of charge, to any person obtaining a copy
-//    of this software and associated documentation files (the "Software"), to deal
-//    in the Software without restriction, including without limitation the rights
-//    to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-//    copies of the Software, and to permit persons to whom the Software is
-//    furnished to do so, subject to the following conditions:
-//
-//    The above copyright notice and this permission notice shall be included in
-//    all copies or substantial portions of the Software.
-//
-//    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-//    IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-//    FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-//    AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-//    LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-//    OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-//    THE SOFTWARE.
+// You should have received a copy of the GNU General Public License
+// along with Hive Mobile. If not, see <http://www.gnu.org/licenses/>.
+
+// __author__    = João Magalhães <joamag@hive.pt>
+// __version__   = 1.0.0
+// __revision__  = $LastChangedRevision: 2390 $
+// __date__      = $LastChangedDate: 2009-04-02 08:36:50 +0100 (qui, 02 Abr 2009) $
+// __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
+// __license__   = GNU General Public License (GPL), Version 3
 
 #import "HPTextViewInternal.h"
 
 @implementation HPTextViewInternal
 
-- (void)dealloc {
-    // calls the super
-    [super dealloc];
-}
-
--(void)setContentOffset:(CGPoint)s
-{
+-(void)setContentOffset:(CGPoint)s {
+    // in case the tracking os the decelerating are set
     if(self.tracking || self.decelerating){
-        //initiated by user...
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     } else {
-
         float bottomOffset = (self.contentSize.height - self.frame.size.height + self.contentInset.bottom);
+
         if(s.y < bottomOffset && self.scrollEnabled){
             self.contentInset = UIEdgeInsetsMake(0, 0, 8, 0); //maybe use scrollRangeToVisible?
         }
-
     }
 
+    // sets the content offset
     [super setContentOffset:s];
 }
 
 -(void)setContentInset:(UIEdgeInsets)s {
+    // copies the insets into a local
+    // variable value
     UIEdgeInsets insets = s;
 
+    // in case the bottom insets
+    // overflows the maximum value
     if(s.bottom > 8) {
+        // sets the default inset
         insets.bottom = 0;
     }
 
-    insets.top = 0;
+    // forces the top value
+    insets.top = -5;
 
+    // sets the content insets
     [super setContentInset:insets];
 }
 

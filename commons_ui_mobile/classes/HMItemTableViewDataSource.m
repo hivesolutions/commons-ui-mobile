@@ -205,6 +205,8 @@
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
+
+        NSLog(@"VAI CRIAR A CELL");
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
 
@@ -271,6 +273,7 @@
         tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
         tableViewCell.accessoryValue = tableCellItem.accessoryValue;
         tableViewCell.height = tableCellItem.height;
+        tableViewCell.item = tableCellItem;
     }
 
     // inserts the item cell identifier association into the map

@@ -23,9 +23,18 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import <UIKit/UIKit.h>
+#import "Dependencies.h"
 
-@interface HPTextViewInternal : UITextView {
-}
+@protocol HMView<NSObject>
+
+@required
+
+/**
+ * The item associate with the current
+ * view.
+ * This property acts as the binding of the
+ * ui component with the logic component.
+ */
+@property (retain) HMItem *item;
 
 @end

@@ -71,9 +71,11 @@
     textView.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
    // textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.backgroundColor = [UIColor clearColor];
+
+    textView.delegate = self;
     textView.text = self.description;
   //  textView.secureTextEntry = self.secure;
-    textView.delegate = self;
+
     textView.editable = NO;
 
     // sets the text field's return key type
@@ -141,16 +143,24 @@
 }
 
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
-    NSIndexPath *indexPath = [self.itemTableView indexPathForCell:self];
-    HMItem *item = [self.itemTableView.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
+    // sets the item height
+    self.item.height = height + HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN;
 
-    item.height = height + 12;
-
-    //[self.itemTableView reloadData];
-    [UIView setAnimationsEnabled:NO];
-    [self.itemTableView beginUpdates];
-    [self.itemTableView endUpdates];
-    [UIView setAnimationsEnabled:YES];
+    // in case the editing dirty is setdfg
+    if(_editingDirty) {
+        // reloads the data in the item
+        // table view
+        [self.itemTableView reloadData];
+    }
+    // otherwise the cell is completely loaded
+    // and there is no need to reload the table
+    // in complete mode
+    else {
+        [UIView setAnimationsEnabled:NO];
+        [self.itemTableView beginUpdates];
+        [self.itemTableView endUpdates];
+        [UIView setAnimationsEnabled:YES];
+    }
 }
 
 - (void)setDescription:(NSString *)description {

@@ -51,11 +51,12 @@
 // avoids circular dependency
 @class HMItemTableView;
 
-@interface HMTableViewCell : UITableViewCell {
+@interface HMTableViewCell : UITableViewCell<HMView> {
     @protected
     NSString *_description;
 
     @private
+    HMItem *_item;
     NSString *_name;
     NSString *_icon;
     NSString *_highlightedIcon;
