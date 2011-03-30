@@ -185,13 +185,14 @@
     // retrieves the table cell item
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
-    // returns the editing style for
-    // the table cell item
-    if(tableCellItem.indentable) {
+    // returns the editing style in case the table is
+    // being edited and the table cell item is indentable
+    if(self.editing && tableCellItem.indentable) {
         return UITableViewCellEditingStyleDelete;
-    } else {
-        return UITableViewCellEditingStyleNone;
     }
+
+    // returns no editing style
+    return UITableViewCellEditingStyleNone;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
