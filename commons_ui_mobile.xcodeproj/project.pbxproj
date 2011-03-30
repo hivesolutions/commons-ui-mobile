@@ -62,6 +62,10 @@
 		C2C498261341053200541D4C /* HMTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C498241341053100541D4C /* HMTableView.m */; };
 		C2C4982A1341088D00541D4C /* HMTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C498281341088D00541D4C /* HMTableViewController.h */; };
 		C2C4982B1341088D00541D4C /* HMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C498291341088D00541D4C /* HMTableViewController.m */; };
+		C2C520241343AB2D00F80A55 /* HPGrowingTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C520201343AB1E00F80A55 /* HPGrowingTextView.h */; };
+		C2C520251343AB2D00F80A55 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C520211343AB1F00F80A55 /* HPGrowingTextView.m */; };
+		C2C520261343AB2D00F80A55 /* HPTextViewInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C520221343AB2200F80A55 /* HPTextViewInternal.h */; };
+		C2C520271343AB2D00F80A55 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C520231343AB2700F80A55 /* HPTextViewInternal.m */; };
 		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
 		C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */; };
 		C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */; };
@@ -126,6 +130,10 @@
 		C2C498241341053100541D4C /* HMTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableView.m; path = classes/HMTableView.m; sourceTree = "<group>"; };
 		C2C498281341088D00541D4C /* HMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewController.h; path = classes/HMTableViewController.h; sourceTree = "<group>"; };
 		C2C498291341088D00541D4C /* HMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewController.m; path = classes/HMTableViewController.m; sourceTree = "<group>"; };
+		C2C520201343AB1E00F80A55 /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPGrowingTextView.h; path = classes/HPGrowingTextView.h; sourceTree = "<group>"; };
+		C2C520211343AB1F00F80A55 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPGrowingTextView.m; path = classes/HPGrowingTextView.m; sourceTree = "<group>"; };
+		C2C520221343AB2200F80A55 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPTextViewInternal.h; path = classes/HPTextViewInternal.h; sourceTree = "<group>"; };
+		C2C520231343AB2700F80A55 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPTextViewInternal.m; path = classes/HPTextViewInternal.m; sourceTree = "<group>"; };
 		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
 		C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteAbstraction.h; path = classes/HMRemoteAbstraction.h; sourceTree = "<group>"; };
 		C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteAbstraction.m; path = classes/HMRemoteAbstraction.m; sourceTree = "<group>"; };
@@ -218,6 +226,10 @@
 		C220E36313318DD60076803A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C2C520201343AB1E00F80A55 /* HPGrowingTextView.h */,
+				C2C520211343AB1F00F80A55 /* HPGrowingTextView.m */,
+				C2C520221343AB2200F80A55 /* HPTextViewInternal.h */,
+				C2C520231343AB2700F80A55 /* HPTextViewInternal.m */,
 				A537556513432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h */,
 				A537556613432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m */,
 				A537556713432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h */,
@@ -443,6 +455,8 @@
 				C2C4982A1341088D00541D4C /* HMTableViewController.h in Headers */,
 				A537556913432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h in Headers */,
 				A537556B13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h in Headers */,
+				C2C520241343AB2D00F80A55 /* HPGrowingTextView.h in Headers */,
+				C2C520261343AB2D00F80A55 /* HPTextViewInternal.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -517,6 +531,8 @@
 				C2C4982B1341088D00541D4C /* HMTableViewController.m in Sources */,
 				A537556A13432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m in Sources */,
 				A537556C13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m in Sources */,
+				C2C520251343AB2D00F80A55 /* HPGrowingTextView.m in Sources */,
+				C2C520271343AB2D00F80A55 /* HPTextViewInternal.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

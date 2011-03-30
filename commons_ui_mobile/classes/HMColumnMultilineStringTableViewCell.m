@@ -25,6 +25,8 @@
 
 #import "HMColumnMultilineStringTableViewCell.h"
 
+#import "HPGrowingTextView.h"
+
 @implementation HMColumnMultilineStringTableViewCell
 
 @synthesize textView = _textView;
@@ -64,13 +66,13 @@
     // creates the text view
     CGRect editViewFrame = self.editView.frame;
     CGRect textViewFrame = CGRectMake(0, HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width, self.height - HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN);
-    UITextView *textView = [[UITextView alloc] initWithFrame:textViewFrame];
+    UITextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textView.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-    textView.autocorrectionType = UITextAutocorrectionTypeNo;
+   // textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.backgroundColor = [UIColor clearColor];
     textView.text = self.description;
-    textView.secureTextEntry = self.secure;
+  //  textView.secureTextEntry = self.secure;
     textView.delegate = self;
     textView.editable = NO;
 
@@ -138,25 +140,17 @@
     [self blurEditing];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    // hides the keyboard when
-    // a newline is inserted
-    if([text isEqualToString:@"\n"]) {
-        // disables editing in case
-        // returning should do so
-        if(self.returnDisablesEdit) {
-            self.itemTableView.editing = NO;
-        }
+- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
+    NSIndexPath *indexPath = [self.itemTableView indexPathForCell:self];
+    HMItem *item = [self.itemTableView.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
 
-        // hides the keyboard
-        [self.textView resignFirstResponder];
+    item.height = height + 12;
 
-        // returns no to avoid adding the newline
-        return NO;
-    }
-
-    // returns yes to add the newline
-    return YES;
+    //[self.itemTableView reloadData];
+    [UIView setAnimationsEnabled:NO];
+    [self.itemTableView beginUpdates];
+    [self.itemTableView endUpdates];
+    [UIView setAnimationsEnabled:YES];
 }
 
 - (void)setDescription:(NSString *)description {
