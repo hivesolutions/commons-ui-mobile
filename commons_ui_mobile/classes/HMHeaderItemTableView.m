@@ -104,12 +104,12 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 82)];
     header.contentMode = UIViewContentModeScaleToFill;
     header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    header.backgroundColor = [UIColor redColor];
+    header.backgroundColor = [UIColor clearColor];
 
     // creates the header container
     UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20 - deltaX, 0, screenWidth - 20 + deltaX, 82)];
     headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
-    headerContainer.backgroundColor = [UIColor greenColor];
+    headerContainer.backgroundColor = [UIColor clearColor];
 
     // creates the image frame
     CGRect imageFrame = CGRectMake(0, 15, 64, 64);
@@ -189,13 +189,13 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 110)];
     header.contentMode = UIViewContentModeScaleToFill;
     header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    header.backgroundColor = [UIColor redColor];
+    header.backgroundColor = [UIColor clearColor];
     header.layer.opacity = 0.0;
 
     // creates the header container
     UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20 - deltaX, 0, screenWidth - 20 + deltaX, 110)];
     headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
-    headerContainer.backgroundColor = [UIColor greenColor];
+    headerContainer.backgroundColor = [UIColor clearColor];
 
     // creates the image frame
     CGRect imageFrame = CGRectMake(0, 15, 64, 64);
