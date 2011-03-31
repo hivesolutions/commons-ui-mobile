@@ -25,18 +25,17 @@
 
 #import "Dependencies.h"
 
+#import "HMTableViewDataSource.h"
 #import "HMItemTableViewProvider.h"
 
 /**
  * Table view data soruce used to represent for reprenstation
  * of item objects.
  */
-@interface HMItemTableViewDataSource : NSObject<UITableViewDataSource> {
+@interface HMItemTableViewDataSource : HMTableViewDataSource {
     @private
     NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
-    UITableView *_tableView;
     HMNamedItemGroup *_itemSpecification;
-    NSMutableDictionary *_cellIdentifierMap;
     BOOL _itemDirty;
 }
 
@@ -46,20 +45,9 @@
 @property (assign) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
 
 /**
- * The table view that is associated with this
- * data source.
- */
-@property (assign) UITableView *tableView;
-
-/**
  * The current item specification (top level item node).
  */
 @property (retain) HMNamedItemGroup *itemSpecification;
-
-/**
- * The map containing the cell identifiers.
- */
-@property (retain) NSMutableDictionary *cellIdentifierMap;
 
 /**
  * The reference to the header named item group.
@@ -78,11 +66,6 @@
  * provider.
  */
 - (id)initWithItemTableViewProvider:(NSObject<HMItemTableViewProvider> *)itemTableViewProvider;
-
-/**
- * Initializes the instance structures.
- */
-- (void)initStructures;
 
 /**
  * Flushes the item specification, converting the current ui component
