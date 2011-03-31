@@ -238,8 +238,10 @@
     // initializes the section view
     UIView *sectionView = nil;
 
-    // creates the section view
+    // creates the section view, in case
+    // the header label item is defined
     if(headerLabelItem) {
+        // creates the section view
         sectionView = [self tableView:tableView sectionViewForLabelItem:headerLabelItem];
     }
 
@@ -263,8 +265,10 @@
     // initializes the section view
     UIView *sectionView = nil;
 
-    // creates the section view
+    // creates the section view, in case
+    // the footer label item is defined
     if(footerLabelItem) {
+        // creates the section view
         sectionView = [self tableView:tableView sectionViewForLabelItem:footerLabelItem];
     }
 
