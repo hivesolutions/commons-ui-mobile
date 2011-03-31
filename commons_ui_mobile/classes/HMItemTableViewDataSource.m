@@ -83,6 +83,12 @@
         // retrieves the cell for the list item identifier
         HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:listItem.identifier];
 
+        // ignores in case the
+        // cell was not found
+        if(cell == nil) {
+            continue;
+        }
+
         // sets the adapted values
         listItem.description = cell.description;
     }
@@ -103,6 +109,12 @@
 
         // retrieves the cell for the list item identifier
         HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:listItem.identifier];
+
+        // ignores in case the
+        // cell was not found
+        if(cell == nil) {
+            continue;
+        }
 
         // sets the adapted values
         listItem.description = cell.description;
