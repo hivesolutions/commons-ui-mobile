@@ -60,7 +60,7 @@
     UIButton *_imageAddButton;
     HMPlainStringTableViewCell *_titleTableViewCell;
     HMPlainStringTableViewCell *_subTitleTableViewCell;
-    HMItemTableView *_headerTableView;
+    HMTableView *_headerTableView;
 }
 
 /**
@@ -121,7 +121,7 @@
 /**
  * The table view.
  */
-@property (retain) HMItemTableView *headerTableView;
+@property (retain) HMTableView *headerTableView;
 
 /**
  * Constructs the view components and adds them
