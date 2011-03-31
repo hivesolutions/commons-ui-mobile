@@ -52,8 +52,11 @@
         [cell changeEditing:editing commit:YES];
     };
 
+    // casts the data source as table data source
+    HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
+
     // retrieves the cell list
-    NSArray *cellList = [self.dataSource cellList];
+    NSArray *cellList = tableDataSource.cellList;
 
     // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
@@ -72,8 +75,11 @@
         [cell changeEditing:editing commit:YES];
     };
 
+    // casts the data source as table data source
+    HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
+
     // retrieves the cell list
-    NSArray *cellList = [self.dataSource cellList];
+    NSArray *cellList = tableDataSource.cellList;
 
     // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
@@ -92,8 +98,11 @@
         [cell changeEditing:editing commit:commit];
     };
 
+    // casts the data source as table data source
+    HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
+
     // retrieves the cell list
-    NSArray *cellList = [self.dataSource cellList];
+    NSArray *cellList = tableDataSource.cellList;
 
     // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
@@ -115,11 +124,30 @@
         }
     };
 
+    // casts the data source as table data source
+    HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
+
     // retrieves the cell list
-    NSArray *cellList = [self.dataSource cellList];
+    NSArray *cellList = tableDataSource.cellList;
 
     // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
+}
+
+- (void)invalidateCells {
+    // casts the data source as table data source
+    HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
+
+    // invalidates the cell in the table data source
+    [tableDataSource invalidateCells];
+}
+
+- (void)reloadDataInvalidate {
+    // invalidates the cells
+    [self invalidateCells];
+
+    // reloads the data
+    [self reloadData];
 }
 
 @end

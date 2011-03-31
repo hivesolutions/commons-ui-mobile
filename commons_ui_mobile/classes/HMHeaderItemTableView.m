@@ -36,7 +36,6 @@
 @synthesize titleTableViewCell = _titleTableViewCell;
 @synthesize subTitleTableViewCell = _subTitleTableViewCell;
 @synthesize headerTableView = _headerTableView;
-
 @synthesize cellList = _cellList;
 
 - (id)init {
@@ -62,6 +61,9 @@
 }
 
 - (void)dealloc {
+    // releases the fcell list
+    [_cellList release];
+
     // releases the title
     [_title release];
 
@@ -76,8 +78,6 @@
 }
 
 - (void)constructView {
-    _cellList = [[NSMutableArray alloc] init];
-
     // constructs the "normal" view
     [self constructNormalView];
 
@@ -88,7 +88,6 @@
 - (void)constructNormalView {
     // initializes the position deltas
     float deltaX = 0;
-    float deltaY = 0;
 
     // retrieves the screen width
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
@@ -101,7 +100,6 @@
     // adjusts the delta in case the device is an ipad
     if([currentDeviceModel hasPrefix:@"iPad"]) {
         deltaX = -38;
-        deltaY = -20;
     }
 
     // creates the header
@@ -173,6 +171,9 @@
     float deltaX = 0;
     float deltaY = 0;
     float headerTableViewMarginX = 94;
+
+    // constructs the cell list
+    NSMutableArray *cellList = [[NSMutableArray alloc] init];
 
     // retrieves the screen width
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
@@ -258,10 +259,14 @@
     self.headerTableView = headerTableView;
     self.imageAddButton = addButton;
 
+    // sets the cell list
+    self.cellList = cellList;
+
     // releases the objects
     [headerTableView release];
     [headerContainer release];
     [header release];
+    [cellList release];
 }
 
 - (void)addPhotoButtonClicked:(id)sender extra:(id)extra {
@@ -488,8 +493,10 @@
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
+        // creates the table view cell
         tableViewCell = [[HMPlainStringTableViewCell alloc] init];
 
+        // adds the table view cell to the cell list
         [self.cellList addObject:tableViewCell];
     }
 

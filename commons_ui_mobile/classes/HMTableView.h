@@ -69,4 +69,20 @@
  */
 - (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView;
 
+/**
+ * Invalidates the cells clearing all the internal
+ * supporting data structures.
+ */
+- (void)invalidateCells;
+
+/**
+ * Reloads the table data flushing the current
+ * cell by invalidation.
+ * This method is much heavier than the reload data
+ * as it constructs the cells again.
+ * As a comparision calling this method is almost the same
+ * thing as constructing the table all over again.
+ */
+- (void)reloadDataInvalidate;
+
 @end

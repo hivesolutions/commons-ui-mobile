@@ -71,6 +71,14 @@
     [cellIdentifierMap release];
 }
 
+- (void)invalidateCells {
+    // removes all the object from the cell list
+    [self.cellList removeAllObjects];
+
+    // removes all object form the cell identifier map
+    [self.cellIdentifierMap removeAllObjects];
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     return nil;
 }
