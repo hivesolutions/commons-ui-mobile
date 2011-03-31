@@ -175,8 +175,6 @@
     // retrieves the table cell item
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
 
-    NSLog(@"Vai sacar nome: %@ height: %f", tableCellItem.identifier, tableCellItem.height);
-
     // returns the table cell item's height
     return tableCellItem.height;
 }
