@@ -49,6 +49,8 @@
  */
 @interface HMHeaderItemTableView : HMItemTableView<UITableViewDataSource> {
     @private
+    NSArray *_cellList;
+
     NSString *_title;
     NSString *_subTitle;
     NSString *_image;
@@ -62,6 +64,13 @@
     HMPlainStringTableViewCell *_subTitleTableViewCell;
     HMItemTableView *_headerTableView;
 }
+
+
+/**
+ * The title of the header.
+ */
+@property (retain) NSArray *cellList;
+
 
 /**
  * The title of the header.
