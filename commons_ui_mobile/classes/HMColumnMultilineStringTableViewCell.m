@@ -151,7 +151,7 @@
     if(_editingDirty) {
         // reloads the data in the item
         // table view
-        [self.itemTableView reloadData];
+        //[self.itemTableView reloadData];
     }
     // otherwise the cell is completely loaded
     // and there is no need to reload the table
