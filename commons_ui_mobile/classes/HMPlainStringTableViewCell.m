@@ -56,7 +56,7 @@
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
     textField.delegate = self;
-    
+
     // sets the text field's return key type
     if([self.returnType isEqualToString:@"done"]) {
         textField.returnKeyType = UIReturnKeyDone;
