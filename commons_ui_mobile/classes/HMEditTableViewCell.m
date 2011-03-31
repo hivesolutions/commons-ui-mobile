@@ -32,6 +32,7 @@
 @synthesize returnType = _returnType;
 @synthesize editable = _editable;
 @synthesize clearable = _clearable;
+@synthesize editAlways = _editAlways;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -83,6 +84,57 @@
 }
 
 - (void)blurEditing {
+}
+
+- (void)persistEditing {
+}
+
+- (void)rollbackEditing {
+}
+
+- (void)flushEditing {
+}
+
+- (void)updateTableData {
+    // in case the editing dirty is setdfg
+    if(_editingDirty) {
+        // reloads the data in the item
+        // table view
+        [self.itemTableView reloadData];
+    }
+    // otherwise the cell is completely loaded
+    // and there is no need to reload the table
+    // in complete mode
+    else {
+        [UIView setAnimationsEnabled:NO];
+        [self.itemTableView beginUpdates];
+        [self.itemTableView endUpdates];
+        [UIView setAnimationsEnabled:YES];
+    }
+}
+
+- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    // calls the super
+    [super changeEditing:editing commit:commit];
+
+    // persists the editing
+    [self flushEditing];
+
+    // returns in case its in edit mode
+    if(editing == YES) {
+        return;
+    }
+
+    // commits the cell's value in
+    // or restores it depending on
+    // the commit flag
+    if(commit == YES) {
+        // persists the editing
+        [self persistEditing];
+    } else {
+        // rollsback the editing
+        [self rollbackEditing];
+    }
 }
 
 - (void)setEditing:(BOOL)editing {
@@ -138,8 +190,18 @@
         // creates the editing (view)
         [self createEditing];
 
-        // hides the editing
-        [self hideEditing];
+        // in case its meant to show
+        // allways the edit fields
+        if(self.editAlways) {
+            // shows the editing
+            [self showEditing];
+        }
+        // otherwise its normal
+        // and should be hidden
+        else {
+            // hides the editing
+            [self hideEditing];
+        }
 
         // unsets the editing dirty flag
         _editingDirty = NO;
