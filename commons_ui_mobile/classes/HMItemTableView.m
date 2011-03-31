@@ -61,30 +61,6 @@
     [self.itemDataSource flushItemSpecification];
 }
 
-- (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView {
-    // retrieves the visible cells
-    NSArray *visibleCells = [self visibleCells];
-
-    // retrieves the visible cells size
-    int visibleCellsSize = [visibleCells count];
-
-    // iterates over all the visible cells (to blur them)
-    for(int index = 0; index < visibleCellsSize; index++) {
-        // retrieves the (visible) cell
-        HMEditTableViewCell *cell = [visibleCells objectAtIndex:index];
-
-        // checks if the cell responds to the blur selector
-        BOOL cellRespondsBlur = [cell respondsToSelector:@selector(blurEditing)];
-
-        // in case the cell is the table cell view and responds
-        // to the cell blur method
-        if(cell != tableCellView && cellRespondsBlur) {
-            // blurs the editing
-            [cell blurEditing];
-        }
-    }
-}
-
 - (UIView *)tableView:(UITableView *)tableView sectionViewForLabelItem:(HMLabelItem *)labelItem {
     // retrieves the size occupied by the font
     UIFont *font = [UIFont fontWithName:labelItem.fontName size:labelItem.fontSize];
