@@ -88,7 +88,6 @@
 - (void)constructNormalView {
     // initializes the position deltas
     float deltaX = 0;
-    float deltaY = 0;
 
     // retrieves the screen width
     CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
@@ -101,7 +100,6 @@
     // adjusts the delta in case the device is an ipad
     if([currentDeviceModel hasPrefix:@"iPad"]) {
         deltaX = -38;
-        deltaY = -20;
     }
 
     // creates the header

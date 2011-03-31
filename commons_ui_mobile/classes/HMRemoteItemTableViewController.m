@@ -701,6 +701,9 @@
 }
 
 - (void)processOperationRead:(NSData *)data  {
+    // retrieves the item table vuew
+    HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
     // creates a new json parser
     SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
@@ -713,8 +716,8 @@
     // sets the remote data as set
     _remoteDataIsSet = YES;
 
-    // reloads the data
-    [self.tableView reloadData];
+    // reloads the data invalidating the current cells
+    [itemTableView reloadDataInvalidate];
 
     // constructs the delayed structures
     [self constructStructuresDelayed];

@@ -54,6 +54,12 @@
 - (void)initStructures;
 
 /**
+ * Invalidates the cells clearing all the internal
+ * supporting data structures.
+ */
+- (void)invalidateCells;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;
