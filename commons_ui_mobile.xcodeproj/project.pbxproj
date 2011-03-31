@@ -69,6 +69,8 @@
 		C2C520251343AB2D00F80A55 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C520211343AB1F00F80A55 /* HPGrowingTextView.m */; };
 		C2C520261343AB2D00F80A55 /* HPTextViewInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C520221343AB2200F80A55 /* HPTextViewInternal.h */; };
 		C2C520271343AB2D00F80A55 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C520231343AB2700F80A55 /* HPTextViewInternal.m */; };
+		C2C7B7A01344E80E008C0E4B /* HMEntityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */; };
+		C2C7B7A31344E814008C0E4B /* HMEntityProviderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */; };
 		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
 		C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */; };
 		C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */; };
@@ -140,6 +142,8 @@
 		C2C520211343AB1F00F80A55 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPGrowingTextView.m; path = classes/HPGrowingTextView.m; sourceTree = "<group>"; };
 		C2C520221343AB2200F80A55 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPTextViewInternal.h; path = classes/HPTextViewInternal.h; sourceTree = "<group>"; };
 		C2C520231343AB2700F80A55 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPTextViewInternal.m; path = classes/HPTextViewInternal.m; sourceTree = "<group>"; };
+		C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityProvider.h; path = classes/HMEntityProvider.h; sourceTree = "<group>"; };
+		C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityProviderDelegate.h; path = classes/HMEntityProviderDelegate.h; sourceTree = "<group>"; };
 		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
 		C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteAbstraction.h; path = classes/HMRemoteAbstraction.h; sourceTree = "<group>"; };
 		C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteAbstraction.m; path = classes/HMRemoteAbstraction.m; sourceTree = "<group>"; };
@@ -266,6 +270,31 @@
 				C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C254AF021344ED3B00CACA7F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C254AF051344ED4600CACA7F /* Delegates */,
+				C254AF041344ED4100CACA7F /* Providers */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
+		C254AF041344ED4100CACA7F /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */,
+			);
+			name = Providers;
+			sourceTree = "<group>";
+		};
+		C254AF051344ED4600CACA7F /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		C29A2E30132E9D08005EAB37 /* Headers */ = {
@@ -484,6 +513,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C254AF021344ED3B00CACA7F /* Entity */,
 				C2FEBD6D1340AF5600CBB51E /* View */,
 				C2DFF26C133A032100E6E1D2 /* Abstractions */,
 				C2C96E45133373F700D6910B /* Dependencies */,
@@ -564,6 +594,8 @@
 				C2C520261343AB2D00F80A55 /* HPTextViewInternal.h in Headers */,
 				C2B808BC1343E4EF00CAEC67 /* HMView.h in Headers */,
 				C233B0FD1344841D00A9F9B5 /* HMTableViewDataSource.h in Headers */,
+				C2C7B7A01344E80E008C0E4B /* HMEntityProvider.h in Headers */,
+				C2C7B7A31344E814008C0E4B /* HMEntityProviderDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
