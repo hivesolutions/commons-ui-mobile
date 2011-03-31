@@ -195,7 +195,6 @@
 		C220E35F13318CE30076803A /* Providers */ = {
 			isa = PBXGroup;
 			children = (
-				C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */,
 				C2029292132FE42F009D7B69 /* HMItemTableViewProvider.h */,
 				C29A2E37132EA52B005EAB37 /* HMRemoteTableViewProvider.h */,
 			);
@@ -205,7 +204,6 @@
 		C220E36013318D0D0076803A /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
-				C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */,
 				C2029298132FE748009D7B69 /* HMItemTableViewDelegate.h */,
 				C202928C132FD974009D7B69 /* HMRemoteTableViewDelegate.h */,
 			);
@@ -272,6 +270,31 @@
 				C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C254AF021344ED3B00CACA7F /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				C254AF051344ED4600CACA7F /* Delegates */,
+				C254AF041344ED4100CACA7F /* Providers */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
+		C254AF041344ED4100CACA7F /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */,
+			);
+			name = Providers;
+			sourceTree = "<group>";
+		};
+		C254AF051344ED4600CACA7F /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */,
+			);
+			name = Delegates;
 			sourceTree = "<group>";
 		};
 		C29A2E30132E9D08005EAB37 /* Headers */ = {
@@ -490,6 +513,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C254AF021344ED3B00CACA7F /* Entity */,
 				C2FEBD6D1340AF5600CBB51E /* View */,
 				C2DFF26C133A032100E6E1D2 /* Abstractions */,
 				C2C96E45133373F700D6910B /* Dependencies */,
