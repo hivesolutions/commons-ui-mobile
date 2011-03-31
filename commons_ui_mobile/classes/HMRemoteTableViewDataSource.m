@@ -28,7 +28,6 @@
 @implementation HMRemoteTableViewDataSource
 
 @synthesize remoteTableViewProvider = _remoteTableViewProvider;
-@synthesize tableView = _tableView;
 @synthesize remoteAbstraction = _remoteAbstraction;
 @synthesize remoteData = _remoteData;
 @synthesize filterType = _filterType;
@@ -38,12 +37,6 @@
 - (id)init {
     // calls the super
     self = [super init];
-
-    // sets the remote dirty
-    _remoteDirty = YES;
-
-    // sets the default filter type
-    self.filterType = @"like";
 
     // returns self
     return self;
@@ -55,9 +48,6 @@
 
     // sets the attributes
     self.remoteTableViewProvider = remoteTableViewProvider;
-
-    // sets the default filter type
-    self.filterType = @"like";
 
     // returns self
     return self;
@@ -81,6 +71,17 @@
 
     // calls the supper
     [super dealloc];
+}
+
+- (void)initStructures {
+    // calls the super
+    [super initStructures];
+
+    // sets the remote dirty
+    _remoteDirty = YES;
+
+    // sets the default filter type
+    self.filterType = @"like";
 }
 
 - (void)updateRemote {

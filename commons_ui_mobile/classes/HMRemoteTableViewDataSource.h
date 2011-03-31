@@ -25,18 +25,18 @@
 
 #import "Dependencies.h"
 
-#import "HMRemoteTableViewProvider.h"
 #import "HMRemoteDelegate.h"
 #import "HMRemoteAbstraction.h"
+#import "HMTableViewDataSource.h"
+#import "HMRemoteTableViewProvider.h"
 
 /**
  * Class used to represent a table view data source
  * for remote connections with serialization.
  */
-@interface HMRemoteTableViewDataSource : NSObject<UITableViewDataSource, HMRemoteDelegate> {
+@interface HMRemoteTableViewDataSource : HMTableViewDataSource<HMRemoteDelegate> {
     @private
     NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
-    UITableView *_tableView;
     HMRemoteAbstraction *_remoteAbstraction;
     NSArray *_remoteData;
     NSString *_filterType;
@@ -51,12 +51,6 @@
  * about the remote node.
  */
 @property (assign) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
-
-/**
- * The table view that is associated with this
- * data source.
- */
-@property (assign) UITableView *tableView;
 
 /**
  * The remote abstraction to be used for controlling

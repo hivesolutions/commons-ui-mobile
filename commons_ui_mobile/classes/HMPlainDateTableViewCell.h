@@ -25,7 +25,7 @@
 
 #import "Dependencies.h"
 
-#import "HMEditTableViewCell.h"
+#import "HMPlainEditTableViewCell.h"
 
 /**
  * The date table view cell x margin.
@@ -42,7 +42,7 @@
  */
 #define HM_DATE_TABLE_VIEW_CELL_HEIGHT 19
 
-@interface HMDateTableViewCell : HMEditTableViewCell {
+@interface HMPlainDateTableViewCell : HMPlainEditTableViewCell {
     @private
     UIDatePicker *_datePicker;
     NSDate *_dateValue;

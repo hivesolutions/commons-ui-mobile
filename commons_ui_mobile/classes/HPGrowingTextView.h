@@ -23,7 +23,7 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import <UIKit/UIKit.h>
+#import "Dependencies.h"
 
 @class HPGrowingTextView;
 @class HPTextViewInternal;
@@ -45,6 +45,9 @@
 
 - (void)growingTextViewDidChangeSelection:(HPGrowingTextView *)growingTextView;
 - (BOOL)growingTextViewShouldReturn:(HPGrowingTextView *)growingTextView;
+
+- (void)growingTextViewWillBeginScroll:(HPGrowingTextView *)growingTextView;
+- (void)growingTextViewWillEndScroll:(HPGrowingTextView *)growingTextView;
 @end
 
 @interface HPGrowingTextView : UIView<UITextViewDelegate> {
@@ -77,7 +80,6 @@
 @property BOOL animateHeightChange;
 @property (retain) UITextView *internalTextView;
 
-
 //uitextview properties
 @property(assign) NSObject<HPGrowingTextViewDelegate> *delegate;
 @property(nonatomic,assign) NSString *text;
@@ -90,8 +92,8 @@
 @property(nonatomic) UIDataDetectorTypes dataDetectorTypes __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_3_0);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 
-
 //uitextview methods
+- (void)flushSize;
 - (BOOL)hasText;
 - (void)scrollRangeToVisible:(NSRange)range;
 

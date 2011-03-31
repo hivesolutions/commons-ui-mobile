@@ -39,22 +39,6 @@
     [super dealloc];
 }
 
-- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
-    // returns in case its in edit mode
-    if(editing == YES) {
-        return;
-    }
-
-    // commits the cell's value in
-    // or restores it depending on
-    // the commit flag
-    if(commit == YES) {
-        self.description = self.textField.text;
-    } else {
-        self.textField.text = self.description;
-    }
-}
-
 - (void)createEditing {
     // calls the super
     [super createEditing];
@@ -72,7 +56,7 @@
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
     textField.delegate = self;
-
+    
     // sets the text field's return key type
     if([self.returnType isEqualToString:@"done"]) {
         textField.returnKeyType = UIReturnKeyDone;
@@ -119,6 +103,22 @@
 
     // calls the super
     [super blurEditing];
+}
+
+- (void)persistEditing {
+    // calls the super
+    [super persistEditing];
+
+    // sets the description from the text field
+    self.description = self.textField.text;
+}
+
+- (void)rollbackEditing {
+    // reverts the text field text value
+    self.textField.text = self.description;
+
+    // calls the super
+    [super rollbackEditing];
 }
 
 - (BOOL)secure {

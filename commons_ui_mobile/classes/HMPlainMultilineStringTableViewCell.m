@@ -38,22 +38,6 @@
     [super dealloc];
 }
 
-- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
-    // returns in case its in edit mode
-    if(editing == YES) {
-        return;
-    }
-
-    // commits the cell's value in
-    // or restores it depending on
-    // the commit flag
-    if(commit == YES) {
-        self.description = self.textView.text;
-    } else {
-        self.textView.text = self.description;
-    }
-}
-
 - (void)createEditing {
     // calls the super
     [super createEditing];
@@ -108,6 +92,22 @@
 
     // calls the super
     [super blurEditing];
+}
+
+- (void)persistEditing {
+    // calls the super
+    [super persistEditing];
+
+    // sets the description from the text view
+    self.description = self.textView.text;
+}
+
+- (void)rollbackEditing {
+    // reverts the text view text value
+    self.textView.text = self.description;
+
+    // calls the super
+    [super rollbackEditing];
 }
 
 - (BOOL)secure {

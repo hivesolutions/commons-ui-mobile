@@ -23,7 +23,7 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import <UIKit/UIKit.h>
+#import "Dependencies.h"
 
 @interface HPTextViewInternal : UITextView {
 }

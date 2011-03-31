@@ -23,9 +23,9 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMDateTableViewCell.h"
+#import "HMPlainDateTableViewCell.h"
 
-@implementation HMDateTableViewCell
+@implementation HMPlainDateTableViewCell
 
 @synthesize datePicker = _datePicker;
 @synthesize dateValue = _dateValue;
@@ -144,24 +144,6 @@
     return screenRect;
 }
 
-- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
-    // returns in case its in edit mode
-    if(editing == YES) {
-        return;
-    }
-
-    // commits the cell's value in or restores
-    // it depending on
-    // the commit flag
-    if(commit == YES) {
-        // converts the date to a string and stores it in the detail text label
-        self.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dateValue];
-    } else {
-        // converts the date string to a date and stores it in the date value
-        self.dateValue = [self.dateFormatter dateFromString:self.detailTextLabel.text];
-    }
-}
-
 - (void)createEditing {
     // invokes the super
     [super createEditing];
@@ -227,6 +209,22 @@
 
     // calls the super
     [super blurEditing];
+}
+
+- (void)persistEditing {
+    // calls the super
+    [super persistEditing];
+
+    // converts the date to a string and stores it in the detail text label
+    self.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dateValue];
+}
+
+- (void)rollbackEditing {
+    // converts the date string to a date and stores it in the date value
+    self.dateValue = [self.dateFormatter dateFromString:self.detailTextLabel.text];
+
+    // calls the super
+    [super rollbackEditing];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
