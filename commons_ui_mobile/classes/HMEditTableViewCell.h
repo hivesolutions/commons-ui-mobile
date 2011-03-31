@@ -37,6 +37,7 @@
     NSString *_returnType;
     BOOL _editable;
     BOOL _clearable;
+    BOOL _editAlways;
 }
 
 /**
@@ -69,6 +70,12 @@
 @property (assign) BOOL clearable;
 
 /**
+ * Indicates if the cell is meant to
+ * be of type edit only.
+ */
+@property (assign) BOOL editAlways;
+
+/**
  * Creates the editing view.
  */
 - (void)createEditing;
@@ -89,8 +96,34 @@
 - (void)focusEditing;
 
 /**
- * Bliurs from the editing view contents.
+ * Blurs from the editing view contents.
  */
 - (void)blurEditing;
+
+/**
+ * Persists the editing view contents.
+ */
+- (void)persistEditing;
+
+/**
+ * Rollback the editing view contents.
+ */
+- (void)rollbackEditing;
+
+/**
+ * Flushes the current editing contents.
+ * This method should be overriden carefully
+ * because it can cause side effects.
+ */
+- (void)flushEditing;
+
+/**
+ * Updates the table data according to the new
+ * specification.
+ * This method should be used carefully as it wastes
+ * a lot of resource in order to update the table
+ * contents.
+ */
+- (void)updateTableData;
 
 @end

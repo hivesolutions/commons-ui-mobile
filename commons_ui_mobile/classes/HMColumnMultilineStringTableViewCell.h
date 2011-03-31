@@ -26,6 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMColumnEditTableViewCell.h"
+#import "HPGrowingTextView.h"
 
 /**
  * The column multiline string table view cell y margin.
@@ -37,9 +38,19 @@
  */
 #define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
 
-@interface HMColumnMultilineStringTableViewCell : HMColumnEditTableViewCell<UITextViewDelegate> {
+/**
+ * The column multiline string table view cell extra cell height.
+ */
+#define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_CELL_HEIGHT 14
+
+/**
+ * The column multiline string table view cell scroll margin
+ */
+#define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_SCROLL_MARGIN 11
+
+@interface HMColumnMultilineStringTableViewCell : HMColumnEditTableViewCell<HPGrowingTextViewDelegate> {
     @private
-    UITextView *_textView;
+    HPGrowingTextView *_textView;
     BOOL _secure;
     BOOL _returnDisablesEdit;
 }
@@ -47,7 +58,7 @@
 /**
  * The textfield used to represent the cell value.
  */
-@property (retain) UITextView *textView;
+@property (retain) HPGrowingTextView *textView;
 
 /**
  * Indicates if the value should be masked.

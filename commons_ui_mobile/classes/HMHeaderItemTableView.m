@@ -37,6 +37,8 @@
 @synthesize subTitleTableViewCell = _subTitleTableViewCell;
 @synthesize headerTableView = _headerTableView;
 
+@synthesize cellList = _cellList;
+
 - (id)init {
     // calls the super
     self = [super init];
@@ -74,6 +76,8 @@
 }
 
 - (void)constructView {
+    _cellList = [[NSMutableArray alloc] init];
+
     // constructs the "normal" view
     [self constructNormalView];
 
@@ -485,6 +489,8 @@
     // need to create a new cell
     if(tableViewCell == nil) {
         tableViewCell = [[HMPlainStringTableViewCell alloc] init];
+
+        [self.cellList addObject:tableViewCell];
     }
 
     // configures the table view cell
@@ -497,11 +503,15 @@
         tableViewCell.description = self.title;
         tableViewCell.defaultValue = NSLocalizedString(@"Title", @"Title");
         self.titleTableViewCell = tableViewCell;
+
     } else {
         tableViewCell.description = self.subTitle;
         tableViewCell.defaultValue = NSLocalizedString(@"Subtitle", @"Subtitle");
         self.subTitleTableViewCell = tableViewCell;
     }
+
+    // sets the cell as edit always
+    tableViewCell.editAlways = YES;
 
     // returns the cell
     return tableViewCell;

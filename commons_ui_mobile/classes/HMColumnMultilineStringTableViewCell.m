@@ -25,8 +25,6 @@
 
 #import "HMColumnMultilineStringTableViewCell.h"
 
-#import "HPGrowingTextView.h"
-
 @implementation HMColumnMultilineStringTableViewCell
 
 @synthesize textView = _textView;
@@ -40,26 +38,6 @@
     [super dealloc];
 }
 
-- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
-    // returns in case its in edit mode
-    if(editing == YES) {
-        // resets the text view text (this setting)
-        // forces the text view to resize
-        self.textView.text = self.textView.text;
-
-        return;
-    }
-
-    // commits the cell's value in
-    // or restores it depending on
-    // the commit flag
-    if(commit == YES) {
-        self.description = self.textView.text;
-    } else {
-        self.textView.text = self.description;
-    }
-}
-
 - (void)createEditing {
     // calls the super
     [super createEditing];
@@ -70,7 +48,7 @@
     // creates the text view
     CGRect editViewFrame = self.editView.frame;
     CGRect textViewFrame = CGRectMake(0, HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width, self.height - HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN);
-    UITextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
+    HPGrowingTextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
     textView.delegate = self;
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textView.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
@@ -115,6 +93,30 @@
     [super blurEditing];
 }
 
+- (void)persistEditing {
+    // calls the super
+    [super persistEditing];
+
+    // sets the description from the text view
+    self.description = self.textView.text;
+}
+
+- (void)rollbackEditing {
+    // reverts the text view text value
+    self.textView.text = self.description;
+
+    // calls the super
+    [super rollbackEditing];
+}
+
+- (void)flushEditing {
+    // calls the super
+    [super flushEditing];
+
+    // flushes the size of the text view
+    self.textView.text = self.textView.text;
+}
+
 - (BOOL)secure {
     return _secure;
 }
@@ -133,35 +135,30 @@
     self.textView.secureTextEntry = _secure;
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView {
+- (void)growingTextViewDidBeginEditing:(HPGrowingTextView *)textView {
     // focuses the editing
     [self focusEditing];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
+- (void)growingTextViewDidEndEditing:(HPGrowingTextView *)textView {
     // blurs the editing
     [self blurEditing];
 }
 
 - (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
     // sets the item height
-    self.item.height = height + HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN;
+    self.item.height = height + HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_CELL_HEIGHT;
 
-    // in case the editing dirty is setdfg
-    if(_editingDirty) {
-        // reloads the data in the item
-        // table view
-        //[self.itemTableView reloadData];
-    }
-    // otherwise the cell is completely loaded
-    // and there is no need to reload the table
-    // in complete mode
-    else {
-        [UIView setAnimationsEnabled:NO];
-        [self.itemTableView beginUpdates];
-        [self.itemTableView endUpdates];
-        [UIView setAnimationsEnabled:YES];
-    }
+    // updates the table data
+    [self updateTableData];
+}
+
+- (void)growingTextViewWillBeginScroll:(HPGrowingTextView *)growingTextView {
+    // increments the item height with the scroll padding
+    self.item.height += HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_SCROLL_MARGIN;
+
+    // updates the table data
+    [self updateTableData];
 }
 
 - (void)setDescription:(NSString *)description {

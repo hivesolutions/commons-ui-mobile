@@ -71,12 +71,98 @@
         animateHeightChange = YES;
 
         // sets the maximum number of lines
-        [self setMaxNumberOfLines:3];
+        [self setMaxNumberOfLines:6];
     }
 
     // returns self
     return self;
 }
+
+- (void)flushSize {
+    // size of content, so we can set the frame of self
+    NSInteger newSizeHeight = internalTextView.contentSize.height;
+
+    if(newSizeHeight < minimumHeight || !internalTextView.hasText) {
+        // not smaller than minHeight
+        newSizeHeight = minimumHeight;
+    }
+
+    if(internalTextView.frame.size.height != newSizeHeight) {
+        if(newSizeHeight <= maximumHeight) {
+            if(animateHeightChange){
+                [UIView beginAnimations:@"slideDown" context:nil];
+                [UIView setAnimationDelegate:self];
+                [UIView setAnimationDidStopSelector:@selector(growDidStop)];
+                [UIView setAnimationBeginsFromCurrentState:YES];
+            }
+
+            if([delegate respondsToSelector:@selector(growingTextView:willChangeHeight:)]) {
+                [delegate growingTextView:self willChangeHeight:newSizeHeight];
+            }
+
+            // internalTextView
+            CGRect internalTextViewFrame = self.frame;
+            internalTextViewFrame.size.height = newSizeHeight;
+            self.frame = internalTextViewFrame;
+
+            internalTextViewFrame.origin.y = 0;
+            internalTextViewFrame.origin.x = 0;
+            internalTextView.frame = internalTextViewFrame;
+
+            // in case the height animations are set
+            if(animateHeightChange) {
+                // commits the animations
+                [UIView commitAnimations];
+            }
+        } else if(internalTextView.frame.size.height < maximumHeight) {
+            // internalTextView
+            CGRect internalTextViewFrame = self.frame;
+            internalTextViewFrame.size.height = maximumHeight;
+            self.frame = internalTextViewFrame;
+
+            internalTextViewFrame.origin.y = 0;
+            internalTextViewFrame.origin.x = 0;
+            internalTextView.frame = internalTextViewFrame;
+
+            if([delegate respondsToSelector:@selector(growingTextView:willChangeHeight:)]) {
+                [delegate growingTextView:self willChangeHeight:maximumHeight];
+            }
+        }
+
+        // in case the new size height is greater or equal
+        // to the maximum height
+        if(newSizeHeight >= maximumHeight) {
+            // in case the scroll is not enabled
+            if(!internalTextView.scrollEnabled) {
+                // sets the internal text view scroll
+                // and flashes the scroll indicators (for visibility)
+                internalTextView.scrollEnabled = YES;
+                [internalTextView flashScrollIndicators];
+
+                if([delegate respondsToSelector:@selector(growingTextViewWillBeginScroll:)]) {
+                    [delegate growingTextViewWillBeginScroll:self];
+                }
+            }
+        }
+        // otherwise the new size is shrinking bellow
+        // the maximum height
+        else {
+            // disbles the scroll enabled
+            internalTextView.scrollEnabled = NO;
+
+            if([delegate respondsToSelector:@selector(growingTextViewWillEndScroll:)]) {
+                [delegate growingTextViewWillEndScroll:self];
+            }
+        }
+    }
+
+    // in case the delegate response to the selector
+    if([delegate respondsToSelector:@selector(growingTextViewDidChange:)]) {
+        // calls the growing textt view did change
+        [delegate growingTextViewDidChange:self];
+    }
+}
+
 
 - (void)sizeToFit {
     CGRect r = self.frame;
@@ -103,7 +189,7 @@
     if(n == 1){
         [newLines appendString:@"-"];
     } else {
-        for(int i = 1; i<n; i++){
+        for(int i = 1; i < n; i++){
             [newLines appendString:@"\n"];
         }
     }
@@ -147,69 +233,9 @@
     [test release];
 }
 
-
 - (void)textViewDidChange:(UITextView *)textView {
-    // size of content, so we can set the frame of self
-    NSInteger newSizeHeight = internalTextView.contentSize.height;
-
-    if(newSizeHeight < minimumHeight || !internalTextView.hasText) {
-        // not smaller than minHeight
-        newSizeHeight = minimumHeight;
-    }
-
-    if(internalTextView.frame.size.height != newSizeHeight) {
-      //  if(newSizeHeight <= maximumHeight) {
-            if(animateHeightChange){
-                [UIView beginAnimations:@"slideDown" context:nil];
-                [UIView setAnimationDelegate:self];
-                [UIView setAnimationDidStopSelector:@selector(growDidStop)];
-                [UIView setAnimationBeginsFromCurrentState:YES];
-            }
-
-            if([delegate respondsToSelector:@selector(growingTextView:willChangeHeight:)]) {
-                [delegate growingTextView:self willChangeHeight:newSizeHeight];
-            }
-
-            // internalTextView
-            CGRect internalTextViewFrame = self.frame;
-            internalTextViewFrame.size.height = newSizeHeight;
-            self.frame = internalTextViewFrame;
-
-            internalTextViewFrame.origin.y = 0;
-            internalTextViewFrame.origin.x = 0;
-            internalTextView.frame = internalTextViewFrame;
-
-            // in case the height animations are set
-            if(animateHeightChange) {
-                // commits the animations
-                [UIView commitAnimations];
-            }
-    //    }
-
-        // in case the new size height is greater or equal
-        // to the maximum height
-        if(newSizeHeight >= maximumHeight) {
-            // in case the scroll is not enabled
-            if(!internalTextView.scrollEnabled) {
-                // sets the internal text view scroll
-                // and flashes the scroll indicators (for visibility)
-                internalTextView.scrollEnabled = YES;
-                [internalTextView flashScrollIndicators];
-            }
-        }
-        // otherwise the new size is shrinking bellow
-        // the maximum height
-        else {
-            // disbles the scroll enabled
-            internalTextView.scrollEnabled = NO;
-        }
-    }
-
-    // in case the delegate response to the selector
-    if([delegate respondsToSelector:@selector(growingTextViewDidChange:)]) {
-        // calls the growing textt view did change
-        [delegate growingTextViewDidChange:self];
-    }
+    // flushes the size of the text view
+    [self flushSize];
 }
 
 -(void)growDidStop {
@@ -231,7 +257,6 @@
     [super dealloc];
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark UITextView properties
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -239,7 +264,8 @@
 - (void)setText:(NSString *)atext {
     internalTextView.text = atext;
 
-    [self textViewDidChange:self.internalTextView];
+    // flushes the size of the text view
+    [self flushSize];
 }
 
 - (NSString*)text {
@@ -281,6 +307,17 @@
 {
     return internalTextView.textAlignment;
 }
+
+/////
+
+-(void)setScrollEnabled:(BOOL)scrollEnabled {
+    internalTextView.scrollEnabled = scrollEnabled;
+}
+
+- (BOOL)isScrollEnabled {
+    return internalTextView.scrollEnabled;
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

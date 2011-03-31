@@ -25,6 +25,8 @@
 
 #import "Dependencies.h"
 
+#import "HMTableViewDataSource.h"
+
 @interface HMTableView : UITableView {
 }
 
@@ -58,5 +60,13 @@
  * @param commit The value for the commit.
  */
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit;
+
+/**
+ * Blurs all the edit table view cells in the table
+ * except the one given.
+ *
+ * @param tableCellView The table cell view not to be hidden.
+ */
+- (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView;
 
 @end

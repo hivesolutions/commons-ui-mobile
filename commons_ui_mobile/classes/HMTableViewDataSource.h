@@ -25,7 +25,37 @@
 
 #import "Dependencies.h"
 
-@interface HPTextViewInternal : UITextView {
+@interface HMTableViewDataSource : NSObject<UITableViewDataSource> {
+    @private
+    UITableView *_tableView;
+    NSMutableArray *_cellList;
+    NSMutableDictionary *_cellIdentifierMap;
 }
+
+/**
+ * The table view that is associated with this
+ * data source.
+ */
+@property (assign) UITableView *tableView;
+
+/**
+ * The list containing all the cells
+ */
+@property (retain) NSMutableArray *cellList;
+
+/**
+ * The map containing the cell identifiers.
+ */
+@property (retain) NSMutableDictionary *cellIdentifierMap;
+
+/**
+ * Initializes the instance structures.
+ */
+- (void)initStructures;
+
+/**
+ * Keeps the class valid for export at link time.
+ */
++ (void)_keepAtLinkTime;
 
 @end

@@ -28,16 +28,11 @@
 @implementation HMItemTableViewDataSource
 
 @synthesize itemTableViewProvider = _itemTableViewProvider;
-@synthesize tableView = _tableView;
 @synthesize itemSpecification = _itemSpecification;
-@synthesize cellIdentifierMap = _cellIdentifierMap;
 
 - (id)init {
     // calls the super
     self = [super init];
-
-    // initializes the structures
-    [self initStructures];
 
     // returns self
     return self;
@@ -50,9 +45,6 @@
     // sets the attributes
     self.itemTableViewProvider = itemTableViewProvider;
 
-    // initializes the structures
-    [self initStructures];
-
     // returns self
     return self;
 }
@@ -61,26 +53,16 @@
     // releases the item specification
     [_itemSpecification release];
 
-    // releases the cell identifier map
-    [_cellIdentifierMap release];
-
     // calls the supper
     [super dealloc];
 }
 
 - (void)initStructures {
+    // calls the super
+    [super initStructures];
+
     // sets the item dirty
     _itemDirty = YES;
-
-    // creates the item cell map to hold the relations
-    // between the cells and the identifiers
-    NSMutableDictionary *cellIdentifierMap = [[NSMutableDictionary alloc] init];
-
-    // sets the attributes
-    self.cellIdentifierMap = cellIdentifierMap;
-
-    // releases the objects
-    [cellIdentifierMap release];
 }
 
 - (void)flushItemSpecification {
@@ -99,7 +81,7 @@
         HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
 
         // retrieves the cell for the list item identifier
-        HMTableViewCell *cell = (HMTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
+        HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:listItem.identifier];
 
         // sets the adapted values
         listItem.description = cell.description;
@@ -120,7 +102,7 @@
         HMTableCellItem *listItem = (HMTableCellItem *) [listItemGroupItems objectAtIndex:index];
 
         // retrieves the cell for the list item identifier
-        HMTableViewCell *cell = (HMTableViewCell *) [_cellIdentifierMap objectForKey:listItem.identifier];
+        HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:listItem.identifier];
 
         // sets the adapted values
         listItem.description = cell.description;
@@ -199,13 +181,13 @@
     // retrieves the table cell item
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
-    // tries to retrives the cell from cache (reusable)
-    HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView dequeueReusableCellWithIdentifier:tableCellItem.identifier];
+    // retrieves the table view cell for the table cell item identifier
+    HMTableViewCell *tableViewCell = [self.cellIdentifierMap objectForKey:tableCellItem.identifier];
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
-        NSLog(@"VAI CRIAR A CELL");
+        NSLog(@"VAI CRIAR A CELL %@", tableCellItem.identifier);
 
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
@@ -276,8 +258,11 @@
         tableViewCell.item = tableCellItem;
     }
 
+    // inserts the item cell into the cell list
+    [self.cellList addObject:tableViewCell];
+
     // inserts the item cell identifier association into the map
-    [_cellIdentifierMap setObject:tableViewCell forKey:tableCellItem.identifier];
+    [self.cellIdentifierMap setObject:tableViewCell forKey:tableCellItem.identifier];
 
     // sets the button item's attributes in the cell
     tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];

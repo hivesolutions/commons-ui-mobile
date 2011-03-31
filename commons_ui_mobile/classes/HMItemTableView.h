@@ -26,6 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMTableView.h"
+#import "HMEditTableViewCell.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
 #import "HMItemTableViewDataSource.h"
@@ -61,14 +62,6 @@
  * in the ui.
  */
 - (void)flushItemSpecification;
-
-/**
- * Blurs all the edit table view cells in the table
- * except the one given.
- *
- * @param tableCellView The table cell view not to be hidden.
- */
-- (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView;
 
 /**
  * Keeps the class valid for export at link time.

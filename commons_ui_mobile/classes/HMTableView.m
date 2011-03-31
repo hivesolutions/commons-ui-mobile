@@ -52,11 +52,11 @@
         [cell changeEditing:editing commit:YES];
     };
 
-    // retrieves the visible cells
-    NSArray *visibleCells = [self visibleCells];
+    // retrieves the cell list
+    NSArray *cellList = [self.dataSource cellList];
 
     // calls the block for the cells
-    [HMEnumerableUtil map:visibleCells block:block copyEnumerable:YES];
+    [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate {
@@ -72,11 +72,11 @@
         [cell changeEditing:editing commit:YES];
     };
 
-    // retrieves the visible cells
-    NSArray *visibleCells = [self visibleCells];
+    // retrieves the cell list
+    NSArray *cellList = [self.dataSource cellList];
 
     // calls the block for the cells
-    [HMEnumerableUtil map:visibleCells block:block copyEnumerable:YES];
+    [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
@@ -92,11 +92,34 @@
         [cell changeEditing:editing commit:commit];
     };
 
-    // retrieves the visible cells
-    NSArray *visibleCells = [self visibleCells];
+    // retrieves the cell list
+    NSArray *cellList = [self.dataSource cellList];
 
     // calls the block for the cells
-    [HMEnumerableUtil map:visibleCells block:block copyEnumerable:YES];
+    [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
+}
+- (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView {
+    // creates the block to change the editing
+    void (^block)(id) = ^(id value) {
+        // casts the value as cell
+        HMEditTableViewCell *cell = value;
+
+        // checks if the cell responds to the blur selector
+        BOOL cellRespondsBlur = [cell respondsToSelector:@selector(blurEditing)];
+
+        // in case the cell is the table cell view and responds
+        // to the cell blur method
+        if(cell != tableCellView && cellRespondsBlur) {
+            // blurs the editing
+            [cell blurEditing];
+        }
+    };
+
+    // retrieves the cell list
+    NSArray *cellList = [self.dataSource cellList];
+
+    // calls the block for the cells
+    [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
 
 @end
