@@ -306,13 +306,21 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
--(void)setReturnKeyType:(UIReturnKeyType)keyType
-{
+- (void)setSecureTextEntry :(BOOL)bsecureTextEntry {
+    internalTextView.secureTextEntry = bsecureTextEntry;
+}
+
+- (BOOL)secureTextEntry {
+    return internalTextView.secureTextEntry;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+- (void)setReturnKeyType:(UIReturnKeyType)keyType {
     internalTextView.returnKeyType = keyType;
 }
 
--(UIReturnKeyType)returnKeyType
-{
+- (UIReturnKeyType)returnKeyType {
     return internalTextView.returnKeyType;
 }
 
@@ -401,8 +409,6 @@
     }
 
     return YES;
-
-
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////

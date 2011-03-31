@@ -71,16 +71,13 @@
     CGRect editViewFrame = self.editView.frame;
     CGRect textViewFrame = CGRectMake(0, HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width, self.height - HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN);
     UITextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
+    textView.delegate = self;
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textView.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-   // textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.backgroundColor = [UIColor clearColor];
-
-    textView.delegate = self;
     textView.text = self.description;
-  //  textView.secureTextEntry = self.secure;
-
     textView.editable = NO;
+    textView.secureTextEntry = self.secure;
 
     // sets the text field's return key type
     if([self.returnType isEqualToString:@"done"]) {

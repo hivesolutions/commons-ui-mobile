@@ -86,6 +86,7 @@
 @property(nonatomic) UITextAlignment textAlignment;
 @property(nonatomic) NSRange selectedRange;
 @property(nonatomic,getter=isEditable) BOOL editable;
+@property(nonatomic,assign) BOOL secureTextEntry;
 @property(nonatomic) UIDataDetectorTypes dataDetectorTypes __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_3_0);
 @property (nonatomic) UIReturnKeyType returnKeyType;
 
