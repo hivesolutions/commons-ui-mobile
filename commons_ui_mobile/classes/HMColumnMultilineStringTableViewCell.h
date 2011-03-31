@@ -37,6 +37,16 @@
  */
 #define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
 
+/**
+ * The column multiline string table view cell extra cell height.
+ */
+#define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_CELL_HEIGHT 14
+
+/**
+ * The column multiline string table view cell scroll margin
+ */
+#define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_SCROLL_MARGIN 11
+
 @interface HMColumnMultilineStringTableViewCell : HMColumnEditTableViewCell<UITextViewDelegate> {
     @private
     UITextView *_textView;
