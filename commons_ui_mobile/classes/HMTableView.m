@@ -103,10 +103,10 @@
     void (^block)(id) = ^(id value) {
         // casts the value as cell
         HMEditTableViewCell *cell = value;
-        
+
         // checks if the cell responds to the blur selector
         BOOL cellRespondsBlur = [cell respondsToSelector:@selector(blurEditing)];
-        
+
         // in case the cell is the table cell view and responds
         // to the cell blur method
         if(cell != tableCellView && cellRespondsBlur) {
@@ -114,7 +114,7 @@
             [cell blurEditing];
         }
     };
-    
+
     // retrieves the cell list
     NSArray *cellList = [self.dataSource cellList];
 
