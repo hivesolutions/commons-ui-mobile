@@ -239,7 +239,7 @@
     [addButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
 
     // creates the header table view
-    HMTableView *headerTableView = [[HMItemTableView alloc] initWithFrame:CGRectMake(74 + deltaX, 5 + deltaY, screenWidth - headerTableViewMarginX, 120) style:UITableViewStyleGrouped];
+    HMTableView *headerTableView = [[HMTableView alloc] initWithFrame:CGRectMake(74 + deltaX, 5 + deltaY, screenWidth - headerTableViewMarginX, 120) style:UITableViewStyleGrouped];
     headerTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     headerTableView.backgroundColor = [UIColor clearColor];
     headerTableView.dataSource = self;
