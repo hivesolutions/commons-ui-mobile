@@ -49,6 +49,8 @@
 #import "../classes/HMRemoteTableViewDelegate.h"
 #import "../classes/HMRemoteTableViewProvider.h"
 #import "../classes/HMRoundedCornerImageView.h"
+#import "../classes/HMEntityProviderDelegate.h"
+#import "../classes/HMEntityProvider.h"
 #import "../classes/HMTableViewCell.h"
 #import "../classes/HMTableViewCellBackgroundView.h"
 #import "../classes/HMRemoteAbstraction.h"

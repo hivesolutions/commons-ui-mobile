@@ -69,6 +69,8 @@
 		C2C520251343AB2D00F80A55 /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C520211343AB1F00F80A55 /* HPGrowingTextView.m */; };
 		C2C520261343AB2D00F80A55 /* HPTextViewInternal.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C520221343AB2200F80A55 /* HPTextViewInternal.h */; };
 		C2C520271343AB2D00F80A55 /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C520231343AB2700F80A55 /* HPTextViewInternal.m */; };
+		C2C7B7A01344E80E008C0E4B /* HMEntityProvider.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */; };
+		C2C7B7A31344E814008C0E4B /* HMEntityProviderDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */; };
 		C2C96E481333742900D6910B /* Dependencies.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C96E471333742900D6910B /* Dependencies.h */; };
 		C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */; };
 		C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */; };
@@ -140,6 +142,8 @@
 		C2C520211343AB1F00F80A55 /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPGrowingTextView.m; path = classes/HPGrowingTextView.m; sourceTree = "<group>"; };
 		C2C520221343AB2200F80A55 /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HPTextViewInternal.h; path = classes/HPTextViewInternal.h; sourceTree = "<group>"; };
 		C2C520231343AB2700F80A55 /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HPTextViewInternal.m; path = classes/HPTextViewInternal.m; sourceTree = "<group>"; };
+		C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityProvider.h; path = classes/HMEntityProvider.h; sourceTree = "<group>"; };
+		C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityProviderDelegate.h; path = classes/HMEntityProviderDelegate.h; sourceTree = "<group>"; };
 		C2C96E471333742900D6910B /* Dependencies.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Dependencies.h; path = classes/Dependencies.h; sourceTree = "<group>"; };
 		C2DFF26E133A044200E6E1D2 /* HMRemoteAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteAbstraction.h; path = classes/HMRemoteAbstraction.h; sourceTree = "<group>"; };
 		C2DFF26F133A044200E6E1D2 /* HMRemoteAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteAbstraction.m; path = classes/HMRemoteAbstraction.m; sourceTree = "<group>"; };
@@ -191,6 +195,7 @@
 		C220E35F13318CE30076803A /* Providers */ = {
 			isa = PBXGroup;
 			children = (
+				C2C7B79F1344E80E008C0E4B /* HMEntityProvider.h */,
 				C2029292132FE42F009D7B69 /* HMItemTableViewProvider.h */,
 				C29A2E37132EA52B005EAB37 /* HMRemoteTableViewProvider.h */,
 			);
@@ -200,6 +205,7 @@
 		C220E36013318D0D0076803A /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				C2C7B7A21344E814008C0E4B /* HMEntityProviderDelegate.h */,
 				C2029298132FE748009D7B69 /* HMItemTableViewDelegate.h */,
 				C202928C132FD974009D7B69 /* HMRemoteTableViewDelegate.h */,
 			);
@@ -564,6 +570,8 @@
 				C2C520261343AB2D00F80A55 /* HPTextViewInternal.h in Headers */,
 				C2B808BC1343E4EF00CAEC67 /* HMView.h in Headers */,
 				C233B0FD1344841D00A9F9B5 /* HMTableViewDataSource.h in Headers */,
+				C2C7B7A01344E80E008C0E4B /* HMEntityProvider.h in Headers */,
+				C2C7B7A31344E814008C0E4B /* HMEntityProviderDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
