@@ -49,7 +49,6 @@
  */
 @interface HMHeaderItemTableView : HMItemTableView<UITableViewDataSource> {
     @private
-    NSArray *_cellList;
 
     NSString *_title;
     NSString *_subTitle;
@@ -63,14 +62,8 @@
     HMPlainStringTableViewCell *_titleTableViewCell;
     HMPlainStringTableViewCell *_subTitleTableViewCell;
     HMTableView *_headerTableView;
+    NSMutableArray *_cellList;
 }
-
-
-/**
- * The title of the header.
- */
-@property (retain) NSArray *cellList;
-
 
 /**
  * The title of the header.
@@ -131,6 +124,11 @@
  * The table view.
  */
 @property (retain) HMTableView *headerTableView;
+
+/**
+ * The list of cells for the edit header view.
+ */
+@property (retain) NSMutableArray *cellList;
 
 /**
  * Constructs the view components and adds them
