@@ -200,13 +200,13 @@
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // tries to retrives the cell from cache (reusable)
-    HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView dequeueReusableCellWithIdentifier:tableCellItem.identifier];
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
-
         NSLog(@"VAI CRIAR A CELL");
+
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
 
