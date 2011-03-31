@@ -26,6 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMPlainEditTableViewCell.h"
+#import "HPGrowingTextView.h"
 
 /**
  * The plain multiline string table view cell y margin.
@@ -37,9 +38,19 @@
  */
 #define HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
 
-@interface HMPlainMultilineStringTableViewCell : HMPlainEditTableViewCell<UITextViewDelegate> {
+/**
+ * The plain multiline string table view cell extra cell height.
+ */
+#define HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_CELL_HEIGHT 14
+
+/**
+ * The plain multiline string table view cell scroll margin
+ */
+#define HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_SCROLL_MARGIN 11
+
+@interface HMPlainMultilineStringTableViewCell : HMPlainEditTableViewCell<HPGrowingTextViewDelegate> {
     @private
-    UITextView *_textView;
+    HPGrowingTextView *_textView;
     BOOL _secure;
     BOOL _returnDisablesEdit;
 }
@@ -48,7 +59,7 @@
  * The text view used to represent
  * the cell value.
  */
-@property (retain) UITextView *textView;
+@property (retain) HPGrowingTextView *textView;
 
 /**
  * Indicates if the value should be masked.

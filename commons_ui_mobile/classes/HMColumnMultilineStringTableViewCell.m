@@ -25,8 +25,6 @@
 
 #import "HMColumnMultilineStringTableViewCell.h"
 
-#import "HPGrowingTextView.h"
-
 @implementation HMColumnMultilineStringTableViewCell
 
 @synthesize textView = _textView;
@@ -50,7 +48,7 @@
     // creates the text view
     CGRect editViewFrame = self.editView.frame;
     CGRect textViewFrame = CGRectMake(0, HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width, self.height - HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN);
-    UITextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
+    HPGrowingTextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
     textView.delegate = self;
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textView.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
@@ -137,12 +135,12 @@
     self.textView.secureTextEntry = _secure;
 }
 
-- (void)growingTextViewDidBeginEditing:(UITextView *)textView {
+- (void)growingTextViewDidBeginEditing:(HPGrowingTextView *)textView {
     // focuses the editing
     [self focusEditing];
 }
 
-- (void)growingTextViewDidEndEditing:(UITextView *)textView {
+- (void)growingTextViewDidEndEditing:(HPGrowingTextView *)textView {
     // blurs the editing
     [self blurEditing];
 }

@@ -48,15 +48,14 @@
     // creates the text view
     CGRect editViewFrame = self.editView.frame;
     CGRect textViewFrame = CGRectMake(0, HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width, self.height - HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_Y_MARGIN);
-    UITextView *textView = [[UITextView alloc] initWithFrame:textViewFrame];
-    textView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    HPGrowingTextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
+    textView.delegate = self;
+    textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textView.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-    textView.autocorrectionType = UITextAutocorrectionTypeNo;
     textView.backgroundColor = [UIColor clearColor];
     textView.text = self.description;
-    textView.secureTextEntry = self.secure;
-    textView.delegate = self;
     textView.editable = NO;
+    textView.secureTextEntry = self.secure;
 
     // sets the text field's return key type
     if([self.returnType isEqualToString:@"done"]) {
@@ -110,6 +109,14 @@
     [super rollbackEditing];
 }
 
+- (void)flushEditing {
+    // calls the super
+    [super flushEditing];
+
+    // flushes the size of the text view
+    self.textView.text = self.textView.text;
+}
+
 - (BOOL)secure {
     return _secure;
 }
@@ -128,35 +135,30 @@
     self.textView.secureTextEntry = _secure;
 }
 
-- (void)textViewDidBeginEditing:(UITextView *)textView {
+- (void)growingTextViewDidBeginEditing:(HPGrowingTextView *)textView {
     // focuses the editing
     [self focusEditing];
 }
 
-- (void)textViewDidEndEditing:(UITextView *)textView {
+- (void)growingTextViewDidEndEditing:(HPGrowingTextView *)textView {
     // blurs the editing
     [self blurEditing];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-   // hides the keyboard when
-   // a newline is inserted
-   if([text isEqualToString:@"\n"]) {
-        // disables editing in case
-        // returning should do so
-        if(self.returnDisablesEdit) {
-            self.itemTableView.editing = NO;
-        }
+- (void)growingTextView:(HPGrowingTextView *)growingTextView willChangeHeight:(float)height {
+    // sets the item height
+    self.item.height = height + HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_CELL_HEIGHT;
 
-        // hides the keyboard
-        [self.textView resignFirstResponder];
+    // updates the table data
+    [self updateTableData];
+}
 
-        // returns no to avoid adding the newline
-        return NO;
-    }
+- (void)growingTextViewWillBeginScroll:(HPGrowingTextView *)growingTextView {
+    // increments the item height with the scroll padding
+    self.item.height += HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_SCROLL_MARGIN;
 
-    // returns yes to add the newline
-    return YES;
+    // updates the table data
+    [self updateTableData];
 }
 
 - (void)setDescription:(NSString *)description {
@@ -181,7 +183,7 @@
         NSMutableString *secretValue = [[NSMutableString alloc] init];
 
         // iterates over the length of the description
-        for(int index = 0; index < description.length && index < HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH; index++) {
+        for(int index = 0; index < description.length && index < HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH; index++) {
             // adds the secret token to the secret value
             [secretValue appendString:@"•"];
         }
