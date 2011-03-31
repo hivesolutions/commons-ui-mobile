@@ -86,15 +86,34 @@
 }
 
 - (void)constructNormalView {
+    // initializes the position deltas
+    float deltaX = 0;
+    float deltaY = 0;
+
+    // retrieves the screen width
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGFloat screenWidth = screenRect.size.width;
+
+    // retrieves the current device model
+    UIDevice *currentDevice = [UIDevice currentDevice];
+    NSString *currentDeviceModel = [currentDevice model];
+
+    // adjusts the delta in case the device is an ipad
+    if([currentDeviceModel hasPrefix:@"iPad"]) {
+        deltaX = -38;
+        deltaY = -20;
+    }
+
     // creates the header
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 82)];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 82)];
     header.contentMode = UIViewContentModeScaleToFill;
     header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     header.backgroundColor = [UIColor clearColor];
 
     // creates the header container
-    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 300, 82)];
-    headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20 - deltaX, 0, screenWidth - 20 + deltaX, 82)];
+    headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
+    headerContainer.backgroundColor = [UIColor clearColor];
 
     // creates the image frame
     CGRect imageFrame = CGRectMake(0, 15, 64, 64);
@@ -107,7 +126,7 @@
 
     // creates the title label view
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleLabelFrame];
-    titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     titleLabel.backgroundColor = [UIColor clearColor];
     titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:19];
     titleLabel.shadowColor = [UIColor whiteColor];
@@ -118,7 +137,7 @@
 
     // creates the subtitle label view
     UILabel *subTitleLabel = [[UILabel alloc] initWithFrame:subTitleLabelFrame];
-    subTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    subTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     subTitleLabel.backgroundColor = [UIColor clearColor];
     subTitleLabel.font = [UIFont fontWithName:@"Helvetica" size:15];
     subTitleLabel.shadowColor = [UIColor whiteColor];
@@ -150,16 +169,36 @@
 }
 
 - (void)constructEditView {
+    // initializes the position deltas
+    float deltaX = 0;
+    float deltaY = 0;
+    float headerTableViewMarginX = 94;
+
+    // retrieves the screen width
+    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    CGFloat screenWidth = screenRect.size.width;
+
+    // retrieves the current device model
+    UIDevice *currentDevice = [UIDevice currentDevice];
+    NSString *currentDeviceModel = [currentDevice model];
+
+    // adjusts the delta in case the device is an ipad
+    if([currentDeviceModel hasPrefix:@"iPad"] ) {
+        deltaX = -31;
+        deltaY = -20;
+        headerTableViewMarginX = 98;
+    }
+
     // creates the header
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 110)];
+    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 110)];
     header.contentMode = UIViewContentModeScaleToFill;
     header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     header.backgroundColor = [UIColor clearColor];
     header.layer.opacity = 0.0;
 
     // creates the header container
-    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20, 0, 300, 110)];
-    headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20 - deltaX, 0, screenWidth - 20 + deltaX, 110)];
+    headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     headerContainer.backgroundColor = [UIColor clearColor];
 
     // creates the image frame
@@ -196,13 +235,16 @@
     [addButton setBackgroundImage:newImage forState:UIControlStateNormal];
     [addButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
 
-    // creates the table view
-    HMTableView *headerTableView = [[HMTableView alloc] initWithFrame:CGRectMake(80, 5, 220, 180) style:UITableViewStyleGrouped];
-    headerTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    // creates the header table view
+    HMTableView *headerTableView = [[HMItemTableView alloc] initWithFrame:CGRectMake(74 + deltaX, 5 + deltaY, screenWidth - headerTableViewMarginX, 120) style:UITableViewStyleGrouped];
+    headerTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     headerTableView.backgroundColor = [UIColor clearColor];
     headerTableView.dataSource = self;
     headerTableView.editing = YES;
-    headerTableView.rowHeight = HM_HEADER_ITEM_TABLE_VIEW_HEADER_ROW_HEIGHT;
+    headerTableView.scrollEnabled = NO;
+    headerTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    headerTableView.separatorColor = [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1.0];
+    [headerTableView setBackgroundView: nil];
 
     // adds the sub views
     [headerContainer addSubview:addButton];

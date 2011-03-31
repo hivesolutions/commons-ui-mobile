@@ -46,7 +46,7 @@
  * The vertical margin between the badge
  * label and the cell.
  */
-#define BADGE_LABEL_ACCESSORY_Y_MARGIN 13
+#define BADGE_LABEL_ACCESSORY_Y_MARGIN 15
 
 // avoids circular dependency
 @class HMItemTableView;
