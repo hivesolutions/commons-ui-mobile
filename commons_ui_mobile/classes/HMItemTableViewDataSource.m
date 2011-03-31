@@ -71,14 +71,15 @@
 }
 
 - (void)flushItemGroup:(HMItemGroup *)itemGroup {
-    // retrieves the item count
-    int itemCount = [itemGroup.items count];
+    // retrieves the item group enumerator
+    NSEnumerator *itemGroupEnumerator = [itemGroup.items objectEnumerator];
 
-    // flushes the item group's items
-    for(int index = 0; index < itemCount; index++) {
-        // retrieves the object
-        NSObject *object = [itemGroup.items objectAtIndex:index];
+    // allocates the object
+    id object;
 
+    // iterates over the item group, flushing
+    // the item group's items
+    while((object = [itemGroupEnumerator nextObject])) {
         // flushes the item group in case the
         // object if of that kind
         if([object isKindOfClass:[HMItemGroup class]]) {
