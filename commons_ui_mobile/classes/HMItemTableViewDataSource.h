@@ -74,6 +74,14 @@
 - (void)flushItemSpecification;
 
 /**
+ * Flushes the item group, converting the current ui component
+ * values with new object items.
+ *
+ * @param itemGroup The item group.
+ */
+- (void)flushItemGroup:(HMItemGroup *)itemGroup;
+
+/**
  * Updates the current item specification.
  */
 - (void)updateItemSpecification;
