@@ -28,7 +28,14 @@
 #import "HMTableViewDataSource.h"
 
 @interface HMTableView : UITableView {
+    BOOL _dirty;
 }
+
+/**
+ * Flag controlling the status of the current view.
+ * In case this view is dirty it should be redraw.
+ */
+@property (assign) BOOL dirty;
 
 /**
  * Called when the view did appear.

@@ -33,10 +33,10 @@
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
-    
+
     // enables clips to bound to avoid overflow
     self.clipsToBounds = YES;
-    
+
     // returns self
     return self;
 }

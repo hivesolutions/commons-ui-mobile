@@ -83,39 +83,51 @@
     if(self.viewReady && self.itemTableView) {
         // retrieves if the animations are enabled
         BOOL areAnimationsEnabled = [UIView areAnimationsEnabled];
-        
+
         // disables the animations
         [UIView setAnimationsEnabled:NO];
-        
+
         // runs the updates over the item table view
         [self.itemTableView beginUpdates];
         [self.itemTableView endUpdates];
-        
+
         // resets the animations enabled value
         [UIView setAnimationsEnabled:areAnimationsEnabled];
     }
     // otherwise the cell is not positioned in the table
     // or is not ready to be presented and changed
     else {
-        // executes the update table data delayed in the main thread
-        // to avoid thread issues with the table view
-        [self performSelectorOnMainThread:@selector(updateTableDataDelayed) withObject:nil waitUntilDone:NO];
+        // in case the item table view is not dirty
+        if(!self.itemTableView.dirty) {
+            // executes the update table data delayed in the main thread
+            // to avoid thread issues with the table view
+            [self performSelectorOnMainThread:@selector(updateTableDataDelayed) withObject:nil waitUntilDone:NO];
+
+            // sets the dirty flag
+            self.itemTableView.dirty = YES;
+        }
     }
 }
 
 - (void)updateTableDataDelayed {
+    // prints a debug message
+    NSLog(@"Updating table data in delayed mode");
+
     // retrieves if the animations are enabled
     BOOL areAnimationsEnabled = [UIView areAnimationsEnabled];
-    
+
     // disables the animations
     [UIView setAnimationsEnabled:YES];
-    
+
     // runs the updates over the item table view
     [self.itemTableView beginUpdates];
     [self.itemTableView endUpdates];
-    
+
     // resets the animations enabled value
     [UIView setAnimationsEnabled:areAnimationsEnabled];
+
+    // unsets the dirty flag
+    self.itemTableView.dirty = NO;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -370,10 +382,10 @@
 - (void)didMoveToSuperview {
     // calls the super
     [super didMoveToSuperview];
-    
+
     // retrieves the associated table view (superview)
     self.itemTableView = (HMItemTableView *) self.superview;
-    
+
     // sets the view ready flag
     self.viewReady = YES;
 }

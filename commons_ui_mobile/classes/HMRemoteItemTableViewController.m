@@ -655,6 +655,12 @@
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView.superview;
 
+    // sets the right bar buttom
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+
+    // sets the left bar buttom
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+
     // updates the remote with the given request
     [remoteAbstraction updateRemoteWithRequest:request];
 
@@ -700,6 +706,10 @@
 - (void)didDeselectItemRowWithItem:(HMItem *)item {
 }
 
+- (void)processOperationCreate:(NSData *)data  {
+    NSLog(@"Created THING!!!!");
+}
+
 - (void)processOperationRead:(NSData *)data  {
     // retrieves the item table vuew
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
@@ -740,6 +750,13 @@
 
     // switches over the remote abstraction id
     switch(remoteAbstraction.remoteAbstractionId) {
+        case HMItemOperationCreate:
+            // processes the create operation
+            [self processOperationCreate:data];
+
+            // breaks the switch
+            break;
+
         case HMItemOperationRead:
             // processes the read operation
             [self processOperationRead:data];

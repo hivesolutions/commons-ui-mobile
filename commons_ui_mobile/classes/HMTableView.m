@@ -27,6 +27,8 @@
 
 @implementation HMTableView
 
+@synthesize dirty = _dirty;
+
 - (void)didAppear {
 }
 
