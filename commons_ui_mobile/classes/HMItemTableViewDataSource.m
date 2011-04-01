@@ -179,7 +179,8 @@
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
-        NSLog(@"VAI CRIAR A CELL %@", tableCellItem.identifier);
+        // prints a debug message
+        NSLog(@"Creating UITableViewCell with identifier: %@", tableCellItem.identifier);
 
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
