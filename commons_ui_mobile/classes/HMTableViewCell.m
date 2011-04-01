@@ -73,22 +73,47 @@
     [super dealloc];
 }
 
+- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+}
+
 - (void)updateTableData {
+    // in case the item table view is defined
+    // the cell is not positioned in the table
+    if(!self.itemTableView) {
+        // executes the update table data delayed in the main thread
+        // to avoid thread issues with the table view
+        [self performSelectorOnMainThread:@selector(updateTableDataDelayed) withObject:nil waitUntilDone:NO];
+    }
+    // otherwise the cell is already positioned in the table
+    else {
+        // retrieves if the animations are enabled
+        BOOL areAnimationsEnabled = [UIView areAnimationsEnabled];
+        
+        // disables the animations
+        [UIView setAnimationsEnabled:NO];
+        
+        // runs the updates over the item table view
+        [self.itemTableView beginUpdates];
+        [self.itemTableView endUpdates];
+        
+        // resets the animations enabled value
+        [UIView setAnimationsEnabled:areAnimationsEnabled];
+    }
+}
+
+- (void)updateTableDataDelayed {
     // retrieves if the animations are enabled
-    BOOL areAnimationsEnalbed = [UIView areAnimationsEnabled];
-
+    BOOL areAnimationsEnabled = [UIView areAnimationsEnabled];
+    
     // disables the animations
-    [UIView setAnimationsEnabled:NO];
-
+    [UIView setAnimationsEnabled:YES];
+    
     // runs the updates over the item table view
     [self.itemTableView beginUpdates];
     [self.itemTableView endUpdates];
-
+    
     // resets the animations enabled value
-    [UIView setAnimationsEnabled:areAnimationsEnalbed];
-}
-
-- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    [UIView setAnimationsEnabled:areAnimationsEnabled];
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -341,11 +366,11 @@
 }
 
 - (void)didMoveToSuperview {
-    // calls the super
-    [super didMoveToSuperview];
-
     // retrieves the associated table view (superview)
     self.itemTableView = (HMItemTableView *) self.superview;
+    
+    // calls the super
+    [super didMoveToSuperview];
 }
 
 @end
