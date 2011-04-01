@@ -31,6 +31,8 @@
 #import "HMItemTableViewProvider.h"
 #import "HMRemoteDelegate.h"
 #import "HMRemoteAbstraction.h"
+#import "HMEntityProvider.h"
+#import "HMEntityDelegate.h"
 
 /**
  * The http get method name.
@@ -52,6 +54,8 @@
  */
 #define HTTP_CONTENT_TYPE_VALUE @"content-type"
 
+@class HMEntityAbstraction;
+
 /**
  * Enumeration defining the various item
  * operations available.
@@ -64,15 +68,29 @@ typedef enum {
     HMItemOperationDelete
 } HMItemOperationType;
 
-@interface HMRemoteItemTableViewController : HMTableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate> {
+@interface HMRemoteItemTableViewController : HMTableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate, HMEntityDelegate, HMEntityProvider> {
     @private
+    NSDictionary *_entity;
+    HMEntityAbstraction *_entityAbstraction;
     HMRemoteAbstraction *_remoteAbstraction;
+    NSObject<HMEntityProviderDelegate> *_entityProviderDelegate;
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
     BOOL _viewAppear;
     BOOL _remoteDataIsSet;
 }
+
+/**
+ * The entity represented by the view.
+ */
+@property (retain) NSDictionary *entity;
+
+/**
+ * The entity abstraction to be used for operations
+ * in the entity.
+ */
+@property (retain) HMEntityAbstraction *entityAbstraction;
 
 /**
  * The remote abstraction to be used for controlling

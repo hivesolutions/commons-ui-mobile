@@ -34,4 +34,11 @@
  */
 @property (retain) NSDictionary *entity;
 
+/**
+ * Changes the entity data in the current instance.
+ *
+ * @param entity The entity data to be updated / changed.
+ */
+- (void)changeEntity:(NSDictionary *)entity;
+
 @end

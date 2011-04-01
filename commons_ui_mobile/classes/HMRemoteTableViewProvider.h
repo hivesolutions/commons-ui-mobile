@@ -30,7 +30,8 @@
  * serializer engines.
  */
 typedef enum {
-    HMRemoteTableViewJsonSerialized = 1,
+    HMRemoteTableViewNoneSerialized = 1,
+    HMRemoteTableViewJsonSerialized,
     HMRemoteTableViewXmlSerialized,
 } HMRemoteTableViewSerialized;
 
