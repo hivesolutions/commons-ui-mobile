@@ -97,7 +97,6 @@
     CGRect wrapperViewFrame = CGRectMake(0, 0, tableView.frame.size.width, size.height);
     UIView *wrapperView = [[[UIView alloc] initWithFrame:wrapperViewFrame] autorelease];
     wrapperView.backgroundColor = [UIColor clearColor];
-    wrapperView.clipsToBounds = YES;
     wrapperView.autoresizesSubviews = YES;
     [wrapperView addSubview:label];
 

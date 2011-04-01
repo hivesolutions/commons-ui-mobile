@@ -30,6 +30,17 @@
 @synthesize textView = _textView;
 @synthesize returnDisablesEdit = _returnDisablesEdit;
 
+- (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
+    // invokes the parent constructor
+    self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
+    
+    // enables clips to bound to avoid overflow
+    self.clipsToBounds = YES;
+    
+    // returns the instance
+    return self;
+}
+
 - (void)dealloc {
     // releases the text view
     [_textView release];

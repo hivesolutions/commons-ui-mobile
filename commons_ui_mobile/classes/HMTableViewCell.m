@@ -31,6 +31,7 @@
 @synthesize accessoryValue = _accessoryValue;
 @synthesize height = _height;
 @synthesize itemTableView = _itemTableView;
+@synthesize viewReady = _viewReady;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -77,15 +78,9 @@
 }
 
 - (void)updateTableData {
-    // in case the item table view is defined
-    // the cell is not positioned in the table
-    if(!self.itemTableView) {
-        // executes the update table data delayed in the main thread
-        // to avoid thread issues with the table view
-        [self performSelectorOnMainThread:@selector(updateTableDataDelayed) withObject:nil waitUntilDone:NO];
-    }
-    // otherwise the cell is already positioned in the table
-    else {
+    // in case the view is ready and positioned
+    // in the item table view
+    if(self.viewReady && self.itemTableView) {
         // retrieves if the animations are enabled
         BOOL areAnimationsEnabled = [UIView areAnimationsEnabled];
         
@@ -98,6 +93,13 @@
         
         // resets the animations enabled value
         [UIView setAnimationsEnabled:areAnimationsEnabled];
+    }
+    // otherwise the cell is not positioned in the table
+    // or is not ready to be presented and changed
+    else {
+        // executes the update table data delayed in the main thread
+        // to avoid thread issues with the table view
+        [self performSelectorOnMainThread:@selector(updateTableDataDelayed) withObject:nil waitUntilDone:NO];
     }
 }
 
@@ -366,11 +368,14 @@
 }
 
 - (void)didMoveToSuperview {
+    // calls the super
+    [super didMoveToSuperview];
+    
     // retrieves the associated table view (superview)
     self.itemTableView = (HMItemTableView *) self.superview;
     
-    // calls the super
-    [super didMoveToSuperview];
+    // sets the view ready flag
+    self.viewReady = YES;
 }
 
 @end
