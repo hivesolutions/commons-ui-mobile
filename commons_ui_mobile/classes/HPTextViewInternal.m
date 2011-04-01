@@ -32,6 +32,7 @@
     if(self.tracking || self.decelerating){
         self.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     } else {
+        // calculates the bottom offset
         float bottomOffset = (self.contentSize.height - self.frame.size.height + self.contentInset.bottom);
 
         if(s.y < bottomOffset && self.scrollEnabled){
