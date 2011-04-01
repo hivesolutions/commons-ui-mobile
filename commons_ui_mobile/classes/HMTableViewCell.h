@@ -65,6 +65,7 @@
     NSString *_accessoryValue;
     float _height;
     HMItemTableView *_itemTableView;
+    BOOL _viewReady;
 }
 
 /**
@@ -113,6 +114,12 @@
  * The item table view this cell belongs to.
  */
 @property (assign) HMItemTableView *itemTableView;
+
+/**
+ * Flag controlling if the view representing the cell is
+ * ready for rendering.
+ */
+@property (assign) BOOL viewReady;
 
 /**
  * Called when the edinting mode is going to be changed.

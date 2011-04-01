@@ -166,7 +166,10 @@
 - (void)didMoveToSuperview {
     // calls the super
     [super didMoveToSuperview];
-
+    
+    // unsets the view ready flag
+    self.viewReady = NO;
+    
     // in case the editing is dirty
     if(_editingDirty) {
         // creates the editing (view)
@@ -188,6 +191,9 @@
         // unsets the editing dirty flag
         _editingDirty = NO;
     }
+    
+    // set the view ready flag
+    self.viewReady = YES;
 }
 
 @end
