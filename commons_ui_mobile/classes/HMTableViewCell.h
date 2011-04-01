@@ -124,4 +124,13 @@
  */
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit;
 
+/**
+ * Updates the table data according to the new
+ * specification.
+ * This method should be used carefully as it wastes
+ * a lot of resource in order to update the table
+ * contents.
+ */
+- (void)updateTableData;
+
 @end
