@@ -96,21 +96,18 @@
 }
 
 - (void)updateTableData {
-    // in case the editing dirty is setdfg
-    if(_editingDirty) {
-        // reloads the data in the item
-        // table view
-        [self.itemTableView reloadData];
-    }
-    // otherwise the cell is completely loaded
-    // and there is no need to reload the table
-    // in complete mode
-    else {
-        [UIView setAnimationsEnabled:NO];
-        [self.itemTableView beginUpdates];
-        [self.itemTableView endUpdates];
-        [UIView setAnimationsEnabled:YES];
-    }
+    // retrieves if the animations are enabled
+    BOOL areAnimationsEnalbed = [UIView areAnimationsEnabled];
+
+    // disables the animations
+    [UIView setAnimationsEnabled:NO];
+
+    // runs the updates over the item table view
+    [self.itemTableView beginUpdates];
+    [self.itemTableView endUpdates];
+
+    // resets the animations enabled value
+    [UIView setAnimationsEnabled:areAnimationsEnalbed];
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
