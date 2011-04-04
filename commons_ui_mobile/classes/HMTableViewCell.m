@@ -300,12 +300,14 @@
         // sets the acessory type as the table view
         // cell acessory disclosure indicator
         self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        self.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if([accessoryTypeString isEqualToString:@"switch"]) {
         // creates the notifications switch
         UISwitch *notificationsSwitch = [[UISwitch alloc] init];
 
         // sets the notifications switch in the accessory view
         self.accessoryView = notificationsSwitch;
+        self.editingAccessoryView = notificationsSwitch;
 
         // releases the notifications switch
         [notificationsSwitch release];
