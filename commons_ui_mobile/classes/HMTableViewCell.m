@@ -321,6 +321,7 @@
 
         // sets the badge label as the accessory view
         self.accessoryView = badgeLabel;
+        self.editingAccessoryView = badgeLabel;
 
         // releases the badge label
         [badgeLabel release];
