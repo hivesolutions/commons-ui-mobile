@@ -31,7 +31,14 @@
 @class HMEditItemTableView;
 
 @interface HMColumnEditTableViewCell : HMEditTableViewCell {
+    @private
+    UIView *_nameLabelClickView;
 }
+
+/**
+ * The label used to handle name label clicks.
+ */
+@property (retain) UIView *nameLabelClickView;
 
 /**
  * Indicates that the label

@@ -28,6 +28,7 @@
 @implementation HMTableViewCell
 
 @synthesize item = _item;
+@synthesize selectableName = _selectableName;
 @synthesize height = _height;
 @synthesize itemTableView = _itemTableView;
 @synthesize viewReady = _viewReady;

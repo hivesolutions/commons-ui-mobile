@@ -27,6 +27,8 @@
 
 @implementation HMColumnEditTableViewCell
 
+@synthesize nameLabelClickView = _nameLabelClickView;
+
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
@@ -39,6 +41,13 @@
     return self;
 }
 
+- (void)dealloc {
+    // releases the name label click view
+    [_nameLabelClickView release];
+
+    // calls the super
+    [super dealloc];
+}
 - (void)didSelectLabel {
 }
 
@@ -55,14 +64,21 @@
     }
 
     // creates a label click view
-    CGRect labelClickViewFrame = CGRectMake(0, 0, delta, self.contentView.frame.size.height);
-    UIView *labelClickView = [[UIView alloc] initWithFrame:labelClickViewFrame];
-    labelClickView.backgroundColor = [UIColor clearColor];
+    CGRect nameLabelClickViewFrame = CGRectMake(0, 0, delta, self.contentView.frame.size.height);
+    UIView *nameLabelClickView = [[UIView alloc] initWithFrame:nameLabelClickViewFrame];
+    nameLabelClickView.backgroundColor = [UIColor clearColor];
+
+    // shows/hides if the name label click view
+    if(self.selectableName) {
+        nameLabelClickView.hidden = NO;
+    } else {
+        nameLabelClickView.hidden = YES;
+    }
 
     // creates a tap gesture recognizer
     // for the label click view
     UITapGestureRecognizer *tapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didSelectLabel)];
-    [labelClickView addGestureRecognizer:tapGestureRecognizer];
+    [nameLabelClickView addGestureRecognizer:tapGestureRecognizer];
 
     // creates the edit view
     CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
@@ -72,14 +88,15 @@
 
     // adds the label click view and the
     // edit view to the content view
-    [self.contentView addSubview:labelClickView];
+    [self.contentView addSubview:nameLabelClickView];
     [self.contentView addSubview:editView];
 
     // sets the attributes
+    self.nameLabelClickView = nameLabelClickView;
     self.editView = editView;
 
     // releases the objects
-    [labelClickView release];
+    [nameLabelClickView release];
     [tapGestureRecognizer release];
     [editView release];
 }
@@ -114,6 +131,19 @@
 
     // shows the detail text label
     self.detailTextLabel.hidden = NO;
+}
+
+- (void)setSelectableName:(BOOL)selectableName {
+    // calls the super
+    [super setSelectableName:selectableName];
+
+    // shows/hides the name label click view
+    if(selectableName){
+        self.nameLabelClickView.hidden = NO;
+    }
+    else {
+        self.nameLabelClickView.hidden = YES;
+    }
 }
 
 - (void)layoutSubviews {

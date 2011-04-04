@@ -61,6 +61,7 @@
     NSString *_icon;
     NSString *_highlightedIcon;
     BOOL _selectable;
+    BOOL _selectableName;
     NSString *_accessoryTypeString;
     NSString *_accessoryValue;
     float _height;
@@ -91,10 +92,15 @@
 @property (retain) NSString *highlightedIcon;
 
 /**
- * Indicates if the button is selectable
- * in the normal mode.
+ * Indicates if the button is
+ * selectable in the normal mode.
  */
 @property (assign) BOOL selectable;
+
+/**
+ * Indicates if the name is selectable.
+ */
+@property (assign) BOOL selectableName;
 
 /**
  * The type of accessory (string mode).
