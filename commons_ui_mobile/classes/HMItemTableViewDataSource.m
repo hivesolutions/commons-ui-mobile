@@ -202,7 +202,8 @@
                     columnStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnStringTableViewCell.secure = stringTableCellItem.secure;
-                    columnStringTableViewCell.editable = stringTableCellItem.editable;
+                    columnStringTableViewCell.editableRow = stringTableCellItem.editableRow;
+                    columnStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnStringTableViewCell.returnType = stringTableCellItem.returnType;
                     columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
@@ -212,7 +213,8 @@
                     plainStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainStringTableViewCell.secure = stringTableCellItem.secure;
-                    plainStringTableViewCell.editable = stringTableCellItem.editable;
+                    plainStringTableViewCell.editableRow = stringTableCellItem.editableRow;
+                    plainStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainStringTableViewCell.returnType = stringTableCellItem.returnType;
                     plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
@@ -224,7 +226,8 @@
                     columnMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnMultilineStringTableViewCell.secure = stringTableCellItem.secure;
-                    columnMultilineStringTableViewCell.editable = stringTableCellItem.editable;
+                    columnMultilineStringTableViewCell.editableRow = stringTableCellItem.editableRow;
+                    columnMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
                     columnMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
@@ -234,7 +237,8 @@
                     plainMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainMultilineStringTableViewCell.secure = stringTableCellItem.secure;
-                    plainMultilineStringTableViewCell.editable = stringTableCellItem.editable;
+                    plainMultilineStringTableViewCell.editableRow = stringTableCellItem.editableRow;
+                    plainMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
                     plainMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
@@ -251,6 +255,8 @@
         tableViewCell.selectable = tableCellItem.selectable;
         tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
         tableViewCell.accessoryValue = tableCellItem.accessoryValue;
+        tableViewCell.editingAccessoryTypeString = tableCellItem.editingAccessoryType;
+        tableViewCell.editingAccessoryValue = tableCellItem.editingAccessoryValue;
         tableViewCell.height = tableCellItem.height;
         tableViewCell.item = tableCellItem;
     }

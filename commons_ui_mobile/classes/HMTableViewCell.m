@@ -70,6 +70,15 @@
     // releases the accessory type string
     [_accessoryTypeString release];
 
+    // releases the accessory value
+    [_accessoryValue release];
+
+    // releases the editing accessory type string
+    [_editingAccessoryTypeString release];
+
+    // releases the editing accessory value
+    [_editingAccessoryValue release];
+
     // calls the super
     [super dealloc];
 }
@@ -349,6 +358,82 @@
 
         // sets the accessory in the badge
         badgeLabel.text = accessoryValue;
+    }
+}
+
+- (NSString *)editingAccessoryTypeString {
+    return _editingAccessoryTypeString;
+}
+
+- (void)setEditingAccessoryTypeString:(NSString *)editingAccessoryTypeString {
+    // in case the object is the same
+    if(editingAccessoryTypeString == _editingAccessoryTypeString) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [editingAccessoryTypeString release];
+
+    // sets and retains the object
+    _editingAccessoryTypeString = [editingAccessoryTypeString retain];
+
+    // creates the specified accessory type
+    if([editingAccessoryTypeString isEqualToString:@"disclosure_indicator"]) {
+        // sets the acessory type as the table view
+        // cell acessory disclosure indicator
+        self.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    } else if([editingAccessoryTypeString isEqualToString:@"switch"]) {
+        // creates the notifications switch
+        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
+
+        // sets the notifications switch in the accessory view
+        self.editingAccessoryView  = notificationsSwitch;
+
+        // releases the notifications switch
+        [notificationsSwitch release];
+    } else if([editingAccessoryTypeString isEqualToString:@"badge_label"]) {
+        // creates the badge label and sets it as the accessory view
+        HMBadgeLabel *badgeLabel = [[HMBadgeLabel alloc] init];
+        badgeLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+        badgeLabel.text = self.editingAccessoryValue;
+        badgeLabel.backgroundColor = [UIColor clearColor];
+        badgeLabel.textColor = [UIColor whiteColor];
+        badgeLabel.textAlignment = UITextAlignmentCenter;
+        badgeLabel.badgeColor = [UIColor colorWithRed:0.54 green:0.56 blue:0.62 alpha:1.0];
+
+        // sets the badge label as the accessory view
+        self.editingAccessoryView = badgeLabel;
+
+        // releases the badge label
+        [badgeLabel release];
+    }
+}
+
+- (NSString *)editingAccessoryValue {
+    return _editingAccessoryValue;
+}
+
+- (void)setEditingAccessoryValue:(NSString *)editingAccessoryValue {
+    // in case the object is the same
+    if(editingAccessoryValue == _editingAccessoryValue) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [editingAccessoryValue release];
+
+    // sets and retains the object
+    _editingAccessoryValue = [editingAccessoryValue retain];
+
+    // updates the badge label's value
+    if([self.editingAccessoryValue isEqualToString:@"badge_label"] && self.editingAccessoryView) {
+        // retrieves the badge label
+        HMBadgeLabel *badgeLabel = (HMBadgeLabel *) self.editingAccessoryView;
+
+        // sets the accessory in the badge
+        badgeLabel.text = editingAccessoryValue;
     }
 }
 

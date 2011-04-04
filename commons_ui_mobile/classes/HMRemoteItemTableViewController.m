@@ -644,7 +644,7 @@
 
 - (void)doneButtonClicked:(id)sender extra:(id)extra {
     // in case the table view is not in editing mode (ignore)
-    if(!self.tableView.editing) {
+    if(self.tableView.editing == NO) {
         // returns immediately
         return;
     }

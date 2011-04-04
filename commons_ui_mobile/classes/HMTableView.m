@@ -131,6 +131,7 @@
     // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
+
 - (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView {
     // creates the block to change the editing
     void (^block)(id) = ^(id value) {

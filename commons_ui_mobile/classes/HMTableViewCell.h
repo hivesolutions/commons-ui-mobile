@@ -63,6 +63,8 @@
     BOOL _selectable;
     NSString *_accessoryTypeString;
     NSString *_accessoryValue;
+    NSString *_editingAccessoryTypeString;
+    NSString *_editingAccessoryValue;
     float _height;
     HMItemTableView *_itemTableView;
     BOOL _viewReady;
@@ -105,6 +107,16 @@
  * The accessory value.
  */
 @property (retain) NSString *accessoryValue;
+
+/**
+ * The type of editing accessory (string mode).
+ */
+@property (retain) NSString *editingAccessoryTypeString;
+
+/**
+ * The editing accessory value.
+ */
+@property (retain) NSString *editingAccessoryValue;
 
 /**
  * The table view cell's height.

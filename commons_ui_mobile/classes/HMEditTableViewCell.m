@@ -30,7 +30,8 @@
 @synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
 @synthesize returnType = _returnType;
-@synthesize editable = _editable;
+@synthesize editableRow = _editableRow;
+@synthesize editableCell = _editableCell;
 @synthesize clearable = _clearable;
 @synthesize editAlways = _editAlways;
 @synthesize selectableEdit = _selectableEdit;
@@ -39,8 +40,11 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
-    // sets the editing dirty
+    // sets the default attributes
     _editingDirty = YES;
+    _editableRow = YES;
+    _editableCell = YES;
+    _editAlways = NO;
 
     // returns the instance
     return self;
@@ -66,13 +70,6 @@
 
     // shows the edit view
     self.editView.hidden = NO;
-
-    // sets the cell's selection style
-    if(self.selectableEdit) {
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
-    } else {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
 }
 
 - (void)hideEditing {
@@ -81,13 +78,6 @@
 
     // hides the contents
     self.accessoryView.hidden = NO;
-
-    // sets the cell's selection style
-    if(self.selectable) {
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
-    } else {
-        self.selectionStyle = UITableViewCellEditingStyleNone;
-    }
 }
 
 - (void)focusEditing {
@@ -135,14 +125,18 @@
 }
 
 - (void)setEditing:(BOOL)editing {
-    // returns in case the cell
-    // is not editable
-    if(!self.editable) {
+    // returns in case the cell is not editable
+    if(self.editableRow == NO && self.editableCell == NO) {
         return;
     }
 
     // calls the super
     [super setEditing:editing];
+
+    // returns in case the cell is not editable
+    if(self.editableCell == NO) {
+        return;
+    }
 
     // in case it's editing
     if(editing) {
@@ -157,14 +151,25 @@
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    // returns in case the cell
-    // is not editable
-    if(!self.editable) {
+    // returns in case the cell is not editable
+    if(self.editableRow == NO && self.editableCell == NO) {
         return;
     }
 
     // calls the super
     [super setEditing:editing animated:animated];
+
+    // sets the cell's selection style
+    if((editing && self.selectableEdit) || (editing == NO && self.selectable)) {
+        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+    } else {
+        self.selectionStyle = UITableViewCellEditingStyleNone;
+    }
+
+    // returns in case the cell is not editable
+    if(self.editableCell == NO) {
+        return;
+    }
 
     // in case it's editing
     if(editing) {
@@ -190,8 +195,8 @@
         // creates the editing (view)
         [self createEditing];
 
-        // in case its meant to show
-        // allways the edit fields
+        // in case its meant to always
+        // show the edit fields
         if(self.editAlways) {
             // shows the editing
             [self showEditing];

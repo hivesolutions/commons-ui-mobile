@@ -187,7 +187,7 @@
 
 - (void)hideEditing {
     // slides down the date picker
-    if(!self.datePicker.hidden) {
+    if(self.datePicker.hidden == YES) {
         [self slideDownDatePicker];
     }
 
