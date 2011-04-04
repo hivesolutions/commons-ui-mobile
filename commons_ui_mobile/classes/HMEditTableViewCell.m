@@ -101,6 +101,13 @@
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    // returns in case the cell
+    // is not editable
+    if(!self.editable) {
+        // returns immediately (no need to edit)
+        return;
+    }
+
     // calls the super
     [super changeEditing:editing commit:commit];
 
@@ -109,6 +116,11 @@
 
     // returns in case its in edit mode
     if(editing == YES) {
+        // shows the editing mode
+        [self showEditing];
+
+        // returns immediately (no need
+        // to update internal structures)
         return;
     }
 
@@ -122,65 +134,9 @@
         // rollsback the editing
         [self rollbackEditing];
     }
-}
 
-- (void)setEditing:(BOOL)editing {
-    // returns in case the cell is not editable
-    if(self.editableRow == NO && self.editableCell == NO) {
-        return;
-    }
-
-    // calls the super
-    [super setEditing:editing];
-
-    // returns in case the cell is not editable
-    if(self.editableCell == NO) {
-        return;
-    }
-
-    // in case it's editing
-    if(editing) {
-        // shows the editing mode
-        [self showEditing];
-    }
-    // otherwise editing is over
-    else {
-        // hides the editing mode
-        [self hideEditing];
-    }
-}
-
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
-    // returns in case the cell is not editable
-    if(self.editableRow == NO && self.editableCell == NO) {
-        return;
-    }
-
-    // calls the super
-    [super setEditing:editing animated:animated];
-
-    // sets the cell's selection style
-    if((editing && self.selectableEdit) || (editing == NO && self.selectable)) {
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
-    } else {
-        self.selectionStyle = UITableViewCellEditingStyleNone;
-    }
-
-    // returns in case the cell is not editable
-    if(self.editableCell == NO) {
-        return;
-    }
-
-    // in case it's editing
-    if(editing) {
-        // shows the editing mode
-        [self showEditing];
-    }
-    // otherwise editing is over
-    else {
-        // hides the editing mode
-        [self hideEditing];
-    }
+    // hides the editing mode
+    [self hideEditing];
 }
 
 - (void)didMoveToSuperview {

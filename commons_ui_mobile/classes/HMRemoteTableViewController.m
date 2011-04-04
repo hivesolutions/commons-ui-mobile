@@ -104,9 +104,6 @@
     // presents the user view controller into the navigation controller
     [self presentModalViewController:navigationController animated:YES];
 
-    // releases the new entity view controller reference
-    [newEntityViewController release];
-
     // releases the navigation controller reference
     [navigationController release];
 }
@@ -148,9 +145,6 @@
 
         // pushes the view controller into the navigation controller
         [self.navigationController pushViewController:viewController animated:YES];
-
-        // releases the view controller reference
-        [viewController release];
     }
 }
 

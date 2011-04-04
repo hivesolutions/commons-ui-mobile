@@ -241,7 +241,7 @@
     headerTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     headerTableView.backgroundColor = [UIColor clearColor];
     headerTableView.dataSource = self;
-    headerTableView.editing = YES;
+    headerTableView.editing = NO;
     headerTableView.scrollEnabled = NO;
     headerTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     headerTableView.separatorColor = [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1.0];
