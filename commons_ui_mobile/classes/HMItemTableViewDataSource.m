@@ -179,7 +179,8 @@
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
-        NSLog(@"VAI CRIAR A CELL %@", tableCellItem.identifier);
+        // prints a debug message
+        NSLog(@"Creating UITableViewCell with identifier: %@", tableCellItem.identifier);
 
         // retrieves the object class name
         const char *objectClassName = object_getClassName(tableCellItem);
@@ -268,6 +269,25 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if(editingStyle == UITableViewCellEditingStyleDelete) {
+        // retrieves the table view cell
+        HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView cellForRowAtIndexPath:indexPath];
+
+        // creates an array with the index path
+        NSArray *array = [[NSArray alloc] initWithObjects:indexPath, nil];
+
+        // clears the table view cell description
+        tableViewCell.description = @"";
+
+        // deletes and inserts the rows
+        [tableView beginUpdates];
+        [tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
+        [tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
+        [tableView endUpdates];
+
+        // releases the objects
+        [array release];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {

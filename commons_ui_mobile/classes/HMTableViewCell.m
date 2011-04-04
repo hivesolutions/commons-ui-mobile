@@ -31,6 +31,7 @@
 @synthesize accessoryValue = _accessoryValue;
 @synthesize height = _height;
 @synthesize itemTableView = _itemTableView;
+@synthesize viewReady = _viewReady;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -73,22 +74,60 @@
     [super dealloc];
 }
 
+- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+}
+
 - (void)updateTableData {
+    // in case the view is ready and positioned
+    // in the item table view
+    if(self.viewReady && self.itemTableView) {
+        // retrieves if the animations are enabled
+        BOOL areAnimationsEnabled = [UIView areAnimationsEnabled];
+
+        // disables the animations
+        [UIView setAnimationsEnabled:NO];
+
+        // runs the updates over the item table view
+        [self.itemTableView beginUpdates];
+        [self.itemTableView endUpdates];
+
+        // resets the animations enabled value
+        [UIView setAnimationsEnabled:areAnimationsEnabled];
+    }
+    // otherwise the cell is not positioned in the table
+    // or is not ready to be presented and changed
+    else {
+        // in case the item table view is not dirty
+        if(!self.itemTableView.dirty) {
+            // executes the update table data delayed in the main thread
+            // to avoid thread issues with the table view
+            [self performSelectorOnMainThread:@selector(updateTableDataDelayed) withObject:nil waitUntilDone:NO];
+
+            // sets the dirty flag
+            self.itemTableView.dirty = YES;
+        }
+    }
+}
+
+- (void)updateTableDataDelayed {
+    // prints a debug message
+    NSLog(@"Updating table data in delayed mode");
+
     // retrieves if the animations are enabled
-    BOOL areAnimationsEnalbed = [UIView areAnimationsEnabled];
+    BOOL areAnimationsEnabled = [UIView areAnimationsEnabled];
 
     // disables the animations
-    [UIView setAnimationsEnabled:NO];
+    [UIView setAnimationsEnabled:YES];
 
     // runs the updates over the item table view
     [self.itemTableView beginUpdates];
     [self.itemTableView endUpdates];
 
     // resets the animations enabled value
-    [UIView setAnimationsEnabled:areAnimationsEnalbed];
-}
+    [UIView setAnimationsEnabled:areAnimationsEnabled];
 
-- (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    // unsets the dirty flag
+    self.itemTableView.dirty = NO;
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -346,6 +385,9 @@
 
     // retrieves the associated table view (superview)
     self.itemTableView = (HMItemTableView *) self.superview;
+
+    // sets the view ready flag
+    self.viewReady = YES;
 }
 
 @end

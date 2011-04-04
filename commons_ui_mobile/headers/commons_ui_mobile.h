@@ -59,5 +59,6 @@
 #import "../classes/HMEntityDelegate.h"
 #import "../classes/HMTableView.h"
 #import "../classes/HMTableViewController.h"
+#import "../classes/HMRemoteTableViewController.h"
 #import "../classes/HMPlainMultilineStringTableViewCell.h"
 #import "../classes/HMColumnMultilineStringTableViewCell.h"

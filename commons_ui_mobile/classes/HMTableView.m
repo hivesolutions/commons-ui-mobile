@@ -27,6 +27,8 @@
 
 @implementation HMTableView
 
+@synthesize dirty = _dirty;
+
 - (id)init {
     // calls the super
     self = [super init];
@@ -48,7 +50,6 @@
     // returns self
     return self;
 }
-
 
 - (void)didAppear {
 }

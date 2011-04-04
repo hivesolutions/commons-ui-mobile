@@ -75,4 +75,17 @@
     [tableView willDisappear];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // returns yes to provide interface rotation
+    return YES;
+}
+
+- (void)didReceiveMemoryWarning {
+    // calls the super
+    [super didReceiveMemoryWarning];
+
+    // prints a debug message
+    NSLog(@"View did receive memory warning");
+}
+
 @end

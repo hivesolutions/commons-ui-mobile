@@ -27,7 +27,10 @@
 
 @implementation HMRemoteItemTableViewController
 
+@synthesize entity = _entity;
+@synthesize entityAbstraction = _entityAbstraction;
 @synthesize remoteAbstraction = _remoteAbstraction;
+@synthesize entityProviderDelegate = _entityProviderDelegate;
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
@@ -92,6 +95,12 @@
 }
 
 - (void)dealloc {
+    // releases the entity
+    [_entity release];
+
+    // releases the entity abstraction
+    [_entityAbstraction release];
+
     // releases the remote abstraction
     [_remoteAbstraction release];
 
@@ -111,6 +120,14 @@
 
 - (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType {
     return nil;
+}
+
+- (void)changeEntity:(NSDictionary *)entity {
+    // sets the entity
+    self.entity = entity;
+
+    // updates the remote
+    [self updateRemote];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -152,6 +169,15 @@
 
     // sets the view appear as not set
     _viewAppear = NO;
+
+    // creates the entity abstraction
+    HMEntityAbstraction *entityAbstraction = [[HMEntityAbstraction alloc] initWithEntityDelegate:self];
+
+    // sets the entity abstraction
+    self.entityAbstraction = entityAbstraction;
+
+    // releases the entity abstraction
+    [entityAbstraction release];
 }
 
 - (void)constructStructures {
@@ -655,6 +681,12 @@
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView.superview;
 
+    // sets the right bar buttom
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+
+    // sets the left bar buttom
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+
     // updates the remote with the given request
     [remoteAbstraction updateRemoteWithRequest:request];
 
@@ -700,6 +732,26 @@
 - (void)didDeselectItemRowWithItem:(HMItem *)item {
 }
 
+- (void)processOperationCreate:(NSData *)data  {
+    // creates a new json parser
+    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
+
+    // parses the received (remote) data and sets it into the intance
+    NSDictionary *remoteData = [jsonParser objectWithData:data];
+
+    // in case the entity provider delegate is set
+    if(self.entityProviderDelegate) {
+        // updates the entity in the entity provider delegate
+        [self.entityProviderDelegate updateEntity:remoteData];
+    }
+
+    // pops the view controller
+    [self.navigationController popViewControllerAnimated:YES];
+
+    // releases the json parser
+    [jsonParser release];
+}
+
 - (void)processOperationRead:(NSData *)data  {
     // retrieves the item table vuew
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
@@ -740,6 +792,13 @@
 
     // switches over the remote abstraction id
     switch(remoteAbstraction.remoteAbstractionId) {
+        case HMItemOperationCreate:
+            // processes the create operation
+            [self processOperationCreate:data];
+
+            // breaks the switch
+            break;
+
         case HMItemOperationRead:
             // processes the read operation
             [self processOperationRead:data];
