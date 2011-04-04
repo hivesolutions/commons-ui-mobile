@@ -25,9 +25,28 @@
 
 @implementation HMEditTableViewCellEditView
 
+@synthesize drawBorder = _drawBorder;
+
+- (UIView *)initWithFrame:(CGRect)frame {
+    // calls the super
+    self = [super initWithFrame:frame];
+
+    // sets the default attributes
+    self.drawBorder = YES;
+
+    // returns the self
+    return self;
+}
+
 - (void)drawRect:(CGRect)rect {
     // calls the super
     [super drawRect:rect];
+
+    // returns in case no
+    // border should be drawn
+    if(!self.drawBorder) {
+        return;
+    }
 
     // retrieves the current graphics context
     CGContextRef context = UIGraphicsGetCurrentContext();

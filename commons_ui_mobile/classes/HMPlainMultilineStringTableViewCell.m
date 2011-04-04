@@ -34,6 +34,9 @@
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
 
+    // sets the default attributes
+    self.persistentEdit = YES;
+
     // enables clips to bound to avoid overflow
     self.clipsToBounds = YES;
 
@@ -84,6 +87,9 @@
 }
 
 - (void)showEditing {
+    // calls the super
+    [super showEditing];
+
     // makes the text view editable
     self.textView.editable = YES;
 }
@@ -94,6 +100,9 @@
 
     // makes the text view not editable
     self.textView.editable = NO;
+
+    // calls the super
+    [super hideEditing];
 }
 
 - (void)blurEditing {

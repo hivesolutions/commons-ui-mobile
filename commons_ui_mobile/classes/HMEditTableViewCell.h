@@ -40,6 +40,7 @@
     BOOL _clearable;
     BOOL _editAlways;
     BOOL _selectableEdit;
+    BOOL _persistentEdit;
 }
 
 /**
@@ -87,6 +88,11 @@
  * in the edit mode.
  */
 @property (assign) BOOL selectableEdit;
+
+/**
+ * Indicates if the edit view is persistent.
+ */
+@property (assign) BOOL persistentEdit;
 
 /**
  * Creates the editing view.

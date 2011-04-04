@@ -78,6 +78,12 @@
     // calls the super
     [super hideEditing];
 
+    // returns in case the edit
+    // view is persistent
+    if(self.persistentEdit) {
+        return;
+    }
+
     // shows the text label
     self.textLabel.hidden = NO;
 }

@@ -88,6 +88,11 @@
     // hides the detail text label
     self.detailTextLabel.hidden = YES;
 
+    // enables the edit view border
+    HMEditTableViewCellEditView *editView = (HMEditTableViewCellEditView *) self.editView;
+    editView.drawBorder = YES;
+    [editView setNeedsDisplay];
+
     // calls the super
     [super showEditing];
 }
@@ -95,6 +100,17 @@
 - (void)hideEditing {
     // calls the super
     [super hideEditing];
+
+    // disables the edit view border
+    HMEditTableViewCellEditView *editView = (HMEditTableViewCellEditView *) self.editView;
+    editView.drawBorder = NO;
+    [editView setNeedsDisplay];
+
+    // returns in case the edit
+    // view is persistent
+    if(self.persistentEdit) {
+        return;
+    }
 
     // shows the detail text label
     self.detailTextLabel.hidden = NO;

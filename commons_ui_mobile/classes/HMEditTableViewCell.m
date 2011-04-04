@@ -35,6 +35,7 @@
 @synthesize clearable = _clearable;
 @synthesize editAlways = _editAlways;
 @synthesize selectableEdit = _selectableEdit;
+@synthesize persistentEdit = _persistentEdit;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -44,6 +45,7 @@
     _editingDirty = YES;
     _editableRow = YES;
     _editableCell = YES;
+    _persistentEdit = NO;
     _editAlways = NO;
 
     // returns the instance
@@ -73,6 +75,12 @@
 }
 
 - (void)hideEditing {
+    // returns in case the edit
+    // view is persistent
+    if(self.persistentEdit) {
+        return;
+    }
+
     // shows the edit view
     self.editView.hidden = YES;
 
@@ -101,9 +109,15 @@
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
-    // returns in case the cell
-    // is not editable
-    if(!self.editable) {
+    // sets the cell's selection style
+    if((editing && self.selectableEdit) || (editing == NO && self.selectable)) {
+        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+    } else {
+        self.selectionStyle = UITableViewCellEditingStyleNone;
+    }
+
+    // returns in case the cell is not editable
+    if(!self.editableCell) {
         // returns immediately (no need to edit)
         return;
     }

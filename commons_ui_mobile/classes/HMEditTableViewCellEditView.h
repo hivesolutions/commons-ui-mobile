@@ -25,5 +25,16 @@
 
 #import "Dependencies.h"
 
-@interface HMEditTableViewCellEditView : UIView
+@interface HMEditTableViewCellEditView : UIView {
+    @private
+    BOOL _drawBorder;
+}
+
+/**
+ * Indicates if a border should be
+ * drawn in the left side fo the
+ * edit view.
+ */
+@property (assign) BOOL drawBorder;
+
 @end
