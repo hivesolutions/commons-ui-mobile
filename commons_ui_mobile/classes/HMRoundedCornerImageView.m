@@ -36,7 +36,7 @@
     CGImageRef imageRef = image.CGImage;
     int imageBitsPerComponent = CGImageGetBitsPerComponent(imageRef);
     CGColorSpaceRef imageColorSpaceRef = CGImageGetColorSpace(imageRef);
-    
+
     // resizes the image
     CGContextRef context = CGBitmapContextCreate(NULL, imageWidth * imageScale, imageHeight * imageScale, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     CGContextDrawImage(context, imageRect, image.CGImage);
@@ -46,7 +46,7 @@
     // releases the objects
     CGContextRelease(context);
     CGImageRelease(imageResized);
-    
+
     // configures the context
     context = CGBitmapContextCreate(NULL, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH * imageScale, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT * imageScale, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     const CGColorRef grayColor = [[UIColor grayColor] CGColor];
