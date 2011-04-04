@@ -31,13 +31,14 @@
     // retrieves the image's attributes
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
-    CGRect imageRect = CGRectMake(0, 0, imageWidth, imageHeight);
+    CGFloat imageScale = image.scale;
+    CGRect imageRect = CGRectMake(0, 0, imageWidth * imageScale, imageHeight * imageScale);
     CGImageRef imageRef = image.CGImage;
     int imageBitsPerComponent = CGImageGetBitsPerComponent(imageRef);
     CGColorSpaceRef imageColorSpaceRef = CGImageGetColorSpace(imageRef);
-
+    
     // resizes the image
-    CGContextRef context = CGBitmapContextCreate(NULL, imageWidth, imageHeight, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
+    CGContextRef context = CGBitmapContextCreate(NULL, imageWidth * imageScale, imageHeight * imageScale, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     CGContextDrawImage(context, imageRect, image.CGImage);
     CGImageRef imageResized = CGBitmapContextCreateImage(context);
     image = [UIImage imageWithCGImage:imageResized];
@@ -45,17 +46,17 @@
     // releases the objects
     CGContextRelease(context);
     CGImageRelease(imageResized);
-
+    
     // configures the context
-    context = CGBitmapContextCreate(NULL, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
+    context = CGBitmapContextCreate(NULL, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH * imageScale, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT * imageScale, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     const CGColorRef grayColor = [[UIColor grayColor] CGColor];
     CGContextSetStrokeColorWithColor(context, grayColor);
-    CGContextSetLineWidth(context, 1);
+    CGContextSetLineWidth(context, 1.0 * imageScale);
     CGContextSetAllowsAntialiasing(context, YES);
     CGContextSetShouldAntialias(context, YES);
 
     // retrieves the rectangles coordinates
-    CGRect resizedImageRect = CGRectMake(0, 0, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT);
+    CGRect resizedImageRect = CGRectMake(0, 0, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH * imageScale, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT * imageScale);
     CGFloat minimumX = CGRectGetMinX(resizedImageRect);
     CGFloat middleX = CGRectGetMidX(resizedImageRect);
     CGFloat maximumX = CGRectGetMaxX(resizedImageRect);
@@ -66,10 +67,10 @@
     // creates the image's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, middleY);
-    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
-    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS);
+    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS * imageScale);
+    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS * imageScale);
+    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS * imageScale);
+    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS * imageScale);
     CGPathCloseSubpath(path);
 
     // defines the gradient drawing bounds
