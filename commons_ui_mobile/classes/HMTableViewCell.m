@@ -290,7 +290,7 @@
     }
 
     // releases the object
-    [accessoryTypeString release];
+    [_accessoryTypeString release];
 
     // sets and retains the object
     _accessoryTypeString = [accessoryTypeString retain];
