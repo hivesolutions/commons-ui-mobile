@@ -58,7 +58,6 @@
 
     // hides the detail text label
     self.detailTextLabel.hidden = YES;
-    self.detailTextLabel.backgroundColor = [UIColor redColor];
 
     // creates the text view
     CGRect editViewFrame = self.editView.frame;

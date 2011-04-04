@@ -339,7 +339,7 @@
     }
 
     // releases the object
-    [accessoryValue release];
+    [_accessoryValue release];
 
     // sets and retains the object
     _accessoryValue = [accessoryValue retain];
