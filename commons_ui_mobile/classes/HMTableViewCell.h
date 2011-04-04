@@ -60,7 +60,7 @@
     NSString *_name;
     NSString *_icon;
     NSString *_highlightedIcon;
-    BOOL _highlightable;
+    BOOL _selectable;
     NSString *_accessoryTypeString;
     NSString *_accessoryValue;
     float _height;
@@ -90,9 +90,10 @@
 @property (retain) NSString *highlightedIcon;
 
 /**
- * Indicates if the table view cell is highlightable.
+ * Indicates if the button is selectable
+ * in the normal mode.
  */
-@property (assign) BOOL highlightable;
+@property (assign) BOOL selectable;
 
 /**
  * The type of accessory (string mode).

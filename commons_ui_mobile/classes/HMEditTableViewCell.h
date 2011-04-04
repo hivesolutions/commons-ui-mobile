@@ -38,6 +38,7 @@
     BOOL _editable;
     BOOL _clearable;
     BOOL _editAlways;
+    BOOL _selectableEdit;
 }
 
 /**
@@ -74,6 +75,12 @@
  * be of type edit only.
  */
 @property (assign) BOOL editAlways;
+
+/**
+ * Indicates if the button is selectable
+ * in the edit mode.
+ */
+@property (assign) BOOL selectableEdit;
 
 /**
  * Creates the editing view.

@@ -217,20 +217,20 @@
     [self.imageView setHighlightedImage:highlightedIconImage];
 }
 
-- (BOOL)highlightable {
-    return _highlightable;
+- (BOOL)selectable {
+    return _selectable;
 }
 
-- (void)setHighlightable:(BOOL)highlightable {
+- (void)setSelectable:(BOOL)selectable {
     // sets the object
-    _highlightable = highlightable;
+    _selectable = selectable;
 
-    // in case it's highlightable
-    if(highlightable == YES) {
+    // in case it's selectable in the normal mode
+    if(selectable == YES) {
         // changes the selection style to blue
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
     }
-    // otherwise it's not highlightable
+    // otherwise it's not selectable
     else {
         // changes the selection style to none
         self.selectionStyle = UITableViewCellSelectionStyleNone;

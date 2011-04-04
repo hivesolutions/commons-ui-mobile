@@ -501,7 +501,6 @@
     }
 
     // configures the table view cell
-    tableViewCell.highlightable = NO;
     tableViewCell.clearable = YES;
     tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 

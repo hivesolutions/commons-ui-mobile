@@ -27,6 +27,29 @@
 
 @implementation HMTableView
 
+- (id)init {
+    // calls the super
+    self = [super init];
+
+    // sets the default attributes
+    self.allowsSelectionDuringEditing = YES;
+
+    // returns self
+    return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    // calls the super
+    self = [super initWithCoder:aDecoder];
+
+    // sets the default attributes
+    self.allowsSelectionDuringEditing = YES;
+
+    // returns self
+    return self;
+}
+
+
 - (void)didAppear {
 }
 

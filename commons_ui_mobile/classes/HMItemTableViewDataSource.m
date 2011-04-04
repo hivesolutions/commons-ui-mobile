@@ -198,6 +198,7 @@
             if(stringTableCellItem.multipleLines == NO) {
                 if(stringTableCellItem.name) {
                     HMColumnStringTableViewCell *columnStringTableViewCell = [[[HMColumnStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    columnStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnStringTableViewCell.secure = stringTableCellItem.secure;
                     columnStringTableViewCell.editable = stringTableCellItem.editable;
@@ -207,6 +208,7 @@
                     tableViewCell = columnStringTableViewCell;
                 } else {
                     HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    plainStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainStringTableViewCell.secure = stringTableCellItem.secure;
                     plainStringTableViewCell.editable = stringTableCellItem.editable;
@@ -218,6 +220,7 @@
             } else {
                 if(stringTableCellItem.name) {
                     HMColumnMultilineStringTableViewCell *columnMultilineStringTableViewCell = [[[HMColumnMultilineStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    columnMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnMultilineStringTableViewCell.secure = stringTableCellItem.secure;
                     columnMultilineStringTableViewCell.editable = stringTableCellItem.editable;
@@ -227,6 +230,7 @@
                     tableViewCell = columnMultilineStringTableViewCell;
                 } else {
                     HMPlainMultilineStringTableViewCell *plainMultilineStringTableViewCell = [[[HMPlainMultilineStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                    plainMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainMultilineStringTableViewCell.secure = stringTableCellItem.secure;
                     plainMultilineStringTableViewCell.editable = stringTableCellItem.editable;
@@ -243,7 +247,7 @@
         tableViewCell.description = tableCellItem.description;
         tableViewCell.icon = tableCellItem.icon;
         tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
-        tableViewCell.highlightable = tableCellItem.highlightable;
+        tableViewCell.selectable = tableCellItem.selectable;
         tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
         tableViewCell.accessoryValue = tableCellItem.accessoryValue;
         tableViewCell.height = tableCellItem.height;

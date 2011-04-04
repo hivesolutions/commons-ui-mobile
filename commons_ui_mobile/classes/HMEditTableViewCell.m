@@ -33,6 +33,7 @@
 @synthesize editable = _editable;
 @synthesize clearable = _clearable;
 @synthesize editAlways = _editAlways;
+@synthesize selectableEdit = _selectableEdit;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -65,6 +66,13 @@
 
     // shows the edit view
     self.editView.hidden = NO;
+
+    // sets the cell's selection style
+    if(self.selectableEdit) {
+        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+    } else {
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
 }
 
 - (void)hideEditing {
@@ -73,6 +81,13 @@
 
     // hides the contents
     self.accessoryView.hidden = NO;
+
+    // sets the cell's selection style
+    if(self.selectable) {
+        self.selectionStyle = UITableViewCellSelectionStyleBlue;
+    } else {
+        self.selectionStyle = UITableViewCellEditingStyleNone;
+    }
 }
 
 - (void)focusEditing {
