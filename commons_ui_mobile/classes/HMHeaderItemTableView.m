@@ -502,6 +502,8 @@
 
     // configures the table view cell
     tableViewCell.clearable = YES;
+    tableViewCell.editAlways = YES;
+    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 
     // sets each table view cell's value and stores it
@@ -515,9 +517,6 @@
         tableViewCell.defaultValue = NSLocalizedString(@"Subtitle", @"Subtitle");
         self.subTitleTableViewCell = tableViewCell;
     }
-
-    // sets the cell as edit always
-    tableViewCell.editAlways = YES;
 
     // returns the cell
     return tableViewCell;

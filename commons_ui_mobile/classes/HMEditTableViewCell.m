@@ -67,9 +67,6 @@
 }
 
 - (void)showEditing {
-    // hides the contents
-    self.accessoryView.hidden = YES;
-
     // shows the edit view
     self.editView.hidden = NO;
 }
@@ -83,9 +80,6 @@
 
     // shows the edit view
     self.editView.hidden = YES;
-
-    // hides the contents
-    self.accessoryView.hidden = NO;
 }
 
 - (void)focusEditing {

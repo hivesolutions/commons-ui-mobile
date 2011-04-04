@@ -255,8 +255,6 @@
         tableViewCell.selectable = tableCellItem.selectable;
         tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
         tableViewCell.accessoryValue = tableCellItem.accessoryValue;
-        tableViewCell.editingAccessoryTypeString = tableCellItem.editingAccessoryType;
-        tableViewCell.editingAccessoryValue = tableCellItem.editingAccessoryValue;
         tableViewCell.height = tableCellItem.height;
         tableViewCell.item = tableCellItem;
     }

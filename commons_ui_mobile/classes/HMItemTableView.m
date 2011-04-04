@@ -162,7 +162,7 @@
 
     // returns the editing style in case the table is
     // being edited and the table cell item is indentable
-    if(self.editing && tableCellItem.indentable) {
+    if(self.editing && tableCellItem.editableRow) {
         // returns with editing style
         return UITableViewCellEditingStyleDelete;
     }
