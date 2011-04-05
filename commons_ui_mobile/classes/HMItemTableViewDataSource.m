@@ -207,6 +207,7 @@
                     columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnStringTableViewCell.returnType = stringTableCellItem.returnType;
                     columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    columnStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
                     tableViewCell = columnStringTableViewCell;
                 } else {
                     HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
@@ -218,6 +219,7 @@
                     plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainStringTableViewCell.returnType = stringTableCellItem.returnType;
                     plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    plainStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
                     tableViewCell = plainStringTableViewCell;
                 }
             } else {
@@ -231,6 +233,7 @@
                     columnMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
                     columnMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    columnMultilineStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
                     tableViewCell = columnMultilineStringTableViewCell;
                 } else {
                     HMPlainMultilineStringTableViewCell *plainMultilineStringTableViewCell = [[[HMPlainMultilineStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
@@ -242,6 +245,7 @@
                     plainMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
                     plainMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
+                    plainMultilineStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
                     tableViewCell = plainMultilineStringTableViewCell;
                 }
             }
