@@ -301,6 +301,21 @@
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    // calls the super
+    [super setEditing:editing animated:animated];
+
+    // checks if the item delegate responds to the set editing selector
+    BOOL respondsToSelector = [self.itemDelegate respondsToSelector:@selector(setEditing:)];
+
+    // in case the item delegate responds
+    // to the set editing selector
+    if(respondsToSelector) {
+        // calls the set editing in the item delegate
+        [self.itemDelegate setEditing:editing];
+    }
+}
+
 + (void)_keepAtLinkTime {
 }
 

@@ -41,6 +41,13 @@
  */
 - (void)buttonClicked:(NSString *)buttonName;
 
+/**
+ * Called when the editing status is changed.
+ *
+ * @param editing The current editing status.
+ */
+- (void)setEditing:(BOOL)editing;
+
 @required
 
 /**
