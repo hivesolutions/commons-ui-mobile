@@ -132,13 +132,31 @@
     // creates the http data from the remote data
     NSData *httpData = [HMHttpUtil createHttpData:data];
 
-    // creates the request to be used in the remote abstraction
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+    // sets the default "target" url
+    NSString *targetUrl = self.url;
+    
+    // in case the method is get
+    if([method isEqualToString:HTTP_GET_METHOD]) {
+        // initializes the data string with the contents of the data
+        NSString *dataString = [[NSString alloc] initWithData:httpData encoding:NSUTF8StringEncoding];
+    
+        // creates the target url with the url and the data string
+        targetUrl = [NSString stringWithFormat:@"%@?%@", self.url, dataString];
+        
+        // releases the data string
+        [dataString release];
+    }
 
-    // sets the http request properties, for a post request
-    [request setHTTPMethod: method];
-    [request setHTTPBody:httpData];
-    [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
+    // creates the request to be used in the remote abstraction
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:targetUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+
+    // in case the method is post
+    if([method isEqualToString:HTTP_POST_METHOD]) {
+        // sets the http request properties, for a post request
+        [request setHTTPMethod:method];
+        [request setHTTPBody:httpData];
+        [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
+    }
 
     // updates the remote with the request
     [self updateRemoteWithRequest:request];
