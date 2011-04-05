@@ -36,6 +36,7 @@
 @synthesize editAlways = _editAlways;
 @synthesize selectableEdit = _selectableEdit;
 @synthesize persistentEdit = _persistentEdit;
+@synthesize focusEdit = _focusEdit;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor

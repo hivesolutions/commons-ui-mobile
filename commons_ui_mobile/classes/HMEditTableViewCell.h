@@ -41,6 +41,7 @@
     BOOL _editAlways;
     BOOL _selectableEdit;
     BOOL _persistentEdit;
+    BOOL _focusEdit;
 }
 
 /**
@@ -93,6 +94,12 @@
  * Indicates if the edit view is persistent.
  */
 @property (assign) BOOL persistentEdit;
+
+/**
+ * Indicates if the cell should focus
+ * when entering edit mode.
+ */
+@property (assign) BOOL focusEdit;
 
 /**
  * Creates the editing view.

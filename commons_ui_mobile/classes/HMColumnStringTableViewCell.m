@@ -83,6 +83,12 @@
 
     // shows the text field
     self.textField.hidden = NO;
+
+    // focuses on the text field in case
+    // it should focus when entering edit mode
+    if(self.focusEdit) {
+        [self.textField becomeFirstResponder];
+    }
 }
 
 - (void)hideEditing {
