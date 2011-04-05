@@ -28,6 +28,10 @@
 @implementation HMRoundedCornerImageView
 
 - (void)setImage:(UIImage *)image {
+    // retrieves the image view's attributes
+    CGFloat width = self.frame.size.width;
+    CGFloat height = self.frame.size.height;
+
     // retrieves the image's attributes
     CGFloat imageWidth = image.size.width;
     CGFloat imageHeight = image.size.height;
@@ -48,7 +52,7 @@
     CGImageRelease(imageResized);
 
     // configures the context
-    context = CGBitmapContextCreate(NULL, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH * imageScale, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT * imageScale, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
+    context = CGBitmapContextCreate(NULL, width * imageScale, height * imageScale, imageBitsPerComponent, 0, imageColorSpaceRef, kCGImageAlphaPremultipliedFirst);
     const CGColorRef grayColor = [[UIColor grayColor] CGColor];
     CGContextSetStrokeColorWithColor(context, grayColor);
     CGContextSetLineWidth(context, 1.0 * imageScale);
@@ -56,7 +60,7 @@
     CGContextSetShouldAntialias(context, YES);
 
     // retrieves the rectangles coordinates
-    CGRect resizedImageRect = CGRectMake(0, 0, HM_ROUNDED_CORNER_DEFAULT_IMAGE_WIDTH * imageScale, HM_ROUNDED_CORNER_DEFAULT_IMAGE_HEIGHT * imageScale);
+    CGRect resizedImageRect = CGRectMake(0, 0, width * imageScale, height * imageScale);
     CGFloat minimumX = CGRectGetMinX(resizedImageRect);
     CGFloat middleX = CGRectGetMidX(resizedImageRect);
     CGFloat maximumX = CGRectGetMaxX(resizedImageRect);
