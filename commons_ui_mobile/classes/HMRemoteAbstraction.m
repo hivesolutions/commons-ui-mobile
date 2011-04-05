@@ -134,15 +134,15 @@
 
     // sets the default "target" url
     NSString *targetUrl = self.url;
-    
+
     // in case the method is get
     if([method isEqualToString:HTTP_GET_METHOD]) {
         // initializes the data string with the contents of the data
         NSString *dataString = [[NSString alloc] initWithData:httpData encoding:NSUTF8StringEncoding];
-    
+
         // creates the target url with the url and the data string
         targetUrl = [NSString stringWithFormat:@"%@?%@", self.url, dataString];
-        
+
         // releases the data string
         [dataString release];
     }
