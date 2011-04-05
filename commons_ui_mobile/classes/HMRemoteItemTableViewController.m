@@ -783,7 +783,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection response:(NSURLResponse *)response {
     // initializes the data string with the contents of the data
     NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
 

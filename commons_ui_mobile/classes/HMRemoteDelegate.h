@@ -37,8 +37,9 @@
  * @param remoteAbstraction The associated remote abstraction.
  * @param data The data associated with the remote call.
  * @param connection The connection associated with the remote call.
+ * @param response The response associated with the remote call.
  */
-- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection;
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection response:(NSURLResponse *)response;
 
 /**
  * Called when a remote call fails.

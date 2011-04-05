@@ -28,6 +28,31 @@
 #import "HMRemoteDelegate.h"
 
 /**
+ * The http get method name.
+ */
+#define HTTP_GET_METHOD @"GET"
+
+/**
+ * The http post method name.
+ */
+#define HTTP_POST_METHOD @"POST"
+
+/**
+ * The http valid status code.
+ */
+#define HTTP_VALID_STATUS_CODE 200
+
+/**
+ * The http application url encoded mime type.
+ */
+#define HTTP_APPLICATION_URL_ENCODED @"application/x-www-form-urlencoded"
+
+/**
+ * The http content type value.
+ */
+#define HTTP_CONTENT_TYPE_VALUE @"content-type"
+
+/**
  * The connection timeout for the remote abstraction
  * connection.
  */
@@ -56,6 +81,7 @@ typedef enum {
     NSString *_url;
     NSURLConnection *_connection;
     NSMutableData *_receivedData;
+    NSURLResponse *_response;
 }
 
 /**
@@ -111,6 +137,11 @@ typedef enum {
 @property (retain) NSMutableData *receivedData;
 
 /**
+ * The received response from the connection.
+ */
+@property (retain) NSURLResponse *response;
+
+/**
  * Constructor fo the class.
  *
  * @param remoteAbstractionId The id describing the remote abstraction.
@@ -141,6 +172,15 @@ typedef enum {
  * update of the data.
  */
 - (void)updateRemoteWithRequest:(NSURLRequest *)request;
+
+/**
+ * Updates the remote data, using the given
+ * data.
+ *
+ * @param data The data to be used in the update.
+ * @param method The http method to be used to perform the request.
+ */
+- (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method;
 
 /**
  * Updates the view associated with the remote

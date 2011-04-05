@@ -34,26 +34,6 @@
 #import "HMEntityProvider.h"
 #import "HMEntityDelegate.h"
 
-/**
- * The http get method name.
- */
-#define HTTP_GET_METHOD @"GET"
-
-/**
- * The http post method name.
- */
-#define HTTP_POST_METHOD @"POST"
-
-/**
- * The http application url encoded mime type.
- */
-#define HTTP_APPLICATION_URL_ENCODED @"application/x-www-form-urlencoded"
-
-/**
- * The http content type value.
- */
-#define HTTP_CONTENT_TYPE_VALUE @"content-type"
-
 @class HMEntityAbstraction;
 
 /**

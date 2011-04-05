@@ -37,6 +37,7 @@
 @synthesize url = _url;
 @synthesize connection = _connection;
 @synthesize receivedData = _receivedData;
+@synthesize response = _response;
 
 - (id)init {
     // calls the super
@@ -90,6 +91,9 @@
     // releases the connection
     [_receivedData release];
 
+    // releases the response
+    [_response release];
+
     // calls the super
     [super dealloc];
 }
@@ -122,6 +126,22 @@
     // releases the objects
     [connection release];
     [receivedData release];
+}
+
+- (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method {
+    // creates the http data from the remote data
+    NSData *httpData = [HMHttpUtil createHttpData:data];
+
+    // creates the request to be used in the remote abstraction
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:self.url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+
+    // sets the http request properties, for a post request
+    [request setHTTPMethod: method];
+    [request setHTTPBody:httpData];
+    [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
+
+    // updates the remote with the request
+    [self updateRemoteWithRequest:request];
 }
 
 - (void)cancelRemote {
@@ -272,12 +292,17 @@
     [self.receivedData appendData:data];
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+    // sets the response in the instance
+    self.response = response;
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     // sets the remote abstraction status to closed
     self.remoteAbstractionStatus = HMRemoteAbstractionStatusClosed;
 
     // calls the remote did succeed method in the remote delegate
-    [self.remoteDelegate remoteDidSucceed:self data:self.receivedData connection:self.connection];
+    [self.remoteDelegate remoteDidSucceed:self data:self.receivedData connection:self.connection response:self.response];
 
     // hides the activity indicator
     [self hideActivityIndicator];

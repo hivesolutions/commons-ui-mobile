@@ -226,7 +226,7 @@
     return nil;
 }
 
-- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection {
+- (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection response:(NSURLResponse *)response {
     // creates a new json parser
     SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
