@@ -179,8 +179,17 @@ typedef enum {
  *
  * @param data The data to be used in the update.
  * @param method The http method to be used to perform the request.
+ * @param setSession If the session information should be set in the data.
  */
-- (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method;
+- (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method setSession:(BOOL)setSession;
+
+/**
+ * Sets the session information in the data map.
+ *
+ * @param data The map to hold the data information.
+ * @return The new data map with the session information.
+ */
+- (NSDictionary *)setSessionInData:(NSDictionary *)data;
 
 /**
  * Updates the view associated with the remote

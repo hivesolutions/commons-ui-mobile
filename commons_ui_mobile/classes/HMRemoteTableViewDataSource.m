@@ -98,9 +98,6 @@
     // the filter dictionary to be used in the url
     NSMutableDictionary *urlData = [[NSMutableDictionary alloc] init];
 
-    // starts the extra url
-    NSString *extraUrl;
-
     // in case the filter value is defined and
     // not empty
     if(self.filterValue && [self.filterValue length] > 0) {
@@ -113,14 +110,8 @@
     [urlData setObject:@"0" forKey:@"filter[start_record]"];
     [urlData setObject:@"30" forKey:@"filter[number_records]"];
 
-    // creates the extra url from the url data
-    extraUrl = [HMHttpUtil createHttpDataString:urlData];
-
-    // appends the extra url to the remote url
-    NSString *completeUrl = [NSString stringWithFormat:@"%@?%@", remoteUrl, extraUrl];
-
     // creates the remote abstraction using the remote url
-    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationUnset url:completeUrl];
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationUnset url:remoteUrl];
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView.superview;
 
@@ -128,7 +119,7 @@
     self.remoteAbstraction = remoteAbstraction;
 
     // oprens the remote abstraction
-    [self.remoteAbstraction updateRemoteWithData:nil method:HTTP_GET_METHOD];
+    [self.remoteAbstraction updateRemoteWithData:urlData method:HTTP_GET_METHOD setSession:YES];
 
     // unsets the remote dirty flag
     _remoteDirty = NO;

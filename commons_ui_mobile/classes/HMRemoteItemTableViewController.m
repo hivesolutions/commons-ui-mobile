@@ -580,7 +580,7 @@
         [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
 
         // updates the remote with the given request
-        [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD];
+        [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD setSession:YES];
 
         // releases the remote abstraction
         [remoteAbstraction release];
@@ -666,7 +666,7 @@
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
 
     // updates the remote with the given request
-    [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD];
+    [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD setSession:YES];
 
     // releases the remote abstraction
     [remoteAbstraction release];
@@ -818,7 +818,7 @@
         remoteAbstraction.view = self.tableView;
 
         // updates the remote with the given request
-        [remoteAbstraction updateRemoteWithData:nil method:HTTP_POST_METHOD];
+        [remoteAbstraction updateRemoteWithData:nil method:HTTP_POST_METHOD setSession:YES];
 
         // releases the remote abstraction
         [remoteAbstraction release];

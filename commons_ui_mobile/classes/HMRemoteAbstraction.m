@@ -128,7 +128,13 @@
     [receivedData release];
 }
 
-- (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method {
+- (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method setSession:(BOOL)setSession {
+    // in case the set session flag is set
+    if(setSession) {
+        // sets the session in the data
+        [self setSessionInData:data];
+    }
+
     // creates the http data from the remote data
     NSData *httpData = [HMHttpUtil createHttpData:data];
 
@@ -160,6 +166,29 @@
 
     // updates the remote with the request
     [self updateRemoteWithRequest:request];
+}
+
+- (NSDictionary *)setSessionInData:(NSDictionary *)data {
+    // retrieves the preferences
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+
+    // sets the session id in the preferences
+    NSString *sessionId = [preferences objectForKey:@"sessionId"];
+
+    // in case the data map is not set
+    if(data == nil) {
+        // allocates a new data map
+        data = [[[NSMutableDictionary alloc] init] autorelease];
+    }
+
+    // casts the data as a mutable dictionary
+    NSMutableDictionary *mutableData = (NSMutableDictionary *) data;
+
+    // sets the session id in the data
+    [mutableData setObject:sessionId forKey:@"session_id"];
+
+    // returns the data
+    return data;
 }
 
 - (void)cancelRemote {
