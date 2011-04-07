@@ -416,7 +416,7 @@
     // sets the attributes
     self.remoteAbstraction = remoteAbstraction;
 
-    // oprens the remote abstraction
+    // opens the remote abstraction
     [self.remoteAbstraction updateRemote];
 
     // releases the objects
@@ -562,22 +562,11 @@
         // data
         NSDictionary *remoteData = [self convertRemoteGroup:HMItemOperationUpdate];
 
-        // creates the http data from the remote data
-        NSData *httpData = [HMHttpUtil createHttpData:remoteData];
-
         // creates the update url
         NSString *updateUrl = [self getRemoteUrlForOperation:HMItemOperationUpdate];
 
-        // creates the request to be used in the remote abstraction
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:updateUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
-
-        // sets the http request properties, for a post request
-        [request setHTTPMethod: HTTP_POST_METHOD];
-        [request setHTTPBody:httpData];
-        [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
-
         // creates the remote abstraction
-        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationUpdate];
+        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationUpdate url:updateUrl];
         remoteAbstraction.remoteDelegate = self;
         remoteAbstraction.view = self.tableView.superview;
 
@@ -591,7 +580,7 @@
         [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
 
         // updates the remote with the given request
-        [remoteAbstraction updateRemoteWithRequest:request];
+        [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD];
 
         // releases the remote abstraction
         [remoteAbstraction release];
@@ -662,22 +651,11 @@
     // data
     NSDictionary *remoteData = [self convertRemoteGroup:HMItemOperationCreate];
 
-    // creates the http data from the remote data
-    NSData *httpData = [HMHttpUtil createHttpData:remoteData];
-
     // creates the create url
     NSString *createUrl = [self getRemoteUrlForOperation:HMItemOperationCreate];
 
-    // creates the request to be used in the remote abstraction
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:createUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
-
-    // sets the http request properties, for a post request
-    [request setHTTPMethod: HTTP_POST_METHOD];
-    [request setHTTPBody:httpData];
-    [request setValue:HTTP_APPLICATION_URL_ENCODED forHTTPHeaderField:HTTP_CONTENT_TYPE_VALUE];
-
     // creates the remote abstraction
-    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationCreate];
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationCreate url:createUrl];
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView.superview;
 
@@ -688,7 +666,7 @@
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
 
     // updates the remote with the given request
-    [remoteAbstraction updateRemoteWithRequest:request];
+    [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD];
 
     // releases the remote abstraction
     [remoteAbstraction release];
@@ -834,19 +812,13 @@
         // creates the delete url
         NSString *deleteUrl = [self getRemoteUrlForOperation:HMItemOperationDelete];
 
-        // creates the request to be used in the remote abstraction
-        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:deleteUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
-
-        // sets the http request properties, for a post request
-        [request setHTTPMethod: HTTP_POST_METHOD];
-
         // creates the remote abstraction
-        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithId:HMItemOperationDelete];
+        HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationDelete url:deleteUrl];
         remoteAbstraction.remoteDelegate = self;
         remoteAbstraction.view = self.tableView;
 
         // updates the remote with the given request
-        [remoteAbstraction updateRemoteWithRequest:request];
+        [remoteAbstraction updateRemoteWithData:nil method:HTTP_POST_METHOD];
 
         // releases the remote abstraction
         [remoteAbstraction release];

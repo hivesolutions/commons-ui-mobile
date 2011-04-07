@@ -119,11 +119,8 @@
     // appends the extra url to the remote url
     NSString *completeUrl = [NSString stringWithFormat:@"%@?%@", remoteUrl, extraUrl];
 
-    // creates the request to be used in the remote abstraction
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:completeUrl] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
-
     // creates the remote abstraction using the remote url
-    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] init];
+    HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationUnset url:completeUrl];
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView.superview;
 
@@ -131,7 +128,7 @@
     self.remoteAbstraction = remoteAbstraction;
 
     // oprens the remote abstraction
-    [self.remoteAbstraction updateRemoteWithRequest:request];
+    [self.remoteAbstraction updateRemoteWithData:nil method:HTTP_GET_METHOD];
 
     // unsets the remote dirty flag
     _remoteDirty = NO;
