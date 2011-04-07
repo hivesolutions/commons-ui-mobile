@@ -53,6 +53,7 @@
     BOOL _secure;
     BOOL _returnDisablesEdit;
     BOOL _multipleLines;
+    NSString *_autocapitalizationType;
 }
 
 /**
@@ -76,5 +77,10 @@
  * more than one line.
  */
 @property (assign) BOOL multipleLines;
+
+/**
+ * Indicates the cell's auto capitalization type.
+ */
+@property (retain) NSString *autocapitalizationType;
 
 @end

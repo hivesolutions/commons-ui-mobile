@@ -53,6 +53,7 @@
     HPGrowingTextView *_textView;
     BOOL _secure;
     BOOL _returnDisablesEdit;
+    NSString *_autocapitalizationType;
 }
 
 /**
@@ -70,5 +71,10 @@
  * disable the edit mode.
  */
 @property (assign) BOOL returnDisablesEdit;
+
+/**
+ * Indicates the cell's auto capitalization type.
+ */
+@property (retain) NSString *autocapitalizationType;
 
 @end

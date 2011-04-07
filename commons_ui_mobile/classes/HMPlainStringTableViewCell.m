@@ -30,10 +30,14 @@
 @synthesize textField = _textField;
 @synthesize returnDisablesEdit = _returnDisablesEdit;
 @synthesize multipleLines = _multipleLines;
+@synthesize autocapitalizationType = _autocapitalizationType;
 
 - (void)dealloc {
     // releases the text field
     [_textField release];
+
+    // releases the auto capitalization type
+    [_autocapitalizationType release];
 
     // calls the super
     [super dealloc];
@@ -49,6 +53,7 @@
     UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+    textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.backgroundColor = [UIColor clearColor];
     textField.text = self.description;
@@ -56,6 +61,13 @@
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
     textField.delegate = self;
+
+    // sets the text field's auto capitalization type
+    if([self.autocapitalizationType isEqualToString:@"words"]) {
+        textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
+    } else if ([self.autocapitalizationType isEqualToString:@"sentences"]) {
+        textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
+    }
 
     // sets the text field's return key type
     if([self.returnType isEqualToString:@"done"]) {
