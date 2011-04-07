@@ -206,6 +206,7 @@
                     columnStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnStringTableViewCell.returnType = stringTableCellItem.returnType;
+                    columnStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     columnStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
                     tableViewCell = columnStringTableViewCell;
@@ -218,6 +219,7 @@
                     plainStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainStringTableViewCell.returnType = stringTableCellItem.returnType;
+                    plainStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     plainStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
                     tableViewCell = plainStringTableViewCell;
@@ -232,6 +234,7 @@
                     columnMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
+                    columnMultilineStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     columnMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     columnMultilineStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
                     tableViewCell = columnMultilineStringTableViewCell;
@@ -243,6 +246,7 @@
                     plainMultilineStringTableViewCell.editableRow = stringTableCellItem.editableRow;
                     plainMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
+                    plainMultilineStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     plainMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
                     plainMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     plainMultilineStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;

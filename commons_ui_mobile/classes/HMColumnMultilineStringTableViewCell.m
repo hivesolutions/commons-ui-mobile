@@ -29,6 +29,7 @@
 
 @synthesize textView = _textView;
 @synthesize returnDisablesEdit = _returnDisablesEdit;
+@synthesize autocapitalizationType = _autocapitalizationType;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -47,6 +48,9 @@
 - (void)dealloc {
     // releases the text view
     [_textView release];
+
+    // releases the auto capitalization type
+    [_autocapitalizationType release];
 
     // calls the super
     [super dealloc];
