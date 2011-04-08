@@ -131,8 +131,9 @@
 - (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method setSession:(BOOL)setSession {
     // in case the set session flag is set
     if(setSession) {
-        // sets the session in the data
-        [self setSessionInData:data];
+        // sets the session in the data and returns
+        // the new data object
+        data = [self setSessionInData:data];
     }
 
     // creates the http data from the remote data

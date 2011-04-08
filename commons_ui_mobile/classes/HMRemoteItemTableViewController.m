@@ -416,8 +416,8 @@
     // sets the attributes
     self.remoteAbstraction = remoteAbstraction;
 
-    // opens the remote abstraction
-    [self.remoteAbstraction updateRemote];
+    // opens the remote abstraction with empty data
+    [self.remoteAbstraction updateRemoteWithData:nil method:HTTP_GET_METHOD setSession:YES];
 
     // releases the objects
     [remoteAbstraction release];
@@ -579,7 +579,7 @@
         // sets the edit bar button item
         [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
 
-        // updates the remote with the given request
+        // updates the remote with the given remote data
         [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD setSession:YES];
 
         // releases the remote abstraction
@@ -665,7 +665,7 @@
     // sets the left bar buttom
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
 
-    // updates the remote with the given request
+    // updates the remote with the given remote data
     [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD setSession:YES];
 
     // releases the remote abstraction
@@ -817,7 +817,7 @@
         remoteAbstraction.remoteDelegate = self;
         remoteAbstraction.view = self.tableView;
 
-        // updates the remote with the given request
+        // updates the remote with the given remote data
         [remoteAbstraction updateRemoteWithData:nil method:HTTP_POST_METHOD setSession:YES];
 
         // releases the remote abstraction
