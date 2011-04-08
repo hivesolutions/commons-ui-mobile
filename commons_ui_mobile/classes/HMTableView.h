@@ -28,8 +28,15 @@
 #import "HMTableViewDataSource.h"
 
 @interface HMTableView : UITableView {
+    UIViewController *_viewController;
     BOOL _dirty;
 }
+
+/**
+ * The view controller reference in use for
+ * the table view;
+ */
+@property (assign) UIViewController *viewController;
 
 /**
  * Flag controlling the status of the current view.

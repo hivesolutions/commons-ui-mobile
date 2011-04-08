@@ -29,12 +29,15 @@
 #import "HMRemoteAbstraction.h"
 #import "HMTableViewDataSource.h"
 #import "HMRemoteTableViewProvider.h"
+#import "HMApplicationDelegate.h"
+#import "HMAuthenticationDelegate.h"
+#import "HMAuthenticationViewController.h"
 
 /**
  * Class used to represent a table view data source
  * for remote connections with serialization.
  */
-@interface HMRemoteTableViewDataSource : HMTableViewDataSource<HMRemoteDelegate> {
+@interface HMRemoteTableViewDataSource : HMTableViewDataSource<HMRemoteDelegate, HMAuthenticationDelegate> {
     @private
     NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
     HMRemoteAbstraction *_remoteAbstraction;

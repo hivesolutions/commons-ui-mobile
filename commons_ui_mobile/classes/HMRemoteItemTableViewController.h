@@ -33,6 +33,8 @@
 #import "HMRemoteAbstraction.h"
 #import "HMEntityProvider.h"
 #import "HMEntityDelegate.h"
+#import "HMAuthenticationDelegate.h"
+#import "HMErrorAbstraction.h"
 
 @class HMEntityAbstraction;
 
@@ -48,7 +50,7 @@ typedef enum {
     HMItemOperationDelete
 } HMItemOperationType;
 
-@interface HMRemoteItemTableViewController : HMTableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate, HMEntityDelegate, HMEntityProvider> {
+@interface HMRemoteItemTableViewController : HMTableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate, HMEntityDelegate, HMEntityProvider, HMAuthenticationDelegate> {
     @private
     NSDictionary *_entity;
     HMEntityAbstraction *_entityAbstraction;

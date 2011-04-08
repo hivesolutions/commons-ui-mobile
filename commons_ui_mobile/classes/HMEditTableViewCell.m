@@ -104,10 +104,14 @@
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
-    // sets the cell's selection style
-    if((editing && self.selectableEdit) || (editing == NO && self.selectable)) {
+    // in case the change is to editing and the cell is meant
+    // to be selectable in edit mode or in case the cell is not
+    // in edit mode and it is selectable
+    if((editing == YES && self.selectableEdit) || (editing == NO && self.selectable)) {
+        // sets the selection style to editing style in blue
         self.selectionStyle = UITableViewCellSelectionStyleBlue;
     } else {
+        // sets the selection style to no editing style
         self.selectionStyle = UITableViewCellEditingStyleNone;
     }
 
@@ -175,6 +179,17 @@
 
         // unsets the editing dirty flag
         _editingDirty = NO;
+    }
+
+    // in case the item table view is in editing mode
+    BOOL itemTableViewEditing = self.itemTableView.editing;
+
+    // in case the item table view is
+    // in editing mode, there's a need to change
+    // the editing mode in the cell
+    if(itemTableViewEditing) {
+        // changes the editing mode
+        [self changeEditing:YES commit:YES];
     }
 
     // set the view ready flag

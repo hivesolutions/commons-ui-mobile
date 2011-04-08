@@ -118,7 +118,7 @@
     // sets the attributes
     self.remoteAbstraction = remoteAbstraction;
 
-    // oprens the remote abstraction
+    // updates the remote abstraction with the url data
     [self.remoteAbstraction updateRemoteWithData:urlData method:HTTP_GET_METHOD setSession:YES];
 
     // unsets the remote dirty flag
@@ -221,8 +221,25 @@
     // parses the received (remote) data and sets it into the intance
     self.remoteData = [jsonParser objectWithData:data];
 
-    // reloads the data
-    [self.tableView reloadData];
+    // casts the response as http response
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
+
+    // in case the status code is valid
+    if(httpResponse.statusCode == HTTP_VALID_STATUS_CODE) {
+        // reloads the data
+        [self.tableView reloadData];
+    }
+    // otherwise there must be a problem
+    else {
+        // casts the table view (safe)
+        HMTableView *tableView = (HMTableView *) self.tableView;
+
+        // retrieves the view controller from the table view
+        UIViewController *viewController = tableView.viewController;
+
+        // handles the error data
+        [HMErrorAbstraction handleErrorData:self.remoteData authenticationDelegate:self view:self.tableView.superview viewController:viewController];
+    }
 
     // releases the json parser
     [jsonParser release];
@@ -231,6 +248,17 @@
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
     // reloads the data
     [self.tableView reloadData];
+}
+
+- (void)authenticationComplete:(BOOL)result {
+    // in case the authenticaion fails
+    if(result == NO) {
+        // returns immediately
+        return;
+    }
+
+    // updates the remote table (forced)
+    [self updateRemoteForced];
 }
 
 + (void)_keepAtLinkTime {

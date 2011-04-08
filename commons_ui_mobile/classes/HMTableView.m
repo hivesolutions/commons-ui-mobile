@@ -27,6 +27,7 @@
 
 @implementation HMTableView
 
+@synthesize viewController = _viewController;
 @synthesize dirty = _dirty;
 
 - (id)init {
