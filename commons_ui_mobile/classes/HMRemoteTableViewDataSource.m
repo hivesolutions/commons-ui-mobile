@@ -243,6 +243,9 @@
         // retrieves the exception message
         NSString *message = [exception objectForKey:@"message"];
 
+        // prints the error message
+        NSLog(@"Error received with status: %d name: %@ and message: %@", httpResponse.statusCode, exceptionName, message);
+
         // in case it's an authentication error
         if([exceptionName isEqualToString:@"AuthenticationError"]) {
             // retrieves the current application
@@ -265,11 +268,23 @@
         }
         // otherwise it's a generic error
         else {
-            // TENHO DE MOSTRAR O ERRO EM ABIXO
-        }
+            // retrieves the (localized) base error message
+            NSString *baseErrorMessage = NSLocalizedString(@"ServerError", @"ServerError");
 
-        // prints the error message
-        NSLog(@"Error with status: %d name: %@ and message: %@", httpResponse.statusCode, exceptionName, message);
+            // creates the error message from the base error message and the
+            // localized error description
+            NSString *errorMessage = [NSString stringWithFormat:@"%@\n%@", baseErrorMessage, message];
+
+            // creates the action sheet
+            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss") destructiveButtonTitle:nil otherButtonTitles:nil];
+            actionSheet.alpha = 0.75;
+
+            // sets the action sheet style
+            actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
+
+            // shows the action sheet in the table view
+            [actionSheet showInView:self.tableView.superview];
+        }
     }
 
     // releases the json parser
