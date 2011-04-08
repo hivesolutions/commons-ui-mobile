@@ -67,6 +67,7 @@
     float _height;
     HMItemTableView *_itemTableView;
     BOOL _viewReady;
+    NSDictionary *_data;
 }
 
 /**
@@ -127,6 +128,11 @@
  * ready for rendering.
  */
 @property (assign) BOOL viewReady;
+
+/**
+ * The data associated with the cell.
+ */
+@property (retain) NSDictionary *data;
 
 /**
  * Called when the edinting mode is going to be changed.

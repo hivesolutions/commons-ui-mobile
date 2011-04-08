@@ -32,6 +32,7 @@
 @synthesize height = _height;
 @synthesize itemTableView = _itemTableView;
 @synthesize viewReady = _viewReady;
+@synthesize data = _data;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -72,6 +73,9 @@
 
     // releases the accessory value
     [_accessoryValue release];
+
+    // releases the data
+    [_data release];
 
     // calls the super
     [super dealloc];

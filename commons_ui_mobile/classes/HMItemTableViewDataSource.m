@@ -95,8 +95,9 @@
             // retrieves the cell for the item
             HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:item.identifier];
 
-            // sets the cell's description in the item
+            // sets the cell's description and data in the item
             item.description = cell.description;
+            item.data = cell.data;
         }
     }
 }
@@ -289,8 +290,9 @@
         // creates an array with the index path
         NSArray *array = [[NSArray alloc] initWithObjects:indexPath, nil];
 
-        // clears the table view cell description
+        // clears the table view cell data
         tableViewCell.description = @"";
+        tableViewCell.data = nil;
 
         // deletes and inserts the rows
         [tableView beginUpdates];
