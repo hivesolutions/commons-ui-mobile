@@ -27,6 +27,48 @@
 
 @implementation HMTableViewController
 
+- (id)init {
+    // calls the super
+    self = [super init];
+
+    // casts the table view (safe)
+    HMTableView *tableView = (HMTableView *) self.tableView;
+
+    // sets the view controller in the table view
+    tableView.viewController = self;
+
+    // returns self
+    return self;
+}
+
+- (id)initWithStyle:(UITableViewStyle)style {
+    // calls the super
+    self = [super initWithStyle:style];
+
+    // casts the table view (safe)
+    HMTableView *tableView = (HMTableView *) self.tableView;
+
+    // sets the view controller in the table view
+    tableView.viewController = self;
+
+    // returns self
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    // calls the super
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+
+    // casts the table view (safe)
+    HMTableView *tableView = (HMTableView *) self.tableView;
+
+    // sets the view controller in the table view
+    tableView.viewController = self;
+
+    // returns self
+    return self;
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     // calls the super
     [super viewDidAppear:animated];

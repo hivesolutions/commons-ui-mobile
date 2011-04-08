@@ -40,6 +40,10 @@
 		C2029296132FE594009D7B69 /* HMItemTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2029294132FE592009D7B69 /* HMItemTableView.h */; };
 		C2029297132FE594009D7B69 /* HMItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2029295132FE593009D7B69 /* HMItemTableView.m */; };
 		C2029299132FE748009D7B69 /* HMItemTableViewDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2029298132FE748009D7B69 /* HMItemTableViewDelegate.h */; };
+		C210CB75134F56F60026BE3B /* HMApplicationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C210CB73134F56F60026BE3B /* HMApplicationDelegate.h */; };
+		C210CB78134F58DF0026BE3B /* HMAuthenticationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C210CB77134F58DF0026BE3B /* HMAuthenticationDelegate.h */; };
+		C210CB7C134F5A620026BE3B /* HMAuthenticationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C210CB7A134F5A620026BE3B /* HMAuthenticationViewController.h */; };
+		C210CB7D134F5A620026BE3B /* HMAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */; };
 		C233B0FD1344841D00A9F9B5 /* HMTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */; };
 		C233B0FE1344841D00A9F9B5 /* HMTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C233B0FC1344841D00A9F9B5 /* HMTableViewDataSource.m */; };
 		C23B5E561333BC0100CFC9AF /* HMPlainDateTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C23B5E541333BC0100CFC9AF /* HMPlainDateTableViewCell.h */; };
@@ -115,6 +119,10 @@
 		C2029294132FE592009D7B69 /* HMItemTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMItemTableView.h; path = classes/HMItemTableView.h; sourceTree = "<group>"; };
 		C2029295132FE593009D7B69 /* HMItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMItemTableView.m; path = classes/HMItemTableView.m; sourceTree = "<group>"; };
 		C2029298132FE748009D7B69 /* HMItemTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMItemTableViewDelegate.h; path = classes/HMItemTableViewDelegate.h; sourceTree = "<group>"; };
+		C210CB73134F56F60026BE3B /* HMApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMApplicationDelegate.h; path = classes/HMApplicationDelegate.h; sourceTree = "<group>"; };
+		C210CB77134F58DF0026BE3B /* HMAuthenticationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAuthenticationDelegate.h; path = classes/HMAuthenticationDelegate.h; sourceTree = "<group>"; };
+		C210CB7A134F5A620026BE3B /* HMAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAuthenticationViewController.h; path = classes/HMAuthenticationViewController.h; sourceTree = "<group>"; };
+		C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMAuthenticationViewController.m; path = classes/HMAuthenticationViewController.m; sourceTree = "<group>"; };
 		C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewDataSource.h; path = classes/HMTableViewDataSource.h; sourceTree = "<group>"; };
 		C233B0FC1344841D00A9F9B5 /* HMTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewDataSource.m; path = classes/HMTableViewDataSource.m; sourceTree = "<group>"; };
 		C23B5E541333BC0100CFC9AF /* HMPlainDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMPlainDateTableViewCell.h; path = classes/HMPlainDateTableViewCell.h; sourceTree = "<group>"; };
@@ -172,6 +180,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C210CB70134F56D00026BE3B /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C210CB79134F5A570026BE3B /* View Controllers */,
+				C210CB72134F56D90026BE3B /* Delegates */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		C210CB72134F56D90026BE3B /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				C210CB77134F58DF0026BE3B /* HMAuthenticationDelegate.h */,
+				C210CB73134F56F60026BE3B /* HMApplicationDelegate.h */,
+			);
+			name = Delegates;
+			sourceTree = "<group>";
+		};
+		C210CB79134F5A570026BE3B /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				C210CB7A134F5A620026BE3B /* HMAuthenticationViewController.h */,
+				C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		C220E35C13318CC40076803A /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -519,6 +554,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C210CB70134F56D00026BE3B /* Application */,
 				C254AF021344ED3B00CACA7F /* Entity */,
 				C2FEBD6D1340AF5600CBB51E /* View */,
 				C2DFF26C133A032100E6E1D2 /* Abstractions */,
@@ -603,6 +639,9 @@
 				C2C7B7A01344E80E008C0E4B /* HMEntityProvider.h in Headers */,
 				C2C7B7A31344E814008C0E4B /* HMEntityProviderDelegate.h in Headers */,
 				C27B02CD134620B700C562C4 /* HMRemoteTableViewController.h in Headers */,
+				C210CB75134F56F60026BE3B /* HMApplicationDelegate.h in Headers */,
+				C210CB78134F58DF0026BE3B /* HMAuthenticationDelegate.h in Headers */,
+				C210CB7C134F5A620026BE3B /* HMAuthenticationViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -681,6 +720,7 @@
 				C2C520271343AB2D00F80A55 /* HPTextViewInternal.m in Sources */,
 				C233B0FE1344841D00A9F9B5 /* HMTableViewDataSource.m in Sources */,
 				C27B02CE134620B700C562C4 /* HMRemoteTableViewController.m in Sources */,
+				C210CB7D134F5A620026BE3B /* HMAuthenticationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

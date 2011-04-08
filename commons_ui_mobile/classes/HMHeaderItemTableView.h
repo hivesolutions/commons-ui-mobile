@@ -49,7 +49,6 @@
  */
 @interface HMHeaderItemTableView : HMItemTableView<UITableViewDataSource> {
     @private
-
     NSString *_title;
     NSString *_subTitle;
     NSString *_image;

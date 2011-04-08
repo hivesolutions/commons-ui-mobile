@@ -62,3 +62,6 @@
 #import "../classes/HMRemoteTableViewController.h"
 #import "../classes/HMPlainMultilineStringTableViewCell.h"
 #import "../classes/HMColumnMultilineStringTableViewCell.h"
+#import "../classes/HMApplicationDelegate.h"
+#import "../classes/HMAuthenticationDelegate.h"
+#import "../classes/HMAuthenticationViewController.h"
