@@ -46,7 +46,7 @@
  *
  * @param editing The current editing status.
  */
-- (void)setEditing:(BOOL)editing;
+- (void)setEditingChanged:(BOOL)editing;
 
 @required
 

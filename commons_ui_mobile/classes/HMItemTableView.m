@@ -305,14 +305,14 @@
     // calls the super
     [super setEditing:editing animated:animated];
 
-    // checks if the item delegate responds to the set editing selector
-    BOOL respondsToSelector = [self.itemDelegate respondsToSelector:@selector(setEditing:)];
+    // checks if the item delegate responds to the set editing changed selector
+    BOOL respondsToSelector = [self.itemDelegate respondsToSelector:@selector(setEditingChanged:)];
 
     // in case the item delegate responds
-    // to the set editing selector
+    // to the set editing changed selector
     if(respondsToSelector) {
-        // calls the set editing in the item delegate
-        [self.itemDelegate setEditing:editing];
+        // calls the set editing changed in the item delegate
+        [self.itemDelegate setEditingChanged:editing];
     }
 }
 
