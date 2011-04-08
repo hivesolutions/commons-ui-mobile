@@ -53,6 +53,7 @@
 #import "../classes/HMEntityProvider.h"
 #import "../classes/HMTableViewCell.h"
 #import "../classes/HMTableViewCellBackgroundView.h"
+#import "../classes/HMErrorAbstraction.h"
 #import "../classes/HMRemoteAbstraction.h"
 #import "../classes/HMRemoteDelegate.h"
 #import "../classes/HMEntityAbstraction.h"

@@ -231,60 +231,14 @@
     }
     // otherwise there must be a problem
     else {
-        // casts the remote data as an exception
-        NSDictionary *remoteDataException = (NSDictionary *) self.remoteData;
+        // casts the table view (safe)
+        HMTableView *tableView = (HMTableView *) self.tableView;
 
-        // retrieves the exception map
-        NSDictionary *exception = [remoteDataException objectForKey:@"exception"];
+        // retrieves the view controller from the table view
+        UIViewController *viewController = tableView.viewController;
 
-        // retrieves the exception name
-        NSString *exceptionName = [exception objectForKey:@"exception_name"];
-
-        // retrieves the exception message
-        NSString *message = [exception objectForKey:@"message"];
-
-        // prints the error message
-        NSLog(@"Error received with status: %d name: %@ and message: %@", httpResponse.statusCode, exceptionName, message);
-
-        // in case it's an authentication error
-        if([exceptionName isEqualToString:@"AuthenticationError"]) {
-            // retrieves the current application
-            UIApplication *currentApplication = [UIApplication sharedApplication];
-
-            // retrieves the current application delegate
-            NSObject<HMApplicationDelegate> *currentApplicationDelegate = (NSObject<HMApplicationDelegate> *) currentApplication.delegate;
-
-            // retrieves the authentication view controller
-            HMAuthenticationViewController *authenticationViewController = [currentApplicationDelegate getAuthenticationViewController];
-
-            // sets the current instance as the authentication delegate
-            authenticationViewController.authenticationDelegate = self;
-
-            // casts the table view (safe)
-            HMTableView *tableView = (HMTableView *) self.tableView;
-
-            // pushes the login view controller
-            [tableView.viewController presentModalViewController:authenticationViewController animated:YES];
-        }
-        // otherwise it's a generic error
-        else {
-            // retrieves the (localized) base error message
-            NSString *baseErrorMessage = NSLocalizedString(@"ServerError", @"ServerError");
-
-            // creates the error message from the base error message and the
-            // localized error description
-            NSString *errorMessage = [NSString stringWithFormat:@"%@\n%@", baseErrorMessage, message];
-
-            // creates the action sheet
-            UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:errorMessage delegate:nil cancelButtonTitle:NSLocalizedString(@"Dismiss", @"Dismiss") destructiveButtonTitle:nil otherButtonTitles:nil];
-            actionSheet.alpha = 0.75;
-
-            // sets the action sheet style
-            actionSheet.actionSheetStyle = UIActionSheetStyleDefault;
-
-            // shows the action sheet in the table view
-            [actionSheet showInView:self.tableView.superview];
-        }
+        // handles the error data
+        [HMErrorAbstraction handleErrorData:self.remoteData authenticationDelegate:self view:self.tableView.superview viewController:viewController];
     }
 
     // releases the json parser

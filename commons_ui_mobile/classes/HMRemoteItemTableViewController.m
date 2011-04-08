@@ -710,12 +710,9 @@
 - (void)didDeselectItemRowWithItem:(HMItem *)item {
 }
 
-- (void)processOperationCreate:(NSData *)data  {
-    // creates a new json parser
-    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
-
-    // parses the received (remote) data and sets it into the intance
-    NSDictionary *remoteData = [jsonParser objectWithData:data];
+- (void)processOperationCreate:(id)data  {
+    // casts the data into remote data
+    NSDictionary *remoteData = (NSDictionary *) data;
 
     // in case the entity provider delegate is set
     if(self.entityProviderDelegate) {
@@ -725,20 +722,14 @@
 
     // pops the view controller
     [self.navigationController popViewControllerAnimated:YES];
-
-    // releases the json parser
-    [jsonParser release];
 }
 
-- (void)processOperationRead:(NSData *)data  {
+- (void)processOperationRead:(id)data  {
     // retrieves the item table vuew
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
-    // creates a new json parser
-    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
-
-    // parses the received (remote) data and sets it into the intance
-    NSDictionary *remoteData = [jsonParser objectWithData:data];
+    // casts the data into remote data
+    NSDictionary *remoteData = (NSDictionary *) data;
 
     // processes the remote data, setting the remote group
     [self processRemoteData:remoteData];
@@ -751,48 +742,62 @@
 
     // constructs the delayed structures
     [self constructStructuresDelayed];
-
-    // releases the json parser
-    [jsonParser release];
 }
 
-- (void)processOperationDelete:(NSData *)data  {
+- (void)processOperationDelete:(id)data  {
     // pops the view controller
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection response:(NSURLResponse *)response {
-    // initializes the data string with the contents of the data
-    NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    // creates a new json parser
+    SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
-    // logs the received data
-    NSLog(@"%@", dataString);
+    // parses the received (remote) data
+    id remoteData = [jsonParser objectWithData:data];
 
-    // switches over the remote abstraction id
-    switch(remoteAbstraction.remoteAbstractionId) {
-        case HMItemOperationCreate:
-            // processes the create operation
-            [self processOperationCreate:data];
+    // casts the response as http response
+    NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *) response;
 
-            // breaks the switch
-            break;
+    // in case the status code is valid
+    if(httpResponse.statusCode == HTTP_VALID_STATUS_CODE) {
+        // switches over the remote abstraction id
+        switch(remoteAbstraction.remoteAbstractionId) {
+            case HMItemOperationCreate:
+                // processes the create operation
+                [self processOperationCreate:remoteData];
 
-        case HMItemOperationRead:
-            // processes the read operation
-            [self processOperationRead:data];
+                // breaks the switch
+                break;
 
-            // breaks the switch
-            break;
-        case HMItemOperationDelete:
-            // processes the delete operation
-            [self processOperationDelete:data];
+            case HMItemOperationRead:
+                // processes the read operation
+                [self processOperationRead:remoteData];
 
-            // breaks the switch
-            break;
+                // breaks the switch
+                break;
+            case HMItemOperationDelete:
+                // processes the delete operation
+                [self processOperationDelete:remoteData];
+
+                // breaks the switch
+                break;
+        }
+    }
+    // otherwise there must be a problem
+    else {
+        // casts the table view (safe)
+        HMTableView *tableView = (HMTableView *) self.tableView;
+
+        // retrieves the view controller from the table view
+        UIViewController *viewController = tableView.viewController;
+
+        // handles the error data
+        [HMErrorAbstraction handleErrorData:remoteData authenticationDelegate:self view:self.tableView.superview viewController:viewController];
     }
 
     // releases the objects
-    [dataString release];
+    [jsonParser release];
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
@@ -826,6 +831,17 @@
     // in case the button click was cancel
     else {
     }
+}
+
+- (void)authenticationComplete:(BOOL)result {
+    // in case the authenticaion fails
+    if(result == NO) {
+        // returns immediately
+        return;
+    }
+
+    // updates the remote
+    [self updateRemote];
 }
 
 @end

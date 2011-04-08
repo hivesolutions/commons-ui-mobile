@@ -44,6 +44,8 @@
 		C210CB78134F58DF0026BE3B /* HMAuthenticationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C210CB77134F58DF0026BE3B /* HMAuthenticationDelegate.h */; };
 		C210CB7C134F5A620026BE3B /* HMAuthenticationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C210CB7A134F5A620026BE3B /* HMAuthenticationViewController.h */; };
 		C210CB7D134F5A620026BE3B /* HMAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */; };
+		C2207C57134F684D00BE87CB /* HMErrorAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2207C55134F684D00BE87CB /* HMErrorAbstraction.h */; };
+		C2207C58134F684D00BE87CB /* HMErrorAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2207C56134F684D00BE87CB /* HMErrorAbstraction.m */; };
 		C233B0FD1344841D00A9F9B5 /* HMTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */; };
 		C233B0FE1344841D00A9F9B5 /* HMTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C233B0FC1344841D00A9F9B5 /* HMTableViewDataSource.m */; };
 		C23B5E561333BC0100CFC9AF /* HMPlainDateTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C23B5E541333BC0100CFC9AF /* HMPlainDateTableViewCell.h */; };
@@ -123,6 +125,8 @@
 		C210CB77134F58DF0026BE3B /* HMAuthenticationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAuthenticationDelegate.h; path = classes/HMAuthenticationDelegate.h; sourceTree = "<group>"; };
 		C210CB7A134F5A620026BE3B /* HMAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAuthenticationViewController.h; path = classes/HMAuthenticationViewController.h; sourceTree = "<group>"; };
 		C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMAuthenticationViewController.m; path = classes/HMAuthenticationViewController.m; sourceTree = "<group>"; };
+		C2207C55134F684D00BE87CB /* HMErrorAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMErrorAbstraction.h; path = classes/HMErrorAbstraction.h; sourceTree = "<group>"; };
+		C2207C56134F684D00BE87CB /* HMErrorAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMErrorAbstraction.m; path = classes/HMErrorAbstraction.m; sourceTree = "<group>"; };
 		C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewDataSource.h; path = classes/HMTableViewDataSource.h; sourceTree = "<group>"; };
 		C233B0FC1344841D00A9F9B5 /* HMTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewDataSource.m; path = classes/HMTableViewDataSource.m; sourceTree = "<group>"; };
 		C23B5E541333BC0100CFC9AF /* HMPlainDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMPlainDateTableViewCell.h; path = classes/HMPlainDateTableViewCell.h; sourceTree = "<group>"; };
@@ -205,6 +209,15 @@
 				C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C2207C53134F683C00BE87CB /* Error */ = {
+			isa = PBXGroup;
+			children = (
+				C2207C55134F684D00BE87CB /* HMErrorAbstraction.h */,
+				C2207C56134F684D00BE87CB /* HMErrorAbstraction.m */,
+			);
+			name = Error;
 			sourceTree = "<group>";
 		};
 		C220E35C13318CC40076803A /* Table View Cells */ = {
@@ -478,6 +491,7 @@
 		C2DFF26C133A032100E6E1D2 /* Abstractions */ = {
 			isa = PBXGroup;
 			children = (
+				C2207C53134F683C00BE87CB /* Error */,
 				C2C272C1133C05C900D203C2 /* Entity */,
 				C2DFF273133A227800E6E1D2 /* Delegates */,
 				C2DFF272133A227200E6E1D2 /* Remote */,
@@ -642,6 +656,7 @@
 				C210CB75134F56F60026BE3B /* HMApplicationDelegate.h in Headers */,
 				C210CB78134F58DF0026BE3B /* HMAuthenticationDelegate.h in Headers */,
 				C210CB7C134F5A620026BE3B /* HMAuthenticationViewController.h in Headers */,
+				C2207C57134F684D00BE87CB /* HMErrorAbstraction.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -721,6 +736,7 @@
 				C233B0FE1344841D00A9F9B5 /* HMTableViewDataSource.m in Sources */,
 				C27B02CE134620B700C562C4 /* HMRemoteTableViewController.m in Sources */,
 				C210CB7D134F5A620026BE3B /* HMAuthenticationViewController.m in Sources */,
+				C2207C58134F684D00BE87CB /* HMErrorAbstraction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
