@@ -139,6 +139,26 @@
     // creates the http data from the remote data
     NSData *httpData = [HMHttpUtil createHttpData:data];
 
+    // updates the remote with the given http data
+    [self updateRemoteWithHttpData:httpData method:method];
+}
+
+- (void)updateRemoteWithSequenceData:(NSArray *)data method:(NSString *)method setSession:(BOOL)setSession {
+    // in case the set session flag is set
+    if(setSession) {
+        // sets the session in the data and returns
+        // the new data object
+        data = [self setSessionInSequenceData:data];
+    }
+
+    // creates the http data from the remote data
+    NSData *httpData = [HMHttpUtil createHttpSequenceData:data];
+
+    // updates the remote with the given http data
+    [self updateRemoteWithHttpData:httpData method:method];
+}
+
+- (void)updateRemoteWithHttpData:(NSData *)httpData method:(NSString *)method {
     // sets the default "target" url
     NSString *targetUrl = self.url;
 
@@ -190,6 +210,29 @@
 
     // returns the data
     return data;
+}
+
+- (NSArray *)setSessionInSequenceData:(NSArray *)sequenceData {
+    // retrieves the preferences
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+
+    // sets the session id in the preferences
+    NSString *sessionId = [preferences objectForKey:@"sessionId"];
+
+    // in case the sequence data array is not set
+    if(sequenceData == nil) {
+        // allocates a new data array
+        sequenceData = [[[NSMutableArray alloc] init] autorelease];
+    }
+
+    // casts the data as a mutable array
+    NSMutableArray *mutableSequenceData = (NSMutableArray *) sequenceData;
+
+    // adds the session id tuple to the sequence data
+    [mutableSequenceData addObject:[NSArray arrayWithObjects:@"session_id", sessionId, nil]];
+
+    // returns the sequence data
+    return sequenceData;
 }
 
 - (void)cancelRemote {

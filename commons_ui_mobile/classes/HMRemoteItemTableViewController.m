@@ -656,7 +656,7 @@
     [itemTableView flushItemSpecification];
 
     // converts the remote group, retrieving the remote
-    // data
+    // data (in seqence)
     NSDictionary *remoteData = [self convertRemoteGroup:HMItemOperationCreate];
 
     // creates the create url

@@ -175,6 +175,15 @@ typedef enum {
 
 /**
  * Updates the remote data, using the given
+ * http data.
+ *
+ * @param httpData The http data to be used in the update.
+ * @param method The http method to be used to perform the request.
+ */
+- (void)updateRemoteWithHttpData:(NSData *)httpData method:(NSString *)method;
+
+/**
+ * Updates the remote data, using the given
  * data.
  *
  * @param data The data to be used in the update.
@@ -184,12 +193,30 @@ typedef enum {
 - (void)updateRemoteWithData:(NSDictionary *)data method:(NSString *)method setSession:(BOOL)setSession;
 
 /**
+ * Updates the remote data, using the given
+ * sequence data.
+ *
+ * @param data The data to be used in the update.
+ * @param method The http method to be used to perform the request.
+ * @param setSession If the session information should be set in the data.
+ */
+- (void)updateRemoteWithSequenceData:(NSArray *)data method:(NSString *)method setSession:(BOOL)setSession;
+
+/**
  * Sets the session information in the data map.
  *
  * @param data The map to hold the data information.
  * @return The new data map with the session information.
  */
 - (NSDictionary *)setSessionInData:(NSDictionary *)data;
+
+/**
+ * Sets the session information in the sequence data array.
+ *
+ * @param data The array to hold the data information.
+ * @return The new data map with the session information.
+ */
+- (NSArray *)setSessionInSequenceData:(NSArray *)sequenceData;
 
 /**
  * Updates the view associated with the remote
