@@ -27,9 +27,12 @@
 
 #import "HMTableView.h"
 #import "HMEditTableViewCell.h"
+#import "HMTableViewController.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
 #import "HMItemTableViewDataSource.h"
+#import "HMEntityProvider.h"
+#import "HMEntityProviderDelegate.h"
 
 /**
  * The item table view header offset.
@@ -44,7 +47,7 @@
 /**
  * The item table view to be used to display object items.
  */
-@interface HMItemTableView : HMTableView<UITableViewDelegate> {
+@interface HMItemTableView : HMTableView<UITableViewDelegate, HMEntityProviderDelegate> {
     @private
     HMItemTableViewDataSource *_itemDataSource;
     NSObject<HMItemTableViewDelegate> *_itemDelegate;

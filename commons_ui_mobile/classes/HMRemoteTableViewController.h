@@ -100,7 +100,12 @@
 /**
  * Updates the entity provider delegate with the entity
  * and shows it in the screen.
+ *
+ * @param entity The entity to be used to update the entity
+ * provider delegate.
+ * @param entityName The name of the entity to be updated.
+ * @param entityKey The key value to the eneoty to be updated.
  */
-- (void)updateEntityProviderDelegate:(NSDictionary *)entity;
+- (void)updateEntityProviderDelegate:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey;
 
 @end

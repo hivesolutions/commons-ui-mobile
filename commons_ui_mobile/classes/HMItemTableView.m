@@ -286,8 +286,24 @@
     // retrieves the button item
     HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
-    // calls the did select item row with item method
-    [self.itemDelegate didSelectItemRowWithItem:buttonItem];
+    // in case the button item is a select view controller
+    if(buttonItem.selectViewController) {
+        // initializes the select view controller
+        HMTableViewController<HMEntityProvider> *selectViewController = [[buttonItem.selectViewController alloc] initWithNibName:buttonItem.selectNibName bundle:[NSBundle mainBundle]];
+        selectViewController.entityProviderDelegate = self;
+
+        // pushes the select view controller
+        [self.viewController.navigationController pushViewController:selectViewController animated:YES];
+
+        // releases the select view controller reference
+        [selectViewController release];
+    }
+    // otherwise the button is normal and the handling
+    // should be taken from the item delegate
+    else {
+        // calls the did select item row with item method
+        [self.itemDelegate didSelectItemRowWithItem:buttonItem];
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -314,6 +330,21 @@
         // calls the set editing changed in the item delegate
         [self.itemDelegate setEditingChanged:editing];
     }
+}
+
+- (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {
+    // retrieves the employee name
+    NSString *employeeName = [entity objectForKey:entityKey];
+
+    // retrieves the cell identifier map
+    NSMutableDictionary *cellIdentifierMap = self.itemDataSource.cellIdentifierMap;
+
+    // retrieves the table cell view for the entity name
+    HMTableViewCell *tableViewCell = [cellIdentifierMap objectForKey:entityName];
+
+    // updates the employee cell
+    tableViewCell.description = employeeName;
+    tableViewCell.data = entity;
 }
 
 + (void)_keepAtLinkTime {

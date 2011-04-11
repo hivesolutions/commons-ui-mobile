@@ -69,11 +69,11 @@
 }
 
 - (NSString *)getTitle {
-    return @"Table";
+    return nil;
 }
 
 - (NSString *)getNewEntityTitle {
-    return @"Table";
+    return nil;
 }
 
 - (UIColor *)getHeaderColor {
@@ -108,9 +108,9 @@
     [navigationController release];
 }
 
-- (void)updateEntityProviderDelegate:(NSDictionary *)entity {
+- (void)updateEntityProviderDelegate:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {
     // updates the entity in the entity provider delegate
-    [self.entityProviderDelegate updateEntity:entity];
+    [self.entityProviderDelegate updateEntity:entity entityName:entityName entityKey:entityKey];
 
     // pops the view controller
     [self.navigationController popViewControllerAnimated:YES];
@@ -124,16 +124,26 @@
     return HMRemoteTableViewNoneSerialized;
 }
 
+- (NSString *)getItemName {
+    return nil;
+}
+
 - (NSString *)getItemTitleName {
-    return @"table";
+    return nil;
 }
 
 - (void)didSelectRemoteRowWithData:(NSDictionary *)data {
     // in case the entity provider delegate
     // is set this is a provider call
     if(self.entityProviderDelegate) {
+        // retrieves the item name
+        NSString *itemName = [self getItemName];
+
+        // retrieves the item title name
+        NSString *itemTitleName = [self getItemTitleName];
+
         // updates the entity provider delegate
-        [self updateEntityProviderDelegate:data];
+        [self updateEntityProviderDelegate:data entityName:itemName entityKey:itemTitleName];
     }
     // otherwise it's a normal selection
     else {
@@ -151,10 +161,10 @@
 - (void)didDeselectRemoteRowWithData:(NSDictionary *)data {
 }
 
-- (void)updateEntity:(NSDictionary *)entity {
+- (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {
     if(self.entityProviderDelegate) {
         // updates the entity provider delegate
-        [self updateEntityProviderDelegate:entity];
+        [self updateEntityProviderDelegate:entity entityName:entityName entityKey:entityKey];
     }
 }
 

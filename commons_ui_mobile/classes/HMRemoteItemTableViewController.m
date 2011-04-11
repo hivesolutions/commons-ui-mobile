@@ -122,6 +122,14 @@
     return nil;
 }
 
+- (NSString *)getItemName {
+    return nil;
+}
+
+- (NSString *)getItemTitleName {
+    return nil;
+}
+
 - (void)changeEntity:(NSDictionary *)entity {
     // sets the entity
     self.entity = entity;
@@ -714,10 +722,17 @@
     // casts the data into remote data
     NSDictionary *remoteData = (NSDictionary *) data;
 
+    // retrieves the item name
+    NSString *itemName = [self getItemName];
+
+    // retrieves the item title name
+    NSString *itemTitleName = [self getItemTitleName];
+
     // in case the entity provider delegate is set
     if(self.entityProviderDelegate) {
-        // updates the entity in the entity provider delegate
-        [self.entityProviderDelegate updateEntity:remoteData];
+        // updates the entity in the entity provider delegate, using
+        // the item name and item title name
+        [self.entityProviderDelegate updateEntity:remoteData entityName:itemName entityKey:itemTitleName];
     }
 
     // pops the view controller

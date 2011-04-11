@@ -130,6 +130,22 @@ typedef enum {
 - (NSString *)getRemoteUrlForOperation:(HMItemOperationType)operationType;
 
 /**
+ * Retrieves the name of the item represented.
+ *
+ * @return The name of the item represented.
+ */
+- (NSString *)getItemName;
+
+/**
+ * Retrieves the name of tht title attribute
+ * to be used to represent the entity.
+ *
+ * @return The name of tht title attribute
+ * to be used to represent the entity.
+ */
+- (NSString *)getItemTitleName;
+
+/**
  * Constructs the internal data structures.
  */
 - (void)constructStructures;

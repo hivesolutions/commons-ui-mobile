@@ -39,7 +39,9 @@
  * of name and values.
  *
  * @param entity The map representing the entity.
+ * @param entityName The name of the entity to be updated.
+ * @param entityKey The name of the key attribute of the entity.
  */
-- (void)updateEntity:(NSDictionary *)entity;
+- (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey;
 
 @end
