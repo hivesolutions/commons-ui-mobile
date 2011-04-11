@@ -33,6 +33,7 @@
 #import "HMItemTableViewDataSource.h"
 #import "HMEntityProvider.h"
 #import "HMEntityProviderDelegate.h"
+#import "HMEntityDelegate.h"
 
 /**
  * The item table view header offset.

@@ -286,17 +286,46 @@
     // retrieves the button item
     HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
-    // in case the button item is a select view controller
-    if(buttonItem.selectViewController) {
-        // initializes the select view controller
-        HMTableViewController<HMEntityProvider> *selectViewController = [[buttonItem.selectViewController alloc] initWithNibName:buttonItem.selectNibName bundle:[NSBundle mainBundle]];
-        selectViewController.entityProviderDelegate = self;
+    // returns in case the table is in editing mode
+    // but the item is not selectable in editing mode
+    if(self.editing && !buttonItem.selectableEdit) {
+        return;
+    }
 
-        // pushes the select view controller
-        [self.viewController.navigationController pushViewController:selectViewController animated:YES];
+    // returns in case the table is not in editing mode
+    // but the item is not selectable when not in editing mode
+    if(!self.editing && !buttonItem.selectable) {
+        return;
+    }
 
-        // releases the select view controller reference
-        [selectViewController release];
+    // in case the table is in editing mode and
+    // edit view controller is defined
+    if(self.editing && buttonItem.editViewController) {
+        // initializes the view controller
+        UIViewController<HMEntityProvider> *viewControllerInstance = [[buttonItem.editViewController alloc] initWithNibName:buttonItem.editNibName bundle:[NSBundle mainBundle]];
+        viewControllerInstance.entityProviderDelegate = self;
+
+        // pushes the view controller instance
+        [self.viewController.navigationController pushViewController:viewControllerInstance animated:YES];
+
+        // releases the view controller reference
+        [viewControllerInstance release];
+    }
+    // in case the table is not in editing mode
+    // and a read view controller is defined
+    else if(!self.editing && buttonItem.readViewController) {
+        // initializes the view controller
+        UIViewController<HMEntityDelegate, HMEntityProvider> *viewControllerInstance = [[buttonItem.readViewController alloc] initWithNibName:buttonItem.readNibName bundle:[NSBundle mainBundle]];
+        viewControllerInstance.entityProviderDelegate = self;
+
+        // changes the entity
+        [viewControllerInstance changeEntity:buttonItem.data];
+
+        // pushes the view controller instance
+        [self.viewController.navigationController pushViewController:viewControllerInstance animated:YES];
+
+        // releases the view controller reference
+        [viewControllerInstance release];
     }
     // otherwise the button is normal and the handling
     // should be taken from the item delegate
