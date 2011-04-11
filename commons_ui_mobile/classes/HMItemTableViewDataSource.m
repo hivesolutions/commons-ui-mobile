@@ -259,6 +259,7 @@
         // sets the cell's attributes
         tableViewCell.name = tableCellItem.name;
         tableViewCell.description = tableCellItem.description;
+        tableViewCell.data = tableCellItem.data;
         tableViewCell.icon = tableCellItem.icon;
         tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
         tableViewCell.selectable = tableCellItem.selectable;
@@ -283,6 +284,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // clears the row's contents in case delete was selected
     if(editingStyle == UITableViewCellEditingStyleDelete) {
         // retrieves the table view cell
         HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView cellForRowAtIndexPath:indexPath];
