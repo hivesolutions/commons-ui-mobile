@@ -263,9 +263,8 @@
     [super dealloc];
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+#pragma mark -
 #pragma mark UITextView properties
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)setText:(NSString *)atext {
     internalTextView.text = atext;
@@ -278,8 +277,6 @@
     return internalTextView.text;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 - (void)setFont:(UIFont *)afont {
     internalTextView.font = afont;
 
@@ -291,18 +288,13 @@
     return internalTextView.font;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-- (void)setTextColor:(UIColor *)color
-{
+- (void)setTextColor:(UIColor *)color {
     internalTextView.textColor = color;
 }
 
 - (UIColor *)textColor{
     return internalTextView.textColor;
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)setTextAlignment:(UITextAlignment)aligment {
     internalTextView.textAlignment = aligment;
@@ -312,8 +304,6 @@
     return internalTextView.textAlignment;
 }
 
-/////
-
 - (void)setScrollEnabled:(BOOL)scrollEnabled {
     internalTextView.scrollEnabled = scrollEnabled;
 }
@@ -321,9 +311,6 @@
 - (BOOL)isScrollEnabled {
     return internalTextView.scrollEnabled;
 }
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)setSelectedRange:(NSRange)range {
     internalTextView.selectedRange = range;
@@ -333,8 +320,6 @@
     return internalTextView.selectedRange;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 - (void)setEditable:(BOOL)beditable {
     internalTextView.editable = beditable;
 }
@@ -342,8 +327,6 @@
 - (BOOL)isEditable {
     return internalTextView.editable;
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 - (void)setSecureTextEntry:(BOOL)bsecureTextEntry {
     internalTextView.secureTextEntry = bsecureTextEntry;
@@ -353,8 +336,6 @@
     return internalTextView.secureTextEntry;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 - (void)setReturnKeyType:(UIReturnKeyType)keyType {
     internalTextView.returnKeyType = keyType;
 }
@@ -362,8 +343,6 @@
 - (UIReturnKeyType)returnKeyType {
     return internalTextView.returnKeyType;
 }
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 
 -(void)setDataDetectorTypes:(UIDataDetectorTypes)datadetector {
     internalTextView.dataDetectorTypes = datadetector;
@@ -373,8 +352,6 @@
     return internalTextView.dataDetectorTypes;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
 - (BOOL)hasText {
     return [internalTextView hasText];
 }
@@ -383,13 +360,9 @@
     [internalTextView scrollRangeToVisible:range];
 }
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark -
 #pragma mark UITextViewDelegate
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
     if([delegate respondsToSelector:@selector(growingTextViewShouldBeginEditing:)]) {
         return [delegate growingTextViewShouldBeginEditing:self];
@@ -398,8 +371,6 @@
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)textViewShouldEndEditing:(UITextView *)textView {
     if([delegate respondsToSelector:@selector(growingTextViewShouldEndEditing:)]) {
         return [delegate growingTextViewShouldEndEditing:self];
@@ -409,31 +380,25 @@
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     if([delegate respondsToSelector:@selector(growingTextViewDidBeginEditing:)]) {
         [delegate growingTextViewDidBeginEditing:self];
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)textViewDidEndEditing:(UITextView *)textView {
     if([delegate respondsToSelector:@selector(growingTextViewDidEndEditing:)]) {
         [delegate growingTextViewDidEndEditing:self];
     }
 }
 
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)atext {
     // weird 1 pixel bug when clicking backspace when textView is empty
     if(![textView hasText] && [atext isEqualToString:@""]) return NO;
 
-    if ([atext isEqualToString:@"\n"]) {
-        if ([delegate respondsToSelector:@selector(growingTextViewShouldReturn:)]) {
-            if (![delegate performSelector:@selector(growingTextViewShouldReturn:) withObject:self]) {
+    if([atext isEqualToString:@"\n"]) {
+        if([delegate respondsToSelector:@selector(growingTextViewShouldReturn:)]) {
+            if(![delegate performSelector:@selector(growingTextViewShouldReturn:) withObject:self]) {
                 return YES;
             } else {
                 [textView resignFirstResponder];
@@ -445,9 +410,8 @@
     return YES;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
 - (void)textViewDidChangeSelection:(UITextView *)textView {
-    if ([delegate respondsToSelector:@selector(growingTextViewDidChangeSelection:)]) {
+    if([delegate respondsToSelector:@selector(growingTextViewDidChangeSelection:)]) {
         [delegate growingTextViewDidChangeSelection:self];
     }
 }
