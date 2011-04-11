@@ -210,6 +210,9 @@
 
         // sets the text label text with the secret value
         self.textLabel.text = secretValue;
+
+        // releases the object
+        [secretValue release];
     }
 }
 
