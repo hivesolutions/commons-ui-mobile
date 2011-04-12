@@ -213,47 +213,47 @@ typedef enum {
  * intance operation type is used.
  * @return The converted remote group as remote data.
  */
-- (NSMutableDictionary *)convertRemoteGroup:(HMItemOperationType)operationType;
+- (NSMutableArray *)convertRemoteGroup:(HMItemOperationType)operationType;
 
 /**
  * Converts the remote group for the create operation.
  * This operation puts the result into the given
- * remote data dictionary.
+ * remote data array.
  *
- * @param The remote data dictionary to receive the
+ * @param The remote data array to receive the
  * converted results.
  */
-- (void)convertRemoteGroupCreate:(NSMutableDictionary *)remoteData;
+- (void)convertRemoteGroupCreate:(NSMutableArray *)remoteData;
 
 /**
  * Converts the remote group for the read operation.
  * This operation puts the result into the given
- * remote data dictionary.
+ * remote data array.
  *
- * @param The remote data dictionary to receive the
+ * @param The remote data array to receive the
  * converted results.
  */
-- (void)convertRemoteGroupRead:(NSMutableDictionary *)remoteData;
+- (void)convertRemoteGroupRead:(NSMutableArray *)remoteData;
 
 /**
  * Converts the remote group for the update operation.
  * This operation puts the result into the given
- * remote data dictionary.
+ * remote data array.
  *
- * @param The remote data dictionary to receive the
+ * @param The remote data array to receive the
  * converted results.
  */
-- (void)convertRemoteGroupUpdate:(NSMutableDictionary *)remoteData;
+- (void)convertRemoteGroupUpdate:(NSMutableArray *)remoteData;
 
 /**
  * Converts the remote group for the delete operation.
  * This operation puts the result into the given
- * remote data dictionary.
+ * remote data array.
  *
- * @param The remote data dictionary to receive the
+ * @param The remote data array to receive the
  * converted results.
  */
-- (void)convertRemoteGroupDelete:(NSMutableDictionary *)remoteData;
+- (void)convertRemoteGroupDelete:(NSMutableArray *)remoteData;
 
 /**
  * Updates the remote data, by performing a remote

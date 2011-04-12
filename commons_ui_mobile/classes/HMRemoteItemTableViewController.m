@@ -348,13 +348,13 @@
 - (void)processRemoteData:(NSDictionary *)remoteData {
 }
 
-- (NSMutableDictionary *)convertRemoteGroup:(HMItemOperationType)operationType; {
+- (NSMutableArray *)convertRemoteGroup:(HMItemOperationType)operationType; {
     // retrieves the target operation type based on the given parameter
     // checking for nulls
     HMItemOperationType operationTypeTarget = operationType == HMItemOperationUnset ? self.operationType : operationType;
 
     // allocates the remote data
-    NSMutableDictionary *remoteData = [[NSMutableDictionary alloc] init];
+    NSMutableArray *remoteData = [[NSMutableArray alloc] init];
 
     // switches over the operation type target
     switch(operationTypeTarget) {
@@ -400,16 +400,16 @@
     return [remoteData autorelease];
 }
 
-- (void)convertRemoteGroupCreate:(NSMutableDictionary *)remoteData {
+- (void)convertRemoteGroupCreate:(NSMutableArray *)remoteData {
 }
 
-- (void)convertRemoteGroupRead:(NSMutableDictionary *)remoteData {
+- (void)convertRemoteGroupRead:(NSMutableArray *)remoteData {
 }
 
-- (void)convertRemoteGroupUpdate:(NSMutableDictionary *)remoteData {
+- (void)convertRemoteGroupUpdate:(NSMutableArray *)remoteData {
 }
 
-- (void)convertRemoteGroupDelete:(NSMutableDictionary *)remoteData {
+- (void)convertRemoteGroupDelete:(NSMutableArray *)remoteData {
 }
 
 - (void)updateRemote {
@@ -568,7 +568,7 @@
 
         // converts the remote group, retrieving the remote
         // data
-        NSDictionary *remoteData = [self convertRemoteGroup:HMItemOperationUpdate];
+        NSArray *remoteData = [self convertRemoteGroup:HMItemOperationUpdate];
 
         // creates the update url
         NSString *updateUrl = [self getRemoteUrlForOperation:HMItemOperationUpdate];
@@ -587,8 +587,8 @@
         // sets the edit bar button item
         [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
 
-        // updates the remote with the given remote data
-        [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD setSession:YES];
+        // updates the remote with the given remote sequence data
+        [remoteAbstraction updateRemoteWithSequenceData:remoteData method:HTTP_POST_METHOD setSession:YES];
 
         // releases the remote abstraction
         [remoteAbstraction release];
@@ -657,7 +657,7 @@
 
     // converts the remote group, retrieving the remote
     // data (in seqence)
-    NSDictionary *remoteData = [self convertRemoteGroup:HMItemOperationCreate];
+    NSArray *remoteData = [self convertRemoteGroup:HMItemOperationCreate];
 
     // creates the create url
     NSString *createUrl = [self getRemoteUrlForOperation:HMItemOperationCreate];
@@ -673,8 +673,8 @@
     // sets the left bar buttom
     [self.navigationItem setLeftBarButtonItem:nil animated:YES];
 
-    // updates the remote with the given remote data
-    [remoteAbstraction updateRemoteWithData:remoteData method:HTTP_POST_METHOD setSession:YES];
+    // updates the remote with the given remote sequence data
+    [remoteAbstraction updateRemoteWithSequenceData:remoteData method:HTTP_POST_METHOD setSession:YES];
 
     // releases the remote abstraction
     [remoteAbstraction release];
