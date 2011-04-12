@@ -32,6 +32,7 @@
 #import "HMApplicationDelegate.h"
 #import "HMAuthenticationDelegate.h"
 #import "HMAuthenticationViewController.h"
+#import "HMTableViewCell.h"
 
 /**
  * Class used to represent a table view data source

@@ -30,7 +30,6 @@
 @synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
 @synthesize returnType = _returnType;
-@synthesize editableRow = _editableRow;
 @synthesize editableCell = _editableCell;
 @synthesize clearable = _clearable;
 @synthesize editAlways = _editAlways;
@@ -44,7 +43,6 @@
 
     // sets the default attributes
     _editingDirty = YES;
-    _editableRow = YES;
     _editableCell = YES;
     _persistentEdit = NO;
     _editAlways = NO;

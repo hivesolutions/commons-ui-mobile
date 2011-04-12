@@ -35,7 +35,6 @@
     UIView *_editView;
     NSString *_defaultValue;
     NSString *_returnType;
-    BOOL _editableRow;
     BOOL _editableCell;
     BOOL _clearable;
     BOOL _editAlways;
@@ -61,11 +60,6 @@
  * the cell's value edition.
  */
 @property (retain) NSString *returnType;
-
-/**
- * Indicates if the row is editable.
- */
-@property (assign) BOOL editableRow;
 
 /**
  * Indicates if the cell is editable.

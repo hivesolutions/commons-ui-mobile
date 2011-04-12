@@ -63,7 +63,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView sectionViewForLabelItem:(HMLabelItem *)labelItem {
     // retrieves the size occupied by the font
-    UIFont *font = [UIFont fontWithName:labelItem.fontName size:labelItem.fontSize];
+    UIFont *font = [UIFont fontWithName:labelItem.descriptionFont size:labelItem.descriptionFontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
 
@@ -80,8 +80,8 @@
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
     // retrieves the label colors
-    HMColor *textColor = labelItem.textColor;
-    HMColor *shadowColor = labelItem.shadowColor;
+    HMColor *textColor = labelItem.descriptionColor;
+    HMColor *shadowColor = labelItem.descriptionShadowColor;
 
     // sets the label text color
     if(textColor) {
@@ -160,14 +160,25 @@
     // retrieves the table cell item
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
-    // returns the editing style in case the table is
-    // being edited and the table cell item is indentable
-    if(self.editing && tableCellItem.editableRow) {
-        // returns with editing style
+    // returns in case the table view
+    // is not in editing mode
+    if(!self.editing) {
+        return UITableViewCellEditingStyleNone;
+    }
+
+    // returns the insert style in
+    // case the row is insertable
+    if(tableCellItem.insertableRow) {
+        return UITableViewCellEditingStyleInsert;
+    }
+
+    // returns the delete style in
+    // case the row is deletable
+    if(tableCellItem.deletableRow) {
         return UITableViewCellEditingStyleDelete;
     }
 
-    // returns no editing style
+    // returns the default value
     return UITableViewCellEditingStyleNone;
 }
 
@@ -193,7 +204,7 @@
     HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
 
     // retrieves the height occupied by the font
-    UIFont *font = [UIFont fontWithName:headerLabelItem.fontName size:headerLabelItem.fontSize];
+    UIFont *font = [UIFont fontWithName:headerLabelItem.descriptionFont size:headerLabelItem.descriptionFontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_HEADER_OFFSET;
@@ -216,7 +227,7 @@
     HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
 
     // retrieves the height occupied by the font
-    UIFont *font = [UIFont fontWithName:footerLabelItem.fontName size:footerLabelItem.fontSize];
+    UIFont *font = [UIFont fontWithName:footerLabelItem.descriptionFont size:footerLabelItem.descriptionFontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_FOOTER_OFFSET;
@@ -362,18 +373,37 @@
 }
 
 - (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {
-    // retrieves the employee name
-    NSString *employeeName = [entity objectForKey:entityKey];
+    // retrieves the entity value
+    NSString *entityValue = [entity objectForKey:entityKey];
 
-    // retrieves the cell identifier map
-    NSMutableDictionary *cellIdentifierMap = self.itemDataSource.cellIdentifierMap;
+    // retrieves the item
+    HMItem *item = (HMItem *) [self.itemDataSource.listItemGroup search:entityName];
 
-    // retrieves the table cell view for the entity name
-    HMTableViewCell *tableViewCell = [cellIdentifierMap objectForKey:entityName];
+    // creates an item and adds it to the section in case
+    // the item is a table mutable section item group
+    if([item isKindOfClass:[HMTableMutableSectionItemGroup class]]) {
+        // casts the item to a table mutable section item group
+        HMTableMutableSectionItemGroup *tableMutableSectionItemGroup = (HMTableMutableSectionItemGroup *) item;
 
-    // updates the employee cell
-    tableViewCell.description = employeeName;
-    tableViewCell.data = entity;
+        // creates the table cell item for the entity
+        HMTableCellItem *tableCellItem = [tableMutableSectionItemGroup.tableCellItemCreationDelegate createTableCellItem:entity];
+
+        // adds the table cell item to the table mutable section item group
+        [tableMutableSectionItemGroup addItem:tableCellItem];
+
+        // reloads the data
+        [self reloadData];
+    } else {
+        // retrieves the cell identifier map
+        NSMutableDictionary *cellIdentifierMap = self.itemDataSource.cellIdentifierMap;
+
+        // retrieves the table cell view for the entity name
+        HMTableViewCell *tableViewCell = [cellIdentifierMap objectForKey:entityName];
+
+        // updates the table view cell
+        tableViewCell.description = entityValue;
+        tableViewCell.data = entity;
+    }
 }
 
 + (void)_keepAtLinkTime {

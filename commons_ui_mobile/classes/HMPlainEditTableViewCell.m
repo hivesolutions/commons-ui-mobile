@@ -31,9 +31,6 @@
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
 
-    // defines the text label's font
-    self.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-
     // returns self
     return self;
 }

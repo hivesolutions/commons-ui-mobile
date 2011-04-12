@@ -203,7 +203,6 @@
                     columnStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnStringTableViewCell.secure = stringTableCellItem.secure;
-                    columnStringTableViewCell.editableRow = stringTableCellItem.editableRow;
                     columnStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnStringTableViewCell.returnType = stringTableCellItem.returnType;
@@ -216,7 +215,6 @@
                     plainStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainStringTableViewCell.secure = stringTableCellItem.secure;
-                    plainStringTableViewCell.editableRow = stringTableCellItem.editableRow;
                     plainStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainStringTableViewCell.returnType = stringTableCellItem.returnType;
@@ -231,7 +229,6 @@
                     columnMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnMultilineStringTableViewCell.secure = stringTableCellItem.secure;
-                    columnMultilineStringTableViewCell.editableRow = stringTableCellItem.editableRow;
                     columnMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
@@ -244,7 +241,6 @@
                     plainMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainMultilineStringTableViewCell.secure = stringTableCellItem.secure;
-                    plainMultilineStringTableViewCell.editableRow = stringTableCellItem.editableRow;
                     plainMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainMultilineStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
@@ -255,29 +251,40 @@
                 }
             }
         }
-
-        // sets the cell's attributes
-        tableViewCell.name = tableCellItem.name;
-        tableViewCell.description = tableCellItem.description;
-        tableViewCell.data = tableCellItem.data;
-        tableViewCell.icon = tableCellItem.icon;
-        tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
-        tableViewCell.selectable = tableCellItem.selectable;
-        tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
-        tableViewCell.accessoryValue = tableCellItem.accessoryValue;
-        tableViewCell.selectableName = tableCellItem.selectableName;
-        tableViewCell.height = tableCellItem.height;
-        tableViewCell.item = tableCellItem;
     }
+
+    // retrieves the table view cell's colors
+    HMColor *nameColor = tableCellItem.nameColor;
+    HMColor *descriptionColor = tableCellItem.descriptionColor;
+    HMColor *backgroundColor = tableCellItem.backgroundColor;
+
+    // sets the cell's attributes
+    tableViewCell.item = tableCellItem;
+    tableViewCell.data = tableCellItem.data;
+    tableViewCell.name = tableCellItem.name;
+    tableViewCell.description = tableCellItem.description;
+    tableViewCell.nameFont = tableCellItem.nameFont;
+    tableViewCell.nameFontSize = tableCellItem.nameFontSize;
+    tableViewCell.descriptionFont = tableCellItem.descriptionFont;
+    tableViewCell.descriptionFontSize = tableCellItem.descriptionFontSize;
+    tableViewCell.icon = tableCellItem.icon;
+    tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
+    tableViewCell.selectable = tableCellItem.selectable;
+    tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
+    tableViewCell.accessoryValue = tableCellItem.accessoryValue;
+    tableViewCell.selectableName = tableCellItem.selectableName;
+    tableViewCell.height = tableCellItem.height;
+    tableViewCell.insertableRow = tableCellItem.insertableRow;
+    tableViewCell.deletableRow = tableCellItem.deletableRow;
+    tableViewCell.nameColor = [UIColor colorWithRed:nameColor.red green:nameColor.green blue:nameColor.blue alpha:nameColor.alpha];
+    tableViewCell.descriptionColor = [UIColor colorWithRed:descriptionColor.red green:descriptionColor.green blue:descriptionColor.blue alpha:descriptionColor.alpha];
+    tableViewCell.backgroundColor = [UIColor colorWithRed:backgroundColor.red green:backgroundColor.green blue:backgroundColor.blue alpha:backgroundColor.alpha];
 
     // inserts the item cell into the cell list
     [self.cellList addObject:tableViewCell];
 
     // inserts the item cell identifier association into the map
     [self.cellIdentifierMap setObject:tableViewCell forKey:tableCellItem.identifier];
-
-    // sets the button item's attributes in the cell
-    tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 
     // returns the cell
     return tableViewCell;

@@ -503,6 +503,8 @@
     // configures the table view cell
     tableViewCell.clearable = YES;
     tableViewCell.editAlways = YES;
+    tableViewCell.descriptionFont = @"Helvetica-Bold";
+    tableViewCell.descriptionFontSize = 15;
     tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 

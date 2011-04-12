@@ -27,22 +27,39 @@
 
 @implementation HMTableViewCell
 
-@synthesize item = _item;
+@synthesize name = _name;
+@synthesize nameFont = _nameFont;
+@synthesize nameFontSize = _nameFontSize;
+@synthesize nameColor = _nameColor;
+@synthesize descriptionFont = _descriptionFont;
+@synthesize descriptionFontSize = _descriptionFontSize;
+@synthesize descriptionColor = _descriptionColor;
 @synthesize selectableName = _selectableName;
 @synthesize height = _height;
-@synthesize itemTableView = _itemTableView;
 @synthesize viewReady = _viewReady;
+@synthesize insertableRow = _insertableRow;
+@synthesize deletableRow = _deletableRow;
 @synthesize data = _data;
+@synthesize item = _item;
+@synthesize itemTableView = _itemTableView;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
-    // sets the default attributes
-    self.height = HM_TABLE_VIEW_CELL_HEIGHT;
-
-    // replaces the selected background view
+    // creates the background view
     HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
+
+    // sets the default attributes
+    self.nameFont = @"Helvetica-Bold";
+    self.nameFontSize = HM_TABLE_VIEW_CELL_NAME_FONT_SIZE;
+    self.nameColor = [UIColor blackColor];
+    self.descriptionFont = @"Helvetica-Bold";
+    self.descriptionFontSize = HM_TABLE_VIEW_CELL_DESCRIPTION_FONT_SIZE;
+    self.descriptionColor = [UIColor blackColor];
+    self.height = HM_TABLE_VIEW_CELL_HEIGHT;
+    self.insertableRow = NO;
+    self.deletableRow = YES;
     self.selectedBackgroundView = backgroundView;
 
     // releases the objects
@@ -53,14 +70,23 @@
 }
 
 - (void)dealloc {
-    // releases the item
-    [_item release];
-
     // releases the name
     [_name release];
 
+    // releases the name font
+    [_nameFont release];
+
+    // releases the name color
+    [_nameColor release];
+
     // releases the description
     [_description release];
+
+    // releases the description font
+    [_descriptionFont release];
+
+    // releases the description color
+    [_descriptionColor release];
 
     // releases the icon
     [_icon release];
@@ -76,6 +102,9 @@
 
     // releases the data
     [_data release];
+
+    // releases the item
+    [_item release];
 
     // calls the super
     [super dealloc];
@@ -319,7 +348,7 @@
     } else if([accessoryTypeString isEqualToString:@"badge_label"]) {
         // creates the badge label and sets it as the accessory view
         HMBadgeLabel *badgeLabel = [[HMBadgeLabel alloc] init];
-        badgeLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+        badgeLabel.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
         badgeLabel.text = self.accessoryValue;
         badgeLabel.backgroundColor = [UIColor clearColor];
         badgeLabel.textColor = [UIColor whiteColor];
@@ -387,6 +416,12 @@
         self.accessoryView.frame = frame;
         self.accessoryView.bounds = frame;
     }
+
+    // sets the label fonts and colors
+    self.textLabel.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
+    self.textLabel.textColor = self.descriptionColor;
+    self.detailTextLabel.font = [UIFont fontWithName:self.nameFont size:self.nameFontSize];
+    self.detailTextLabel.textColor = self.nameColor;
 }
 
 - (void)didMoveToSuperview {

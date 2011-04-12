@@ -170,7 +170,9 @@
     // need to create a new cell
     if(cell == nil) {
         // creates the new cell with the given reuse identifier
-        cell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        HMTableViewCell *tableViewCell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        tableViewCell.descriptionFontSize = 18;
+        cell = tableViewCell;
     }
 
     // retrieves the index path row

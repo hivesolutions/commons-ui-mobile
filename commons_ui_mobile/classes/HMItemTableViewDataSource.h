@@ -27,6 +27,10 @@
 
 #import "HMTableViewDataSource.h"
 #import "HMItemTableViewProvider.h"
+#import "HMColumnStringTableViewCell.h"
+#import "HMPlainStringTableViewCell.h"
+#import "HMColumnMultilineStringTableViewCell.h"
+#import "HMPlainMultilineStringTableViewCell.h"
 
 /**
  * Table view data soruce used to represent for reprenstation

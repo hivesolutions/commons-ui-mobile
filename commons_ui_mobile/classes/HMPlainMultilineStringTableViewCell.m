@@ -69,7 +69,7 @@
     HPGrowingTextView *textView = [[HPGrowingTextView alloc] initWithFrame:textViewFrame];
     textView.delegate = self;
     textView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    textView.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
+    textView.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
     textView.backgroundColor = [UIColor clearColor];
     textView.text = self.description;
     textView.editable = NO;

@@ -25,6 +25,19 @@
 
 #import "Dependencies.h"
 
+#import "HMBadgeLabel.h"
+#import "HMTableViewCellBackgroundView.h"
+
+/**
+ * The table view cell name font size.
+ */
+#define HM_TABLE_VIEW_CELL_NAME_FONT_SIZE 13
+
+/**
+ * The table view cell description font size.
+ */
+#define HM_TABLE_VIEW_CELL_DESCRIPTION_FONT_SIZE 15
+
 /**
  * The table view cell height.
  */
@@ -56,8 +69,13 @@
     NSString *_description;
 
     @private
-    HMItem *_item;
+    NSString *_descriptionFont;
+    NSUInteger _descriptionFontSize;
+    UIColor *_descriptionColor;
     NSString *_name;
+    NSString *_nameFont;
+    NSUInteger _nameFontSize;
+    UIColor *_nameColor;
     NSString *_icon;
     NSString *_highlightedIcon;
     BOOL _selectable;
@@ -65,9 +83,12 @@
     NSString *_accessoryTypeString;
     NSString *_accessoryValue;
     float _height;
-    HMItemTableView *_itemTableView;
     BOOL _viewReady;
+    BOOL _insertableRow;
+    BOOL _deletableRow;
     NSDictionary *_data;
+    HMItem *_item;
+    HMItemTableView *_itemTableView;
 }
 
 /**
@@ -77,10 +98,40 @@
 @property (retain) NSString *name;
 
 /**
+ * The table cell's name font.
+ */
+@property (retain) NSString *nameFont;
+
+/**
+ * The table cell's name font size.
+ */
+@property (assign) NSUInteger nameFontSize;
+
+/**
+ * The table cell's name color.
+ */
+@property (retain) UIColor *nameColor;
+
+/**
  * The cell's description that will be set
  * as its detail text label.
  */
 @property (retain) NSString *description;
+
+/**
+ * The table cell's description font.
+ */
+@property (retain) NSString *descriptionFont;
+
+/**
+ * The table cell's description font size.
+ */
+@property (assign) NSUInteger descriptionFontSize;
+
+/**
+ * The table cell's description color.
+ */
+@property (retain) UIColor *descriptionColor;
 
 /**
  * The identifier of the icon resource.
@@ -119,20 +170,30 @@
 @property (assign) float height;
 
 /**
- * The item table view this cell belongs to.
- */
-@property (assign) HMItemTableView *itemTableView;
-
-/**
  * Flag controlling if the view representing the cell is
  * ready for rendering.
  */
 @property (assign) BOOL viewReady;
 
 /**
+ * Indicates if the row is insertable.
+ */
+@property (assign) BOOL insertableRow;
+
+/**
+ * Indicates if the row is deletable.
+ */
+@property (assign) BOOL deletableRow;
+
+/**
  * The data associated with the cell.
  */
 @property (retain) NSDictionary *data;
+
+/**
+ * The item table view this cell belongs to.
+ */
+@property (assign) HMItemTableView *itemTableView;
 
 /**
  * Called when the edinting mode is going to be changed.

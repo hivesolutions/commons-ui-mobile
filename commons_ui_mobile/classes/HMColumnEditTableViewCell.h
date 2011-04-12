@@ -26,6 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMEditTableViewCell.h"
+#import "HMEditTableViewCellEditView.h"
 
 // avoids circular dependency
 @class HMEditItemTableView;
