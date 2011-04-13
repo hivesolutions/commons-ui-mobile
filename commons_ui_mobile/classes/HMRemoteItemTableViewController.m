@@ -736,7 +736,7 @@
     }
 
     // pops the view controller
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController dismissModalViewControllerAnimated:YES];
 }
 
 - (void)processOperationRead:(id)data  {
@@ -816,6 +816,9 @@
 }
 
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
+    // prints a debug message
+    NSLog(@"Remote call did fail");
+
     // sets the remote data as not set
     _remoteDataIsSet = NO;
 
