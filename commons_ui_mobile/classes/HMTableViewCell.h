@@ -87,6 +87,7 @@
     BOOL _insertableRow;
     BOOL _deletableRow;
     NSDictionary *_data;
+    BOOL _changeEditingStatus;
     HMItem *_item;
     HMItemTableView *_itemTableView;
 }
@@ -189,6 +190,11 @@
  * The data associated with the cell.
  */
 @property (retain) NSDictionary *data;
+
+/**
+* Flag that controls the change editing status.
+ */
+@property (assign) BOOL changeEditingStatus;
 
 /**
  * The item table view this cell belongs to.

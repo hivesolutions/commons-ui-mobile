@@ -102,6 +102,19 @@
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    // in case the "new" editing value is the same
+    // as the current change editing status (nothing changes)
+    if(editing == self.changeEditingStatus) {
+        // returns immediately
+        return;
+    }
+
+    // in case the view is not ready
+    if(!self.viewReady) {
+        // returns immediately
+        return;
+    }
+
     // in case the change is to editing and the cell is meant
     // to be selectable in edit mode or in case the cell is not
     // in edit mode and it is selectable

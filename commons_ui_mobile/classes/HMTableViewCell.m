@@ -40,6 +40,7 @@
 @synthesize insertableRow = _insertableRow;
 @synthesize deletableRow = _deletableRow;
 @synthesize data = _data;
+@synthesize changeEditingStatus = _changeEditingStatus;
 @synthesize item = _item;
 @synthesize itemTableView = _itemTableView;
 
@@ -111,6 +112,7 @@
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
+    self.changeEditingStatus = editing;
 }
 
 - (void)updateTableData {

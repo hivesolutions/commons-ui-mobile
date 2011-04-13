@@ -100,6 +100,7 @@
     // focuses on the text field in case
     // it should focus when entering edit mode
     if(self.focusEdit) {
+        // makes the text field the first responder
         [self.textField becomeFirstResponder];
     }
 }
