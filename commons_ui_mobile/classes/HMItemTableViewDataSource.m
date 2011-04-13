@@ -291,26 +291,49 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // clears the row's contents in case delete was selected
-    if(editingStyle == UITableViewCellEditingStyleDelete) {
-        // retrieves the table view cell
-        HMTableViewCell *tableViewCell = (HMTableViewCell *) [tableView cellForRowAtIndexPath:indexPath];
+    // returns in case the editing style is not delete
+    if(editingStyle != UITableViewCellEditingStyleDelete) {
+        return;
+    }
 
-        // creates an array with the index path
-        NSArray *array = [[NSArray alloc] initWithObjects:indexPath, nil];
+    // retrieves the table cell item
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
-        // clears the table view cell data
-        tableViewCell.description = @"";
-        tableViewCell.data = nil;
+    // in case the row is not deletable
+    if(!tableCellItem.deletableRow) {
+        // returns without
+        // performing any action
+        return;
+    }
 
-        // deletes and inserts the rows
-        [tableView beginUpdates];
-        [tableView deleteRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
-        [tableView insertRowsAtIndexPaths:array withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
+    // creates an array with the index path
+    NSArray *indexPathArray = [NSArray arrayWithObject:indexPath];
 
-        // releases the objects
-        [array release];
+    // peforms the specified delete action type
+    switch(tableCellItem.deleteActionType) {
+        // deletes the row
+        case HMTableCellItemDeleteActionTypeDelete:
+            // removes the item from the list item group
+            [self.listItemGroup removeItemAtIndexPath:indexPath];
+
+            // deletes the row
+            [tableView beginUpdates];
+            [tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+            [tableView endUpdates];
+            break;
+        // clears the row
+        case HMTableCellItemDeleteActionTypeClear:
+            // clears the table cell item's
+            // description and data
+            tableCellItem.description = @"";
+            tableCellItem.data = nil;
+
+            // reloads the row
+            [tableView beginUpdates];
+            [tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+            [tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
+            [tableView endUpdates];
+            break;
     }
 }
 
@@ -326,6 +349,15 @@
 
     // retrieves the section item group items count
     NSInteger sectionItemGroupItemsCount = [sectionItemGroup.items count];
+
+    // figures out if the item group is mutable
+    BOOL tableMutableSectionItemGroup = [sectionItemGroup isKindOfClass:[HMTableMutableSectionItemGroup class]];
+
+    // decreases the count in case the table is not in edit mode and
+    // the section is mutable, in order to hide the add line button
+    if(!self.tableView.editing && tableMutableSectionItemGroup) {
+        sectionItemGroupItemsCount -= 1;
+    }
 
     // releases the index path
     [indexPath release];

@@ -67,6 +67,9 @@
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
 
+    // retrieves the description color
+    HMColor *descriptionColor = labelItem.descriptionColor;
+
     // creates a label
     CGRect labelFrame = CGRectMake(10, 0, tableView.frame.size.width - 20, size.height);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
@@ -78,19 +81,12 @@
     label.backgroundColor = [UIColor clearColor];
     label.shadowOffset = CGSizeMake(1, 1);
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-
-    // retrieves the label colors
-    HMColor *textColor = labelItem.descriptionColor;
-    HMColor *shadowColor = labelItem.descriptionShadowColor;
-
-    // sets the label text color
-    if(textColor) {
-        label.textColor = [UIColor colorWithRed:textColor.red green:textColor.green blue:textColor.blue alpha:textColor.alpha];
-    }
+    label.textColor = [UIColor colorWithRed:descriptionColor.red green:descriptionColor.green blue:descriptionColor.blue alpha:descriptionColor.alpha];
 
     // sets the label shadow color
-    if(shadowColor) {
-        label.shadowColor = [UIColor colorWithRed:shadowColor.red green:shadowColor.green blue:shadowColor.blue alpha:shadowColor.alpha];
+    if(labelItem.descriptionShadowColor) {
+        HMColor *descriptionShadowColor = labelItem.descriptionShadowColor;
+        label.shadowColor = [UIColor colorWithRed:descriptionShadowColor.red green:descriptionShadowColor.green blue:descriptionShadowColor.blue alpha:descriptionShadowColor.alpha];
     }
 
     // creates a wrapper view
@@ -370,6 +366,19 @@
         // calls the set editing changed in the item delegate
         [self.itemDelegate setEditingChanged:editing];
     }
+
+    // reloads the data to take into account table
+    // changes that are related with the edit mode
+    [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(reloadData) userInfo:nil repeats:NO];
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
+    // calls the super for set editing
+    [super setEditing:editing animated:animate commit:commit];
+
+    // reloads the data to take into account table
+    // changes that are related with the edit mode
+    [self reloadData];
 }
 
 - (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {

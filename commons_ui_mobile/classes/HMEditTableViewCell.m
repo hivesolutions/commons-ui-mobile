@@ -194,4 +194,19 @@
     self.viewReady = YES;
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    // calls the super
+    [super setSelected:selected animated:animated];
+
+    // in case it's not selectable
+    if((!self.editing && !self.selectable) || (self.editing && !self.selectableEdit)) {
+        // returns immediately
+        // to avoid bluring all
+        return;
+    }
+
+    // focuses the editing
+    [self focusEditing];
+}
+
 @end
