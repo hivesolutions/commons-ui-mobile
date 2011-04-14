@@ -473,9 +473,9 @@
     [self redrawHeader];
 }
 
-- (void)flushItemSpecification {
+- (void)flushItemSpecificationTransient:(BOOL)transient {
     // calls the super
-    [super flushItemSpecification];
+    [super flushItemSpecificationTransient:(BOOL)transient];
 
     // retrieves the header named item group
     HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
@@ -486,8 +486,8 @@
     HMItem *imageItem = [headerNamedItemGroup getItem:@"image"];
 
     // sets the attributes
-    titleItem.description = self.titleTableViewCell.description;
-    subTitleItem.description = self.subTitleTableViewCell.description;
+    titleItem.description = transient ? self.titleTableViewCell.descriptionTransient : self.titleTableViewCell.description;
+    subTitleItem.description = transient ? self.subTitleTableViewCell.descriptionTransient : self.subTitleTableViewCell.description;
     imageItem.description = self.image;
 }
 

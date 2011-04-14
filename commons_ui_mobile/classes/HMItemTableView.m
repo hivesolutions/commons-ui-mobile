@@ -57,8 +57,19 @@
 - (void)flushItemSpecification {
     // flushes the item specification in the item
     // data source (changing) the item specification
+    // values with the current ui component ones,
+    // in this case the item data source is not
+    // called directly because it would stop
+    // the behaviour from the flush item specification
+    // implementation of inheriting classes to be avoided
+    [self flushItemSpecificationTransient:NO];
+}
+
+- (void)flushItemSpecificationTransient:(BOOL)transient {
+    // flushes the item specification in the item
+    // data source (changing) the item specification
     // values with the current ui component ones
-    [self.itemDataSource flushItemSpecification];
+    [self.itemDataSource flushItemSpecificationTransient:transient];
 }
 
 - (UIView *)tableView:(UITableView *)tableView sectionViewForLabelItem:(HMLabelItem *)labelItem {

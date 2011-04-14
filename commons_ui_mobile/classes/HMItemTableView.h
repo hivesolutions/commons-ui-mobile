@@ -68,6 +68,18 @@
 - (void)flushItemSpecification;
 
 /**
+ * Flushes the item specification, converting the current ui component
+ * values with new object items.
+ * This method should be called before persisting any data represented
+ * in the ui.
+ *
+ * @param transient Indicates if the cell's transient value,
+ * the value that is currently displayed, should be flushed,
+ * or if the commited value should be flushed instead.
+ */
+- (void)flushItemSpecificationTransient:(BOOL)transient;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;
