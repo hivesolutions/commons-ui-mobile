@@ -216,4 +216,8 @@
     }
 }
 
+- (NSString *)descriptionTransient {
+    return self.textField.text;
+}
+
 @end

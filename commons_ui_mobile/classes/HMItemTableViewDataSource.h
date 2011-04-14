@@ -78,12 +78,25 @@
 - (void)flushItemSpecification;
 
 /**
+ * Flushes the item specification, converting the current ui component
+ * values with new object items.
+ *
+ * @param transient Indicates if the cell's transient value,
+ * the value that is currently displayed, should be flushed,
+ * or if the commited value should be flushed instead.
+ */
+- (void)flushItemSpecificationTransient:(BOOL)transient;
+
+/**
  * Flushes the item group, converting the current ui component
  * values with new object items.
  *
  * @param itemGroup The item group.
+ * @param transient Indicates if the cell's transient value,
+ * the value that is currently displayed, should be flushed,
+ * or if the commited value should be flushed instead.
  */
-- (void)flushItemGroup:(HMItemGroup *)itemGroup;
+- (void)flushItemGroup:(HMItemGroup *)itemGroup transient:(BOOL)transient;
 
 /**
  * Updates the current item specification.

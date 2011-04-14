@@ -67,10 +67,15 @@
 
 - (void)flushItemSpecification {
     // flushes the item specification
-    [self flushItemGroup:self.listItemGroup];
+    [self flushItemGroup:self.listItemGroup transient:NO];
 }
 
-- (void)flushItemGroup:(HMItemGroup *)itemGroup {
+- (void)flushItemSpecificationTransient:(BOOL)transient {
+    // flushes the item specification
+    [self flushItemGroup:self.listItemGroup transient:transient];
+}
+
+- (void)flushItemGroup:(HMItemGroup *)itemGroup transient:(BOOL)transient {
     // retrieves the item group enumerator
     NSEnumerator *itemGroupEnumerator = [itemGroup.items objectEnumerator];
 
@@ -80,6 +85,18 @@
     // iterates over the item group, flushing
     // the item group's items
     while((object = [itemGroupEnumerator nextObject])) {
+        // casts the object
+        HMItem *item = (HMItem *)object;
+
+        // retrieves the cell for the item
+        HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:item.identifier];
+
+        // continues in case the cell is
+        // transient and the flush is not transient
+        if(cell.transient && !transient) {
+            continue;
+        }
+
         // flushes the item group in case the
         // object if of that kind
         if([object isKindOfClass:[HMItemGroup class]]) {
@@ -87,17 +104,11 @@
             itemGroup = (HMItemGroup *)object;
 
             // flushes the item group
-            [self flushItemGroup:itemGroup];
+            [self flushItemGroup:itemGroup transient:transient];
         } else {
-            // casts the object
-            HMItem *item = (HMItem *)object;
-
-            // retrieves the cell for the item
-            HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:item.identifier];
-
             // sets the cell's description and data in the item
-            item.description = cell.description;
-            item.data = cell.data;
+            item.description = transient ? cell.descriptionTransient : cell.description;
+            item.data = transient ? cell.dataTransient : cell.data;
         }
     }
 }

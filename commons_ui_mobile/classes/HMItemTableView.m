@@ -433,7 +433,7 @@
 
         // updates the table view cell
         tableViewCell.description = entityValue;
-        tableViewCell.data = entity;
+        tableViewCell.dataTransient = entity;
     }
 }
 

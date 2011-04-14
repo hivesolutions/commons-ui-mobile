@@ -27,6 +27,7 @@
 
 @implementation HMTableViewCell
 
+@synthesize transient = _transient;
 @synthesize name = _name;
 @synthesize nameFont = _nameFont;
 @synthesize nameFontSize = _nameFontSize;
@@ -39,7 +40,7 @@
 @synthesize viewReady = _viewReady;
 @synthesize insertableRow = _insertableRow;
 @synthesize deletableRow = _deletableRow;
-@synthesize data = _data;
+@synthesize dataTransient = _dataTransient;
 @synthesize changeEditingStatus = _changeEditingStatus;
 @synthesize item = _item;
 @synthesize itemTableView = _itemTableView;
@@ -103,6 +104,9 @@
 
     // releases the data
     [_data release];
+
+    // releases the data transient
+    [_dataTransient release];
 
     // releases the item
     [_item release];
@@ -214,6 +218,10 @@
 
     // sets the cell's text label
     self.detailTextLabel.text = description;
+}
+
+- (NSString *)descriptionTransient {
+    return nil;
 }
 
 - (NSString *)icon {
@@ -361,6 +369,28 @@
         // sets the accessory in the badge
         badgeLabel.text = accessoryValue;
     }
+}
+
+- (NSDictionary *)data {
+    return _data;
+}
+
+- (void)setData:(NSDictionary *)data {
+    // in case the object is the same
+    if(data == _data) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_data release];
+
+    // sets and retains the object
+    _data = [data retain];
+
+    // sets a copy of the data
+    // as the the transient data
+    self.dataTransient = [NSDictionary dictionaryWithDictionary:_data];
 }
 
 - (void)layoutSubviews {

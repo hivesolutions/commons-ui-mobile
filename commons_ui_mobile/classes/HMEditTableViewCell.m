@@ -93,6 +93,9 @@
 }
 
 - (void)persistEditing {
+    // sets the transient data in
+    // the data property to persist it
+    self.data = self.dataTransient;
 }
 
 - (void)rollbackEditing {

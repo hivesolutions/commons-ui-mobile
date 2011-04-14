@@ -220,4 +220,8 @@
     }
 }
 
+- (NSString *)descriptionTransient {
+    return self.textView.text;
+}
+
 @end

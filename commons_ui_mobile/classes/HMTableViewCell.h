@@ -69,6 +69,7 @@
     NSString *_description;
 
     @private
+    BOOL _transient;
     NSString *_descriptionFont;
     NSUInteger _descriptionFontSize;
     UIColor *_descriptionColor;
@@ -87,10 +88,17 @@
     BOOL _insertableRow;
     BOOL _deletableRow;
     NSDictionary *_data;
+    NSDictionary *_dataTransient;
     BOOL _changeEditingStatus;
     HMItem *_item;
     HMItemTableView *_itemTableView;
 }
+
+/**
+ * Indicates if the cell has been
+ * persisted or is in a transient state.
+ */
+@property (assign) BOOL transient;
 
 /**
  * The cell's name that will be set
@@ -118,6 +126,13 @@
  * as its detail text label.
  */
 @property (retain) NSString *description;
+
+/**
+ * The cell's transient description property,
+ * used to provide the cell's current description,
+ * instead of the one that has last been commited.
+ */
+@property (readonly) NSString *descriptionTransient;
 
 /**
  * The table cell's description font.
@@ -190,6 +205,13 @@
  * The data associated with the cell.
  */
 @property (retain) NSDictionary *data;
+
+/**
+ * The data associated with the cell
+ * in in the state currently described
+ * in the cell.
+ */
+@property (retain) NSDictionary *dataTransient;
 
 /**
 * Flag that controls the change editing status.

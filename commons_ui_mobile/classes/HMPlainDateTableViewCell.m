@@ -268,4 +268,8 @@
     self.label.text = dateString;
 }
 
+- (NSString *)descriptionTransient {
+    return self.label.text;
+}
+
 @end
