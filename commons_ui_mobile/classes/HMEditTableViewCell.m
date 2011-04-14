@@ -109,12 +109,6 @@
         return;
     }
 
-    // in case the view is not ready
-    if(!self.viewReady) {
-        // returns immediately
-        return;
-    }
-
     // in case the change is to editing and the cell is meant
     // to be selectable in edit mode or in case the cell is not
     // in edit mode and it is selectable
