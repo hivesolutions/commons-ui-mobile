@@ -367,18 +367,28 @@
         [self.itemDelegate setEditingChanged:editing];
     }
 
+    // checks if the root is a mutable parent
+    BOOL isMutableParent = self.itemDataSource.listItemGroup.mutableParent;
+
     // reloads the data to take into account table
     // changes that are related with the edit mode
-    [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(reloadData) userInfo:nil repeats:NO];
+    if(isMutableParent) {
+        [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(reloadData) userInfo:nil repeats:NO];
+    }
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
     // calls the super for set editing
     [super setEditing:editing animated:animate commit:commit];
 
+    // checks if the root is a mutable parent
+    BOOL isMutableParent = self.itemDataSource.listItemGroup.mutableParent;
+
     // reloads the data to take into account table
     // changes that are related with the edit mode
-    [self reloadData];
+    if(isMutableParent) {
+        [self reloadData];
+    }
 }
 
 - (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {
