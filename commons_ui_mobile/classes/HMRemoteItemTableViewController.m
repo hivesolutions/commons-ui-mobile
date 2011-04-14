@@ -569,9 +569,6 @@
 
     // in case the table view is in editing mode
     if(self.tableView.editing) {
-        // casts the table view as item table view
-        HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
-
         // flushes the item specification for transient items
         [itemTableView flushItemSpecificationTransient:YES];
 
@@ -587,23 +584,11 @@
         remoteAbstraction.remoteDelegate = self;
         remoteAbstraction.view = self.tableView.superview;
 
-        // unsets the left bar button item
-        [self.navigationItem setLeftBarButtonItem:nil animated:YES];
-
-        // creates the edit bar button
-        UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
-
-        // sets the edit bar button item
-        [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
-
         // updates the remote with the given remote sequence data
         [remoteAbstraction updateRemoteWithSequenceData:remoteData method:HTTP_POST_METHOD setSession:YES];
 
         // releases the remote abstraction
         [remoteAbstraction release];
-
-        // releases the objects
-        [editBarButton release];
     }
     // otherwise it must not be editing
     else {
@@ -749,9 +734,6 @@
     // retrieves the item table vuew
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
-    // sets the item table view as not editing
-    [itemTableView setEditing:NO animated:YES commit:YES];
-
     // casts the data into remote data
     NSDictionary *remoteData = (NSDictionary *) data;
 
@@ -766,6 +748,26 @@
 
     // constructs the delayed structures
     [self constructStructuresDelayed];
+}
+
+- (void)processOperationUpdate:(id)data  {
+    // casts the table view to item table view
+    HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // sets the item table view as not editing
+    [itemTableView setEditing:NO animated:YES commit:YES];
+
+    // unsets the left bar button item
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+
+    // creates the edit bar button
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
+
+    // sets the edit bar button item
+    [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
+
+    // releases the objects
+    [editBarButton release];
 }
 
 - (void)processOperationDelete:(id)data  {
@@ -800,6 +802,14 @@
 
                 // breaks the switch
                 break;
+
+            case HMItemOperationUpdate:
+                // processes the update operation
+                [self processOperationUpdate:remoteData];
+
+                // breaks the switch
+                break;
+
             case HMItemOperationDelete:
                 // processes the delete operation
                 [self processOperationDelete:remoteData];
