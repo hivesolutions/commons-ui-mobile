@@ -569,14 +569,11 @@
 
     // in case the table view is in editing mode
     if(self.tableView.editing) {
-        // sets the item table view as not editing
-        [itemTableView setEditing:NO animated:YES commit:YES];
-
         // casts the table view as item table view
         HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
-        // flushes the item specification
-        [itemTableView flushItemSpecification];
+        // flushes the item specification for transient items
+        [itemTableView flushItemSpecificationTransient:YES];
 
         // converts the remote group, retrieving the remote
         // data
@@ -661,11 +658,8 @@
     // casts the table view to item table view
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
-    // sets the item table view as not editing
-    [itemTableView setEditing:NO animated:YES commit:YES];
-
-    // flushes the item specification
-    [itemTableView flushItemSpecification];
+    // flushes the item specification for transient items
+    [itemTableView flushItemSpecificationTransient:YES];
 
     // converts the remote group, retrieving the remote
     // data (in seqence)
@@ -678,12 +672,6 @@
     HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationCreate url:createUrl];
     remoteAbstraction.remoteDelegate = self;
     remoteAbstraction.view = self.tableView.superview;
-
-    // sets the right bar buttom
-    [self.navigationItem setRightBarButtonItem:nil animated:YES];
-
-    // sets the left bar buttom
-    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
 
     // updates the remote with the given remote sequence data
     [remoteAbstraction updateRemoteWithSequenceData:remoteData method:HTTP_POST_METHOD setSession:YES];
@@ -747,6 +735,12 @@
         [self.entityProviderDelegate updateEntity:remoteData entityName:itemName entityKey:itemTitleName];
     }
 
+    // sets the right bar buttom
+    [self.navigationItem setRightBarButtonItem:nil animated:YES];
+
+    // sets the left bar buttom
+    [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+
     // pops the view controller
     [self.navigationController dismissModalViewControllerAnimated:YES];
 }
@@ -754,6 +748,9 @@
 - (void)processOperationRead:(id)data  {
     // retrieves the item table vuew
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // sets the item table view as not editing
+    [itemTableView setEditing:NO animated:YES commit:YES];
 
     // casts the data into remote data
     NSDictionary *remoteData = (NSDictionary *) data;
