@@ -33,10 +33,6 @@
     // invokes the parent constructor
     self = [super initWithStyle:UITableViewCellStyleValue2 reuseIdentifier:cellIdentifier];
 
-    // sets the text label to adjust the
-    // font size to the available width
-    self.textLabel.adjustsFontSizeToFitWidth = YES;
-
     // returns self
     return self;
 }
@@ -157,6 +153,10 @@
 
     // updates the detail text label's position
     self.detailTextLabel.frame = frame;
+
+    // sets the text label to adjust the
+    // font size to the available width
+    self.textLabel.adjustsFontSizeToFitWidth = YES;
 
     // swaps the fonts and colors because the name is
     // represented by the text label and the description
