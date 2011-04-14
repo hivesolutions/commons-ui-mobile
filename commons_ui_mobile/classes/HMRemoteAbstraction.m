@@ -308,6 +308,12 @@
     [self.activity setAlpha:0.0];
     [UIView commitAnimations];
 
+    // hides the activity
+    self.activity.hidden = YES;
+
+    // restores the alpha value
+    [self.activity setAlpha:1.0];
+
     // stops animating the activity indicator
     [self.activityIndicator stopAnimating];
 }
