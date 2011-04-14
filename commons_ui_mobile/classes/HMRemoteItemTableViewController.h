@@ -60,6 +60,7 @@ typedef enum {
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
     BOOL _viewAppear;
+    BOOL _viewDisappear;
     BOOL _remoteDataIsSet;
 }
 

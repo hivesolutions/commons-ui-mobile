@@ -150,6 +150,12 @@
     // calls the super
     [super viewDidAppear:animated];
 
+    // in case did already appear
+    if(_viewAppear) {
+        // returns immediately
+        return;
+    }
+
     // sets the view appear flag
     _viewAppear = YES;
 
@@ -161,8 +167,14 @@
     // hides the toolbar
     [self hideToolbar];
 
-    // sets the view appear flag
-    _viewAppear = NO;
+    // in case did already disappear
+    if(_viewDisappear) {
+        // returns immediately
+        return;
+    }
+
+    // sets the view disappear flag
+    _viewDisappear = YES;
 
     // calls the destroy structures delayed
     [self destroyStructuresDelayed];
