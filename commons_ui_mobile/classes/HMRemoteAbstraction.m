@@ -253,7 +253,7 @@
     // creates the activity
     UIView *activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
     activity.backgroundColor = [UIColor blackColor];
-    activity.alpha = 0.75;
+    activity.alpha = HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA;
 
     // creates the activity indicator
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(self.view.bounds.size.width / 2 - 12, self.view.bounds.size.height / 2 - 12, 24, 24)];
@@ -304,7 +304,7 @@
     [UIView beginAnimations:@"fadeOut" context: nil];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(hideActivityIndicatorComplete)];
-    [UIView setAnimationDuration:0.5];
+    [UIView setAnimationDuration:HM_REMOTE_ABSTRACTION_FADE_TIME];
     [self.activity setAlpha:0.0];
     [UIView commitAnimations];
 
@@ -312,7 +312,7 @@
     self.activity.hidden = YES;
 
     // restores the alpha value
-    [self.activity setAlpha:1.0];
+    [self.activity setAlpha:HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA];
 
     // stops animating the activity indicator
     [self.activityIndicator stopAnimating];

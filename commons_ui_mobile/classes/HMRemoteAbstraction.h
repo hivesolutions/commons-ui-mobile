@@ -59,6 +59,16 @@
 #define HM_REMOTE_ABSTRACTION_TIMEOUT 30.0
 
 /**
+ * The alpha value to be used in the activity.
+ */
+#define HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA 0.75
+
+/**
+ * The fade time to be used in the activity.
+ */
+#define HM_REMOTE_ABSTRACTION_FADE_TIME 0.5
+
+/**
  * Enumeration defining the various status
  * for the remote abstraction.
  */
