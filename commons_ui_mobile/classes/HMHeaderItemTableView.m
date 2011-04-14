@@ -359,6 +359,10 @@
     // calls the super
     [super setEditing:editing];
 
+    // changes the cells' editing mode
+    [self.titleTableViewCell changeEditing:editing commit:NO];
+    [self.subTitleTableViewCell changeEditing:editing commit:NO];
+
     // in case it's editing
     if(editing) {
         // shows the editing
@@ -374,6 +378,10 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate {
     // calls the super
     [super setEditing:editing animated:animate];
+
+    // changes the cells' editing mode
+    [self.titleTableViewCell changeEditing:editing commit:NO];
+    [self.subTitleTableViewCell changeEditing:editing commit:NO];
 
     // in case it's editing
     if(editing) {
@@ -447,14 +455,14 @@
     HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
 
     // retrieves the values from the header named item group
-    HMItem *title = [headerNamedItemGroup getItem:@"title"];
-    HMItem *subTitle = [headerNamedItemGroup getItem:@"subTitle"];
-    HMItem *image = [headerNamedItemGroup getItem:@"image"];
+    HMItem *titleItem = [headerNamedItemGroup getItem:@"title"];
+    HMItem *subTitleItem = [headerNamedItemGroup getItem:@"subTitle"];
+    HMItem *imageItem = [headerNamedItemGroup getItem:@"image"];
 
     // sets the attributes
-    self.title = title.identifier;
-    self.subTitle = subTitle.identifier;
-    self.image = image.identifier;
+    self.title = titleItem.description;
+    self.subTitle = subTitleItem.description;
+    self.image = imageItem.description;
 }
 
 - (void)reloadData {
@@ -478,9 +486,9 @@
     HMItem *imageItem = [headerNamedItemGroup getItem:@"image"];
 
     // sets the attributes
-    titleItem.identifier = self.titleTableViewCell.description;
-    subTitleItem.identifier = self.subTitleTableViewCell.description;
-    imageItem.identifier = self.image;
+    titleItem.description = self.titleTableViewCell.description;
+    subTitleItem.description = self.subTitleTableViewCell.description;
+    imageItem.description = self.image;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -507,6 +515,12 @@
     tableViewCell.descriptionFontSize = 15;
     tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
     tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
+
+    // forces the cell to be constructed in
+    // edit mode, since when set editing is
+    // first called the cells won't be
+    // constructed yet
+    [tableViewCell changeEditing:YES commit:NO];
 
     // sets each table view cell's value and stores it
     if(indexPath.row == 0) {

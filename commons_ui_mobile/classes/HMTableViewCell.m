@@ -168,36 +168,6 @@
     self.itemTableView.dirty = NO;
 }
 
-- (void)drawRect:(CGRect)rect {
-    // retrieves the parent table view
-    UITableView *tableView = (UITableView *) self.superview;
-
-    // retrieves the cell's position attributes
-    NSIndexPath *indexPath = [tableView indexPathForCell:self];
-    NSUInteger section = [indexPath section];
-    NSUInteger numberRows = [tableView numberOfRowsInSection:section];
-    NSUInteger row = [indexPath row];
-
-    // retrieves the background view
-    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
-
-    // sets the background view's position
-    if(tableView.style == UITableViewStylePlain) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionPlain];
-    } else if(row == 0 && numberRows == 1) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedSingle];
-    } else if(row == 0) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedTop];
-    } else if(row == numberRows - 1) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedBottom];
-    } else {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedMiddle];
-    }
-
-    // invokes the parent
-    [super drawRect:rect];
-}
-
 - (NSString *)name {
     return _name;
 }
@@ -424,6 +394,9 @@
     self.textLabel.textColor = self.descriptionColor;
     self.detailTextLabel.font = [UIFont fontWithName:self.nameFont size:self.nameFontSize];
     self.detailTextLabel.textColor = self.nameColor;
+
+    // updates the background view position
+    [self updateBackgroundViewPosition];
 }
 
 - (void)didMoveToSuperview {
@@ -435,6 +408,33 @@
 
     // sets the view ready flag
     self.viewReady = YES;
+}
+
+- (void)updateBackgroundViewPosition {
+    // retrieves the parent table view
+    UITableView *tableView = (UITableView *) self.superview;
+
+    // retrieves the cell's position attributes
+    NSIndexPath *indexPath = [tableView indexPathForCell:self];
+    NSUInteger section = [indexPath section];
+    NSUInteger numberRows = [tableView numberOfRowsInSection:section];
+    NSUInteger row = [indexPath row];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
+
+    // sets the background view's position
+    if(tableView.style == UITableViewStylePlain) {
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionPlain];
+    } else if(row == 0 && numberRows == 1) {
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedSingle];
+    } else if(row == 0) {
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedTop];
+    } else if(row == numberRows - 1) {
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedBottom];
+    } else {
+        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedMiddle];
+    }
 }
 
 @end

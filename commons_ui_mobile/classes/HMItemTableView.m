@@ -74,7 +74,6 @@
     CGRect labelFrame = CGRectMake(10, 0, tableView.frame.size.width - 20, size.height);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.text = labelItem.description;
-    label.textAlignment = UITextAlignmentCenter;
     label.lineBreakMode = UILineBreakModeWordWrap;
     label.numberOfLines = 0;
     label.font = font;
@@ -82,6 +81,19 @@
     label.shadowOffset = CGSizeMake(1, 1);
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     label.textColor = [UIColor colorWithRed:descriptionColor.red green:descriptionColor.green blue:descriptionColor.blue alpha:descriptionColor.alpha];
+
+    // sets the label's text alignment
+    switch (labelItem.textAlignment) {
+        case HMLabelItemTextAlignmentLeft:
+            label.textAlignment = UITextAlignmentLeft;
+            break;
+        case HMLabelItemTextAlignmentCenter:
+            label.textAlignment = UITextAlignmentCenter;
+            break;
+        case HMLabelItemTextAlignmentRight:
+            label.textAlignment = UITextAlignmentRight;
+            break;
+    }
 
     // sets the label shadow color
     if(labelItem.descriptionShadowColor) {

@@ -220,4 +220,9 @@
  */
 - (void)updateTableData;
 
+/**
+ * Updates the background view's position.
+ */
+- (void)updateBackgroundViewPosition;
+
 @end
