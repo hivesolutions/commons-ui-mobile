@@ -308,12 +308,6 @@
     [self.activity setAlpha:0.0];
     [UIView commitAnimations];
 
-    // hides the activity
-    self.activity.hidden = YES;
-
-    // restores the alpha value
-    [self.activity setAlpha:HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA];
-
     // stops animating the activity indicator
     [self.activityIndicator stopAnimating];
 }
@@ -321,6 +315,9 @@
 - (void)hideActivityIndicatorComplete {
     // hides the activity
     self.activity.hidden = YES;
+
+    // restores the alpha value
+    [self.activity setAlpha:HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA];
 }
 
 - (void)showActionSheet {
