@@ -66,3 +66,6 @@
 #import "../classes/HMApplicationDelegate.h"
 #import "../classes/HMAuthenticationDelegate.h"
 #import "../classes/HMAuthenticationViewController.h"
+#import "../classes/HMOptionsButtonView.h"
+#import "../classes/HMOptionsView.h"
+#import "../classes/HMStyledPageControl.h"
