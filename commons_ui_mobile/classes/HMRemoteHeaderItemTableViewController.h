@@ -27,6 +27,11 @@
 
 #import "HMRemoteItemTableViewController.h"
 
+/**
+ * The default image quality to be used.
+ */
+#define HM_REMOTE_HEADER_ITEM_TABLE_VIEW_CONTROLLER_IMAGE_QUALITY 90.0
+
 @interface HMRemoteHeaderItemTableViewController : HMRemoteItemTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
 }
 

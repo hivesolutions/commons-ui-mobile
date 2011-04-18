@@ -31,7 +31,7 @@
 @synthesize editHeaderView = _editHeaderView;
 @synthesize titleLabel = _titleLabel;
 @synthesize subTitleLabel = _subTitleLabel;
-@synthesize imageImage = _imageImage;
+@synthesize image = _image;
 @synthesize imageAddButton = _imageAddButton;
 @synthesize titleTableViewCell = _titleTableViewCell;
 @synthesize subTitleTableViewCell = _subTitleTableViewCell;
@@ -70,8 +70,11 @@
     // releases the sub title
     [_subTitle release];
 
-    // releases the image
-    [_image release];
+    // releases the image name
+    [_imageName release];
+
+    // releases the image value
+    [_imageValue release];
 
     // calls the super
     [super dealloc];
@@ -156,7 +159,7 @@
     // sets the attributes
     self.titleLabel = titleLabel;
     self.subTitleLabel = subTitleLabel;
-    self.imageImage = image;
+    self.image = image;
 
     // releases the objects
     [titleLabel release];
@@ -331,28 +334,52 @@
     }
 }
 
-- (NSString *)image {
-    return _image;
+- (NSString *)imageName {
+    return _imageName;
 }
 
-- (void)setImage:(NSString *)image {
+- (void)setImageName:(NSString *)imageName {
     // in case the object is the same
-    if(image == _image) {
+    if(imageName == _imageName) {
         // returns immediately
         return;
     }
 
     // releases the object
-    [_image release];
+    [_imageName release];
 
     // sets and retains the object
-    _image = [image retain];
+    _imageName = [imageName retain];
 
     // creates the image (reference) for the image (path)
-    UIImage *imageReference = [UIImage imageNamed:_image];
+    UIImage *imageReference = [UIImage imageNamed:_imageName];
 
     // sets the image in the image (view)
-    self.imageImage.image = imageReference;
+    self.image.image = imageReference;
+}
+
+- (NSData *)imageValue {
+    return _imageValue;
+}
+
+- (void)setImageValue:(NSData *)imageValue {
+    // in case the object is the same
+    if(imageValue == _imageValue) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_imageValue release];
+
+    // sets and retains the object
+    _imageValue = [imageValue retain];
+
+    // creates the image (reference) for the image (path)
+    UIImage *imageReference = [UIImage imageWithData:_imageValue];
+
+    // sets the image in the image (view)
+    self.image.image = imageReference;
 }
 
 - (void)setEditing:(BOOL)editing {
@@ -462,7 +489,8 @@
     // sets the attributes
     self.title = titleItem.description;
     self.subTitle = subTitleItem.description;
-    self.image = imageItem.description;
+    self.imageName = imageItem.description;
+    self.imageValue = (NSData *) imageItem.data;
 }
 
 - (void)reloadData {
@@ -488,7 +516,8 @@
     // sets the attributes
     titleItem.description = transient ? self.titleTableViewCell.descriptionTransient : self.titleTableViewCell.description;
     subTitleItem.description = transient ? self.subTitleTableViewCell.descriptionTransient : self.subTitleTableViewCell.description;
-    imageItem.description = self.image;
+    imageItem.description = self.imageName;
+    imageItem.data = self.imageValue;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {

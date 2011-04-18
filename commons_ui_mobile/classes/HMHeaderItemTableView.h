@@ -26,6 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMItemTableView.h"
+#import "HMRoundedCornerImageView.h"
 #import "HMPlainStringTableViewCell.h"
 
 /**
@@ -51,12 +52,13 @@
     @private
     NSString *_title;
     NSString *_subTitle;
-    NSString *_image;
+    NSString *_imageName;
+    NSData *_imageValue;
     UIView *_normalHeaderView;
     UIView *_editHeaderView;
     UILabel *_titleLabel;
     UILabel *_subTitleLabel;
-    UIImageView *_imageImage;
+    UIImageView *_image;
     UIButton *_imageAddButton;
     HMPlainStringTableViewCell *_titleTableViewCell;
     HMPlainStringTableViewCell *_subTitleTableViewCell;
@@ -75,9 +77,14 @@
 @property (retain) NSString *subTitle;
 
 /**
- * The image of the header.
+ * The image name of the header.
  */
-@property (retain) NSString *image;
+@property (retain) NSString *imageName;
+
+/**
+ * The image value of the header.
+ */
+@property (retain) NSData *imageValue;
 
 /**
  * The header view to be used in "normal" mode.
@@ -102,7 +109,7 @@
 /**
  * The image view to be used in the image.
  */
-@property (assign) UIImageView *imageImage;
+@property (assign) UIImageView *image;
 
 /**
  * The text field for the title.
