@@ -33,7 +33,7 @@
     HMHeaderItemTableView *itemTableView = (HMHeaderItemTableView *) self.tableView;
 
     // retrieves the picture data
-    NSData *pictureData = UIImagePNGRepresentation(picture);
+    NSData *pictureData = UIImageJPEGRepresentation(picture, HM_REMOTE_HEADER_ITEM_TABLE_VIEW_CONTROLLER_IMAGE_QUALITY);
 
     // sets the image in the image (view)
     itemTableView.image.image = picture;
