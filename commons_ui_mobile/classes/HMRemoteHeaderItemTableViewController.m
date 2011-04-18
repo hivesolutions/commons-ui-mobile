@@ -32,8 +32,14 @@
     // view provider and the item delegate
     HMHeaderItemTableView *itemTableView = (HMHeaderItemTableView *) self.tableView;
 
-    // sets the image
-    [itemTableView.imageImage setImage:picture];
+    // retrieves the picture data
+    NSData *pictureData = UIImagePNGRepresentation(picture);
+
+    // sets the image in the image (view)
+    itemTableView.image.image = picture;
+
+    // sets the image value
+    itemTableView.imageValue = pictureData;
 }
 
 - (void)buttonClicked:(NSString *)buttonName {
