@@ -316,7 +316,7 @@ typedef enum {
  * @param hidden The new visibility value for
  * the toolbar.
  */
-- (void)changeToolbar:(BOOL)hidden
+- (void)changeToolbar:(BOOL)hidden;
 
 /**
  * Updates the toolbar status.
