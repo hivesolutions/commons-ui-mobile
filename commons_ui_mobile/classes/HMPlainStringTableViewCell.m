@@ -221,4 +221,9 @@
     return self.textField.text;
 }
 
+- (void)setDescriptionTransient:(NSString *)descriptionTransient {
+    // sets the transient description in the text field
+    self.textField.text = descriptionTransient;
+}
+
 @end

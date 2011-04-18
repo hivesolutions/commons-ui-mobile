@@ -27,7 +27,6 @@
 
 @implementation HMTableViewCell
 
-@synthesize transient = _transient;
 @synthesize name = _name;
 @synthesize nameFont = _nameFont;
 @synthesize nameFontSize = _nameFontSize;
@@ -222,6 +221,9 @@
 
 - (NSString *)descriptionTransient {
     return nil;
+}
+
+- (void)setDescriptionTransient:(NSString *)descriptionTransient {
 }
 
 - (NSString *)icon {

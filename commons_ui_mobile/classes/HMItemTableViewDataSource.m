@@ -76,32 +76,23 @@
 }
 
 - (void)flushItemGroup:(HMItemGroup *)itemGroup transient:(BOOL)transient {
-    // retrieves the item group enumerator
-    NSEnumerator *itemGroupEnumerator = [itemGroup.items objectEnumerator];
-
-    // allocates the object
-    id object;
-
-    // iterates over the item group, flushing
-    // the item group's items
-    while((object = [itemGroupEnumerator nextObject])) {
-        // casts the object
-        HMItem *item = (HMItem *)object;
-
+    // iterates over the item group,
+    // flushing the item group's items
+    for(HMItem *item in itemGroup.items) {
         // retrieves the cell for the item
         HMTableViewCell *cell = (HMTableViewCell *) [self.cellIdentifierMap objectForKey:item.identifier];
 
         // continues in case the cell is
         // transient and the flush is not transient
-        if(cell.transient && !transient) {
+        if(item.transientState != HMItemStateNone && !transient) {
             continue;
         }
 
         // flushes the item group in case the
         // object if of that kind
-        if([object isKindOfClass:[HMItemGroup class]]) {
+        if([item isKindOfClass:[HMItemGroup class]]) {
             // casts the object
-            itemGroup = (HMItemGroup *)object;
+            HMItemGroup *itemGroup = (HMItemGroup *)item;
 
             // flushes the item group
             [self flushItemGroup:itemGroup transient:transient];
@@ -111,6 +102,9 @@
             item.data = transient ? cell.dataTransient : cell.data;
         }
     }
+
+    // flushes the item group
+    [itemGroup flush:transient];
 }
 
 - (void)updateItemSpecification {
@@ -261,35 +255,47 @@
                     tableViewCell = plainMultilineStringTableViewCell;
                 }
             }
+        } else if ([objectClassNameString isEqualToString:@"HMConstantStringTableCellItem"]) {
+            // casts the table cell item to a constant string table cell item
+            HMConstantStringTableCellItem *stringTableCellItem = (HMConstantStringTableCellItem *) tableCellItem;
+
+            HMColumnConstantStringTableViewCell *columnConstantStringTableViewCell = [[[HMColumnConstantStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+            columnConstantStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
+            columnConstantStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+            columnConstantStringTableViewCell.editableCell = YES;
+            columnConstantStringTableViewCell.clearable = stringTableCellItem.clearable;
+            columnConstantStringTableViewCell.returnType = stringTableCellItem.returnType;
+            columnConstantStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
+            tableViewCell = columnConstantStringTableViewCell;
         }
+
+        // retrieves the table view cell's colors
+        HMColor *nameColor = tableCellItem.nameColor;
+        HMColor *descriptionColor = tableCellItem.descriptionColor;
+        HMColor *backgroundColor = tableCellItem.backgroundColor;
+
+        // sets the cell's attributes
+        tableViewCell.item = tableCellItem;
+        tableViewCell.data = tableCellItem.data;
+        tableViewCell.name = tableCellItem.name;
+        tableViewCell.description = tableCellItem.description;
+        tableViewCell.nameFont = tableCellItem.nameFont;
+        tableViewCell.nameFontSize = tableCellItem.nameFontSize;
+        tableViewCell.descriptionFont = tableCellItem.descriptionFont;
+        tableViewCell.descriptionFontSize = tableCellItem.descriptionFontSize;
+        tableViewCell.icon = tableCellItem.icon;
+        tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
+        tableViewCell.selectable = tableCellItem.selectable;
+        tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
+        tableViewCell.accessoryValue = tableCellItem.accessoryValue;
+        tableViewCell.selectableName = tableCellItem.selectableName;
+        tableViewCell.height = tableCellItem.height;
+        tableViewCell.insertableRow = tableCellItem.insertableRow;
+        tableViewCell.deletableRow = tableCellItem.deletableRow;
+        tableViewCell.nameColor = [UIColor colorWithRed:nameColor.red green:nameColor.green blue:nameColor.blue alpha:nameColor.alpha];
+        tableViewCell.descriptionColor = [UIColor colorWithRed:descriptionColor.red green:descriptionColor.green blue:descriptionColor.blue alpha:descriptionColor.alpha];
+        tableViewCell.backgroundColor = [UIColor colorWithRed:backgroundColor.red green:backgroundColor.green blue:backgroundColor.blue alpha:backgroundColor.alpha];
     }
-
-    // retrieves the table view cell's colors
-    HMColor *nameColor = tableCellItem.nameColor;
-    HMColor *descriptionColor = tableCellItem.descriptionColor;
-    HMColor *backgroundColor = tableCellItem.backgroundColor;
-
-    // sets the cell's attributes
-    tableViewCell.item = tableCellItem;
-    tableViewCell.data = tableCellItem.data;
-    tableViewCell.name = tableCellItem.name;
-    tableViewCell.description = tableCellItem.description;
-    tableViewCell.nameFont = tableCellItem.nameFont;
-    tableViewCell.nameFontSize = tableCellItem.nameFontSize;
-    tableViewCell.descriptionFont = tableCellItem.descriptionFont;
-    tableViewCell.descriptionFontSize = tableCellItem.descriptionFontSize;
-    tableViewCell.icon = tableCellItem.icon;
-    tableViewCell.highlightedIcon = tableCellItem.highlightedIcon;
-    tableViewCell.selectable = tableCellItem.selectable;
-    tableViewCell.accessoryTypeString = tableCellItem.accessoryType;
-    tableViewCell.accessoryValue = tableCellItem.accessoryValue;
-    tableViewCell.selectableName = tableCellItem.selectableName;
-    tableViewCell.height = tableCellItem.height;
-    tableViewCell.insertableRow = tableCellItem.insertableRow;
-    tableViewCell.deletableRow = tableCellItem.deletableRow;
-    tableViewCell.nameColor = [UIColor colorWithRed:nameColor.red green:nameColor.green blue:nameColor.blue alpha:nameColor.alpha];
-    tableViewCell.descriptionColor = [UIColor colorWithRed:descriptionColor.red green:descriptionColor.green blue:descriptionColor.blue alpha:descriptionColor.alpha];
-    tableViewCell.backgroundColor = [UIColor colorWithRed:backgroundColor.red green:backgroundColor.green blue:backgroundColor.blue alpha:backgroundColor.alpha];
 
     // inserts the item cell into the cell list
     [self.cellList addObject:tableViewCell];
@@ -307,8 +313,9 @@
         return;
     }
 
-    // retrieves the table cell item
+    // retrieves the table cell item and the table view cell
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
+    HMTableViewCell *tableViewCell = (HMTableViewCell *) [self tableView:tableView cellForRowAtIndexPath:indexPath];
 
     // in case the row is not deletable
     if(!tableCellItem.deletableRow) {
@@ -317,33 +324,27 @@
         return;
     }
 
-    // creates an array with the index path
-    NSArray *indexPathArray = [NSArray arrayWithObject:indexPath];
-
     // peforms the specified delete action type
     switch(tableCellItem.deleteActionType) {
+        // clears the row
+        case HMTableCellItemDeleteActionTypeClear:
+            // clears the table view cell's description and data
+            tableViewCell.descriptionTransient = @"";
+            tableViewCell.dataTransient = nil;
+            break;
         // deletes the row
         case HMTableCellItemDeleteActionTypeDelete:
-            // removes the item from the list item group
-            [self.listItemGroup removeItemAtIndexPath:indexPath];
+            // marks the item as deleted
+            tableCellItem.transientState = HMItemStateOld;
 
             // deletes the row
+            NSArray *indexPathArray = [NSArray arrayWithObject:indexPath];
             [tableView beginUpdates];
             [tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
             break;
-        // clears the row
-        case HMTableCellItemDeleteActionTypeClear:
-            // clears the table cell item's
-            // description and data
-            tableCellItem.description = @"";
-            tableCellItem.data = nil;
-
-            // reloads the row
-            [tableView beginUpdates];
-            [tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
-            [tableView insertRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
-            [tableView endUpdates];
+        default:
+            // breaks
             break;
     }
 }
@@ -367,10 +368,22 @@
     // decreases the count in case the table is not in edit mode and
     // the section is mutable, in order to hide the add line button
     if(!self.tableView.editing && tableMutableSectionItemGroup) {
-        sectionItemGroupItemsCount -= 1;
+        sectionItemGroupItemsCount--;
     }
 
-    // releases the index path
+    // in case the the table view is in edit mode
+    if(self.tableView.editing) {
+        // for every item in the section
+        for(HMTableCellItem *tableCellItem in sectionItemGroup.items) {
+            // in case the item is in an old transient state
+            if(tableCellItem.transientState == HMItemStateOld) {
+                // takes the item out of the section count
+                sectionItemGroupItemsCount--;
+            }
+        }
+    }
+
+    // releases the objects
     [indexPath release];
 
     // returns the section item group items count

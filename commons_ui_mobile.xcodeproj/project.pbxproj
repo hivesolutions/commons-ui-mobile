@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56C3A03013589FD700CA92DA /* HMColumnConstantStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */; };
+		56C3A03113589FD700CA92DA /* HMColumnConstantStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */; };
 		A50772B61337B8E300859BD2 /* HMEditTableViewCellEditView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50772B21337B8E300859BD2 /* HMEditTableViewCellEditView.h */; };
 		A50772B71337B8E300859BD2 /* HMEditTableViewCellEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50772B31337B8E300859BD2 /* HMEditTableViewCellEditView.m */; };
 		A50772B81337B8E300859BD2 /* HMTableViewCellBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50772B41337B8E300859BD2 /* HMTableViewCellBackgroundView.h */; };
 		A50772B91337B8E300859BD2 /* HMTableViewCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50772B51337B8E300859BD2 /* HMTableViewCellBackgroundView.m */; };
 		A50E13F01338ADD3006BDB18 /* HMRoundedCornerImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */; };
 		A50E13F11338ADD3006BDB18 /* HMRoundedCornerImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50E13EF1338ADD3006BDB18 /* HMRoundedCornerImageView.m */; };
+		A514F403135C598F007D4B17 /* HMPlainConstantStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A514F401135C598F007D4B17 /* HMPlainConstantStringTableViewCell.h */; };
+		A514F404135C598F007D4B17 /* HMPlainConstantStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A514F402135C598F007D4B17 /* HMPlainConstantStringTableViewCell.m */; };
 		A537556913432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A537556513432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h */; };
 		A537556A13432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A537556613432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m */; };
 		A537556B13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A537556713432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h */; };
@@ -88,12 +92,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMColumnConstantStringTableViewCell.h; path = classes/HMColumnConstantStringTableViewCell.h; sourceTree = "<group>"; };
+		56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMColumnConstantStringTableViewCell.m; path = classes/HMColumnConstantStringTableViewCell.m; sourceTree = "<group>"; };
 		A50772B21337B8E300859BD2 /* HMEditTableViewCellEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEditTableViewCellEditView.h; path = classes/HMEditTableViewCellEditView.h; sourceTree = "<group>"; };
 		A50772B31337B8E300859BD2 /* HMEditTableViewCellEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMEditTableViewCellEditView.m; path = classes/HMEditTableViewCellEditView.m; sourceTree = "<group>"; };
 		A50772B41337B8E300859BD2 /* HMTableViewCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewCellBackgroundView.h; path = classes/HMTableViewCellBackgroundView.h; sourceTree = "<group>"; };
 		A50772B51337B8E300859BD2 /* HMTableViewCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCellBackgroundView.m; path = classes/HMTableViewCellBackgroundView.m; sourceTree = "<group>"; };
 		A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRoundedCornerImageView.h; path = classes/HMRoundedCornerImageView.h; sourceTree = "<group>"; };
 		A50E13EF1338ADD3006BDB18 /* HMRoundedCornerImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRoundedCornerImageView.m; path = classes/HMRoundedCornerImageView.m; sourceTree = "<group>"; };
+		A514F401135C598F007D4B17 /* HMPlainConstantStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMPlainConstantStringTableViewCell.h; path = classes/HMPlainConstantStringTableViewCell.h; sourceTree = "<group>"; };
+		A514F402135C598F007D4B17 /* HMPlainConstantStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMPlainConstantStringTableViewCell.m; path = classes/HMPlainConstantStringTableViewCell.m; sourceTree = "<group>"; };
 		A537556513432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMColumnMultilineStringTableViewCell.h; path = classes/HMColumnMultilineStringTableViewCell.h; sourceTree = "<group>"; };
 		A537556613432D3F00D9A6A0 /* HMColumnMultilineStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMColumnMultilineStringTableViewCell.m; path = classes/HMColumnMultilineStringTableViewCell.m; sourceTree = "<group>"; };
 		A537556713432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMPlainMultilineStringTableViewCell.h; path = classes/HMPlainMultilineStringTableViewCell.h; sourceTree = "<group>"; };
@@ -437,6 +445,8 @@
 		C2D08D7113449BC00057E3FE /* String */ = {
 			isa = PBXGroup;
 			children = (
+				A514F401135C598F007D4B17 /* HMPlainConstantStringTableViewCell.h */,
+				A514F402135C598F007D4B17 /* HMPlainConstantStringTableViewCell.m */,
 				A5FA274D1338D53600DD428A /* HMPlainStringTableViewCell.h */,
 				A5FA274E1338D53700DD428A /* HMPlainStringTableViewCell.m */,
 			);
@@ -473,6 +483,8 @@
 		C2D08D7513449D510057E3FE /* String */ = {
 			isa = PBXGroup;
 			children = (
+				56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */,
+				56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */,
 				A5FA27491338D52A00DD428A /* HMColumnStringTableViewCell.h */,
 				A5FA274A1338D52A00DD428A /* HMColumnStringTableViewCell.m */,
 			);
@@ -657,6 +669,8 @@
 				C210CB78134F58DF0026BE3B /* HMAuthenticationDelegate.h in Headers */,
 				C210CB7C134F5A620026BE3B /* HMAuthenticationViewController.h in Headers */,
 				C2207C57134F684D00BE87CB /* HMErrorAbstraction.h in Headers */,
+				56C3A03013589FD700CA92DA /* HMColumnConstantStringTableViewCell.h in Headers */,
+				A514F403135C598F007D4B17 /* HMPlainConstantStringTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -737,6 +751,8 @@
 				C27B02CE134620B700C562C4 /* HMRemoteTableViewController.m in Sources */,
 				C210CB7D134F5A620026BE3B /* HMAuthenticationViewController.m in Sources */,
 				C2207C58134F684D00BE87CB /* HMErrorAbstraction.m in Sources */,
+				56C3A03113589FD700CA92DA /* HMColumnConstantStringTableViewCell.m in Sources */,
+				A514F404135C598F007D4B17 /* HMPlainConstantStringTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -396,6 +396,7 @@
     // reloads the data to take into account table
     // changes that are related with the edit mode
     if(isMutableParent) {
+        // reloads the data
         [NSTimer scheduledTimerWithTimeInterval:0.25 target:self selector:@selector(reloadData) userInfo:nil repeats:NO];
     }
 }
@@ -407,11 +408,33 @@
     // checks if the root is a mutable parent
     BOOL isMutableParent = self.itemDataSource.listItemGroup.mutableParent;
 
+    // in case the list item group
+    // is not a mutable parent
+    if(!isMutableParent) {
+        // returns
+        return;
+    }
+
+    // in case the table is
+    // exiting edit mode
+    if(!editing) {
+        // in case a commit
+        // is being done
+        if(commit) {
+            // commits the item group
+            [self.itemDataSource.listItemGroup commit];
+        }
+        // in case a rollback
+        // is being done
+        else {
+            // rollsback the item group
+            [self.itemDataSource.listItemGroup rollback];
+        }
+    }
+
     // reloads the data to take into account table
     // changes that are related with the edit mode
-    if(isMutableParent) {
-        [self reloadData];
-    }
+    [self reloadData];
 }
 
 - (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {
@@ -443,7 +466,7 @@
         HMTableViewCell *tableViewCell = [cellIdentifierMap objectForKey:entityName];
 
         // updates the table view cell
-        tableViewCell.description = entityValue;
+        tableViewCell.descriptionTransient = entityValue;
         tableViewCell.dataTransient = entity;
     }
 }

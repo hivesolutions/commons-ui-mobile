@@ -63,13 +63,7 @@
     CGRect nameLabelClickViewFrame = CGRectMake(0, 0, delta, self.contentView.frame.size.height);
     UIView *nameLabelClickView = [[UIView alloc] initWithFrame:nameLabelClickViewFrame];
     nameLabelClickView.backgroundColor = [UIColor clearColor];
-
-    // shows/hides if the name label click view
-    if(self.selectableName) {
-        nameLabelClickView.hidden = NO;
-    } else {
-        nameLabelClickView.hidden = YES;
-    }
+    nameLabelClickView.hidden = self.selectableName ? NO : YES;
 
     // creates a tap gesture recognizer
     // for the label click view

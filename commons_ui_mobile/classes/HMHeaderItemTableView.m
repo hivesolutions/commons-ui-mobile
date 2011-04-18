@@ -527,7 +527,6 @@
         tableViewCell.description = self.title;
         tableViewCell.defaultValue = NSLocalizedString(@"Title", @"Title");
         self.titleTableViewCell = tableViewCell;
-
     } else {
         tableViewCell.description = self.subTitle;
         tableViewCell.defaultValue = NSLocalizedString(@"Subtitle", @"Subtitle");

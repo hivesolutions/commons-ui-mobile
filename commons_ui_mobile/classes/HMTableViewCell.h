@@ -69,7 +69,6 @@
     NSString *_description;
 
     @private
-    BOOL _transient;
     NSString *_descriptionFont;
     NSUInteger _descriptionFontSize;
     UIColor *_descriptionColor;
@@ -93,12 +92,6 @@
     HMItem *_item;
     HMItemTableView *_itemTableView;
 }
-
-/**
- * Indicates if the cell has been
- * persisted or is in a transient state.
- */
-@property (assign) BOOL transient;
 
 /**
  * The cell's name that will be set
@@ -132,7 +125,7 @@
  * used to provide the cell's current description,
  * instead of the one that has last been commited.
  */
-@property (readonly) NSString *descriptionTransient;
+@property (assign) NSString *descriptionTransient;
 
 /**
  * The table cell's description font.

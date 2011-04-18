@@ -66,3 +66,5 @@
 #import "../classes/HMApplicationDelegate.h"
 #import "../classes/HMAuthenticationDelegate.h"
 #import "../classes/HMAuthenticationViewController.h"
+#import "../classes/HMColumnConstantStringTableViewCell.h"
+#import "../classes/HMPlainConstantStringTableViewCell.h"

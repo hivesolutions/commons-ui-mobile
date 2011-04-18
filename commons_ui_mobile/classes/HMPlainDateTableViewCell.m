@@ -272,4 +272,8 @@
     return self.label.text;
 }
 
+- (void)setDescriptionTransient:(NSString *)descriptionTransient {
+    self.label.text = descriptionTransient;
+}
+
 @end

@@ -224,4 +224,8 @@
     return self.textView.text;
 }
 
+- (void)setDescriptionTransient:(NSString *)descriptionTransient {
+    self.textView.text = descriptionTransient;
+}
+
 @end
