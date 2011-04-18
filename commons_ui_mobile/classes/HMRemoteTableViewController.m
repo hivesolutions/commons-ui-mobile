@@ -72,16 +72,12 @@
 }
 
 - (void)initCreateEntity {
-    // in case the create entity hidden flag
-    // is set (no need to create the button)
-    if(self.createEntityHidden) {
-        // returns immediately
-        return;
-    }
-
     // sets the new bar button in the navigation item
     UIBarButtonItem *newBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showNewEntityViewController)];
     [self.navigationItem setRightBarButtonItem:newBarButton animated:YES];
+
+    // sets the new bar button enabled
+    newBarButton.enabled = !self.createEntityHidden;
 
     // releases the objects
     [newBarButton release];
