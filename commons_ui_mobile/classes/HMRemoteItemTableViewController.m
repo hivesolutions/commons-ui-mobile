@@ -35,6 +35,8 @@
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
 @synthesize editHidden = _editHidden;
+@synthesize deleteHidden = _deleteHidden;
+@synthesize refreshHidden = _refreshHidden;
 
 - (id)init {
     // calls the super
@@ -375,7 +377,10 @@
 
 - (void)constructReadStructures {
     // creates the edit bar button
-    UIBarButtonItem *editBarButton = self.editHidden ? nil : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
+    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
+
+    // sets the edit bar button enabled
+    editBarButton.enabled = !self.editHidden;
 
     // sets the bar buttons
     [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
@@ -508,6 +513,9 @@
     // sets the trash item style
     trashItem.style = UIBarButtonItemStylePlain;
 
+    // sets the trash item enabled
+    trashItem.enabled = !self.deleteHidden;
+
     // flexible item used to separate the left groups items and right grouped items
     UIBarButtonItem *flexibleSpaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
@@ -516,6 +524,9 @@
 
     // sets the system item style
     refreshItem.style = UIBarButtonItemStylePlain;
+
+    // sets the refresh item enabled
+    refreshItem.enabled = !self.refreshHidden;
 
     // creates the standard text color for toolbar labels
     UIColor *toolbarLabelTextColor = [UIColor whiteColor];
@@ -587,7 +598,7 @@
     UIBarButtonItem *rightLabelItem = [[UIBarButtonItem alloc] initWithCustomView:rightLabel];
 
     // creates the toolbar items list
-    NSArray *items = [NSArray arrayWithObjects: trashItem, flexibleSpaceItem, leftLabelItem, centerLabelItem, rightLabelItem, flexibleSpaceItem, refreshItem, nil];
+    NSArray *items = [NSArray arrayWithObjects:trashItem, flexibleSpaceItem, leftLabelItem, centerLabelItem, rightLabelItem, flexibleSpaceItem, refreshItem, nil];
 
     // sets the toolbar items in the toolbar
     [self.navigationController.toolbar setItems:items animated:NO];

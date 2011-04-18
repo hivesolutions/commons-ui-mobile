@@ -60,6 +60,8 @@ typedef enum {
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
     BOOL _editHidden;
+    BOOL _deleteHidden;
+    BOOL _refreshHidden;
     BOOL _viewAppear;
     BOOL _viewDisappear;
     BOOL _remoteDataIsSet;
@@ -105,6 +107,18 @@ typedef enum {
  * hidden or displayed.
  */
 @property (assign) BOOL editHidden;
+
+/**
+ * Controls if the delete support should be
+ * hidden or displayed.
+ */
+@property (assign) BOOL deleteHidden;
+
+/**
+ * Controls if the refresh support should be
+ * hidden or displayed.
+ */
+@property (assign) BOOL refreshHidden;
 
 /**
  * Constructor of the class.
