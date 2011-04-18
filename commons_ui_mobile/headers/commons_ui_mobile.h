@@ -68,3 +68,6 @@
 #import "../classes/HMAuthenticationViewController.h"
 #import "../classes/HMColumnConstantStringTableViewCell.h"
 #import "../classes/HMPlainConstantStringTableViewCell.h"
+#import "../classes/HMOptionsButtonView.h"
+#import "../classes/HMOptionsView.h"
+#import "../classes/HMStyledPageControl.h"

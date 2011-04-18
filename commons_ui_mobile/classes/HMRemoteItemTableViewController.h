@@ -164,6 +164,14 @@ typedef enum {
 - (void)constructStructuresDelayed;
 
 /**
+ * Constructs the internal data structures (delayed).
+ * This delayed constructing allows the display to be
+ * constructed only after the initial successful parsing.
+ * This method is called for reshow.
+ */
+- (void)constructStructuresDelayedReshow;
+
+/**
  * Destroy the internal data structures (delayed).
  */
 - (void)destroyStructuresDelayed;
@@ -182,6 +190,11 @@ typedef enum {
  * Constructs the read operation stuctures.
  */
 - (void)constructReadStructures;
+
+/**
+ * Constructs the read operation stuctures (for reshow).
+ */
+- (void)constructReadStructuresReshow;
 
 /**
  * Destroy the read operation stuctures.
