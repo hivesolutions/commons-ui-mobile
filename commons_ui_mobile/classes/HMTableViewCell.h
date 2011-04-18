@@ -86,8 +86,8 @@
     BOOL _viewReady;
     BOOL _insertableRow;
     BOOL _deletableRow;
-    NSDictionary *_data;
-    NSDictionary *_dataTransient;
+    NSObject *_data;
+    NSObject *_dataTransient;
     BOOL _changeEditingStatus;
     HMItem *_item;
     HMItemTableView *_itemTableView;
@@ -197,14 +197,14 @@
 /**
  * The data associated with the cell.
  */
-@property (retain) NSDictionary *data;
+@property (retain) NSObject *data;
 
 /**
  * The data associated with the cell
  * in in the state currently described
  * in the cell.
  */
-@property (retain) NSDictionary *dataTransient;
+@property (retain) NSObject *dataTransient;
 
 /**
 * Flag that controls the change editing status.

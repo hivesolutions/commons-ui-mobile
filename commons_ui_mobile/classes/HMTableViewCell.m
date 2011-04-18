@@ -373,11 +373,11 @@
     }
 }
 
-- (NSDictionary *)data {
+- (NSObject *)data {
     return _data;
 }
 
-- (void)setData:(NSDictionary *)data {
+- (void)setData:(NSObject *)data {
     // in case the object is the same
     if(data == _data) {
         // returns immediately
@@ -390,9 +390,9 @@
     // sets and retains the object
     _data = [data retain];
 
-    // sets a copy of the data
-    // as the the transient data
-    self.dataTransient = [NSDictionary dictionaryWithDictionary:_data];
+    // sets the data as the
+    // transient data
+    self.dataTransient = _data;
 }
 
 - (void)layoutSubviews {

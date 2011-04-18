@@ -504,33 +504,38 @@
         // creates the table view cell
         tableViewCell = [[HMPlainStringTableViewCell alloc] init];
 
+        // retrieves the title and subtitle items
+        HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
+        HMItem *titleItem = [headerNamedItemGroup getItem:@"title"];
+        HMItem *subTitleItem = [headerNamedItemGroup getItem:@"subTitle"];
+
+        // configures the table view cell
+        tableViewCell.clearable = YES;
+        tableViewCell.editAlways = YES;
+        tableViewCell.descriptionFont = @"Helvetica-Bold";
+        tableViewCell.descriptionFontSize = 15;
+        tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
+
+        // forces the cell to be constructed in
+        // edit mode, since when set editing is
+        // first called the cells won't be
+        // constructed yet
+        [tableViewCell changeEditing:YES commit:NO];
+
+        // sets each table view cell's value and stores it
+        if(indexPath.row == 0) {
+            tableViewCell.description = self.title;
+            tableViewCell.defaultValue = titleItem.defaultValue;
+            self.titleTableViewCell = tableViewCell;
+        } else {
+            tableViewCell.description = self.subTitle;
+            tableViewCell.defaultValue = subTitleItem.defaultValue;
+            self.subTitleTableViewCell = tableViewCell;
+        }
+
         // adds the table view cell to the cell list
         [self.cellList addObject:tableViewCell];
-    }
-
-    // configures the table view cell
-    tableViewCell.clearable = YES;
-    tableViewCell.editAlways = YES;
-    tableViewCell.descriptionFont = @"Helvetica-Bold";
-    tableViewCell.descriptionFontSize = 15;
-    tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
-    tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
-
-    // forces the cell to be constructed in
-    // edit mode, since when set editing is
-    // first called the cells won't be
-    // constructed yet
-    [tableViewCell changeEditing:YES commit:NO];
-
-    // sets each table view cell's value and stores it
-    if(indexPath.row == 0) {
-        tableViewCell.description = self.title;
-        tableViewCell.defaultValue = NSLocalizedString(@"Title", @"Title");
-        self.titleTableViewCell = tableViewCell;
-    } else {
-        tableViewCell.description = self.subTitle;
-        tableViewCell.defaultValue = NSLocalizedString(@"Subtitle", @"Subtitle");
-        self.subTitleTableViewCell = tableViewCell;
     }
 
     // returns the cell

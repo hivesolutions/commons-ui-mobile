@@ -348,8 +348,11 @@
         UIViewController<HMEntityDelegate, HMEntityProvider> *viewControllerInstance = [[buttonItem.readViewController alloc] initWithNibName:buttonItem.readNibName bundle:[NSBundle mainBundle]];
         viewControllerInstance.entityProviderDelegate = self;
 
+        // retrieves the entity data
+        NSDictionary *entityData = (NSDictionary *) buttonItem.data;
+
         // changes the entity
-        [viewControllerInstance changeEntity:buttonItem.data];
+        [viewControllerInstance changeEntity:entityData];
 
         // pushes the view controller instance
         [self.viewController.navigationController pushViewController:viewControllerInstance animated:YES];
