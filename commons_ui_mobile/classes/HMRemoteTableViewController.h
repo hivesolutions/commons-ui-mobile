@@ -36,6 +36,7 @@
     HMEntityAbstraction *_entityAbstraction;
     NSObject<HMEntityProviderDelegate> *_entityProviderDelegate;
     BOOL _createEntityHidden;
+    BOOL _searchBarHidden;
 }
 
 /**
@@ -45,9 +46,14 @@
 @property (retain) HMEntityAbstraction *entityAbstraction;
 
 /**
- * Controls the statys of the create entity button.
+ * Controls the status of the create entity button.
  */
 @property (assign) BOOL createEntityHidden;
+
+/**
+ * Controls the status of the search bar.
+ */
+@property (assign) BOOL searchBarHidden;
 
 /**
  * Initializes the structures.
@@ -58,6 +64,11 @@
  * Initializes the create entity button.
  */
 - (void)initCreateEntity;
+
+/**
+ * Initializes the search bar.
+ */
+- (void)initSearchBar;
 
 /**
  * Retrieves the title to be used.

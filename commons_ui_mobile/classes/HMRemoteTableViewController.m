@@ -30,6 +30,7 @@
 @synthesize entityAbstraction = _entityAbstraction;
 @synthesize entityProviderDelegate = _entityProviderDelegate;
 @synthesize createEntityHidden = _createEntityHidden;
+@synthesize searchBarHidden = _searchBarHidden;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     // calls the super
@@ -57,6 +58,9 @@
     // initializes the create entity (button)
     [self initCreateEntity];
 
+    // initializes the search bar
+    [self initSearchBar];
+
     // creates the entity abstraction
     HMEntityAbstraction *entityAbstraction = [[HMEntityAbstraction alloc] init];
 
@@ -81,6 +85,18 @@
 
     // releases the objects
     [newBarButton release];
+}
+
+- (void)initSearchBar {
+    // in case the create entity hidden flag
+    // is not set (no need to unsets the search bar)
+    if(!self.searchBarHidden) {
+        // returns immediately
+        return;
+    }
+
+    // unsets the table header view
+    self.tableView.tableHeaderView = nil;
 }
 
 - (NSString *)getTitle {

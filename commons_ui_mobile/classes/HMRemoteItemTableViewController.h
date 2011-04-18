@@ -59,6 +59,7 @@ typedef enum {
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
+    BOOL _editHidden;
     BOOL _viewAppear;
     BOOL _viewDisappear;
     BOOL _remoteDataIsSet;
@@ -98,6 +99,12 @@ typedef enum {
  * the type of operation in defined.
  */
 @property (assign) HMItemOperationType operationType;
+
+/**
+ * Controls if the edit support should be
+ * hidden or displayed.
+ */
+@property (assign) BOOL editHidden;
 
 /**
  * Constructor of the class.

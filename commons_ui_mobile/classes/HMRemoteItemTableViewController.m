@@ -34,6 +34,7 @@
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
+@synthesize editHidden = _editHidden;
 
 - (id)init {
     // calls the super
@@ -374,7 +375,7 @@
 
 - (void)constructReadStructures {
     // creates the edit bar button
-    UIBarButtonItem *editBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
+    UIBarButtonItem *editBarButton = self.editHidden ? nil : [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", @"Edit") style:UIBarButtonItemStylePlain target:self action: @selector(editButtonClicked:extra:)];
 
     // sets the bar buttons
     [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
