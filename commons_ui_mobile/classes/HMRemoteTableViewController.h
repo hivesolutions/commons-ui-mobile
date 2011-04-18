@@ -35,6 +35,7 @@
     @private
     HMEntityAbstraction *_entityAbstraction;
     NSObject<HMEntityProviderDelegate> *_entityProviderDelegate;
+    BOOL _createEntityHidden;
 }
 
 /**
@@ -44,9 +45,19 @@
 @property (retain) HMEntityAbstraction *entityAbstraction;
 
 /**
+ * Controls the statys of the create entity button.
+ */
+@property (assign) BOOL createEntityHidden;
+
+/**
  * Initializes the structures.
  */
 - (void)initStructures;
+
+/**
+ * Initializes the create entity button.
+ */
+- (void)initCreateEntity;
 
 /**
  * Retrieves the title to be used.

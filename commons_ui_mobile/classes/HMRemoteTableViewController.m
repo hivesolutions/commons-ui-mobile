@@ -29,6 +29,7 @@
 
 @synthesize entityAbstraction = _entityAbstraction;
 @synthesize entityProviderDelegate = _entityProviderDelegate;
+@synthesize createEntityHidden = _createEntityHidden;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     // calls the super
@@ -53,9 +54,8 @@
     // sets the attributes
     self.title = [self getTitle];
 
-    // sets the new bar button in the navigation item
-    UIBarButtonItem *newBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showNewEntityViewController)];
-    [self.navigationItem setRightBarButtonItem:newBarButton animated:YES];
+    // initializes the create entity (button)
+    [self initCreateEntity];
 
     // creates the entity abstraction
     HMEntityAbstraction *entityAbstraction = [[HMEntityAbstraction alloc] init];
@@ -65,6 +65,21 @@
 
     // releases the objects
     [entityAbstraction release];
+}
+
+- (void)initCreateEntity {
+    // in case the create entity hidden flag
+    // is set (no need to create the button)
+    if(self.createEntityHidden) {
+        // returns immediately
+        return;
+    }
+
+    // sets the new bar button in the navigation item
+    UIBarButtonItem *newBarButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(showNewEntityViewController)];
+    [self.navigationItem setRightBarButtonItem:newBarButton animated:YES];
+
+    // releases the objects
     [newBarButton release];
 }
 
