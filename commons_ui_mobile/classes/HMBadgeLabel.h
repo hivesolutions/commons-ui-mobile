@@ -35,5 +35,4 @@
  */
 @property (retain) UIColor *badgeColor;
 
-
 @end
