@@ -75,7 +75,7 @@
  * options view, to provide an optimized
  * menu view.
  */
-@interface HMOptionsButtonView : UIView {
+@interface HMOptionsButtonView : UIControl {
     @private
     UIButton *_button;
     UILabel *_label;

@@ -135,6 +135,17 @@
     self.label.text = text;
 }
 
+- (void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    // calls the method in the button
+    [self.button addTarget:target action:action forControlEvents:controlEvents];
+}
+
+- (void)removeTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents {
+    // calls the method in the button
+    [self.button removeTarget:target action:action forControlEvents:controlEvents];
+}
+
+
 + (void)_keepAtLinkTime {
 }
 
