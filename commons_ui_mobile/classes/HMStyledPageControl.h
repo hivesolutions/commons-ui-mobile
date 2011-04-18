@@ -35,6 +35,11 @@
  */
 #define HM_STYLED_PAGE_CONTROL_DOT_INACTIVE @"page_control_dot_inactive.png"
 
+/**
+ * A composite page control component that
+ * allows a custom image to be used as the
+ * page control token.
+ */
 @interface HMStyledPageControl : UIPageControl {
     @private
     int _currentCachePage;

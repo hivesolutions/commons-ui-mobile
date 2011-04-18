@@ -45,6 +45,12 @@
  */
 #define HM_OPTIONS_VIEW_EXTRA_HEIGHT 80
 
+/**
+ * View aimed at providing a menu with
+ * optimized (big buttons) experience.
+ * This view works perfectly in both horizontal
+ * and vertical orientations.
+ */
 @interface HMOptionsView : UIView<UIScrollViewDelegate> {
     @private
     NSMutableArray *_optionsButtons;

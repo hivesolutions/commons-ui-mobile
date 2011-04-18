@@ -70,6 +70,11 @@
  */
 #define HM_OPTIONS_BUTTON_VIEW_LABEL_Y 68
 
+/**
+ * Button component to be used inside the
+ * options view, to provide an optimized
+ * menu view.
+ */
 @interface HMOptionsButtonView : UIView {
     @private
     UIButton *_button;
