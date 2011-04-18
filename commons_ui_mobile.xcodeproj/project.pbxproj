@@ -51,7 +51,6 @@
 		C23B5E561333BC0100CFC9AF /* HMPlainDateTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = C23B5E541333BC0100CFC9AF /* HMPlainDateTableViewCell.h */; };
 		C23B5E571333BC0100CFC9AF /* HMPlainDateTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23B5E551333BC0100CFC9AF /* HMPlainDateTableViewCell.m */; };
 		C23B5E721333D5BB00CFC9AF /* HMRemoteItemTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C23B5E701333D5BB00CFC9AF /* HMRemoteItemTableViewController.h */; };
-		C23B5E731333D5BB00CFC9AF /* HMRemoteItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */; };
 		C2760B141358A881006EEB66 /* HMOptionsButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2760B0E1358A881006EEB66 /* HMOptionsButtonView.h */; };
 		C2760B151358A881006EEB66 /* HMOptionsButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2760B0F1358A881006EEB66 /* HMOptionsButtonView.m */; };
 		C2760B161358A881006EEB66 /* HMOptionsView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2760B101358A881006EEB66 /* HMOptionsView.h */; };
@@ -71,6 +70,7 @@
 		C29E100F1333A24C00E9F77A /* HMHeaderItemTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */; };
 		C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */; };
 		C2B808BC1343E4EF00CAEC67 /* HMView.h in Headers */ = {isa = PBXBuildFile; fileRef = C2B808BA1343E4EF00CAEC67 /* HMView.h */; };
+		C2BE9E78135C53B20030D86F /* HMRemoteItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C2BE9E77135C53B20030D86F /* HMRemoteItemTableViewController.m */; };
 		C2C272C5133C05DA00D203C2 /* HMEntityAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C272C3133C05DA00D203C2 /* HMEntityAbstraction.h */; };
 		C2C272C6133C05DA00D203C2 /* HMEntityAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C272C4133C05DA00D203C2 /* HMEntityAbstraction.m */; };
 		C2C272C8133C06FB00D203C2 /* HMEntityDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C2C272C7133C06FB00D203C2 /* HMEntityDelegate.h */; };
@@ -138,7 +138,6 @@
 		C23B5E541333BC0100CFC9AF /* HMPlainDateTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMPlainDateTableViewCell.h; path = classes/HMPlainDateTableViewCell.h; sourceTree = "<group>"; };
 		C23B5E551333BC0100CFC9AF /* HMPlainDateTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMPlainDateTableViewCell.m; path = classes/HMPlainDateTableViewCell.m; sourceTree = "<group>"; };
 		C23B5E701333D5BB00CFC9AF /* HMRemoteItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteItemTableViewController.h; path = classes/HMRemoteItemTableViewController.h; sourceTree = "<group>"; };
-		C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteItemTableViewController.m; path = classes/HMRemoteItemTableViewController.m; sourceTree = "<group>"; };
 		C2760B0E1358A881006EEB66 /* HMOptionsButtonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMOptionsButtonView.h; path = classes/HMOptionsButtonView.h; sourceTree = "<group>"; };
 		C2760B0F1358A881006EEB66 /* HMOptionsButtonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMOptionsButtonView.m; path = classes/HMOptionsButtonView.m; sourceTree = "<group>"; };
 		C2760B101358A881006EEB66 /* HMOptionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMOptionsView.h; path = classes/HMOptionsView.h; sourceTree = "<group>"; };
@@ -158,6 +157,7 @@
 		C29E100D1333A24C00E9F77A /* HMHeaderItemTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMHeaderItemTableView.h; path = classes/HMHeaderItemTableView.h; sourceTree = "<group>"; };
 		C29E100E1333A24C00E9F77A /* HMHeaderItemTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMHeaderItemTableView.m; path = classes/HMHeaderItemTableView.m; sourceTree = "<group>"; };
 		C2B808BA1343E4EF00CAEC67 /* HMView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMView.h; path = classes/HMView.h; sourceTree = "<group>"; };
+		C2BE9E77135C53B20030D86F /* HMRemoteItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteItemTableViewController.m; path = classes/HMRemoteItemTableViewController.m; sourceTree = "<group>"; };
 		C2C272C3133C05DA00D203C2 /* HMEntityAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityAbstraction.h; path = classes/HMEntityAbstraction.h; sourceTree = "<group>"; };
 		C2C272C4133C05DA00D203C2 /* HMEntityAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMEntityAbstraction.m; path = classes/HMEntityAbstraction.m; sourceTree = "<group>"; };
 		C2C272C7133C06FB00D203C2 /* HMEntityDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEntityDelegate.h; path = classes/HMEntityDelegate.h; sourceTree = "<group>"; };
@@ -333,7 +333,7 @@
 				C28924C3133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h */,
 				C28924C4133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m */,
 				C23B5E701333D5BB00CFC9AF /* HMRemoteItemTableViewController.h */,
-				C23B5E711333D5BB00CFC9AF /* HMRemoteItemTableViewController.m */,
+				C2BE9E77135C53B20030D86F /* HMRemoteItemTableViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -768,7 +768,6 @@
 				A5E648EA13313F7100FE725A /* HMEditTableViewCell.m in Sources */,
 				C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */,
 				C23B5E571333BC0100CFC9AF /* HMPlainDateTableViewCell.m in Sources */,
-				C23B5E731333D5BB00CFC9AF /* HMRemoteItemTableViewController.m in Sources */,
 				A50772B71337B8E300859BD2 /* HMEditTableViewCellEditView.m in Sources */,
 				A50772B91337B8E300859BD2 /* HMTableViewCellBackgroundView.m in Sources */,
 				C28924C6133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m in Sources */,
@@ -793,6 +792,7 @@
 				C2760B151358A881006EEB66 /* HMOptionsButtonView.m in Sources */,
 				C2760B171358A881006EEB66 /* HMOptionsView.m in Sources */,
 				C2760B191358A881006EEB66 /* HMStyledPageControl.m in Sources */,
+				C2BE9E78135C53B20030D86F /* HMRemoteItemTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

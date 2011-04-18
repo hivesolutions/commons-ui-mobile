@@ -159,8 +159,20 @@
     // sets the view appear flag
     _viewAppear = YES;
 
-    // calls the construct structures delayed
-    [self constructStructuresDelayed];
+    // in case the view did already disappear
+    if(_viewDisappear) {
+        // unsets the view disappear flag
+        _viewDisappear = NO;
+
+        // calls the construct structures delayed
+        [self constructStructuresDelayedReshow];
+    }
+    // otherwise the view is to be contructed for
+    // the first time
+    else {
+        // calls the construct structures delayed
+        [self constructStructuresDelayed];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -175,6 +187,9 @@
 
     // sets the view disappear flag
     _viewDisappear = YES;
+
+    // unsets the view appear flag
+    _viewAppear = NO;
 
     // calls the destroy structures delayed
     [self destroyStructuresDelayed];
@@ -273,6 +288,32 @@
     }
 }
 
+- (void)constructStructuresDelayedReshow {
+    // in case the view did not appear
+    if(!_remoteDataIsSet || !_viewAppear) {
+        // returns immediately (can't
+        // (re)construct without remote data)
+        return;
+    }
+
+    // switches over the operation type
+    // in order to create the apropriate
+    // components
+    switch(self.operationType) {
+        // in case it's an read operation
+        case HMItemOperationRead:
+            // constructs the read structures reshow
+            [self constructReadStructuresReshow];
+
+            // breaks the switch
+            break;
+
+        // in case it's default
+        default:
+            break;
+    }
+}
+
 - (void)destroyStructuresDelayed {
     // in case the remote data is set
     // or the view is hidden
@@ -343,6 +384,11 @@
 
     // releases the objects
     [editBarButton release];
+}
+
+- (void)constructReadStructuresReshow {
+    // shows the toolbar
+    [self showToolbar];
 }
 
 - (void)destroyReadStructures {
