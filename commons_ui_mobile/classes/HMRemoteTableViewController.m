@@ -90,7 +90,8 @@
 
 - (void)showNewEntityViewController {
     // retrieves the new entity view controller
-    UIViewController<HMEntityDelegate> *newEntityViewController = [self getNewEntityViewController];
+    UIViewController<HMEntityProvider> *newEntityViewController = [self getNewEntityViewController];
+    newEntityViewController.entityProviderDelegate = self;
 
     // sets the title in the new entity view controller
     newEntityViewController.title = [self getNewEntityTitle];
@@ -162,6 +163,8 @@
 }
 
 - (void)updateEntity:(NSDictionary *)entity entityName:(NSString *)entityName entityKey:(NSString *)entityKey {
+    // in case the entity provider
+    // delegate is set
     if(self.entityProviderDelegate) {
         // updates the entity provider delegate
         [self updateEntityProviderDelegate:entity entityName:entityName entityKey:entityKey];
