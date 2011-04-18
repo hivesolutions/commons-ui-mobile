@@ -37,6 +37,7 @@
 @synthesize editHidden = _editHidden;
 @synthesize deleteHidden = _deleteHidden;
 @synthesize refreshHidden = _refreshHidden;
+@synthesize toolbarHidden = _toolbarHidden;
 
 - (id)init {
     // calls the super
@@ -385,7 +386,7 @@
     // sets the bar buttons
     [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
 
-    // shows the toolbar
+    // show the toolbar
     [self showToolbar];
 
     // releases the objects
@@ -393,8 +394,8 @@
 }
 
 - (void)constructReadStructuresReshow {
-    // shows the toolbar
-    [self showToolbar];
+    // updates the toolbar
+    [self updateToolbar];
 }
 
 - (void)destroyReadStructures {
@@ -498,6 +499,37 @@
 - (void)cancelRemote {
     // cancels the remote abstraction
     [self.remoteAbstraction cancelRemote];
+}
+
+- (void)changeToolbar:(BOOL)hidden {
+    // sets the toolbar hidden flag
+    self.toolbarHidden = hidden;
+
+    // in case the hidden flag is set
+    if(hidden) {
+        // hides the toolbar
+        [self hideToolbar];
+    }
+    // otherwise the flag is not set
+    else {
+        // shows the toolbar
+        [self showToolbar];
+    }
+}
+
+- (void)updateToolbar {
+    // in case the toolbar hidden
+    // flag is set
+    if(self.toolbarHidden) {
+        // hides the toolbar
+        [self hideToolbar];
+    }
+    // otherwise the toolbar
+    // should be shown
+    else {
+        // shows the toolbar
+        [self showToolbar];
+    }
 }
 
 - (void)showToolbar {
@@ -653,6 +685,9 @@
         // sets the item table view as editing
         [itemTableView setEditing:YES animated:YES];
 
+        // changes the toolbar to hidden
+        [self changeToolbar:YES];
+
         // creates the cancel button
         UIBarButtonItem *cancelBarButton = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", @"Cancel") style:UIBarButtonItemStylePlain target:self action: @selector(editCancelButtonClicked:extra:)];
 
@@ -674,6 +709,9 @@
 - (void)editCancelButtonClicked:(id)sender extra:(id)extra {
     // casts the table view to item table view
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // changes the toolbar to shown
+    [self changeToolbar:NO];
 
     // sets the item table view as not editing
     [itemTableView setEditing:NO animated:YES commit:NO];
@@ -811,6 +849,9 @@
 - (void)processOperationUpdate:(id)data  {
     // casts the table view to item table view
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // changes the toolbar to shown
+    [self changeToolbar:NO];
 
     // sets the item table view as not editing
     [itemTableView setEditing:NO animated:YES commit:YES];

@@ -62,6 +62,7 @@ typedef enum {
     BOOL _editHidden;
     BOOL _deleteHidden;
     BOOL _refreshHidden;
+    BOOL _toolbarHidden;
     BOOL _viewAppear;
     BOOL _viewDisappear;
     BOOL _remoteDataIsSet;
@@ -119,6 +120,12 @@ typedef enum {
  * hidden or displayed.
  */
 @property (assign) BOOL refreshHidden;
+
+/**
+ * Controls if the toolbar support should be
+ * hidden or displayed.
+ */
+@property (assign) BOOL toolbarHidden;
 
 /**
  * Constructor of the class.
@@ -300,6 +307,21 @@ typedef enum {
  * Cancels the current remote call.
  */
 - (void)cancelRemote;
+
+/**
+ * Changes the current toolbar state
+ * to a new state and changes the internal
+ * structures accordingly.
+ *
+ * @param hidden The new visibility value for
+ * the toolbar.
+ */
+- (void)changeToolbar:(BOOL)hidden
+
+/**
+ * Updates the toolbar status.
+ */
+- (void)updateToolbar;
 
 /**
  * Shows the bottom toolbar.
