@@ -29,6 +29,7 @@
 
 @synthesize remoteDataSource = _remoteDataSource;
 @synthesize remoteDelegate = _remoteDelegate;
+@synthesize searchBar = _searchBar;
 
 - (id)init {
     // calls the super
@@ -60,6 +61,9 @@
     // releases the remote data source
     [_remoteDataSource release];
 
+    // releases the search bar
+    [_searchBar release];
+
     // calls the supper
     [super dealloc];
 }
@@ -78,6 +82,9 @@
 
     // adds the search bar as the table header view
     self.tableHeaderView = searchBar;
+
+    // sets the attributes
+    self.searchBar = searchBar;
 
     // releases the objects
     [searchBar release];
@@ -116,6 +123,12 @@
 - (void)willAppear {
     // calls the update remote
     [self.remoteDataSource updateRemote];
+
+    // sets the search bar as the table header view
+    // re-setting the search bar avoids problems when
+    // changing the visibility of the view while focusing
+    // in the search bar
+    self.tableHeaderView = self.searchBar;
 }
 
 - (void)reloadData {

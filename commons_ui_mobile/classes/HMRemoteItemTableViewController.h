@@ -59,6 +59,7 @@ typedef enum {
     NSMutableData *_receivedData;
     HMNamedItemGroup *_remoteGroup;
     HMItemOperationType _operationType;
+    BOOL _updateRemoteUpdate;
     BOOL _editHidden;
     BOOL _deleteHidden;
     BOOL _refreshHidden;
@@ -102,6 +103,12 @@ typedef enum {
  * the type of operation in defined.
  */
 @property (assign) HMItemOperationType operationType;
+
+/**
+ * If the remote should be updated whenever
+ * an update is done.
+ */
+@property (assign) BOOL updateRemoteUpdate;
 
 /**
  * Controls if the edit support should be
@@ -302,6 +309,22 @@ typedef enum {
  * call to the provider.
  */
 - (void)updateRemote;
+
+/**
+ * Updates the remote data, by performing a remote
+ * call to the provider.
+ * This method disallows the animation.
+ */
+- (void)updateRemoteNoAnimation;
+
+/**
+ * Updates the remote data, by performing a remote
+ * call to the provider.
+ * This melhod allows control of the animation.
+ *
+ * @param animated If the updating should be animated.
+ */
+- (void)updateRemote:(BOOL)animated;
 
 /**
  * Cancels the current remote call.
