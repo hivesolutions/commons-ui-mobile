@@ -34,6 +34,7 @@
 @synthesize receivedData = _receivedData;
 @synthesize remoteGroup = _remoteGroup;
 @synthesize operationType = _operationType;
+@synthesize updateRemoteUpdate = _updateRemoteUpdate;
 @synthesize editHidden = _editHidden;
 @synthesize deleteHidden = _deleteHidden;
 @synthesize refreshHidden = _refreshHidden;
@@ -478,13 +479,23 @@
 }
 
 - (void)updateRemote {
+    // calls the update remote method
+    [self updateRemote:YES];
+}
+
+- (void)updateRemoteNoAnimation {
+    // calls the update remote method
+    [self updateRemote:NO];
+}
+
+- (void)updateRemote:(BOOL)animated {
     // retrieves the remote url
     NSString *remoteUrl = [self getRemoteUrl];
 
     // creates the remote abstraction using the remote url
     HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationRead url:remoteUrl];
     remoteAbstraction.remoteDelegate = self;
-    remoteAbstraction.view = self.tableView.superview;
+    remoteAbstraction.view = animated ? self.tableView.superview : nil;
 
     // sets the attributes
     self.remoteAbstraction = remoteAbstraction;
@@ -864,6 +875,12 @@
 
     // sets the edit bar button item
     [self.navigationItem setRightBarButtonItem:editBarButton animated:YES];
+
+    // in case the update remote flag is set
+    if(self.updateRemoteUpdate) {
+        // updates the remote after a while (avoids collisions)
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updateRemoteNoAnimation) userInfo:nil repeats:NO];
+    }
 
     // releases the objects
     [editBarButton release];
