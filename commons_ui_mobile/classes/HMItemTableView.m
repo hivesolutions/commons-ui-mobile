@@ -316,15 +316,11 @@
     // retrieves the button item
     HMButtonItem *buttonItem = (HMButtonItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
-    // returns in case the table is in editing mode
-    // but the item is not selectable in editing mode
-    if(self.editing && !buttonItem.selectableEdit) {
-        return;
-    }
+    // retrieves the table view cell
+    HMTableViewCell *tableViewCell = (HMTableViewCell *) [self cellForRowAtIndexPath:indexPath];
 
-    // returns in case the table is not in editing mode
-    // but the item is not selectable when not in editing mode
-    if(!self.editing && !buttonItem.selectable) {
+    // returns in case selection is disabled
+    if(tableViewCell.selectionStyle == UITableViewCellSelectionStyleNone) {
         return;
     }
 

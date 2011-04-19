@@ -208,24 +208,30 @@
                     columnStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnStringTableViewCell.secure = stringTableCellItem.secure;
-                    columnStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnStringTableViewCell.returnType = stringTableCellItem.returnType;
                     columnStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     columnStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     columnStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
+                    columnStringTableViewCell.readViewController = stringTableCellItem.readViewController;
+                    columnStringTableViewCell.readNibName = stringTableCellItem.readNibName;
+                    columnStringTableViewCell.editViewController = stringTableCellItem.editViewController;
+                    columnStringTableViewCell.editNibName = stringTableCellItem.editNibName;
                     tableViewCell = columnStringTableViewCell;
                 } else {
                     HMPlainStringTableViewCell *plainStringTableViewCell = [[[HMPlainStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
                     plainStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainStringTableViewCell.secure = stringTableCellItem.secure;
-                    plainStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainStringTableViewCell.returnType = stringTableCellItem.returnType;
                     plainStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     plainStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     plainStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
+                    plainStringTableViewCell.readViewController = stringTableCellItem.readViewController;
+                    plainStringTableViewCell.readNibName = stringTableCellItem.readNibName;
+                    plainStringTableViewCell.editViewController = stringTableCellItem.editViewController;
+                    plainStringTableViewCell.editNibName = stringTableCellItem.editNibName;
                     tableViewCell = plainStringTableViewCell;
                 }
             } else {
@@ -234,24 +240,30 @@
                     columnMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     columnMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     columnMultilineStringTableViewCell.secure = stringTableCellItem.secure;
-                    columnMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     columnMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     columnMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
                     columnMultilineStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     columnMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     columnMultilineStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
+                    columnMultilineStringTableViewCell.readViewController = stringTableCellItem.readViewController;
+                    columnMultilineStringTableViewCell.readNibName = stringTableCellItem.readNibName;
+                    columnMultilineStringTableViewCell.editViewController = stringTableCellItem.editViewController;
+                    columnMultilineStringTableViewCell.editNibName = stringTableCellItem.editNibName;
                     tableViewCell = columnMultilineStringTableViewCell;
                 } else {
                     HMPlainMultilineStringTableViewCell *plainMultilineStringTableViewCell = [[[HMPlainMultilineStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
                     plainMultilineStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
                     plainMultilineStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
                     plainMultilineStringTableViewCell.secure = stringTableCellItem.secure;
-                    plainMultilineStringTableViewCell.editableCell = stringTableCellItem.editableCell;
                     plainMultilineStringTableViewCell.clearable = stringTableCellItem.clearable;
                     plainMultilineStringTableViewCell.autocapitalizationType = stringTableCellItem.autocapitalizationType;
                     plainMultilineStringTableViewCell.returnType = stringTableCellItem.returnType;
                     plainMultilineStringTableViewCell.returnDisablesEdit = stringTableCellItem.returnDisablesEdit;
                     plainMultilineStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
+                    plainMultilineStringTableViewCell.readViewController = stringTableCellItem.readViewController;
+                    plainMultilineStringTableViewCell.readNibName = stringTableCellItem.readNibName;
+                    plainMultilineStringTableViewCell.editViewController = stringTableCellItem.editViewController;
+                    plainMultilineStringTableViewCell.editNibName = stringTableCellItem.editNibName;
                     tableViewCell = plainMultilineStringTableViewCell;
                 }
             }
@@ -259,14 +271,34 @@
             // casts the table cell item to a constant string table cell item
             HMConstantStringTableCellItem *stringTableCellItem = (HMConstantStringTableCellItem *) tableCellItem;
 
-            HMColumnConstantStringTableViewCell *columnConstantStringTableViewCell = [[[HMColumnConstantStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
-            columnConstantStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
-            columnConstantStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
-            columnConstantStringTableViewCell.editableCell = YES;
-            columnConstantStringTableViewCell.clearable = stringTableCellItem.clearable;
-            columnConstantStringTableViewCell.returnType = stringTableCellItem.returnType;
-            columnConstantStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
-            tableViewCell = columnConstantStringTableViewCell;
+            // creates the appropriate cell
+            if(stringTableCellItem.name) {
+                // creates a column constant string table view cell
+                HMColumnConstantStringTableViewCell *columnConstantStringTableViewCell = [[[HMColumnConstantStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                columnConstantStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
+                columnConstantStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                columnConstantStringTableViewCell.clearable = stringTableCellItem.clearable;
+                columnConstantStringTableViewCell.returnType = stringTableCellItem.returnType;
+                columnConstantStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
+                columnConstantStringTableViewCell.readViewController = stringTableCellItem.readViewController;
+                columnConstantStringTableViewCell.readNibName = stringTableCellItem.readNibName;
+                columnConstantStringTableViewCell.editViewController = stringTableCellItem.editViewController;
+                columnConstantStringTableViewCell.editNibName = stringTableCellItem.editNibName;
+                tableViewCell = columnConstantStringTableViewCell;
+            } else {
+                // creates a plain constant string table view cell
+                HMPlainConstantStringTableViewCell *plainConstantStringTableViewCell = [[[HMPlainConstantStringTableViewCell alloc] initWithReuseIdentifier:cellIdentifier] autorelease];
+                plainConstantStringTableViewCell.selectableEdit = stringTableCellItem.selectableEdit;
+                plainConstantStringTableViewCell.defaultValue = stringTableCellItem.defaultValue;
+                plainConstantStringTableViewCell.clearable = stringTableCellItem.clearable;
+                plainConstantStringTableViewCell.returnType = stringTableCellItem.returnType;
+                plainConstantStringTableViewCell.focusEdit = stringTableCellItem.focusEdit;
+                plainConstantStringTableViewCell.readViewController = stringTableCellItem.readViewController;
+                plainConstantStringTableViewCell.readNibName = stringTableCellItem.readNibName;
+                plainConstantStringTableViewCell.editViewController = stringTableCellItem.editViewController;
+                plainConstantStringTableViewCell.editNibName = stringTableCellItem.editNibName;
+                tableViewCell = plainConstantStringTableViewCell;
+            }
         }
 
         // retrieves the table view cell's colors
@@ -308,14 +340,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    // returns in case the editing style is not delete
+    // in case the editing style is not delete
     if(editingStyle != UITableViewCellEditingStyleDelete) {
+        // returns since all further
+        // actions are for deletions
         return;
     }
 
     // retrieves the table cell item and the table view cell
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [self.listItemGroup getItemAtIndexPath:indexPath];
-    HMTableViewCell *tableViewCell = (HMTableViewCell *) [self tableView:tableView cellForRowAtIndexPath:indexPath];
+    HMEditTableViewCell *editTableViewCell = (HMEditTableViewCell *) [self tableView:tableView cellForRowAtIndexPath:indexPath];
 
     // in case the row is not deletable
     if(!tableCellItem.deletableRow) {
@@ -326,13 +360,16 @@
 
     // peforms the specified delete action type
     switch(tableCellItem.deleteActionType) {
-        // clears the row
+        // in case the action type is clear
         case HMTableCellItemDeleteActionTypeClear:
             // clears the table view cell's description and data
-            tableViewCell.descriptionTransient = @"";
-            tableViewCell.dataTransient = nil;
+            editTableViewCell.descriptionTransient = @"";
+            editTableViewCell.dataTransient = nil;
+
+            // breaks the switch
             break;
-        // deletes the row
+
+        // in case the action type is delete
         case HMTableCellItemDeleteActionTypeDelete:
             // marks the item as deleted
             tableCellItem.transientState = HMItemStateOld;
@@ -342,9 +379,13 @@
             [tableView beginUpdates];
             [tableView deleteRowsAtIndexPaths:indexPathArray withRowAnimation:UITableViewRowAnimationNone];
             [tableView endUpdates];
+
+            // breaks the switch
             break;
+
+        // for all other action types
         default:
-            // breaks
+            // breaks the switch
             break;
     }
 }

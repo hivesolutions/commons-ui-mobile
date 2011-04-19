@@ -23,9 +23,9 @@
 // __copyright__ = Copyright (c) 2008 Hive Solutions Lda.
 // __license__   = GNU General Public License (GPL), Version 3
 
-#import "HMColumnConstantStringTableViewCell.h"
+#import "HMPlainConstantStringTableViewCell.h"
 
-@implementation HMColumnConstantStringTableViewCell
+@implementation HMPlainConstantStringTableViewCell
 
 @synthesize label = _label;
 
@@ -43,12 +43,13 @@
 
     // creates the text field and adds it to the edit view
     CGRect editViewFrame = self.editView.frame;
-    CGRect labelFrame = CGRectMake(HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_PLAIN_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN * 2 + 4, HM_PLAIN_STRING_TABLE_VIEW_CELL_HEIGHT);
+    CGRect labelFrame = CGRectMake(HM_PLAIN_CONSTANT_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_PLAIN_CONSTANT_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_PLAIN_CONSTANT_STRING_TABLE_VIEW_CELL_X_MARGIN * 2 + 4, HM_PLAIN_CONSTANT_STRING_TABLE_VIEW_CELL_HEIGHT);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     label.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
     label.backgroundColor = [UIColor clearColor];
     label.text = self.description;
+    label.textColor = self.descriptionColor;
 
     // adds the textfield as subview
     [self.editView addSubview:label];

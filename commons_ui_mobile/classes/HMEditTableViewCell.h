@@ -35,12 +35,13 @@
     UIView *_editView;
     NSString *_defaultValue;
     NSString *_returnType;
-    BOOL _editableCell;
     BOOL _clearable;
     BOOL _editAlways;
     BOOL _selectableEdit;
     BOOL _persistentEdit;
     BOOL _focusEdit;
+    Class _editViewController;
+    NSString *_editNibName;
 }
 
 /**
@@ -60,11 +61,6 @@
  * the cell's value edition.
  */
 @property (retain) NSString *returnType;
-
-/**
- * Indicates if the cell is editable.
- */
-@property (assign) BOOL editableCell;
 
 /**
  * Indicates if the inserted value is
@@ -94,6 +90,19 @@
  * when entering edit mode.
  */
 @property (assign) BOOL focusEdit;
+
+/**
+ * The view controller to use when the
+ * item is selected for editing.
+ */
+@property (assign) Class editViewController;
+
+/**
+ * The name of the nib for the view
+ * controller that will be used when
+ * the item is selected for ediiting.
+ */
+@property (retain) NSString *editNibName;
 
 /**
  * Creates the editing view.

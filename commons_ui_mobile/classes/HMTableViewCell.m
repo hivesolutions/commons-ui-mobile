@@ -41,6 +41,8 @@
 @synthesize deletableRow = _deletableRow;
 @synthesize dataTransient = _dataTransient;
 @synthesize changeEditingStatus = _changeEditingStatus;
+@synthesize readViewController = _readViewController;
+@synthesize readNibName = _readNibName;
 @synthesize item = _item;
 @synthesize itemTableView = _itemTableView;
 
@@ -106,6 +108,9 @@
 
     // releases the data transient
     [_dataTransient release];
+
+    // releases the read nib name
+    [_readNibName release];
 
     // releases the item
     [_item release];
@@ -219,13 +224,6 @@
     self.detailTextLabel.text = description;
 }
 
-- (NSString *)descriptionTransient {
-    return nil;
-}
-
-- (void)setDescriptionTransient:(NSString *)descriptionTransient {
-}
-
 - (NSString *)icon {
     return _icon;
 }
@@ -282,16 +280,8 @@
     // sets the object
     _selectable = selectable;
 
-    // in case it's selectable in the normal mode
-    if(selectable == YES) {
-        // changes the selection style to blue
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
-    }
-    // otherwise it's not selectable
-    else {
-        // changes the selection style to none
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
+    // sets the cell's selection style
+    self.selectionStyle = selectable ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
 
 - (NSString *)accessoryTypeString {
@@ -393,6 +383,13 @@
     // sets the data as the
     // transient data
     self.dataTransient = _data;
+}
+
+- (NSString *)descriptionTransient {
+    return nil;
+}
+
+- (void)setDescriptionTransient:(NSString *)descriptionTransient {
 }
 
 - (void)layoutSubviews {

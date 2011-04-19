@@ -26,6 +26,8 @@
 #import "Dependencies.h"
 
 #import "HMTableViewDataSource.h"
+#import "HMTableViewCell.h"
+#import "HMEditTableViewCell.h"
 
 @interface HMTableView : UITableView {
     UIViewController *_viewController;

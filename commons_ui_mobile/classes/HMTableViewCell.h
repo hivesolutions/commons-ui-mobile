@@ -89,6 +89,8 @@
     NSObject *_data;
     NSObject *_dataTransient;
     BOOL _changeEditingStatus;
+    Class _readViewController;
+    NSString *_readNibName;
     HMItem *_item;
     HMItemTableView *_itemTableView;
 }
@@ -210,6 +212,19 @@
 * Flag that controls the change editing status.
  */
 @property (assign) BOOL changeEditingStatus;
+
+/**
+ * The view controller to use when the
+ * item is selected for reading.
+ */
+@property (assign) Class readViewController;
+
+/**
+ * The name of the nib for the view
+ * controller that will be used when
+ * the item is selected for reading.
+ */
+@property (retain) NSString *readNibName;
 
 /**
  * The item table view this cell belongs to.

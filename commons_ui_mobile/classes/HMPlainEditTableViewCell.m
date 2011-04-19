@@ -47,6 +47,11 @@
         delta += 24;
     }
 
+    // adjusts the delta in case an icon is present
+    if(self.icon) {
+        delta += 34;
+    }
+
     // creates the edit view
     CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
     UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];

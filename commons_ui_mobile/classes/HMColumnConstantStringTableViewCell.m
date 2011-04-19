@@ -49,6 +49,7 @@
     label.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
     label.backgroundColor = [UIColor clearColor];
     label.text = self.description;
+    label.textColor = self.descriptionColor;
 
     // adds the textfield as subview
     [self.editView addSubview:label];

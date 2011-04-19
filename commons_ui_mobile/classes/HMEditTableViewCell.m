@@ -30,12 +30,13 @@
 @synthesize defaultValue = _defaultValue;
 @synthesize editView = _editView;
 @synthesize returnType = _returnType;
-@synthesize editableCell = _editableCell;
 @synthesize clearable = _clearable;
 @synthesize editAlways = _editAlways;
 @synthesize selectableEdit = _selectableEdit;
 @synthesize persistentEdit = _persistentEdit;
 @synthesize focusEdit = _focusEdit;
+@synthesize editViewController = _editViewController;
+@synthesize editNibName = _editNibName;
 
 - (id)initWithStyle:(UITableViewCellStyle)cellStyle reuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -43,7 +44,6 @@
 
     // sets the default attributes
     _editingDirty = YES;
-    _editableCell = YES;
     _persistentEdit = NO;
     _editAlways = NO;
 
@@ -58,6 +58,9 @@
     // releases the return type
     [_returnType release];
 
+    // releases the edit nib name
+    [_editNibName release];
+
     // calls the super
     [super dealloc];
 }
@@ -68,6 +71,10 @@
 - (void)showEditing {
     // shows the edit view
     self.editView.hidden = NO;
+
+    // sets the cell as selectable in case it is entering edit mode
+    // and the cell is selectable in edit mode
+    self.selectionStyle = self.selectableEdit ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
 
 - (void)hideEditing {
@@ -79,6 +86,15 @@
 
     // shows the edit view
     self.editView.hidden = YES;
+
+    // checks if the data exists in case a read view controller was defined
+    // or if the read view controller is undefined
+    BOOL validData = self.readViewController == nil || self.readViewController != nil && self.data != nil;
+
+    // sets the cell as selectable in case it is exiting edit mode
+    // and no read view controller is defined, or is defined along
+    // with the respective data
+    self.selectionStyle = self.selectable && validData ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
 
 - (void)focusEditing {
@@ -109,23 +125,6 @@
     // as the current change editing status (nothing changes)
     if(editing == self.changeEditingStatus) {
         // returns immediately
-        return;
-    }
-
-    // in case the change is to editing and the cell is meant
-    // to be selectable in edit mode or in case the cell is not
-    // in edit mode and it is selectable
-    if((editing == YES && self.selectableEdit) || (editing == NO && self.selectable)) {
-        // sets the selection style to editing style in blue
-        self.selectionStyle = UITableViewCellSelectionStyleBlue;
-    } else {
-        // sets the selection style to no editing style
-        self.selectionStyle = UITableViewCellEditingStyleNone;
-    }
-
-    // returns in case the cell is not editable
-    if(!self.editableCell) {
-        // returns immediately (no need to edit)
         return;
     }
 

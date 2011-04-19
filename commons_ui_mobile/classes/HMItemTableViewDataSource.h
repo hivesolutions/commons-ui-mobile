@@ -31,6 +31,8 @@
 #import "HMPlainStringTableViewCell.h"
 #import "HMColumnMultilineStringTableViewCell.h"
 #import "HMPlainMultilineStringTableViewCell.h"
+#import "HMColumnConstantStringTableViewCell.h"
+#import "HMPlainConstantStringTableViewCell.h"
 
 /**
  * Table view data soruce used to represent for reprenstation
