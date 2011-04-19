@@ -46,6 +46,12 @@
     // calls the super
     [super buttonClicked:buttonName];
 
+    // casts the table view to item table view
+    HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
+
+    // blurs all the other cells
+    [itemTableView blurAllExceptCell:nil];
+
     // creates a new image picker
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;

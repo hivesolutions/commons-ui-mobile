@@ -25,6 +25,7 @@
 
 #import "Dependencies.h"
 
+#import "HMRemoteTableView.h"
 #import "HMRemoteTableViewProvider.h"
 #import "HMRemoteTableViewDelegate.h"
 #import "HMEntityProvider.h"

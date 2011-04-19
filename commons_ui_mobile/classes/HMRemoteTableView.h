@@ -34,6 +34,7 @@
     HMRemoteTableViewDataSource *_remoteDataSource;
     NSObject<HMRemoteTableViewDelegate> *_remoteDelegate;
     NSObject<HMRemoteTableViewProvider> *_remoteTableViewProvider;
+    UISearchBar *_searchBar;
 }
 
 /**
@@ -53,6 +54,12 @@
  * configuration on the remote object.
  */
 @property (assign) IBOutlet NSObject<HMRemoteTableViewProvider> *remoteTableViewProvider;
+
+/**
+ * The search bar component to be used on the top
+ * of the table.
+ */
+@property (retain) UISearchBar *searchBar;
 
 /**
  * Constructs the view components and adds them

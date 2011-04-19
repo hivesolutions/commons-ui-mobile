@@ -91,8 +91,14 @@
         return;
     }
 
+    // casts the table view as remote table view (safe)
+    HMRemoteTableView *remoteTableView = (HMRemoteTableView *) self.tableView;
+
     // unsets the table header view
-    self.tableView.tableHeaderView = nil;
+    remoteTableView.tableHeaderView = nil;
+
+    // unsets the search bar
+    remoteTableView.searchBar = nil;
 }
 
 - (NSString *)getTitle {
