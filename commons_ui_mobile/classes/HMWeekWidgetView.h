@@ -25,12 +25,16 @@
 
 #import "Dependencies.h"
 
+#import "HMStyledPageControl.h"
+#import "HMWeekWidgetPanelView.h"
+
 /**
  * Enumeration defining the
  * various week widget panel types.
  */
 typedef enum {
-    HMWeekWidgetGreenPanel = 1,
+    HMWeekWidgetNonePanel = 1,
+    HMWeekWidgetGreenPanel,
     HMWeekWidgetRedPanel
 } HMWeekWidgetPanelType;
 
@@ -40,6 +44,7 @@ typedef enum {
  */
 @interface HMWeekWidgetView : UIView<UIScrollViewDelegate> {
     @private
+    int _numberPages;
     UIColor *_greenBackgroundColor;
     UIColor *_redBackgroundColor;
     UIScrollView *_scrollView;
@@ -77,15 +82,17 @@ typedef enum {
 - (void)initBackgroudPatterns;
 
 /**
- * Creates a panel view for the given horizontal position.
- * The created panel corresponds to a widget panel.
- *
- * @param xPosition The horizontal position of the created
- * panel view.
- * @param panelType The type of panel to be created.
- * @return The created panel view.
+ * Does the layout.
  */
-- (UIView *)createPanelView:(CGFloat)xPosition panelType:(HMWeekWidgetPanelType)panelType;
+- (void)doLayout;
+
+/**
+ * Add a week wiget panel view to the current view.
+ *
+ * @param weekWidgetPanel The week widget panel to be added.
+ * @param panelType The type of panel to be added (color).
+ */
+- (void)addWeekWidgetPanel:(HMWeekWidgetPanelView *)weekWidgetPanel panelType:(HMWeekWidgetPanelType)panelType;
 
 /**
  * Keeps the class valid for export at link time.

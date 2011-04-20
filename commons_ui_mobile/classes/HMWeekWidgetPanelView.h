@@ -25,8 +25,101 @@
 
 #import "Dependencies.h"
 
+/**
+ * The week widget panel view status label spacing.
+ */
+#define HM_WEEK_WIDGET_PANEL_VIEW_STATUS_LABEL_SPACING 6.0
+
+/**
+ * The week widget panel view status label y (position).
+ */
+#define HM_WEEK_WIDGET_PANEL_VIEW_STATUS_LABEL_Y 390.0
+
 @interface HMWeekWidgetPanelView : UIView<UIScrollViewDelegate> {
+    @private
+    NSString *_title;
+    NSString *_subTitle;
+    UIImage *_image;
+    NSArray *_weekItems;
+    UILabel *_titleLabel;
+    UILabel *_subTitleLabel;
+    UIImageView *_imageView;
+    NSMutableArray *_weekItemLabels;
+    UILabel *_leftLabel;
+    UILabel *_centerLabel;
+    UILabel *_rightLabel;
 }
+
+/**
+ * The title value.
+ */
+@property (assign) NSString *title;
+
+/**
+ * The sub title value.
+ */
+@property (assign) NSString *subTitle;
+
+/**
+ * The image to represent widget panel.
+ */
+@property (assign) UIImage *image;
+
+/**
+ * The list of items representing the various
+ * week days.
+ */
+@property (assign) NSArray *weekItems;
+
+/**
+ * The title label.
+ */
+@property (retain) UILabel *titleLabel;
+
+/**
+ * The sub title label.
+ */
+@property (retain) UILabel *subTitleLabel;
+
+/**
+ * The image view.
+ */
+@property (retain) UIImageView *imageView;
+
+/**
+ * The week item labels.
+ */
+@property (retain) NSMutableArray *weekItemLabels;
+
+/**
+ * The left (status) labels.
+ */
+@property (retain) UILabel *leftLabel;
+
+/**
+ * The center (status) labels.
+ */
+@property (retain) UILabel *centerLabel;
+
+/**
+ * The right (status) labels.
+ */
+@property (retain) UILabel *rightLabel;
+
+/**
+ * Initializes the structures.
+ */
+- (void)initStructures;
+
+/**
+ * Does the layout in the status labels.
+ */
+- (void)doLayoutStatus;
+
+/**
+ * Updates the status value.
+ */
+- (void)updateStatus;
 
 /**
  * Keeps the class valid for export at link time.
