@@ -84,10 +84,11 @@
     // creates the scroll view
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, 336)];
     scrollView.showsHorizontalScrollIndicator = NO;
+    scrollView.pagingEnabled = YES;
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.delegate = self;
 
-    // creates the scroll view
+    // creates the styled page control
     HMStyledPageControl *styledPageControl = [[HMStyledPageControl alloc] initWithFrame:CGRectMake(0, 380, 320, 36)];
     styledPageControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 

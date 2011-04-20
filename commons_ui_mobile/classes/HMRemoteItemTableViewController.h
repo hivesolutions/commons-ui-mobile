@@ -150,6 +150,13 @@ typedef enum {
 - (void)initStructures;
 
 /**
+ * Retrieves the title.
+ *
+ * @return The title.
+ */
+- (NSString *)getTitle;
+
+/**
  * Retrieves the remote url.
  *
  * @return The remote url.

@@ -119,6 +119,10 @@
     [super dealloc];
 }
 
+- (NSString *)getTitle {
+    return nil;
+}
+
 - (NSString *)getRemoteUrl {
     return nil;
 }
@@ -201,6 +205,9 @@
 }
 
 - (void)initStructures {
+    // sets the attributes
+    self.title = [self getTitle];
+
     // sets the table view as read
     self.operationType = HMItemOperationRead;
 

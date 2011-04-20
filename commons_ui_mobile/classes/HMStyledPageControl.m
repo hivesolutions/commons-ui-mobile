@@ -28,11 +28,12 @@
 @implementation HMStyledPageControl
 
 @synthesize currentCachePage = _currentCachePage;
+@synthesize imageActive = _imageActive;
+@synthesize imageInactive = _imageInactive;
 
 - (id)init {
-    // loads the dot images
-    _imageActive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_ACTIVE];
-    _imageInactive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_INACTIVE];
+    // initializes the structures
+    [self initStructures];
 
     // calls the super
     self = [super init];
@@ -42,9 +43,8 @@
 }
 
 - (id)initWithFrame:(CGRect)frame {
-    // loads the dot images
-    _imageActive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_ACTIVE];
-    _imageInactive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_INACTIVE];
+    // initializes the structures
+    [self initStructures];
 
     // calls the super
     self = [super initWithFrame:frame];
@@ -54,15 +54,31 @@
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
-    // loads the dot images
-    _imageActive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_ACTIVE];
-    _imageInactive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_INACTIVE];
+    // initializes the structures
+    [self initStructures];
 
     // calls the super
     self = [super initWithCoder:aDecoder];
 
     // returns self
     return self;
+}
+
+- (void)dealloc {
+    // releases the image active
+    [_imageActive release];
+
+    // releases the image inactive
+    [_imageInactive release];
+
+    // calls the super
+    [super dealloc];
+}
+
+- (void)initStructures {
+    // loads the dot images
+    self.imageActive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_ACTIVE];
+    self.imageInactive = [UIImage imageNamed:HM_STYLED_PAGE_CONTROL_DOT_INACTIVE];
 }
 
 - (void)setCurrentPage:(NSInteger)page {
@@ -87,12 +103,12 @@
         // the currently selected page
         if(subviewIndex == page) {
             // sets the active image in the subview
-            [subview setImage:_imageActive];
+            [subview setImage:self.imageActive];
         }
         // otherwise it must be not selected
         else {
             // sets the inactive image in the subview
-            [subview setImage:_imageInactive];
+            [subview setImage:self.imageInactive];
         }
     }
 
@@ -107,7 +123,7 @@
     // retrieves the first subview and sets the active
     // image for it (selected page controls)
     UIImageView *subview = [self.subviews objectAtIndex:0];
-    [subview setImage:_imageActive];
+    [subview setImage:self.imageActive];
 
     // retrieves the subviews count
     NSUInteger subviewsCount = [self.subviews count];
@@ -119,7 +135,7 @@
         UIImageView *subview = [self.subviews objectAtIndex:subviewIndex];
 
         // sets the inactive image in the subview
-        [subview setImage:_imageInactive];
+        [subview setImage:self.imageInactive];
     }
 }
 

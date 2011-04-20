@@ -54,6 +54,23 @@
 @property (assign) int currentCachePage;
 
 /**
+ * The image to be used for the current
+ * active page.
+ */
+@property (retain) UIImage *imageActive;
+
+/**
+ * The image to be used for the current
+ * inactive page.
+ */
+@property (retain) UIImage *imageInactive;
+
+/**
+ * Initializes the structures.
+ */
+- (void)initStructures;
+
+/**
  * Keeps the class valid for export at link time.
  */
 + (void)_keepAtLinkTime;
