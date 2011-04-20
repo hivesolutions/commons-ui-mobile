@@ -121,6 +121,9 @@
 }
 
 - (void)willAppear {
+    // calls the super
+    [super willAppear];
+
     // calls the update remote
     [self.remoteDataSource updateRemote];
 
@@ -129,6 +132,14 @@
     // changing the visibility of the view while focusing
     // in the search bar
     self.tableHeaderView = self.searchBar;
+}
+
+- (void)willDisappear {
+    // calls the super
+    [super willDisappear];
+
+    // resigns the search bar as first responder (no focus)
+    [self.searchBar resignFirstResponder];
 }
 
 - (void)reloadData {
