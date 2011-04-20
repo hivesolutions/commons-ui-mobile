@@ -277,6 +277,9 @@
 
     // does the layout in the status
     [self doLayoutStatus];
+
+    // releases the objects
+    [dateFormatter release];
 }
 
 - (NSString *)title {

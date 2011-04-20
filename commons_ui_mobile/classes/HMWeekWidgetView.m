@@ -123,10 +123,6 @@
     // sets the attributes
     self.greenBackgroundColor = greenBackgroundColor;
     self.redBackgroundColor = redBackgroundColor;
-
-    // releases the objects
-    [greenBackgroundColor release];
-    [redBackgroundColor release];
 }
 
 - (void)doLayout {
@@ -176,6 +172,19 @@
             // breaks the switch
             break;
     }
+
+    // retrieves the scroll view width
+    CGFloat scrollViewWidth = self.scrollView.frame.size.width;
+
+    // retrieves the week widget panel frame
+    CGRect weekWidgetPanelFrame = weekWidgetPanel.frame;
+
+    // sets the week widget panel frame position
+    weekWidgetPanelFrame.origin.x = _numberPages * scrollViewWidth;
+    weekWidgetPanelFrame.origin.y = 0;
+
+    // re-sets the week widget panel frame
+    weekWidgetPanel.frame = weekWidgetPanelFrame;
 
     // adds the week widget panel to the scroll view
     [self.scrollView addSubview:weekWidgetPanel];
