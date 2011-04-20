@@ -65,6 +65,10 @@
 		C27B02CE134620B700C562C4 /* HMRemoteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C27B02CC134620B600C562C4 /* HMRemoteTableViewController.m */; };
 		C28924C5133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C28924C3133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h */; };
 		C28924C6133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28924C4133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m */; };
+		C289F703135F22F00035A0EB /* HMWeekWidgetPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = C289F6FF135F22F00035A0EB /* HMWeekWidgetPanelView.h */; };
+		C289F704135F22F00035A0EB /* HMWeekWidgetPanelView.m in Sources */ = {isa = PBXBuildFile; fileRef = C289F700135F22F00035A0EB /* HMWeekWidgetPanelView.m */; };
+		C289F705135F22F00035A0EB /* HMWeekWidgetView.h in Headers */ = {isa = PBXBuildFile; fileRef = C289F701135F22F00035A0EB /* HMWeekWidgetView.h */; };
+		C289F706135F22F00035A0EB /* HMWeekWidgetView.m in Sources */ = {isa = PBXBuildFile; fileRef = C289F702135F22F00035A0EB /* HMWeekWidgetView.m */; };
 		C29A2E2E132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E2A132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h */; };
 		C29A2E2F132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = C29A2E2B132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m */; };
 		C29A2E32132E9D11005EAB37 /* commons_ui_mobile.h in Headers */ = {isa = PBXBuildFile; fileRef = C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */; };
@@ -156,6 +160,10 @@
 		C27B02CC134620B600C562C4 /* HMRemoteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableViewController.m; path = classes/HMRemoteTableViewController.m; sourceTree = "<group>"; };
 		C28924C3133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteHeaderItemTableViewController.h; path = classes/HMRemoteHeaderItemTableViewController.h; sourceTree = "<group>"; };
 		C28924C4133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteHeaderItemTableViewController.m; path = classes/HMRemoteHeaderItemTableViewController.m; sourceTree = "<group>"; };
+		C289F6FF135F22F00035A0EB /* HMWeekWidgetPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMWeekWidgetPanelView.h; path = classes/HMWeekWidgetPanelView.h; sourceTree = "<group>"; };
+		C289F700135F22F00035A0EB /* HMWeekWidgetPanelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMWeekWidgetPanelView.m; path = classes/HMWeekWidgetPanelView.m; sourceTree = "<group>"; };
+		C289F701135F22F00035A0EB /* HMWeekWidgetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMWeekWidgetView.h; path = classes/HMWeekWidgetView.h; sourceTree = "<group>"; };
+		C289F702135F22F00035A0EB /* HMWeekWidgetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMWeekWidgetView.m; path = classes/HMWeekWidgetView.m; sourceTree = "<group>"; };
 		C29A2E2A132E9CF6005EAB37 /* HMRemoteTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableViewDataSource.h; path = classes/HMRemoteTableViewDataSource.h; sourceTree = "<group>"; };
 		C29A2E2B132E9CF6005EAB37 /* HMRemoteTableViewDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableViewDataSource.m; path = classes/HMRemoteTableViewDataSource.m; sourceTree = "<group>"; };
 		C29A2E31132E9D11005EAB37 /* commons_ui_mobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commons_ui_mobile.h; path = headers/commons_ui_mobile.h; sourceTree = "<group>"; };
@@ -407,6 +415,25 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		C289F6FC135F223C0035A0EB /* Week Widget */ = {
+			isa = PBXGroup;
+			children = (
+				C289F6FE135F22440035A0EB /* Views */,
+			);
+			name = "Week Widget";
+			sourceTree = "<group>";
+		};
+		C289F6FE135F22440035A0EB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C289F6FF135F22F00035A0EB /* HMWeekWidgetPanelView.h */,
+				C289F700135F22F00035A0EB /* HMWeekWidgetPanelView.m */,
+				C289F701135F22F00035A0EB /* HMWeekWidgetView.h */,
+				C289F702135F22F00035A0EB /* HMWeekWidgetView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		C29A2E30132E9D08005EAB37 /* Headers */ = {
 			isa = PBXGroup;
 			children = (
@@ -628,6 +655,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C289F6FC135F223C0035A0EB /* Week Widget */,
 				C2760B1A1358A8A7006EEB66 /* Page Control */,
 				C27608391358A858006EEB66 /* Options View */,
 				C210CB70134F56D00026BE3B /* Application */,
@@ -724,6 +752,8 @@
 				C2760B141358A881006EEB66 /* HMOptionsButtonView.h in Headers */,
 				C2760B161358A881006EEB66 /* HMOptionsView.h in Headers */,
 				C2760B181358A881006EEB66 /* HMStyledPageControl.h in Headers */,
+				C289F703135F22F00035A0EB /* HMWeekWidgetPanelView.h in Headers */,
+				C289F705135F22F00035A0EB /* HMWeekWidgetView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -809,6 +839,8 @@
 				C2760B171358A881006EEB66 /* HMOptionsView.m in Sources */,
 				C2760B191358A881006EEB66 /* HMStyledPageControl.m in Sources */,
 				C2BE9E78135C53B20030D86F /* HMRemoteItemTableViewController.m in Sources */,
+				C289F704135F22F00035A0EB /* HMWeekWidgetPanelView.m in Sources */,
+				C289F706135F22F00035A0EB /* HMWeekWidgetView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

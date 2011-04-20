@@ -71,3 +71,5 @@
 #import "../classes/HMOptionsButtonView.h"
 #import "../classes/HMOptionsView.h"
 #import "../classes/HMStyledPageControl.h"
+#import "../classes/HMWeekWidgetView.h"
+#import "../classes/HMWeekWidgetPanelView.h"
