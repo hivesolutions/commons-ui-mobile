@@ -39,10 +39,12 @@
     @private
     NSString *_title;
     NSString *_subTitle;
+    NSString *_value;
     UIImage *_image;
     NSArray *_weekItems;
     UILabel *_titleLabel;
     UILabel *_subTitleLabel;
+    UILabel *_valueLabel;
     UIImageView *_imageView;
     NSMutableArray *_weekItemLabels;
     UILabel *_leftLabel;
@@ -59,6 +61,11 @@
  * The sub title value.
  */
 @property (assign) NSString *subTitle;
+
+/**
+ * The value value.
+ */
+@property (assign) NSString *value;
 
 /**
  * The image to represent widget panel.
@@ -80,6 +87,11 @@
  * The sub title label.
  */
 @property (retain) UILabel *subTitleLabel;
+
+/**
+ * The value label.
+ */
+@property (retain) UILabel *valueLabel;
 
 /**
  * The image view.

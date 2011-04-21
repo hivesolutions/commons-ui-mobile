@@ -29,6 +29,7 @@
 
 @synthesize titleLabel = _titleLabel;
 @synthesize subTitleLabel = _subTitleLabel;
+@synthesize valueLabel = _valueLabel;
 @synthesize imageView = _imageView;
 @synthesize weekItemLabels = _weekItemLabels;
 @synthesize leftLabel = _leftLabel;
@@ -75,6 +76,9 @@
     // releases the sub title label
     [_subTitleLabel release];
 
+    // releases the value label
+    [_valueLabel release];
+
     // releases the image view
     [_imageView release];
 
@@ -106,10 +110,19 @@
     // creates the sub title label
     UILabel *subTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(28, 104, 150, 20)];
     subTitleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:16];
-    subTitleLabel.textColor = [UIColor colorWithRed:0.84 green:0.92 blue:0.85 alpha:1.0];
+    subTitleLabel.textColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1.0];
     subTitleLabel.backgroundColor = [UIColor clearColor];
     subTitleLabel.shadowColor = [UIColor blackColor];
     subTitleLabel.shadowOffset = CGSizeMake(0, 1);
+
+    // creates the value label
+    UILabel *valueLabel = [[UILabel alloc] initWithFrame:CGRectMake(188, 124, 104, 26)];
+    valueLabel.textAlignment = UITextAlignmentRight;
+    valueLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:21];
+    valueLabel.textColor = [UIColor whiteColor];
+    valueLabel.backgroundColor = [UIColor clearColor];
+    valueLabel.shadowColor = [UIColor blackColor];
+    valueLabel.shadowOffset = CGSizeMake(0, 1);
 
     // creates the image view
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(132, 30, 58, 58)];
@@ -152,7 +165,7 @@
         [weekItemValueLabel release];
 
         // increments the curren y position value
-        currentY += 36;
+        currentY += 35;
     }
 
     // creates the left toolbar label
@@ -185,6 +198,7 @@
     // adds the subviews
     [self addSubview:titleLabel];
     [self addSubview:subTitleLabel];
+    [self addSubview:valueLabel];
     [self addSubview:imageView];
     [self addSubview:leftLabel];
     [self addSubview:centerLabel];
@@ -193,6 +207,7 @@
     // sets the attributes
     self.titleLabel = titleLabel;
     self.subTitleLabel = subTitleLabel;
+    self.valueLabel = valueLabel;
     self.imageView = imageView;
     self.weekItemLabels = weekItemLabels;
     self.leftLabel = leftLabel;
@@ -202,6 +217,7 @@
     // releases the objects
     [titleLabel release];
     [subTitleLabel release];
+    [valueLabel release];
     [imageView release];
     [weekItemLabels release];
     [leftLabel release];
@@ -304,6 +320,18 @@
 
     // sets the sub title in the sub title label
     self.subTitleLabel.text = subTitle;
+}
+
+- (NSString *)value {
+    return _value;
+}
+
+- (void)setValue:(NSString *)value {
+    // sets the value
+    _value = value;
+
+    // sets the value in the value label
+    self.valueLabel.text = value;
 }
 
 - (UIImage *)image {

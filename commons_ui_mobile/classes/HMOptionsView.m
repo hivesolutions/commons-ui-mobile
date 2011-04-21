@@ -278,16 +278,6 @@
     [self doLayout];
 }
 
-- (void)setBackgroundColor:(UIColor *)backgroundColor {
-    // calls the super
-    [super setBackgroundColor:backgroundColor];
-
-    // sets the background color in the scroll view
-    // and in the styled page control
-    self.scrollView.backgroundColor = backgroundColor;
-    self.styledPageControl.backgroundColor = backgroundColor;
-}
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     // retrieves the page width
     CGFloat pageWidth = scrollView.frame.size.width;
