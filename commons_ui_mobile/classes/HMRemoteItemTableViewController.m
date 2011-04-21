@@ -205,6 +205,11 @@
 }
 
 - (void)initStructures {
+    // sets the background color in the view
+    UIImage *backgroundPatternImage = [UIImage imageNamed:@"linen_background.png"];
+    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundPatternImage];
+    self.view.backgroundColor = backgroundColor;
+
     // sets the attributes
     self.title = [self getTitle];
 
