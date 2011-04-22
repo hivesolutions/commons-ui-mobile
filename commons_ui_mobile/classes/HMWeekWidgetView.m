@@ -196,7 +196,4 @@
     [self doLayout];
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

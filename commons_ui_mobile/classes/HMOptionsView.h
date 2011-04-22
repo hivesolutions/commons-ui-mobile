@@ -108,9 +108,4 @@
  */
 - (CGFloat)getLineMargin;
 
-/**
- * Keeps the class valid for export at link time.
- */
-+ (void)_keepAtLinkTime;
-
 @end

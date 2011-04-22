@@ -373,7 +373,4 @@
     }
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

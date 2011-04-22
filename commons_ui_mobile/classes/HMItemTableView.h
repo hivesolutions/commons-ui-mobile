@@ -80,11 +80,6 @@
 - (void)flushItemSpecificationTransient:(BOOL)transient;
 
 /**
- * Keeps the class valid for export at link time.
- */
-+ (void)_keepAtLinkTime;
-
-/**
  * Creates a view representing a label item
  * that is meant to be inserted in a table section.
  *

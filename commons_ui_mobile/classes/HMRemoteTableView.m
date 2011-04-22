@@ -183,7 +183,4 @@
     [self.remoteDataSource updateRemoteForced];
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

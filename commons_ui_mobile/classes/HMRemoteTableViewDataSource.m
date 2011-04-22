@@ -263,7 +263,4 @@
     [self updateRemoteForced];
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

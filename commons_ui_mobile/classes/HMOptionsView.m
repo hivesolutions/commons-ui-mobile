@@ -292,7 +292,4 @@
     self.styledPageControl.currentPage = page;
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

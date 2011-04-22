@@ -48,6 +48,8 @@
 		C210CB78134F58DF0026BE3B /* HMAuthenticationDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = C210CB77134F58DF0026BE3B /* HMAuthenticationDelegate.h */; };
 		C210CB7C134F5A620026BE3B /* HMAuthenticationViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C210CB7A134F5A620026BE3B /* HMAuthenticationViewController.h */; };
 		C210CB7D134F5A620026BE3B /* HMAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */; };
+		C213372913618DBE00F89D08 /* UIImage+HMImageDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = C213372713618DBE00F89D08 /* UIImage+HMImageDevice.h */; };
+		C213372A13618DBE00F89D08 /* UIImage+HMImageDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = C213372813618DBE00F89D08 /* UIImage+HMImageDevice.m */; };
 		C2207C57134F684D00BE87CB /* HMErrorAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2207C55134F684D00BE87CB /* HMErrorAbstraction.h */; };
 		C2207C58134F684D00BE87CB /* HMErrorAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2207C56134F684D00BE87CB /* HMErrorAbstraction.m */; };
 		C233B0FD1344841D00A9F9B5 /* HMTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */; };
@@ -143,6 +145,8 @@
 		C210CB77134F58DF0026BE3B /* HMAuthenticationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAuthenticationDelegate.h; path = classes/HMAuthenticationDelegate.h; sourceTree = "<group>"; };
 		C210CB7A134F5A620026BE3B /* HMAuthenticationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAuthenticationViewController.h; path = classes/HMAuthenticationViewController.h; sourceTree = "<group>"; };
 		C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMAuthenticationViewController.m; path = classes/HMAuthenticationViewController.m; sourceTree = "<group>"; };
+		C213372713618DBE00F89D08 /* UIImage+HMImageDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+HMImageDevice.h"; path = "classes/UIImage+HMImageDevice.h"; sourceTree = "<group>"; };
+		C213372813618DBE00F89D08 /* UIImage+HMImageDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+HMImageDevice.m"; path = "classes/UIImage+HMImageDevice.m"; sourceTree = "<group>"; };
 		C2207C55134F684D00BE87CB /* HMErrorAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMErrorAbstraction.h; path = classes/HMErrorAbstraction.h; sourceTree = "<group>"; };
 		C2207C56134F684D00BE87CB /* HMErrorAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMErrorAbstraction.m; path = classes/HMErrorAbstraction.m; sourceTree = "<group>"; };
 		C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewDataSource.h; path = classes/HMTableViewDataSource.h; sourceTree = "<group>"; };
@@ -237,6 +241,15 @@
 				C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		C213372513618D6F00F89D08 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				C213372713618DBE00F89D08 /* UIImage+HMImageDevice.h */,
+				C213372813618DBE00F89D08 /* UIImage+HMImageDevice.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		C2207C53134F683C00BE87CB /* Error */ = {
@@ -655,6 +668,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C213372513618D6F00F89D08 /* Categories */,
 				C289F6FC135F223C0035A0EB /* Week Widget */,
 				C2760B1A1358A8A7006EEB66 /* Page Control */,
 				C27608391358A858006EEB66 /* Options View */,
@@ -754,6 +768,7 @@
 				C2760B181358A881006EEB66 /* HMStyledPageControl.h in Headers */,
 				C289F703135F22F00035A0EB /* HMWeekWidgetPanelView.h in Headers */,
 				C289F705135F22F00035A0EB /* HMWeekWidgetView.h in Headers */,
+				C213372913618DBE00F89D08 /* UIImage+HMImageDevice.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -841,6 +856,7 @@
 				C2BE9E78135C53B20030D86F /* HMRemoteItemTableViewController.m in Sources */,
 				C289F704135F22F00035A0EB /* HMWeekWidgetPanelView.m in Sources */,
 				C289F706135F22F00035A0EB /* HMWeekWidgetView.m in Sources */,
+				C213372A13618DBE00F89D08 /* UIImage+HMImageDevice.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

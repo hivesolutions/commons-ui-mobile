@@ -470,7 +470,4 @@
     }
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

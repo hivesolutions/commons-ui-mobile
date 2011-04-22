@@ -73,3 +73,4 @@
 #import "../classes/HMStyledPageControl.h"
 #import "../classes/HMWeekWidgetView.h"
 #import "../classes/HMWeekWidgetPanelView.h"
+#import "../classes/UIImage+HMImageDevice.h"

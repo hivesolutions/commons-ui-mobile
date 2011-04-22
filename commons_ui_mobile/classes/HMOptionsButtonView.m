@@ -145,8 +145,4 @@
     [self.button removeTarget:target action:action forControlEvents:controlEvents];
 }
 
-
-+ (void)_keepAtLinkTime {
-}
-
 @end

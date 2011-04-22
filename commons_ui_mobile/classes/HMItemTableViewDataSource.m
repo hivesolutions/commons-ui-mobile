@@ -435,7 +435,4 @@
     return 0;
 }
 
-+ (void)_keepAtLinkTime {
-}
-
 @end

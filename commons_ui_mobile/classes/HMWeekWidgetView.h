@@ -94,9 +94,4 @@ typedef enum {
  */
 - (void)addWeekWidgetPanel:(HMWeekWidgetPanelView *)weekWidgetPanel panelType:(HMWeekWidgetPanelType)panelType;
 
-/**
- * Keeps the class valid for export at link time.
- */
-+ (void)_keepAtLinkTime;
-
 @end

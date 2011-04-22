@@ -110,9 +110,4 @@
  */
 - (void)updateItemSpecificationForce;
 
-/**
- * Keeps the class valid for export at link time.
- */
-+ (void)_keepAtLinkTime;
-
 @end

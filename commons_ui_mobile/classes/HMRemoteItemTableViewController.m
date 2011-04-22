@@ -205,11 +205,6 @@
 }
 
 - (void)initStructures {
-    // sets the background color in the view
-    UIImage *backgroundPatternImage = [UIImage imageNamed:@"linen_background.png"];
-    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundPatternImage];
-    self.view.backgroundColor = backgroundColor;
-
     // sets the attributes
     self.title = [self getTitle];
 
@@ -228,8 +223,25 @@
     // sets the entity abstraction
     self.entityAbstraction = entityAbstraction;
 
+    // initializes the background view
+    [self initBackgroundView];
+
     // releases the entity abstraction
     [entityAbstraction release];
+}
+
+- (void)initBackgroundView {
+    // sets the background color in the view
+    UIImage *backgroundPatternImage = [UIImage imageNamedDevice:@"linen_shadow_background.png"];
+    UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundPatternImage];
+
+    // creates the background view and sets it with
+    // the created background color
+    UIView *backgroundView = [[[UIView alloc] init] autorelease];
+    backgroundView.backgroundColor = backgroundColor;
+
+    // sets the background view in the table view
+    self.tableView.backgroundView = backgroundView;
 }
 
 - (void)constructStructures {

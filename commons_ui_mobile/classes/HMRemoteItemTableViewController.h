@@ -35,6 +35,7 @@
 #import "HMEntityDelegate.h"
 #import "HMAuthenticationDelegate.h"
 #import "HMErrorAbstraction.h"
+#import "UIImage+HMImageDevice.h"
 
 @class HMEntityAbstraction;
 
@@ -148,6 +149,11 @@ typedef enum {
  * Initializes the structures.
  */
 - (void)initStructures;
+
+/**
+ * Initializes the background view.
+ */
+- (void)initBackgroundView;
 
 /**
  * Retrieves the title.
