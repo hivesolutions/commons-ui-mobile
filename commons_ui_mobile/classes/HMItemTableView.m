@@ -216,9 +216,6 @@
     // retrieves the table section item group
     HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
 
-    // releases the index path
-    [indexPath release];
-
     // retrieves the header label item
     HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
 
@@ -227,6 +224,9 @@
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_HEADER_OFFSET;
+
+    // releases the objects
+    [indexPath release];
 
     // returns the height
     return height;
@@ -239,9 +239,6 @@
     // retrieves the table section item group
     HMTableSectionItemGroup *tableSectionItemGroup = (HMTableSectionItemGroup *) [self.itemDataSource.listItemGroup getItemAtIndexPath:indexPath];
 
-    // releases the index path
-    [indexPath release];
-
     // retrieves the footer label item
     HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
 
@@ -250,6 +247,9 @@
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_FOOTER_OFFSET;
+
+    // releases the objects
+    [indexPath release];
 
     // returns the height
     return height;
