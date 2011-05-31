@@ -565,6 +565,9 @@
 
         // adds the table view cell to the cell list
         [self.cellList addObject:tableViewCell];
+
+        // releases the table view cell
+        [tableViewCell release];
     }
 
     // returns the cell
