@@ -50,6 +50,8 @@
 		C210CB7D134F5A620026BE3B /* HMAuthenticationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */; };
 		C213372913618DBE00F89D08 /* UIImage+HMImageDevice.h in Headers */ = {isa = PBXBuildFile; fileRef = C213372713618DBE00F89D08 /* UIImage+HMImageDevice.h */; };
 		C213372A13618DBE00F89D08 /* UIImage+HMImageDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = C213372813618DBE00F89D08 /* UIImage+HMImageDevice.m */; };
+		C21E1F171397D6B100052A33 /* HMNavigationBarImage.h in Headers */ = {isa = PBXBuildFile; fileRef = C21E1F151397D6B100052A33 /* HMNavigationBarImage.h */; };
+		C21E1F181397D6B100052A33 /* HMNavigationBarImage.m in Sources */ = {isa = PBXBuildFile; fileRef = C21E1F161397D6B100052A33 /* HMNavigationBarImage.m */; };
 		C2207C57134F684D00BE87CB /* HMErrorAbstraction.h in Headers */ = {isa = PBXBuildFile; fileRef = C2207C55134F684D00BE87CB /* HMErrorAbstraction.h */; };
 		C2207C58134F684D00BE87CB /* HMErrorAbstraction.m in Sources */ = {isa = PBXBuildFile; fileRef = C2207C56134F684D00BE87CB /* HMErrorAbstraction.m */; };
 		C233B0FD1344841D00A9F9B5 /* HMTableViewDataSource.h in Headers */ = {isa = PBXBuildFile; fileRef = C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */; };
@@ -148,6 +150,8 @@
 		C210CB7B134F5A620026BE3B /* HMAuthenticationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMAuthenticationViewController.m; path = classes/HMAuthenticationViewController.m; sourceTree = "<group>"; };
 		C213372713618DBE00F89D08 /* UIImage+HMImageDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+HMImageDevice.h"; path = "classes/UIImage+HMImageDevice.h"; sourceTree = "<group>"; };
 		C213372813618DBE00F89D08 /* UIImage+HMImageDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+HMImageDevice.m"; path = "classes/UIImage+HMImageDevice.m"; sourceTree = "<group>"; };
+		C21E1F151397D6B100052A33 /* HMNavigationBarImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMNavigationBarImage.h; path = classes/HMNavigationBarImage.h; sourceTree = "<group>"; };
+		C21E1F161397D6B100052A33 /* HMNavigationBarImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMNavigationBarImage.m; path = classes/HMNavigationBarImage.m; sourceTree = "<group>"; };
 		C2207C55134F684D00BE87CB /* HMErrorAbstraction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMErrorAbstraction.h; path = classes/HMErrorAbstraction.h; sourceTree = "<group>"; };
 		C2207C56134F684D00BE87CB /* HMErrorAbstraction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMErrorAbstraction.m; path = classes/HMErrorAbstraction.m; sourceTree = "<group>"; };
 		C233B0FB1344841D00A9F9B5 /* HMTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewDataSource.h; path = classes/HMTableViewDataSource.h; sourceTree = "<group>"; };
@@ -259,6 +263,23 @@
 				C213372813618DBE00F89D08 /* UIImage+HMImageDevice.m */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		C21E1F121397D5EC00052A33 /* Navigation Bar */ = {
+			isa = PBXGroup;
+			children = (
+				C21E1F141397D63200052A33 /* Views */,
+			);
+			name = "Navigation Bar";
+			sourceTree = "<group>";
+		};
+		C21E1F141397D63200052A33 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C21E1F151397D6B100052A33 /* HMNavigationBarImage.h */,
+				C21E1F161397D6B100052A33 /* HMNavigationBarImage.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		C2207C53134F683C00BE87CB /* Error */ = {
@@ -678,6 +699,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C21E1F121397D5EC00052A33 /* Navigation Bar */,
 				C213372513618D6F00F89D08 /* Categories */,
 				C289F6FC135F223C0035A0EB /* Week Widget */,
 				C2760B1A1358A8A7006EEB66 /* Page Control */,
@@ -779,6 +801,7 @@
 				C289F703135F22F00035A0EB /* HMWeekWidgetPanelView.h in Headers */,
 				C289F705135F22F00035A0EB /* HMWeekWidgetView.h in Headers */,
 				C213372913618DBE00F89D08 /* UIImage+HMImageDevice.h in Headers */,
+				C21E1F171397D6B100052A33 /* HMNavigationBarImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -867,6 +890,7 @@
 				C289F704135F22F00035A0EB /* HMWeekWidgetPanelView.m in Sources */,
 				C289F706135F22F00035A0EB /* HMWeekWidgetView.m in Sources */,
 				C213372A13618DBE00F89D08 /* UIImage+HMImageDevice.m in Sources */,
+				C21E1F181397D6B100052A33 /* HMNavigationBarImage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
