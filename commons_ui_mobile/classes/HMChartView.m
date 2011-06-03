@@ -25,20 +25,24 @@
 
 #import "HMChartView.h"
 
-#define MARGIN_LEFT 10
-#define MARGIN_RIGHT 10
-#define MARGIN_TOP 10
-#define MARGIN_BOTTOM 10
+#define MARGIN_LEFT 0.0
+#define MARGIN_RIGHT 0.0
+#define MARGIN_TOP 20.0
+#define MARGIN_BOTTOM 10.0
 
 
-#define VERTICAL_STEPS 8
-#define HORIZONTAL_STEPS 6
+#define VERTICAL_STEPS 8.0
+#define HORIZONTAL_STEPS 6.0
 
 
-#define MAXIMUM_VAUE 100
+#define CIRCLE_SIZE 12.0
+
+#define CIRCLE_INNER_SIZE 4.0
 
 
-#define VALUES [NSNumber numberWithInt:12], [NSNumber numberWithInt:34], [NSNumber numberWithInt:56], [NSNumber numberWithInt:78], [NSNumber numberWithInt:12], [NSNumber numberWithInt:56]
+#define MAXIMUM_VAUE 100.0
+
+#define VALUES [NSNumber numberWithFloat:12.0], [NSNumber numberWithFloat:14.0], [NSNumber numberWithFloat:56.0], [NSNumber numberWithFloat:78.0], [NSNumber numberWithFloat:12.0], [NSNumber numberWithFloat:56.0], [NSNumber numberWithFloat:13.0]
 
 @implementation HMChartView
 
@@ -59,35 +63,36 @@
     [super drawRect:rect];
 
     // retrieves the frame dimensions
-    NSInteger frameWidth = self.frame.size.width;
-    NSInteger frameHeight = self.frame.size.height;
+    CGFloat frameWidth = self.frame.size.width;
+    CGFloat frameHeight = self.frame.size.height;
 
-    printf("%d, %d\n", frameWidth, frameHeight);
+    printf("%f, %f\n", frameWidth, frameHeight);
 
     NSArray *values = [NSArray arrayWithObjects:VALUES, nil];
 
     NSNumber *maximumValue = [NSNumber numberWithInt:0];
 
-    for (NSNumber *value in values) {
-        if(value > maximumValue) {
+    for(NSNumber *value in values) {
+        if([value compare:maximumValue] > 0) {
             maximumValue = value;
         }
     }
 
     // calculates the vertical and horizontal margins
-    NSInteger marginHorizontal = MARGIN_LEFT + MARGIN_RIGHT;
-    NSInteger marginVertical = MARGIN_TOP + MARGIN_BOTTOM;
+    CGFloat marginHorizontal = MARGIN_LEFT + MARGIN_RIGHT;
+    CGFloat marginVertical = MARGIN_TOP + MARGIN_BOTTOM;
 
-    NSInteger availableWidth = frameWidth - marginHorizontal;
-    NSInteger availableHeight = frameHeight - marginVertical;
+    CGFloat availableWidth = frameWidth - marginHorizontal;
+    CGFloat availableHeight = frameHeight - marginVertical;
 
+    CGFloat verticalStepSize = availableHeight / VERTICAL_STEPS;
+    CGFloat horizontalStepSize = availableWidth / HORIZONTAL_STEPS;
 
-    NSInteger verticalStepSize = availableHeight / VERTICAL_STEPS;
-    NSInteger horizontalStepSize = availableWidth / HORIZONTAL_STEPS;
+    CGFloat maximumValueFloat = [maximumValue floatValue];
 
+    CGFloat initialValue = (12.0 / maximumValueFloat) * availableHeight;
 
-
-
+    printf("%f\n", initialValue);
 
 
 
@@ -100,27 +105,77 @@
 
 
     CGContextSetStrokeColorWithColor(context, traceColor);
+    CGContextSetFillColorWithColor(context, traceColor);
     CGContextSetLineWidth(context, 4);
     CGContextSetAllowsAntialiasing(context, YES);
     CGContextSetShouldAntialias(context, YES);
 
 
+    NSInteger index = 0;
 
+    // iterates over all the values
+    for(NSNumber *value in values) {
+        if(index == 0) {
+            CGContextMoveToPoint(context, MARGIN_LEFT, MARGIN_TOP + availableHeight - initialValue);
+        } else {
+            // retrieves the value in float
+            CGFloat valueFloat = [value floatValue];
 
+            // calculates the current y value
+            CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
 
+            // adds the line to the point
+            CGContextAddLineToPoint(context, MARGIN_LEFT + index * horizontalStepSize, MARGIN_TOP + availableHeight - yValue);
+        }
 
-
-
-    // creates the cell's border
-    CGMutablePathRef path = CGPathCreateMutable();
-    CGPathMoveToPoint(path, NULL, MARGIN_LEFT, MARGIN_BOTTOM + ((((float) 12) / [maximumValue floatValue]) * availableHeight));
-    CGPathAddLineToPoint(path, NULL, MARGIN_LEFT + 1 * horizontalStepSize, 40);
-    CGPathCloseSubpath(path);
+        // increments the index
+        index++;
+    }
 
     // draws the cell's border
-    CGContextAddPath(context, path);
-    CGPathRelease(path);
     CGContextStrokePath(context);
+
+    index = 0;
+
+    // iterates over all the values
+    for(NSNumber *value in values) {
+        // retrieves the value in float
+        CGFloat valueFloat = [value floatValue];
+
+        // calculates the current x and y value
+        CGFloat xValue = MARGIN_LEFT + index * horizontalStepSize;
+        CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
+
+        CGFloat realYValue = MARGIN_TOP + availableHeight - yValue;
+
+        CGFloat circuloXInit = xValue - (CIRCLE_SIZE / 2.0);
+        CGFloat circuloYInit = realYValue - (CIRCLE_SIZE / 2.0);
+
+        CGFloat circuloInnerXInit = xValue - (CIRCLE_INNER_SIZE / 2.0);
+        CGFloat circuloInnerYInit = realYValue - (CIRCLE_INNER_SIZE / 2.0);
+
+        // CIRCULO
+        const CGColorRef traceColor = [[UIColor colorWithRed:53.0 / 255.0 green:127.0 / 255.0 blue:181.0 / 255.0 alpha:1.0] CGColor];
+        CGContextSetFillColorWithColor(context, traceColor);
+        CGRect rectangle = CGRectMake(circuloXInit, circuloYInit, CIRCLE_SIZE, CIRCLE_SIZE);
+        CGContextAddEllipseInRect(context, rectangle);
+        CGContextFillPath(context);
+
+        // CIRCULO INNER
+        //    const CGColorRef whiteColor = [[UIColor colorWithRed:53.0 / 255.0 green:127.0 / 255.0 blue:181.0 / 255.0 alpha:1.0] CGColor];
+        CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+
+        CGRect rectangleInner = CGRectMake(circuloInnerXInit, circuloInnerYInit, CIRCLE_INNER_SIZE, CIRCLE_INNER_SIZE);
+        CGContextAddEllipseInRect(context, rectangleInner);
+        CGContextFillPath(context);
+
+        // increments the index
+        index++;
+    }
+
+
+
+
 }
 
 @end
