@@ -70,7 +70,7 @@
     }
 
     // retrieves the image to be used
-    UIImage *image = [UIImage imageNamed:imageName];
+    UIImage *image = [UIImage imageNamedDevice:imageName];
 
     // puts the image into context
     CGContextTranslateCTM(context, 0, image.size.height);

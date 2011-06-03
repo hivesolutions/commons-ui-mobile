@@ -67,6 +67,8 @@
 		C2760B191358A881006EEB66 /* HMStyledPageControl.m in Sources */ = {isa = PBXBuildFile; fileRef = C2760B131358A881006EEB66 /* HMStyledPageControl.m */; };
 		C27B02CD134620B700C562C4 /* HMRemoteTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C27B02CB134620B600C562C4 /* HMRemoteTableViewController.h */; };
 		C27B02CE134620B700C562C4 /* HMRemoteTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C27B02CC134620B600C562C4 /* HMRemoteTableViewController.m */; };
+		C28364821398ED0800540E74 /* HMChartView.h in Headers */ = {isa = PBXBuildFile; fileRef = C28364801398ED0800540E74 /* HMChartView.h */; };
+		C28364831398ED0800540E74 /* HMChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = C28364811398ED0800540E74 /* HMChartView.m */; };
 		C28924C5133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C28924C3133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h */; };
 		C28924C6133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28924C4133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m */; };
 		C289F703135F22F00035A0EB /* HMWeekWidgetPanelView.h in Headers */ = {isa = PBXBuildFile; fileRef = C289F6FF135F22F00035A0EB /* HMWeekWidgetPanelView.h */; };
@@ -167,6 +169,8 @@
 		C2760B131358A881006EEB66 /* HMStyledPageControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMStyledPageControl.m; path = classes/HMStyledPageControl.m; sourceTree = "<group>"; };
 		C27B02CB134620B600C562C4 /* HMRemoteTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteTableViewController.h; path = classes/HMRemoteTableViewController.h; sourceTree = "<group>"; };
 		C27B02CC134620B600C562C4 /* HMRemoteTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteTableViewController.m; path = classes/HMRemoteTableViewController.m; sourceTree = "<group>"; };
+		C28364801398ED0800540E74 /* HMChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMChartView.h; path = classes/HMChartView.h; sourceTree = "<group>"; };
+		C28364811398ED0800540E74 /* HMChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMChartView.m; path = classes/HMChartView.m; sourceTree = "<group>"; };
 		C28924C3133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRemoteHeaderItemTableViewController.h; path = classes/HMRemoteHeaderItemTableViewController.h; sourceTree = "<group>"; };
 		C28924C4133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMRemoteHeaderItemTableViewController.m; path = classes/HMRemoteHeaderItemTableViewController.m; sourceTree = "<group>"; };
 		C289F6FF135F22F00035A0EB /* HMWeekWidgetPanelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMWeekWidgetPanelView.h; path = classes/HMWeekWidgetPanelView.h; sourceTree = "<group>"; };
@@ -458,6 +462,23 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		C283647D1398ECC700540E74 /* Chart */ = {
+			isa = PBXGroup;
+			children = (
+				C283647F1398ECCC00540E74 /* Views */,
+			);
+			name = Chart;
+			sourceTree = "<group>";
+		};
+		C283647F1398ECCC00540E74 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C28364801398ED0800540E74 /* HMChartView.h */,
+				C28364811398ED0800540E74 /* HMChartView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		C289F6FC135F223C0035A0EB /* Week Widget */ = {
 			isa = PBXGroup;
 			children = (
@@ -699,6 +720,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				C283647D1398ECC700540E74 /* Chart */,
 				C21E1F121397D5EC00052A33 /* Navigation Bar */,
 				C213372513618D6F00F89D08 /* Categories */,
 				C289F6FC135F223C0035A0EB /* Week Widget */,
@@ -802,6 +824,7 @@
 				C289F705135F22F00035A0EB /* HMWeekWidgetView.h in Headers */,
 				C213372913618DBE00F89D08 /* UIImage+HMImageDevice.h in Headers */,
 				C21E1F171397D6B100052A33 /* HMNavigationBarImage.h in Headers */,
+				C28364821398ED0800540E74 /* HMChartView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -891,6 +914,7 @@
 				C289F706135F22F00035A0EB /* HMWeekWidgetView.m in Sources */,
 				C213372A13618DBE00F89D08 /* UIImage+HMImageDevice.m in Sources */,
 				C21E1F181397D6B100052A33 /* HMNavigationBarImage.m in Sources */,
+				C28364831398ED0800540E74 /* HMChartView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

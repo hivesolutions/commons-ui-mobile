@@ -25,30 +25,7 @@
 
 #import "Dependencies.h"
 
-/**
- * The navigation bar image vertical height.
- */
-#define HM_NAVIGATION_BAR_IMAGE_VERTICAL_HEIGHT 44
-
-/**
- * The navigation bar image horizontal height.
- */
-#define HM_NAVIGATION_BAR_IMAGE_HORIZONTAL_HEIGHT 32
-
-@interface HMNavigationBarImage : UINavigationBar {
-    @private
-    NSString *_verticalImageName;
-    NSString *_horizontalImageName;
+@interface HMChartView : UIView {
 }
-
-/**
- * The name of the image to be used in vertical position.
- */
-@property (retain) NSString *verticalImageName;
-
-/**
- * The name of the image to be used in horizontal position.
- */
-@property (retain) NSString *horizontalImageName;
 
 @end
