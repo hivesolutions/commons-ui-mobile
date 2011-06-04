@@ -31,18 +31,15 @@
 #define MARGIN_BOTTOM 10.0
 
 
-#define VERTICAL_STEPS 8.0
-#define HORIZONTAL_STEPS 6.0
+#define VERTICAL_STEPS 8
+#define HORIZONTAL_STEPS 6
 
 
 #define CIRCLE_SIZE 12.0
 
 #define CIRCLE_INNER_SIZE 4.0
 
-
-#define MAXIMUM_VAUE 100.0
-
-#define VALUES [NSNumber numberWithFloat:12.0], [NSNumber numberWithFloat:14.0], [NSNumber numberWithFloat:56.0], [NSNumber numberWithFloat:78.0], [NSNumber numberWithFloat:12.0], [NSNumber numberWithFloat:56.0], [NSNumber numberWithFloat:13.0]
+#define VALUES [NSNumber numberWithFloat:1200.0], [NSNumber numberWithFloat:400.0], [NSNumber numberWithFloat:4000.0], [NSNumber numberWithFloat:2300.0], [NSNumber numberWithFloat:130.0], [NSNumber numberWithFloat:630.0], [NSNumber numberWithFloat:1080.0]
 
 @implementation HMChartView
 
@@ -106,24 +103,82 @@
 
     CGContextSetStrokeColorWithColor(context, traceColor);
     CGContextSetFillColorWithColor(context, traceColor);
-    CGContextSetLineWidth(context, 4);
+    CGContextSetLineWidth(context, 5);
     CGContextSetAllowsAntialiasing(context, YES);
     CGContextSetShouldAntialias(context, YES);
 
 
+
+
+
+    const CGColorRef lightBlueColor = [[UIColor colorWithRed:223.0 / 255.0 green:232.0 / 255.0 blue:237.0 / 255.0 alpha:1.0] CGColor];
+    CGContextSetFillColorWithColor(context, lightBlueColor);
+
     NSInteger index = 0;
+
+    CGContextMoveToPoint(context, MARGIN_LEFT, MARGIN_TOP + availableHeight);
 
     // iterates over all the values
     for(NSNumber *value in values) {
+        // retrieves the value in float
+        CGFloat valueFloat = [value floatValue];
+
+        // calculates the current y value
+        CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
+
+        // adds the line to the point
+        CGContextAddLineToPoint(context, MARGIN_LEFT + index * horizontalStepSize, MARGIN_TOP + availableHeight - yValue);
+
+
+        // increments the index
+        index++;
+    }
+
+    CGContextAddLineToPoint(context, MARGIN_LEFT + HORIZONTAL_STEPS * horizontalStepSize, MARGIN_TOP + availableHeight);
+
+    // draws the cell's border
+    CGContextFillPath(context);
+
+
+
+
+    CGContextSetAllowsAntialiasing(context, NO);
+    CGContextSetShouldAntialias(context, NO);
+
+    const CGColorRef lineColor = [[UIColor colorWithRed:146.0 / 255.0 green:164.0 / 255.0 blue:176.0 / 255.0 alpha:1.0] CGColor];
+    CGContextSetStrokeColorWithColor(context, lineColor);
+    CGContextSetLineWidth(context, 0.25);
+
+    CGContextMoveToPoint(context, MARGIN_LEFT, MARGIN_TOP + availableHeight);
+    CGContextAddLineToPoint(context, MARGIN_LEFT + availableWidth, MARGIN_TOP + availableHeight);
+
+    // draws the cell's border
+    CGContextStrokePath(context);
+
+    CGContextSetAllowsAntialiasing(context, YES);
+    CGContextSetShouldAntialias(context, YES);
+
+    CGContextSetLineWidth(context, 5);
+
+
+    // creates the trace color
+
+    CGContextSetStrokeColorWithColor(context, traceColor);
+
+
+     index = 0;
+
+    // iterates over all the values
+    for(NSNumber *value in values) {
+        // retrieves the value in float
+        CGFloat valueFloat = [value floatValue];
+
+        // calculates the current y value
+        CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
+
         if(index == 0) {
-            CGContextMoveToPoint(context, MARGIN_LEFT, MARGIN_TOP + availableHeight - initialValue);
+            CGContextMoveToPoint(context, MARGIN_LEFT, MARGIN_TOP + availableHeight - yValue);
         } else {
-            // retrieves the value in float
-            CGFloat valueFloat = [value floatValue];
-
-            // calculates the current y value
-            CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
-
             // adds the line to the point
             CGContextAddLineToPoint(context, MARGIN_LEFT + index * horizontalStepSize, MARGIN_TOP + availableHeight - yValue);
         }
@@ -139,6 +194,14 @@
 
     // iterates over all the values
     for(NSNumber *value in values) {
+        if(index == 0 || index == HORIZONTAL_STEPS) {
+            // increments the index
+            index++;
+
+            // continues the loop
+            continue;
+        }
+
         // retrieves the value in float
         CGFloat valueFloat = [value floatValue];
 
@@ -162,8 +225,8 @@
         CGContextFillPath(context);
 
         // CIRCULO INNER
-        //    const CGColorRef whiteColor = [[UIColor colorWithRed:53.0 / 255.0 green:127.0 / 255.0 blue:181.0 / 255.0 alpha:1.0] CGColor];
-        CGContextSetFillColorWithColor(context, [[UIColor whiteColor] CGColor]);
+        const CGColorRef whiteColor = [[UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0] CGColor];
+        CGContextSetFillColorWithColor(context, whiteColor);
 
         CGRect rectangleInner = CGRectMake(circuloInnerXInit, circuloInnerYInit, CIRCLE_INNER_SIZE, CIRCLE_INNER_SIZE);
         CGContextAddEllipseInRect(context, rectangleInner);
@@ -176,6 +239,70 @@
 
 
 
+    index = 0;
+
+    // iterates over all the values
+    for(NSNumber *value in values) {
+        if(index == 0 || index == HORIZONTAL_STEPS) {
+            // increments the index
+            index++;
+
+            // continues the loop
+            continue;
+        }
+
+        NSNumber *previousValue = [values objectAtIndex:index - 1];
+        NSNumber *nextValue = [values objectAtIndex:index + 1];
+
+        // retrieves the value in float
+        CGFloat valueFloat = [value floatValue];
+        CGFloat previousValueFloat = [previousValue floatValue];
+        CGFloat nextValueFloat = [nextValue floatValue];
+
+        NSString *valueString = [NSString stringWithFormat:@"%2.0f", valueFloat];
+
+        // calculates the current x and y value
+        CGFloat xValue = MARGIN_LEFT + index * horizontalStepSize;
+        CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
+
+        CGFloat realYValue = MARGIN_TOP + availableHeight - yValue;
+
+        UIFont *font = [UIFont fontWithName:@"Verdana-Bold" size:10];
+        CGSize size = [valueString sizeWithFont:font];
+
+        CGFloat deltaX;
+
+        // A ESKERDA
+        if(previousValueFloat < valueFloat && nextValueFloat > valueFloat) {
+            xValue -= size.width;
+            realYValue -= 12;
+        }
+        // A DIREITA
+        else if(previousValueFloat > valueFloat && nextValueFloat < valueFloat) {
+            realYValue -= 12;
+        }
+        // POR BAIXO
+        else if(previousValueFloat > valueFloat && nextValueFloat > valueFloat) {
+            xValue -= (size.width / 2.0);
+            realYValue += 16;
+        }
+        // NORMAL
+        else {
+            xValue -= (size.width / 2.0);
+            realYValue -= 12;
+        }
+
+        const CGColorRef textColor = [[UIColor colorWithRed:127.0 / 255.0 green:173.0 / 255.0 blue:207.0 / 255.0 alpha:1.0] CGColor];
+        CGContextSetFillColorWithColor(context, textColor);
+
+        CGContextSetTextDrawingMode(context, kCGTextFill);
+        CGContextSelectFont(context, "Verdana-Bold", 10, kCGEncodingMacRoman);
+        CGContextSetTextMatrix(context, CGAffineTransformMake(1.0,0.0, 0.0, -1.0, 0.0, 0.0));
+        CGContextShowTextAtPoint(context, xValue, realYValue, [valueString cString], strlen([valueString cString]));
+
+
+        index++;
+    }
 }
 
 @end
