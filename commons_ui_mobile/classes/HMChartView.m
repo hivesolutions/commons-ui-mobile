@@ -63,8 +63,6 @@
     CGFloat frameWidth = self.frame.size.width;
     CGFloat frameHeight = self.frame.size.height;
 
-    printf("%f, %f\n", frameWidth, frameHeight);
-
     NSArray *values = [NSArray arrayWithObjects:VALUES, nil];
 
     NSNumber *maximumValue = [NSNumber numberWithInt:0];
@@ -88,8 +86,6 @@
     CGFloat maximumValueFloat = [maximumValue floatValue];
 
     CGFloat initialValue = (12.0 / maximumValueFloat) * availableHeight;
-
-    printf("%f\n", initialValue);
 
 
 
@@ -269,8 +265,6 @@
 
         UIFont *font = [UIFont fontWithName:@"Verdana-Bold" size:10];
         CGSize size = [valueString sizeWithFont:font];
-
-        CGFloat deltaX;
 
         // A ESKERDA
         if(previousValueFloat < valueFloat && nextValueFloat > valueFloat) {
