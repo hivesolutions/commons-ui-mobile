@@ -43,7 +43,7 @@
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
     // allocates the image name
-    NSString *imageName;
+    NSString *imageName = NULL;
 
     // retrieves the frame size height (casts to int)
     NSInteger frameSizeHeight = self.frame.size.height;
