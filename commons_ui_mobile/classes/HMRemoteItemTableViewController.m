@@ -231,6 +231,18 @@
 }
 
 - (void)initBackgroundView {
+    // retrieves the preferences
+    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+
+    // retrieves the background image
+    NSNumber *backgroundImage = [preferences valueForKey:@"backgroundImage"];
+
+    // in case the background image is not enabled
+    if([backgroundImage isEqualToNumber:[NSNumber numberWithInt:0]]) {
+        // returns immediately
+        return;
+    }
+
     // sets the background color in the view
     UIImage *backgroundPatternImage = [UIImage imageNamedDevice:@"linen_shadow_background.png"];
     UIColor *backgroundColor = [UIColor colorWithPatternImage:backgroundPatternImage];
