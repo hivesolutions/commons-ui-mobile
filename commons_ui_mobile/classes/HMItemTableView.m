@@ -218,7 +218,14 @@
 
     // retrieves the header label item
     HMLabelItem *headerLabelItem = tableSectionItemGroup.header;
-
+    
+    // in case the header label
+    // item is not defined
+    if(!headerLabelItem) {
+        // returns zero
+        return 0;
+    }
+    
     // retrieves the height occupied by the font
     UIFont *font = [UIFont fontWithName:headerLabelItem.descriptionFont size:headerLabelItem.descriptionFontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
@@ -241,7 +248,14 @@
 
     // retrieves the footer label item
     HMLabelItem *footerLabelItem = tableSectionItemGroup.footer;
-
+    
+    // in case the footer label 
+    // item is not defined
+    if(!footerLabelItem) {
+        // returns zero
+        return 0;
+    }
+    
     // retrieves the height occupied by the font
     UIFont *font = [UIFont fontWithName:footerLabelItem.descriptionFont size:footerLabelItem.descriptionFontSize];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
