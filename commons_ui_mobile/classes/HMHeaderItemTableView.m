@@ -211,6 +211,7 @@
     // creates the add image button view
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
 
+    // adds the add button touch event
     [addButton addTarget:self action:@selector(addPhotoButtonClicked:extra:) forControlEvents:UIControlEventTouchUpInside];
 
     // sets the button frame

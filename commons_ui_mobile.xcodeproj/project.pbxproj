@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46B5EAA713BBA15B001D2B81 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B5EAA613BBA15B001D2B81 /* AssetsLibrary.framework */; };
 		56C3A03013589FD700CA92DA /* HMColumnConstantStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */; };
 		56C3A03113589FD700CA92DA /* HMColumnConstantStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */; };
 		A50772B61337B8E300859BD2 /* HMEditTableViewCellEditView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50772B21337B8E300859BD2 /* HMEditTableViewCellEditView.h */; };
@@ -108,6 +109,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		46B5EAA613BBA15B001D2B81 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMColumnConstantStringTableViewCell.h; path = classes/HMColumnConstantStringTableViewCell.h; sourceTree = "<group>"; };
 		56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMColumnConstantStringTableViewCell.m; path = classes/HMColumnConstantStringTableViewCell.m; sourceTree = "<group>"; };
 		A50772B21337B8E300859BD2 /* HMEditTableViewCellEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEditTableViewCellEditView.h; path = classes/HMEditTableViewCellEditView.h; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				A5E648DB13313BD000FE725A /* QuartzCore.framework in Frameworks */,
 				C2C2FA0B132E95530038B41E /* UIKit.framework in Frameworks */,
 				C2EEE098132E8E9B0038FFA6 /* Foundation.framework in Frameworks */,
+				46B5EAA713BBA15B001D2B81 /* AssetsLibrary.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +692,7 @@
 		C2EEE096132E8E9B0038FFA6 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				46B5EAA613BBA15B001D2B81 /* AssetsLibrary.framework */,
 				A5E648D813313BC700FE725A /* CoreGraphics.framework */,
 				A5E648DA13313BD000FE725A /* QuartzCore.framework */,
 				C2C2FA0A132E95530038B41E /* UIKit.framework */,

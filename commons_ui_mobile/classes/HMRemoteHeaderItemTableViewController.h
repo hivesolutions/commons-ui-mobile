@@ -33,7 +33,14 @@
 #define HM_REMOTE_HEADER_ITEM_TABLE_VIEW_CONTROLLER_IMAGE_QUALITY 90.0
 
 @interface HMRemoteHeaderItemTableViewController : HMRemoteItemTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
+    @private
+    UIPopoverController *_imagePickerPopover;
 }
+
+/**
+ * The image picker popover controller.
+ */
+@property (retain) UIPopoverController *imagePickerPopover;
 
 /**
  * Called when a new picture was taken.
@@ -41,5 +48,15 @@
  * @param picture The new picture.
  */
 - (void)didTakePicture:(UIImage *)picture;
+
+/**
+ * Presents the image picker.
+ */
+- (void)presentImagePicker;
+
+/**
+ * Dismisses the image picker.
+ */
+- (void)dismissImagePicker;
 
 @end

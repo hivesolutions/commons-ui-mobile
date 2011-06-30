@@ -27,6 +27,7 @@
 #import <UIKit/UIKit.h>
 #import <QuartzCore/QuartzCore.h>
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
 
 // library dependency includes
 #import "../../../json_mobile/json_mobile/headers/json_mobile.h"
