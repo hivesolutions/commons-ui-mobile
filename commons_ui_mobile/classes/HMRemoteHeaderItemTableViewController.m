@@ -32,7 +32,7 @@
 - (void)dealloc {
     // releases the image picker popover
     [_imagePickerPopover release];
-    
+
     // calls the super
     [super dealloc];
 }
@@ -56,7 +56,7 @@
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
     NSString *currentDeviceModel = [currentDevice model];
-    
+
     // casts the table view to header item table view
     HMHeaderItemTableView *itemTableView = (HMHeaderItemTableView *) self.tableView;
 
@@ -64,19 +64,19 @@
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
-    
+
     // in case the device is an ipad
     if([currentDeviceModel hasPrefix:@"iPad"]) {
         // creates a popover controller for the image picker
         // which is required in the ipad
         UIPopoverController *imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-        
+
         // presents the popover with the image picker
         [imagePickerPopover presentPopoverFromRect:itemTableView.imageAddButton.frame inView:self.tableView permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-        
+
         // sets the image picker popover
         self.imagePickerPopover = imagePickerPopover;
-        
+
         // releases the image picker popover
         [imagePickerPopover release];
     }
@@ -85,7 +85,7 @@
         // presents the image picker
         [self presentModalViewController:imagePicker animated:NO];
     }
-    
+
     // releases the objects
     [imagePicker release];
 }
@@ -94,7 +94,7 @@
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
     NSString *currentDeviceModel = [currentDevice model];
-    
+
     // in case the device is an ipad
     if([currentDeviceModel hasPrefix:@"iPad"]) {
         // dismisses the image picker popover in animated mode
@@ -116,7 +116,7 @@
 
     // blurs all the other cells
     [itemTableView blurAllExceptCell:nil];
-    
+
     // presents the image picker
     [self presentImagePicker];
 }
@@ -124,54 +124,54 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     // retrieves the selected image
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    
+
     // in case the image was retrieved
     if(image) {
         // dismisses the image picker
         [self dismissImagePicker];
-     
+
         // calls the did take picture method
         [self didTakePicture:image];
-        
+
         // returns
         return;
     }
-    
-    // retrieves the image url in case the image was 
+
+    // retrieves the image url in case the image was
     // not found, which happens from in ios 5 and above
     NSURL *imageUrl = [info valueForKey:@"UIImagePickerControllerReferenceURL"];
 
     // creates an asset library
     ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
-    
+
     // defines the asset library result block
     ALAssetsLibraryAssetForURLResultBlock resultBlock = ^(ALAsset *asset) {
         // dismisses the image picker
         [self dismissImagePicker];
-        
+
         // retrieves the asset iamge
-        ALAssetRepresentation *assetRepresentation = asset.defaultRepresentation;    
+        ALAssetRepresentation *assetRepresentation = asset.defaultRepresentation;
         UIImage *assetImage = [UIImage imageWithCGImage:assetRepresentation.fullResolutionImage];
-        
+
         // calls the did take picture method
         [self didTakePicture:assetImage];
-        
+
         // releases the asset library
         [assetLibrary release];
     };
-    
+
     // defines the asset library failure block
     ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
         // dismisses the image picker
         [self dismissImagePicker];
-        
+
         // logs the error message
         NSLog(@"can't retrieve image: %@", error.localizedDescription);
-        
+
         // releases the asset library
         [assetLibrary release];
     };
-    
+
     // retrieves the image asset
     [assetLibrary assetForURL:imageUrl resultBlock:resultBlock failureBlock:failureBlock];
 }

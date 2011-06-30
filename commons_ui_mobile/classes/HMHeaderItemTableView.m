@@ -221,7 +221,7 @@
     [addButton setTitle:NSLocalizedString(@"add photo", @"add photo") forState:UIControlStateNormal];
 
     // sets the button title label properties
-    addButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
+    addButton.titleLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:14];
     addButton.titleLabel.numberOfLines = 2;
     addButton.titleLabel.lineBreakMode = UILineBreakModeWordWrap;
     addButton.titleLabel.textAlignment = UITextAlignmentCenter;
