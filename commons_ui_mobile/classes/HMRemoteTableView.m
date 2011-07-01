@@ -70,7 +70,8 @@
 
 - (void)constructView {
     // creates the search bar
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    CGRect searchBarFrame = CGRectMake(0, 0, 320, 44);
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:searchBarFrame];
     searchBar.placeholder = NSLocalizedString(@"Search", @"Search");
     searchBar.tintColor = [UIColor lightGrayColor];
 

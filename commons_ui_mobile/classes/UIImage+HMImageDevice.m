@@ -31,12 +31,13 @@
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
     NSString *currentDeviceModel = [currentDevice model];
+    BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
 
     // allocates the suffix value
     NSString *suffixValue;
 
     // adjusts the delta in case the device is an ipad
-    if([currentDeviceModel hasPrefix:@"iPad"] ) {
+    if(iPadDevice) {
         // sets the ipad suffix value
         suffixValue = @"~ipad";
     }
@@ -53,7 +54,7 @@
     NSMutableArray *imageNameComponentsMutable = [[NSMutableArray alloc] initWithArray:imageNameComponents];
 
     // retrieves the last index value
-    NSUInteger lastIndex = [imageNameComponentsMutable count] - 1;
+    NSUInteger lastIndex = imageNameComponentsMutable.count - 1;
 
     // retrieves the extension value
     NSString *extension = [imageNameComponentsMutable objectAtIndex:lastIndex];

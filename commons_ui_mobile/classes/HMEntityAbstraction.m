@@ -72,7 +72,7 @@
     NSNumber *entityObjectId = [self.entityDelegate.entity objectForKey:@"object_id"];
 
     // creates the url from the object id
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@.%@", baseUrl, entityName, [entityObjectId stringValue], serializerName];
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@.%@", baseUrl, entityName, entityObjectId.stringValue, serializerName];
 
     // returns the url
     return url;
@@ -86,7 +86,7 @@
     NSNumber *entityObjectId = [self.entityDelegate.entity objectForKey:@"object_id"];
 
     // creates the url from the object id
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@.%@", baseUrl, entityName, [entityObjectId stringValue], operationName, serializerName];
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@/%@.%@", baseUrl, entityName, entityObjectId.stringValue, operationName, serializerName];
 
     // returns the url
     return url;
@@ -125,6 +125,9 @@
             url = [self constructObjectCompositeUrl:entityName operationName:@"delete" serializerName:serializerName];
 
             // breaks the swtich
+            break;
+        default:
+            // breaks the switch
             break;
     }
 

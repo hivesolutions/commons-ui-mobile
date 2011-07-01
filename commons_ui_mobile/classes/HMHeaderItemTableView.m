@@ -93,12 +93,13 @@
     float deltaX = 0;
 
     // retrieves the screen width
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    UIScreen *mainScreen = [UIScreen mainScreen];
+    CGRect screenRect = mainScreen.applicationFrame;
     CGFloat screenWidth = screenRect.size.width;
 
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
-    NSString *currentDeviceModel = [currentDevice model];
+    NSString *currentDeviceModel = currentDevice.model;
 
     // adjusts the delta in case the device is an ipad
     if([currentDeviceModel hasPrefix:@"iPad"]) {
@@ -116,16 +117,12 @@
     headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     headerContainer.backgroundColor = [UIColor clearColor];
 
-    // creates the image frame
-    CGRect imageFrame = CGRectMake(0, 15, 64, 64);
-
     // creates the image view
+    CGRect imageFrame = CGRectMake(0, 15, 64, 64);
     UIImageView *image = [[HMRoundedCornerImageView alloc] initWithFrame:imageFrame];
 
-    // creates the title label frame
-    CGRect titleLabelFrame = CGRectMake(83, 34, 197, 24);
-
     // creates the title label view
+    CGRect titleLabelFrame = CGRectMake(83, 34, 197, 24);
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleLabelFrame];
     titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     titleLabel.backgroundColor = [UIColor clearColor];
@@ -133,10 +130,8 @@
     titleLabel.shadowColor = [UIColor whiteColor];
     titleLabel.shadowOffset = CGSizeMake(0, 1);
 
-    // creates the subtitle label frame
-    CGRect subTitleLabelFrame = CGRectMake(83, 45, 197, 24);
-
     // creates the subtitle label view
+    CGRect subTitleLabelFrame = CGRectMake(83, 45, 197, 24);
     UILabel *subTitleLabel = [[UILabel alloc] initWithFrame:subTitleLabelFrame];
     subTitleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     subTitleLabel.backgroundColor = [UIColor clearColor];
@@ -179,34 +174,34 @@
     NSMutableArray *cellList = [[NSMutableArray alloc] init];
 
     // retrieves the screen width
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    UIScreen *mainScreen = [UIScreen mainScreen];
+    CGRect screenRect = mainScreen.applicationFrame;
     CGFloat screenWidth = screenRect.size.width;
 
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
-    NSString *currentDeviceModel = [currentDevice model];
+    NSString *currentDeviceModel = currentDevice.model;
 
     // adjusts the delta in case the device is an ipad
-    if([currentDeviceModel hasPrefix:@"iPad"] ) {
+    if([currentDeviceModel hasPrefix:@"iPad"]) {
         deltaX = -31;
         deltaY = -20;
         headerTableViewMarginX = 98;
     }
 
     // creates the header
-    UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 110)];
+    CGRect headerFrame = CGRectMake(0, 0, screenWidth, 110);
+    UIView *header = [[UIView alloc] initWithFrame:headerFrame];
     header.contentMode = UIViewContentModeScaleToFill;
     header.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     header.backgroundColor = [UIColor clearColor];
     header.layer.opacity = 0.0;
 
     // creates the header container
-    UIView *headerContainer = [[UIView alloc] initWithFrame:CGRectMake(20 - deltaX, 0, screenWidth - 20 + deltaX, 110)];
+    CGRect headerContainerFrame = CGRectMake(20 - deltaX, 0, screenWidth - 20 + deltaX, 110);
+    UIView *headerContainer = [[UIView alloc] initWithFrame:headerContainerFrame];
     headerContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     headerContainer.backgroundColor = [UIColor clearColor];
-
-    // creates the image frame
-    CGRect imageFrame = CGRectMake(0, 15, 64, 64);
 
     // creates the add image button view
     UIButton *addButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -215,6 +210,7 @@
     [addButton addTarget:self action:@selector(addPhotoButtonClicked:extra:) forControlEvents:UIControlEventTouchUpInside];
 
     // sets the button frame
+    CGRect imageFrame = CGRectMake(0, 15, 64, 64);
     addButton.frame = imageFrame;
 
     // sets the button properties
@@ -241,7 +237,8 @@
     [addButton setBackgroundImage:newPressedImage forState:UIControlStateHighlighted];
 
     // creates the header table view
-    HMTableView *headerTableView = [[HMTableView alloc] initWithFrame:CGRectMake(74 + deltaX, 5 + deltaY, screenWidth - headerTableViewMarginX, 120) style:UITableViewStyleGrouped];
+    CGRect headerTableViewFrame = CGRectMake(74 + deltaX, 5 + deltaY, screenWidth - headerTableViewMarginX, 120);
+    HMTableView *headerTableView = [[HMTableView alloc] initWithFrame:headerTableViewFrame style:UITableViewStyleGrouped];
     headerTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     headerTableView.backgroundColor = [UIColor clearColor];
     headerTableView.dataSource = self;
@@ -328,7 +325,7 @@
     self.subTitleTableViewCell.description = _subTitle;
 
     // positions the title label to give space to the subtitle
-    if(_subTitle && [_subTitle length] > 0) {
+    if(_subTitle && _subTitle.length > 0) {
         self.titleLabel.frame = CGRectMake(83, 24, 197, 24);
     } else {
         self.titleLabel.frame = CGRectMake(83, 34, 197, 24);

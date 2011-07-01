@@ -79,7 +79,8 @@
     CGContextScaleCTM(context, 1.0, -1.0);
 
     // draws the image
-    CGContextDrawImage(context, CGRectMake(0, 0, self.frame.size.width, self.frame.size.height), image.CGImage);
+    CGRect imageRect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
+    CGContextDrawImage(context, imageRect, image.CGImage);
 }
 
 @end

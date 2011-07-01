@@ -100,7 +100,8 @@
 
 - (void)updateRemote {
     // creates the request
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
+    NSURL *url = [NSURL URLWithString:self.url];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:HM_REMOTE_ABSTRACTION_TIMEOUT];
 
     // updates the remote with the request
     [self updateRemoteWithRequest:request];
@@ -251,12 +252,14 @@
     }
 
     // creates the activity
-    UIView *activity = [[UIView alloc] initWithFrame: CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+    CGRect activityFrame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
+    UIView *activity = [[UIView alloc] initWithFrame:activityFrame];
     activity.backgroundColor = [UIColor blackColor];
     activity.alpha = HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA;
 
     // creates the activity indicator
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame: CGRectMake(self.view.bounds.size.width / 2 - 12, self.view.bounds.size.height / 2 - 12, 24, 24)];
+    CGRect activityIndicatorFrame = CGRectMake(self.view.bounds.size.width / 2 - 12, self.view.bounds.size.height / 2 - 12, 24, 24);
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:activityIndicatorFrame];
     activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
     activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
 
@@ -305,7 +308,7 @@
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(hideActivityIndicatorComplete)];
     [UIView setAnimationDuration:HM_REMOTE_ABSTRACTION_FADE_TIME];
-    [self.activity setAlpha:0.0];
+    self.activity.alpha = 0.0;
     [UIView commitAnimations];
 
     // stops animating the activity indicator
@@ -317,7 +320,7 @@
     self.activity.hidden = YES;
 
     // restores the alpha value
-    [self.activity setAlpha:HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA];
+    self.activity.alpha = HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA;
 }
 
 - (void)showActionSheet {
@@ -377,6 +380,7 @@
             break;
 
         default:
+            // breaks the switch
             break;
     }
 }

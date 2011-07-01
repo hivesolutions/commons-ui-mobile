@@ -45,7 +45,7 @@
 /**
  * The plain string table view cell password length.
  */
-#define HM_PLAIN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGHT 12
+#define HM_PLAIN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
 
 @interface HMPlainStringTableViewCell : HMPlainEditTableViewCell<UITextFieldDelegate> {
     @private

@@ -130,7 +130,8 @@
     UIDevice *device = [UIDevice currentDevice];
 
     // retrieves the screen rect
-    CGRect screenRect = [[UIScreen mainScreen] applicationFrame];
+    UIScreen *screen = [UIScreen mainScreen];
+    CGRect screenRect = screen.applicationFrame;
 
     // swaps the device's dimensions in case
     // the device is in landscape mode

@@ -66,11 +66,13 @@
     self.backgroundColor = [UIColor clearColor];
 
     // initializes the button with the initial position
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(HM_OPTIONS_BUTTON_VIEW_IMAGE_X, HM_OPTIONS_BUTTON_VIEW_IMAGE_Y, HM_OPTIONS_BUTTON_VIEW_IMAGE_WIDTH, HM_OPTIONS_BUTTON_VIEW_IMAGE_HEIGHT)];
+    CGRect buttonFrame = CGRectMake(HM_OPTIONS_BUTTON_VIEW_IMAGE_X, HM_OPTIONS_BUTTON_VIEW_IMAGE_Y, HM_OPTIONS_BUTTON_VIEW_IMAGE_WIDTH, HM_OPTIONS_BUTTON_VIEW_IMAGE_HEIGHT);
+    UIButton *button = [[UIButton alloc] initWithFrame:buttonFrame];
     button.backgroundColor = [UIColor clearColor];
 
     // initializes the label and the value of it
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(HM_OPTIONS_BUTTON_VIEW_LABEL_X, HM_OPTIONS_BUTTON_VIEW_LABEL_Y, HM_OPTIONS_BUTTON_VIEW_WIDTH, HM_OPTIONS_BUTTON_VIEW_LABEL_HEIGHT)];
+    CGRect labelFrame = CGRectMake(HM_OPTIONS_BUTTON_VIEW_LABEL_X, HM_OPTIONS_BUTTON_VIEW_LABEL_Y, HM_OPTIONS_BUTTON_VIEW_WIDTH, HM_OPTIONS_BUTTON_VIEW_LABEL_HEIGHT);
+    UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.font = [UIFont fontWithName:@"Helvetica-Bold" size:13];
     label.textColor = [UIColor colorWithRed:0.24 green:0.24 blue:0.24 alpha:1.0];
     label.backgroundColor = [UIColor clearColor];

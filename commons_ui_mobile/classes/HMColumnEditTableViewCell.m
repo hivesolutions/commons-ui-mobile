@@ -128,25 +128,17 @@
     [super setSelectableName:selectableName];
 
     // shows/hides the name label click view
-    if(selectableName){
-        self.nameLabelClickView.hidden = NO;
-    }
-    else {
-        self.nameLabelClickView.hidden = YES;
-    }
+    self.nameLabelClickView.hidden = selectableName ? NO : YES;
 }
 
 - (void)layoutSubviews {
     // calls the super
     [super layoutSubviews];
 
-    // moves the detail text label origin
-    // five pixels to the right
-    CGRect frame = self.detailTextLabel.frame;
-    frame.origin.x += 4;
-
-    // updates the detail text label's position
-    self.detailTextLabel.frame = frame;
+    // moves the detail text label origin four pixels to the right
+    CGRect detailTextLabelFrame = self.detailTextLabel.frame;
+    detailTextLabelFrame.origin.x += 4;
+    self.detailTextLabel.frame = detailTextLabelFrame;
 
     // sets the text label to adjust the
     // font size to the available width

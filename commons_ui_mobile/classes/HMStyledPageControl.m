@@ -92,24 +92,17 @@
     }
 
     // retrieves the subviews count
-    NSUInteger subviewsCount = [self.subviews count];
+    NSUInteger subviewsCount = self.subviews.count;
 
     // iterates over all the subviews to update the images
     for(NSUInteger subviewIndex = 0; subviewIndex < subviewsCount; subviewIndex++) {
         // retrieves the current subview
         UIImageView *subview = [self.subviews objectAtIndex:subviewIndex];
 
-        // in case the subview represents
-        // the currently selected page
-        if(subviewIndex == page) {
-            // sets the active image in the subview
-            [subview setImage:self.imageActive];
-        }
-        // otherwise it must be not selected
-        else {
-            // sets the inactive image in the subview
-            [subview setImage:self.imageInactive];
-        }
+        // in case the subview represents the currently
+        // selected page sets the active image in the
+        // subview otherwise sets the inactive image in the subview
+        subview.image = subviewIndex == page ? self.imageActive : self.imageInactive;
     }
 
     // sets the current cache page
@@ -123,10 +116,10 @@
     // retrieves the first subview and sets the active
     // image for it (selected page controls)
     UIImageView *subview = [self.subviews objectAtIndex:0];
-    [subview setImage:self.imageActive];
+    subview.image = self.imageActive;
 
     // retrieves the subviews count
-    NSUInteger subviewsCount = [self.subviews count];
+    NSUInteger subviewsCount = self.subviews.count;
 
     // iterates over all the other subviews to set the
     // inactive image (unselected page controls)
@@ -135,7 +128,7 @@
         UIImageView *subview = [self.subviews objectAtIndex:subviewIndex];
 
         // sets the inactive image in the subview
-        [subview setImage:self.imageInactive];
+        subview.image = self.imageInactive;
     }
 }
 

@@ -83,7 +83,7 @@
     CGFloat verticalStepSize = availableHeight / VERTICAL_STEPS;
     CGFloat horizontalStepSize = availableWidth / HORIZONTAL_STEPS;
 
-    CGFloat maximumValueFloat = [maximumValue floatValue];
+    CGFloat maximumValueFloat = maximumValue.floatValue;
 
     CGFloat initialValue = (12.0 / maximumValueFloat) * availableHeight;
 
@@ -117,7 +117,7 @@
     // iterates over all the values
     for(NSNumber *value in values) {
         // retrieves the value in float
-        CGFloat valueFloat = [value floatValue];
+        CGFloat valueFloat = value.floatValue;
 
         // calculates the current y value
         CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
@@ -167,7 +167,7 @@
     // iterates over all the values
     for(NSNumber *value in values) {
         // retrieves the value in float
-        CGFloat valueFloat = [value floatValue];
+        CGFloat valueFloat = value.floatValue;
 
         // calculates the current y value
         CGFloat yValue = (valueFloat / maximumValueFloat) * availableHeight;
@@ -199,7 +199,7 @@
         }
 
         // retrieves the value in float
-        CGFloat valueFloat = [value floatValue];
+        CGFloat valueFloat = value.floatValue;
 
         // calculates the current x and y value
         CGFloat xValue = MARGIN_LEFT + index * horizontalStepSize;
@@ -251,9 +251,9 @@
         NSNumber *nextValue = [values objectAtIndex:index + 1];
 
         // retrieves the value in float
-        CGFloat valueFloat = [value floatValue];
-        CGFloat previousValueFloat = [previousValue floatValue];
-        CGFloat nextValueFloat = [nextValue floatValue];
+        CGFloat valueFloat = value.floatValue;
+        CGFloat previousValueFloat = previousValue.floatValue;
+        CGFloat nextValueFloat = nextValue.floatValue;
 
         NSString *valueString = [NSString stringWithFormat:@"%2.0f", valueFloat];
 

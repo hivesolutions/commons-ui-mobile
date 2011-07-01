@@ -697,8 +697,7 @@
         // flushes the item specification for transient items
         [itemTableView flushItemSpecificationTransient:YES];
 
-        // converts the remote group, retrieving the remote
-        // data
+        // converts the remote group, retrieving the remote data
         NSArray *remoteData = [self convertRemoteGroup:HMItemOperationUpdate];
 
         // creates the update url

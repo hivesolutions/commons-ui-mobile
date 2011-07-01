@@ -89,7 +89,7 @@
 
     // checks if the data exists in case a read view controller was defined
     // or if the read view controller is undefined
-    BOOL validData = self.readViewController == nil || self.readViewController != nil && self.data != nil;
+    BOOL validData = self.readViewController == nil || (self.readViewController != nil && self.data != nil);
 
     // sets the cell as selectable in case it is exiting edit mode
     // and no read view controller is defined, or is defined along

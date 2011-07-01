@@ -355,7 +355,7 @@
     _weekItems = weekItems;
 
     // retrieves the week items count
-    int weekItemsCount = [weekItems count];
+    int weekItemsCount = weekItems.count;
 
     // iterates over all the items
     for(int index = 0; index < weekItemsCount; index += 2) {

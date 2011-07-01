@@ -154,7 +154,7 @@
     [self updateItemSpecification];
 
     // retrieves the menu item group items size
-    NSInteger menuItemGroupItemsSize = [self.listItemGroup.items count];
+    NSInteger menuItemGroupItemsSize = self.listItemGroup.items.count;
 
     // returns the menu item group items size
     return menuItemGroupItemsSize;
@@ -267,7 +267,7 @@
                     tableViewCell = plainMultilineStringTableViewCell;
                 }
             }
-        } else if ([objectClassNameString isEqualToString:@"HMConstantStringTableCellItem"]) {
+        } else if([objectClassNameString isEqualToString:@"HMConstantStringTableCellItem"]) {
             // casts the table cell item to a constant string table cell item
             HMConstantStringTableCellItem *stringTableCellItem = (HMConstantStringTableCellItem *) tableCellItem;
 
@@ -401,7 +401,7 @@
     HMItemGroup *sectionItemGroup = (HMItemGroup *) [self.listItemGroup getItemAtIndexPath:indexPath];
 
     // retrieves the section item group items count
-    NSInteger sectionItemGroupItemsCount = [sectionItemGroup.items count];
+    NSInteger sectionItemGroupItemsCount = sectionItemGroup.items.count;
 
     // figures out if the item group is mutable
     BOOL tableMutableSectionItemGroup = [sectionItemGroup isKindOfClass:[HMTableMutableSectionItemGroup class]];

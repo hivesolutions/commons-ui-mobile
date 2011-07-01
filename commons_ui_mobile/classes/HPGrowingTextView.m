@@ -41,7 +41,7 @@
 @synthesize returnKeyType;
 
 - (id)initWithFrame:(CGRect)frame {
-    if ((self = [super initWithFrame:frame])) {
+    if((self = [super initWithFrame:frame])) {
         // Initialization code
         CGRect r = frame;
         r.origin.y = -10;

@@ -56,6 +56,7 @@
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
     NSString *currentDeviceModel = [currentDevice model];
+    BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
 
     // casts the table view to header item table view
     HMHeaderItemTableView *itemTableView = (HMHeaderItemTableView *) self.tableView;
@@ -66,7 +67,7 @@
     imagePicker.delegate = self;
 
     // in case the device is an ipad
-    if([currentDeviceModel hasPrefix:@"iPad"]) {
+    if(iPadDevice) {
         // creates a popover controller for the image picker
         // which is required in the ipad
         UIPopoverController *imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
@@ -94,9 +95,10 @@
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
     NSString *currentDeviceModel = [currentDevice model];
+    BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
 
     // in case the device is an ipad
-    if([currentDeviceModel hasPrefix:@"iPad"]) {
+    if(iPadDevice) {
         // dismisses the image picker popover in animated mode
         [self.imagePickerPopover dismissPopoverAnimated:YES];
     }

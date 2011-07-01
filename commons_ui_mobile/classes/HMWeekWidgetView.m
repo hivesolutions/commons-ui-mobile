@@ -82,14 +82,16 @@
     self.backgroundColor = [UIColor blackColor];
 
     // creates the scroll view
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, 320, 428)];
+    CGRect scrollViewFrame = CGRectMake(0, 0, 320, 428);
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:scrollViewFrame];
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.pagingEnabled = YES;
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.delegate = self;
 
     // creates the styled page control
-    HMStyledPageControl *styledPageControl = [[HMStyledPageControl alloc] initWithFrame:CGRectMake(0, 426, 320, 36)];
+    CGRect styledPageControlFrame = CGRectMake(0, 426, 320, 36);
+    HMStyledPageControl *styledPageControl = [[HMStyledPageControl alloc] initWithFrame:styledPageControlFrame];
     styledPageControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
     styledPageControl.imageActive = [UIImage imageNamed:@"page_control_dot_active_white.png"];
     styledPageControl.imageInactive = [UIImage imageNamed:@"page_control_dot_inactive_white.png"];

@@ -100,7 +100,7 @@
 
     // in case the filter value is defined and
     // not empty
-    if(self.filterValue && [self.filterValue length] > 0) {
+    if(self.filterValue && self.filterValue.length > 0) {
         [urlData setObject:self.filterType forKey:@"filter[filters][][filter_type]"];
         [urlData setObject:self.filterName forKey:@"filter[filters][][filter_fields][][field_name]"];
         [urlData setObject:self.filterValue forKey:@"filter[filters][][filter_fields][][field_value]"];
@@ -201,7 +201,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.remoteData count];
+    return self.remoteData.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {

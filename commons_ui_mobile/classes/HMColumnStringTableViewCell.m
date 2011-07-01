@@ -64,7 +64,7 @@
     // sets the text field's auto capitalization type
     if([self.autocapitalizationType isEqualToString:@"words"]) {
         textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    } else if ([self.autocapitalizationType isEqualToString:@"sentences"]) {
+    } else if([self.autocapitalizationType isEqualToString:@"sentences"]) {
         textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     }
 

@@ -76,20 +76,23 @@
     NSMutableArray *optionsButtons = [[NSMutableArray alloc] init];
 
     // creates the search bar
-    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    CGRect searchBarFrame = CGRectMake(0, 0, 320, 44);
+    UISearchBar *searchBar = [[UISearchBar alloc] initWithFrame:searchBarFrame];
     searchBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
     searchBar.barStyle = UIBarStyleBlackTranslucent;
     searchBar.tintColor = [UIColor colorWithRed:0.48 green:0.48 blue:0.48 alpha:1.0];
 
     // creates the scroll view
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 44, 320, 336)];
+    CGRect scrollViewFrame = CGRectMake(0, 44, 320, 336);
+    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:scrollViewFrame];
     scrollView.showsHorizontalScrollIndicator = NO;
     scrollView.pagingEnabled = YES;
     scrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     scrollView.delegate = self;
 
     // creates the styled page control
-    HMStyledPageControl *styledPageControl = [[HMStyledPageControl alloc] initWithFrame:CGRectMake(0, 380, 320, 36)];
+    CGRect styledPageControlFrame = CGRectMake(0, 380, 320, 36);
+    HMStyledPageControl *styledPageControl = [[HMStyledPageControl alloc] initWithFrame:styledPageControlFrame];
     styledPageControl.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
 
     // adds the subviews
@@ -243,13 +246,13 @@
 - (CGFloat)getLineMargin {
     // in case there are no buttons in the
     // options buttons list
-    if([self.optionsButtons count] < 1) {
+    if(self.optionsButtons.count < 1) {
         // returns immediately (invalid state)
         return 0.0;
     }
 
-    // retrieves the options button to be the reference
-    // for marign calculation
+    // retrieves the options button to be
+    // the reference for marign calculation
     HMOptionsButtonView *referenceOptionsButton = [self.optionsButtons objectAtIndex:0];
 
     // retrieves the width

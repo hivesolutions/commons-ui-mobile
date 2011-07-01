@@ -65,7 +65,7 @@
     // sets the text field's auto capitalization type
     if([self.autocapitalizationType isEqualToString:@"words"]) {
         textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
-    } else if ([self.autocapitalizationType isEqualToString:@"sentences"]) {
+    } else if([self.autocapitalizationType isEqualToString:@"sentences"]) {
         textField.autocapitalizationType = UITextAutocapitalizationTypeSentences;
     }
 
@@ -204,7 +204,7 @@
         NSMutableString *secretValue = [[NSMutableString alloc] init];
 
         // iterates over the length of the description
-        for(int index = 0; index < description.length && index < HM_PLAIN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGHT; index++) {
+        for(int index = 0; index < description.length && index < HM_PLAIN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH; index++) {
             // adds the secret token to the secret value
             [secretValue appendString:@"•"];
         }

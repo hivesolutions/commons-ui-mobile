@@ -445,9 +445,9 @@
 
     // retrieves the cell's position attributes
     NSIndexPath *indexPath = [tableView indexPathForCell:self];
-    NSUInteger section = [indexPath section];
+    NSUInteger section = indexPath.section;
     NSUInteger numberRows = [tableView numberOfRowsInSection:section];
-    NSUInteger row = [indexPath row];
+    NSUInteger row = indexPath.row;
 
     // retrieves the background view
     HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
