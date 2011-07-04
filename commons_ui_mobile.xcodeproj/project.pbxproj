@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4668738013C21A3F00FC3531 /* HMAccessoryView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4668737E13C21A3F00FC3531 /* HMAccessoryView.h */; };
+		4668738113C21A3F00FC3531 /* HMAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4668737F13C21A3F00FC3531 /* HMAccessoryView.m */; };
+		4668738413C21B9D00FC3531 /* HMLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4668738213C21B9D00FC3531 /* HMLabel.h */; };
+		4668738513C21B9D00FC3531 /* HMLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4668738313C21B9D00FC3531 /* HMLabel.m */; };
+		466873B113C2417900FC3531 /* HMGradientView.h in Headers */ = {isa = PBXBuildFile; fileRef = 466873AF13C2417800FC3531 /* HMGradientView.h */; };
+		466873B213C2417900FC3531 /* HMGradientView.m in Sources */ = {isa = PBXBuildFile; fileRef = 466873B013C2417800FC3531 /* HMGradientView.m */; };
+		466873B713C241E300FC3531 /* HMTabBarController.h in Headers */ = {isa = PBXBuildFile; fileRef = 466873B513C241E300FC3531 /* HMTabBarController.h */; };
+		466873B813C241E300FC3531 /* HMTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = 466873B613C241E300FC3531 /* HMTabBarController.m */; };
 		46B5EAA713BBA15B001D2B81 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B5EAA613BBA15B001D2B81 /* AssetsLibrary.framework */; };
 		56C3A03013589FD700CA92DA /* HMColumnConstantStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */; };
 		56C3A03113589FD700CA92DA /* HMColumnConstantStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */; };
@@ -109,6 +117,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4668737E13C21A3F00FC3531 /* HMAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAccessoryView.h; path = classes/HMAccessoryView.h; sourceTree = "<group>"; };
+		4668737F13C21A3F00FC3531 /* HMAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMAccessoryView.m; path = classes/HMAccessoryView.m; sourceTree = "<group>"; };
+		4668738213C21B9D00FC3531 /* HMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMLabel.h; path = classes/HMLabel.h; sourceTree = "<group>"; };
+		4668738313C21B9D00FC3531 /* HMLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMLabel.m; path = classes/HMLabel.m; sourceTree = "<group>"; };
+		466873AF13C2417800FC3531 /* HMGradientView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMGradientView.h; path = classes/HMGradientView.h; sourceTree = "<group>"; };
+		466873B013C2417800FC3531 /* HMGradientView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMGradientView.m; path = classes/HMGradientView.m; sourceTree = "<group>"; };
+		466873B513C241E300FC3531 /* HMTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTabBarController.h; path = classes/HMTabBarController.h; sourceTree = "<group>"; };
+		466873B613C241E300FC3531 /* HMTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTabBarController.m; path = classes/HMTabBarController.m; sourceTree = "<group>"; };
 		46B5EAA613BBA15B001D2B81 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMColumnConstantStringTableViewCell.h; path = classes/HMColumnConstantStringTableViewCell.h; sourceTree = "<group>"; };
 		56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMColumnConstantStringTableViewCell.m; path = classes/HMColumnConstantStringTableViewCell.m; sourceTree = "<group>"; };
@@ -228,6 +244,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4668737D13C21A1F00FC3531 /* Accessory Views */ = {
+			isa = PBXGroup;
+			children = (
+				4668737E13C21A3F00FC3531 /* HMAccessoryView.h */,
+				4668737F13C21A3F00FC3531 /* HMAccessoryView.m */,
+			);
+			name = "Accessory Views";
+			sourceTree = "<group>";
+		};
+		466873B313C241C900FC3531 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				466873B413C241D600FC3531 /* View Controllers */,
+			);
+			name = "Tab Bar";
+			sourceTree = "<group>";
+		};
+		466873B413C241D600FC3531 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				466873B513C241E300FC3531 /* HMTabBarController.h */,
+				466873B613C241E300FC3531 /* HMTabBarController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		C209222313955AFB00CDE3F1 /* Extras */ = {
 			isa = PBXGroup;
 			children = (
@@ -301,6 +343,7 @@
 		C220E35C13318CC40076803A /* Table View Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4668737D13C21A1F00FC3531 /* Accessory Views */,
 				C220E36413318DEA0076803A /* Background Views */,
 				C220E36313318DD60076803A /* Views */,
 			);
@@ -724,6 +767,7 @@
 		C2EEE0A4132E8EF20038FFA6 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				466873B313C241C900FC3531 /* Tab Bar */,
 				C283647D1398ECC700540E74 /* Chart */,
 				C21E1F121397D5EC00052A33 /* Navigation Bar */,
 				C213372513618D6F00F89D08 /* Categories */,
@@ -759,6 +803,10 @@
 		C2FEBD6F1340AF6D00CBB51E /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				466873AF13C2417800FC3531 /* HMGradientView.h */,
+				466873B013C2417800FC3531 /* HMGradientView.m */,
+				4668738213C21B9D00FC3531 /* HMLabel.h */,
+				4668738313C21B9D00FC3531 /* HMLabel.m */,
 				C2B808BA1343E4EF00CAEC67 /* HMView.h */,
 				A5B56CBA133BAF890071763F /* HMBadgeLabel.h */,
 				A5B56CBB133BAF890071763F /* HMBadgeLabel.m */,
@@ -829,6 +877,10 @@
 				C213372913618DBE00F89D08 /* UIImage+HMImageDevice.h in Headers */,
 				C21E1F171397D6B100052A33 /* HMNavigationBarImage.h in Headers */,
 				C28364821398ED0800540E74 /* HMChartView.h in Headers */,
+				4668738013C21A3F00FC3531 /* HMAccessoryView.h in Headers */,
+				4668738413C21B9D00FC3531 /* HMLabel.h in Headers */,
+				466873B113C2417900FC3531 /* HMGradientView.h in Headers */,
+				466873B713C241E300FC3531 /* HMTabBarController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -919,6 +971,10 @@
 				C213372A13618DBE00F89D08 /* UIImage+HMImageDevice.m in Sources */,
 				C21E1F181397D6B100052A33 /* HMNavigationBarImage.m in Sources */,
 				C28364831398ED0800540E74 /* HMChartView.m in Sources */,
+				4668738113C21A3F00FC3531 /* HMAccessoryView.m in Sources */,
+				4668738513C21B9D00FC3531 /* HMLabel.m in Sources */,
+				466873B213C2417900FC3531 /* HMGradientView.m in Sources */,
+				466873B813C241E300FC3531 /* HMTabBarController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
