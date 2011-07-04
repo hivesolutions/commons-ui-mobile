@@ -454,15 +454,15 @@
 
     // sets the background view's position
     if(tableView.style == UITableViewStylePlain) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionPlain];
+        backgroundView.position = HMTableViewCellBackgroundViewPositionPlain;
     } else if(row == 0 && numberRows == 1) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedSingle];
+        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedSingle;
     } else if(row == 0) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedTop];
+        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedTop;
     } else if(row == numberRows - 1) {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedBottom];
+        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedBottom;
     } else {
-        [backgroundView setPosition:HMTableViewCellBackgroundViewPositionGroupedMiddle];
+        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedMiddle;
     }
 }
 

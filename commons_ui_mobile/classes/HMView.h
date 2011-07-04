@@ -25,6 +25,9 @@
 
 #import "Dependencies.h"
 
+// avoids circular dependency
+@class HMItem;
+
 @protocol HMView<NSObject>
 
 @required

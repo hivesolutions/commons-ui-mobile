@@ -25,6 +25,9 @@
 
 #import "Dependencies.h"
 
+// avoids circular dependency
+@class HMNamedItemGroup;
+
 /**
  * The provider class to be used in the item
  * table view.

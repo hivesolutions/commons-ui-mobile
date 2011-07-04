@@ -45,6 +45,9 @@
  */
 #define HM_ITEM_TABLE_VIEW_FOOTER_OFFSET 30
 
+// avoids circular dependency
+@class HMLabelItem;
+
 /**
  * The item table view to be used to display object items.
  */

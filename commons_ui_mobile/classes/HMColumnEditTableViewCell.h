@@ -42,6 +42,13 @@
 @property (retain) UIView *nameLabelClickView;
 
 /**
+ * Initializes the cell with the default style.
+ *
+ * @param cellIdentifier: The cell's identifier.
+ */
+- (id)initWithReuseIdentifier:(NSString *)cellIdentifier;
+
+/**
  * Indicates that the label
  * was selected.
  */

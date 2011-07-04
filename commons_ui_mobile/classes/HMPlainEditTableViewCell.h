@@ -33,4 +33,11 @@
 @interface HMPlainEditTableViewCell : HMEditTableViewCell {
 }
 
+/**
+ * Initializes the cell with the default style.
+ *
+ * @param cellIdentifier: The cell's identifier.
+ */
+- (id)initWithReuseIdentifier:(NSString *)cellIdentifier;
+
 @end

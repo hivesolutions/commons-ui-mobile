@@ -34,6 +34,9 @@
 #import "HMColumnConstantStringTableViewCell.h"
 #import "HMPlainConstantStringTableViewCell.h"
 
+// avoids circular dependency
+@class HMItemGroup;
+
 /**
  * Table view data soruce used to represent for reprenstation
  * of item objects.
