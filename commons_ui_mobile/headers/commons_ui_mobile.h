@@ -76,3 +76,7 @@
 #import "../classes/HMNavigationBarImage.h"
 #import "../classes/HMChartView.h"
 #import "../classes/UIImage+HMImageDevice.h"
+#import "../classes/HMLabel.h"
+#import "../classes/HMAccessoryView.h"
+#import "../classes/HMGradientView.h"
+#import "../classes/HMTabBarController.h"
