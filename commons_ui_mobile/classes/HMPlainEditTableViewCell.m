@@ -48,7 +48,7 @@
     }
 
     // adjusts the delta in case an icon is present
-    if(self.icon) {
+    if(self.imageView.image) {
         delta += 34;
     }
 

@@ -91,12 +91,6 @@
     // releases the description color
     [_descriptionColor release];
 
-    // releases the icon
-    [_icon release];
-
-    // releases the highlighted icon
-    [_highlightedIcon release];
-
     // releases the accessory type string
     [_accessoryTypeString release];
 
@@ -222,54 +216,6 @@
 
     // sets the cell's text label
     self.detailTextLabel.text = description;
-}
-
-- (NSString *)icon {
-    return _icon;
-}
-
-- (void)setIcon:(NSString *)icon {
-    // in case the object is the same
-    if(icon == _icon) {
-        // returns immediately
-        return;
-    }
-
-    // releases the object
-    [_icon release];
-
-    // sets and retains the object
-    _icon = [icon retain];
-
-    // retrieves the icon image
-    UIImage *iconImage = [UIImage imageNamed:icon];
-
-    // sets the image in the image view
-    [self.imageView setImage:iconImage];
-}
-
-- (NSString *)highlightedIcon {
-    return _highlightedIcon;
-}
-
-- (void)setHighlightedIcon:(NSString *)highlightedIcon {
-    // in case the object is the same
-    if(highlightedIcon == _highlightedIcon) {
-        // returns immediately
-        return;
-    }
-
-    // releases the object
-    [_highlightedIcon release];
-
-    // sets and retains the object
-    _highlightedIcon = [highlightedIcon retain];
-
-    // retrieves the highlighted icon image
-    UIImage *highlightedIconImage = [UIImage imageNamed:highlightedIcon];
-
-    // sets the image in the image view
-    [self.imageView setHighlightedImage:highlightedIconImage];
 }
 
 - (BOOL)selectable {

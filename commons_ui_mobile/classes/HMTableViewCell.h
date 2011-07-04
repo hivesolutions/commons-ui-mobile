@@ -76,8 +76,6 @@
     NSString *_nameFont;
     NSUInteger _nameFontSize;
     UIColor *_nameColor;
-    NSString *_icon;
-    NSString *_highlightedIcon;
     BOOL _selectable;
     BOOL _selectableName;
     NSString *_accessoryTypeString;
@@ -143,16 +141,6 @@
  * The table cell's description color.
  */
 @property (retain) UIColor *descriptionColor;
-
-/**
- * The identifier of the icon resource.
- */
-@property (retain) NSString *icon;
-
-/**
- * The identifier of the highlighted icon resource.
- */
-@property (retain) NSString *highlightedIcon;
 
 /**
  * Indicates if the button is
