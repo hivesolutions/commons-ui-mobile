@@ -62,6 +62,8 @@
     NSString *_name;
     UIFont *_nameFont;
     UIColor *_nameColor;
+    UIColor *_borderColor;
+    UIColor *_selectedBorderColor;
     NSArray *_backgroundColors;
     NSArray *_selectedBackgroundColors;
     BOOL _selectable;
@@ -119,12 +121,24 @@
 @property (retain) UIColor *descriptionColor;
 
 /**
+ * The table cell's border color.
+ */
+@property (retain) UIColor *borderColor;
+
+/**
+ * The border color of the table
+ * cell when it is selected.
+ */
+@property (retain) UIColor *selectedBorderColor;
+
+/**
  * The table cell's background colors.
  */
 @property (retain) NSArray *backgroundColors;
 
 /**
- * The table cell's selected background colors.
+ * The table cell's background colors
+ * when it is selected.
  */
 @property (retain) NSArray *selectedBackgroundColors;
 

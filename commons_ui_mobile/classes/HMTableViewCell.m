@@ -32,6 +32,8 @@
 @synthesize nameColor = _nameColor;
 @synthesize descriptionFont = _descriptionFont;
 @synthesize descriptionColor = _descriptionColor;
+@synthesize borderColor = _borderColor;
+@synthesize selectedBorderColor = _selectedBorderColor;
 @synthesize backgroundColors = _backgroundColors;
 @synthesize selectedBackgroundColors = _selectedBackgroundColors;
 @synthesize selectableName = _selectableName;
@@ -79,6 +81,12 @@
     // releases the description color
     [_descriptionColor release];
 
+    // releases the border color
+    [_borderColor release];
+
+    // releases the selected border color
+    [_selectedBorderColor release];
+
     // releases the background colors
     [_backgroundColors release];
 
@@ -107,6 +115,7 @@
     self.nameColor = [UIColor blackColor];
     self.descriptionFont = [UIFont fontWithName:@"Helvetica-Bold" size:HM_TABLE_VIEW_CELL_DESCRIPTION_FONT_SIZE];
     self.descriptionColor = [UIColor blackColor];
+    self.borderColor = [UIColor grayColor];
     self.height = HM_TABLE_VIEW_CELL_HEIGHT;
     self.insertableRow = NO;
     self.deletableRow = YES;
@@ -231,6 +240,56 @@
 
     // sets the cell's text label
     self.detailTextLabel.text = description;
+}
+
+- (UIColor *)borderColor {
+    // returns the border color
+    return _borderColor;
+}
+
+- (void)setBorderColor:(UIColor *)borderColor{
+    // in case the object is the same
+    if(borderColor == _borderColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_borderColor release];
+
+    // sets and retains the object
+    _borderColor = [borderColor retain];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *)self.backgroundView;
+
+    // sets the border color
+    backgroundView.borderColor = borderColor;
+}
+
+- (UIColor *)selectedBorderColor {
+    // returns the selected border color
+    return _selectedBorderColor;
+}
+
+- (void)setSelectedBorderColor:(UIColor *)selectedBorderColor{
+    // in case the object is the same
+    if(selectedBorderColor == _selectedBorderColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_selectedBorderColor release];
+
+    // sets and retains the object
+    _selectedBorderColor = [selectedBorderColor retain];
+
+    // retrieves the selected background view
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *)self.selectedBackgroundView;
+
+    // sets the border color
+    selectedBackgroundView.borderColor = selectedBorderColor;
 }
 
 - (NSArray *)backgroundColors {
@@ -414,12 +473,8 @@
         y = (backgroundViewFrame.size.height - height) / 2;
     }
 
-    // updates the accessory view's dimensions
-    CGRect frame = accessoryView.frame;
-    frame.size.width = width;
-    frame.size.height = height;
-
     // updates the accessory view's frame
+    CGRect frame = CGRectMake(x, y, width, height);
     accessoryView.frame = frame;
     accessoryView.bounds = frame;
 }
