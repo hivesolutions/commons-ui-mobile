@@ -44,6 +44,7 @@
     // calls the super
     [super dealloc];
 }
+
 - (void)didSelectLabel {
 }
 
@@ -131,9 +132,9 @@
     self.nameLabelClickView.hidden = selectableName ? NO : YES;
 }
 
-- (void)layoutSubviews {
+- (void)updateLabels {
     // calls the super
-    [super layoutSubviews];
+    [super updateLabels];
 
     // moves the detail text label origin four pixels to the right
     CGRect detailTextLabelFrame = self.detailTextLabel.frame;

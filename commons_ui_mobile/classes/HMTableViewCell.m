@@ -265,17 +265,22 @@
     // calls the super
     [super layoutSubviews];
 
-    // sets the label fonts and colors
-    self.textLabel.font = self.descriptionFont;
-    self.textLabel.textColor = self.descriptionColor;
-    self.detailTextLabel.font = self.nameFont;
-    self.detailTextLabel.textColor = self.nameColor;
+    // updates the labels
+    [self updateLabels];
 
     // updates the accessory view
     [self updateAccessoryView];
 
     // updates the background view position
     [self updateBackgroundViewPosition];
+}
+
+- (void)updateLabels {
+    // sets the label fonts and colors
+    self.textLabel.font = self.descriptionFont;
+    self.textLabel.textColor = self.descriptionColor;
+    self.detailTextLabel.font = self.nameFont;
+    self.detailTextLabel.textColor = self.nameColor;
 }
 
 - (void)updateAccessoryView {
@@ -292,15 +297,27 @@
     UIView *backgroundView = self.selectedBackgroundView;
     CGRect backgroundViewFrame = backgroundView.frame;
 
-    // calculates the dimensions
+    // retrieves the text dimensions
     CGSize textSize = [accessoryView.text sizeWithFont:accessoryView.label.font];
-    CGSize imageSize = accessoryView.image.size;
-    CGFloat width = textSize.width > imageSize.width ? textSize.width : imageSize.width;
-    CGFloat height = textSize.height > imageSize.height ? textSize.height : imageSize.height;
+    CGFloat textWidth = textSize.width;
+    CGFloat textHeight = textSize.height;
 
-    // adds the text padding to the dimensions
-    width += accessoryView.textPadding != -1 ? accessoryView.textPadding : 0;
-    height += accessoryView.textPadding != -1 ? accessoryView.textPadding : 0;
+    // subtracts the text height
+    // to remove the vertical padding
+    textHeight -= 6;
+
+    // retrieves the image dimensions
+    CGSize imageSize = accessoryView.image.size;
+    CGFloat imageWidth = imageSize.width;
+    CGFloat imageHeight = imageSize.height;
+
+    // calculates the accessory view's dimensions
+    CGFloat width = textWidth > imageWidth ? textWidth : imageWidth;
+    CGFloat height = textHeight > imageHeight ? textHeight : imageHeight;
+
+    // adds the image cap to the dimensions
+    width += accessoryView.image.leftCapWidth * 2;
+    height += accessoryView.image.topCapHeight * 2;
 
     // initializes the position
     CGFloat x = 0;
@@ -309,7 +326,7 @@
     // in case the accessory view's margin is defined
     if(accessoryView.margin) {
         // retrieves the margin point
-        CGPoint marginPoint = [accessoryView.margin CGPointValue];
+        CGPoint marginPoint = accessoryView.margin.CGPointValue;
 
         // uses the margin to calculate the accessory view's position
         x = backgroundViewFrame.origin.x + backgroundViewFrame.size.width - width - marginPoint.x;
@@ -322,10 +339,12 @@
         y = (backgroundViewFrame.size.height - height) / 2;
     }
 
-    // creates the new frame
-    CGRect frame = CGRectMake(x, y, width, height);
-
     // updates the accessory view's dimensions
+    CGRect frame = accessoryView.frame;
+    frame.size.width = width;
+    frame.size.height = height;
+
+    // updates the accessory view's frame
     accessoryView.frame = frame;
     accessoryView.bounds = frame;
 }

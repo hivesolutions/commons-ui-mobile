@@ -213,6 +213,11 @@
 - (void)updateTableData;
 
 /**
+ * Updates the labels.
+ */
+- (void)updateLabels;
+
+/**
  * Updates the accessory view.
  */
 - (void)updateAccessoryView;
