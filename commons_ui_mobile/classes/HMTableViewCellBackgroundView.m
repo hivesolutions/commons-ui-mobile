@@ -25,27 +25,68 @@
 
 #import "HMTableViewCellBackgroundView.h"
 
-#define DEFAULT_MARGIN 10
-#define DEFAULT_GRADIENT_LOCATIONS {0.0, 1.0}
-#define DEFAULT_GRADIENT_COLORS {0.66, 0.85, 0.36, 1, 0.23, 0.62, 0.27, 1}
-
 @implementation HMTableViewCellBackgroundView
 
 @synthesize position = _position;
+@synthesize cornerRadius = _cornerRadius;
+@synthesize gradientColors = _gradientColors;
+@synthesize borderColor = _borderColor;
+@synthesize topSeparatorColor = _topSeparatorColor;
+@synthesize bottomSeparatorColor = _bottomSeparatorColor;
+@synthesize topSeparatorStyle = _topSeparatorStyle;
+@synthesize bottomSeparatorStyle = _bottomSeparatorStyle;
 
 - (id)init {
     // invokes the parent constructor
     self = [super init];
 
-    // sets the default attributes
-    self.position = HMTableViewCellBackgroundViewPositionPlain;
+    // initializes the structures
+    [self initStructures];
 
     // returns the instance
     return self;
 }
 
-- (BOOL)isOpaque {
-    return NO;
+- (void)dealloc {
+    // releases the gradient colors
+    [_gradientColors release];
+
+    // releases the border color
+    [_borderColor release];
+
+    // releases the top separator color
+    [_topSeparatorColor release];
+
+    // releases the bottom separator color
+    [_bottomSeparatorColor release];
+
+    // frees the gradient color components
+    free(_gradientColorComponents);
+
+    // frees the gradient color locations
+    free(_gradientColorLocations);
+
+    // calls the super
+    [super dealloc];
+}
+
+- (void)initStructures {
+    // creates the default gradient colors
+    UIColor *topGradientColor = [UIColor colorWithRed:0.66 green:0.85 blue:0.36 alpha:1];
+    UIColor *bottomGradientColor = [UIColor colorWithRed:0.23 green:0.62 blue:0.27 alpha:1];
+    NSArray *defaultGradientColors = [NSArray arrayWithObjects:topGradientColor, bottomGradientColor, nil];
+
+    // creates the default border color
+    UIColor *defaultBorderColor = [UIColor grayColor];
+
+    // sets the default values
+    self.opaque = NO;
+    self.position = HMTableViewCellBackgroundViewPositionPlain;
+    self.gradientColors = defaultGradientColors;
+    self.cornerRadius = DEFAULT_CORNER_RADIUS;
+    self.borderColor = defaultBorderColor;
+    self.topSeparatorStyle = HMTableViewCellBackgroundViewSeparatorStylePlain;
+    self.bottomSeparatorStyle = HMTableViewCellBackgroundViewSeparatorStylePlain;
 }
 
 - (void)drawRect:(CGRect)rectangle {
@@ -53,37 +94,31 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     // configures the context
-    const CGColorRef grayColor = [[UIColor grayColor] CGColor];
-    CGContextSetStrokeColorWithColor(context, grayColor);
+    CGContextSetStrokeColorWithColor(context, self.borderColor.CGColor);
     CGContextSetLineWidth(context, 1);
-    CGContextSetAllowsAntialiasing(context, YES);
-    CGContextSetShouldAntialias(context, YES);
 
     // invokes the appropriate draw function
     // depending on the cell's position
     switch(self.position) {
         case HMTableViewCellBackgroundViewPositionGroupedTop:
-            [self drawRectGroupedTop];
+            [self drawRectGroupedTopContext:context];
             break;
         case HMTableViewCellBackgroundViewPositionGroupedBottom:
-            [self drawRectGroupedBottom];
+            [self drawRectGroupedBottomContext:context];
             break;
         case HMTableViewCellBackgroundViewPositionGroupedMiddle:
-            [self drawRectPlain];
+            [self drawRectPlainContext:context];
             break;
         case HMTableViewCellBackgroundViewPositionGroupedSingle:
-            [self drawRectGroupedSingle];
+            [self drawRectGroupedSingleContext:context];
             break;
         case HMTableViewCellBackgroundViewPositionPlain:
-            [self drawRectPlain];
+            [self drawRectPlainContext:context];
             break;
     }
 }
 
-- (void)drawRectGroupedTop {
-    // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
+- (void)drawRectGroupedTopContext:(CGContextRef)context {
     // retrieves the view's bounds
     CGRect rectangle = self.bounds;
 
@@ -97,8 +132,8 @@
     // creates the cell's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, maximumX);
-    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, DEFAULT_MARGIN);
-    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, maximumY, DEFAULT_MARGIN);
+    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, self.cornerRadius);
+    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, maximumY, self.cornerRadius);
     CGPathAddLineToPoint(path, NULL, maximumX, maximumY);
     CGPathAddLineToPoint(path, NULL, minimumX, maximumY);
     CGPathCloseSubpath(path);
@@ -109,19 +144,28 @@
     CGContextClip(context);
 
     // draws the gradient
-    [self drawGradient];
+    [self drawGradientContext:context];
 
     // draws the cell's border
     CGContextAddPath(context, path);
     CGPathRelease(path);
     CGContextStrokePath(context);
+
+    // in case the bottom separator color is defined
+    if(self.bottomSeparatorColor) {
+        // creates the points
+        CGPoint startPoint = CGPointMake(minimumX + 1, maximumY);
+        CGPoint endPoint = CGPointMake(maximumX - 1, maximumY);
+
+        // draws the separator
+        [self drawSeparatorContext:context style:self.bottomSeparatorStyle color:self.bottomSeparatorColor.CGColor startPoint:startPoint endPoint:endPoint];
+    }
+
+    // restores the state
     CGContextRestoreGState(context);
 }
 
-- (void)drawRectGroupedBottom {
-    // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
+- (void)drawRectGroupedBottomContext:(CGContextRef)context {
     // retrieves the view's bounds
     CGRect rectangle = self.bounds;
 
@@ -138,8 +182,8 @@
     // creates the cell's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, minimumY);
-    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, middleX, maximumY, DEFAULT_MARGIN);
-    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, maximumX, minimumY, DEFAULT_MARGIN);
+    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, middleX, maximumY, self.cornerRadius);
+    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, maximumX, minimumY, self.cornerRadius);
     CGPathAddLineToPoint(path, NULL, maximumX, minimumY);
     CGPathAddLineToPoint(path, NULL, minimumX, minimumY);
     CGPathCloseSubpath(path);
@@ -150,19 +194,28 @@
     CGContextClip(context);
 
     // draws the gradient
-    [self drawGradient];
+    [self drawGradientContext:context];
 
     // draws the cell's border
     CGContextAddPath(context, path);
     CGPathRelease(path);
     CGContextStrokePath(context);
+
+    // in case the top separator color is defined
+    if(self.topSeparatorColor) {
+        // creates the points
+        CGPoint startPoint = CGPointMake(minimumX + 1, minimumY + 1);
+        CGPoint endPoint = CGPointMake(maximumX - 1, minimumY + 1);
+
+        // draws the separator
+        [self drawSeparatorContext:context style:self.topSeparatorStyle color:self.topSeparatorColor.CGColor startPoint:startPoint endPoint:endPoint];
+    }
+
+    // restores the state
     CGContextRestoreGState(context);
 }
 
-- (void)drawRectGroupedSingle {
-    // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
+- (void)drawRectGroupedSingleContext:(CGContextRef)context {
     // retrieves the view's bounds
     CGRect rectangle = self.bounds;
 
@@ -177,10 +230,10 @@
     // creates the cell's border
     CGMutablePathRef path = CGPathCreateMutable();
     CGPathMoveToPoint(path, NULL, minimumX, middleY);
-    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, DEFAULT_MARGIN);
-    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, DEFAULT_MARGIN);
-    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, DEFAULT_MARGIN);
-    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, DEFAULT_MARGIN);
+    CGPathAddArcToPoint(path, NULL, minimumX, minimumY, middleX, minimumY, self.cornerRadius);
+    CGPathAddArcToPoint(path, NULL, maximumX, minimumY, maximumX, middleY, self.cornerRadius);
+    CGPathAddArcToPoint(path, NULL, maximumX, maximumY, middleX, maximumY, self.cornerRadius);
+    CGPathAddArcToPoint(path, NULL, minimumX, maximumY, minimumX, middleY, self.cornerRadius);
     CGPathCloseSubpath(path);
 
     // defines the gradient drawing bounds
@@ -189,7 +242,7 @@
     CGContextClip(context);
 
     // draws the gradient
-    [self drawGradient];
+    [self drawGradientContext:context];
 
     // draws the cell's border
     CGContextAddPath(context, path);
@@ -198,10 +251,7 @@
     CGContextRestoreGState(context);
 }
 
-- (void)drawRectPlain {
-    // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();
-
+- (void)drawRectPlainContext:(CGContextRef)context {
     // retrieves the view's bounds
     CGRect rectangle = self.bounds;
 
@@ -229,18 +279,43 @@
     CGContextClip(context);
 
     // draws the gradient
-    [self drawGradient];
+    [self drawGradientContext:context];
 
     // draws the cell's border
     CGContextAddPath(context, path);
     CGPathRelease(path);
     CGContextStrokePath(context);
+
+    // in case the top separator color is defined
+    if(self.topSeparatorColor) {
+        // creates the points
+        CGPoint startPoint = CGPointMake(minimumX + 1, minimumY + 1);
+        CGPoint endPoint = CGPointMake(maximumX - 1, minimumY + 1);
+
+        // draws the separator
+        [self drawSeparatorContext:context style:self.topSeparatorStyle color:self.topSeparatorColor.CGColor startPoint:startPoint endPoint:endPoint];
+    }
+
+    // in case the bottom separator color is defined
+    if(self.bottomSeparatorColor) {
+        // creates the points
+        CGPoint startPoint = CGPointMake(minimumX + 1, maximumY);
+        CGPoint endPoint = CGPointMake(maximumX - 1, maximumY);
+
+        // draws the separator
+        [self drawSeparatorContext:context style:self.bottomSeparatorStyle color:self.bottomSeparatorColor.CGColor startPoint:startPoint endPoint:endPoint];
+    }
+
+    // restores the state
     CGContextRestoreGState(context);
 }
 
-- (void)drawGradient {
-    // retrieves the current graphics context
-    CGContextRef context = UIGraphicsGetCurrentContext();
+- (void)drawGradientContext:(CGContextRef)context {
+    // in case no gradient colors are defined
+    if(!self.gradientColors) {
+        // returns
+        return;
+    }
 
     // retrieves the view's bounds
     CGRect rectangle = self.bounds;
@@ -250,31 +325,147 @@
     CGFloat minimumY = CGRectGetMinY(rectangle);
     CGFloat maximumY = CGRectGetMaxY(rectangle);
 
+    // retrieves the number of gradient colors
+    int numberGradientColors = [self.gradientColors count];
+
     // draws the gradient
-    CGFloat locations[2] = DEFAULT_GRADIENT_LOCATIONS;
-    CGFloat components[8] = DEFAULT_GRADIENT_COLORS;
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
-    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, components, locations, 2);
+    CGGradientRef gradient = CGGradientCreateWithColorComponents(colorspace, _gradientColorComponents, _gradientColorLocations, numberGradientColors);
     CGPoint minimumPoint = CGPointMake(minimumX, minimumY);
     CGPoint maximumPoint = CGPointMake(minimumX, maximumY);
     CGContextDrawLinearGradient(context, gradient, minimumPoint, maximumPoint, 0);
 
-    // releases the colorspace and the gradient
-    CGColorSpaceRelease(colorspace);
+    // releases the objects
     CGGradientRelease(gradient);
+    CGColorSpaceRelease(colorspace);
 }
 
-- (void)setCellPosition:(HMTableViewCellBackgroundViewPosition)position {
-    // returns in case the position hasn't changed
-    if(self.position == position) {
+- (void)drawSeparatorContext:(CGContextRef)context style:(HMTableViewCellBackgroundViewSeparatorStyle)separatorStyle color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    // depending on the separator style
+    switch(separatorStyle) {
+            // in case it's the plain style
+        case HMTableViewCellBackgroundViewSeparatorStylePlain:
+            // draws a plain separator
+            [self drawSeparatorPlainContext:context color:color startPoint:startPoint endPoint:endPoint];
+            break;
+            // in case it's the dashed style
+        case HMTableViewCellBackgroundViewSeparatorStyleDashed:
+            // draws the dashed separator
+            [self drawSeparatorDashedContext:context color:color startPoint:startPoint endPoint:endPoint];
+            break;
+    }
+}
+
+- (void)drawSeparatorPlainContext:(CGContextRef)context color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    // defines the stroke color
+    CGContextSetStrokeColorWithColor(context, color);
+
+    // creates the separator path
+    CGMutablePathRef path = CGPathCreateMutable();
+    CGPathMoveToPoint(path, NULL, startPoint.x, startPoint.y);
+    CGPathAddLineToPoint(path, NULL, endPoint.x, endPoint.y);
+    CGPathCloseSubpath(path);
+
+    // adds the path to the context
+    CGContextAddPath(context, path);
+
+    // releases the path
+    CGPathRelease(path);
+
+    // draws the path
+    CGContextStrokePath(context);
+}
+
+- (void)drawSeparatorDashedContext:(CGContextRef)context color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint {
+    // defines the stroke color
+    CGContextSetStrokeColorWithColor(context, color);
+
+    // creates the path
+    CGMutablePathRef path = CGPathCreateMutable();
+
+    // initializes the coordinates
+    CGFloat startX = startPoint.x + 10;
+    CGFloat endX = startX + 3;
+
+    // draws the dashed path
+    while(endX < endPoint.x - 6) {
+        CGPathMoveToPoint(path, NULL, startX, startPoint.y);
+        CGPathAddLineToPoint(path, NULL, endX, endPoint.y);
+        startX += 6;
+        endX += 6;
+    }
+
+    // closes the path and adds it to the context
+    CGPathCloseSubpath(path);
+    CGContextAddPath(context, path);
+
+    // releases the path
+    CGPathRelease(path);
+
+    // draws the path
+    CGContextStrokePath(context);
+}
+
+- (NSArray *)gradientColors {
+    return _gradientColors;
+}
+
+- (void)setGradientColors:(NSArray *)gradientColors {
+    // in case the object is the same
+    if(gradientColors == _gradientColors) {
+        // returns immediately
         return;
     }
 
-    // stores the new position
-    self.position = position;
+    // releases the object
+    [_gradientColors release];
 
-    // sets the cell to be re-rendered
-    [self setNeedsDisplay];
+    // sets and retains the object
+    _gradientColors = [gradientColors retain];
+
+    // retrieves the number of gradient colors
+    int numberGradientColors = [gradientColors count];
+
+    // in case the gradient color
+    // components are allocated
+    if(_gradientColorComponents) {
+        // frees the gradient color components
+        free(_gradientColorComponents);
+    }
+
+    // in case the gradient color
+    // locations are allocated
+    if(_gradientColorLocations) {
+        // frees the gradient color locations
+        free(_gradientColorLocations);
+    }
+
+    // allocates the gradient lists
+    _gradientColorComponents = malloc(sizeof(CGFloat) * numberGradientColors * 4);
+    _gradientColorLocations = malloc(sizeof(CGFloat) * numberGradientColors);
+
+    // populates the components list with the gradient colors
+    for(int index = 0; index < numberGradientColors; index++) {
+        // retrieves the gradient color
+        UIColor *gradientColor = (UIColor *) [self.gradientColors objectAtIndex:index];
+        const CGFloat *gradientColorComponents = CGColorGetComponents(gradientColor.CGColor);
+
+        // retrieves the color components
+        CGFloat red = gradientColorComponents[0];
+        CGFloat green = gradientColorComponents[1];
+        CGFloat blue = gradientColorComponents[2];
+        CGFloat alpha = gradientColorComponents[3];
+
+        // sets the color components
+        _gradientColorComponents[index * 4] = red;
+        _gradientColorComponents[index * 4 + 1] = green;
+        _gradientColorComponents[index * 4 + 2] = blue;
+        _gradientColorComponents[index * 4 + 3] = alpha;
+
+        // sets the location for this color
+        CGFloat location = index == 0 ? 0 : (index + 1) * (1.0 / numberGradientColors);
+        _gradientColorLocations[index] = location;
+    }
 }
 
 @end

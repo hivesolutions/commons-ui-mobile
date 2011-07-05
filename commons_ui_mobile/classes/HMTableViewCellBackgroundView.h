@@ -26,8 +26,12 @@
 #import "Dependencies.h"
 
 /**
- * Enumeration defining the various
- * cell positions.
+ * The default corner radius.
+ */
+#define DEFAULT_CORNER_RADIUS 10
+
+/**
+ * Enumeration defining the various cell positions.
  */
 typedef enum  {
     HMTableViewCellBackgroundViewPositionGroupedSingle = 1,
@@ -37,47 +41,137 @@ typedef enum  {
     HMTableViewCellBackgroundViewPositionPlain
 } HMTableViewCellBackgroundViewPosition;
 
+/**
+ * Enumeration defining the various separator styles.
+ */
+typedef enum  {
+    HMTableViewCellBackgroundViewSeparatorStylePlain = 1,
+    HMTableViewCellBackgroundViewSeparatorStyleDashed
+} HMTableViewCellBackgroundViewSeparatorStyle;
+
 @interface HMTableViewCellBackgroundView : UIView {
     @private
     HMTableViewCellBackgroundViewPosition _position;
+    CGFloat _cornerRadius;
+    NSArray *_gradientColors;
+    UIColor *_borderColor;
+    UIColor *_topSeparatorColor;
+    UIColor *_bottomSeparatorColor;
+    HMTableViewCellBackgroundViewSeparatorStyle _topSeparatorStyle;
+    HMTableViewCellBackgroundViewSeparatorStyle _bottomSeparatorStyle;
+    CGFloat *_gradientColorComponents;
+    CGFloat *_gradientColorLocations;
 }
 
+/**
+ * The table view cell's position in the table.
+ */
 @property (assign) HMTableViewCellBackgroundViewPosition position;
 
 /**
- * Draws a top cell for a
- * grouped table.
+ * The table view cell's corner radius.
  */
-- (void)drawRectGroupedTop;
+@property (assign) CGFloat cornerRadius;
 
 /**
- * Draws a bottom cell for a
- * grouped table.
+ * The table view cell's gradient colors.
  */
-- (void)drawRectGroupedBottom;
+@property (retain) NSArray *gradientColors;
 
 /**
- * Draws a cell that stands
- * alone in a grouped table.
+ * The table view cell's border color.
  */
-- (void)drawRectGroupedSingle;
+@property (retain) UIColor *borderColor;
 
 /**
- * Draws a cell for a
- * plain table.
+ * The table view cell's top separator color.
  */
-- (void)drawRectPlain;
+@property (retain) UIColor *topSeparatorColor;
+
+/**
+ * The table view cell's bottom separator color.
+ */
+@property (retain) UIColor *bottomSeparatorColor;
+
+/**
+ * The table view cell's top separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle topSeparatorStyle;
+
+/**
+ * The table view cell's bottom separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle bottomSeparatorStyle;
+
+/**
+ * Initializes the structures.
+ */
+- (void)initStructures;
+
+/**
+ * Draws a top cell for a grouped table.
+ *
+ * @param context: The graphics context.
+ */
+- (void)drawRectGroupedTopContext:(CGContextRef)context;
+
+/**
+ * Draws a bottom cell for a grouped table.
+ *
+ * @param context: The graphics context.
+ */
+- (void)drawRectGroupedBottomContext:(CGContextRef)context;
+
+/**
+ * Draws a cell that stands alone in a grouped table.
+ *
+ * @param context: The graphics context.
+ */
+- (void)drawRectGroupedSingleContext:(CGContextRef)context;
+
+/**
+ * Draws a cell for a plain table.
+ *
+ * @param context: The graphics context.
+ */
+- (void)drawRectPlainContext:(CGContextRef)context;
 
 /**
  * Draws the gradient.
+ *
+ * @param context: The graphics context.
  */
-- (void)drawGradient;
+- (void)drawGradientContext:(CGContextRef)context;
 
 /**
- * Sets the cell's position.
+ * Draws the table view cell separator.
  *
- * @param position The cell's position.
+ * @param context: The graphics context.
+ * @param style: The separator line style.
+ * @param color: The separator line color.
+ * @param startPoint: The start of the separator line.
+ * @param endPoint: The end of the separator line.
  */
-- (void)setCellPosition:(HMTableViewCellBackgroundViewPosition)position;
+- (void)drawSeparatorContext:(CGContextRef)context style:(HMTableViewCellBackgroundViewSeparatorStyle)style color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
+
+/**
+ * Draws the table view cell plain separator.
+ *
+ * @param context: The graphics context.
+ * @param color: The separator line color.
+ * @param startPoint: The start of the separator line.
+ * @param endPoint: The end of the separator line.
+ */
+- (void)drawSeparatorPlainContext:(CGContextRef)context color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
+
+/**
+ * Draws the table view cell dashed separator.
+ *
+ * @param context: The graphics context.
+ * @param color: The separator line color.
+ * @param startPoint: The start of the separator line.
+ * @param endPoint: The end of the separator line.
+ */
+- (void)drawSeparatorDashedContext:(CGContextRef)context color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
 @end
