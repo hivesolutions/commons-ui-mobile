@@ -218,6 +218,22 @@
 - (void)updateLabels;
 
 /**
+ * Updates the name label.
+ *
+ * @param nameLabel: The label that
+ * represents the name.
+ */
+- (void)updateNameLabel:(UILabel *)nameLabel;
+
+/**
+ * Updates the description label.
+ *
+ * @param descriptionLabel: The label that
+ * represents the description.
+ */
+- (void)updateDescriptionLabel:(UILabel *)descriptionLabel;
+
+/**
  * Updates the accessory view.
  */
 - (void)updateAccessoryView;

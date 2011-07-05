@@ -133,25 +133,29 @@
 }
 
 - (void)updateLabels {
-    // calls the super
-    [super updateLabels];
-
-    // moves the detail text label origin four pixels to the right
-    CGRect detailTextLabelFrame = self.detailTextLabel.frame;
-    detailTextLabelFrame.origin.x += 4;
-    self.detailTextLabel.frame = detailTextLabelFrame;
-
-    // sets the text label to adjust the
-    // font size to the available width
-    self.textLabel.adjustsFontSizeToFitWidth = YES;
-
     // swaps the fonts and colors because the name is
     // represented by the text label and the description
     // by the detail text label in this cell type
-    self.textLabel.font = self.nameFont;
-    self.textLabel.textColor = self.nameColor;
-    self.detailTextLabel.font = self.descriptionFont;
-    self.detailTextLabel.textColor = self.descriptionColor;
+    [self updateNameLabel:self.textLabel];
+    [self updateDescriptionLabel:self.detailTextLabel];
+}
+
+- (void)updateNameLabel:(UILabel *)nameLabel {
+    // calls the super
+    [super updateNameLabel:nameLabel];
+
+    // sets the name label to adapt to the size
+    nameLabel.adjustsFontSizeToFitWidth = YES;
+}
+
+- (void)updateDescriptionLabel:(UILabel *)descriptionLabel {
+    // calls the super
+    [super updateDescriptionLabel:descriptionLabel];
+
+    // moves the description label origin four pixels to the right
+    CGRect descriptionLabelFrame = descriptionLabel.frame;
+    descriptionLabelFrame.origin.x += 4;
+    descriptionLabel.frame = descriptionLabelFrame;
 }
 
 @end

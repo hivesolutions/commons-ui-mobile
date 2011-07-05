@@ -276,11 +276,23 @@
 }
 
 - (void)updateLabels {
+    // updates the name label
+    [self updateNameLabel:self.detailTextLabel];
+
+    // updates the description label
+    [self updateDescriptionLabel:self.textLabel];
+}
+
+- (void)updateNameLabel:(UILabel *)nameLabel {
     // sets the label fonts and colors
-    self.textLabel.font = self.descriptionFont;
-    self.textLabel.textColor = self.descriptionColor;
-    self.detailTextLabel.font = self.nameFont;
-    self.detailTextLabel.textColor = self.nameColor;
+    nameLabel.font = self.nameFont;
+    nameLabel.textColor = self.nameColor;
+}
+
+- (void)updateDescriptionLabel:(UILabel *)descriptionLabel {
+    // sets the label fonts and colors
+    descriptionLabel.font = self.descriptionFont;
+    descriptionLabel.textColor = self.descriptionColor;
 }
 
 - (void)updateAccessoryView {
