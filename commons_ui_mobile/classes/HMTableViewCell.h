@@ -44,22 +44,10 @@
 #define HM_TABLE_VIEW_CELL_HEIGHT 50
 
 /**
- * The horizontal margin between the badge
- * label's text and the badge.
+ * The margin between the table view cell's right
+ * border and the accessory view.
  */
-#define BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN 5
-
-/**
- * The horizontal margin between the badge
- * label and the cell.
- */
-#define BADGE_LABEL_ACCESSORY_X_MARGIN 11
-
-/**
- * The vertical margin between the badge
- * label and the cell.
- */
-#define BADGE_LABEL_ACCESSORY_Y_MARGIN 15
+#define HM_TABLE_VIEW_CELL_ACCESSORY_VIEW_MARGIN_X 11
 
 // avoids circular dependency
 @class HMItemTableView;
@@ -69,17 +57,13 @@
     NSString *_description;
 
     @private
-    NSString *_descriptionFont;
-    NSUInteger _descriptionFontSize;
+    UIFont *_descriptionFont;
     UIColor *_descriptionColor;
     NSString *_name;
-    NSString *_nameFont;
-    NSUInteger _nameFontSize;
+    UIFont *_nameFont;
     UIColor *_nameColor;
     BOOL _selectable;
     BOOL _selectableName;
-    NSString *_accessoryTypeString;
-    NSString *_accessoryValue;
     float _height;
     BOOL _viewReady;
     BOOL _insertableRow;
@@ -102,12 +86,7 @@
 /**
  * The table cell's name font.
  */
-@property (retain) NSString *nameFont;
-
-/**
- * The table cell's name font size.
- */
-@property (assign) NSUInteger nameFontSize;
+@property (retain) UIFont *nameFont;
 
 /**
  * The table cell's name color.
@@ -130,12 +109,7 @@
 /**
  * The table cell's description font.
  */
-@property (retain) NSString *descriptionFont;
-
-/**
- * The table cell's description font size.
- */
-@property (assign) NSUInteger descriptionFontSize;
+@property (retain) UIFont *descriptionFont;
 
 /**
  * The table cell's description color.
@@ -152,16 +126,6 @@
  * Indicates if the name is selectable.
  */
 @property (assign) BOOL selectableName;
-
-/**
- * The type of accessory (string mode).
- */
-@property (retain) NSString *accessoryTypeString;
-
-/**
- * The accessory value.
- */
-@property (retain) NSString *accessoryValue;
 
 /**
  * The table view cell's height.
@@ -220,6 +184,16 @@
 @property (assign) HMItemTableView *itemTableView;
 
 /**
+ * Initializes the structures.
+ */
+- (void)initStructures;
+
+/**
+ * Initializes the structures.
+ */
+- (void)constructStructures;
+
+/**
  * Called when the edinting mode is going to be changed.
  * The commit argument defined if the edit operation should
  * be persisted (commited).
@@ -237,6 +211,11 @@
  * contents.
  */
 - (void)updateTableData;
+
+/**
+ * Updates the accessory view.
+ */
+- (void)updateAccessoryView;
 
 /**
  * Updates the background view's position.

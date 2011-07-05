@@ -27,12 +27,6 @@
 
 #import "HMTableViewDataSource.h"
 #import "HMItemTableViewProvider.h"
-#import "HMColumnStringTableViewCell.h"
-#import "HMPlainStringTableViewCell.h"
-#import "HMColumnMultilineStringTableViewCell.h"
-#import "HMPlainMultilineStringTableViewCell.h"
-#import "HMColumnConstantStringTableViewCell.h"
-#import "HMPlainConstantStringTableViewCell.h"
 
 // avoids circular dependency
 @class HMItemGroup;

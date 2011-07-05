@@ -46,7 +46,7 @@
     CGRect labelFrame = CGRectMake(HM_COLUMN_CONSTANT_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_COLUMN_CONSTANT_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_COLUMN_CONSTANT_STRING_TABLE_VIEW_CELL_X_MARGIN * 2, HM_COLUMN_CONSTANT_STRING_TABLE_VIEW_CELL_HEIGHT);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
+    label.font = self.descriptionFont;
     label.backgroundColor = [UIColor clearColor];
     label.text = self.description;
     label.textColor = self.descriptionColor;

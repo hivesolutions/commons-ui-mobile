@@ -147,9 +147,9 @@
     // swaps the fonts and colors because the name is
     // represented by the text label and the description
     // by the detail text label in this cell type
-    self.textLabel.font = [UIFont fontWithName:self.nameFont size:self.nameFontSize];
+    self.textLabel.font = self.nameFont;
     self.textLabel.textColor = self.nameColor;
-    self.detailTextLabel.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
+    self.detailTextLabel.font = self.descriptionFont;
     self.detailTextLabel.textColor = self.descriptionColor;
 }
 

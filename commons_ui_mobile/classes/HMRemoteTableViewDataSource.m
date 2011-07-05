@@ -171,7 +171,7 @@
     if(cell == nil) {
         // creates the new cell with the given reuse identifier
         HMTableViewCell *tableViewCell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
-        tableViewCell.descriptionFontSize = 18;
+        tableViewCell.descriptionFont = [UIFont fontWithName:@"Helvetica-Bold" size:18];
         cell = tableViewCell;
     }
 

@@ -29,10 +29,8 @@
 
 @synthesize name = _name;
 @synthesize nameFont = _nameFont;
-@synthesize nameFontSize = _nameFontSize;
 @synthesize nameColor = _nameColor;
 @synthesize descriptionFont = _descriptionFont;
-@synthesize descriptionFontSize = _descriptionFontSize;
 @synthesize descriptionColor = _descriptionColor;
 @synthesize selectableName = _selectableName;
 @synthesize height = _height;
@@ -50,23 +48,11 @@
     // invokes the parent constructor
     self = [super initWithStyle:cellStyle reuseIdentifier:cellIdentifier];
 
-    // creates the background view
-    HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
+    // initializes the structures
+    [self initStructures];
 
-    // sets the default attributes
-    self.nameFont = @"Helvetica-Bold";
-    self.nameFontSize = HM_TABLE_VIEW_CELL_NAME_FONT_SIZE;
-    self.nameColor = [UIColor blackColor];
-    self.descriptionFont = @"Helvetica-Bold";
-    self.descriptionFontSize = HM_TABLE_VIEW_CELL_DESCRIPTION_FONT_SIZE;
-    self.descriptionColor = [UIColor blackColor];
-    self.height = HM_TABLE_VIEW_CELL_HEIGHT;
-    self.insertableRow = NO;
-    self.deletableRow = YES;
-    self.selectedBackgroundView = backgroundView;
-
-    // releases the objects
-    [backgroundView release];
+    // constructs the structures
+    [self constructStructures];
 
     // returns the instance
     return self;
@@ -91,12 +77,6 @@
     // releases the description color
     [_descriptionColor release];
 
-    // releases the accessory type string
-    [_accessoryTypeString release];
-
-    // releases the accessory value
-    [_accessoryValue release];
-
     // releases the data
     [_data release];
 
@@ -111,6 +91,28 @@
 
     // calls the super
     [super dealloc];
+}
+
+- (void)initStructures {
+    // sets the default attributes
+    self.nameFont = [UIFont fontWithName:@"Helvetica-Bold" size:HM_TABLE_VIEW_CELL_NAME_FONT_SIZE];
+    self.nameColor = [UIColor blackColor];
+    self.descriptionFont = [UIFont fontWithName:@"Helvetica-Bold" size:HM_TABLE_VIEW_CELL_DESCRIPTION_FONT_SIZE];
+    self.descriptionColor = [UIColor blackColor];
+    self.height = HM_TABLE_VIEW_CELL_HEIGHT;
+    self.insertableRow = NO;
+    self.deletableRow = YES;
+}
+
+- (void)constructStructures {
+    // creates the background view
+    HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
+
+    // sets the objects
+    self.selectedBackgroundView = backgroundView;
+
+    // releases the objects
+    [backgroundView release];
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
@@ -230,85 +232,6 @@
     self.selectionStyle = selectable ? UITableViewCellSelectionStyleBlue : UITableViewCellSelectionStyleNone;
 }
 
-- (NSString *)accessoryTypeString {
-    return _accessoryTypeString;
-}
-
-- (void)setAccessoryTypeString:(NSString *)accessoryTypeString {
-    // in case the object is the same
-    if(accessoryTypeString == _accessoryTypeString) {
-        // returns immediately
-        return;
-    }
-
-    // releases the object
-    [_accessoryTypeString release];
-
-    // sets and retains the object
-    _accessoryTypeString = [accessoryTypeString retain];
-
-    // creates the specified accessory type
-    if([accessoryTypeString isEqualToString:@"disclosure_indicator"]) {
-        // sets the acessory type as the table view
-        // cell acessory disclosure indicator
-        self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        self.editingAccessoryType = UITableViewCellAccessoryDisclosureIndicator;
-    } else if([accessoryTypeString isEqualToString:@"switch"]) {
-        // creates the notifications switch
-        UISwitch *notificationsSwitch = [[UISwitch alloc] init];
-
-        // sets the notifications switch in the accessory view
-        self.accessoryView = notificationsSwitch;
-        self.editingAccessoryView = notificationsSwitch;
-
-        // releases the notifications switch
-        [notificationsSwitch release];
-    } else if([accessoryTypeString isEqualToString:@"badge_label"]) {
-        // creates the badge label and sets it as the accessory view
-        HMBadgeLabel *badgeLabel = [[HMBadgeLabel alloc] init];
-        badgeLabel.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
-        badgeLabel.text = self.accessoryValue;
-        badgeLabel.backgroundColor = [UIColor clearColor];
-        badgeLabel.textColor = [UIColor whiteColor];
-        badgeLabel.textAlignment = UITextAlignmentCenter;
-        badgeLabel.badgeColor = [UIColor colorWithRed:0.54 green:0.56 blue:0.62 alpha:1.0];
-
-        // sets the badge label as the accessory view
-        self.accessoryView = badgeLabel;
-        self.editingAccessoryView = badgeLabel;
-
-        // releases the badge label
-        [badgeLabel release];
-    }
-}
-
-- (NSString *)accessoryValue {
-    return _accessoryValue;
-}
-
-- (void)setAccessoryValue:(NSString *)accessoryValue {
-    // in case the object is the same
-    if(accessoryValue == _accessoryValue) {
-        // returns immediately
-        return;
-    }
-
-    // releases the object
-    [_accessoryValue release];
-
-    // sets and retains the object
-    _accessoryValue = [accessoryValue retain];
-
-    // updates the badge label's value
-    if([self.accessoryTypeString isEqualToString:@"badge_label"] && self.accessoryView) {
-        // retrieves the badge label
-        HMBadgeLabel *badgeLabel = (HMBadgeLabel *) self.accessoryView;
-
-        // sets the accessory in the badge
-        badgeLabel.text = accessoryValue;
-    }
-}
-
 - (NSObject *)data {
     return _data;
 }
@@ -342,36 +265,69 @@
     // calls the super
     [super layoutSubviews];
 
-    // adjusts the badge label's position
-    if([self.accessoryTypeString isEqualToString:@"badge_label"] && self.accessoryView) {
-        // retrieves the badge label
-        HMBadgeLabel *badgeLabel = (HMBadgeLabel *) self.accessoryView;
-
-        // calculates the text size
-        CGSize textSize = [badgeLabel.text sizeWithFont:badgeLabel.font];
-
-        // updates the accessory view's frame, this approach
-        // assumes that the selected background view is already with
-        // a valid position and dimensions
-        CGRect frame = CGRectZero;
-        frame.origin.x = self.selectedBackgroundView.frame.origin.x + self.selectedBackgroundView.frame.size.width - textSize.width - BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN * 2 - BADGE_LABEL_ACCESSORY_X_MARGIN;
-        frame.origin.y = BADGE_LABEL_ACCESSORY_Y_MARGIN;
-        frame.size.width = textSize.width + BADGE_LABEL_ACCESSORY_VALUE_X_MARGIN * 2;
-        frame.size.height = textSize.height;
-
-        // updates the accessory view's dimensions
-        self.accessoryView.frame = frame;
-        self.accessoryView.bounds = frame;
-    }
-
     // sets the label fonts and colors
-    self.textLabel.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
+    self.textLabel.font = self.descriptionFont;
     self.textLabel.textColor = self.descriptionColor;
-    self.detailTextLabel.font = [UIFont fontWithName:self.nameFont size:self.nameFontSize];
+    self.detailTextLabel.font = self.nameFont;
     self.detailTextLabel.textColor = self.nameColor;
+
+    // updates the accessory view
+    [self updateAccessoryView];
 
     // updates the background view position
     [self updateBackgroundViewPosition];
+}
+
+- (void)updateAccessoryView {
+    // in case the accessory view is not defined
+    if(!self.accessoryView) {
+        // returns
+        return;
+    }
+
+    // retrieves the accessory view
+    HMAccessoryView *accessoryView = (HMAccessoryView *) self.accessoryView;
+
+    // retrieves the selected background view's frame
+    UIView *backgroundView = self.selectedBackgroundView;
+    CGRect backgroundViewFrame = backgroundView.frame;
+
+    // calculates the dimensions
+    CGSize textSize = [accessoryView.text sizeWithFont:accessoryView.label.font];
+    CGSize imageSize = accessoryView.image.size;
+    CGFloat width = textSize.width > imageSize.width ? textSize.width : imageSize.width;
+    CGFloat height = textSize.height > imageSize.height ? textSize.height : imageSize.height;
+
+    // adds the text padding to the dimensions
+    width += accessoryView.textPadding != -1 ? accessoryView.textPadding : 0;
+    height += accessoryView.textPadding != -1 ? accessoryView.textPadding : 0;
+
+    // initializes the position
+    CGFloat x = 0;
+    CGFloat y = 0;
+
+    // in case the accessory view's margin is defined
+    if(accessoryView.margin) {
+        // retrieves the margin point
+        CGPoint marginPoint = [accessoryView.margin CGPointValue];
+
+        // uses the margin to calculate the accessory view's position
+        x = backgroundViewFrame.origin.x + backgroundViewFrame.size.width - width - marginPoint.x;
+        y = marginPoint.y;
+    }
+    // in case the accessory view's margin is not defined
+    else {
+        // sets the default accessory view position
+        x = backgroundViewFrame.origin.x + backgroundViewFrame.size.width - width - HM_TABLE_VIEW_CELL_ACCESSORY_VIEW_MARGIN_X;
+        y = (backgroundViewFrame.size.height - height) / 2;
+    }
+
+    // creates the new frame
+    CGRect frame = CGRectMake(x, y, width, height);
+
+    // updates the accessory view's dimensions
+    accessoryView.frame = frame;
+    accessoryView.bounds = frame;
 }
 
 - (void)didMoveToSuperview {

@@ -79,7 +79,7 @@
     BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
 
     // retrieves the size occupied by the font
-    UIFont *font = [UIFont fontWithName:labelItem.descriptionFont size:labelItem.descriptionFontSize];
+    UIFont *font = [UIFont fontWithName:labelItem.descriptionFont.name size:labelItem.descriptionFont.size];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
 
@@ -230,12 +230,15 @@
     // in case the header label
     // item is not defined
     if(!headerLabelItem) {
+        // releases the objects
+        [indexPath release];
+
         // returns zero
         return 0;
     }
 
     // retrieves the height occupied by the font
-    UIFont *font = [UIFont fontWithName:headerLabelItem.descriptionFont size:headerLabelItem.descriptionFontSize];
+    UIFont *font = [UIFont fontWithName:headerLabelItem.descriptionFont.name size:headerLabelItem.descriptionFont.size];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_HEADER_OFFSET;
@@ -260,12 +263,15 @@
     // in case the footer label
     // item is not defined
     if(!footerLabelItem) {
+        // releases the objects
+        [indexPath release];
+
         // returns zero
         return 0;
     }
 
     // retrieves the height occupied by the font
-    UIFont *font = [UIFont fontWithName:footerLabelItem.descriptionFont size:footerLabelItem.descriptionFontSize];
+    UIFont *font = [UIFont fontWithName:footerLabelItem.descriptionFont.name size:footerLabelItem.descriptionFont.size];
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_FOOTER_OFFSET;

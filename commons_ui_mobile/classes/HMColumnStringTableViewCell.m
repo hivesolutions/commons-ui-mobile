@@ -51,7 +51,7 @@
     CGRect textFieldFrame = CGRectMake(HM_COLUMN_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_COLUMN_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_COLUMN_STRING_TABLE_VIEW_CELL_X_MARGIN * 2, HM_COLUMN_STRING_TABLE_VIEW_CELL_HEIGHT);
     UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    textField.font = [UIFont fontWithName:self.descriptionFont size:self.descriptionFontSize];
+    textField.font = self.descriptionFont;
     textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     textField.autocorrectionType = UITextAutocorrectionTypeNo;
     textField.backgroundColor = [UIColor clearColor];
