@@ -79,7 +79,7 @@
     BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
 
     // retrieves the size occupied by the font
-    UIFont *font = [UIFont fontWithName:labelItem.descriptionFont.name size:labelItem.descriptionFont.size];
+    UIFont *font = labelItem.descriptionFont.UIFont;
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
 
@@ -99,7 +99,7 @@
     label.backgroundColor = [UIColor clearColor];
     label.shadowOffset = CGSizeMake(1, 1);
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    label.textColor = [UIColor colorWithRed:descriptionColor.red green:descriptionColor.green blue:descriptionColor.blue alpha:descriptionColor.alpha];
+    label.textColor = descriptionColor.UIColor;
 
     // sets the label's text alignment
     switch (labelItem.textAlignment) {
@@ -116,8 +116,7 @@
 
     // sets the label shadow color
     if(labelItem.descriptionShadowColor) {
-        HMColor *descriptionShadowColor = labelItem.descriptionShadowColor;
-        label.shadowColor = [UIColor colorWithRed:descriptionShadowColor.red green:descriptionShadowColor.green blue:descriptionShadowColor.blue alpha:descriptionShadowColor.alpha];
+        label.shadowColor = labelItem.descriptionShadowColor.UIColor;
     }
 
     // creates a wrapper view
@@ -238,7 +237,7 @@
     }
 
     // retrieves the height occupied by the font
-    UIFont *font = [UIFont fontWithName:headerLabelItem.descriptionFont.name size:headerLabelItem.descriptionFont.size];
+    UIFont *font = headerLabelItem.descriptionFont.UIFont;
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [headerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_HEADER_OFFSET;
@@ -271,7 +270,7 @@
     }
 
     // retrieves the height occupied by the font
-    UIFont *font = [UIFont fontWithName:footerLabelItem.descriptionFont.name size:footerLabelItem.descriptionFont.size];
+    UIFont *font = footerLabelItem.descriptionFont.UIFont;
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [footerLabelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
     CGFloat height = size.height + HM_ITEM_TABLE_VIEW_FOOTER_OFFSET;
