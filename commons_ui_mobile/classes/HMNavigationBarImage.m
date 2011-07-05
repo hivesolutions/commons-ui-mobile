@@ -106,7 +106,10 @@
     // in case its running on ios 5
     if([self respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {
         // sets the navigation bar's background image
-        [self setBackgroundImage:verticalImage forBarMetrics:UIBarMetricsDefault];
+        // with the integer value representing the
+        // UIBarMetricsDefault enumeration value
+        // for backwards compatability
+        [self setBackgroundImage:verticalImage forBarMetrics:0];
     }
 }
 
@@ -132,8 +135,11 @@
 
     // in case its running on ios 5
     if([self respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {
-        // sets the navigation bar's background image
-        [self setBackgroundImage:horizontalImage forBarMetrics:UIBarMetricsLandscapePhone];
+        // sets the navigation bar's background image,
+        // with the integer value representing the
+        // UIBarMetricsLandscapePhone enumeration value
+        // for backwards compatability
+        [self setBackgroundImage:horizontalImage forBarMetrics:1];
     }
 }
 
