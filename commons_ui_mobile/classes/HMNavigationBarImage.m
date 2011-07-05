@@ -43,7 +43,7 @@
 
 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context {
     // allocates the image name
-    NSString *imageName;
+    NSString *imageName = nil;
 
     // retrieves the frame size height (casts to int)
     NSInteger frameSizeHeight = self.frame.size.height;
@@ -81,6 +81,60 @@
     // draws the image
     CGRect imageRect = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     CGContextDrawImage(context, imageRect, image.CGImage);
+}
+
+- (NSString *)verticalImageName {
+    return _verticalImageName;
+}
+
+- (void)setVerticalImageName:(NSString *)verticalImageName {
+    // in case the object is the same
+    if(verticalImageName == _verticalImageName) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [verticalImageName release];
+
+    // sets and retains the object
+    _verticalImageName = [verticalImageName retain];
+
+    // retrieves the vertical image
+    UIImage *verticalImage = [UIImage imageNamedDevice:verticalImageName];
+
+    // in case its running on ios 5
+    if([self respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {
+        // sets the navigation bar's background image
+        [self setBackgroundImage:verticalImage forBarMetrics:UIBarMetricsDefault];
+    }
+}
+
+- (NSString *)horizontalImageName {
+    return _horizontalImageName;
+}
+
+- (void)setHorizontalImageName:(NSString *)horizontalImageName {
+    // in case the object is the same
+    if(horizontalImageName == _horizontalImageName) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [horizontalImageName release];
+
+    // sets and retains the object
+    _horizontalImageName = [horizontalImageName retain];
+
+    // retrieves the horizontal image
+    UIImage *horizontalImage = [UIImage imageNamedDevice:horizontalImageName];
+
+    // in case its running on ios 5
+    if([self respondsToSelector:@selector(setBackgroundImage:forBarMetrics:)]) {
+        // sets the navigation bar's background image
+        [self setBackgroundImage:horizontalImage forBarMetrics:UIBarMetricsLandscapePhone];
+    }
 }
 
 @end
