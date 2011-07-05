@@ -32,6 +32,8 @@
 @synthesize nameColor = _nameColor;
 @synthesize descriptionFont = _descriptionFont;
 @synthesize descriptionColor = _descriptionColor;
+@synthesize backgroundColors = _backgroundColors;
+@synthesize selectedBackgroundColors = _selectedBackgroundColors;
 @synthesize selectableName = _selectableName;
 @synthesize height = _height;
 @synthesize viewReady = _viewReady;
@@ -77,6 +79,12 @@
     // releases the description color
     [_descriptionColor release];
 
+    // releases the background colors
+    [_backgroundColors release];
+
+    // releases the selecte background colors
+    [_selectedBackgroundColors release];
+
     // releases the data
     [_data release];
 
@@ -102,17 +110,22 @@
     self.height = HM_TABLE_VIEW_CELL_HEIGHT;
     self.insertableRow = NO;
     self.deletableRow = YES;
+    self.textLabel.backgroundColor = [UIColor clearColor];
+    self.detailTextLabel.backgroundColor = [UIColor clearColor];
 }
 
 - (void)constructStructures {
     // creates the background view
     HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
+    HMTableViewCellBackgroundView *selectedBackgroundView = [[HMTableViewCellBackgroundView alloc] init];
 
     // sets the objects
-    self.selectedBackgroundView = backgroundView;
+    self.backgroundView = backgroundView;
+    self.selectedBackgroundView = selectedBackgroundView;
 
     // releases the objects
     [backgroundView release];
+    [selectedBackgroundView release];
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
@@ -218,6 +231,56 @@
 
     // sets the cell's text label
     self.detailTextLabel.text = description;
+}
+
+- (NSArray *)backgroundColors {
+    // returns the background colors
+    return _backgroundColors;
+}
+
+- (void)setBackgroundColors:(NSArray *)backgroundColors {
+    // in case the object is the same
+    if(backgroundColors == _backgroundColors) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_backgroundColors release];
+
+    // sets and retains the object
+    _backgroundColors = [backgroundColors retain];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *)self.backgroundView;
+
+    // sets the background colors
+    backgroundView.gradientColors = backgroundColors;
+}
+
+- (NSArray *)selectedBackgroundColors {
+    // returns the selected background colors
+    return _selectedBackgroundColors;
+}
+
+- (void)setSelectedBackgroundColors:(NSArray *)selectedBackgroundColors {
+    // in case the object is the same
+    if(selectedBackgroundColors == _selectedBackgroundColors) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_selectedBackgroundColors release];
+
+    // sets and retains the object
+    _selectedBackgroundColors = [selectedBackgroundColors retain];
+
+    // retrieves the selected background view
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *)self.selectedBackgroundView;
+
+    // sets the selected background colors
+    selectedBackgroundView.gradientColors = selectedBackgroundColors;
 }
 
 - (BOOL)selectable {
@@ -382,21 +445,34 @@
     NSUInteger numberRows = [tableView numberOfRowsInSection:section];
     NSUInteger row = indexPath.row;
 
-    // retrieves the background view
-    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
+    // retrieves the background views
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
 
-    // sets the background view's position
+    // initializes the position
+    HMTableViewCellBackgroundViewPosition position = HMTableViewCellBackgroundViewPositionGroupedMiddle;
+
+    // in case the table has a plain style
     if(tableView.style == UITableViewStylePlain) {
-        backgroundView.position = HMTableViewCellBackgroundViewPositionPlain;
-    } else if(row == 0 && numberRows == 1) {
-        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedSingle;
-    } else if(row == 0) {
-        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedTop;
-    } else if(row == numberRows - 1) {
-        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedBottom;
-    } else {
-        backgroundView.position = HMTableViewCellBackgroundViewPositionGroupedMiddle;
+        position = HMTableViewCellBackgroundViewPositionPlain;
     }
+    // in case there is only one row
+    else if(row == 0 && numberRows == 1) {
+        position = HMTableViewCellBackgroundViewPositionGroupedSingle;
+    }
+    // in case there is more than one
+    // row and this is the first one
+    else if(row == 0) {
+        position = HMTableViewCellBackgroundViewPositionGroupedTop;
+    }
+    // in case this is the last row
+    else if(row == numberRows - 1) {
+        position = HMTableViewCellBackgroundViewPositionGroupedBottom;
+    }
+
+    // updates the background views' positions
+    backgroundView.position = position;
+    selectedBackgroundView.position = position;
 }
 
 @end

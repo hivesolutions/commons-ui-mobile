@@ -71,18 +71,12 @@
 }
 
 - (void)initStructures {
-    // creates the default gradient colors
-    UIColor *topGradientColor = [UIColor colorWithRed:0.66 green:0.85 blue:0.36 alpha:1];
-    UIColor *bottomGradientColor = [UIColor colorWithRed:0.23 green:0.62 blue:0.27 alpha:1];
-    NSArray *defaultGradientColors = [NSArray arrayWithObjects:topGradientColor, bottomGradientColor, nil];
-
     // creates the default border color
     UIColor *defaultBorderColor = [UIColor grayColor];
 
     // sets the default values
     self.opaque = NO;
     self.position = HMTableViewCellBackgroundViewPositionPlain;
-    self.gradientColors = defaultGradientColors;
     self.cornerRadius = DEFAULT_CORNER_RADIUS;
     self.borderColor = defaultBorderColor;
     self.topSeparatorStyle = HMTableViewCellBackgroundViewSeparatorStylePlain;

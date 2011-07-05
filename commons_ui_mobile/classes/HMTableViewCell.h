@@ -62,6 +62,8 @@
     NSString *_name;
     UIFont *_nameFont;
     UIColor *_nameColor;
+    NSArray *_backgroundColors;
+    NSArray *_selectedBackgroundColors;
     BOOL _selectable;
     BOOL _selectableName;
     float _height;
@@ -115,6 +117,16 @@
  * The table cell's description color.
  */
 @property (retain) UIColor *descriptionColor;
+
+/**
+ * The table cell's background colors.
+ */
+@property (retain) NSArray *backgroundColors;
+
+/**
+ * The table cell's selected background colors.
+ */
+@property (retain) NSArray *selectedBackgroundColors;
 
 /**
  * Indicates if the button is
