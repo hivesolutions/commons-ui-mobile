@@ -93,17 +93,17 @@ typedef enum  {
     HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
     HMTableViewCellVerticalAnchor _nameVerticalAnchor;
     UIColor *_borderColor;
+    NSArray *_backgroundColors;
     UIColor *_backgroundTopSeparatorColor;
     UIColor *_backgroundBottomSeparatorColor;
-    UIColor *_selectedBackgroundTopSeparatorColor;
-    UIColor *_selectedBackgroundBottomSeparatorColor;
     HMTableViewCellBackgroundViewSeparatorStyle _backgroundTopSeparatorStyle;
     HMTableViewCellBackgroundViewSeparatorStyle _backgroundBottomSeparatorStyle;
+    UIColor *_selectedBorderColor;
+    NSArray *_selectedBackgroundColors;
+    UIColor *_selectedBackgroundTopSeparatorColor;
+    UIColor *_selectedBackgroundBottomSeparatorColor;
     HMTableViewCellBackgroundViewSeparatorStyle _selectedBackgroundTopSeparatorStyle;
     HMTableViewCellBackgroundViewSeparatorStyle _selectedBackgroundBottomSeparatorStyle;
-    UIColor *_selectedBorderColor;
-    NSArray *_backgroundColors;
-    NSArray *_selectedBackgroundColors;
     BOOL _selectable;
     BOOL _selectableName;
     float _height;
@@ -215,6 +215,11 @@ typedef enum  {
 @property (retain) UIColor *borderColor;
 
 /**
+ * The table cell's background colors.
+ */
+@property (retain) NSArray *backgroundColors;
+
+/**
  * The background top separator color.
  */
 @property (retain) UIColor *backgroundTopSeparatorColor;
@@ -223,16 +228,6 @@ typedef enum  {
  * The background bottom separator color.
  */
 @property (retain) UIColor *backgroundBottomSeparatorColor;
-
-/**
- * The selected background top separator color.
- */
-@property (retain) UIColor *selectedBackgroundTopSeparatorColor;
-
-/**
- * The selected background bottom separator color.
- */
-@property (retain) UIColor *selectedBackgroundBottomSeparatorColor;
 
 /**
  * The background top separator style.
@@ -245,6 +240,28 @@ typedef enum  {
 @property (assign) HMTableViewCellBackgroundViewSeparatorStyle backgroundBottomSeparatorStyle;
 
 /**
+ * The border color of the table
+ * cell when it is selected.
+ */
+@property (retain) UIColor *selectedBorderColor;
+
+/**
+ * The table cell's background colors
+ * when it is selected.
+ */
+@property (retain) NSArray *selectedBackgroundColors;
+
+/**
+ * The selected background top separator color.
+ */
+@property (retain) UIColor *selectedBackgroundTopSeparatorColor;
+
+/**
+ * The selected background bottom separator color.
+ */
+@property (retain) UIColor *selectedBackgroundBottomSeparatorColor;
+
+/**
  * The selected background top separator style.
  */
 @property (assign) HMTableViewCellBackgroundViewSeparatorStyle selectedBackgroundTopSeparatorStyle;
@@ -253,23 +270,6 @@ typedef enum  {
  * The selected background bottom separator style.
  */
 @property (assign) HMTableViewCellBackgroundViewSeparatorStyle selectedBackgroundBottomSeparatorStyle;
-
-/**
- * The border color of the table
- * cell when it is selected.
- */
-@property (retain) UIColor *selectedBorderColor;
-
-/**
- * The table cell's background colors.
- */
-@property (retain) NSArray *backgroundColors;
-
-/**
- * The table cell's background colors
- * when it is selected.
- */
-@property (retain) NSArray *selectedBackgroundColors;
 
 /**
  * Indicates if the button is
