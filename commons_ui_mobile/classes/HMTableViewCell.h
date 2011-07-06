@@ -52,6 +52,26 @@
 // avoids circular dependency
 @class HMItemTableView;
 
+/**
+ * Enumeration defining the various
+ * horizontal anchors.
+ */
+typedef enum  {
+    HMTableViewCellHorizontalAnchorNone = 1,
+    HMTableViewCellHorizontalAnchorLeft,
+    HMTableViewCellHorizontalAnchorRight
+} HMTableViewCellHorizontalAnchor;
+
+/**
+ * Enumeration defining the various
+ * vertical anchors.
+ */
+typedef enum  {
+    HMTableViewCellVerticalAnchorNone = 1,
+    HMTableViewCellVerticalAnchorTop,
+    HMTableViewCellVerticalAnchorBottom
+} HMTableViewCellVerticalAnchor;
+
 @interface HMTableViewCell : UITableViewCell<HMView> {
     @protected
     NSString *_description;
@@ -59,9 +79,19 @@
     @private
     UIFont *_descriptionFont;
     UIColor *_descriptionColor;
+    NSUInteger _descriptionNumberLines;
+    UITextAlignment _descriptionAlignment;
+    NSValue *_descriptionPosition;
+    HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
+    HMTableViewCellVerticalAnchor _descriptionVerticalAnchor;
     NSString *_name;
     UIFont *_nameFont;
     UIColor *_nameColor;
+    NSUInteger _nameNumberLines;
+    UITextAlignment _nameAlignment;
+    NSValue *_namePosition;
+    HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
+    HMTableViewCellVerticalAnchor _nameVerticalAnchor;
     UIColor *_borderColor;
     UIColor *_selectedBorderColor;
     NSArray *_backgroundColors;
@@ -98,6 +128,31 @@
 @property (retain) UIColor *nameColor;
 
 /**
+ * The table cell's name number of lines.
+ */
+@property (assign) NSUInteger nameNumberLines;
+
+/**
+ * The table cell's name alignment.
+ */
+@property (assign) UITextAlignment nameAlignment;
+
+/**
+ * The table cell's name position.
+ */
+@property (retain) NSValue *namePosition;
+
+/**
+ * The table cell's name horizontal anchor.
+ */
+@property (assign) HMTableViewCellHorizontalAnchor nameHorizontalAnchor;
+
+/**
+ * The table cell's name vertical anchor.
+ */
+@property (assign) HMTableViewCellVerticalAnchor nameVerticalAnchor;
+
+/**
  * The cell's description that will be set
  * as its detail text label.
  */
@@ -119,6 +174,32 @@
  * The table cell's description color.
  */
 @property (retain) UIColor *descriptionColor;
+
+/**
+ * The table cell's description number of lines.
+ */
+@property (assign) NSUInteger descriptionNumberLines;
+
+/**
+ * The table cell's description text alignment.
+ */
+@property (assign) UITextAlignment descriptionAlignment;
+
+/**
+ * The table cell's description position,
+ * description position.
+ */
+@property (retain) NSValue *descriptionPosition;
+
+/**
+ * The table cell's description horizontal anchor.
+ */
+@property (assign) HMTableViewCellHorizontalAnchor descriptionHorizontalAnchor;
+
+/**
+ * The table cell's description vertical anchor.
+ */
+@property (assign) HMTableViewCellVerticalAnchor descriptionVerticalAnchor;
 
 /**
  * The table cell's border color.

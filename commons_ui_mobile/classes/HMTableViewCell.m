@@ -30,8 +30,18 @@
 @synthesize name = _name;
 @synthesize nameFont = _nameFont;
 @synthesize nameColor = _nameColor;
+@synthesize nameNumberLines = _nameNumberLines;
+@synthesize nameAlignment = _nameAlignment;
+@synthesize namePosition = _namePosition;
+@synthesize nameHorizontalAnchor = _nameHorizontalAnchor;
+@synthesize nameVerticalAnchor = _nameVerticalAnchor;
 @synthesize descriptionFont = _descriptionFont;
 @synthesize descriptionColor = _descriptionColor;
+@synthesize descriptionNumberLines = _descriptionNumberLines;
+@synthesize descriptionAlignment = _descriptionAlignment;
+@synthesize descriptionPosition = _descriptionPosition;
+@synthesize descriptionHorizontalAnchor = _descriptionHorizontalAnchor;
+@synthesize descriptionVerticalAnchor = _descriptionVerticalAnchor;
 @synthesize borderColor = _borderColor;
 @synthesize selectedBorderColor = _selectedBorderColor;
 @synthesize backgroundColors = _backgroundColors;
@@ -72,6 +82,9 @@
     // releases the name color
     [_nameColor release];
 
+    // releases the name position
+    [_namePosition release];
+
     // releases the description
     [_description release];
 
@@ -80,6 +93,9 @@
 
     // releases the description color
     [_descriptionColor release];
+
+    // releases the description position
+    [_descriptionPosition release];
 
     // releases the border color
     [_borderColor release];
@@ -406,15 +422,131 @@
 }
 
 - (void)updateNameLabel:(UILabel *)nameLabel {
-    // sets the label fonts and colors
+    // configures the name label
     nameLabel.font = self.nameFont;
     nameLabel.textColor = self.nameColor;
+    nameLabel.textAlignment = self.nameAlignment;
+    nameLabel.numberOfLines = self.nameNumberLines;
+
+    // retrieves the name label frame
+    CGRect nameLabelFrame = nameLabel.frame;
+
+    // in case the name position is not defined
+    if(self.namePosition) {
+        // retrieves the name position
+        CGPoint namePosition = self.namePosition.CGPointValue;
+
+        // updates the name label's horizontal positions
+        // according to the type of horizontal anchoring
+        switch(self.nameHorizontalAnchor) {
+            // in case the labels should anchor to the left
+            case HMTableViewCellHorizontalAnchorLeft:
+                nameLabelFrame.origin.x = self.frame.origin.x + namePosition.x;
+                break;
+
+            // in case the labels should anchor to the top
+            case HMTableViewCellHorizontalAnchorRight:
+                nameLabelFrame.origin.x = self.frame.origin.x + self.frame.size.width - nameLabelFrame.size.width - namePosition.x;
+                break;
+
+            // in case no anchoring is defined
+            case HMTableViewCellHorizontalAnchorNone:
+                nameLabelFrame.origin.x = namePosition.x;
+                break;
+        }
+
+        // updates the name label's vertical positions
+        // according to the type of vertical anchoring
+        switch(self.nameVerticalAnchor) {
+            // in case the labels should anchor to the top
+            case HMTableViewCellVerticalAnchorTop:
+                nameLabelFrame.origin.y = self.frame.origin.y + namePosition.y;
+                break;
+
+            // in case the labels should anchor to the bottom
+            case HMTableViewCellVerticalAnchorBottom:
+                nameLabelFrame.origin.y = self.frame.origin.y + self.frame.size.height - namePosition.y;
+                break;
+
+            // in case no anchoring is defined
+            case HMTableViewCellVerticalAnchorNone:
+                nameLabelFrame.origin.y = namePosition.y;
+                break;
+        }
+    }
+
+    // sets the updated label frame
+    nameLabel.frame = nameLabelFrame;
 }
 
 - (void)updateDescriptionLabel:(UILabel *)descriptionLabel {
-    // sets the label fonts and colors
+    // configures the description label
     descriptionLabel.font = self.descriptionFont;
     descriptionLabel.textColor = self.descriptionColor;
+    descriptionLabel.textAlignment = self.descriptionAlignment;
+    descriptionLabel.numberOfLines = self.descriptionNumberLines;
+
+    // retrieves the description label frame
+    CGRect descriptionLabelFrame = descriptionLabel.frame;
+
+    // in case the description position is not defined
+    if(self.descriptionPosition) {
+        // retrieves the description position
+        CGPoint descriptionPosition = self.descriptionPosition.CGPointValue;
+
+        // updates the description label's horizontal positions
+        // according to the type of horizontal anchoring
+        switch(self.descriptionHorizontalAnchor) {
+            // in case the labels should anchor to the left
+            case HMTableViewCellHorizontalAnchorLeft:
+                descriptionLabelFrame.origin.x = self.frame.origin.x + descriptionPosition.x;
+
+                // breaks
+                break;
+
+            // in case the labels should anchor to the top
+            case HMTableViewCellHorizontalAnchorRight:
+                descriptionLabelFrame.origin.x = self.frame.origin.x + self.frame.size.width - descriptionLabelFrame.size.width - descriptionPosition.x;
+
+                // breaks
+                break;
+
+            // in case no anchoring is defined
+            case HMTableViewCellHorizontalAnchorNone:
+                descriptionLabelFrame.origin.x = descriptionPosition.x;
+
+                // breaks
+                break;
+        }
+
+        // updates the description label's vertical positions
+        // according to the type of vertical anchoring
+        switch(self.descriptionVerticalAnchor) {
+            // in case the labels should anchor to the top
+            case HMTableViewCellVerticalAnchorTop:
+                descriptionLabelFrame.origin.y = self.frame.origin.y + descriptionPosition.y;
+
+                // breaks
+                break;
+
+            // in case the labels should anchor to the bottom
+            case HMTableViewCellVerticalAnchorBottom:
+                descriptionLabelFrame.origin.y = self.frame.origin.y + self.frame.size.height - descriptionPosition.y;
+
+                // breaks
+                break;
+
+            // in case no anchoring is defined
+            case HMTableViewCellVerticalAnchorNone:
+                descriptionLabelFrame.origin.y = descriptionPosition.y;
+
+                // breaks
+                break;
+        }
+    }
+
+    // sets the updated label frame
+    descriptionLabel.frame = descriptionLabelFrame;
 }
 
 - (void)updateAccessoryView {
