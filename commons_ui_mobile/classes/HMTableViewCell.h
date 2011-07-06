@@ -93,6 +93,14 @@ typedef enum  {
     HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
     HMTableViewCellVerticalAnchor _nameVerticalAnchor;
     UIColor *_borderColor;
+    UIColor *_backgroundTopSeparatorColor;
+    UIColor *_backgroundBottomSeparatorColor;
+    UIColor *_selectedBackgroundTopSeparatorColor;
+    UIColor *_selectedBackgroundBottomSeparatorColor;
+    HMTableViewCellBackgroundViewSeparatorStyle _backgroundTopSeparatorStyle;
+    HMTableViewCellBackgroundViewSeparatorStyle _backgroundBottomSeparatorStyle;
+    HMTableViewCellBackgroundViewSeparatorStyle _selectedBackgroundTopSeparatorStyle;
+    HMTableViewCellBackgroundViewSeparatorStyle _selectedBackgroundBottomSeparatorStyle;
     UIColor *_selectedBorderColor;
     NSArray *_backgroundColors;
     NSArray *_selectedBackgroundColors;
@@ -205,6 +213,46 @@ typedef enum  {
  * The table cell's border color.
  */
 @property (retain) UIColor *borderColor;
+
+/**
+ * The background top separator color.
+ */
+@property (retain) UIColor *backgroundTopSeparatorColor;
+
+/**
+ * The background bottom separator color.
+ */
+@property (retain) UIColor *backgroundBottomSeparatorColor;
+
+/**
+ * The selected background top separator color.
+ */
+@property (retain) UIColor *selectedBackgroundTopSeparatorColor;
+
+/**
+ * The selected background bottom separator color.
+ */
+@property (retain) UIColor *selectedBackgroundBottomSeparatorColor;
+
+/**
+ * The background top separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle backgroundTopSeparatorStyle;
+
+/**
+ * The background bottom separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle backgroundBottomSeparatorStyle;
+
+/**
+ * The selected background top separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle selectedBackgroundTopSeparatorStyle;
+
+/**
+ * The selected background bottom separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle selectedBackgroundBottomSeparatorStyle;
 
 /**
  * The border color of the table

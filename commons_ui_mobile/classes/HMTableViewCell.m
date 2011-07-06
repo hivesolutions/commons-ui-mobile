@@ -43,6 +43,14 @@
 @synthesize descriptionHorizontalAnchor = _descriptionHorizontalAnchor;
 @synthesize descriptionVerticalAnchor = _descriptionVerticalAnchor;
 @synthesize borderColor = _borderColor;
+@synthesize backgroundTopSeparatorColor = _backgroundTopSeparatorColor;
+@synthesize backgroundBottomSeparatorColor = _backgroundBottomSeparatorColor;
+@synthesize selectedBackgroundTopSeparatorColor = _selectedBackgroundTopSeparatorColor;
+@synthesize selectedBackgroundBottomSeparatorColor = _selectedBackgroundBottomSeparatorColor;
+@synthesize backgroundTopSeparatorStyle = _backgroundTopSeparatorStyle;
+@synthesize backgroundBottomSeparatorStyle =  _backgroundBottomSeparatorStyle;
+@synthesize selectedBackgroundTopSeparatorStyle =  _selectedBackgroundTopSeparatorStyle;
+@synthesize selectedBackgroundBottomSeparatorStyle =  _selectedBackgroundBottomSeparatorStyle;
 @synthesize selectedBorderColor = _selectedBorderColor;
 @synthesize backgroundColors = _backgroundColors;
 @synthesize selectedBackgroundColors = _selectedBackgroundColors;
@@ -102,6 +110,18 @@
 
     // releases the selected border color
     [_selectedBorderColor release];
+
+    // releases the background top separator color
+    [_backgroundTopSeparatorColor release];
+
+    // releases the background bottom separator color
+    [_backgroundBottomSeparatorColor release];
+
+    // releases the selected background top separator color
+    [_selectedBackgroundTopSeparatorColor release];
+
+    // releases the selected background bottom separator color
+    [_selectedBackgroundBottomSeparatorColor release];
 
     // releases the background colors
     [_backgroundColors release];
@@ -281,6 +301,162 @@
 
     // sets the border color
     backgroundView.borderColor = borderColor;
+}
+
+- (UIColor *)backgroundTopSeparatorColor {
+    return _backgroundTopSeparatorColor;
+}
+
+- (void)setBackgroundTopSeparatorColor:(UIColor *)backgroundTopSeparatorColor {
+    // in case the object is the same
+    if(backgroundTopSeparatorColor == _backgroundTopSeparatorColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_backgroundTopSeparatorColor release];
+
+    // sets and retains the object
+    _backgroundTopSeparatorColor = [backgroundTopSeparatorColor retain];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the top separator color in the background view
+    backgroundView.topSeparatorColor = backgroundTopSeparatorColor;
+}
+
+- (UIColor *)backgroundBottomSeparatorColor {
+    return _backgroundBottomSeparatorColor;
+}
+
+- (void)setBackgroundBottomSeparatorColor:(UIColor *)backgroundBottomSeparatorColor {
+    // in case the object is the same
+    if(backgroundBottomSeparatorColor == _backgroundBottomSeparatorColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_backgroundBottomSeparatorColor release];
+
+    // sets and retains the object
+    _backgroundBottomSeparatorColor = [backgroundBottomSeparatorColor retain];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the bottom separator color in the background view
+    backgroundView.bottomSeparatorColor = backgroundBottomSeparatorColor;
+}
+
+- (UIColor *)selectedBackgroundTopSeparatorColor {
+    return _selectedBackgroundTopSeparatorColor;
+}
+
+- (void)setSelectedBackgroundTopSeparatorColor:(UIColor *)selectedBackgroundTopSeparatorColor {
+    // in case the object is the same
+    if(selectedBackgroundTopSeparatorColor == _selectedBackgroundTopSeparatorColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_selectedBackgroundTopSeparatorColor release];
+
+    // sets and retains the object
+    _selectedBackgroundTopSeparatorColor = [selectedBackgroundTopSeparatorColor retain];
+
+    // retrieves the selected background view
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
+
+    // sets the top separator color in the selected background view
+    selectedBackgroundView.topSeparatorColor = selectedBackgroundTopSeparatorColor;
+}
+
+- (UIColor *)selectedBackgroundBottomSeparatorColor {
+    return _selectedBackgroundBottomSeparatorColor;
+}
+
+- (void)setSelectedBackgroundBottomSeparatorColor:(UIColor *)selectedBackgroundBottomSeparatorColor {
+    // in case the object is the same
+    if(selectedBackgroundBottomSeparatorColor == _selectedBackgroundBottomSeparatorColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_selectedBackgroundBottomSeparatorColor release];
+
+    // sets and retains the object
+    _selectedBackgroundBottomSeparatorColor = [selectedBackgroundBottomSeparatorColor retain];
+
+    // retrieves the selected background view
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
+
+    // sets the bottom separator color in the selected background view
+    selectedBackgroundView.bottomSeparatorColor = selectedBackgroundBottomSeparatorColor;
+}
+
+- (HMTableViewCellBackgroundViewSeparatorStyle)backgroundTopSeparatorStyle {
+    return _backgroundTopSeparatorStyle;
+}
+
+- (void)setBackgroundTopSeparatorStyle:(HMTableViewCellBackgroundViewSeparatorStyle)backgroundTopSeparatorStyle {
+    // sets the value
+    _backgroundTopSeparatorStyle = backgroundTopSeparatorStyle;
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the top separator style in the background view
+    backgroundView.topSeparatorStyle = backgroundTopSeparatorStyle;
+}
+
+- (HMTableViewCellBackgroundViewSeparatorStyle)backgroundBottomSeparatorStyle {
+    return _backgroundBottomSeparatorStyle;
+}
+
+- (void)setBackgroundBottomSeparatorStyle:(HMTableViewCellBackgroundViewSeparatorStyle)backgroundBottomSeparatorStyle {
+    // sets the value
+    _backgroundBottomSeparatorStyle = backgroundBottomSeparatorStyle;
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the bottom separator style in the background view
+    backgroundView.bottomSeparatorStyle = backgroundBottomSeparatorStyle;
+}
+
+- (HMTableViewCellBackgroundViewSeparatorStyle)selectedBackgroundTopSeparatorStyle {
+    return _selectedBackgroundTopSeparatorStyle;
+}
+
+- (void)setSelectedBackgroundTopSeparatorStyle:(HMTableViewCellBackgroundViewSeparatorStyle)selectedBackgroundTopSeparatorStyle {
+    // sets the value
+    _selectedBackgroundTopSeparatorStyle = selectedBackgroundTopSeparatorStyle;
+
+    // retrieves the selected background view
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
+
+    // sets the top separator style in the selected background view
+    selectedBackgroundView.topSeparatorStyle = selectedBackgroundTopSeparatorStyle;
+}
+
+- (HMTableViewCellBackgroundViewSeparatorStyle)selectedBackgroundBottomSeparatorStyle {
+    return _selectedBackgroundBottomSeparatorStyle;
+}
+
+- (void)setSelectedBackgroundBottomSeparatorStyle:(HMTableViewCellBackgroundViewSeparatorStyle)selectedBackgroundBottomSeparatorStyle {
+    // sets the value
+    _selectedBackgroundBottomSeparatorStyle = selectedBackgroundBottomSeparatorStyle;
+
+    // retrieves the selected background view
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
+
+    // sets the bottom separator style in the selected background view
+    selectedBackgroundView.bottomSeparatorStyle = selectedBackgroundBottomSeparatorStyle;
 }
 
 - (UIColor *)selectedBorderColor {
