@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4631755113C47B30000400B8 /* HMSubDescriptionTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 4631754F13C47B30000400B8 /* HMSubDescriptionTableViewCell.h */; };
+		4631755213C47B30000400B8 /* HMSubDescriptionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4631755013C47B30000400B8 /* HMSubDescriptionTableViewCell.m */; };
 		4668738013C21A3F00FC3531 /* HMAccessoryView.h in Headers */ = {isa = PBXBuildFile; fileRef = 4668737E13C21A3F00FC3531 /* HMAccessoryView.h */; };
 		4668738113C21A3F00FC3531 /* HMAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4668737F13C21A3F00FC3531 /* HMAccessoryView.m */; };
 		4668738413C21B9D00FC3531 /* HMLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4668738213C21B9D00FC3531 /* HMLabel.h */; };
@@ -117,6 +119,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4631754F13C47B30000400B8 /* HMSubDescriptionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMSubDescriptionTableViewCell.h; path = classes/HMSubDescriptionTableViewCell.h; sourceTree = "<group>"; };
+		4631755013C47B30000400B8 /* HMSubDescriptionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMSubDescriptionTableViewCell.m; path = classes/HMSubDescriptionTableViewCell.m; sourceTree = "<group>"; };
 		4668737E13C21A3F00FC3531 /* HMAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMAccessoryView.h; path = classes/HMAccessoryView.h; sourceTree = "<group>"; };
 		4668737F13C21A3F00FC3531 /* HMAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMAccessoryView.m; path = classes/HMAccessoryView.m; sourceTree = "<group>"; };
 		4668738213C21B9D00FC3531 /* HMLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMLabel.h; path = classes/HMLabel.h; sourceTree = "<group>"; };
@@ -593,6 +597,8 @@
 		C2D08D6C13449A700057E3FE /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				4631754F13C47B30000400B8 /* HMSubDescriptionTableViewCell.h */,
+				4631755013C47B30000400B8 /* HMSubDescriptionTableViewCell.m */,
 				A53B0573132F97C40064BCA5 /* HMTableViewCell.h */,
 				A53B0574132F97C40064BCA5 /* HMTableViewCell.m */,
 			);
@@ -881,6 +887,7 @@
 				4668738413C21B9D00FC3531 /* HMLabel.h in Headers */,
 				466873B113C2417900FC3531 /* HMGradientView.h in Headers */,
 				466873B713C241E300FC3531 /* HMTabBarController.h in Headers */,
+				4631755113C47B30000400B8 /* HMSubDescriptionTableViewCell.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -975,6 +982,7 @@
 				4668738513C21B9D00FC3531 /* HMLabel.m in Sources */,
 				466873B213C2417900FC3531 /* HMGradientView.m in Sources */,
 				466873B813C241E300FC3531 /* HMTabBarController.m in Sources */,
+				4631755213C47B30000400B8 /* HMSubDescriptionTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

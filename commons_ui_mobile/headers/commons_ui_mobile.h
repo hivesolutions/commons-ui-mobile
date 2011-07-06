@@ -80,3 +80,4 @@
 #import "../classes/HMAccessoryView.h"
 #import "../classes/HMGradientView.h"
 #import "../classes/HMTabBarController.h"
+#import "../classes/HMSubDescriptionTableViewCell.h"
