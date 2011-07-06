@@ -25,7 +25,7 @@
 
 #import "Dependencies.h"
 
-#import "HMBadgeLabel.h"
+#import "HMAccessoryView.h"
 #import "HMTableViewCellBackgroundView.h"
 
 /**
@@ -92,12 +92,6 @@ typedef enum  {
     NSValue *_namePosition;
     HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
     HMTableViewCellVerticalAnchor _nameVerticalAnchor;
-    UIColor *_borderColor;
-    NSArray *_backgroundColors;
-    UIColor *_backgroundTopSeparatorColor;
-    UIColor *_backgroundBottomSeparatorColor;
-    HMTableViewCellBackgroundViewSeparatorStyle _backgroundTopSeparatorStyle;
-    HMTableViewCellBackgroundViewSeparatorStyle _backgroundBottomSeparatorStyle;
     UIColor *_selectedBorderColor;
     NSArray *_selectedBackgroundColors;
     UIColor *_selectedBackgroundTopSeparatorColor;
@@ -208,36 +202,6 @@ typedef enum  {
  * The table cell's description vertical anchor.
  */
 @property (assign) HMTableViewCellVerticalAnchor descriptionVerticalAnchor;
-
-/**
- * The table cell's border color.
- */
-@property (retain) UIColor *borderColor;
-
-/**
- * The table cell's background colors.
- */
-@property (retain) NSArray *backgroundColors;
-
-/**
- * The background top separator color.
- */
-@property (retain) UIColor *backgroundTopSeparatorColor;
-
-/**
- * The background bottom separator color.
- */
-@property (retain) UIColor *backgroundBottomSeparatorColor;
-
-/**
- * The background top separator style.
- */
-@property (assign) HMTableViewCellBackgroundViewSeparatorStyle backgroundTopSeparatorStyle;
-
-/**
- * The background bottom separator style.
- */
-@property (assign) HMTableViewCellBackgroundViewSeparatorStyle backgroundBottomSeparatorStyle;
 
 /**
  * The border color of the table
@@ -394,8 +358,8 @@ typedef enum  {
 - (void)updateAccessoryView;
 
 /**
- * Updates the background view's position.
+ * Updates the cell's position.
  */
-- (void)updateBackgroundViewPosition;
+- (void)updatePosition;
 
 @end

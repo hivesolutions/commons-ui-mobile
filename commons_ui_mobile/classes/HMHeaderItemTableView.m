@@ -541,7 +541,6 @@
         tableViewCell.editAlways = YES;
         tableViewCell.descriptionFont = [UIFont fontWithName:@"Helvetica-Bold" size:15];
         tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
-        tableViewCell.backgroundColor = [UIColor colorWithRed:0.96 green:0.96 blue:0.96 alpha:1];
 
         // forces the cell to be constructed in
         // edit mode, since when set editing is
@@ -553,10 +552,12 @@
         if(indexPath.row == 0) {
             tableViewCell.description = self.title;
             tableViewCell.defaultValue = titleItem.defaultValue;
+            tableViewCell.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0];
             self.titleTableViewCell = tableViewCell;
         } else {
             tableViewCell.description = self.subTitle;
             tableViewCell.defaultValue = subTitleItem.defaultValue;
+            tableViewCell.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0];
             self.subTitleTableViewCell = tableViewCell;
         }
 

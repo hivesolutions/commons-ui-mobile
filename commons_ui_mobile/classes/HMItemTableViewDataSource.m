@@ -187,13 +187,13 @@
 
         // generates the component
         tableViewCell = (HMTableViewCell *) [tableCellItem generateComponent];
+
+        // inserts the item cell into the cell list
+        [self.cellList addObject:tableViewCell];
+
+        // inserts the item cell identifier association into the map
+        [self.cellIdentifierMap setObject:tableViewCell forKey:tableCellItem.identifier];
     }
-
-    // inserts the item cell into the cell list
-    [self.cellList addObject:tableViewCell];
-
-    // inserts the item cell identifier association into the map
-    [self.cellIdentifierMap setObject:tableViewCell forKey:tableCellItem.identifier];
 
     // returns the cell
     return tableViewCell;

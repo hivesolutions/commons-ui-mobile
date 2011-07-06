@@ -169,10 +169,21 @@
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(cell == nil) {
+        // creates the colors
+        UIColor *lightGreenColor = [UIColor colorWithRed:0.66 green:0.85 blue:0.36 alpha:1];
+        UIColor *darkGreenColor = [UIColor colorWithRed:0.23 green:0.62 blue:0.27 alpha:1];
+
+        // creates the selected background colors
+        NSArray *selectedBackgroundColors = [[NSArray alloc] initWithObjects:lightGreenColor, darkGreenColor, nil];
+
         // creates the new cell with the given reuse identifier
-        UITableViewCell *tableViewCell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+        HMTableViewCell *tableViewCell = [[[HMTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
         tableViewCell.textLabel.font = [UIFont fontWithName:@"Helvetica-Bold" size:18];
+        tableViewCell.selectedBackgroundColors = selectedBackgroundColors;
         cell = tableViewCell;
+
+        // releases the selected background colors
+        [selectedBackgroundColors release];
     }
 
     // retrieves the index path row
