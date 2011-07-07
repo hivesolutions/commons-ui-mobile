@@ -528,20 +528,18 @@
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
-        // creates the table view cell
-        tableViewCell = [[HMEditTableViewCell alloc] init];
-
         // retrieves the title and subtitle items
         HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
-
 
         // sets each table view cell's value and stores it
         if(indexPath.row == 0) {
             // retrieves the title item
             HMItem *titleItem = [headerNamedItemGroup getItem:@"title"];
 
+            // generates the component
             tableViewCell = (HMEditTableViewCell *) [titleItem generateComponent];
 
+            // sets the table view cell to always be in edit mode
             tableViewCell.editAlways = YES;
 
             // forces the cell to be constructed in
@@ -550,13 +548,16 @@
             // constructed yet
             [tableViewCell changeEditing:YES commit:NO];
 
+            // sets the title table view cell
             self.titleTableViewCell = tableViewCell;
         } else {
             // retrieves the subtitle item
             HMItem *subTitleItem = [headerNamedItemGroup getItem:@"subTitle"];
 
+            // Generates the component
             tableViewCell = (HMEditTableViewCell *) [subTitleItem generateComponent];
 
+            // sets the table view cell to always be in edit mode
             tableViewCell.editAlways = YES;
 
             // forces the cell to be constructed in
@@ -565,14 +566,12 @@
             // constructed yet
             [tableViewCell changeEditing:YES commit:NO];
 
+            // sets the table view cell as the subtitle table view cell
             self.subTitleTableViewCell = tableViewCell;
         }
 
         // adds the table view cell to the cell list
         [self.cellList addObject:tableViewCell];
-
-        // releases the table view cell
-        [tableViewCell release];
     }
 
     // returns the cell
