@@ -28,7 +28,6 @@
 
 // class includes
 #import "../classes/HMView.h"
-#import "../classes/HMBadgeLabel.h"
 #import "../classes/HMPlainDateTableViewCell.h"
 #import "../classes/HMColumnEditTableViewCell.h"
 #import "../classes/HMColumnStringTableViewCell.h"

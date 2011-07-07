@@ -523,41 +523,48 @@
     static NSString *cellIdentifier = @"Cell";
 
     // tries to retrives the cell from cache (reusable)
-    HMPlainStringTableViewCell *tableViewCell = (HMPlainStringTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    HMEditTableViewCell *tableViewCell = (HMEditTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
     // in case the cell is not defined in the cuurrent cache
     // need to create a new cell
     if(tableViewCell == nil) {
         // creates the table view cell
-        tableViewCell = [[HMPlainStringTableViewCell alloc] init];
+        tableViewCell = [[HMEditTableViewCell alloc] init];
 
         // retrieves the title and subtitle items
         HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
-        HMItem *titleItem = [headerNamedItemGroup getItem:@"title"];
-        HMItem *subTitleItem = [headerNamedItemGroup getItem:@"subTitle"];
 
-        // configures the table view cell
-        tableViewCell.clearable = YES;
-        tableViewCell.editAlways = YES;
-        tableViewCell.descriptionFont = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-        tableViewCell.selectionStyle = UITableViewCellSelectionStyleNone;
-
-        // forces the cell to be constructed in
-        // edit mode, since when set editing is
-        // first called the cells won't be
-        // constructed yet
-        [tableViewCell changeEditing:YES commit:NO];
 
         // sets each table view cell's value and stores it
         if(indexPath.row == 0) {
-            tableViewCell.description = self.title;
-            tableViewCell.defaultValue = titleItem.defaultValue;
-            tableViewCell.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0];
+            // retrieves the title item
+            HMItem *titleItem = [headerNamedItemGroup getItem:@"title"];
+
+            tableViewCell = (HMEditTableViewCell *) [titleItem generateComponent];
+
+            tableViewCell.editAlways = YES;
+
+            // forces the cell to be constructed in
+            // edit mode, since when set editing is
+            // first called the cells won't be
+            // constructed yet
+            [tableViewCell changeEditing:YES commit:NO];
+
             self.titleTableViewCell = tableViewCell;
         } else {
-            tableViewCell.description = self.subTitle;
-            tableViewCell.defaultValue = subTitleItem.defaultValue;
-            tableViewCell.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0];
+            // retrieves the subtitle item
+            HMItem *subTitleItem = [headerNamedItemGroup getItem:@"subTitle"];
+
+            tableViewCell = (HMEditTableViewCell *) [subTitleItem generateComponent];
+
+            tableViewCell.editAlways = YES;
+
+            // forces the cell to be constructed in
+            // edit mode, since when set editing is
+            // first called the cells won't be
+            // constructed yet
+            [tableViewCell changeEditing:YES commit:NO];
+
             self.subTitleTableViewCell = tableViewCell;
         }
 

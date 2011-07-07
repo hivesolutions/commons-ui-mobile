@@ -35,7 +35,6 @@
 #import "HMEntityDelegate.h"
 #import "HMAuthenticationDelegate.h"
 #import "HMErrorAbstraction.h"
-#import "UIImage+HMImageDevice.h"
 
 @class HMEntityAbstraction;
 

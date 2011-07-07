@@ -34,8 +34,6 @@
 		A537556C13432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A537556813432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m */; };
 		A53B0577132F97C40064BCA5 /* HMTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A53B0573132F97C40064BCA5 /* HMTableViewCell.h */; };
 		A53B0578132F97C40064BCA5 /* HMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A53B0574132F97C40064BCA5 /* HMTableViewCell.m */; };
-		A5B56CBC133BAF890071763F /* HMBadgeLabel.h in Headers */ = {isa = PBXBuildFile; fileRef = A5B56CBA133BAF890071763F /* HMBadgeLabel.h */; };
-		A5B56CBD133BAF890071763F /* HMBadgeLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A5B56CBB133BAF890071763F /* HMBadgeLabel.m */; };
 		A5E648D913313BC800FE725A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E648D813313BC700FE725A /* CoreGraphics.framework */; };
 		A5E648DB13313BD000FE725A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5E648DA13313BD000FE725A /* QuartzCore.framework */; };
 		A5E648E913313F7100FE725A /* HMEditTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = A5E648E713313F6C00FE725A /* HMEditTableViewCell.h */; };
@@ -146,8 +144,6 @@
 		A537556813432D3F00D9A6A0 /* HMPlainMultilineStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMPlainMultilineStringTableViewCell.m; path = classes/HMPlainMultilineStringTableViewCell.m; sourceTree = "<group>"; };
 		A53B0573132F97C40064BCA5 /* HMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewCell.h; path = classes/HMTableViewCell.h; sourceTree = "<group>"; };
 		A53B0574132F97C40064BCA5 /* HMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCell.m; path = classes/HMTableViewCell.m; sourceTree = "<group>"; };
-		A5B56CBA133BAF890071763F /* HMBadgeLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMBadgeLabel.h; path = classes/HMBadgeLabel.h; sourceTree = "<group>"; };
-		A5B56CBB133BAF890071763F /* HMBadgeLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMBadgeLabel.m; path = classes/HMBadgeLabel.m; sourceTree = "<group>"; };
 		A5E648D813313BC700FE725A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		A5E648DA13313BD000FE725A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		A5E648E713313F6C00FE725A /* HMEditTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEditTableViewCell.h; path = classes/HMEditTableViewCell.h; sourceTree = "<group>"; };
@@ -814,8 +810,6 @@
 				4668738213C21B9D00FC3531 /* HMLabel.h */,
 				4668738313C21B9D00FC3531 /* HMLabel.m */,
 				C2B808BA1343E4EF00CAEC67 /* HMView.h */,
-				A5B56CBA133BAF890071763F /* HMBadgeLabel.h */,
-				A5B56CBB133BAF890071763F /* HMBadgeLabel.m */,
 				A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */,
 				A50E13EF1338ADD3006BDB18 /* HMRoundedCornerImageView.m */,
 			);
@@ -855,7 +849,6 @@
 				A5FA274F1338D53900DD428A /* HMPlainStringTableViewCell.h in Headers */,
 				C2DFF270133A044200E6E1D2 /* HMRemoteAbstraction.h in Headers */,
 				C2DFF276133A228600E6E1D2 /* HMRemoteDelegate.h in Headers */,
-				A5B56CBC133BAF890071763F /* HMBadgeLabel.h in Headers */,
 				C2C272C5133C05DA00D203C2 /* HMEntityAbstraction.h in Headers */,
 				C2C272C8133C06FB00D203C2 /* HMEntityDelegate.h in Headers */,
 				C2C498251341053200541D4C /* HMTableView.h in Headers */,
@@ -955,7 +948,6 @@
 				A5FA274C1338D52C00DD428A /* HMColumnStringTableViewCell.m in Sources */,
 				A5FA27501338D53900DD428A /* HMPlainStringTableViewCell.m in Sources */,
 				C2DFF271133A044200E6E1D2 /* HMRemoteAbstraction.m in Sources */,
-				A5B56CBD133BAF890071763F /* HMBadgeLabel.m in Sources */,
 				C2C272C6133C05DA00D203C2 /* HMEntityAbstraction.m in Sources */,
 				C2C498261341053200541D4C /* HMTableView.m in Sources */,
 				C2C4982B1341088D00541D4C /* HMTableViewController.m in Sources */,

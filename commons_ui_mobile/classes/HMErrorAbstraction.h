@@ -25,6 +25,10 @@
 
 #import "Dependencies.h"
 
+#import "HMAuthenticationDelegate.h"
+#import "HMApplicationDelegate.h"
+#import "HMAuthenticationViewController.h"
+
 @interface HMErrorAbstraction : NSObject {
 }
 

@@ -26,6 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMRemoteItemTableViewController.h"
+#import "HMHeaderItemTableView.h"
 
 /**
  * The default image quality to be used.

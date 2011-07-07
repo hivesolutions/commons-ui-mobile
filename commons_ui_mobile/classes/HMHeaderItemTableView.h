@@ -27,7 +27,7 @@
 
 #import "HMItemTableView.h"
 #import "HMRoundedCornerImageView.h"
-#import "HMPlainStringTableViewCell.h"
+#import "HMEditTableViewCell.h"
 
 /**
  * The number of sections in the header.
@@ -60,8 +60,8 @@
     UILabel *_subTitleLabel;
     UIImageView *_image;
     UIButton *_imageAddButton;
-    HMPlainStringTableViewCell *_titleTableViewCell;
-    HMPlainStringTableViewCell *_subTitleTableViewCell;
+    HMEditTableViewCell *_titleTableViewCell;
+    HMEditTableViewCell *_subTitleTableViewCell;
     HMTableView *_headerTableView;
     NSMutableArray *_cellList;
 }
@@ -114,12 +114,12 @@
 /**
  * The text field for the title.
  */
-@property (assign) HMPlainStringTableViewCell *titleTableViewCell;
+@property (assign) HMEditTableViewCell *titleTableViewCell;
 
 /**
  * The text field for the sub-title.
  */
-@property (assign) HMPlainStringTableViewCell *subTitleTableViewCell;
+@property (assign) HMEditTableViewCell *subTitleTableViewCell;
 
 /**
  * The button to the add image.

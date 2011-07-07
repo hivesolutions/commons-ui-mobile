@@ -27,6 +27,8 @@
 
 #import "HMTableViewDataSource.h"
 #import "HMItemTableViewProvider.h"
+#import "HMTableViewCell.h"
+#import "HMEditTableViewCell.h"
 
 // avoids circular dependency
 @class HMItemGroup;

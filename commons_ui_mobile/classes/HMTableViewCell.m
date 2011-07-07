@@ -129,7 +129,6 @@
 
 - (void)initStructures {
     // makes the labels transparent
-    self.backgroundColor = [UIColor colorWithRed:0.98 green:0.98 blue:0.98 alpha:1.0];
     self.textLabel.backgroundColor = [UIColor clearColor];
     self.detailTextLabel.backgroundColor = [UIColor clearColor];
 }
