@@ -34,54 +34,16 @@
 
 @interface HMSubDescriptionTableViewCell : HMTableViewCell {
     @private
-    NSString *_subDescription;
     UILabel *_subDescriptionLabel;
-    UIFont *_subDescriptionFont;
-    UIColor *_subDescriptionColor;
-    CGFloat _subDescriptionWidth;
-    UITextAlignment _subDescriptionTextAlignment;
-    UIColor *_subDescriptionShadowColor;
     NSValue *_subDescriptionPosition;
     HMTableViewCellHorizontalAnchor _subDescriptionHorizontalAnchor;
     HMTableViewCellVerticalAnchor _subDescriptionVerticalAnchor;
-    NSUInteger _subDescriptionNumberLines;
 }
-
-/**
- * The cell's sub description that will be set
- * as its label.
- */
-@property (retain) NSString *subDescription;
 
 /**
  * The cell's sub description label.
  */
 @property (retain) UILabel *subDescriptionLabel;
-
-/**
- * The table cell's sub description font.
- */
-@property (retain) UIFont *subDescriptionFont;
-
-/**
- * The table cell's sub description color.
- */
-@property (retain) UIColor *subDescriptionColor;
-
-/**
- * The table cell's sub description width.
- */
-@property (assign) CGFloat subDescriptionWidth;
-
-/**
- * The table cell's sub description text alignment.
- */
-@property (assign) UITextAlignment subDescriptionTextAlignment;
-
-/**
- * The table cell's sub description shadow color.
- */
-@property (retain) UIColor *subDescriptionShadowColor;
 
 /**
  * The table cell's sub description position,
@@ -98,10 +60,5 @@
  * The table cell's sub description vertical anchor.
  */
 @property (assign) HMTableViewCellVerticalAnchor subDescriptionVerticalAnchor;
-
-/**
- * The table cell's sub description number of lines.
- */
-@property (assign) NSUInteger subDescriptionNumberLines;
 
 @end

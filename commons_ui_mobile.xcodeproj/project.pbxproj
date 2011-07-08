@@ -20,8 +20,6 @@
 		46B5EAA713BBA15B001D2B81 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46B5EAA613BBA15B001D2B81 /* AssetsLibrary.framework */; };
 		56C3A03013589FD700CA92DA /* HMColumnConstantStringTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */; };
 		56C3A03113589FD700CA92DA /* HMColumnConstantStringTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */; };
-		A50772B61337B8E300859BD2 /* HMEditTableViewCellEditView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50772B21337B8E300859BD2 /* HMEditTableViewCellEditView.h */; };
-		A50772B71337B8E300859BD2 /* HMEditTableViewCellEditView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50772B31337B8E300859BD2 /* HMEditTableViewCellEditView.m */; };
 		A50772B81337B8E300859BD2 /* HMTableViewCellBackgroundView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50772B41337B8E300859BD2 /* HMTableViewCellBackgroundView.h */; };
 		A50772B91337B8E300859BD2 /* HMTableViewCellBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = A50772B51337B8E300859BD2 /* HMTableViewCellBackgroundView.m */; };
 		A50E13F01338ADD3006BDB18 /* HMRoundedCornerImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */; };
@@ -130,8 +128,6 @@
 		46B5EAA613BBA15B001D2B81 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		56C3A02E13589FD700CA92DA /* HMColumnConstantStringTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMColumnConstantStringTableViewCell.h; path = classes/HMColumnConstantStringTableViewCell.h; sourceTree = "<group>"; };
 		56C3A02F13589FD700CA92DA /* HMColumnConstantStringTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMColumnConstantStringTableViewCell.m; path = classes/HMColumnConstantStringTableViewCell.m; sourceTree = "<group>"; };
-		A50772B21337B8E300859BD2 /* HMEditTableViewCellEditView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMEditTableViewCellEditView.h; path = classes/HMEditTableViewCellEditView.h; sourceTree = "<group>"; };
-		A50772B31337B8E300859BD2 /* HMEditTableViewCellEditView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMEditTableViewCellEditView.m; path = classes/HMEditTableViewCellEditView.m; sourceTree = "<group>"; };
 		A50772B41337B8E300859BD2 /* HMTableViewCellBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMTableViewCellBackgroundView.h; path = classes/HMTableViewCellBackgroundView.h; sourceTree = "<group>"; };
 		A50772B51337B8E300859BD2 /* HMTableViewCellBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HMTableViewCellBackgroundView.m; path = classes/HMTableViewCellBackgroundView.m; sourceTree = "<group>"; };
 		A50E13EE1338ADD3006BDB18 /* HMRoundedCornerImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HMRoundedCornerImageView.h; path = classes/HMRoundedCornerImageView.h; sourceTree = "<group>"; };
@@ -424,8 +420,6 @@
 		C220E36413318DEA0076803A /* Background Views */ = {
 			isa = PBXGroup;
 			children = (
-				A50772B21337B8E300859BD2 /* HMEditTableViewCellEditView.h */,
-				A50772B31337B8E300859BD2 /* HMEditTableViewCellEditView.m */,
 				A50772B41337B8E300859BD2 /* HMTableViewCellBackgroundView.h */,
 				A50772B51337B8E300859BD2 /* HMTableViewCellBackgroundView.m */,
 			);
@@ -839,7 +833,6 @@
 				C29E100F1333A24C00E9F77A /* HMHeaderItemTableView.h in Headers */,
 				C23B5E561333BC0100CFC9AF /* HMPlainDateTableViewCell.h in Headers */,
 				C23B5E721333D5BB00CFC9AF /* HMRemoteItemTableViewController.h in Headers */,
-				A50772B61337B8E300859BD2 /* HMEditTableViewCellEditView.h in Headers */,
 				A50772B81337B8E300859BD2 /* HMTableViewCellBackgroundView.h in Headers */,
 				C28924C5133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.h in Headers */,
 				A50E13F01338ADD3006BDB18 /* HMRoundedCornerImageView.h in Headers */,
@@ -939,7 +932,6 @@
 				A5E648EA13313F7100FE725A /* HMEditTableViewCell.m in Sources */,
 				C29E10101333A24C00E9F77A /* HMHeaderItemTableView.m in Sources */,
 				C23B5E571333BC0100CFC9AF /* HMPlainDateTableViewCell.m in Sources */,
-				A50772B71337B8E300859BD2 /* HMEditTableViewCellEditView.m in Sources */,
 				A50772B91337B8E300859BD2 /* HMTableViewCellBackgroundView.m in Sources */,
 				C28924C6133814F800B6D8A5 /* HMRemoteHeaderItemTableViewController.m in Sources */,
 				A50E13F11338ADD3006BDB18 /* HMRoundedCornerImageView.m in Sources */,

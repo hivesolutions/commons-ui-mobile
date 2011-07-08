@@ -402,6 +402,20 @@
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];
 }
 
+/*
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // rettrieves the list item group
+    HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
+
+    // retrieves the table cell item
+    HMTableCellItem *tableCellItem = (HMTableCellItem *) [listItemGroup getItemAtIndexPath:indexPath];
+
+    // retrieves the table view cell
+    HMTableViewCell *tableViewCell = (HMTableViewCell *) [self cellForRowAtIndexPath:indexPath];
+
+    tableViewCell.backgroundColor = [UIColor redColor];
+}
+*/
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     // calls the super
     [super setEditing:editing animated:animated];

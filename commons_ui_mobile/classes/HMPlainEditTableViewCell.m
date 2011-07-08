@@ -90,6 +90,12 @@
     self.textLabel.hidden = NO;
 }
 
+- (void)updateLabels {
+    // swaps the labels
+    [self updateNameLabel:self.detailTextLabel];
+    [self updateDescriptionLabel:self.textLabel];
+}
+
 - (void)setDescription:(NSString *)description {
     // in case the object is the same
     if(description == _description) {

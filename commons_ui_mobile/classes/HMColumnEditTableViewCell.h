@@ -26,7 +26,6 @@
 #import "Dependencies.h"
 
 #import "HMEditTableViewCell.h"
-#import "HMEditTableViewCellEditView.h"
 
 // avoids circular dependency
 @class HMEditItemTableView;
@@ -34,12 +33,25 @@
 @interface HMColumnEditTableViewCell : HMEditTableViewCell {
     @private
     UIView *_nameLabelClickView;
+    UIView *_columnSeparatorView;
+    BOOL _drawColumnSeparator;
 }
 
 /**
  * The label used to handle name label clicks.
  */
 @property (retain) UIView *nameLabelClickView;
+
+/**
+ * The view representing the column separator.
+ */
+@property (retain) UIView *columnSeparatorView;
+
+/**
+ * Boolean indicating if column separators
+ * should be drawn.
+ */
+@property (assign) BOOL drawColumnSeparator;
 
 /**
  * Initializes the cell with the default style.

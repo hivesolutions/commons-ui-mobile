@@ -32,7 +32,6 @@
 #import "../classes/HMColumnEditTableViewCell.h"
 #import "../classes/HMColumnStringTableViewCell.h"
 #import "../classes/HMEditTableViewCell.h"
-#import "../classes/HMEditTableViewCellEditView.h"
 #import "../classes/HMHeaderItemTableView.h"
 #import "../classes/HMTableViewDataSource.h"
 #import "../classes/HMItemTableView.h"

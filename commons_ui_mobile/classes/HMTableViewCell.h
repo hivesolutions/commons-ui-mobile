@@ -84,12 +84,14 @@ typedef enum  {
     NSValue *_descriptionPosition;
     HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
     HMTableViewCellVerticalAnchor _descriptionVerticalAnchor;
+    NSNumber *_descriptionWidth;
     NSString *_name;
     UIFont *_nameFont;
     UIColor *_nameColor;
     NSUInteger _nameNumberLines;
     UITextAlignment _nameAlignment;
     NSValue *_namePosition;
+    NSNumber *_nameWidth;
     HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
     HMTableViewCellVerticalAnchor _nameVerticalAnchor;
     UIColor *_selectedBorderColor;
@@ -155,6 +157,11 @@ typedef enum  {
 @property (assign) HMTableViewCellVerticalAnchor nameVerticalAnchor;
 
 /**
+ * The table cell's name width.
+ */
+@property (retain) NSNumber *nameWidth;
+
+/**
  * The cell's description that will be set
  * as its detail text label.
  */
@@ -202,6 +209,11 @@ typedef enum  {
  * The table cell's description vertical anchor.
  */
 @property (assign) HMTableViewCellVerticalAnchor descriptionVerticalAnchor;
+
+/**
+ * The table cell's description width.
+ */
+@property (retain) NSNumber *descriptionWidth;
 
 /**
  * The border color of the table
@@ -352,6 +364,19 @@ typedef enum  {
  */
 - (void)updateDescriptionLabel:(UILabel *)descriptionLabel;
 
+/**
+ * Updates the label's position.
+ *
+ * @param label: The label that will be
+ * positioned.
+ * @param position: The point at which
+ * the label will be positioned.
+ * @param horizontalAnchor: The origin for
+ * the position's horizontal coordinate.
+ * @param verticalAnchor: The origin for
+ * the position's vertical coordinate.
+ */
+- (void)updateLabelPosition:(UILabel *)label position:(CGPoint)position horizontalAnchor:(HMTableViewCellHorizontalAnchor)horizontalAnchor verticalAnchor:(HMTableViewCellVerticalAnchor)verticalAnchor;
 /**
  * Updates the accessory view.
  */

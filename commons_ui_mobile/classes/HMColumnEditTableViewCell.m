@@ -28,6 +28,8 @@
 @implementation HMColumnEditTableViewCell
 
 @synthesize nameLabelClickView = _nameLabelClickView;
+@synthesize columnSeparatorView = _columnSeparatorView;
+@synthesize drawColumnSeparator = _drawColumnSeparator;
 
 - (id)initWithReuseIdentifier:(NSString *)cellIdentifier {
     // invokes the parent constructor
@@ -41,8 +43,19 @@
     // releases the name label click view
     [_nameLabelClickView release];
 
+    // releases the column separator view
+    [_columnSeparatorView release];
+
     // calls the super
     [super dealloc];
+}
+
+- (void)initStructures {
+    // calls the super
+    [super initStructures];
+
+    // draws the column separator
+    self.drawColumnSeparator = YES;
 }
 
 - (void)didSelectLabel {
@@ -73,33 +86,41 @@
 
     // creates the edit view
     CGRect editViewFrame = CGRectMake(delta, 0, self.contentView.frame.size.width - delta, self.contentView.frame.size.height);
-    UIView *editView = [[HMEditTableViewCellEditView alloc] initWithFrame:editViewFrame];
+    UIView *editView = [[UIView alloc] initWithFrame:editViewFrame];
     editView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     editView.backgroundColor = [UIColor clearColor];
+
+    // creates the column separator view frame
+    CGRect columnSeparatorViewFrame = CGRectMake(delta, 0, 1, self.contentView.frame.size.height);
+    UIView *columnSeparatorView = [[UIView alloc] initWithFrame:columnSeparatorViewFrame];
+    columnSeparatorView.backgroundColor = self.itemTableView.separatorColor;
+    columnSeparatorView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    columnSeparatorView.hidden = YES;
 
     // adds the label click view and the
     // edit view to the content view
     [self.contentView addSubview:nameLabelClickView];
     [self.contentView addSubview:editView];
+    [self.contentView addSubview:columnSeparatorView];
 
     // sets the attributes
     self.nameLabelClickView = nameLabelClickView;
+    self.columnSeparatorView = columnSeparatorView;
     self.editView = editView;
 
     // releases the objects
-    [nameLabelClickView release];
-    [tapGestureRecognizer release];
+    [columnSeparatorView release];
     [editView release];
+    [tapGestureRecognizer release];
+    [nameLabelClickView release];
 }
 
 - (void)showEditing {
     // hides the detail text label
     self.detailTextLabel.hidden = YES;
 
-    // enables the edit view border
-    HMEditTableViewCellEditView *editView = (HMEditTableViewCellEditView *) self.editView;
-    editView.drawBorder = YES;
-    [editView setNeedsDisplay];
+    // shows/hides the column separator
+    self.columnSeparatorView.hidden = self.drawColumnSeparator ? NO : YES;
 
     // calls the super
     [super showEditing];
@@ -109,10 +130,8 @@
     // calls the super
     [super hideEditing];
 
-    // disables the edit view border
-    HMEditTableViewCellEditView *editView = (HMEditTableViewCellEditView *) self.editView;
-    editView.drawBorder = NO;
-    [editView setNeedsDisplay];
+    // shows/hides the column separator
+    self.columnSeparatorView.hidden = YES;
 
     // returns in case the edit
     // view is persistent
@@ -132,14 +151,6 @@
     self.nameLabelClickView.hidden = selectableName ? NO : YES;
 }
 
-- (void)updateLabels {
-    // swaps the fonts and colors because the name is
-    // represented by the text label and the description
-    // by the detail text label in this cell type
-    [self updateNameLabel:self.textLabel];
-    [self updateDescriptionLabel:self.detailTextLabel];
-}
-
 - (void)updateNameLabel:(UILabel *)nameLabel {
     // calls the super
     [super updateNameLabel:nameLabel];
@@ -152,9 +163,29 @@
     // calls the super
     [super updateDescriptionLabel:descriptionLabel];
 
-    // moves the description label origin four pixels to the right
+    // retrieves the descripton label's frame
     CGRect descriptionLabelFrame = descriptionLabel.frame;
+
+    // in case the name's width changed and no positions were defined
+    if(self.nameWidth && !self.namePosition && !self.descriptionPosition) {
+        // offsets the description label to the right of the name label
+        CGFloat nameLabelX = self.textLabel.frame.origin.x;
+        CGFloat nameLabelWidth = self.textLabel.frame.size.width;
+        descriptionLabelFrame.origin.x = nameLabelX + nameLabelWidth + 10;
+
+        // updates the edit view frame's width
+        CGRect editViewFrame = self.editView.frame;
+        editViewFrame.origin.x = descriptionLabelFrame.origin.x;
+        editViewFrame.size.width = self.frame.size.width - editViewFrame.origin.x - 20;
+        self.editView.frame = editViewFrame;
+    }
+
+    // moves the description label origin
+    // four pixels to the right to make
+    // the label coincide with the edit field
     descriptionLabelFrame.origin.x += 4;
+
+    // sets the updated description label frame
     descriptionLabel.frame = descriptionLabelFrame;
 }
 
