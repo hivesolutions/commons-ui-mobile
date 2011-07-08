@@ -35,6 +35,7 @@
 @interface HMSubDescriptionTableViewCell : HMTableViewCell {
     @private
     UILabel *_subDescriptionLabel;
+    UIFont *_subDescriptionFont;
     NSValue *_subDescriptionPosition;
     HMTableViewCellHorizontalAnchor _subDescriptionHorizontalAnchor;
     HMTableViewCellVerticalAnchor _subDescriptionVerticalAnchor;
@@ -44,6 +45,11 @@
  * The cell's sub description label.
  */
 @property (retain) UILabel *subDescriptionLabel;
+
+/**
+ * The cell's sub description font.
+ */
+@property (retain) UIFont *subDescriptionFont;
 
 /**
  * The table cell's sub description position,

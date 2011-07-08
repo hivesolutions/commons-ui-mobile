@@ -79,7 +79,7 @@ typedef enum  {
     @private
     UIFont *_descriptionFont;
     UIColor *_descriptionColor;
-    NSUInteger _descriptionNumberLines;
+    NSNumber *_subDescriptionNumberLines;
     UITextAlignment _descriptionAlignment;
     NSValue *_descriptionPosition;
     HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
@@ -88,7 +88,7 @@ typedef enum  {
     NSString *_name;
     UIFont *_nameFont;
     UIColor *_nameColor;
-    NSUInteger _nameNumberLines;
+    NSNumber *_nameNumberLines;
     UITextAlignment _nameAlignment;
     NSValue *_namePosition;
     NSNumber *_nameWidth;
@@ -134,7 +134,7 @@ typedef enum  {
 /**
  * The table cell's name number of lines.
  */
-@property (assign) NSUInteger nameNumberLines;
+@property (retain) NSNumber *nameNumberLines;
 
 /**
  * The table cell's name alignment.
@@ -187,7 +187,7 @@ typedef enum  {
 /**
  * The table cell's description number of lines.
  */
-@property (assign) NSUInteger descriptionNumberLines;
+@property (retain) NSNumber *descriptionNumberLines;
 
 /**
  * The table cell's description text alignment.

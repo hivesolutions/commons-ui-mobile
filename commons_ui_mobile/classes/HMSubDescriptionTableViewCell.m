@@ -28,6 +28,7 @@
 @implementation HMSubDescriptionTableViewCell
 
 @synthesize subDescriptionLabel = _subDescriptionLabel;
+@synthesize subDescriptionFont = _subDescriptionFont;
 @synthesize subDescriptionPosition = _subDescriptionPosition;
 @synthesize subDescriptionHorizontalAnchor = _subDescriptionHorizontalAnchor;
 @synthesize subDescriptionVerticalAnchor = _subDescriptionVerticalAnchor;
@@ -35,6 +36,9 @@
 - (void)dealloc {
     // releases the sub description label
     [_subDescriptionLabel release];
+
+    // releases the sub description font
+    [_subDescriptionFont release];
 
     // releases the sub description position
     [_subDescriptionPosition release];
@@ -57,7 +61,7 @@
     [super constructStructures];
 
     // creates the subDescription label
-    CGRect frame = CGRectMake(0, 0, 320, 10);
+    CGRect frame = CGRectMake(0, 0, 300, 10);
     UILabel *subDescriptionLabel = [[UILabel alloc] initWithFrame:frame];
     subDescriptionLabel.backgroundColor = [UIColor clearColor];
 
@@ -85,4 +89,33 @@
     }
 }
 
+- (UIFont *)subDescriptionFont {
+    // returns the sub description font
+    return _subDescriptionFont;
+}
+
+- (void)setSubDescriptionFont:(UIFont *)subDescriptionFont {
+    // in case the object is the same
+    if(subDescriptionFont == _subDescriptionFont) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_subDescriptionFont release];
+
+    // sets and retains the object
+    _subDescriptionFont = [subDescriptionFont retain];
+
+    // sets the font in the sub description label
+    self.subDescriptionLabel.font = subDescriptionFont;
+
+    // calculates the new text size
+    CGSize textSize = [@"1" sizeWithFont:subDescriptionFont];
+
+    // sets the updates text size
+    CGRect frame = self.subDescriptionLabel.frame;
+    frame.size.height = textSize.height;
+    self.subDescriptionLabel.frame = frame;
+}
 @end

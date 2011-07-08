@@ -86,6 +86,9 @@
     // releases the name color
     [_nameColor release];
 
+    // releases the name number lines
+    [_nameNumberLines release];
+
     // releases the name position
     [_namePosition release];
 
@@ -100,6 +103,9 @@
 
     // releases the description color
     [_descriptionColor release];
+
+    // releases the description number lines
+    [_descriptionNumberLines release];
 
     // releases the description position
     [_descriptionPosition release];
@@ -454,6 +460,12 @@
     nameLabel.textColor = self.nameColor ? self.nameColor : nameLabel.textColor;
     nameLabel.textAlignment = self.nameAlignment;
 
+    // in case the name number of lines are defined
+    if(self.nameNumberLines) {
+        // sets the number of lines in the name label
+        nameLabel.numberOfLines = self.nameNumberLines.intValue;
+    }
+
     // in case the name width is defined
     if(self.nameWidth) {
         // unpacks the name width
@@ -480,6 +492,12 @@
     descriptionLabel.font = self.descriptionFont ? self.descriptionFont : descriptionLabel.font;
     descriptionLabel.textColor = self.descriptionColor ? self.descriptionColor : descriptionLabel.textColor;
     descriptionLabel.textAlignment = self.descriptionAlignment;
+
+    // in case the description number of lines are defined
+    if(self.descriptionNumberLines) {
+        // sets the number of lines in the description label
+        descriptionLabel.numberOfLines = self.descriptionNumberLines.intValue;
+    }
 
     // in case the description width is defined
     if(self.descriptionWidth) {

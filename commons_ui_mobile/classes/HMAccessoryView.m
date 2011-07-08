@@ -95,8 +95,6 @@
     // creates the label
     HMLabel *label = [[HMLabel alloc] initWithFrame:self.frame];
     label.textAlignment = UITextAlignmentCenter;
-    label.font = [UIFont fontWithName:@"Helvetica-Bold" size:15];
-    label.textColor = [UIColor whiteColor];
     label.backgroundColor = [UIColor clearColor];
     label.edgeInsets = UIEdgeInsetsMake(0, 0, 0, 0);
     label.contentMode = UIViewContentModeCenter;
@@ -198,6 +196,27 @@
 
     // sets the label's text
     self.label.font = textFont;
+}
+
+- (UIColor *)textColorNormal {
+    return _textColorNormal;
+}
+
+- (void)setTextColorNormal:(UIColor *)textColorNormal {
+    // in case the object is the same
+    if(textColorNormal == _textColorNormal) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_textColorNormal release];
+
+    // sets and retains the object
+    _textColorNormal = [textColorNormal retain];
+
+    // sets the label's text
+    self.label.textColor = textColorNormal;
 }
 
 - (UIColor *)textShadowColor {
