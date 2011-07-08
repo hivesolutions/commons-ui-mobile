@@ -29,7 +29,6 @@
 
 @synthesize textField = _textField;
 @synthesize returnDisablesEdit = _returnDisablesEdit;
-@synthesize multipleLines = _multipleLines;
 @synthesize autocapitalizationType = _autocapitalizationType;
 
 - (void)dealloc {
