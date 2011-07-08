@@ -402,7 +402,6 @@
     [self.itemDelegate didDeselectItemRowWithItem:buttonItem];
 }
 
-/*
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     // rettrieves the list item group
     HMItemGroup *listItemGroup = self.itemDataSource.listItemGroup;
@@ -411,11 +410,14 @@
     HMTableCellItem *tableCellItem = (HMTableCellItem *) [listItemGroup getItemAtIndexPath:indexPath];
 
     // retrieves the table view cell
-    HMTableViewCell *tableViewCell = (HMTableViewCell *) [self cellForRowAtIndexPath:indexPath];
+    HMTableViewCell *tableViewCell = (HMTableViewCell *) [self.itemDataSource tableView:self cellForRowAtIndexPath:indexPath];
 
-    tableViewCell.backgroundColor = [UIColor redColor];
+    // configures the table view cell's background color
+    // here, since this particular change won't take
+    // place by defining it at the time of the cell's construction
+    tableViewCell.backgroundColor = tableCellItem.backgroundPatternImage ? tableCellItem.backgroundPatternImage.UIColor : tableCellItem.backgroundColor.UIColor;
 }
-*/
+
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     // calls the super
     [super setEditing:editing animated:animated];
