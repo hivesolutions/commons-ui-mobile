@@ -208,7 +208,7 @@
             [secretValue appendString:@"•"];
         }
 
-        // sets the detail text label text with the secret value
+        // sets the secret value in the description label
         self.descriptionLabel.text = secretValue;
 
         // releases the object

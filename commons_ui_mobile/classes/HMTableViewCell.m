@@ -45,6 +45,7 @@
 @synthesize subDescriptionPosition = _subDescriptionPosition;
 @synthesize subDescriptionHorizontalAnchor = _subDescriptionHorizontalAnchor;
 @synthesize subDescriptionVerticalAnchor = _subDescriptionVerticalAnchor;
+@synthesize subDescriptionWidth = _subDescriptionWidth;
 @synthesize selectedBorderColor = _selectedBorderColor;
 @synthesize selectedBackgroundColors = _selectedBackgroundColors;
 @synthesize selectedBackgroundTopSeparatorColor = _selectedBackgroundTopSeparatorColor;
@@ -113,6 +114,9 @@
 
     // releases the sub description position
     [_subDescriptionPosition release];
+
+    // releases the sub description width
+    [_subDescriptionWidth release];
 
     // releases the selected border color
     [_selectedBorderColor release];
@@ -533,48 +537,44 @@
 - (void)layoutNameLabel {
     // in case the name width is defined
     if(self.nameWidth) {
-        // unpacks the name width
-        float nameWidth = self.nameWidth.floatValue;
-
         // sets the name width in the frame
         CGRect nameLabelFrame = self.nameLabel.frame;
-        nameLabelFrame.size.width = nameWidth;
+        nameLabelFrame.size.width = self.nameWidth.floatValue;
         self.nameLabel.frame = nameLabelFrame;
     }
 
     // in case the name position is defined
     if(self.namePosition) {
-        // retrieves the name position
-        CGPoint namePosition = self.namePosition.CGPointValue;
-
         // updates the label's position
-        [self layoutLabel:self.nameLabel position:namePosition horizontalAnchor:self.nameHorizontalAnchor verticalAnchor:self.nameVerticalAnchor];
+        [self layoutLabel:self.nameLabel position:self.namePosition.CGPointValue horizontalAnchor:self.nameHorizontalAnchor verticalAnchor:self.nameVerticalAnchor];
     }
 }
 
 - (void)layoutDescriptionLabel {
     // in case the description width is defined
     if(self.descriptionWidth) {
-        // unpacks the description width
-        float descriptionWidth = self.descriptionWidth.floatValue;
-
         // sets the description width in the frame
         CGRect descriptionLabelFrame = self.descriptionLabel.frame;
-        descriptionLabelFrame.size.width = descriptionWidth;
+        descriptionLabelFrame.size.width = self.descriptionWidth.floatValue;
         self.descriptionLabel.frame = descriptionLabelFrame;
     }
 
     // in case the description position is defined
     if(self.descriptionPosition) {
-        // retrieves the description position
-        CGPoint descriptionPosition = self.descriptionPosition.CGPointValue;
-
         // updates the label's position
-        [self layoutLabel:self.descriptionLabel position:descriptionPosition horizontalAnchor:self.descriptionHorizontalAnchor verticalAnchor:self.descriptionVerticalAnchor];
+        [self layoutLabel:self.descriptionLabel position:self.descriptionPosition.CGPointValue horizontalAnchor:self.descriptionHorizontalAnchor verticalAnchor:self.descriptionVerticalAnchor];
     }
 }
 
 - (void)layoutSubDescriptionLabel {
+    // in case the sub description width is defined
+    if(self.subDescriptionWidth) {
+        // sets the sub description width in the frame
+        CGRect descriptionLabelFrame = self.descriptionLabel.frame;
+        descriptionLabelFrame.size.width = self.subDescriptionWidth.floatValue;
+        self.descriptionLabel.frame = descriptionLabelFrame;
+    }
+
     // in case the sub description position is defined
     if(self.subDescriptionPosition) {
         // unpacks the position

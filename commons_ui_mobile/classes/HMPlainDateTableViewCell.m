@@ -216,7 +216,7 @@
     // calls the super
     [super persistEditing];
 
-    // converts the date to a string and stores it in the detail text label
+    // converts the date to a string and stores it in the description label
     self.descriptionLabel.text = [self.dateFormatter stringFromDate:self.dateValue];
 }
 
@@ -265,7 +265,7 @@
     // converts the date to a string
     NSString *dateString = [self.dateFormatter stringFromDate:dateValue];
 
-    // sets the date string in the detail text label
+    // sets the date string in the label
     self.label.text = dateString;
 }
 

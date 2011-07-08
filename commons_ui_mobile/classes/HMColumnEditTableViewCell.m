@@ -116,7 +116,7 @@
 }
 
 - (void)showEditing {
-    // hides the detail text label
+    // hides the description label
     self.descriptionLabel.hidden = YES;
 
     // shows/hides the column separator
@@ -139,7 +139,7 @@
         return;
     }
 
-    // shows the detail text label
+    // shows the description label
     self.descriptionLabel.hidden = NO;
 }
 

@@ -92,6 +92,7 @@ typedef enum  {
     UILabel *_subDescriptionLabel;
     UIFont *_subDescriptionFont;
     NSValue *_subDescriptionPosition;
+    NSNumber *_subDescriptionWidth;
     HMTableViewCellHorizontalAnchor _subDescriptionHorizontalAnchor;
     HMTableViewCellVerticalAnchor _subDescriptionVerticalAnchor;
     UIColor *_selectedBorderColor;
@@ -147,8 +148,7 @@ typedef enum  {
 @property (retain) NSNumber *nameWidth;
 
 /**
- * The cell's description that will be set
- * as its detail text label.
+ * The cell's description.
  */
 @property (retain) NSString *description;
 
@@ -215,6 +215,11 @@ typedef enum  {
  * The table cell's sub description vertical anchor.
  */
 @property (assign) HMTableViewCellVerticalAnchor subDescriptionVerticalAnchor;
+
+/**
+ * The table cell's sub description width.
+ */
+@property (retain) NSNumber *subDescriptionWidth;
 
 /**
  * The border color of the table
