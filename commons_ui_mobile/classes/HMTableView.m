@@ -34,8 +34,11 @@
     // calls the super
     self = [super init];
 
-    // sets the default attributes
-    self.allowsSelectionDuringEditing = YES;
+    // initializes the structures
+    [self initStructures];
+
+    // constructs the structures
+    [self constructStructures];
 
     // returns self
     return self;
@@ -45,11 +48,32 @@
     // calls the super
     self = [super initWithCoder:aDecoder];
 
-    // sets the default attributes
-    self.allowsSelectionDuringEditing = YES;
+    // initializes the structures
+    [self initStructures];
+
+    // constructs the structures
+    [self constructStructures];
 
     // returns self
     return self;
+}
+
+- (void)initStructures {
+    // sets the default attributes
+    self.allowsSelectionDuringEditing = YES;
+}
+
+- (void)constructStructures {
+    // creates the
+    UIView *backgroundView = [[UIView alloc] init];
+
+    // sets a background view for compatibility
+    // with ipad which doesn't allow customizing
+    // table background without setting a background view
+    self.backgroundView = backgroundView;
+
+    // releases the background view
+    [backgroundView release];
 }
 
 - (void)didAppear {

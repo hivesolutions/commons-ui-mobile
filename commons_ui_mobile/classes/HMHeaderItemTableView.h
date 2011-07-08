@@ -137,12 +137,6 @@
 @property (retain) NSMutableArray *cellList;
 
 /**
- * Constructs the view components and adds them
- * to the view.
- */
-- (void)constructView;
-
-/**
  * Constructs the normal view components.
  */
 - (void)constructNormalView;

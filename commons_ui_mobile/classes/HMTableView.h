@@ -47,6 +47,16 @@
 @property (assign) BOOL dirty;
 
 /**
+ * Initializes the structures.
+ */
+- (void)initStructures;
+
+/**
+ * Constructs the structures.
+ */
+- (void)constructStructures;
+
+/**
  * Called when the view did appear.
  */
 - (void)didAppear;

@@ -30,22 +30,6 @@
 @synthesize itemDataSource = _itemDataSource;
 @synthesize itemDelegate = _itemDelegate;
 
-- (id)init {
-    // calls the super
-    self = [super init];
-
-    // returns self
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    // calls the super
-    self = [super initWithCoder:aDecoder];
-
-    // returns self
-    return self;
-}
-
 - (void)dealloc {
     // releases the item data source
     [_itemDataSource release];

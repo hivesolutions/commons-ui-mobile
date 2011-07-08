@@ -38,28 +38,6 @@
 @synthesize headerTableView = _headerTableView;
 @synthesize cellList = _cellList;
 
-- (id)init {
-    // calls the super
-    self = [super init];
-
-    // constructs the view
-    [self constructView];
-
-    // returns self
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    // calls the super
-    self = [super initWithCoder:aDecoder];
-
-    // constructs the view
-    [self constructView];
-
-    // returns self
-    return self;
-}
-
 - (void)dealloc {
     // releases the fcell list
     [_cellList release];
@@ -80,7 +58,10 @@
     [super dealloc];
 }
 
-- (void)constructView {
+- (void)constructStructures {
+    // calls the super
+    [super constructStructures];
+
     // constructs the "normal" view
     [self constructNormalView];
 

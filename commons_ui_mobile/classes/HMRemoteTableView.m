@@ -31,28 +31,6 @@
 @synthesize remoteDelegate = _remoteDelegate;
 @synthesize searchBar = _searchBar;
 
-- (id)init {
-    // calls the super
-    self = [super init];
-
-    // constructs the view
-    [self constructView];
-
-    // returns self
-    return self;
-}
-
-- (id)initWithCoder:(NSCoder *)aDecoder {
-    // calls the super
-    self = [super initWithCoder:aDecoder];
-
-    // constructs the view
-    [self constructView];
-
-    // returns self
-    return self;
-}
-
 - (void)dealloc {
     // cancels any pending remote connections in the
     // remote data source
@@ -66,6 +44,14 @@
 
     // calls the supper
     [super dealloc];
+}
+
+- (void)constructStructures {
+    // calls the super
+    [super constructStructures];
+
+    // constructs the view
+    [self constructView];
 }
 
 - (void)constructView {
