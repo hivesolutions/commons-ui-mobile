@@ -209,7 +209,7 @@
         }
 
         // sets the detail text label text with the secret value
-        self.detailTextLabel.text = secretValue;
+        self.descriptionLabel.text = secretValue;
 
         // releases the object
         [secretValue release];

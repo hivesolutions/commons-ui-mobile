@@ -117,7 +117,7 @@
 
 - (void)showEditing {
     // hides the detail text label
-    self.detailTextLabel.hidden = YES;
+    self.descriptionLabel.hidden = YES;
 
     // shows/hides the column separator
     self.columnSeparatorView.hidden = self.drawColumnSeparator ? NO : YES;
@@ -140,7 +140,7 @@
     }
 
     // shows the detail text label
-    self.detailTextLabel.hidden = NO;
+    self.descriptionLabel.hidden = NO;
 }
 
 - (void)setSelectableName:(BOOL)selectableName {
@@ -151,26 +151,26 @@
     self.nameLabelClickView.hidden = selectableName ? NO : YES;
 }
 
-- (void)updateNameLabel:(UILabel *)nameLabel {
+- (void)updateNameLabel {
     // calls the super
-    [super updateNameLabel:nameLabel];
+    [super updateNameLabel];
 
     // sets the name label to adapt to the size
-    nameLabel.adjustsFontSizeToFitWidth = YES;
+    self.nameLabel.adjustsFontSizeToFitWidth = YES;
 }
 
-- (void)updateDescriptionLabel:(UILabel *)descriptionLabel {
+- (void)updateDescriptionLabel {
     // calls the super
-    [super updateDescriptionLabel:descriptionLabel];
+    [super updateDescriptionLabel];
 
     // retrieves the descripton label's frame
-    CGRect descriptionLabelFrame = descriptionLabel.frame;
+    CGRect descriptionLabelFrame = self.descriptionLabel.frame;
 
     // in case the name's width changed and no positions were defined
     if(self.nameWidth && !self.namePosition && !self.descriptionPosition) {
         // offsets the description label to the right of the name label
-        CGFloat nameLabelX = self.textLabel.frame.origin.x;
-        CGFloat nameLabelWidth = self.textLabel.frame.size.width;
+        CGFloat nameLabelX = self.nameLabel.frame.origin.x;
+        CGFloat nameLabelWidth = self.nameLabel.frame.size.width;
         descriptionLabelFrame.origin.x = nameLabelX + nameLabelWidth + 10;
 
         // updates the edit view frame's width
@@ -186,7 +186,7 @@
     descriptionLabelFrame.origin.x += 4;
 
     // sets the updated description label frame
-    descriptionLabel.frame = descriptionLabelFrame;
+    self.descriptionLabel.frame = descriptionLabelFrame;
 }
 
 @end

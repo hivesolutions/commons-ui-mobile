@@ -48,7 +48,7 @@
     // releases the objects
     [dateFormatter release];
 
-    self.detailTextLabel.text = @"3/14/11 5:32 PM";
+    self.descriptionLabel.text = @"3/14/11 5:32 PM";
 
     // returns self
     return self;
@@ -169,7 +169,7 @@
 
     // converts the date string to a
     // date and stores it in the date value
-    self.dateValue = [self.dateFormatter dateFromString:self.detailTextLabel.text];
+    self.dateValue = [self.dateFormatter dateFromString:self.descriptionLabel.text];
 
     // adds the date picker to the window
     [[self.window.subviews objectAtIndex:0] addSubview:datePicker];
@@ -217,12 +217,12 @@
     [super persistEditing];
 
     // converts the date to a string and stores it in the detail text label
-    self.detailTextLabel.text = [self.dateFormatter stringFromDate:self.dateValue];
+    self.descriptionLabel.text = [self.dateFormatter stringFromDate:self.dateValue];
 }
 
 - (void)rollbackEditing {
     // converts the date string to a date and stores it in the date value
-    self.dateValue = [self.dateFormatter dateFromString:self.detailTextLabel.text];
+    self.dateValue = [self.dateFormatter dateFromString:self.descriptionLabel.text];
 
     // calls the super
     [super rollbackEditing];

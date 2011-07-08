@@ -35,6 +35,15 @@
     return self;
 }
 
+- (void)initStructures {
+    // calls the super
+    [super initStructures];
+    
+    // swaps the labels
+    self.nameLabel = self.detailTextLabel;
+    self.descriptionLabel = self.textLabel;
+}
+
 - (void)createEditing {
     // calls the super
     [super createEditing];
@@ -70,7 +79,7 @@
 
 - (void)showEditing {
     // hides the text label
-    self.textLabel.hidden = YES;
+    self.descriptionLabel.hidden = YES;
 
     // calls the super
     [super showEditing];
@@ -87,13 +96,7 @@
     }
 
     // shows the text label
-    self.textLabel.hidden = NO;
-}
-
-- (void)updateLabels {
-    // swaps the labels
-    [self updateNameLabel:self.detailTextLabel];
-    [self updateDescriptionLabel:self.textLabel];
+    self.descriptionLabel.hidden = NO;
 }
 
 - (void)setDescription:(NSString *)description {
@@ -110,7 +113,7 @@
     _description = [description retain];
 
     // sets the cell's text label
-    self.textLabel.text = description;
+    self.descriptionLabel.text = description;
 }
 
 @end

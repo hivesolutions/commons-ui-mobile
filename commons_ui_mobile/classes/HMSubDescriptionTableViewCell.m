@@ -75,9 +75,9 @@
     [subDescriptionLabel release];
 }
 
-- (void)updateLabels {
+- (void)layoutSubviews {
     // calls the super
-    [super updateLabels];
+    [super layoutSubviews];
 
     // in case the sub description position is defined
     if(self.subDescriptionPosition) {
@@ -118,4 +118,5 @@
     frame.size.height = textSize.height;
     self.subDescriptionLabel.frame = frame;
 }
+
 @end

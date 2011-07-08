@@ -77,6 +77,7 @@ typedef enum  {
     NSString *_description;
 
     @private
+    UILabel *_descriptionLabel;
     UIFont *_descriptionFont;
     UIColor *_descriptionColor;
     NSNumber *_subDescriptionNumberLines;
@@ -85,6 +86,7 @@ typedef enum  {
     HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
     HMTableViewCellVerticalAnchor _descriptionVerticalAnchor;
     NSNumber *_descriptionWidth;
+    UILabel *_nameLabel;
     NSString *_name;
     UIFont *_nameFont;
     UIColor *_nameColor;
@@ -114,6 +116,11 @@ typedef enum  {
     HMItem *_item;
     HMItemTableView *_itemTableView;
 }
+
+/**
+ * The cell's name label.
+ */
+@property (retain) UILabel *nameLabel;
 
 /**
  * The cell's name that will be set
@@ -160,6 +167,11 @@ typedef enum  {
  * The table cell's name width.
  */
 @property (retain) NSNumber *nameWidth;
+
+/**
+ * The cell's description label.
+ */
+@property (retain) UILabel *descriptionLabel;
 
 /**
  * The cell's description that will be set
@@ -344,25 +356,14 @@ typedef enum  {
 - (void)updateTableData;
 
 /**
- * Updates the labels.
- */
-- (void)updateLabels;
-
-/**
  * Updates the name label.
- *
- * @param nameLabel: The label that
- * represents the name.
  */
-- (void)updateNameLabel:(UILabel *)nameLabel;
+- (void)updateNameLabel;
 
 /**
  * Updates the description label.
- *
- * @param descriptionLabel: The label that
- * represents the description.
  */
-- (void)updateDescriptionLabel:(UILabel *)descriptionLabel;
+- (void)updateDescriptionLabel;
 
 /**
  * Updates the label's position.

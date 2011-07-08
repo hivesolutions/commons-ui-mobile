@@ -27,6 +27,7 @@
 
 @implementation HMTableViewCell
 
+@synthesize nameLabel = _nameLabel;
 @synthesize name = _name;
 @synthesize nameFont = _nameFont;
 @synthesize nameColor = _nameColor;
@@ -36,6 +37,8 @@
 @synthesize nameHorizontalAnchor = _nameHorizontalAnchor;
 @synthesize nameVerticalAnchor = _nameVerticalAnchor;
 @synthesize nameWidth = _nameWidth;
+@synthesize descriptionLabel = _descriptionLabel;
+@synthesize description = _description;
 @synthesize descriptionFont = _descriptionFont;
 @synthesize descriptionColor = _descriptionColor;
 @synthesize descriptionNumberLines = _descriptionNumberLines;
@@ -77,6 +80,9 @@
 }
 
 - (void)dealloc {
+    // releases the name label
+    [_nameLabel release];
+    
     // releases the name
     [_name release];
 
@@ -95,6 +101,9 @@
     // releases the name width
     [_nameWidth release];
 
+    // releases the description label
+    [_descriptionLabel release];
+    
     // releases the description
     [_description release];
 
@@ -142,9 +151,11 @@
 }
 
 - (void)initStructures {
-    // makes the labels transparent
+    // sets the default values
     self.textLabel.backgroundColor = [UIColor clearColor];
     self.detailTextLabel.backgroundColor = [UIColor clearColor];
+    self.nameLabel = self.textLabel;
+    self.descriptionLabel = self.detailTextLabel;
 }
 
 - (void)constructStructures {
@@ -233,7 +244,7 @@
     _name = [name retain];
 
     // sets the cell's text label
-    self.textLabel.text = name;
+    self.nameLabel.text = name;
 }
 
 - (NSString *)description {
@@ -260,7 +271,7 @@
     _description = [description retain];
 
     // sets the cell's text label
-    self.detailTextLabel.text = description;
+    self.descriptionLabel.text = description;
 }
 
 - (UIColor *)selectedBorderColor {
@@ -436,9 +447,12 @@
     // calls the super
     [super layoutSubviews];
 
-    // updates the labels
-    [self updateLabels];
+    // updates the name label
+    [self updateNameLabel];
 
+    // updates the description label
+    [self updateDescriptionLabel];
+    
     // updates the accessory view
     [self updateAccessoryView];
 
@@ -446,24 +460,16 @@
     [self updatePosition];
 }
 
-- (void)updateLabels {
-    // updates the name label
-    [self updateNameLabel:self.textLabel];
-
-    // updates the description label
-    [self updateDescriptionLabel:self.detailTextLabel];
-}
-
-- (void)updateNameLabel:(UILabel *)nameLabel {
+- (void)updateNameLabel {
     // configures the name label
-    nameLabel.font = self.nameFont ? self.nameFont : nameLabel.font;
-    nameLabel.textColor = self.nameColor ? self.nameColor : nameLabel.textColor;
-    nameLabel.textAlignment = self.nameAlignment;
+    self.nameLabel.font = self.nameFont ? self.nameFont : self.nameLabel.font;
+    self.nameLabel.textColor = self.nameColor ? self.nameColor : self.nameLabel.textColor;
+    self.nameLabel.textAlignment = self.nameAlignment;
 
     // in case the name number of lines are defined
     if(self.nameNumberLines) {
         // sets the number of lines in the name label
-        nameLabel.numberOfLines = self.nameNumberLines.intValue;
+        self.nameLabel.numberOfLines = self.nameNumberLines.intValue;
     }
 
     // in case the name width is defined
@@ -472,9 +478,9 @@
         float nameWidth = self.nameWidth.floatValue;
 
         // sets the name width in the frame
-        CGRect nameLabelFrame = nameLabel.frame;
+        CGRect nameLabelFrame = self.nameLabel.frame;
         nameLabelFrame.size.width = nameWidth;
-        nameLabel.frame = nameLabelFrame;
+        self.nameLabel.frame = nameLabelFrame;
     }
 
     // in case the name position is defined
@@ -483,20 +489,20 @@
         CGPoint namePosition = self.namePosition.CGPointValue;
 
         // updates the label's position
-        [self updateLabelPosition:nameLabel position:namePosition horizontalAnchor:self.nameHorizontalAnchor verticalAnchor:self.nameVerticalAnchor];
+        [self updateLabelPosition:self.nameLabel position:namePosition horizontalAnchor:self.nameHorizontalAnchor verticalAnchor:self.nameVerticalAnchor];
     }
 }
 
-- (void)updateDescriptionLabel:(UILabel *)descriptionLabel {
+- (void)updateDescriptionLabel {
     // configures the description label
-    descriptionLabel.font = self.descriptionFont ? self.descriptionFont : descriptionLabel.font;
-    descriptionLabel.textColor = self.descriptionColor ? self.descriptionColor : descriptionLabel.textColor;
-    descriptionLabel.textAlignment = self.descriptionAlignment;
+    self.descriptionLabel.font = self.descriptionFont ? self.descriptionFont : self.descriptionLabel.font;
+    self.descriptionLabel.textColor = self.descriptionColor ? self.descriptionColor : self.descriptionLabel.textColor;
+    self.descriptionLabel.textAlignment = self.descriptionAlignment;
 
     // in case the description number of lines are defined
     if(self.descriptionNumberLines) {
         // sets the number of lines in the description label
-        descriptionLabel.numberOfLines = self.descriptionNumberLines.intValue;
+        self.descriptionLabel.numberOfLines = self.descriptionNumberLines.intValue;
     }
 
     // in case the description width is defined
@@ -505,9 +511,9 @@
         float descriptionWidth = self.descriptionWidth.floatValue;
 
         // sets the description width in the frame
-        CGRect descriptionLabelFrame = descriptionLabel.frame;
+        CGRect descriptionLabelFrame = self.descriptionLabel.frame;
         descriptionLabelFrame.size.width = descriptionWidth;
-        descriptionLabel.frame = descriptionLabelFrame;
+        self.descriptionLabel.frame = descriptionLabelFrame;
     }
 
     // in case the description position is defined
@@ -516,7 +522,7 @@
         CGPoint descriptionPosition = self.descriptionPosition.CGPointValue;
 
         // updates the label's position
-        [self updateLabelPosition:descriptionLabel position:descriptionPosition horizontalAnchor:self.descriptionHorizontalAnchor verticalAnchor:self.descriptionVerticalAnchor];
+        [self updateLabelPosition:self.descriptionLabel position:descriptionPosition horizontalAnchor:self.descriptionHorizontalAnchor verticalAnchor:self.descriptionVerticalAnchor];
     }
 }
 

@@ -61,7 +61,7 @@
     [super createEditing];
 
     // hides the detail text label
-    self.detailTextLabel.hidden = YES;
+    self.descriptionLabel.hidden = YES;
 
     // creates the text view
     CGRect editViewFrame = self.editView.frame;
@@ -213,7 +213,7 @@
         }
 
         // sets the detail text label text with the secret value
-        self.detailTextLabel.text = secretValue;
+        self.descriptionLabel.text = secretValue;
 
         // releases the object
         [secretValue release];
