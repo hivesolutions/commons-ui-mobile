@@ -151,17 +151,17 @@
     self.nameLabelClickView.hidden = selectableName ? NO : YES;
 }
 
-- (void)updateNameLabel {
+- (void)layoutNameLabel {
     // calls the super
-    [super updateNameLabel];
+    [super layoutNameLabel];
 
     // sets the name label to adapt to the size
     self.nameLabel.adjustsFontSizeToFitWidth = YES;
 }
 
-- (void)updateDescriptionLabel {
+- (void)layoutDescriptionLabel {
     // calls the super
-    [super updateDescriptionLabel];
+    [super layoutDescriptionLabel];
 
     // retrieves the descripton label's frame
     CGRect descriptionLabelFrame = self.descriptionLabel.frame;

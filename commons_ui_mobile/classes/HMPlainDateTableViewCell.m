@@ -164,7 +164,7 @@
     CGRect labelFrame = CGRectMake(HM_DATE_TABLE_VIEW_CELL_X_MARGIN, HM_DATE_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_DATE_TABLE_VIEW_CELL_X_MARGIN * 2, HM_DATE_TABLE_VIEW_CELL_HEIGHT);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    label.font = self.descriptionFont;
+    label.font = self.descriptionLabel.font;
     label.backgroundColor = [UIColor clearColor];
 
     // converts the date string to a

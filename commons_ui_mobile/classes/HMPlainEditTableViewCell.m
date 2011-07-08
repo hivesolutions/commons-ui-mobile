@@ -38,7 +38,7 @@
 - (void)initStructures {
     // calls the super
     [super initStructures];
-    
+
     // swaps the labels
     self.nameLabel = self.detailTextLabel;
     self.descriptionLabel = self.textLabel;

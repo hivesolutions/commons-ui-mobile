@@ -27,26 +27,24 @@
 
 @implementation HMTableViewCell
 
-@synthesize nameLabel = _nameLabel;
 @synthesize name = _name;
-@synthesize nameFont = _nameFont;
-@synthesize nameColor = _nameColor;
-@synthesize nameNumberLines = _nameNumberLines;
-@synthesize nameAlignment = _nameAlignment;
+@synthesize nameLabel = _nameLabel;
 @synthesize namePosition = _namePosition;
 @synthesize nameHorizontalAnchor = _nameHorizontalAnchor;
 @synthesize nameVerticalAnchor = _nameVerticalAnchor;
 @synthesize nameWidth = _nameWidth;
-@synthesize descriptionLabel = _descriptionLabel;
 @synthesize description = _description;
-@synthesize descriptionFont = _descriptionFont;
-@synthesize descriptionColor = _descriptionColor;
-@synthesize descriptionNumberLines = _descriptionNumberLines;
-@synthesize descriptionAlignment = _descriptionAlignment;
+@synthesize descriptionLabel = _descriptionLabel;
 @synthesize descriptionPosition = _descriptionPosition;
 @synthesize descriptionHorizontalAnchor = _descriptionHorizontalAnchor;
 @synthesize descriptionVerticalAnchor = _descriptionVerticalAnchor;
 @synthesize descriptionWidth = _descriptionWidth;
+@synthesize subDescription = _subDescription;
+@synthesize subDescriptionLabel = _subDescriptionLabel;
+@synthesize subDescriptionFont = _subDescriptionFont;
+@synthesize subDescriptionPosition = _subDescriptionPosition;
+@synthesize subDescriptionHorizontalAnchor = _subDescriptionHorizontalAnchor;
+@synthesize subDescriptionVerticalAnchor = _subDescriptionVerticalAnchor;
 @synthesize selectedBorderColor = _selectedBorderColor;
 @synthesize selectedBackgroundColors = _selectedBackgroundColors;
 @synthesize selectedBackgroundTopSeparatorColor = _selectedBackgroundTopSeparatorColor;
@@ -80,20 +78,11 @@
 }
 
 - (void)dealloc {
-    // releases the name label
-    [_nameLabel release];
-    
     // releases the name
     [_name release];
 
-    // releases the name font
-    [_nameFont release];
-
-    // releases the name color
-    [_nameColor release];
-
-    // releases the name number lines
-    [_nameNumberLines release];
+    // releases the name label
+    [_nameLabel release];
 
     // releases the name position
     [_namePosition release];
@@ -101,26 +90,29 @@
     // releases the name width
     [_nameWidth release];
 
-    // releases the description label
-    [_descriptionLabel release];
-    
     // releases the description
     [_description release];
 
-    // releases the description font
-    [_descriptionFont release];
-
-    // releases the description color
-    [_descriptionColor release];
-
-    // releases the description number lines
-    [_descriptionNumberLines release];
+    // releases the description label
+    [_descriptionLabel release];
 
     // releases the description position
     [_descriptionPosition release];
 
     // releases the description width
     [_descriptionWidth release];
+
+    // releases the sub description
+    [_subDescription release];
+
+    // releases the sub description label
+    [_subDescriptionLabel release];
+
+    // releases the sub description font
+    [_subDescriptionFont release];
+
+    // releases the sub description position
+    [_subDescriptionPosition release];
 
     // releases the selected border color
     [_selectedBorderColor release];
@@ -151,21 +143,36 @@
 }
 
 - (void)initStructures {
-    // sets the default values
-    self.textLabel.backgroundColor = [UIColor clearColor];
-    self.detailTextLabel.backgroundColor = [UIColor clearColor];
+    // sets the labels
     self.nameLabel = self.textLabel;
     self.descriptionLabel = self.detailTextLabel;
+
+    // sets the default values
+    self.nameLabel.backgroundColor = [UIColor clearColor];
+    self.descriptionLabel.backgroundColor = [UIColor clearColor];
+    self.subDescriptionHorizontalAnchor = HMTableViewCellHorizontalAnchorNone;
+    self.subDescriptionVerticalAnchor = HMTableViewCellVerticalAnchorNone;
 }
 
 - (void)constructStructures {
     // creates the selected background view
     HMTableViewCellBackgroundView *selectedBackgroundView = [[HMTableViewCellBackgroundView alloc] init];
 
+    // creates the subDescription label
+    CGRect frame = CGRectMake(0, 0, 300, 10);
+    UILabel *subDescriptionLabel = [[UILabel alloc] initWithFrame:frame];
+    subDescriptionLabel.backgroundColor = [UIColor clearColor];
+    subDescriptionLabel.hidden = YES;
+
+    // adds the sub description label
+    [self.contentView addSubview:subDescriptionLabel];
+
     // sets the objects
+    self.subDescriptionLabel = subDescriptionLabel;
     self.selectedBackgroundView = selectedBackgroundView;
 
     // releases the objects
+    [subDescriptionLabel release];
     [selectedBackgroundView release];
 }
 
@@ -272,6 +279,73 @@
 
     // sets the cell's text label
     self.descriptionLabel.text = description;
+}
+
+- (NSString *)descriptionTransient {
+    return nil;
+}
+
+- (void)setDescriptionTransient:(NSString *)descriptionTransient {
+}
+
+- (NSString *)subDescription {
+    return _subDescription;
+}
+
+- (void)setSubDescription:(NSString *)subDescription {
+    // in case the description is invalid
+    if(subDescription == nil) {
+        // returns immediately
+        return;
+    }
+
+    // in case the object is the same
+    if(subDescription == _description) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_subDescription release];
+
+    // sets and retains the object
+    _subDescription = [subDescription retain];
+
+    // makes the sub description label visible
+    self.subDescriptionLabel.hidden = NO;
+
+    // sets the value in the sub description label
+    self.subDescriptionLabel.text = subDescription;
+}
+
+- (UIFont *)subDescriptionFont {
+    // returns the sub description font
+    return _subDescriptionFont;
+}
+
+- (void)setSubDescriptionFont:(UIFont *)subDescriptionFont {
+    // in case the object is the same
+    if(subDescriptionFont == _subDescriptionFont) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_subDescriptionFont release];
+
+    // sets and retains the object
+    _subDescriptionFont = [subDescriptionFont retain];
+
+    // sets the font in the sub description label
+    self.subDescriptionLabel.font = subDescriptionFont;
+
+    // calculates the new text size
+    CGSize textSize = [@"1" sizeWithFont:subDescriptionFont];
+
+    // sets the updates text size
+    CGRect frame = self.subDescriptionLabel.frame;
+    frame.size.height = textSize.height;
+    self.subDescriptionLabel.frame = frame;
 }
 
 - (UIColor *)selectedBorderColor {
@@ -436,42 +510,27 @@
     self.dataTransient = _data;
 }
 
-- (NSString *)descriptionTransient {
-    return nil;
-}
-
-- (void)setDescriptionTransient:(NSString *)descriptionTransient {
-}
-
 - (void)layoutSubviews {
     // calls the super
     [super layoutSubviews];
 
     // updates the name label
-    [self updateNameLabel];
+    [self layoutNameLabel];
 
     // updates the description label
-    [self updateDescriptionLabel];
-    
+    [self layoutDescriptionLabel];
+
+    // updates the sub description label
+    [self layoutSubDescriptionLabel];
+
     // updates the accessory view
-    [self updateAccessoryView];
+    [self layoutAccessoryView];
 
     // updates the position
     [self updatePosition];
 }
 
-- (void)updateNameLabel {
-    // configures the name label
-    self.nameLabel.font = self.nameFont ? self.nameFont : self.nameLabel.font;
-    self.nameLabel.textColor = self.nameColor ? self.nameColor : self.nameLabel.textColor;
-    self.nameLabel.textAlignment = self.nameAlignment;
-
-    // in case the name number of lines are defined
-    if(self.nameNumberLines) {
-        // sets the number of lines in the name label
-        self.nameLabel.numberOfLines = self.nameNumberLines.intValue;
-    }
-
+- (void)layoutNameLabel {
     // in case the name width is defined
     if(self.nameWidth) {
         // unpacks the name width
@@ -489,22 +548,11 @@
         CGPoint namePosition = self.namePosition.CGPointValue;
 
         // updates the label's position
-        [self updateLabelPosition:self.nameLabel position:namePosition horizontalAnchor:self.nameHorizontalAnchor verticalAnchor:self.nameVerticalAnchor];
+        [self layoutLabel:self.nameLabel position:namePosition horizontalAnchor:self.nameHorizontalAnchor verticalAnchor:self.nameVerticalAnchor];
     }
 }
 
-- (void)updateDescriptionLabel {
-    // configures the description label
-    self.descriptionLabel.font = self.descriptionFont ? self.descriptionFont : self.descriptionLabel.font;
-    self.descriptionLabel.textColor = self.descriptionColor ? self.descriptionColor : self.descriptionLabel.textColor;
-    self.descriptionLabel.textAlignment = self.descriptionAlignment;
-
-    // in case the description number of lines are defined
-    if(self.descriptionNumberLines) {
-        // sets the number of lines in the description label
-        self.descriptionLabel.numberOfLines = self.descriptionNumberLines.intValue;
-    }
-
+- (void)layoutDescriptionLabel {
     // in case the description width is defined
     if(self.descriptionWidth) {
         // unpacks the description width
@@ -522,11 +570,22 @@
         CGPoint descriptionPosition = self.descriptionPosition.CGPointValue;
 
         // updates the label's position
-        [self updateLabelPosition:self.descriptionLabel position:descriptionPosition horizontalAnchor:self.descriptionHorizontalAnchor verticalAnchor:self.descriptionVerticalAnchor];
+        [self layoutLabel:self.descriptionLabel position:descriptionPosition horizontalAnchor:self.descriptionHorizontalAnchor verticalAnchor:self.descriptionVerticalAnchor];
     }
 }
 
-- (void)updateLabelPosition:(UILabel *)label position:(CGPoint)position horizontalAnchor:(HMTableViewCellHorizontalAnchor)horizontalAnchor verticalAnchor:(HMTableViewCellVerticalAnchor)verticalAnchor {
+- (void)layoutSubDescriptionLabel {
+    // in case the sub description position is defined
+    if(self.subDescriptionPosition) {
+        // unpacks the position
+        CGPoint subDescriptionPositionPoint = self.subDescriptionPosition.CGPointValue;
+
+        // updates the label's position
+        [self layoutLabel:self.subDescriptionLabel position:subDescriptionPositionPoint horizontalAnchor:self.subDescriptionHorizontalAnchor verticalAnchor:self.subDescriptionVerticalAnchor];
+    }
+}
+
+- (void)layoutLabel:(UILabel *)label position:(CGPoint)position horizontalAnchor:(HMTableViewCellHorizontalAnchor)horizontalAnchor verticalAnchor:(HMTableViewCellVerticalAnchor)verticalAnchor {
     // retrieves the label frame
     CGRect labelFrame = label.frame;
 
@@ -584,7 +643,7 @@
     label.frame = labelFrame;
 }
 
-- (void)updateAccessoryView {
+- (void)layoutAccessoryView {
     // in case the accessory view is not defined
     if(!self.accessoryView) {
         // returns
@@ -646,17 +705,6 @@
     accessoryView.bounds = frame;
 }
 
-- (void)didMoveToSuperview {
-    // calls the super
-    [super didMoveToSuperview];
-
-    // retrieves the associated table view (superview)
-    self.itemTableView = (HMItemTableView *) self.superview;
-
-    // sets the view ready flag
-    self.viewReady = YES;
-}
-
 - (void)updatePosition {
     // retrieves the parent table view
     UITableView *tableView = (UITableView *) self.superview;
@@ -693,6 +741,17 @@
 
     // updates the background views' positions
     selectedBackgroundView.position = position;
+}
+
+- (void)didMoveToSuperview {
+    // calls the super
+    [super didMoveToSuperview];
+
+    // retrieves the associated table view (superview)
+    self.itemTableView = (HMItemTableView *) self.superview;
+
+    // sets the view ready flag
+    self.viewReady = YES;
 }
 
 @end

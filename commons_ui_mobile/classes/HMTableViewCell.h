@@ -77,25 +77,23 @@ typedef enum  {
     NSString *_description;
 
     @private
-    UILabel *_descriptionLabel;
-    UIFont *_descriptionFont;
-    UIColor *_descriptionColor;
-    NSNumber *_subDescriptionNumberLines;
-    UITextAlignment _descriptionAlignment;
-    NSValue *_descriptionPosition;
-    HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
-    HMTableViewCellVerticalAnchor _descriptionVerticalAnchor;
-    NSNumber *_descriptionWidth;
     UILabel *_nameLabel;
     NSString *_name;
-    UIFont *_nameFont;
-    UIColor *_nameColor;
-    NSNumber *_nameNumberLines;
-    UITextAlignment _nameAlignment;
     NSValue *_namePosition;
     NSNumber *_nameWidth;
     HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
     HMTableViewCellVerticalAnchor _nameVerticalAnchor;
+    UILabel *_descriptionLabel;
+    NSValue *_descriptionPosition;
+    HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
+    HMTableViewCellVerticalAnchor _descriptionVerticalAnchor;
+    NSNumber *_descriptionWidth;
+    NSString *_subDescription;
+    UILabel *_subDescriptionLabel;
+    UIFont *_subDescriptionFont;
+    NSValue *_subDescriptionPosition;
+    HMTableViewCellHorizontalAnchor _subDescriptionHorizontalAnchor;
+    HMTableViewCellVerticalAnchor _subDescriptionVerticalAnchor;
     UIColor *_selectedBorderColor;
     NSArray *_selectedBackgroundColors;
     UIColor *_selectedBackgroundTopSeparatorColor;
@@ -118,35 +116,15 @@ typedef enum  {
 }
 
 /**
- * The cell's name label.
- */
-@property (retain) UILabel *nameLabel;
-
-/**
  * The cell's name that will be set
  * as its label.
  */
 @property (retain) NSString *name;
 
 /**
- * The table cell's name font.
+ * The cell's name label.
  */
-@property (retain) UIFont *nameFont;
-
-/**
- * The table cell's name color.
- */
-@property (retain) UIColor *nameColor;
-
-/**
- * The table cell's name number of lines.
- */
-@property (retain) NSNumber *nameNumberLines;
-
-/**
- * The table cell's name alignment.
- */
-@property (assign) UITextAlignment nameAlignment;
+@property (retain) UILabel *nameLabel;
 
 /**
  * The table cell's name position.
@@ -169,15 +147,15 @@ typedef enum  {
 @property (retain) NSNumber *nameWidth;
 
 /**
- * The cell's description label.
- */
-@property (retain) UILabel *descriptionLabel;
-
-/**
  * The cell's description that will be set
  * as its detail text label.
  */
 @property (retain) NSString *description;
+
+/**
+ * The cell's description label.
+ */
+@property (retain) UILabel *descriptionLabel;
 
 /**
  * The cell's transient description property,
@@ -185,26 +163,6 @@ typedef enum  {
  * instead of the one that has last been commited.
  */
 @property (assign) NSString *descriptionTransient;
-
-/**
- * The table cell's description font.
- */
-@property (retain) UIFont *descriptionFont;
-
-/**
- * The table cell's description color.
- */
-@property (retain) UIColor *descriptionColor;
-
-/**
- * The table cell's description number of lines.
- */
-@property (retain) NSNumber *descriptionNumberLines;
-
-/**
- * The table cell's description text alignment.
- */
-@property (assign) UITextAlignment descriptionAlignment;
 
 /**
  * The table cell's description position,
@@ -226,6 +184,37 @@ typedef enum  {
  * The table cell's description width.
  */
 @property (retain) NSNumber *descriptionWidth;
+
+/**
+ * The cell's sub description.
+ */
+@property (retain) NSString *subDescription;
+
+/**
+ * The cell's sub description label.
+ */
+@property (retain) UILabel *subDescriptionLabel;
+
+/**
+ * The cell's sub description font.
+ */
+@property (retain) UIFont *subDescriptionFont;
+
+/**
+ * The table cell's sub description position,
+ * represented in a cgpoint structure.
+ */
+@property (retain) NSValue *subDescriptionPosition;
+
+/**
+ * The table cell's sub description horizontal anchor.
+ */
+@property (assign) HMTableViewCellHorizontalAnchor subDescriptionHorizontalAnchor;
+
+/**
+ * The table cell's sub description vertical anchor.
+ */
+@property (assign) HMTableViewCellVerticalAnchor subDescriptionVerticalAnchor;
 
 /**
  * The border color of the table
@@ -358,12 +347,17 @@ typedef enum  {
 /**
  * Updates the name label.
  */
-- (void)updateNameLabel;
+- (void)layoutNameLabel;
 
 /**
  * Updates the description label.
  */
-- (void)updateDescriptionLabel;
+- (void)layoutDescriptionLabel;
+
+/**
+ * Updates the sub description label.
+ */
+- (void)layoutSubDescriptionLabel;
 
 /**
  * Updates the label's position.
@@ -377,11 +371,11 @@ typedef enum  {
  * @param verticalAnchor: The origin for
  * the position's vertical coordinate.
  */
-- (void)updateLabelPosition:(UILabel *)label position:(CGPoint)position horizontalAnchor:(HMTableViewCellHorizontalAnchor)horizontalAnchor verticalAnchor:(HMTableViewCellVerticalAnchor)verticalAnchor;
+- (void)layoutLabel:(UILabel *)label position:(CGPoint)position horizontalAnchor:(HMTableViewCellHorizontalAnchor)horizontalAnchor verticalAnchor:(HMTableViewCellVerticalAnchor)verticalAnchor;
 /**
  * Updates the accessory view.
  */
-- (void)updateAccessoryView;
+- (void)layoutAccessoryView;
 
 /**
  * Updates the cell's position.
