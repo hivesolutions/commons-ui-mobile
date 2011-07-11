@@ -692,6 +692,21 @@
     // casts the table view to item table view
     HMItemTableView *itemTableView = (HMItemTableView *) self.tableView;
 
+    // retrieves the right bar button item
+    UIBarButtonItem *rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+
+    // in case the right bar button
+    // item is not enabled
+    if(!rightBarButtonItem.enabled) {
+        // returns
+        return;
+    }
+
+    // disables the right bar button in order to block
+    // the user from performing the same action
+    // twice in a row, which would result in a crash
+    rightBarButtonItem.enabled = NO;
+
     // in case the table view is in editing mode
     if(self.tableView.editing) {
         // flushes the item specification for transient items
