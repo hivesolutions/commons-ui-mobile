@@ -28,6 +28,7 @@
 #import "HMItemTableView.h"
 #import "HMRoundedCornerImageView.h"
 #import "HMEditTableViewCell.h"
+#import "HMTableView.h"
 
 /**
  * The number of sections in the header.

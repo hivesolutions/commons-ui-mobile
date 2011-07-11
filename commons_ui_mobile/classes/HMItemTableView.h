@@ -26,8 +26,7 @@
 #import "Dependencies.h"
 
 #import "HMTableView.h"
-#import "HMEditTableViewCell.h"
-#import "HMTableViewController.h"
+#import "HMTableViewCell.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
 #import "HMItemTableViewDataSource.h"

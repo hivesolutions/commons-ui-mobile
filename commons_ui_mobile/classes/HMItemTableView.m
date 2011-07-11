@@ -81,26 +81,36 @@
     label.numberOfLines = 0;
     label.font = font;
     label.backgroundColor = [UIColor clearColor];
+    label.shadowColor = labelItem.descriptionShadowColor.UIColor;
     label.shadowOffset = CGSizeMake(1, 1);
     label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     label.textColor = descriptionColor.UIColor;
 
     // sets the label's text alignment
     switch (labelItem.textAlignment) {
+        // in case the alignment is to the left
         case HMLabelItemTextAlignmentLeft:
+            // sets the alignment to the left
             label.textAlignment = UITextAlignmentLeft;
-            break;
-        case HMLabelItemTextAlignmentCenter:
-            label.textAlignment = UITextAlignmentCenter;
-            break;
-        case HMLabelItemTextAlignmentRight:
-            label.textAlignment = UITextAlignmentRight;
-            break;
-    }
 
-    // sets the label shadow color
-    if(labelItem.descriptionShadowColor) {
-        label.shadowColor = labelItem.descriptionShadowColor.UIColor;
+            // breaks
+            break;
+
+        // in case the alignment is to the center
+        case HMLabelItemTextAlignmentCenter:
+            // sets the alignment to the center
+            label.textAlignment = UITextAlignmentCenter;
+
+            // breaks
+            break;
+
+        // in case the alignment is to the right
+        case HMLabelItemTextAlignmentRight:
+            // sets the alignment to the right
+            label.textAlignment = UITextAlignmentRight;
+
+            // breaks
+            break;
     }
 
     // creates a wrapper view

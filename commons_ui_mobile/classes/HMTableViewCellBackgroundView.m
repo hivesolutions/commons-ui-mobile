@@ -94,20 +94,44 @@
     // invokes the appropriate draw function
     // depending on the cell's position
     switch(self.position) {
+        // in case the cell is the top cell in a grouped table
         case HMTableViewCellBackgroundViewPositionGroupedTop:
+            // draws the cell as a grouped table top cell
             [self drawRectGroupedTopContext:context];
+
+            // breaks
             break;
+
+        // in case the cell is the bottom cell in a grouped table
         case HMTableViewCellBackgroundViewPositionGroupedBottom:
+            // draws the cell as a grouped table bottom cell
             [self drawRectGroupedBottomContext:context];
+
+            // breaks
             break;
+
+        // in case the cell is the middle cell in a grouped table
         case HMTableViewCellBackgroundViewPositionGroupedMiddle:
+            // draws the cell as a grouped table middle cell
             [self drawRectPlainContext:context];
+
+            // breaks
             break;
+
+        // in case the cell is a single cell in a grouped table
         case HMTableViewCellBackgroundViewPositionGroupedSingle:
+            // draws the cell as a grouped table single cell
             [self drawRectGroupedSingleContext:context];
+
+            // breaks
             break;
+
+        // in case the cell is a cell a plain table
         case HMTableViewCellBackgroundViewPositionPlain:
+            // draws the cell as a plain cell
             [self drawRectPlainContext:context];
+
+            // breaks
             break;
     }
 }
