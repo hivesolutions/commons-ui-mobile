@@ -650,6 +650,11 @@
         return;
     }
 
+    // retrieves the current row number
+    UITableView *tableView = (UITableView *) self.superview;
+    NSIndexPath *indexPath = [tableView indexPathForCell:self];
+    NSUInteger row = indexPath.row;
+
     // retrieves the accessory view
     HMAccessoryView *accessoryView = (HMAccessoryView *) self.accessoryView;
 
@@ -678,6 +683,13 @@
     // adds the image cap to the dimensions
     width += accessoryView.image.leftCapWidth * 2;
     height += accessoryView.image.topCapHeight * 2;
+
+    // performs an height adjustment
+    // for when the accessory view is
+    // not in the first row, the reason
+    // for this adjustment being required
+    // is currently unknown
+    height += (row != 0 ? 1 : 0);
 
     // initializes the position
     CGFloat x = 0;

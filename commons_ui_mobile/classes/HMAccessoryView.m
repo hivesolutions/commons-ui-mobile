@@ -267,7 +267,7 @@
     [super setFrame:frame];
 
     // updates the label's frame
-    [self.label setFrame:frame];
+    self.label.frame = frame;
 }
 
 @end
