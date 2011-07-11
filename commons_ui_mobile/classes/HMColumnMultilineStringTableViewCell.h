@@ -25,8 +25,8 @@
 
 #import "Dependencies.h"
 
-#import "HMColumnEditTableViewCell.h"
 #import "HPGrowingTextView.h"
+#import "HMColumnEditTableViewCell.h"
 
 /**
  * The column multiline string table view cell y margin.
@@ -48,6 +48,12 @@
  */
 #define HM_COLUMN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_SCROLL_MARGIN 11
 
+/**
+ * Provides a edit table view cell,
+ * whose name and description are
+ * displayed side by side, to display
+ * and edit multiple line string values.
+ */
 @interface HMColumnMultilineStringTableViewCell : HMColumnEditTableViewCell<HPGrowingTextViewDelegate> {
     @private
     HPGrowingTextView *_textView;

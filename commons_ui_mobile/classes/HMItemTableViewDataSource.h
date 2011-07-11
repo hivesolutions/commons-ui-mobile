@@ -25,17 +25,17 @@
 
 #import "Dependencies.h"
 
-#import "HMTableViewDataSource.h"
-#import "HMItemTableViewProvider.h"
 #import "HMTableViewCell.h"
 #import "HMEditTableViewCell.h"
+#import "HMTableViewDataSource.h"
+#import "HMItemTableViewProvider.h"
 
 // avoids circular dependency
 @class HMItemGroup;
 
 /**
- * Table view data soruce used to represent for reprenstation
- * of item objects.
+ * Table view data source used to represent
+ * for representation of item objects.
  */
 @interface HMItemTableViewDataSource : HMTableViewDataSource {
     @private

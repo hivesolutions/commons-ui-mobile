@@ -25,6 +25,10 @@
 
 #import "Dependencies.h"
 
+/**
+ * Represents a data source from where
+ * a table view can retrieve its items.
+ */
 @interface HMTableViewDataSource : NSObject<UITableViewDataSource> {
     @private
     UITableView *_tableView;

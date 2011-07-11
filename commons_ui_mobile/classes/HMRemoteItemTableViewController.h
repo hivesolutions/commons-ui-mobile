@@ -25,16 +25,16 @@
 
 #import "Dependencies.h"
 
-#import "HMTableViewController.h"
 #import "HMItemTableView.h"
+#import "HMEntityDelegate.h"
+#import "HMEntityProvider.h"
+#import "HMRemoteDelegate.h"
+#import "HMErrorAbstraction.h"
+#import "HMRemoteAbstraction.h"
+#import "HMTableViewController.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
-#import "HMRemoteDelegate.h"
-#import "HMRemoteAbstraction.h"
-#import "HMEntityProvider.h"
-#import "HMEntityDelegate.h"
 #import "HMAuthenticationDelegate.h"
-#import "HMErrorAbstraction.h"
 
 @class HMEntityAbstraction;
 
@@ -50,6 +50,9 @@ typedef enum {
     HMItemOperationDelete
 } HMItemOperationType;
 
+/**
+ * Provides the behavior for remote table views.
+ */
 @interface HMRemoteItemTableViewController : HMTableViewController<UIActionSheetDelegate, HMItemTableViewProvider, HMItemTableViewDelegate, HMRemoteDelegate, HMEntityDelegate, HMEntityProvider, HMAuthenticationDelegate> {
     @private
     NSDictionary *_entity;
@@ -373,7 +376,7 @@ typedef enum {
  * clicked.
  *
  * @param sender The sender object.
- @ @param extra The extra parameters values.
+ * @param extra The extra parameters values.
  */
 - (void)editButtonClicked:(id)sender extra:(id)extra;
 
@@ -382,7 +385,7 @@ typedef enum {
  * clicked.
  *
  * @param sender The sender object.
- @ @param extra The extra parameters values.
+ * @param extra The extra parameters values.
  */
 - (void)cancelButtonClicked:(id)sender extra:(id)extra;
 
@@ -391,7 +394,7 @@ typedef enum {
  * clicked.
  *
  * @param sender The sender object.
- @ @param extra The extra parameters values.
+ * @param extra The extra parameters values.
  */
 - (void)deleteButtonClicked:(id)sender extra:(id)extra;
 
@@ -400,7 +403,7 @@ typedef enum {
  * clicked.
  *
  * @param sender The sender object.
- @ @param extra The extra parameters values.
+ * @param extra The extra parameters values.
  */
 - (void)refreshButtonClicked:(id)sender extra:(id)extra;
 

@@ -25,10 +25,10 @@
 
 #import "Dependencies.h"
 
-#import "HMItemTableView.h"
-#import "HMRoundedCornerImageView.h"
-#import "HMEditTableViewCell.h"
 #import "HMTableView.h"
+#import "HMItemTableView.h"
+#import "HMEditTableViewCell.h"
+#import "HMRoundedCornerImageView.h"
 
 /**
  * The number of sections in the header.

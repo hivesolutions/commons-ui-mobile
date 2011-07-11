@@ -27,13 +27,17 @@
 
 #import "HMAuthenticationDelegate.h"
 
+/**
+ * Provides the behavior for a view which
+ * used for user authentication.
+ */
 @interface HMAuthenticationViewController : UIViewController {
     @private
     NSObject<HMAuthenticationDelegate> *_authenticationDelegate;
 }
 
 /**
- * The delegate to be used for authentication changes
+ * The delegate to be used for authentication changes.
  */
 @property (assign) NSObject<HMAuthenticationDelegate> *authenticationDelegate;
 

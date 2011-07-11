@@ -25,6 +25,11 @@
 
 #import "Dependencies.h"
 
+/**
+ * Extends ui kit image by adding
+ * a constructor that takes into
+ * account which device is being used.
+ */
 @interface UIImage (HMImageDevice)
 
 /**

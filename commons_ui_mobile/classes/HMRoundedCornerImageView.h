@@ -31,6 +31,9 @@
  */
 #define HM_ROUNDED_CORNER_DEFAULT_CORNER_RADIUS 4.0
 
+/**
+ * Extends the ui kit image view by adding rounded corners.
+ */
 @interface HMRoundedCornerImageView : UIImageView {
 }
 

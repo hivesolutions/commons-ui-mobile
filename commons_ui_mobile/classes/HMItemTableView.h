@@ -27,12 +27,12 @@
 
 #import "HMTableView.h"
 #import "HMTableViewCell.h"
+#import "HMEntityDelegate.h"
+#import "HMEntityProvider.h"
 #import "HMItemTableViewDelegate.h"
 #import "HMItemTableViewProvider.h"
-#import "HMItemTableViewDataSource.h"
-#import "HMEntityProvider.h"
 #import "HMEntityProviderDelegate.h"
-#import "HMEntityDelegate.h"
+#import "HMItemTableViewDataSource.h"
 
 /**
  * The item table view header offset.
@@ -57,8 +57,22 @@
     NSObject<HMItemTableViewProvider> *_itemTableViewProvider;
 }
 
+/**
+ * The data source provider to be used
+ * to retrieve object information.
+ */
 @property (retain) HMItemTableViewDataSource *itemDataSource;
+
+/**
+ * The delegate to be used to handle the
+ * changes in the table.
+ */
 @property (assign) IBOutlet NSObject<HMItemTableViewDelegate> *itemDelegate;
+
+/**
+ * The table view provider used to retrieve
+ * configuration on the object.
+ */
 @property (assign) IBOutlet NSObject<HMItemTableViewProvider> *itemTableViewProvider;
 
 /**

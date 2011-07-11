@@ -48,6 +48,12 @@
  */
 #define HM_PLAIN_MULTILINE_STRING_TABLE_VIEW_CELL_EXTRA_SCROLL_MARGIN 11
 
+/**
+ * Provides an edit table view cell, whose
+ * name is not displayed, and the description
+ * takes up the whole cell, meant to display
+ * and edit multiple line string values.
+ */
 @interface HMPlainMultilineStringTableViewCell : HMPlainEditTableViewCell<HPGrowingTextViewDelegate> {
     @private
     HPGrowingTextView *_textView;

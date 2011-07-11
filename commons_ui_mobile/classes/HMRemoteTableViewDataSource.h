@@ -25,17 +25,17 @@
 
 #import "Dependencies.h"
 
+#import "HMTableViewCell.h"
 #import "HMRemoteDelegate.h"
 #import "HMRemoteAbstraction.h"
-#import "HMTableViewDataSource.h"
-#import "HMRemoteTableViewProvider.h"
 #import "HMApplicationDelegate.h"
+#import "HMTableViewDataSource.h"
 #import "HMAuthenticationDelegate.h"
+#import "HMRemoteTableViewProvider.h"
 #import "HMAuthenticationViewController.h"
-#import "HMTableViewCell.h"
 
 /**
- * Class used to represent a table view data source
+ * Represents a table view data source
  * for remote connections with serialization.
  */
 @interface HMRemoteTableViewDataSource : HMTableViewDataSource<HMRemoteDelegate, HMAuthenticationDelegate> {

@@ -99,33 +99,35 @@
     // switches over the operation type
     // in order to retrieve the apropriate url
     switch(operationType) {
-            // in case it's a create operation
+        // in case it's a create operation
         case HMItemOperationCreate:
             url = [self constructClassUrl:entityName serializerName:serializerName];
 
             // breaks the swtich
             break;
 
-            // in case it's a read operation
+        // in case it's a read operation
         case HMItemOperationRead:
             url = [self constructObjectUrl:entityName serializerName:serializerName];
 
             // breaks the swtich
             break;
 
-            // in case it's an update operation
+        // in case it's an update operation
         case HMItemOperationUpdate:
             url = [self constructObjectCompositeUrl:entityName operationName:@"update" serializerName:serializerName];
 
             // breaks the swtich
             break;
 
-            // in case it's a delete operation
+        // in case it's a delete operation
         case HMItemOperationDelete:
             url = [self constructObjectCompositeUrl:entityName operationName:@"delete" serializerName:serializerName];
 
             // breaks the swtich
             break;
+
+        // in case it's none of the above operations
         default:
             // breaks the switch
             break;

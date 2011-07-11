@@ -79,6 +79,9 @@ typedef enum {
     HMRemoteAbstractionStatusError
 } HMRemoteAbstractionStatus;
 
+/**
+ * Provides an abstraction for interacting with a remote host.
+ */
 @interface HMRemoteAbstraction : NSObject<UIActionSheetDelegate> {
     @private
     int _remoteAbstractionId;

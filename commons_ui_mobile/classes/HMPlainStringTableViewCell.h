@@ -47,6 +47,12 @@
  */
 #define HM_PLAIN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
 
+/**
+ * Provides an edit table view cell,
+ * whose name is not displayed, and
+ * the description takes up the whole cell,
+ * meant to display and edit string values.
+ */
 @interface HMPlainStringTableViewCell : HMPlainEditTableViewCell<UITextFieldDelegate> {
     @private
     UITextField *_textField;

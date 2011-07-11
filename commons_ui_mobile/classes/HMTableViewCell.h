@@ -72,6 +72,11 @@ typedef enum  {
     HMTableViewCellVerticalAnchorBottom
 } HMTableViewCellVerticalAnchor;
 
+/**
+ * Provides a basic table view cell,
+ * by extending the one provided
+ * by ui kit with more properties.
+ */
 @interface HMTableViewCell : UITableViewCell<HMView> {
     @private
     NSString *_name;
@@ -375,6 +380,7 @@ typedef enum  {
  * the position's vertical coordinate.
  */
 - (void)layoutLabel:(UILabel *)label position:(CGPoint)position horizontalAnchor:(HMTableViewCellHorizontalAnchor)horizontalAnchor verticalAnchor:(HMTableViewCellVerticalAnchor)verticalAnchor;
+
 /**
  * Updates the accessory view.
  */

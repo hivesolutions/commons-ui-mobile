@@ -27,6 +27,10 @@
 
 @class HMRemoteAbstraction;
 
+/**
+ * Delegate for objects that can handle
+ * the result of remote operations.
+ */
 @protocol HMRemoteDelegate<NSObject>
 
 @required

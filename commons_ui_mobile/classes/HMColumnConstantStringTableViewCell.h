@@ -42,6 +42,12 @@
  */
 #define HM_COLUMN_CONSTANT_STRING_TABLE_VIEW_CELL_HEIGHT 19
 
+/**
+ * Provides a edit table view cell,
+ * whose name and description
+ * are displayed side by side, meant
+ * to display and edit string values.
+ */
 @interface HMColumnConstantStringTableViewCell : HMColumnEditTableViewCell {
     UILabel *_label;
 }

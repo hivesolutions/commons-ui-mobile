@@ -42,6 +42,12 @@
  */
 #define HM_PLAIN_CONSTANT_STRING_TABLE_VIEW_CELL_HEIGHT 19
 
+/**
+ * Provides an edit table view cell,
+ * whose name is not displayed, and
+ * the description takes up the whole cell,
+ * meant to display and edit string values.
+ */
 @interface HMPlainConstantStringTableViewCell : HMPlainEditTableViewCell {
     UILabel *_label;
 }

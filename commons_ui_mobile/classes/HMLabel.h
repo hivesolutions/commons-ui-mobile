@@ -25,6 +25,10 @@
 
 #import "Dependencies.h"
 
+/**
+ * Extends the ui kit label by
+ * providing additional properties.
+ */
 @interface HMLabel : UILabel {
     @private
     UIEdgeInsets _edgeInsets;

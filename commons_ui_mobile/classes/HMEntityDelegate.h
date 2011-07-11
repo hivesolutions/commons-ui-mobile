@@ -25,6 +25,10 @@
 
 #import "Dependencies.h"
 
+/**
+ * Delegate for objects that can
+ * handle an entity.
+ */
 @protocol HMEntityDelegate<NSObject>
 
 @required

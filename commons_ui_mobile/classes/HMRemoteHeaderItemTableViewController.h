@@ -25,14 +25,17 @@
 
 #import "Dependencies.h"
 
-#import "HMRemoteItemTableViewController.h"
 #import "HMHeaderItemTableView.h"
+#import "HMRemoteItemTableViewController.h"
 
 /**
  * The default image quality to be used.
  */
 #define HM_REMOTE_HEADER_ITEM_TABLE_VIEW_CONTROLLER_IMAGE_QUALITY 90.0
 
+/**
+ * Provides the behavior for remote header item table views.
+ */
 @interface HMRemoteHeaderItemTableViewController : HMRemoteItemTableViewController<UINavigationControllerDelegate, UIImagePickerControllerDelegate> {
     @private
     UIPopoverController *_imagePickerPopover;

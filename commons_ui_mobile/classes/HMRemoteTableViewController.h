@@ -25,14 +25,17 @@
 
 #import "Dependencies.h"
 
-#import "HMEntityAbstraction.h"
+#import "HMEntityDelegate.h"
+#import "HMEntityProvider.h"
 #import "HMRemoteTableView.h"
+#import "HMEntityAbstraction.h"
+#import "HMEntityProviderDelegate.h"
 #import "HMRemoteTableViewProvider.h"
 #import "HMRemoteTableViewDelegate.h"
-#import "HMEntityProvider.h"
-#import "HMEntityProviderDelegate.h"
-#import "HMEntityDelegate.h"
 
+/**
+ * Provides the behavior for remote table views.
+ */
 @interface HMRemoteTableViewController : HMTableViewController<HMRemoteTableViewProvider, HMRemoteTableViewDelegate, HMEntityProvider, HMEntityProviderDelegate> {
     @private
     HMEntityAbstraction *_entityAbstraction;

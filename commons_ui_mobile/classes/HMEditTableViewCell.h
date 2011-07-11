@@ -27,6 +27,11 @@
 
 #import "HMTableViewCell.h"
 
+/**
+ * Provides a table view cell
+ * that switches visual state
+ * between view and edit mode.
+ */
 @interface HMEditTableViewCell : HMTableViewCell {
     @protected
     BOOL _editingDirty;

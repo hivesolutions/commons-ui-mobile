@@ -25,10 +25,15 @@
 
 #import "Dependencies.h"
 
-#import "HMTableViewDataSource.h"
 #import "HMTableViewCell.h"
 #import "HMEditTableViewCell.h"
+#import "HMTableViewDataSource.h"
 
+/**
+ * Extends the ui kit table view by
+ * providing additional features and
+ * sdk limitation bypasses.
+ */
 @interface HMTableView : UITableView {
     UIViewController *_viewController;
     BOOL _dirty;

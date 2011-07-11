@@ -27,6 +27,10 @@
 
 #import "HMTableView.h"
 
+/**
+ * Extends the ui kit view controller
+ * to extend behavior and bypass limitations.
+ */
 @interface HMTableViewController : UITableViewController {
 }
 

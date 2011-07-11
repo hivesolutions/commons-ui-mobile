@@ -29,6 +29,10 @@
 #import "HMRemoteTableViewProvider.h"
 #import "HMRemoteTableViewDataSource.h"
 
+/**
+ * The table view to be used to display
+ * items retrieved from a remote data source.
+ */
 @interface HMRemoteTableView : HMTableView<UITableViewDelegate, UISearchBarDelegate> {
     @private
     HMRemoteTableViewDataSource *_remoteDataSource;

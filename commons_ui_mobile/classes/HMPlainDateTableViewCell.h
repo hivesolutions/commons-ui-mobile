@@ -42,6 +42,10 @@
  */
 #define HM_DATE_TABLE_VIEW_CELL_HEIGHT 19
 
+/**
+ * Provides an edit table view cell,
+ * meant to display and edit date values.
+ */
 @interface HMPlainDateTableViewCell : HMPlainEditTableViewCell {
     @private
     UIDatePicker *_datePicker;

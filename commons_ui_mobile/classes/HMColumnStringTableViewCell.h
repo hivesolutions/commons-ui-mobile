@@ -47,6 +47,12 @@
  */
 #define HM_COLUMN_STRING_TABLE_VIEW_CELL_PASSWORD_LENGTH 12
 
+/**
+ * Provides a edit table view cell,
+ * whose name and description
+ * are displayed side by side, meant
+ * to display and edit string values.
+ */
 @interface HMColumnStringTableViewCell : HMColumnEditTableViewCell<UITextFieldDelegate> {
     @private
     UITextField *_textField;

@@ -26,9 +26,9 @@
 #import "Dependencies.h"
 
 /**
- * The default corner radius.
+ * The table view cell background view's default corner radius.
  */
-#define DEFAULT_CORNER_RADIUS 10
+#define HM_TABLE_VIEW_CELL_BACKGROUND_VIEW_DEFAULT_CORNER_RADIUS 10
 
 /**
  * Enumeration defining the various cell positions.
@@ -49,6 +49,13 @@ typedef enum  {
     HMTableViewCellBackgroundViewSeparatorStyleDashed
 } HMTableViewCellBackgroundViewSeparatorStyle;
 
+/**
+ * Provides a background view meant to override
+ * the table view cell's selected background view,
+ * in order to bypass the customization limitations
+ * in ios (customized selected background views are
+ * not clipped to grouped table cell borders).
+ */
 @interface HMTableViewCellBackgroundView : UIView {
     @private
     HMTableViewCellBackgroundViewPosition _position;

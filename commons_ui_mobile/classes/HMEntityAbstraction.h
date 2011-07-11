@@ -27,6 +27,10 @@
 
 #import "HMEntityDelegate.h"
 
+/**
+ * Provides an abstraction for mapping entities
+ * and their operations with remote logic routes.
+ */
 @interface HMEntityAbstraction : NSObject<UIActionSheetDelegate> {
     @private
     NSObject<HMEntityDelegate> *_entityDelegate;

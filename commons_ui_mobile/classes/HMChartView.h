@@ -25,6 +25,9 @@
 
 #import "Dependencies.h"
 
+/**
+ * Represents a chart component.
+ */
 @interface HMChartView : UIView {
 }
 

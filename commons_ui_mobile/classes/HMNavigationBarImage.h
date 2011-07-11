@@ -35,6 +35,11 @@
  */
 #define HM_NAVIGATION_BAR_IMAGE_HORIZONTAL_HEIGHT 32
 
+/**
+ * Extends the ui kit navigation bar by
+ * allowing to customize its background
+ * between different ios versions.
+ */
 @interface HMNavigationBarImage : UINavigationBar {
     @private
     NSString *_verticalImageName;

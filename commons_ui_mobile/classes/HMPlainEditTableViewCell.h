@@ -30,6 +30,11 @@
 // avoids circular dependency
 @class HMEditItemTableView;
 
+/**
+ * Provides an edit table view cell,
+ * whose name is not displayed, and
+ * the description takes up the whole cell.
+ */
 @interface HMPlainEditTableViewCell : HMEditTableViewCell {
 }
 

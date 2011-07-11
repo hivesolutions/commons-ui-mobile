@@ -25,10 +25,14 @@
 
 #import "Dependencies.h"
 
-#import "HMAuthenticationDelegate.h"
 #import "HMApplicationDelegate.h"
+#import "HMAuthenticationDelegate.h"
 #import "HMAuthenticationViewController.h"
 
+/**
+ * Provides an abstraction for coherent
+ * error handling.
+ */
 @interface HMErrorAbstraction : NSObject {
 }
 

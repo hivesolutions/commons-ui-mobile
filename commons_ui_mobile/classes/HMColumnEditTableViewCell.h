@@ -30,6 +30,11 @@
 // avoids circular dependency
 @class HMEditItemTableView;
 
+/**
+ * Provides an edit table view cell,
+ * whose name and description
+ * are displayed side by side.
+ */
 @interface HMColumnEditTableViewCell : HMEditTableViewCell {
     @private
     UIView *_nameLabelClickView;

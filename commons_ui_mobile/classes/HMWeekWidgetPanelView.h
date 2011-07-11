@@ -35,6 +35,10 @@
  */
 #define HM_WEEK_WIDGET_PANEL_VIEW_STATUS_LABEL_Y 390.0
 
+/**
+ * Represents a component which displays
+ * aggregated values for each week day.
+ */
 @interface HMWeekWidgetPanelView : UIView<UIScrollViewDelegate> {
     @private
     NSString *_title;
@@ -73,8 +77,8 @@
 @property (assign) UIImage *image;
 
 /**
- * The list of items representing the various
- * week days.
+ * The list of items representing the
+ * various week days.
  */
 @property (assign) NSArray *weekItems;
 
