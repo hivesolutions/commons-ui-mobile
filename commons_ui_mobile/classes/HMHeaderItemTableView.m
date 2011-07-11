@@ -225,9 +225,9 @@
     headerTableView.dataSource = self;
     headerTableView.editing = NO;
     headerTableView.scrollEnabled = NO;
-    headerTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    headerTableView.separatorColor = [UIColor colorWithRed:0.65 green:0.65 blue:0.65 alpha:1.0];
-    [headerTableView setBackgroundView: nil];
+    headerTableView.separatorStyle = self.separatorStyle;
+    headerTableView.separatorColor = self.separatorColor;
+    headerTableView.backgroundView = nil;
 
     // adds the sub views
     [headerContainer addSubview:addButton];
@@ -567,6 +567,22 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // returns the number of rows in the header
     return HM_HEADER_ITEM_TABLE_VIEW_HEADER_ROWS;
+}
+
+- (void)setSeparatorColor:(UIColor *)separatorColor {
+    // calls the super
+    [super setSeparatorColor:separatorColor];
+
+    // sets the separator color in the header table view
+    self.headerTableView.separatorColor = separatorColor;
+}
+
+- (void)setSeparatorStyle:(UITableViewCellSeparatorStyle)separatorStyle {
+    // calls the super
+    [super setSeparatorStyle:separatorStyle];
+
+    // sets the separator style in the header table view
+    self.headerTableView.separatorStyle = separatorStyle;
 }
 
 @end
