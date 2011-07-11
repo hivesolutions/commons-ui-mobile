@@ -33,7 +33,6 @@
 @synthesize textColorNormal = _textColorNormal;
 @synthesize textColorHighlighted = _textColorHighlighted;
 @synthesize textShadowColor = _textShadowColor;
-@synthesize textPadding = _textPadding;
 @synthesize imageNormal = _imageNormal;
 @synthesize imageHighlighted = _imageHighlighted;
 @synthesize margin = _margin;
@@ -86,7 +85,6 @@
 
 - (void)initStructures {
     // sets the default attributes
-    self.textPadding = -1;
     self.opaque = NO;
     self.backgroundColor = [UIColor clearColor];
 }

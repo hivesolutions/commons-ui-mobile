@@ -662,38 +662,45 @@
     UIView *backgroundView = self.selectedBackgroundView;
     CGRect backgroundViewFrame = backgroundView.frame;
 
-    // retrieves the text dimensions
-    CGSize textSize = [accessoryView.text sizeWithFont:accessoryView.label.font];
-    CGFloat textWidth = textSize.width;
-    CGFloat textHeight = textSize.height;
-
-    // subtracts the text height
-    // to remove the vertical padding
-    textHeight -= 6;
-
     // retrieves the image dimensions
     CGSize imageSize = accessoryView.image.size;
     CGFloat imageWidth = imageSize.width;
     CGFloat imageHeight = imageSize.height;
 
-    // calculates the accessory view's dimensions
-    CGFloat width = textWidth > imageWidth ? textWidth : imageWidth;
-    CGFloat height = textHeight > imageHeight ? textHeight : imageHeight;
-
-    // adds the image cap to the dimensions
-    width += accessoryView.image.leftCapWidth * 2;
-    height += accessoryView.image.topCapHeight * 2;
-
-    // performs an height adjustment
-    // for when the accessory view is
-    // not in the first row, the reason
-    // for this adjustment being required
-    // is currently unknown
-    height += (row != 0 ? 1 : 0);
-
     // initializes the position
     CGFloat x = 0;
     CGFloat y = 0;
+
+    // initializes the dimensions
+    CGFloat width = imageWidth;
+    CGFloat height = imageHeight;
+
+    // in case the accessory view has text
+    if(accessoryView.text) {
+        // retrieves the text dimensions
+        CGSize textSize = [accessoryView.text sizeWithFont:accessoryView.label.font];
+        CGFloat textWidth = textSize.width;
+        CGFloat textHeight = textSize.height;
+
+        // subtracts the text height
+        // to remove the vertical padding
+        textHeight -= 6;
+
+        // calculates the accessory view's dimensions
+        width = textWidth > imageWidth ? textWidth : imageWidth;
+        height = textHeight > imageHeight ? textHeight : imageHeight;
+
+        // adds the image cap to the dimensions
+        width += accessoryView.image.leftCapWidth * 2;
+        height += accessoryView.image.topCapHeight * 2;
+
+        // performs an height adjustment
+        // for when the accessory view is
+        // not in the first row, the reason
+        // for this adjustment being required
+        // is currently unknown
+        height += (row != 0 ? 1 : 0);
+    }
 
     // in case the accessory view's margin is defined
     if(accessoryView.margin) {

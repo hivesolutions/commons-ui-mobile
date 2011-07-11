@@ -42,7 +42,6 @@
     UIColor *_textColorNormal;
     UIColor *_textColorHighlighted;
     UIColor *_textShadowColor;
-    CGFloat _textPadding;
     UIImage *_imageNormal;
     UIImage *_imageHighlighted;
     NSValue *_margin;
@@ -77,11 +76,6 @@
  * The accessory view's text shadow color.
  */
 @property (retain) UIColor *textShadowColor;
-
-/**
- * The accessory view's text padding.
- */
-@property (assign) CGFloat textPadding;
 
 /**
  * The accessory view's normal image.
