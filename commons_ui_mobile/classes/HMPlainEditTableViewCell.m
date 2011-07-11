@@ -99,21 +99,4 @@
     self.descriptionLabel.hidden = NO;
 }
 
-- (void)setDescription:(NSString *)description {
-    // in case the object is the same
-    if(description == _description) {
-        // returns immediately
-        return;
-    }
-
-    // releases the object
-    [_description release];
-
-    // sets and retains the object
-    _description = [description retain];
-
-    // sets the cell's text label
-    self.descriptionLabel.text = description;
-}
-
 @end

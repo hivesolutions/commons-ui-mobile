@@ -73,16 +73,14 @@ typedef enum  {
 } HMTableViewCellVerticalAnchor;
 
 @interface HMTableViewCell : UITableViewCell<HMView> {
-    @protected
-    NSString *_description;
-
     @private
-    UILabel *_nameLabel;
     NSString *_name;
+    UILabel *_nameLabel;
     NSValue *_namePosition;
     NSNumber *_nameWidth;
     HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
     HMTableViewCellVerticalAnchor _nameVerticalAnchor;
+    NSString *_description;
     UILabel *_descriptionLabel;
     NSValue *_descriptionPosition;
     HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
