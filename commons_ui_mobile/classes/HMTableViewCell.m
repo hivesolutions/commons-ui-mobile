@@ -46,7 +46,13 @@
 @synthesize subDescriptionHorizontalAnchor = _subDescriptionHorizontalAnchor;
 @synthesize subDescriptionVerticalAnchor = _subDescriptionVerticalAnchor;
 @synthesize subDescriptionWidth = _subDescriptionWidth;
-@synthesize selectedBorderColor = _selectedBorderColor;
+@synthesize cornerRadius = _cornerRadius;
+@synthesize borderColor = _borderColor;
+@synthesize backgroundColors = _backgroundColors;
+@synthesize backgroundTopSeparatorColor = _backgroundTopSeparatorColor;
+@synthesize backgroundBottomSeparatorColor = _backgroundBottomSeparatorColor;
+@synthesize backgroundTopSeparatorStyle =  _backgroundTopSeparatorStyle;
+@synthesize backgroundBottomSeparatorStyle =  _backgroundBottomSeparatorStyle;
 @synthesize selectedBackgroundColors = _selectedBackgroundColors;
 @synthesize selectedBackgroundTopSeparatorColor = _selectedBackgroundTopSeparatorColor;
 @synthesize selectedBackgroundBottomSeparatorColor = _selectedBackgroundBottomSeparatorColor;
@@ -118,10 +124,19 @@
     // releases the sub description width
     [_subDescriptionWidth release];
 
-    // releases the selected border color
-    [_selectedBorderColor release];
+    // releases the border color
+    [_borderColor release];
 
-    // releases the selecte background colors
+    // releases the background colors
+    [_backgroundColors release];
+
+    // releases the background top separator color
+    [_backgroundTopSeparatorColor release];
+
+    // releases the background bottom separator color
+    [_backgroundBottomSeparatorColor release];
+
+    // releases the selected background colors
     [_selectedBackgroundColors release];
 
     // releases the selected background top separator color
@@ -178,6 +193,25 @@
     // releases the objects
     [subDescriptionLabel release];
     [selectedBackgroundView release];
+}
+
+- (void)constructBackgroundView {
+    // in case the background view is already custom
+    if([self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
+        // returns
+        return;
+    }
+
+    // creates the custom background view
+    HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
+    backgroundView.borderColor = self.borderColor;
+    backgroundView.cornerRadius = self.cornerRadius;
+
+    // sets the custom background view
+    self.backgroundView = backgroundView;
+
+    // releases the background view
+    [backgroundView release];
 }
 
 - (void)changeEditing:(BOOL)editing commit:(BOOL)commit {
@@ -352,29 +386,176 @@
     self.subDescriptionLabel.frame = frame;
 }
 
-- (UIColor *)selectedBorderColor {
-    // returns the selected border color
-    return _selectedBorderColor;
+- (CGFloat)cornerRadius {
+    return _cornerRadius;
 }
 
-- (void)setSelectedBorderColor:(UIColor *)selectedBorderColor{
+- (void)setCornerRadius:(CGFloat)cornerRadius {
+    // in case the background view is custom
+    if([self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
+        // retrieves the background view
+        HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+        // sets the corner radius in the background view
+        backgroundView.cornerRadius = cornerRadius;
+    }
+
+    // retrieves the selected background view
+    HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *) self.selectedBackgroundView;
+
+    // sets the corner radius in the selected background view
+    selectedBackgroundView.cornerRadius = cornerRadius;
+}
+
+- (UIColor *)borderColor {
+    // returns the border color
+    return _borderColor;
+}
+
+- (void)setBorderColor:(UIColor *)borderColor {
     // in case the object is the same
-    if(selectedBorderColor == _selectedBorderColor) {
+    if(borderColor == _borderColor) {
         // returns immediately
         return;
     }
 
     // releases the object
-    [_selectedBorderColor release];
+    [_borderColor release];
 
     // sets and retains the object
-    _selectedBorderColor = [selectedBorderColor retain];
+    _borderColor = [borderColor retain];
+
+    // in case the background view is custom
+    if([self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
+        // retrieves the background view
+        HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+        // sets the border color in the background view
+        backgroundView.borderColor = borderColor;
+    }
 
     // retrieves the selected background view
     HMTableViewCellBackgroundView *selectedBackgroundView = (HMTableViewCellBackgroundView *)self.selectedBackgroundView;
 
     // sets the border color
-    selectedBackgroundView.borderColor = selectedBorderColor;
+    selectedBackgroundView.borderColor = borderColor;
+}
+
+- (NSArray *)backgroundColors {
+    return _backgroundColors;
+}
+
+- (void)setBackgroundColors:(NSArray *)backgroundColors {
+    // in case the object is the same
+    if(backgroundColors == _backgroundColors) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_backgroundColors release];
+
+    // sets and retains the object
+    _backgroundColors = [backgroundColors retain];
+
+    // constructs the background view
+    [self constructBackgroundView];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the background colors
+    backgroundView.gradientColors = backgroundColors;
+}
+
+- (UIColor *)backgroundTopSeparatorColor {
+    return _backgroundTopSeparatorColor;
+}
+
+- (void)setBackgroundTopSeparatorColor:(UIColor *)backgroundTopSeparatorColor{
+    // in case the object is the same
+    if(backgroundTopSeparatorColor == _backgroundTopSeparatorColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_backgroundTopSeparatorColor release];
+
+    // sets and retains the object
+    _backgroundTopSeparatorColor = [backgroundTopSeparatorColor retain];
+
+    // constructs the background view
+    [self constructBackgroundView];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the top separator color in the background view
+    backgroundView.topSeparatorColor = backgroundTopSeparatorColor;
+}
+
+- (UIColor *)backgroundBottomSeparatorColor {
+    return _backgroundBottomSeparatorColor;
+}
+
+- (void)setBackgroundBottomSeparatorColor:(UIColor *)backgroundBottomSeparatorColor {
+    // in case the object is the same
+    if(backgroundBottomSeparatorColor == _backgroundBottomSeparatorColor) {
+        // returns immediately
+        return;
+    }
+
+    // releases the object
+    [_backgroundBottomSeparatorColor release];
+
+    // sets and retains the object
+    _backgroundBottomSeparatorColor = [backgroundBottomSeparatorColor retain];
+
+    // constructs the background view
+    [self constructBackgroundView];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the bottom separator color in the background view
+    backgroundView.bottomSeparatorColor = backgroundBottomSeparatorColor;
+}
+
+- (HMTableViewCellBackgroundViewSeparatorStyle)backgroundTopSeparatorStyle {
+    return _backgroundTopSeparatorStyle;
+}
+
+- (void)setBackgroundTopSeparatorStyle:(HMTableViewCellBackgroundViewSeparatorStyle)backgroundTopSeparatorStyle {
+    // sets the value
+    _backgroundTopSeparatorStyle = backgroundTopSeparatorStyle;
+
+    // constructs the background view
+    [self constructBackgroundView];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the top separator style in the background view
+    backgroundView.topSeparatorStyle = backgroundTopSeparatorStyle;
+}
+
+- (HMTableViewCellBackgroundViewSeparatorStyle)backgroundBottomSeparatorStyle {
+    return _backgroundBottomSeparatorStyle;
+}
+
+- (void)setBackgroundBottomSeparatorStyle:(HMTableViewCellBackgroundViewSeparatorStyle)backgroundBottomSeparatorStyle {
+    // sets the value
+    _backgroundBottomSeparatorStyle = backgroundBottomSeparatorStyle;
+
+    // constructs the background view
+    [self constructBackgroundView];
+
+    // retrieves the background view
+    HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+    // sets the bottom separator style in the selected background view
+    backgroundView.bottomSeparatorStyle = backgroundBottomSeparatorStyle;
 }
 
 - (NSArray *)selectedBackgroundColors {
@@ -529,9 +710,6 @@
 
     // updates the accessory view
     [self layoutAccessoryView];
-
-    // updates the position
-    [self updatePosition];
 }
 
 - (void)layoutNameLabel {
@@ -724,12 +902,11 @@
     accessoryView.bounds = frame;
 }
 
-- (void)updatePosition {
+- (void)updatePosition:(NSIndexPath *)indexPath {
     // retrieves the parent table view
     UITableView *tableView = (UITableView *) self.superview;
 
     // retrieves the cell's position attributes
-    NSIndexPath *indexPath = [tableView indexPathForCell:self];
     NSUInteger section = indexPath.section;
     NSUInteger numberRows = [tableView numberOfRowsInSection:section];
     NSUInteger row = indexPath.row;
@@ -758,7 +935,16 @@
         position = HMTableViewCellBackgroundViewPositionGroupedBottom;
     }
 
-    // updates the background views' positions
+    // in case the background view is custom
+    if([self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
+        // retrieves the background view
+        HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
+
+        // updates the background view's position
+        backgroundView.position = position;
+    }
+
+    // updates the selected background view's position
     selectedBackgroundView.position = position;
 }
 

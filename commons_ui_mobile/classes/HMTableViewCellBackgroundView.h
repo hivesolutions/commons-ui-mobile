@@ -26,11 +26,6 @@
 #import "Dependencies.h"
 
 /**
- * The table view cell background view's default corner radius.
- */
-#define HM_TABLE_VIEW_CELL_BACKGROUND_VIEW_DEFAULT_CORNER_RADIUS 10
-
-/**
  * Enumeration defining the various cell positions.
  */
 typedef enum  {

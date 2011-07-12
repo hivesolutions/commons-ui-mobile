@@ -98,7 +98,13 @@ typedef enum  {
     NSNumber *_subDescriptionWidth;
     HMTableViewCellHorizontalAnchor _subDescriptionHorizontalAnchor;
     HMTableViewCellVerticalAnchor _subDescriptionVerticalAnchor;
-    UIColor *_selectedBorderColor;
+    CGFloat _cornerRadius;
+    UIColor *_borderColor;
+    NSArray *_backgroundColors;
+    UIColor *_backgroundTopSeparatorColor;
+    UIColor *_backgroundBottomSeparatorColor;
+    HMTableViewCellBackgroundViewSeparatorStyle _backgroundTopSeparatorStyle;
+    HMTableViewCellBackgroundViewSeparatorStyle _backgroundBottomSeparatorStyle;
     NSArray *_selectedBackgroundColors;
     UIColor *_selectedBackgroundTopSeparatorColor;
     UIColor *_selectedBackgroundBottomSeparatorColor;
@@ -225,10 +231,39 @@ typedef enum  {
 @property (retain) NSNumber *subDescriptionWidth;
 
 /**
- * The border color of the table
- * cell when it is selected.
+ * The table cell's corner radius.
  */
-@property (retain) UIColor *selectedBorderColor;
+@property (assign) CGFloat cornerRadius;
+
+/**
+ * The table cell's border color.
+ */
+@property (retain) UIColor *borderColor;
+
+/**
+ * The table cell's background colors.
+ */
+@property (retain) NSArray *backgroundColors;
+
+/**
+ * The background top separator color.
+ */
+@property (retain) UIColor *backgroundTopSeparatorColor;
+
+/**
+ * The background bottom separator color.
+ */
+@property (retain) UIColor *backgroundBottomSeparatorColor;
+
+/**
+ * The background top separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle backgroundTopSeparatorStyle;
+
+/**
+ * The background bottom separator style.
+ */
+@property (assign) HMTableViewCellBackgroundViewSeparatorStyle backgroundBottomSeparatorStyle;
 
 /**
  * The table cell's background colors
@@ -334,6 +369,11 @@ typedef enum  {
 - (void)constructStructures;
 
 /**
+ * Constructs the background view.
+ */
+- (void)constructBackgroundView;
+
+/**
  * Called when the edinting mode is going to be changed.
  * The commit argument defined if the edit operation should
  * be persisted (commited).
@@ -388,7 +428,9 @@ typedef enum  {
 
 /**
  * Updates the cell's position.
+ *
+ * @param indexPath: The cell's index path.
  */
-- (void)updatePosition;
+- (void)updatePosition:(NSIndexPath *)indexPath;
 
 @end

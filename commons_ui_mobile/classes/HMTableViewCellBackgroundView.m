@@ -77,7 +77,6 @@
     // sets the default values
     self.opaque = NO;
     self.position = HMTableViewCellBackgroundViewPositionPlain;
-    self.cornerRadius = HM_TABLE_VIEW_CELL_BACKGROUND_VIEW_DEFAULT_CORNER_RADIUS;
     self.borderColor = defaultBorderColor;
     self.topSeparatorStyle = HMTableViewCellBackgroundViewSeparatorStylePlain;
     self.bottomSeparatorStyle = HMTableViewCellBackgroundViewSeparatorStylePlain;

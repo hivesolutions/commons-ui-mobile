@@ -409,7 +409,10 @@
     // configures the table view cell's background color
     // here, since this particular change won't take
     // place by defining it at the time of the cell's construction
-    tableViewCell.backgroundColor = tableCellItem.backgroundPatternImage ? tableCellItem.backgroundPatternImage.UIColor : tableCellItem.backgroundColor.UIColor;
+    tableViewCell.backgroundColor = tableCellItem.backgroundColor.UIColor;
+
+    // updates the cell's position
+    [tableViewCell updatePosition:indexPath];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
