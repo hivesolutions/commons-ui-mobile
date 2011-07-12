@@ -217,8 +217,13 @@
 
     // creates the custom background view
     HMTableViewCellBackgroundView *backgroundView = [[HMTableViewCellBackgroundView alloc] init];
+    backgroundView.backgroundColor = self.backgroundView.backgroundColor;
     backgroundView.borderColor = self.borderColor;
     backgroundView.cornerRadius = self.cornerRadius;
+    backgroundView.topSeparatorColor = self.backgroundTopSeparatorColor;
+    backgroundView.bottomSeparatorColor = self.backgroundBottomSeparatorColor;
+    backgroundView.topSeparatorStyle = self.backgroundTopSeparatorStyle;
+    backgroundView.bottomSeparatorColor = self.backgroundBottomSeparatorColor;
 
     // sets the custom background view
     self.backgroundView = backgroundView;
@@ -609,9 +614,12 @@
     // sets the value
     _backgroundTopSeparatorStyle = backgroundTopSeparatorStyle;
 
-    // constructs the background view
-    [self constructBackgroundView];
-
+    // in case the background view is not custom
+    if(![self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
+        // returns
+        return;
+    }
+    
     // retrieves the background view
     HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
 
@@ -627,9 +635,12 @@
     // sets the value
     _backgroundBottomSeparatorStyle = backgroundBottomSeparatorStyle;
 
-    // constructs the background view
-    [self constructBackgroundView];
-
+    // in case the background view is not custom
+    if(![self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
+        // returns
+        return;
+    }
+    
     // retrieves the background view
     HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
 
