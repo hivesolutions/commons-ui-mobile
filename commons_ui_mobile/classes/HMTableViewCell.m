@@ -181,7 +181,6 @@
     // sets the default values
     self.nameLabel.shadowOffset = CGSizeMake(1, 1);
     self.descriptionLabel.shadowOffset = CGSizeMake(1, 1);
-    self.subDescriptionLabel.shadowOffset = CGSizeMake(1, 1);
     self.subDescriptionHorizontalAnchor = HMTableViewCellHorizontalAnchorNone;
     self.subDescriptionVerticalAnchor = HMTableViewCellVerticalAnchorNone;
 }
@@ -193,6 +192,7 @@
     // creates the subDescription label
     CGRect frame = CGRectMake(0, 0, 300, 10);
     UILabel *subDescriptionLabel = [[UILabel alloc] initWithFrame:frame];
+    subDescriptionLabel.shadowOffset = CGSizeMake(1, 1);
     subDescriptionLabel.backgroundColor = [UIColor clearColor];
     subDescriptionLabel.hidden = YES;
 
