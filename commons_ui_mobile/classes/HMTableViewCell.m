@@ -29,17 +29,20 @@
 
 @synthesize name = _name;
 @synthesize nameLabel = _nameLabel;
+@synthesize nameShadowColor = _nameShadowColor;
 @synthesize namePosition = _namePosition;
 @synthesize nameHorizontalAnchor = _nameHorizontalAnchor;
 @synthesize nameVerticalAnchor = _nameVerticalAnchor;
 @synthesize nameWidth = _nameWidth;
 @synthesize description = _description;
 @synthesize descriptionLabel = _descriptionLabel;
+@synthesize descriptionShadowColor = _descriptionShadowColor;
 @synthesize descriptionPosition = _descriptionPosition;
 @synthesize descriptionHorizontalAnchor = _descriptionHorizontalAnchor;
 @synthesize descriptionVerticalAnchor = _descriptionVerticalAnchor;
 @synthesize descriptionWidth = _descriptionWidth;
 @synthesize subDescription = _subDescription;
+@synthesize subDescriptionShadowColor = _subDescriptionShadowColor;
 @synthesize subDescriptionLabel = _subDescriptionLabel;
 @synthesize subDescriptionFont = _subDescriptionFont;
 @synthesize subDescriptionPosition = _subDescriptionPosition;
@@ -91,6 +94,9 @@
     // releases the name label
     [_nameLabel release];
 
+    // releases the name shadow color
+    [_nameShadowColor release];
+    
     // releases the name position
     [_namePosition release];
 
@@ -102,7 +108,10 @@
 
     // releases the description label
     [_descriptionLabel release];
-
+    
+    // releases the description shadow color
+    [_descriptionShadowColor release];
+    
     // releases the description position
     [_descriptionPosition release];
 
@@ -115,6 +124,9 @@
     // releases the sub description label
     [_subDescriptionLabel release];
 
+    // releases the sub description shadow color
+    [_subDescriptionShadowColor release];
+    
     // releases the sub description font
     [_subDescriptionFont release];
 
@@ -165,10 +177,11 @@
     // sets the labels
     self.nameLabel = self.textLabel;
     self.descriptionLabel = self.detailTextLabel;
-
+    
     // sets the default values
-    self.nameLabel.backgroundColor = [UIColor clearColor];
-    self.descriptionLabel.backgroundColor = [UIColor clearColor];
+    self.nameLabel.shadowOffset = CGSizeMake(1, 1);
+    self.descriptionLabel.shadowOffset = CGSizeMake(1, 1);
+    self.subDescriptionLabel.shadowOffset = CGSizeMake(1, 1);
     self.subDescriptionHorizontalAnchor = HMTableViewCellHorizontalAnchorNone;
     self.subDescriptionVerticalAnchor = HMTableViewCellVerticalAnchorNone;
 }
@@ -292,6 +305,27 @@
     self.nameLabel.text = name;
 }
 
+- (UIColor *)nameShadowColor {
+    return _nameShadowColor;
+}
+
+- (void)setNameShadowColor:(UIColor *)nameShadowColor {
+    // in case the object is the same
+    if(nameShadowColor == _nameShadowColor) {
+        // returns immediately
+        return;
+    }
+    
+    // releases the object
+    [_nameShadowColor release];
+    
+    // sets and retains the object
+    _nameShadowColor = [nameShadowColor retain];
+    
+    // sets the name label's shadow color
+    self.nameLabel.shadowColor = nameShadowColor;
+}
+
 - (NSString *)description {
     return _description;
 }
@@ -315,7 +349,7 @@
     // sets and retains the object
     _description = [description retain];
 
-    // sets the cell's text label
+    // sets the description label's text
     self.descriptionLabel.text = description;
 }
 
@@ -324,6 +358,27 @@
 }
 
 - (void)setDescriptionTransient:(NSString *)descriptionTransient {
+}
+
+- (UIColor *)descriptionShadowColor {
+    return _descriptionShadowColor;
+}
+
+- (void)setDescriptionShadowColor:(UIColor *)descriptionShadowColor {
+    // in case the object is the same
+    if(descriptionShadowColor == _descriptionShadowColor) {
+        // returns immediately
+        return;
+    }
+    
+    // releases the object
+    [_descriptionShadowColor release];
+    
+    // sets and retains the object
+    _descriptionShadowColor = [descriptionShadowColor retain];
+    
+    // sets the description label's shadow color
+    self.descriptionLabel.shadowColor = descriptionShadowColor;
 }
 
 - (NSString *)subDescription {
@@ -354,6 +409,27 @@
 
     // sets the value in the sub description label
     self.subDescriptionLabel.text = subDescription;
+}
+
+- (UIColor *)subDescriptionShadowColor {
+    return _subDescriptionShadowColor;
+}
+
+- (void)setSubDescriptionShadowColor:(UIColor *)subDescriptionShadowColor {
+    // in case the object is the same
+    if(subDescriptionShadowColor == _subDescriptionShadowColor) {
+        // returns immediately
+        return;
+    }
+    
+    // releases the object
+    [_subDescriptionShadowColor release];
+    
+    // sets and retains the object
+    _subDescriptionShadowColor = [subDescriptionShadowColor retain];
+    
+    // sets the sub description label's shadow color
+    self.subDescriptionLabel.shadowColor = subDescriptionShadowColor;
 }
 
 - (UIFont *)subDescriptionFont {
@@ -391,6 +467,9 @@
 }
 
 - (void)setCornerRadius:(CGFloat)cornerRadius {
+    // sets the corner radius
+    _cornerRadius = cornerRadius;
+    
     // in case the background view is custom
     if([self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
         // retrieves the background view
@@ -695,6 +774,26 @@
     self.dataTransient = _data;
 }
 
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    // calls the super
+    [super setSelected:selected animated:animated];
+    
+    // toggles the label's shadows
+    self.nameLabel.shadowColor = selected ? nil : self.nameShadowColor;
+    self.descriptionLabel.shadowColor = selected ? nil : self.descriptionShadowColor;
+    self.subDescriptionLabel.shadowColor = selected ? nil : self.subDescriptionShadowColor;
+}
+
+- (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
+    // calls the super
+    [super setHighlighted:highlighted animated:animated];
+    
+    // toggles the label's shadows
+    self.nameLabel.shadowColor = highlighted ? nil : self.nameShadowColor;
+    self.descriptionLabel.shadowColor = highlighted ? nil : self.descriptionShadowColor;
+    self.subDescriptionLabel.shadowColor = highlighted ? nil : self.subDescriptionShadowColor;
+}
+
 - (void)layoutSubviews {
     // calls the super
     [super layoutSubviews];
@@ -713,6 +812,9 @@
 }
 
 - (void)layoutNameLabel {
+    // sets the label background color to clear
+    self.nameLabel.backgroundColor = [UIColor clearColor];
+    
     // in case the name width is defined
     if(self.nameWidth) {
         // sets the name width in the frame
@@ -729,6 +831,9 @@
 }
 
 - (void)layoutDescriptionLabel {
+    // sets the label background color to clear
+    self.descriptionLabel.backgroundColor = [UIColor clearColor];
+    
     // in case the description width is defined
     if(self.descriptionWidth) {
         // sets the description width in the frame
@@ -877,9 +982,9 @@
         // not in the first row, the reason
         // for this adjustment being required
         // is currently unknown
-        height += (row != 0 ? 1 : 0);
+        height += (row == 0 && (int)height % 2 == 1 ? 0 : 1);
     }
-
+    
     // in case the accessory view's margin is defined
     if(accessoryView.margin) {
         // retrieves the margin point
@@ -902,10 +1007,7 @@
     accessoryView.bounds = frame;
 }
 
-- (void)updatePosition:(NSIndexPath *)indexPath {
-    // retrieves the parent table view
-    UITableView *tableView = (UITableView *) self.superview;
-
+- (void)updatePositionTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath {
     // retrieves the cell's position attributes
     NSUInteger section = indexPath.section;
     NSUInteger numberRows = [tableView numberOfRowsInSection:section];

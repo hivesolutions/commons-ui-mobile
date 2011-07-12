@@ -81,9 +81,10 @@
     // retrieves the current device model
     UIDevice *currentDevice = [UIDevice currentDevice];
     NSString *currentDeviceModel = currentDevice.model;
-
+    BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
+    
     // adjusts the delta in case the device is an ipad
-    if([currentDeviceModel hasPrefix:@"iPad"]) {
+    if(iPadDevice) {
         deltaX = -38;
     }
 
@@ -522,6 +523,9 @@
 
             // sets the table view cell to always be in edit mode
             tableViewCell.editAlways = YES;
+            
+            // updates the cell's position
+            [tableViewCell updatePositionTableView:tableView indexPath:indexPath];
 
             // forces the cell to be constructed in
             // edit mode, since when set editing is
@@ -541,6 +545,9 @@
             // sets the table view cell to always be in edit mode
             tableViewCell.editAlways = YES;
 
+            // updates the cell's position
+            [tableViewCell updatePositionTableView:tableView indexPath:indexPath];
+            
             // forces the cell to be constructed in
             // edit mode, since when set editing is
             // first called the cells won't be

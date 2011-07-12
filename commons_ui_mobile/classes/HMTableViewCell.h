@@ -81,18 +81,21 @@ typedef enum  {
     @private
     NSString *_name;
     UILabel *_nameLabel;
+    UIColor *_nameShadowColor;
     NSValue *_namePosition;
     NSNumber *_nameWidth;
     HMTableViewCellHorizontalAnchor _nameHorizontalAnchor;
     HMTableViewCellVerticalAnchor _nameVerticalAnchor;
     NSString *_description;
     UILabel *_descriptionLabel;
+    UIColor *_descriptionShadowColor;
     NSValue *_descriptionPosition;
     HMTableViewCellHorizontalAnchor _descriptionHorizontalAnchor;
     HMTableViewCellVerticalAnchor _descriptionVerticalAnchor;
     NSNumber *_descriptionWidth;
     NSString *_subDescription;
     UILabel *_subDescriptionLabel;
+    UIColor *_subDescriptionShadowColor;
     UIFont *_subDescriptionFont;
     NSValue *_subDescriptionPosition;
     NSNumber *_subDescriptionWidth;
@@ -126,15 +129,20 @@ typedef enum  {
 }
 
 /**
- * The cell's name that will be set
+ * The table cell's name that will be set
  * as its label.
  */
 @property (retain) NSString *name;
 
 /**
- * The cell's name label.
+ * The table cell's name label.
  */
 @property (retain) UILabel *nameLabel;
+
+/**
+ * The table cell name's shadow color.
+ */
+@property (retain) UIColor *nameShadowColor;
 
 /**
  * The table cell's name position.
@@ -157,14 +165,19 @@ typedef enum  {
 @property (retain) NSNumber *nameWidth;
 
 /**
- * The cell's description.
+ * The table cell's description.
  */
 @property (retain) NSString *description;
 
 /**
- * The cell's description label.
+ * The table cell's description label.
  */
 @property (retain) UILabel *descriptionLabel;
+
+/**
+ * The table cell description's shadow color.
+ */
+@property (retain) UIColor *descriptionShadowColor;
 
 /**
  * The cell's transient description property,
@@ -195,17 +208,22 @@ typedef enum  {
 @property (retain) NSNumber *descriptionWidth;
 
 /**
- * The cell's sub description.
+ * The table cell's sub description.
  */
 @property (retain) NSString *subDescription;
 
 /**
- * The cell's sub description label.
+ * The table cell's sub description shadow color.
+ */
+@property (retain) UIColor *subDescriptionShadowColor;
+
+/**
+ * The table cell's sub description label.
  */
 @property (retain) UILabel *subDescriptionLabel;
 
 /**
- * The cell's sub description font.
+ * The table cell's sub description font.
  */
 @property (retain) UIFont *subDescriptionFont;
 
@@ -429,8 +447,9 @@ typedef enum  {
 /**
  * Updates the cell's position.
  *
+ * @param tableView: The cell's table view.
  * @param indexPath: The cell's index path.
  */
-- (void)updatePosition:(NSIndexPath *)indexPath;
+- (void)updatePositionTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 
 @end

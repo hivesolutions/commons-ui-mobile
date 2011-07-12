@@ -405,14 +405,14 @@
 
     // retrieves the table view cell
     HMTableViewCell *tableViewCell = (HMTableViewCell *) [self.itemDataSource tableView:self cellForRowAtIndexPath:indexPath];
-
+    
     // configures the table view cell's background color
     // here, since this particular change won't take
     // place by defining it at the time of the cell's construction
     tableViewCell.backgroundColor = tableCellItem.backgroundColor.UIColor;
 
     // updates the cell's position
-    [tableViewCell updatePosition:indexPath];
+    [tableViewCell updatePositionTableView:tableView indexPath:indexPath];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
