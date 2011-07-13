@@ -33,11 +33,6 @@
 #define HM_COLUMN_STRING_TABLE_VIEW_CELL_X_MARGIN 6
 
 /**
- * The column string table view cell y margin.
- */
-#define HM_COLUMN_STRING_TABLE_VIEW_CELL_Y_MARGIN 15
-
-/**
  * The column string table view cell height.
  */
 #define HM_COLUMN_STRING_TABLE_VIEW_CELL_HEIGHT 19

@@ -96,7 +96,7 @@
 
     // releases the name shadow color
     [_nameShadowColor release];
-    
+
     // releases the name position
     [_namePosition release];
 
@@ -108,10 +108,10 @@
 
     // releases the description label
     [_descriptionLabel release];
-    
+
     // releases the description shadow color
     [_descriptionShadowColor release];
-    
+
     // releases the description position
     [_descriptionPosition release];
 
@@ -126,7 +126,7 @@
 
     // releases the sub description shadow color
     [_subDescriptionShadowColor release];
-    
+
     // releases the sub description font
     [_subDescriptionFont release];
 
@@ -177,7 +177,7 @@
     // sets the labels
     self.nameLabel = self.textLabel;
     self.descriptionLabel = self.detailTextLabel;
-    
+
     // sets the default values
     self.nameLabel.shadowOffset = CGSizeMake(1, 1);
     self.descriptionLabel.shadowOffset = CGSizeMake(1, 1);
@@ -320,13 +320,13 @@
         // returns immediately
         return;
     }
-    
+
     // releases the object
     [_nameShadowColor release];
-    
+
     // sets and retains the object
     _nameShadowColor = [nameShadowColor retain];
-    
+
     // sets the name label's shadow color
     self.nameLabel.shadowColor = nameShadowColor;
 }
@@ -375,13 +375,13 @@
         // returns immediately
         return;
     }
-    
+
     // releases the object
     [_descriptionShadowColor release];
-    
+
     // sets and retains the object
     _descriptionShadowColor = [descriptionShadowColor retain];
-    
+
     // sets the description label's shadow color
     self.descriptionLabel.shadowColor = descriptionShadowColor;
 }
@@ -426,13 +426,13 @@
         // returns immediately
         return;
     }
-    
+
     // releases the object
     [_subDescriptionShadowColor release];
-    
+
     // sets and retains the object
     _subDescriptionShadowColor = [subDescriptionShadowColor retain];
-    
+
     // sets the sub description label's shadow color
     self.subDescriptionLabel.shadowColor = subDescriptionShadowColor;
 }
@@ -474,7 +474,7 @@
 - (void)setCornerRadius:(CGFloat)cornerRadius {
     // sets the corner radius
     _cornerRadius = cornerRadius;
-    
+
     // in case the background view is custom
     if([self.backgroundView isKindOfClass:[HMTableViewCellBackgroundView class]]) {
         // retrieves the background view
@@ -619,7 +619,7 @@
         // returns
         return;
     }
-    
+
     // retrieves the background view
     HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
 
@@ -640,7 +640,7 @@
         // returns
         return;
     }
-    
+
     // retrieves the background view
     HMTableViewCellBackgroundView *backgroundView = (HMTableViewCellBackgroundView *) self.backgroundView;
 
@@ -788,7 +788,7 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     // calls the super
     [super setSelected:selected animated:animated];
-    
+
     // toggles the label's shadows
     self.nameLabel.shadowColor = selected ? nil : self.nameShadowColor;
     self.descriptionLabel.shadowColor = selected ? nil : self.descriptionShadowColor;
@@ -798,7 +798,7 @@
 - (void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated {
     // calls the super
     [super setHighlighted:highlighted animated:animated];
-    
+
     // toggles the label's shadows
     self.nameLabel.shadowColor = highlighted ? nil : self.nameShadowColor;
     self.descriptionLabel.shadowColor = highlighted ? nil : self.descriptionShadowColor;
@@ -825,7 +825,7 @@
 - (void)layoutNameLabel {
     // sets the label background color to clear
     self.nameLabel.backgroundColor = [UIColor clearColor];
-    
+
     // in case the name width is defined
     if(self.nameWidth) {
         // sets the name width in the frame
@@ -844,7 +844,7 @@
 - (void)layoutDescriptionLabel {
     // sets the label background color to clear
     self.descriptionLabel.backgroundColor = [UIColor clearColor];
-    
+
     // in case the description width is defined
     if(self.descriptionWidth) {
         // sets the description width in the frame
@@ -995,7 +995,7 @@
         // is currently unknown
         height += (row == 0 && (int)height % 2 == 1 ? 0 : 1);
     }
-    
+
     // in case the accessory view's margin is defined
     if(accessoryView.margin) {
         // retrieves the margin point

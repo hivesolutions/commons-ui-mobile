@@ -49,7 +49,7 @@
 
     // creates the text field and adds it to the edit view
     CGRect editViewFrame = self.editView.frame;
-    CGRect textFieldFrame = CGRectMake(HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN, HM_PLAIN_STRING_TABLE_VIEW_CELL_Y_MARGIN, editViewFrame.size.width - HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN * 2 + 4, HM_PLAIN_STRING_TABLE_VIEW_CELL_HEIGHT);
+    CGRect textFieldFrame = CGRectMake(HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN, round(editViewFrame.size.height / 2 - HM_PLAIN_STRING_TABLE_VIEW_CELL_HEIGHT / 2), editViewFrame.size.width - HM_PLAIN_STRING_TABLE_VIEW_CELL_X_MARGIN * 2 + 4, HM_PLAIN_STRING_TABLE_VIEW_CELL_HEIGHT);
     UITextField *textField = [[UITextField alloc] initWithFrame:textFieldFrame];
     textField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
     textField.font = self.descriptionLabel.font;
@@ -61,6 +61,7 @@
     textField.clearsOnBeginEditing = self.secure;
     textField.secureTextEntry = self.secure;
     textField.delegate = self;
+    textField.backgroundColor = [UIColor clearColor];
 
     // sets the text field's auto capitalization type
     if([self.autocapitalizationType isEqualToString:@"words"]) {

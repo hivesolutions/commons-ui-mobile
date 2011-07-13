@@ -82,7 +82,7 @@
     UIDevice *currentDevice = [UIDevice currentDevice];
     NSString *currentDeviceModel = currentDevice.model;
     BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
-    
+
     // adjusts the delta in case the device is an ipad
     if(iPadDevice) {
         deltaX = -38;
@@ -507,10 +507,10 @@
     // tries to retrives the cell from cache (reusable)
     HMEditTableViewCell *tableViewCell = (HMEditTableViewCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
 
-    // in case the cell is not defined in the cuurrent cache
+    // in case the cell is not defined in the current cache
     // need to create a new cell
     if(tableViewCell == nil) {
-        // retrieves the title and subtitle items
+        // retrieves the header named item group
         HMNamedItemGroup *headerNamedItemGroup = self.itemDataSource.headerNamedItemGroup;
 
         // sets each table view cell's value and stores it
@@ -523,7 +523,7 @@
 
             // sets the table view cell to always be in edit mode
             tableViewCell.editAlways = YES;
-            
+
             // updates the cell's position
             [tableViewCell updatePositionTableView:tableView indexPath:indexPath];
 
@@ -547,7 +547,7 @@
 
             // updates the cell's position
             [tableViewCell updatePositionTableView:tableView indexPath:indexPath];
-            
+
             // forces the cell to be constructed in
             // edit mode, since when set editing is
             // first called the cells won't be

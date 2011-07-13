@@ -172,10 +172,10 @@
         UIDevice *currentDevice = [UIDevice currentDevice];
         NSString *currentDeviceModel = currentDevice.model;
         BOOL iPadDevice = [currentDeviceModel hasPrefix:@"iPad"];
-        
+
         // calculates the delta according to the device
         float delta = iPadDevice ? 90 : 20;
-        
+
         // offsets the description label to the right of the name label
         CGFloat nameLabelX = self.nameLabel.frame.origin.x;
         CGFloat nameLabelWidth = self.nameLabel.frame.size.width;
@@ -187,7 +187,7 @@
         editViewFrame.size.width = self.frame.size.width - editViewFrame.origin.x - delta;
         self.editView.frame = editViewFrame;
     }
-    
+
     // moves the description label origin
     // four pixels to the right to make
     // the label coincide with the edit field
