@@ -166,9 +166,6 @@
     // releases the read nib name
     [_readNibName release];
 
-    // releases the item
-    [_item release];
-
     // calls the super
     [super dealloc];
 }
@@ -246,7 +243,7 @@
         // disables the animations
         [UIView setAnimationsEnabled:NO];
 
-        // runs the updates over athe item table view
+        // runs the updates over the item table view
         [self.itemTableView beginUpdates];
         [self.itemTableView endUpdates];
 

@@ -519,7 +519,7 @@
             HMItem *titleItem = [headerNamedItemGroup getItem:@"title"];
 
             // generates the component
-            tableViewCell = (HMEditTableViewCell *) [titleItem generateComponent];
+            tableViewCell = (HMEditTableViewCell *) titleItem.component;
 
             // sets the table view cell to always be in edit mode
             tableViewCell.editAlways = YES;
@@ -540,7 +540,7 @@
             HMItem *subTitleItem = [headerNamedItemGroup getItem:@"subTitle"];
 
             // Generates the component
-            tableViewCell = (HMEditTableViewCell *) [subTitleItem generateComponent];
+            tableViewCell = (HMEditTableViewCell *) subTitleItem.component;
 
             // sets the table view cell to always be in edit mode
             tableViewCell.editAlways = YES;

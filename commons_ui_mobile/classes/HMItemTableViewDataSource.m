@@ -186,7 +186,7 @@
         NSLog(@"Creating UITableViewCell with identifier: %@", tableCellItem.identifier);
 
         // generates the component
-        tableViewCell = (HMTableViewCell *) [tableCellItem generateComponent];
+        tableViewCell = (HMTableViewCell *) tableCellItem.component;
 
         // inserts the item cell into the cell list
         [self.cellList addObject:tableViewCell];
