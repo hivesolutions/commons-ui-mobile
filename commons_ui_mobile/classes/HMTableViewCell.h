@@ -428,13 +428,13 @@ typedef enum  {
 /**
  * Updates the label's position.
  *
- * @param label: The label that will be
+ * @param label The label that will be
  * positioned.
- * @param position: The point at which
+ * @param position The point at which
  * the label will be positioned.
  * @param horizontalAnchor: The origin for
  * the position's horizontal coordinate.
- * @param verticalAnchor: The origin for
+ * @param verticalAnchor The origin for
  * the position's vertical coordinate.
  */
 - (void)layoutLabel:(UILabel *)label position:(CGPoint)position horizontalAnchor:(HMTableViewCellHorizontalAnchor)horizontalAnchor verticalAnchor:(HMTableViewCellVerticalAnchor)verticalAnchor;
@@ -447,8 +447,8 @@ typedef enum  {
 /**
  * Updates the cell's position.
  *
- * @param tableView: The cell's table view.
- * @param indexPath: The cell's index path.
+ * @param tableView The cell's table view.
+ * @param indexPath The cell's index path.
  */
 - (void)updatePositionTableView:(UITableView *)tableView indexPath:(NSIndexPath *)indexPath;
 

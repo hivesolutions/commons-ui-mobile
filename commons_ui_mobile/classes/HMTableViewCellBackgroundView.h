@@ -113,7 +113,7 @@ typedef enum  {
 /**
  * Draws a top cell for a grouped table.
  *
- * @param context: The graphics context.
+ * @param context The graphics context.
  */
 - (void)drawRectGroupedTopContext:(CGContextRef)context;
 
@@ -127,52 +127,52 @@ typedef enum  {
 /**
  * Draws a cell that stands alone in a grouped table.
  *
- * @param context: The graphics context.
+ * @param context The graphics context.
  */
 - (void)drawRectGroupedSingleContext:(CGContextRef)context;
 
 /**
  * Draws a cell for a plain table.
  *
- * @param context: The graphics context.
+ * @param context The graphics context.
  */
 - (void)drawRectPlainContext:(CGContextRef)context;
 
 /**
  * Draws the gradient.
  *
- * @param context: The graphics context.
+ * @param context The graphics context.
  */
 - (void)drawGradientContext:(CGContextRef)context;
 
 /**
  * Draws the table view cell separator.
  *
- * @param context: The graphics context.
- * @param style: The separator line style.
- * @param color: The separator line color.
- * @param startPoint: The start of the separator line.
- * @param endPoint: The end of the separator line.
+ * @param context The graphics context.
+ * @param style The separator line style.
+ * @param color The separator line color.
+ * @param startPoint The start of the separator line.
+ * @param endPoint The end of the separator line.
  */
 - (void)drawSeparatorContext:(CGContextRef)context style:(HMTableViewCellBackgroundViewSeparatorStyle)style color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
 /**
  * Draws the table view cell plain separator.
  *
- * @param context: The graphics context.
- * @param color: The separator line color.
- * @param startPoint: The start of the separator line.
- * @param endPoint: The end of the separator line.
+ * @param context The graphics context.
+ * @param color The separator line color.
+ * @param startPoint The start of the separator line.
+ * @param endPoint The end of the separator line.
  */
 - (void)drawSeparatorPlainContext:(CGContextRef)context color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 
 /**
  * Draws the table view cell dashed separator.
  *
- * @param context: The graphics context.
- * @param color: The separator line color.
- * @param startPoint: The start of the separator line.
- * @param endPoint: The end of the separator line.
+ * @param context The graphics context.
+ * @param color The separator line color.
+ * @param startPoint The start of the separator line.
+ * @param endPoint The end of the separator line.
  */
 - (void)drawSeparatorDashedContext:(CGContextRef)context color:(CGColorRef)color startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint;
 

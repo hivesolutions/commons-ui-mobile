@@ -38,6 +38,6 @@
  * This property acts as the binding of the
  * ui component with the logic component.
  */
-@property (retain) HMItem *item;
+@property (assign) HMItem *item;
 
 @end
