@@ -294,7 +294,6 @@
         CGContextSetTextMatrix(context, CGAffineTransformMake(1.0,0.0, 0.0, -1.0, 0.0, 0.0));
         CGContextShowTextAtPoint(context, xValue, realYValue, [valueString cString], strlen([valueString cString]));
 
-
         index++;
     }
 }

@@ -27,9 +27,6 @@
 
 #import "HMEditTableViewCell.h"
 
-// avoids circular dependency
-@class HMEditItemTableView;
-
 /**
  * Provides an edit table view cell,
  * whose name and description
