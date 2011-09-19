@@ -67,24 +67,27 @@
     CGSize maximumSize = CGSizeMake(tableView.frame.size.width, NSUIntegerMax);
     CGSize size = [labelItem.description sizeWithFont:font constrainedToSize:maximumSize lineBreakMode:UILineBreakModeWordWrap];
 
-    // retrieves the description color
-    HMColor *descriptionColor = labelItem.descriptionColor;
+    // initializes the label origin x coordinate
+    CGFloat labelOriginX = 0;
 
-    // defines the label origin x coordinate
-    CGFloat labelOriginX = iPadDevice ? 44 : 10;
+    // in case the text alignment is to the left
+    if(labelItem.textAlignment == HMLabelItemTextAlignmentLeft) {
+        // indents the label to appear on top of the table section
+        labelOriginX = iPadDevice ? 44 : 10;
+    }
 
     // creates a label
-    CGRect labelFrame = CGRectMake(labelOriginX, 0, tableView.frame.size.width - 20, size.height);
+    CGRect labelFrame = CGRectMake(labelOriginX, 0, tableView.frame.size.width - labelOriginX, size.height);
     UILabel *label = [[UILabel alloc] initWithFrame:labelFrame];
+    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    label.font = font;
     label.text = labelItem.description;
+    label.textColor = labelItem.descriptionColor.UIColor;
     label.lineBreakMode = UILineBreakModeWordWrap;
     label.numberOfLines = 0;
-    label.font = font;
     label.backgroundColor = [UIColor clearColor];
     label.shadowColor = labelItem.descriptionShadowColor.UIColor;
     label.shadowOffset = CGSizeMake(1, 1);
-    label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    label.textColor = descriptionColor.UIColor;
 
     // sets the label's text alignment
     switch (labelItem.textAlignment) {
