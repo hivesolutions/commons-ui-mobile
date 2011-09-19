@@ -127,55 +127,11 @@
     // retrieves the selected image
     UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
 
-    // in case the image was retrieved
-    if(image) {
-        // dismisses the image picker
-        [self dismissImagePicker];
+    // dismisses the image picker
+    [self dismissImagePicker];
 
-        // calls the did take picture method
-        [self didTakePicture:image];
-
-        // returns
-        return;
-    }
-
-    // retrieves the image url in case the image was
-    // not found, which happens from in ios 5 and above
-    NSURL *imageUrl = [info valueForKey:@"UIImagePickerControllerReferenceURL"];
-
-    // creates an asset library
-    ALAssetsLibrary *assetLibrary = [[ALAssetsLibrary alloc] init];
-
-    // defines the asset library result block
-    ALAssetsLibraryAssetForURLResultBlock resultBlock = ^(ALAsset *asset) {
-        // dismisses the image picker
-        [self dismissImagePicker];
-
-        // retrieves the asset iamge
-        ALAssetRepresentation *assetRepresentation = asset.defaultRepresentation;
-        UIImage *assetImage = [UIImage imageWithCGImage:assetRepresentation.fullResolutionImage];
-
-        // calls the did take picture method
-        [self didTakePicture:assetImage];
-
-        // releases the asset library
-        [assetLibrary release];
-    };
-
-    // defines the asset library failure block
-    ALAssetsLibraryAccessFailureBlock failureBlock = ^(NSError *error) {
-        // dismisses the image picker
-        [self dismissImagePicker];
-
-        // logs the error message
-        NSLog(@"can't retrieve image: %@", error.localizedDescription);
-
-        // releases the asset library
-        [assetLibrary release];
-    };
-
-    // retrieves the image asset
-    [assetLibrary assetForURL:imageUrl resultBlock:resultBlock failureBlock:failureBlock];
+    // calls the did take picture method
+    [self didTakePicture:image];
 }
 
 @end
