@@ -942,6 +942,14 @@
 }
 
 - (void)remoteDidSucceed:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data connection:(NSURLConnection *)connection response:(NSURLResponse *)response {
+    // retrieves the right bar button item
+    UIBarButtonItem *rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+
+    // enables the right bar button
+    // since it was disabled when the
+    // button was clicked
+    rightBarButtonItem.enabled = YES;
+
     // creates a new json parser
     SBJsonParser *jsonParser = [[SBJsonParser alloc] init];
 
@@ -1003,6 +1011,14 @@
 - (void)remoteDidFail:(HMRemoteAbstraction *)remoteAbstraction data:(NSData *)data error:(NSError *)error {
     // prints a debug message
     NSLog(@"Remote call did fail");
+
+    // retrieves the right bar button item
+    UIBarButtonItem *rightBarButtonItem = self.navigationItem.rightBarButtonItem;
+
+    // enables the right bar button
+    // since it was disabled when the
+    // button was clicked
+    rightBarButtonItem.enabled = YES;
 
     // sets the remote data as not set
     _remoteDataIsSet = NO;
