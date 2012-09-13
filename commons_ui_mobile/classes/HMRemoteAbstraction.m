@@ -340,7 +340,8 @@
     // localized error description
     NSString *errorMessage = [NSString stringWithFormat:@"%@\n%@", baseErrorMessage, localizedErrorDescription];
 
-    // creates the action sheet
+    // creates the action sheet containing the error message and that
+    // allows the retry of the action
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:errorMessage delegate:self cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel") destructiveButtonTitle:NSLocalizedString(@"Retry", @"Retry") otherButtonTitles:nil];
     actionSheet.alpha = 0.75;
 
