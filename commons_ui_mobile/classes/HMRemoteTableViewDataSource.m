@@ -101,14 +101,13 @@
     // in case the filter value is defined and
     // not empty
     if(self.filterValue && self.filterValue.length > 0) {
-        [urlData setObject:self.filterType forKey:@"filter[filters][][filter_type]"];
-        [urlData setObject:self.filterName forKey:@"filter[filters][][filter_fields][][field_name]"];
-        [urlData setObject:self.filterValue forKey:@"filter[filters][][filter_fields][][field_value]"];
+        NSString *filter = [NSString stringWithFormat:@"%@:%@:%@", self.filterName, self.filterType, self.filterValue];
+        [urlData setObject:filter forKey:@"filters[]"];
     }
 
     // sets the number of records to be retrieved
-    [urlData setObject:@"0" forKey:@"filter[start_record]"];
-    [urlData setObject:@"30" forKey:@"filter[number_records]"];
+    [urlData setObject:@"0" forKey:@"start_record"];
+    [urlData setObject:@"30" forKey:@"number_records"];
 
     // creates the remote abstraction using the remote url
     HMRemoteAbstraction *remoteAbstraction = [[HMRemoteAbstraction alloc] initWithIdAndUrl:HMItemOperationUnset url:remoteUrl];
