@@ -92,7 +92,11 @@
     // calls the super
     [super setEditing:editing];
 
-    // creates the block to change the editing
+    // in case the  mode is not editing, returns
+    // immediately no need to do anything more
+    if(editing == NO) { return; }
+    
+    // creates the block (lambda function) to change the editing
     void (^block)(id) = ^(id value) {
         // casts the value as cell
         HMTableViewCell *cell = value;
@@ -104,10 +108,9 @@
     // casts the data source as table data source
     HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
 
-    // retrieves the cell list
+    // retrieves the cell list and then calls the
+    // block for the cells
     NSArray *cellList = tableDataSource.cellList;
-
-    // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
 
@@ -115,7 +118,11 @@
     // calls the super
     [super setEditing:editing animated:animate];
 
-    // creates the block to change the editing
+    // in case the  mode is not editing, returns
+    // immediately no need to do anything more
+    if(editing == NO) { return; }
+    
+    // creates the block (lambda function) to change the editing
     void (^block)(id) = ^(id value) {
         // casts the value as cell
         HMTableViewCell *cell = value;
@@ -127,18 +134,21 @@
     // casts the data source as table data source
     HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
 
-    // retrieves the cell list
+    // retrieves the cell list and then calls the
+    // block for the cells
     NSArray *cellList = tableDataSource.cellList;
-
-    // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
 
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
     // calls the super for set editing
     [super setEditing:editing animated:animate];
-
-    // creates the block to change the editing
+    
+    // in case the  mode is not editing, returns
+    // immediately no need to do anything more
+    if(editing == NO) { return; }
+    
+    // creates the block (lambda function) to change the editing
     void (^block)(id) = ^(id value) {
         // casts the value as cell
         HMTableViewCell *cell = value;
@@ -150,15 +160,14 @@
     // casts the data source as table data source
     HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
 
-    // retrieves the cell list
+    // retrieves the cell list and then calls the
+    // block for the cells
     NSArray *cellList = tableDataSource.cellList;
-
-    // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
 
 - (void)blurAllExceptCell:(HMEditTableViewCell *)tableCellView {
-    // creates the block to change the editing
+    // creates the block (lambda function) to change the editing
     void (^block)(id) = ^(id value) {
         // casts the value as cell
         HMEditTableViewCell *cell = value;
@@ -177,10 +186,9 @@
     // casts the data source as table data source
     HMTableViewDataSource *tableDataSource = (HMTableViewDataSource *) self.dataSource;
 
-    // retrieves the cell list
+    // retrieves the cell list an then calls the
+    // block for the cells
     NSArray *cellList = tableDataSource.cellList;
-
-    // calls the block for the cells
     [HMEnumerableUtil map:cellList block:block copyEnumerable:YES];
 }
 
