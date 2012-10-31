@@ -1053,11 +1053,9 @@
 }
 
 - (void)authenticationComplete:(BOOL)result {
-    // in case the authenticaion fails
-    if(result == NO) {
-        // returns immediately
-        return;
-    }
+    // in case the authenticaion fails must
+    // return immediately (nothing to be done)
+    if(result == NO) { return; }
 
     // updates the remote
     [self updateRemote];
