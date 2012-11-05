@@ -892,7 +892,7 @@
 		C2EEE08B132E8E9B0038FFA6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0420;
+				LastUpgradeCheck = 0450;
 			};
 			buildConfigurationList = C2EEE08E132E8E9B0038FFA6 /* Build configuration list for PBXProject "commons_ui_mobile" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -986,6 +986,7 @@
 				DSTROOT = /tmp/commons_ui_mobile.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "commons_ui_mobile/support/commons_ui_mobile-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1029,6 +1030,7 @@
 				DSTROOT = /tmp/commons_ui_mobile.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "commons_ui_mobile/support/commons_ui_mobile-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1041,6 +1043,7 @@
 				DSTROOT = /tmp/commons_ui_mobile.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "commons_ui_mobile/support/commons_ui_mobile-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
