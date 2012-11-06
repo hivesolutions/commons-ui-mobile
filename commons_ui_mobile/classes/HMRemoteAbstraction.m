@@ -254,6 +254,7 @@
     // creates the activity
     CGRect activityFrame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     UIView *activity = [[UIView alloc] initWithFrame:activityFrame];
+    activity.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
     activity.backgroundColor = [UIColor blackColor];
     activity.alpha = HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA;
 
