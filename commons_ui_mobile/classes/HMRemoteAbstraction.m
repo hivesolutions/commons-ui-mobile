@@ -254,7 +254,7 @@
     // creates the activity
     CGRect activityFrame = CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height);
     UIView *activity = [[UIView alloc] initWithFrame:activityFrame];
-    activity.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
+    activity.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     activity.backgroundColor = [UIColor blackColor];
     activity.alpha = HM_REMOTE_ABSTRACTION_ACTIVITY_ALPHA;
 
@@ -262,7 +262,7 @@
     CGRect activityIndicatorFrame = CGRectMake(self.view.bounds.size.width / 2 - 12, self.view.bounds.size.height / 2 - 12, 24, 24);
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:activityIndicatorFrame];
     activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyleWhite;
-    activityIndicator.autoresizingMask = (UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin);
+    activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
 
     // creates the activity structure
     [activity addSubview:activityIndicator];
