@@ -95,7 +95,7 @@
     // in case the  mode is not editing, returns
     // immediately no need to do anything more
     if(editing == NO) { return; }
-    
+
     // creates the block (lambda function) to change the editing
     void (^block)(id) = ^(id value) {
         // casts the value as cell
@@ -121,7 +121,7 @@
     // in case the  mode is not editing, returns
     // immediately no need to do anything more
     if(editing == NO) { return; }
-    
+
     // creates the block (lambda function) to change the editing
     void (^block)(id) = ^(id value) {
         // casts the value as cell
@@ -143,11 +143,11 @@
 - (void)setEditing:(BOOL)editing animated:(BOOL)animate commit:(BOOL)commit {
     // calls the super for set editing
     [super setEditing:editing animated:animate];
-    
+
     // in case the  mode is not editing, returns
     // immediately no need to do anything more
     if(editing == NO) { return; }
-    
+
     // creates the block (lambda function) to change the editing
     void (^block)(id) = ^(id value) {
         // casts the value as cell
